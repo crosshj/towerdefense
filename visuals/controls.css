@@ -1,0 +1,202 @@
+.controls-bottom {
+	position: absolute;
+	bottom: 8px;
+	width: 100vw;
+	display: flex;
+	justify-content: center;
+	gap: 5px;
+	align-items: flex-end;
+	height: 22%;
+	max-height: 106px;
+	/* opacity: 0.3; */
+}
+.controls-bottom .symbol {
+	font-size: 60px;
+	line-height: 55px;
+}
+.controls-bottom .symbol-smaller {
+	font-size: 45px;
+	line-height: 40px;
+}
+.controls-bottom > div {
+	border-radius: 15px;
+	display: flex;
+	flex-direction: column;
+	color: #886337;
+	text-transform: uppercase;
+	font-family: arial;
+	justify-content: flex-end;
+	align-items: center;
+	padding-bottom: 10px;
+	background-color: #4c360e;
+	background: linear-gradient(#644d40, #472f2a);
+	box-shadow: 1px 3px 5px 2px #00000075, inset 1px 1px 0px 4px #6b472b,
+		inset 1px 1px 0px 5px #0f0000c9, inset 1px -6px 8px 0px #312604;
+}
+.controls-bottom .missile {
+	margin-right: 18px;
+}
+.controls-bottom .mineral {
+	margin-left: 18px;
+}
+.controls-bottom .missile,
+.controls-bottom .mineral {
+	height: 85%;
+	aspect-ratio: 112 / 100;
+}
+.controls-bottom .team {
+	height: 80%;
+	aspect-ratio: 101 / 100;
+}
+
+/* ticker */
+.controls-ticker {
+	color: #777;
+	font-family: monospace;
+	position: absolute;
+	top: 30px;
+	background: black;
+	padding: 0.2em 1em;
+	user-select: none;
+	min-width: 80px;
+	white-space: pre;
+	display: flex;
+	justify-content: flex-end;
+}
+.screen-info {
+	color: #777;
+	font-family: monospace;
+	position: absolute;
+	top: 10px;
+	background: black;
+	padding: 0.2em 1em;
+	user-select: none;
+	min-width: 80px;
+}
+
+/* top */
+.controls-top {
+	position: absolute;
+	top: 15px;
+	width: 100vw;
+	height: 50px;
+	display: flex;
+	/* opacity: 0.3; */
+}
+.controls-top .effects {
+	display: flex;
+	margin-right: auto;
+	margin-left: 20px;
+	gap: 11px;
+}
+.controls-top .effects > div,
+.controls-top .pause {
+	background-color: #555;
+	height: 100%;
+	aspect-ratio: 1/1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: white;
+	border-radius: 50%;
+	box-shadow: 1px 1px 0px 2px black;
+	/* opacity: 0.5; */
+}
+.controls-top .effects > div {
+	font-size: 30px;
+}
+.controls-top .pause {
+	margin-right: 17px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 20px;
+	font-weight: 900;
+}
+.controls-top .mineral {
+	margin-right: 25px;
+	font-size: 30px;
+	font-family: monospace;
+	font-weight: 900;
+	color: #444;
+	display: flex;
+	align-items: center;
+}
+
+.controls-bottom .button {
+	position: relative;
+}
+.controls-bottom .progress.vertical {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: 5px;
+	margin-top: 0;
+	margin-right: 3px;
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+	mix-blend-mode: overlay;
+	opacity: 0.6;
+	transition: top 0s;
+	top: 100%;
+}
+.controls-bottom .progress.blue {
+	background: #17cdfc;
+}
+.controls-bottom .progress.orange {
+	background: #ffe9be;
+}
+.progress.vertical.p-0 {
+	top: 100%;
+}
+.progress.vertical.p-10 {
+	margin-right: 6px;
+	margin-left: 7px;
+	top: 90%;
+	transition: top 0.6s;
+}
+.progress.vertical.p-20 {
+	top: 80%;
+	transition: top 0.6s;
+}
+.progress.vertical.p-30 {
+	top: 70%;
+	transition: top 0.6s;
+}
+.progress.vertical.p-40 {
+	top: 60%;
+	transition: top 0.6s;
+}
+.progress.vertical.p-50 {
+	top: 50%;
+	transition: top 0.6s;
+}
+.progress.vertical.p-60 {
+	top: 40%;
+	transition: top 0.6s;
+}
+.progress.vertical.p-70 {
+	top: 30%;
+	transition: top 0.6s;
+}
+.progress.vertical.p-80 {
+	top: 20%;
+	transition: top 0.6s;
+}
+.progress.vertical.p-90 {
+	top: 13%;
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+	transition: top 0.6s;
+}
+.progress.vertical.p-100 {
+	top: 0;
+	margin-top: 5px;
+	border-top-right-radius: 10px;
+	border-top-left-radius: 10px;
+}
+
+.press-start-2p-regular {
+	font-family: 'Press Start 2P', system-ui;
+	font-weight: 400;
+	font-style: normal;
+}

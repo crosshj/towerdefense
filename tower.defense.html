@@ -1,0 +1,48 @@
+<html>
+	<head>
+		<title>Tower Defense</title>
+		<meta charset="utf-8" />
+		<meta name="description" content="" />
+		<meta name="author" content="" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="mobile-web-app-capable" content="yes" />
+		<link rel="manifest" href="./manifest.json" />
+
+		<link
+			href="https://fonts.googleapis.com/css?family=Press+Start+2P"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://unpkg.com/nes.css@2.3.0/css/nes.min.css"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="./visuals/page.css" />
+		<link rel="stylesheet" href="./visuals/controls.css" />
+	</head>
+
+	<body>
+		<div class="container">
+			<canvas></canvas>
+		</div>
+		<div
+			style="
+				background: url(assets/linerangers1.png);
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				opacity: 0.25;
+				background-size: contain;
+				display: none;
+			"
+		></div>
+	</body>
+	<script>
+		if (document.URL.includes('::preview::')) {
+			const container = document.querySelector('.container');
+			container.classList.add('dev');
+		}
+	</script>
+	<script src="./visuals/menu.js?cache=289328938293" type="module"></script>
+</html>
