@@ -50,7 +50,6 @@ const createMenu = () => {
 	const demoChoiceSelect = menu.querySelector('select#demo-choice');
 	const demoPlayButton = menu.querySelector('button#demo-play');
 	demoPlayButton.addEventListener('click', () => {
-		console.log(demoChoiceSelect);
 		startGame({
 			which: demoChoiceSelect.value,
 			menu

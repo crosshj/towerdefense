@@ -33,7 +33,7 @@ export const balancedLongField1 = () => {
 			record: false,
 			field: {
 				height: 800,
-				width: 5000
+				width: 4000
 			},
 			towers: [
 				{
