@@ -11,11 +11,17 @@ import { getActions } from './actions.js';
 import { balancedGame1 } from './games/balanced1.js';
 import { balancedLongField1 } from './games/balancedLongField1.js';
 import { fast1 } from './games/fast1.js';
+import { fieldStage1 } from './games/field1.js';
+import { ghostStage1 } from './games/ghost1.js';
+import { oceanStage1 } from './games/ocean1.js';
 
 const games = [
 	balancedGame1,
 	balancedLongField1,
-	fast1
+	fast1,
+	fieldStage1,
+	ghostStage1,
+	oceanStage1
 	//
 ];
 

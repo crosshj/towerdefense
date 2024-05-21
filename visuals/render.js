@@ -30,7 +30,6 @@ const render = (state, ctx, gif, controls) => {
 	const center = (x, width) => x - width / 2;
 
 	const {
-		background: bgimg,
 		bgMid,
 		bgTop,
 		bgBottom,
@@ -39,6 +38,7 @@ const render = (state, ctx, gif, controls) => {
 		teeAttackBlue,
 		teeAttackRed
 	} = state.assets.images;
+	const bgimg = state.assets.images[state?.stage?.background || 'background'];
 
 	controls.updateProgress('missile', state.missile.charge || 0);
 	controls.updateProgress('mineral', state.mineral.charge || 0);
