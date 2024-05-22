@@ -1,16 +1,26 @@
 {
 	"name": "Tower Defense",
-	"short_name": "Tower Defense",
+  	"short_name": "TeeDee",
+	"description": "Tower Defense for all!"
 	"theme_color": "#080b17",
 	"background_color": "#080b17",
-	"display": "fullscreen",
+	"display": "standalone",
 	"orientation": "landscape",
 	"scope": "https://teedee.us/",
-	"start_url": "index.html",
-	"icons": [
-		{
-			"src": "assets/towerDefenseIcon.png"
-		}
-	]
+	"start_url": "https://teedee.us/",
+	"dir": "auto",
+	"lang": "en-US",
+	"icons": [{
+		"purpose": "maskable",
+		"sizes": "512x512",
+		"src": "assets/towerDefenseIcon.png",
+		"type": "image/png"
+	}, {
+		"purpose": "any",
+		"sizes": "512x512",
+		"src": "assets/towerDefenseIcon.png",
+		"type": "image/png"
+	}]
 
 }
+
