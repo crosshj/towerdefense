@@ -4,7 +4,7 @@ import State from './state.js';
 import { loadAssets } from '../visuals/assets.js';
 import Controls from '../visuals/controls.js';
 import TeamUpdates from './update/team.js';
-import { chargeMineral, chargeMissile } from './update/player.js';
+import PlayerUpdates from './update/player.js';
 import { updateGameStatus } from './update/game.js';
 import { getActions } from './actions.js';
 
@@ -36,11 +36,19 @@ export const startGame = async ({ menu, which }) => {
 	state.assets = await loadAssets();
 	state.actions = getActions(state);
 
+	const controls = new Controls({
+		state,
+		showTicker: false,
+		showScreenInfo: false,
+		showEffects: true
+	});
+
 	const gameLoop = () => {
 		try {
 			if (state.paused) return true;
-			chargeMissile(state);
-			chargeMineral(state);
+			PlayerUpdates.chargeMissile(state);
+			PlayerUpdates.chargeMineral(state);
+			PlayerUpdates.updateMineral(state);
 			TeamUpdates.spawnTeam(state);
 			TeamUpdates.targetOpponents(state);
 			TeamUpdates.attackOpponents(state);
@@ -56,13 +64,6 @@ export const startGame = async ({ menu, which }) => {
 			return false;
 		}
 	};
-
-	const controls = new Controls({
-		state,
-		showTicker: false,
-		showScreenInfo: false,
-		showEffects: true
-	});
 
 	const render = new Render({ state, controls });
 

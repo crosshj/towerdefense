@@ -42,6 +42,10 @@ const render = (state, ctx, gif, controls) => {
 
 	controls.updateProgress('missile', state.missile.charge || 0);
 	controls.updateProgress('mineral', state.mineral.charge || 0);
+	controls.updateMineral(
+		state.mineral.amount || 0,
+		state.mineral.capacity || 0
+	);
 
 	const drawGuides = () => {
 		const line = (x, y, x1, y2, color = '#555') => {

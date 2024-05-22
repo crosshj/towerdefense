@@ -19,7 +19,6 @@ const createTopControls = ({ showEffects, state } = {}) => {
 			${effects}
 		</div>
 		<div class="mineral">
-			⬖ 77/170
 		</div>
 		<div class="pause button">I I</div>
 	`;
@@ -30,6 +29,11 @@ const createTopControls = ({ showEffects, state } = {}) => {
 		pauseButton.style.color = state.paused ? '' : 'white';
 		state.actions.pauseToggle();
 	});
+
+	const mineralEl = top.querySelector('.mineral');
+	top.updateMineral = (amount, total) => {
+		mineralEl.innerText = `⬖ ${amount}/${total}`;
+	};
 	document.body.insertAdjacentElement('beforeend', top);
 	return top;
 };
@@ -69,7 +73,7 @@ const createBottomControls = ({ state }) => {
 			<div>mineral</div>
 		</div>
     `;
-	document.body.insertAdjacentElement('beforeend', bottom);
+
 	const missileButton = bottom.querySelector('.missile.button');
 	const missileButtonProgress = bottom.querySelector(
 		'.missile.button .progress'
@@ -86,6 +90,8 @@ const createBottomControls = ({ state }) => {
 		if (!mineralButtonProgress.classList.contains(`p-100`)) return;
 		state.actions.mineralLevel();
 	});
+
+	document.body.insertAdjacentElement('beforeend', bottom);
 	return bottom;
 };
 
@@ -107,6 +113,8 @@ export default class Controls {
 		}
 		this.top = createTopControls({ state, showEffects });
 		this.bottom = createBottomControls({ state });
+
+		this.updateMineral = this.top.updateMineral;
 	}
 	updateTicker(count) {
 		if (!this.showTicker) return;
