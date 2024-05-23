@@ -9,7 +9,9 @@ I'm making a game and starting with Line Rangers style.
 
 -   money-grabbing
 -   disconnected from community/players
--   gacha that feels unfair
+-   gacha that feels unfair (and if it really is unfair then see a host of other endorphin-based predatory games)
+-   not enough open-ness / nerd / API (this is why lerico exists to document line)
+-   in-game communication sucks (this is why people use discord?)
 
 ## notes
 
