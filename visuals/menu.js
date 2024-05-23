@@ -33,6 +33,7 @@ const template = () => `
                     <option value="3">Field Stage 1</option>
                     <option value="4">Ghost Stage 1</option>
                     <option value="5">Ocean Stage 1</option>
+                    <option value="6">Japanese Stage 1</option>
                 </select>
             </div>
         </div>

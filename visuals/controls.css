@@ -4,6 +4,11 @@ div#controls {
 	right: 0;
 	top: 0;
 	bottom: 0;
+	pointer-events: none;
+}
+.controls-bottom,
+.controls-top {
+	pointer-events: all;
 }
 .controls-bottom {
 	position: absolute;
@@ -16,6 +21,7 @@ div#controls {
 	height: 22%;
 	max-height: 106px;
 	/* opacity: 0.3; */
+	pointer-events: all;
 }
 .controls-bottom .symbol {
 	font-size: 60px;

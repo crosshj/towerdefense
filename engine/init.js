@@ -14,6 +14,7 @@ import { fast1 } from './games/fast1.js';
 import { fieldStage1 } from './games/field1.js';
 import { ghostStage1 } from './games/ghost1.js';
 import { oceanStage1 } from './games/ocean1.js';
+import { japanese1 } from './games/japanese1.js';
 
 const games = [
 	balancedGame1,
@@ -21,7 +22,8 @@ const games = [
 	fast1,
 	fieldStage1,
 	ghostStage1,
-	oceanStage1
+	oceanStage1,
+	japanese1
 	//
 ];
 
