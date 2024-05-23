@@ -1,6 +1,17 @@
 import ScreenInfo from './screen.js';
 
-const createTopControls = ({ showEffects, state } = {}) => {
+const getDomRoot = () => {
+	const prevControls = document.getElementById('controls');
+	if (prevControls) {
+		document.body.removeChild(prevControls);
+	}
+	const root = document.createElement('div');
+	root.id = 'controls';
+	document.body.appendChild(root);
+	return root;
+};
+
+const createTopControls = ({ root, showEffects, state } = {}) => {
 	const top = document.createElement('div');
 	top.classList.add('controls-top');
 
@@ -34,11 +45,11 @@ const createTopControls = ({ showEffects, state } = {}) => {
 	top.updateMineral = (amount, total) => {
 		mineralEl.innerText = `⬖ ${amount}/${total}`;
 	};
-	document.body.insertAdjacentElement('beforeend', top);
+	root.insertAdjacentElement('beforeend', top);
 	return top;
 };
 
-const createBottomControls = ({ state }) => {
+const createBottomControls = ({ root, state }) => {
 	const bottom = document.createElement('div');
 	bottom.classList.add('controls-bottom');
 	bottom.innerHTML = `
@@ -91,28 +102,30 @@ const createBottomControls = ({ state }) => {
 		state.actions.mineralLevel();
 	});
 
-	document.body.insertAdjacentElement('beforeend', bottom);
+	root.insertAdjacentElement('beforeend', bottom);
 	return bottom;
 };
 
-const createTicker = () => {
+const createTicker = (root) => {
 	const ticker = document.createElement('div');
 	ticker.classList.add('controls-ticker');
-	document.body.append(ticker);
+	root.append(ticker);
 	return ticker;
 };
 
 export default class Controls {
 	constructor({ state, showTicker, showScreenInfo, showEffects } = {}) {
+		const root = getDomRoot();
+
 		this.showTicker = showTicker;
 		if (showTicker) {
-			this.ticker = createTicker();
+			this.ticker = createTicker(root);
 		}
 		if (showScreenInfo) {
-			ScreenInfo();
+			ScreenInfo(root);
 		}
-		this.top = createTopControls({ state, showEffects });
-		this.bottom = createBottomControls({ state });
+		this.top = createTopControls({ root, state, showEffects });
+		this.bottom = createBottomControls({ root, state });
 
 		this.updateMineral = this.top.updateMineral;
 	}
