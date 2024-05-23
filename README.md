@@ -13,6 +13,10 @@ I'm making a game and starting with Line Rangers style.
 
 ## notes
 
+https://web.dev/articles/pwas-in-app-stores
+
+---
+
 from lerico, characters seem to be under 200x200 with many around 170 high and
 varying widths 760x428 game dims from a screencap I saw, seems reasonable
 
