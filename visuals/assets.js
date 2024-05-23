@@ -167,7 +167,7 @@ const Tile = (process) => (inputCanvas, offsetX, offsetY, width, height) => {
 
 export const loadAssets = async ({ root = './' } = {}) => {
 	const imageUrls = Object.entries(images).filter(
-		([k, v]) => typeof v !== 'function'
+		([k, v]) => typeof v === 'string'
 	);
 
 	const slices = Object.entries(images).filter(

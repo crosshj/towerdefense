@@ -279,10 +279,10 @@ const render = (state, ctx, gif, controls) => {
 	});
 
 	if (state.towers[0].status === 'dead') {
-		console.log('Red wins!');
+		alert('You lose!');
 	}
 	if (state.towers[1].status === 'dead') {
-		console.log('Blue wins!');
+		alert('You win!');
 	}
 
 	if (!state.record) return;
