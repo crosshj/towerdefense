@@ -1,4 +1,5 @@
 import { startGame } from '../engine/init.js';
+import { Howl } from 'https://cdn.jsdelivr.net/npm/howler@2.2.4/+esm';
 
 const template = () => `
 <div
@@ -53,6 +54,31 @@ const createMenu = () => {
 	const menu = document.getElementById('main-menu');
 	const demoChoiceSelect = menu.querySelector('select#demo-choice');
 	const demoPlayButton = menu.querySelector('button#demo-play');
+
+	var sound = new Howl({
+		src: ['/assets/audio/EtherealTraverse.wav'],
+		volume: 0,
+		preload: true,
+		autoplay: true,
+		loop: true,
+		paused: true
+	});
+	sound.play();
+	sound.fade(0, 1, 4000);
+
+	menu.hide = () => {
+		menu.style.display = 'none';
+		sound.fade(sound.volume(), 0, 500, undefined, () => {
+			sound.stop();
+		});
+	};
+
+	menu.show = () => {
+		menu.style.display = 'flex';
+		sound.play();
+		sound.fade(0, 0.5, 1000);
+	};
+
 	demoPlayButton.addEventListener('click', () => {
 		startGame({
 			which: demoChoiceSelect.value,

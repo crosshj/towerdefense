@@ -1,0 +1,70 @@
+<html>
+	<head>
+		<title>TD: Audio Test</title>
+		<meta charset="utf-8" />
+		<base href="../" target="_blank" />
+		<meta name="description" content="" />
+		<meta name="author" content="" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="mobile-web-app-capable" content="yes" />
+		<link rel="icon" type="image/png" href="assets/favicon.png" />
+	</head>
+
+	<body>
+		<button onmousedown="togglePlay(event)">PAUSE</button>
+		<div style="margin-bottom: 1em"></div>
+		<button onmousedown="punch('click')">CLICK</button>
+		<div style="margin-bottom: 1em"></div>
+		<button onmousedown="punch('one')">PUNCH 1</button>
+		<button onmousedown="punch('two')">PUNCH 2</button>
+		<button onmousedown="punch('three')">PUNCH 3</button>
+	</body>
+
+	<script type="module">
+		import {
+			Howler,
+			Howl
+		} from 'https://cdn.jsdelivr.net/npm/howler@2.2.4/+esm';
+		// console.log({ Howler, Howl });
+
+		var sound = new Howl({
+			src: ['assets/audio/EtherealTraverse.wav'],
+			volume: 0,
+			//html5: true,
+			preload: true,
+			autoplay: true,
+			loop: true,
+			paused: true
+		});
+		sound.play();
+		sound.fade(0, 1, 4000);
+
+		window.togglePlay = (e) => {
+			const { target } = e;
+			const isPaused = target.innerText === 'PLAY';
+			if (isPaused) {
+				target.innerText = 'PAUSE';
+				sound.play();
+				sound.fade(0, 1, 4000);
+			} else {
+				target.innerText = 'PLAY';
+				sound.fade(sound.volume(), 0, 300, undefined, () => {
+					soundId = sound.stop();
+				});
+			}
+		};
+		window.clickSound = () => sound.play('click');
+
+		var punches = new Howl({
+			src: ['/assets/audio/717788__ryanpbaskett__punches.wav'],
+			preload: true,
+			sprite: {
+				one: [8298, 450, false],
+				two: [10087, 350, false],
+				three: [16169, 210, false],
+				click: [31331, 20, false]
+			}
+		});
+		window.punch = (which) => punches.play(which);
+	</script>
+</html>

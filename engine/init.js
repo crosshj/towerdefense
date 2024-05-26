@@ -33,7 +33,7 @@ export const startGame = async ({ menu, which }) => {
 		alert('no game selected!');
 		return;
 	}
-	menu.style.display = 'none';
+	menu.hide();
 	const state = new State(thisGame().state);
 	state.assets = await loadAssets();
 	state.actions = getActions(state);
@@ -58,7 +58,7 @@ export const startGame = async ({ menu, which }) => {
 			TeamUpdates.updateDeployedTicks(state);
 			const continueGame = updateGameStatus(state);
 			if (!continueGame) {
-				menu.style.display = 'flex';
+				menu.show();
 			}
 			return continueGame;
 		} catch (e) {
