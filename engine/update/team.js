@@ -1,4 +1,6 @@
-import { clone, unNest } from '../../utils/utils.js';
+import { unNest } from '../../utils/utils.js';
+import { loadSounds } from '../../visuals/assets.js';
+const coreSounds = await loadSounds('coreSounds');
 
 export const moveDeployed = (state) => {
 	const { tick, towers } = state;
@@ -61,9 +63,18 @@ export const attackOpponents = (state) => {
 		const canCrit =
 			typeof attacker.critChance === 'number' &&
 			typeof attacker.critMult === 'number';
+		let didCrit = false;
 		if (canCrit && Math.random() <= attacker.critChance) {
 			damage = attacker.attack * attacker.critMult;
 			console.log('critical attack');
+			didCrit = true;
+		}
+		if (damage <= 0) {
+			return;
+		}
+		if (Math.random() > 0.85 || didCrit) {
+			didCrit && coreSounds.play('swipe1');
+			!didCrit && coreSounds.play('punch1');
 		}
 		target.hp -= damage;
 		if (target.hp < 0) {

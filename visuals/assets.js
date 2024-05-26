@@ -1,3 +1,5 @@
+import { Howl } from 'https://cdn.jsdelivr.net/npm/howler@2.2.4/+esm';
+
 const proxy = 'https://api.allorigins.win/raw?url=';
 
 window.towerColor1 = window.towerColor1 || '#24b';
@@ -188,4 +190,35 @@ export const loadAssets = async ({ root = './' } = {}) => {
 	}
 
 	return { images };
+};
+
+const sounds = {};
+export const loadSounds = async (key) => {
+	if (sounds[key]) return sounds[key];
+	if (key === 'menuBackground') {
+		sounds.menuBackground = new Howl({
+			src: ['/assets/audio/EtherealTraverse.wav'],
+			volume: 0,
+			preload: true,
+			autoplay: true,
+			loop: true,
+			paused: true
+		});
+		return sounds.menuBackground;
+	}
+	//coreSounds
+	if (key === 'coreSounds') {
+		sounds.coreSounds = new Howl({
+			src: ['/assets/audio/717788__ryanpbaskett__punches.wav'],
+			preload: true,
+			volume: 0.7,
+			sprite: {
+				punch1: [8298, 450, false],
+				punch2: [10087, 350, false],
+				swipe1: [16169, 210, false],
+				click: [31331, 20, false]
+			}
+		});
+		return sounds.coreSounds;
+	}
 };
