@@ -58,31 +58,27 @@ const createMenu = async () => {
 	const bgMusic = await loadSounds('menuBackground');
 	const coreSounds = await loadSounds('coreSounds');
 
-	bgMusic.play();
-	bgMusic.fade(0, 1, 4000);
+	bgMusic.start();
 
 	menu.hide = () => {
 		menu.style.display = 'none';
-		bgMusic.fade(bgMusic.volume(), 0, 500, undefined, () => {
-			bgMusic.stop();
-		});
+		bgMusic.stop();
 	};
 
 	menu.show = () => {
 		menu.style.display = 'flex';
-		bgMusic.play();
-		bgMusic.fade(0, 0.5, 1000);
+		bgMusic.start();
 	};
 
 	demoChoiceSelect.addEventListener('mousedown', () => {
-		coreSounds.play('click');
+		coreSounds.play('click', 1);
 	});
 	demoChoiceSelect.addEventListener('change', () => {
-		coreSounds.play('click');
+		coreSounds.play('click', 1);
 	});
 
 	demoPlayButton.addEventListener('mousedown', () => {
-		coreSounds.play('click');
+		coreSounds.play('click', 1);
 		startGame({
 			which: demoChoiceSelect.value,
 			menu

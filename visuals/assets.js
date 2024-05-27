@@ -196,7 +196,8 @@ const sounds = {};
 export const loadSounds = async (key) => {
 	if (sounds[key]) return sounds[key];
 	if (key === 'menuBackground') {
-		sounds.menuBackground = new Howl({
+		const MAXVOL = 0.75;
+		const bg = new Howl({
 			src: ['/assets/audio/EtherealTraverse.wav'],
 			volume: 0,
 			preload: true,
@@ -204,10 +205,21 @@ export const loadSounds = async (key) => {
 			loop: true,
 			paused: true
 		});
+		sounds.menuBackground = {
+			stop: () => {
+				bg.fade(MAXVOL, 0, 1000, undefined, () => {
+					bg.stop();
+				});
+			},
+			start: () => {
+				bg.play();
+				bg.fade(0, MAXVOL, 1000);
+			}
+		};
 		return sounds.menuBackground;
 	}
 	if (key === 'tropicalShadowsBackground') {
-		const MAXVOL = 0.5;
+		const MAXVOL = 0.6;
 		const bg = new Howl({
 			src: ['/assets/audio/TropicalShadows.wav'],
 			volume: 0,
@@ -230,7 +242,7 @@ export const loadSounds = async (key) => {
 		return sounds.tropicalShadowsBackground;
 	}
 	if (key === 'sunnyFieldBackground') {
-		const MAXVOL = 0.25;
+		const MAXVOL = 0.45;
 		const bg = new Howl({
 			src: ['/assets/audio/SunnyField.wav'],
 			volume: 0,
@@ -253,7 +265,7 @@ export const loadSounds = async (key) => {
 		return sounds.sunnyFieldBackground;
 	}
 	if (key === 'asianSceneBackground') {
-		const MAXVOL = 0.45;
+		const MAXVOL = 0.6;
 		const bg = new Howl({
 			src: ['/assets/audio/AsianScene.wav'],
 			volume: 0,
@@ -277,10 +289,11 @@ export const loadSounds = async (key) => {
 	}
 	//coreSounds
 	if (key === 'coreSounds') {
-		sounds.coreSounds = new Howl({
+		const MAXVOL = 0.4;
+		const sprites = new Howl({
 			src: ['/assets/audio/coreSounds.wav'],
 			preload: true,
-			volume: 0.3,
+			volume: 1,
 			sprite: {
 				punch1: [8298, 450, false],
 				punch2: [10087, 350, false],
@@ -288,6 +301,12 @@ export const loadSounds = async (key) => {
 				click: [31331, 20, false]
 			}
 		});
+		sounds.coreSounds = {
+			play: (which, vol = MAXVOL) => {
+				const id = sprites.play(which);
+				sprites.volume(vol, id);
+			}
+		};
 		return sounds.coreSounds;
 	}
 };
