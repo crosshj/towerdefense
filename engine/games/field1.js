@@ -33,7 +33,10 @@ export const fieldStage1 = () => {
 			record: false,
 			field: {
 				height: 800,
-				width: 3700
+				width: 4000
+			},
+			sounds: {
+				background: 'sunnyFieldBackground'
 			},
 			stage: {
 				background: 'backgroundField1'

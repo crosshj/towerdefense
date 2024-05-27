@@ -77,7 +77,7 @@ const images = {
 	backgroundField1: 'assets/bg-field1.png',
 	backgroundGhost1: 'assets/bg-ghost1.png',
 	backgroundOcean1: 'assets/bg-ocean1.png',
-	backgroundJapanese1: 'assets/background-ai4.png',
+	backgroundJapanese1: 'assets/background-japan2.png',
 	bgTop: ({ background: bg }) =>
 		Tile()(
 			bg,
@@ -206,12 +206,81 @@ export const loadSounds = async (key) => {
 		});
 		return sounds.menuBackground;
 	}
+	if (key === 'tropicalShadowsBackground') {
+		const MAXVOL = 0.5;
+		const bg = new Howl({
+			src: ['/assets/audio/TropicalShadows.wav'],
+			volume: 0,
+			preload: true,
+			autoplay: true,
+			loop: true,
+			paused: true
+		});
+		sounds.tropicalShadowsBackground = {
+			stop: () => {
+				bg.fade(MAXVOL, 0, 1000, undefined, () => {
+					bg.stop();
+				});
+			},
+			start: () => {
+				bg.play();
+				bg.fade(0, MAXVOL, 1000);
+			}
+		};
+		return sounds.tropicalShadowsBackground;
+	}
+	if (key === 'sunnyFieldBackground') {
+		const MAXVOL = 0.25;
+		const bg = new Howl({
+			src: ['/assets/audio/SunnyField.wav'],
+			volume: 0,
+			preload: true,
+			autoplay: true,
+			loop: true,
+			paused: true
+		});
+		sounds.sunnyFieldBackground = {
+			stop: () => {
+				bg.fade(MAXVOL, 0, 1000, undefined, () => {
+					bg.stop();
+				});
+			},
+			start: () => {
+				bg.play();
+				bg.fade(0, MAXVOL, 1000);
+			}
+		};
+		return sounds.sunnyFieldBackground;
+	}
+	if (key === 'asianSceneBackground') {
+		const MAXVOL = 0.45;
+		const bg = new Howl({
+			src: ['/assets/audio/AsianScene.wav'],
+			volume: 0,
+			preload: true,
+			autoplay: true,
+			loop: true,
+			paused: true
+		});
+		sounds.asianSceneBackground = {
+			stop: () => {
+				bg.fade(MAXVOL, 0, 1000, undefined, () => {
+					bg.stop();
+				});
+			},
+			start: () => {
+				bg.play();
+				bg.fade(0, MAXVOL, 1000);
+			}
+		};
+		return sounds.asianSceneBackground;
+	}
 	//coreSounds
 	if (key === 'coreSounds') {
 		sounds.coreSounds = new Howl({
 			src: ['/assets/audio/717788__ryanpbaskett__punches.wav'],
 			preload: true,
-			volume: 0.7,
+			volume: 0.3,
 			sprite: {
 				punch1: [8298, 450, false],
 				punch2: [10087, 350, false],

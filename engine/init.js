@@ -1,7 +1,7 @@
 import Engine from './engine.js';
 import Render from '../visuals/render.js';
 import State from './state.js';
-import { loadAssets } from '../visuals/assets.js';
+import { loadAssets, loadSounds } from '../visuals/assets.js';
 import Controls from '../visuals/controls.js';
 import TeamUpdates from './update/team.js';
 import PlayerUpdates from './update/player.js';
@@ -45,9 +45,21 @@ export const startGame = async ({ menu, which }) => {
 		showEffects: true
 	});
 
+	let bgMusic = {
+		start: () => {},
+		stop: () => {}
+	};
+	if (state?.sounds?.background) {
+		const { background: bgMusicName } = state.sounds;
+		bgMusic = await loadSounds(bgMusicName);
+	}
+	bgMusic.start();
+
 	const gameLoop = () => {
 		try {
-			if (state.paused) return true;
+			if (state.paused) {
+				return true;
+			}
 			PlayerUpdates.chargeMissile(state);
 			PlayerUpdates.chargeMineral(state);
 			PlayerUpdates.updateMineral(state);
@@ -58,6 +70,7 @@ export const startGame = async ({ menu, which }) => {
 			TeamUpdates.updateDeployedTicks(state);
 			const continueGame = updateGameStatus(state);
 			if (!continueGame) {
+				bgMusic.stop();
 				menu.show();
 			}
 			return continueGame;

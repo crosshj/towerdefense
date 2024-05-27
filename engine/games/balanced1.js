@@ -35,6 +35,9 @@ export const balancedGame1 = () => {
 				height: 800,
 				width: 2300
 			},
+			sounds: {
+				background: 'tropicalShadowsBackground'
+			},
 			towers: [
 				{
 					type: 'attacker',

@@ -1,7 +1,7 @@
 export const balancedLongField1 = () => {
 	const towerX = 200;
 	const towerColor1 = '#24b';
-	const towerColor2 = '#934';
+	const towerColor2 = '#604050';
 
 	const basicChar = {
 		type: 'attacker',
@@ -34,6 +34,9 @@ export const balancedLongField1 = () => {
 			field: {
 				height: 800,
 				width: 4000
+			},
+			sounds: {
+				background: 'tropicalShadowsBackground'
 			},
 			towers: [
 				{

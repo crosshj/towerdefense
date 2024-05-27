@@ -35,6 +35,9 @@ export const japanese1 = () => {
 				height: 800,
 				width: 4000
 			},
+			sounds: {
+				background: 'asianSceneBackground'
+			},
 			stage: {
 				background: 'backgroundJapanese1'
 			},

@@ -24,17 +24,17 @@ const template = () => `
     >
         <p class="title">Tower Defense</p>
         <div style="background-color:#212529; padding: 1rem 1.2rem 1rem 1rem;width:calc(100% + 8px)">
-            <label for="dark_select" style="color:#fff">Choose a Demo</label>
             <div class="nes-select is-dark">
-                <select required id="demo-choice" value="0">
-                    <!-- option value="" disabled selected hidden>Select...</option -->
-                    <option value="0">Mostly Balanced: Blue wins often</option>
-                    <option value="1">Mostly Balanced: Long Field</option>
+                <select required id="demo-choice" value="">
+                    <option value="" disabled selected hidden>Select Stage...</option>
+                    <option value="-1" disabled>---</option>
+                    <option value="1">Tropical Graveyard</option>
+                    <option value="6">Japanese</option>
+                    <option value="3">Sunny Field</option>
                     <option value="2">Fast: Blue is OP</option>
-                    <option value="3">Field Stage 1</option>
                     <option value="4">Ghost Stage 1</option>
                     <option value="5">Ocean Stage 1</option>
-                    <option value="6">Japanese Stage 1</option>
+                    <option value="0">Mostly Balanced: Blue wins often</option>
                 </select>
             </div>
         </div>
