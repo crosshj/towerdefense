@@ -278,7 +278,7 @@ export const loadSounds = async (key) => {
 	//coreSounds
 	if (key === 'coreSounds') {
 		sounds.coreSounds = new Howl({
-			src: ['/assets/audio/717788__ryanpbaskett__punches.wav'],
+			src: ['/assets/audio/coreSounds.wav'],
 			preload: true,
 			volume: 0.3,
 			sprite: {
