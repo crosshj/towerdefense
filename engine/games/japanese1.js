@@ -63,8 +63,8 @@ export const japanese1 = () => {
 			],
 			tick: 0,
 			missile: {
-				charge: 0,
-				chargeRate: 30
+				charge: 100,
+				chargeRate: 2
 			},
 			mineral: {
 				charge: 0, // level charge

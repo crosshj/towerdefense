@@ -1,5 +1,24 @@
 import ScreenInfo from './screen.js';
 
+const progressClasses = [
+	'p-0',
+	'p-10',
+	'p-20',
+	'p-30',
+	'p-40',
+	'p-50',
+	'p-60',
+	'p-70',
+	'p-80',
+	'p-90',
+	'p-100'
+];
+
+const updateProgress = (el, amount) => {
+	el.classList.remove(...progressClasses);
+	el.classList.add(`p-${amount}`);
+};
+
 const getDomRoot = () => {
 	const prevControls = document.getElementById('controls');
 	if (prevControls) {
@@ -17,11 +36,12 @@ const createTopControls = ({ root, showEffects, state } = {}) => {
 
 	const effects = showEffects
 		? `
-			<div>🙌</div>
-			<div>☄</div>
-			<div>🧊</div>
-			<div>🌪</div>
-			<div>🔧</div>
+			<div data-effect="teamSwitch" class="progress p-100">A</div>
+			<div data-effect="callFriend">🙌</div>
+			<div data-effect="meteor">☄</div>
+			<div data-effect="ice">🧊</div>
+			<div data-effect="tornado">🌪</div>
+			<div data-effect="invincible">🛡</div>
 		`
 		: '';
 
@@ -41,9 +61,43 @@ const createTopControls = ({ root, showEffects, state } = {}) => {
 		state.actions.pauseToggle();
 	});
 
+	const effectsContainer = top.querySelector('.effects');
+	effectsContainer.addEventListener('click', (e) => {
+		const { effect = 'none' } = e?.target?.dataset;
+		if (effect === 'none') return;
+		if (effect === 'teamSwitch' && !e.target.classList.contains('p-100')) {
+			return;
+		}
+		state.actions.triggerEffect({
+			effect,
+			disableEffect: () => {
+				e.target.classList.add('disabled');
+			},
+			switchTeam: () => {
+				const newText = e.target.innerText === 'A' ? 'B' : 'A';
+				e.target.innerText = newText;
+				let currentProgress = 0;
+				updateProgress(e.target, currentProgress);
+				const thisInterval = setInterval(() => {
+					currentProgress += 10;
+					if (currentProgress > 100) {
+						clearInterval(thisInterval);
+						return;
+					}
+					if (currentProgress === 100) {
+						clearInterval(thisInterval);
+					}
+					updateProgress(e.target, currentProgress);
+				}, 1000);
+			}
+		});
+	});
+
 	const mineralEl = top.querySelector('.mineral');
 	top.updateMineral = (amount, total) => {
-		mineralEl.innerText = `⬖ ${amount}/${total}`;
+		const newText = `⬖ ${amount}/${total}`;
+		if (mineralEl.innerText === newText) return;
+		mineralEl.innerText = newText;
 	};
 	root.insertAdjacentElement('beforeend', top);
 	return top;
@@ -81,7 +135,7 @@ const createBottomControls = ({ root, state }) => {
 		<div class="mineral button">
 			<div class="symbol">⬖</div>
 			<div class="progress p-0 vertical blue"></div>
-			<div>mineral</div>
+			<div class="levelIndicator">Lv.1</div>
 		</div>
     `;
 
@@ -97,9 +151,21 @@ const createBottomControls = ({ root, state }) => {
 	const mineralButtonProgress = bottom.querySelector(
 		'.mineral.button .progress'
 	);
+	const mineralButtonLevelIndicator = bottom.querySelector(
+		'.mineral.button .levelIndicator'
+	);
 	mineralButton.addEventListener('click', () => {
 		if (!mineralButtonProgress.classList.contains(`p-100`)) return;
-		state.actions.mineralLevel();
+		state.actions.mineralLevel({
+			updateLevel: (levelNumber) => {
+				let levelText = `Lv.${levelNumber}`;
+				if (levelNumber === 8) {
+					levelText = 'MAX';
+					mineralButtonProgress.style.display = 'none';
+				}
+				mineralButtonLevelIndicator.innerText = levelText;
+			}
+		});
 	});
 
 	root.insertAdjacentElement('beforeend', bottom);
@@ -136,20 +202,6 @@ export default class Controls {
 	updateProgress(which, amount) {
 		const el = this.bottom.querySelector(`.${which} .progress`);
 		if (el.classList.contains(`p-${amount}`)) return;
-		const progressClasses = [
-			'p-0',
-			'p-10',
-			'p-20',
-			'p-30',
-			'p-40',
-			'p-50',
-			'p-60',
-			'p-70',
-			'p-80',
-			'p-90',
-			'p-100'
-		];
-		el.classList.remove(...progressClasses);
-		el.classList.add(`p-${amount}`);
+		updateProgress(el, amount);
 	}
 }

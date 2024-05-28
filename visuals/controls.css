@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap');
+
 div#controls {
 	position: absolute;
 	left: 0;
@@ -20,7 +22,6 @@ div#controls {
 	align-items: flex-end;
 	height: 22%;
 	max-height: 106px;
-	/* opacity: 0.3; */
 	pointer-events: all;
 }
 .controls-bottom .symbol {
@@ -31,20 +32,24 @@ div#controls {
 	font-size: 45px;
 	line-height: 40px;
 }
+/* prettier-ignore */
 .controls-bottom > div {
 	border-radius: 15px;
 	display: flex;
 	flex-direction: column;
 	color: #886337;
 	text-transform: uppercase;
-	font-family: arial;
+	font-family: monospace;
 	justify-content: flex-end;
 	align-items: center;
-	padding-bottom: 10px;
+	padding-bottom: 2px;
 	background-color: #4c360e;
 	background: linear-gradient(#644d40, #472f2a);
-	box-shadow: 1px 3px 5px 2px #00000075, inset 1px 1px 0px 4px #6b472b,
-		inset 1px 1px 0px 5px #0f0000c9, inset 1px -6px 8px 0px #312604;
+	box-shadow: 
+		1px 3px 5px 2px #00000075,
+		inset 1px 1px 0px 4px #6b472b,
+		inset 1px 1px 0px 5px #0f0000c9,
+		inset 1px -6px 8px 0px #312604;
 }
 .controls-bottom .missile {
 	margin-right: 18px;
@@ -94,13 +99,15 @@ div#controls {
 	width: 100vw;
 	height: 50px;
 	display: flex;
-	/* opacity: 0.3; */
 }
 .controls-top .effects {
 	display: flex;
 	margin-right: auto;
 	margin-left: 20px;
 	gap: 11px;
+	font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+		Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
+		sans-serif;
 }
 .controls-top .effects > div,
 .controls-top .pause {
@@ -113,10 +120,12 @@ div#controls {
 	color: white;
 	border-radius: 50%;
 	box-shadow: 1px 1px 0px 2px black;
-	/* opacity: 0.5; */
 }
 .controls-top .effects > div {
 	font-size: 30px;
+}
+.controls-top .effects .disabled {
+	filter: grayscale(1) brightness(0.5);
 }
 .controls-top .pause {
 	margin-right: 17px;
@@ -124,12 +133,22 @@ div#controls {
 	font-size: 20px;
 	font-weight: 900;
 }
+/* prettier-ignore */
 .controls-top .mineral {
+	--text-outline-color: #0007;
+	color: #f2f2f2;
+	font-size: 28px;
+	font-family: "Rubik Mono One", 'Courier New', Courier, monospace;
+	letter-spacing: -2px;
+	/* font-weight: 700;
+	font-style: normal; */
+	text-shadow: 
+		-1px -1px 0 var(--text-outline-color), /* top */
+		3px -1px 0 var(--text-outline-color),  /* right */
+		-1px 3px 0 var(--text-outline-color),  /* left */
+		3px 3px 0 var(--text-outline-color);   /* bottom */
+	-webkit-font-smoothing: antialiased;
 	margin-right: 25px;
-	font-size: 30px;
-	font-family: monospace;
-	font-weight: 900;
-	color: #0a83c8;
 	display: flex;
 	align-items: center;
 }
@@ -212,4 +231,28 @@ div#controls {
 	font-family: 'Press Start 2P', system-ui;
 	font-weight: 400;
 	font-style: normal;
+}
+
+/* prettier-ignore */
+.effects .progress {
+	--progress-color: #ffa500c0;
+	/* --progress-color: #333; */
+	background: linear-gradient(
+		to top,
+		var(--progress-color) 0%,
+		var(--progress-color) var(--progress),
+		transparent var(--progress),
+		transparent 100%
+	);
+	&.p-0 { --progress: 0%; }
+	&.p-10 { --progress: 10%; }
+	&.p-20 { --progress: 20%; }
+	&.p-30 { --progress: 30%; }
+	&.p-40 { --progress: 40%; }
+	&.p-50 { --progress: 50%; }
+	&.p-60 { --progress: 60%; }
+	&.p-70 { --progress: 70%; }
+	&.p-80 { --progress: 80%; }
+	&.p-90 { --progress: 90%; }
+	&.p-100 { --progress: 100%; }
 }
