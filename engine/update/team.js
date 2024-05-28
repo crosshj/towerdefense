@@ -77,7 +77,7 @@ export const attackOpponents = (state) => {
 			!didCrit && coreSounds.play('punch1');
 		}
 		target.hp -= damage;
-		if (target.hp < 0) {
+		if (target.hp <= 0) {
 			target.status = 'dead';
 			attacker.target = undefined;
 		}

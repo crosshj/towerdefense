@@ -1,6 +1,7 @@
 import { cleanError, colorShade } from '../utils/utils.js';
 import { toggleCoords } from '../engine/state.js';
 import GifMaker from './gif.js';
+import { renderMissile } from './objects/missile.js';
 
 const BOTTOM_OFFSET = 60;
 
@@ -271,6 +272,11 @@ const render = (state, ctx, gif, controls) => {
 
 	ctx.clearRect(0, 0, fieldWidth, fieldHeight);
 	drawBackground();
+
+	const allMissiles = state.missile.instances || [];
+	for (const missile of allMissiles) {
+		renderMissile(ctx)(missile);
+	}
 
 	const globalModeState = toggleCoords(state, 'global');
 	globalModeState.towers.forEach((tower) => {

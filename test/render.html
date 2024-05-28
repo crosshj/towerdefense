@@ -1,0 +1,33 @@
+<html>
+	<head>
+		<title>TD: Render Test</title>
+		<meta charset="utf-8" />
+		<base href="../" target="_blank" />
+		<meta name="description" content="" />
+		<meta name="author" content="" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="mobile-web-app-capable" content="yes" />
+		<link rel="icon" type="image/png" href="assets/favicon.png" />
+		<meta name="color-scheme" content="dark light" />
+	</head>
+
+	<body>
+		<canvas
+			id="missileCanvas"
+			height="400"
+			width="400"
+			style="background: #777"
+		></canvas>
+	</body>
+
+	<script type="module">
+		import { renderMissile } from '/visuals/objects/missile.js';
+		const missileCanvas = document.getElementById('missileCanvas');
+		const missileCanvasCtx = missileCanvas.getContext('2d');
+		renderMissile(missileCanvasCtx)({
+			x: 200,
+			y: 200,
+			angle: -45
+		});
+	</script>
+</html>

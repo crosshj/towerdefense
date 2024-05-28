@@ -1,4 +1,5 @@
 import { getMineralMap } from './mineral.js';
+import { spawnMissile } from './update/missile.js';
 
 const mineralMap = getMineralMap();
 
@@ -9,7 +10,7 @@ export const getActions = (state) => {
 		},
 		missileFire: () => {
 			if (state.paused) return;
-			state.missile.charge = 0;
+			spawnMissile(state);
 		},
 		mineralLevel: () => {
 			if (state.paused) return;

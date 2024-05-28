@@ -298,7 +298,8 @@ export const loadSounds = async (key) => {
 				punch1: [8298, 450, false],
 				punch2: [10087, 350, false],
 				swipe1: [16169, 210, false],
-				click: [31331, 20, false]
+				click: [31331, 20, false],
+				explode1: [31651, 1582, false]
 			}
 		});
 		sounds.coreSounds = {
