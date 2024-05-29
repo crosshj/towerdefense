@@ -1,0 +1,97 @@
+<html>
+	<head>
+		<title>Sprites Tool</title>
+		<meta charset="utf-8" />
+		<base href="." target="_blank" />
+		<meta name="description" content="" />
+		<meta name="author" content="" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="mobile-web-app-capable" content="yes" />
+		<link rel="icon" type="image/png" href="assets/favicon.png" />
+		<meta name="color-scheme" content="dark light" />
+		<link href="index.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		Create Sprite Atlas with:
+		<a href="https://www.leshylabs.com/apps/sstool/">Leshy SS tool</a>
+
+		<h3>Upload JSON and Image</h3>
+		<label for="jsonInput">Sprite Atlas</label>
+		<input type="file" id="jsonInput" accept=".json" /><br /><br />
+		<label for="imageInput">Spritesheet</label>
+		<input type="file" id="imageInput" accept="image/*" /><br /><br />
+		<button id="submitButton">Submit</button><br /><br />
+
+		<h3>Results</h3>
+		<div id="sliceResults">-- no results --</div>
+	</body>
+
+	<script type="module">
+		document
+			.getElementById('submitButton')
+			.addEventListener('click', async () => {
+				const jsonFile = document.getElementById('jsonInput').files[0];
+				const imageFile =
+					document.getElementById('imageInput').files[0];
+
+				if (jsonFile && imageFile) {
+					// Read the JSON file
+					const jsonContent = await jsonFile.text();
+					const spritesMap = JSON.parse(jsonContent);
+
+					// Read the image file
+					const image = new Image();
+					image.onload = () => cutImageUp(image, spritesMap);
+					image.src = URL.createObjectURL(imageFile);
+				} else {
+					alert('Please select both a JSON file and an image file.');
+				}
+			});
+
+		function cutImageUp(image, spritesMap) {
+			var imagePieces = [];
+			for (const piece of spritesMap) {
+				const { name, x, y, width, height } = piece;
+				var canvas = document.createElement('canvas');
+				canvas.width = width;
+				canvas.height = height;
+				var context = canvas.getContext('2d');
+				context.drawImage(
+					image,
+					x,
+					y,
+					width,
+					height,
+					0,
+					0,
+					canvas.width,
+					canvas.height
+				);
+				const dataUri = canvas.toDataURL();
+				//imagePieces.push(dataUri);
+
+				const resultsDiv = document.getElementById('sliceResults');
+				resultsDiv.innerHTML = '';
+				const container = document.createElement('div');
+				container.style.maxHeight = '200px';
+				resultsDiv.append(container);
+
+				const link = document.createElement('a');
+				link.href = dataUri;
+				link.download = `${name}.png`;
+				link.textContent = `${name}.png`;
+				container.append(link);
+
+				const img = document.createElement('img');
+				img.src = dataUri;
+				img.alt = `${name}.png`;
+				img.style.maxHeight = '100%';
+				img.style.maxWidth = '200px';
+				container.append(img);
+
+				//container.append(document.createElement('br'));
+			}
+		}
+	</script>
+</html>
