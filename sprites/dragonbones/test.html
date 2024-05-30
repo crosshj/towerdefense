@@ -16,15 +16,22 @@
 
 		<link href="css.css" rel="stylesheet" />
 
-		<script egret="lib" src="js/dragonBones.js"></script>
+		<script src="js/dragonBones.js"></script>
 	</head>
 	<body>
+		<canvas
+			id="test-canvas"
+			width="400"
+			height="300"
+			style="background: #333"
+		></canvas>
 		<script type="module">
-			import { POJEventManager, POJFactory } from './test.js';
+			import { POJFactory, POJArmatureDisplay } from './test.js';
 
-			const em = new POJEventManager();
+			const canvas = document.getElementById('test-canvas');
+			const em = new POJArmatureDisplay(null);
 			const dbInstance = new dragonBones.DragonBones(em);
-			const factory = new POJFactory(dbInstance);
+			const factory = new POJFactory(dbInstance, canvas);
 
 			await factory.loadData({
 				skeleton: './base_fighter_ske.json',
@@ -33,10 +40,11 @@
 			});
 
 			window.armature = factory.buildArmatureDisplay('Armature');
-			console.log({ armature });
+			//console.log({ armature });
 
 			armature.animation.play('look_up');
-			factory.advanceTime(1 / 60);
+			// factory.advanceTime(1 / 60);
+			window.factory = factory;
 		</script>
 	</body>
 </html>
