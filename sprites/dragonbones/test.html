@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>DragonBones Viewer</title>
+		<meta
+			name="viewport"
+			content="width=device-width,initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"
+		/>
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="full-screen" content="true" />
+		<meta name="screen-orientation" content="portrait" />
+		<meta name="x5-fullscreen" content="true" />
+		<meta name="360-fullscreen" content="true" />
+		<meta name="renderer" content="webkit" />
+
+		<link href="css.css" rel="stylesheet" />
+
+		<!-- <script egret="lib" src="js/egret.min.js"></script> -->
+		<!-- <script egret="lib" src="js/egret.web.min.js"></script> -->
+		<!-- <script egret="lib" src="js/tween.min.js"></script> -->
+		<!-- <script egret="lib" src="js/promise.min.js"></script> -->
+		<script egret="lib" src="js/dragonBones.js"></script>
+		<!-- <script egret="lib" src="js/qrcode.min.js"></script> -->
+		<!-- <script egret="lib" src="js/main.min.js"></script> -->
+	</head>
+	<body>
+		<script>
+			const image = new Image();
+			image.onload = async function () {
+				const resources = {
+					ske: await fetch('./base_fighter_ske.json').then((x) =>
+						x.json()
+					),
+					texAtlas: await fetch('./base_fighter_tex.json').then((x) =>
+						x.json()
+					),
+					tex: image
+				};
+				class EventManager {
+					constructor() {}
+					dbInit() {
+						console.log('dbInit');
+					}
+					dbClear() {
+						console.log('dbClear');
+					}
+					dbUpdate() {
+						console.log('dbUpdate');
+					}
+					dispatchDBEvent(eventType, eventObj) {
+						console.log({ eventType, eventObj });
+					}
+				}
+				class ArmatureDisplay {
+					constructor(...args) {
+						console.log({ args });
+					}
+					dbInit() {
+						console.log('dbInit');
+					}
+					dbUpdate() {
+						console.log('dbUpdate');
+					}
+					dispatchDBEvent(eventType, eventObj) {
+						console.log({ eventType, eventObj });
+					}
+				}
+				class Slot extends dragonBones.Slot {
+					static toString() {
+						return '[class dragonBones.POJSlot]';
+					}
+					_initDisplay(initDisplayValue, _isRetain) {
+						console.log({ initDisplayValue });
+					}
+					_onUpdateDisplay(...onUpdateDisplayArgs) {
+						console.log({ onUpdateDisplayArgs });
+					}
+					_addDisplay(...addDisplayArgs) {
+						console.log({ addDisplayArgs });
+					}
+					_updateDisplayData() {
+						console.log({ _: 'this is dumb..', slot: this });
+						// debugger;
+						//super._updateDisplayData();
+						this._textureDirty = true;
+						this._transformDirty = true;
+					}
+					_updateFrame(..._updateFrameArgs) {
+						console.log({ _updateFrameArgs });
+					}
+				}
+				class POJTextureData extends dragonBones.TextureData {
+					static toString() {
+						return '[class dragonBones.POJTextureData]';
+					}
+
+					renderTexture = null; // Initial value.
+
+					_onClear() {
+						super._onClear();
+
+						if (this.renderTexture !== null) {
+							this.renderTexture.destroy(false);
+						}
+
+						this.renderTexture = null;
+					}
+				}
+				class POJTextureAtlasData extends dragonBones.TextureAtlasData {
+					static toString() {
+						return '[class dragonBones.POJTextureAtlasData]';
+					}
+					createTexture() {
+						return dragonBones.BaseObject.borrowObject(
+							POJTextureData
+						);
+					}
+				}
+				class POJFactory extends dragonBones.BaseFactory {
+					constructor(dbInstance) {
+						super();
+						this._dragonBones = dbInstance;
+					}
+					advanceTime(passedTime) {
+						this._dragonBones.advanceTime(passedTime);
+					}
+					_buildTextureAtlasData(textureAtlasData, textureAtlas) {
+						if (textureAtlasData !== null) {
+							textureAtlasData.renderTexture = textureAtlas;
+						} else {
+							textureAtlasData =
+								dragonBones.BaseObject.borrowObject(
+									POJTextureAtlasData
+								);
+						}
+
+						return textureAtlasData;
+					}
+					_getTextureData() {}
+					_buildArmature(dataPackage) {
+						const armature = dragonBones.BaseObject.borrowObject(
+							dragonBones.Armature
+						);
+						const armatureDisplay = new ArmatureDisplay(
+							this._scene
+						);
+
+						armature.init(
+							dataPackage.armature,
+							armatureDisplay,
+							armatureDisplay,
+							this._dragonBones
+						);
+
+						return armature;
+					}
+					_buildSlot(dataPackage, slotData, armature) {
+						const slot = dragonBones.BaseObject.borrowObject(Slot);
+						// const rawDisplay =
+						// 	this._scene.dragonbone.createSlotDisplayPlaceholder();
+						// const meshDisplay =
+						// 	this._scene.dragonbone.createMeshDisplayPlaceholder();
+						const rawDisplay = () => {};
+						const meshDisplay = () => {};
+
+						slot.init(slotData, armature, rawDisplay, meshDisplay);
+
+						return slot;
+					}
+					buildArmatureDisplay(
+						armatureName,
+						dragonBonesName,
+						skinName = '',
+						textureAtlasName = '',
+						textureScale = 1.0
+					) {
+						// console.log({
+						// 	armatureName,
+						// 	dragonBonesName,
+						// 	skinName,
+						// 	textureAtlasName
+						// });
+						const armature = this.buildArmature(
+							armatureName,
+							dragonBonesName,
+							skinName,
+							textureAtlasName
+						);
+
+						return armature;
+					}
+					buildDragonBonesData(dragonBonesName, textureScale = 1.0) {
+						let data = this._dragonBonesDataMap[dragonBonesName];
+						return data;
+					}
+				}
+				window.dragonInstance = new dragonBones.DragonBones(
+					new EventManager()
+				);
+				window.baseFact = new POJFactory(dragonInstance);
+
+				baseFact.parseDragonBonesData(resources.ske);
+				baseFact.parseTextureAtlasData(
+					resources.texAtlas,
+					resources.tex
+				);
+				const armature = baseFact.buildArmatureDisplay('Armature');
+				console.log({ armature });
+
+				armature.animation.play('look_up');
+				baseFact.advanceTime(1 / 60);
+
+				// egret.runEgret({ renderMode: "canvas", audioType: 0 });
+			};
+			image.src = './base_fighter_tex.png';
+		</script>
+	</body>
+</html>
