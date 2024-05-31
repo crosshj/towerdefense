@@ -21,9 +21,9 @@
 	<body>
 		<canvas
 			id="test-canvas"
-			width="400"
-			height="300"
-			style="background: #333"
+			width="128"
+			height="128"
+			style="background: #333; image-rendering: pixelated; zoom: 4"
 		></canvas>
 		<script type="module">
 			import { POJFactory, POJArmatureDisplay } from './test.js';
@@ -43,7 +43,9 @@
 			//console.log({ armature });
 
 			armature.animation.play('look_up');
-			// factory.advanceTime(1 / 60);
+			setInterval(() => {
+				factory.advanceTime(1 / 60);
+			}, 1000 / 60);
 			window.factory = factory;
 		</script>
 	</body>

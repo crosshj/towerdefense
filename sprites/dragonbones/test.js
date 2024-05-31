@@ -16,15 +16,26 @@ const log =
 	};
 
 class Bitmap {
-	constructor(canvas) {
+	constructor(canvas, name) {
 		this._canvas = canvas;
+		this.name = name;
 	}
-	putImage(image, rect) {
-		console.log(typeof image);
-		if (!image) return;
-		console.log({ image, rect });
+	putImage() {
+		if (!this.drawable) {
+			//console.log(`no drawable for: ${this.name}`);
+			return;
+		}
 		const ctx = this._canvas.getContext('2d');
-		ctx.drawImage(image, ...rect);
+		// console.log(this);
+		ctx.save();
+		ctx.translate(
+			this._canvas.width / 2 + this.x,
+			this._canvas.height + this.y
+		);
+		ctx.rotate((this.rotation * Math.PI) / 180);
+		ctx.drawImage(this.drawable, 0, 0);
+		ctx.restore();
+		//console.log({ image, rect });
 	}
 	setImage(image, [offsetX, offsetY, width, height]) {
 		const canvas = document.createElement('canvas');
@@ -42,10 +53,9 @@ class Bitmap {
 			canvas.width,
 			canvas.height
 		);
-		//this.drawable = canvas;
-		this.drawable = new Image();
-		this.drawable.src = canvas.toDataURL();
-		document.body.appendChild(this.drawable);
+		this.drawable = canvas;
+		// this.drawable = new Image();
+		// this.drawable.src = canvas.toDataURL();
 	}
 }
 
@@ -74,7 +84,7 @@ export class POJArmatureDisplay {
 	_armature = null;
 
 	constructor(...args) {
-		this.debug = true;
+		this.debug = false;
 		this.log = log('ArmatureDisplay', this);
 		this.log({ args });
 	}
@@ -91,6 +101,11 @@ export class POJArmatureDisplay {
 		const drawed = this.debugDraw;
 		if (drawed || this._debugDraw) {
 		} else {
+		}
+		const slots = this._armature.getSlots();
+		for (const slot of slots) {
+			//console.log({ displays: slot.displayList });
+			slot.displayList[0].putImage();
 		}
 	}
 	dispose(disposeProxy = true) {
@@ -136,13 +151,8 @@ export class POJArmatureDisplay {
 	}
 
 	//Hilo specific?
-	addChild(bitmap) {
-		this.log('addChild', { bitmap });
-		const image = bitmap.drawable;
-		console.log({ type: typeof image });
-		setTimeout(() => {
-			bitmap.putImage(image, [bitmap.x, bitmap.y]);
-		}, 3000);
+	addChild() {
+		this.log('addChild');
 	}
 	addChildAt() {
 		this.log('addChildAt');
@@ -176,14 +186,15 @@ class POJSlot extends Slot {
 		isRetain;
 	}
 	_onUpdateDisplay() {
+		// console.log({
+		// 	display: this.display,
+		// 	rawDisplay: this._rawDisplay,
+		// 	keys: Object.keys(this._rawDisplay)
+		// });
 		this._renderDisplay = this._display ? this._display : this._rawDisplay;
 	}
 	_addDisplay() {
 		const container = this._armature.display;
-		console.log({
-			_: 'slot.addDisplay',
-			renderDisplay: this._renderDisplay
-		});
 		container.addChild(this._renderDisplay);
 	}
 	_replaceDisplay(value) {
@@ -267,7 +278,11 @@ class POJSlot extends Slot {
 						currentTextureData.parent.scale *
 						this._armature._armatureData.scale;
 					const normalDisplay = this._renderDisplay;
-					console.log({ currentTextureData });
+					// console.log({
+					// 	normalDisplay,
+					// 	currentTextureData,
+					// 	renderTexture
+					// });
 					normalDisplay.setImage(renderTexture, [
 						currentTextureData.region.x,
 						currentTextureData.region.y,
@@ -285,7 +300,7 @@ class POJSlot extends Slot {
 			// TODO
 		} else {
 			const normalDisplay = this._renderDisplay;
-			normalDisplay.setImage(null);
+			// normalDisplay.setImage(null);
 			normalDisplay.x = 0.0;
 			normalDisplay.y = 0.0;
 			normalDisplay.visible = false;
@@ -295,7 +310,7 @@ class POJSlot extends Slot {
 		//this.log({ _updateMeshArgs });
 	}
 	_updateTransform(..._updateTransformArgs) {
-		//this.log({ _updateTransformArgs });
+		//console.log({ _updateTransformArgs });
 		this.updateGlobalTransform(); // Update transform.
 
 		const transform = this.global;
@@ -396,6 +411,7 @@ export class POJFactory extends BaseFactory {
 		return false;
 	}
 	advanceTime(passedTime) {
+		this.canvas.getContext('2d').reset();
 		this._dragonBones.advanceTime(passedTime);
 	}
 	async loadData({ skeleton, atlas, texture }) {
@@ -441,7 +457,8 @@ export class POJFactory extends BaseFactory {
 		// 	this._scene.dragonbone.createSlotDisplayPlaceholder();
 		// const meshDisplay =
 		// 	this._scene.dragonbone.createMeshDisplayPlaceholder();
-		const rawDisplay = new Bitmap(this.canvas);
+		// console.log({ slotData, armature });
+		const rawDisplay = new Bitmap(this.canvas, slotData.name);
 
 		slot.init(slotData, armature, rawDisplay, rawDisplay);
 
@@ -473,24 +490,24 @@ export class POJFactory extends BaseFactory {
 
 		return null;
 	}
-	getTextureDisplay(textureName, textureAtlasName = null) {
-		console.log({ textureName, textureAtlasName });
-		const textureData = this._getTextureData(
-			textureAtlasName !== null ? textureAtlasName : '',
-			textureName
-		);
-		if (textureData !== null) {
-			const texture = textureData.parent.renderTexture;
-			if (texture) {
-				const bitmap = new Bitmap(this.canvas);
-				console.log({ textureData });
-				bitmap.setImage(texture, textureData.region);
+	// getTextureDisplay(textureName, textureAtlasName = null) {
+	// 	console.log({ textureName, textureAtlasName });
+	// 	const textureData = this._getTextureData(
+	// 		textureAtlasName !== null ? textureAtlasName : '',
+	// 		textureName
+	// 	);
+	// 	if (textureData !== null) {
+	// 		const texture = textureData.parent.renderTexture;
+	// 		if (texture) {
+	// 			const bitmap = new Bitmap(this.canvas);
+	// 			console.log({ textureData });
+	// 			bitmap.setImage(texture, textureData.region);
 
-				return bitmap;
-			}
-		}
-		return null;
-	}
+	// 			return bitmap;
+	// 		}
+	// 	}
+	// 	return null;
+	// }
 	buildDragonBonesData(dragonBonesName, textureScale = 1.0) {
 		let data = this._dragonBonesDataMap[dragonBonesName];
 		return data;
