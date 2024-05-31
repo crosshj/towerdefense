@@ -19,12 +19,7 @@
 		<script src="js/dragonBones.js"></script>
 	</head>
 	<body>
-		<canvas
-			id="test-canvas"
-			width="128"
-			height="128"
-			style="background: #333; image-rendering: pixelated; zoom: 4"
-		></canvas>
+		<canvas id="test-canvas" width="128" height="128"></canvas>
 		<script type="module">
 			import { POJFactory, POJArmatureDisplay } from './test.js';
 
@@ -42,10 +37,23 @@
 			window.armature = factory.buildArmatureDisplay('Armature');
 			//console.log({ armature });
 
-			armature.animation.play('look_up');
+			let anim = 'look_up';
+			armature.animation.play(anim);
+			const switchAnim = () => {
+				const newAnim = anim === 'run' ? 'look_up' : 'run';
+				anim = newAnim;
+				armature.animation.play(newAnim);
+			};
+
+			let count = 0;
 			setInterval(() => {
+				count++;
+				if (count === 300) {
+					count = 0;
+					switchAnim();
+				}
 				factory.advanceTime(1 / 60);
-			}, 1000 / 60);
+			}, 1000 / 80);
 			window.factory = factory;
 		</script>
 	</body>

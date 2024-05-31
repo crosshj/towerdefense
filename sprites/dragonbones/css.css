@@ -30,3 +30,9 @@ body {
 	justify-content: center;
 	align-items: center;
 }
+
+canvas {
+	background: #555;
+	image-rendering: pixelated;
+	zoom: 4;
+}
