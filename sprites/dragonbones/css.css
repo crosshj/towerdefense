@@ -29,10 +29,11 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	flex-direction: column;
 }
 
 canvas {
 	background: #555;
-	image-rendering: pixelated;
-	zoom: 4;
+	/* image-rendering: pixelated; */
+	zoom: 3;
 }

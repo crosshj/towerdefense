@@ -10,51 +10,113 @@
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="full-screen" content="true" />
 		<meta name="screen-orientation" content="portrait" />
-		<meta name="x5-fullscreen" content="true" />
-		<meta name="360-fullscreen" content="true" />
-		<meta name="renderer" content="webkit" />
-
-		<link href="css.css" rel="stylesheet" />
 
 		<script src="js/dragonBones.js"></script>
 	</head>
+	<style>
+		* {
+			box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+		}
+
+		body,
+		html {
+			padding: 0;
+			border: 0;
+			margin: 0;
+			height: 100%;
+			background: #3c3c3c;
+			box-sizing: border-box;
+			-ms-touch-action: none;
+			-webkit-touch-callout: none;
+			-webkit-user-select: none;
+			-khtml-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+			overflow: hidden;
+			color: #fff;
+			font-weight: 100;
+			font: 80%/1.65 Verdana, 'Geneva CE', lucida, 'Microsoft YaHei',
+				sans-serif;
+		}
+
+		body {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+		}
+
+		canvas {
+			background: #555;
+			/* image-rendering: pixelated; */
+			zoom: 3;
+		}
+	</style>
 	<body>
 		<canvas id="test-canvas" width="128" height="128"></canvas>
-		<script type="module">
-			import { POJFactory, POJArmatureDisplay } from './test.js';
+		<div style="margin-top: 1em">
+			<select required id="model-choice" value="">
+				<option value="" disabled selected hidden>
+					Choose model...
+				</option>
+				<option value="-1" disabled>---</option>
+				<option value="./base_fighter_tex.png">Big Head White</option>
+				<option value="./base_fighter_tex_pink.png">
+					Small Head Pink
+				</option>
+			</select>
+			<button id="model-switch" type="button">SWITCH</button>
+		</div>
+	</body>
+	<script type="module">
+		import { POJFactory, POJArmatureDisplay } from './test.js';
 
-			const canvas = document.getElementById('test-canvas');
-			const em = new POJArmatureDisplay(null);
-			const dbInstance = new dragonBones.DragonBones(em);
-			const factory = new POJFactory(dbInstance, canvas);
-
-			await factory.loadData({
-				skeleton: './base_fighter_ske.json',
-				atlas: './base_fighter_tex.json',
-				texture: './base_fighter_tex.png'
+		const whichTexture =
+			localStorage.getItem('spriteModelChoice') ||
+			'./base_fighter_tex.png';
+		document
+			.getElementById('model-switch')
+			.addEventListener('mousedown', () => {
+				const modelChoice =
+					document.getElementById('model-choice').value;
+				localStorage.setItem('spriteModelChoice', modelChoice);
+				document.location.reload();
 			});
 
-			window.armature = factory.buildArmatureDisplay('Armature');
-			//console.log({ armature });
+		const canvas = document.getElementById('test-canvas');
+		const em = new POJArmatureDisplay(null);
+		const dbInstance = new dragonBones.DragonBones(em);
+		const factory = new POJFactory(dbInstance, canvas);
 
-			let anim = 'look_up';
-			armature.animation.play(anim);
-			const switchAnim = () => {
-				const newAnim = anim === 'run' ? 'look_up' : 'run';
-				anim = newAnim;
-				armature.animation.play(newAnim);
-			};
+		await factory.loadData({
+			skeleton: './base_fighter_ske.json',
+			atlas: './base_fighter_tex.json',
+			texture: whichTexture
+		});
 
-			let count = 0;
-			setInterval(() => {
-				count++;
-				if (count === 120) {
-					count = 0;
-					switchAnim();
-				}
-				factory.advanceTime(1 / 24);
-			}, 1000 / 40);
-			window.factory = factory;
-		</script>
-	</body>
+		window.armature = factory.buildArmatureDisplay('Armature');
+		//console.log({ armature });
+
+		let anim = 'look_up';
+		armature.animation.play(anim);
+		const switchAnim = () => {
+			const newAnim = anim === 'run' ? 'look_up' : 'run';
+			anim = newAnim;
+			armature.animation.play(newAnim);
+		};
+
+		let count = 0;
+		setInterval(() => {
+			count++;
+			if (count === 120) {
+				count = 0;
+				switchAnim();
+			}
+			factory.advanceTime(1 / 24);
+		}, 1000 / 40);
+		window.factory = factory;
+	</script>
 </html>
