@@ -51,7 +51,7 @@
 
 		canvas {
 			background: #555;
-			/* image-rendering: pixelated; */
+			image-rendering: pixelated;
 			zoom: 3;
 		}
 	</style>
@@ -67,6 +67,8 @@
 				<option value="./base_fighter_tex_pink.png">
 					Small Head Pink
 				</option>
+				<option value="fighterBaseSwap1">Fighter Base Swap 1</option>
+				<option value="fighterBaseSwap2">Fighter Base Swap 2</option>
 			</select>
 			<button id="model-switch" type="button">SWITCH</button>
 		</div>
@@ -77,6 +79,24 @@
 		const whichTexture =
 			localStorage.getItem('spriteModelChoice') ||
 			'./base_fighter_tex.png';
+
+		let skeleton = './base_fighter_ske.json';
+		let atlas = './base_fighter_tex.json';
+		let texture = whichTexture;
+		let anim = 'look_up';
+		let animSpeed = 1000 / 40;
+
+		if (whichTexture.startsWith('fighterBase')) {
+			skeleton = './FighterBase/FighterBase_ske.json';
+			atlas = './FighterBase/FighterBase_tex.json';
+			texture = './FighterBase/FighterBase_tex.png';
+			anim =
+				whichTexture === 'fighterBaseSwap1'
+					? 'sprite_swap'
+					: 'sprite_swap2';
+			animSpeed = 1000 / 30;
+		}
+
 		document
 			.getElementById('model-switch')
 			.addEventListener('mousedown', () => {
@@ -91,16 +111,9 @@
 		const dbInstance = new dragonBones.DragonBones(em);
 		const factory = new POJFactory(dbInstance, canvas);
 
-		await factory.loadData({
-			skeleton: './base_fighter_ske.json',
-			atlas: './base_fighter_tex.json',
-			texture: whichTexture
-		});
-
+		await factory.loadData({ skeleton, atlas, texture });
 		window.armature = factory.buildArmatureDisplay('Armature');
-		//console.log({ armature });
 
-		let anim = 'look_up';
 		armature.animation.play(anim);
 		const switchAnim = () => {
 			const newAnim = anim === 'run' ? 'look_up' : 'run';
@@ -110,13 +123,14 @@
 
 		let count = 0;
 		setInterval(() => {
-			count++;
-			if (count === 120) {
-				count = 0;
-				switchAnim();
+			if (!anim.startsWith('sprite_swap')) {
+				count++;
+				if (count === 120) {
+					count = 0;
+					switchAnim();
+				}
 			}
 			factory.advanceTime(1 / 24);
-		}, 1000 / 40);
-		window.factory = factory;
+		}, animSpeed);
 	</script>
 </html>
