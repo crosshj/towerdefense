@@ -138,7 +138,9 @@
 					switchAnim();
 				}
 			}
-			factory.advanceTime(1 / 24);
+			window.requestAnimationFrame(() => {
+				factory.advanceTime(1 / 24);
+			});
 		}, animSpeed);
 	</script>
 </html>

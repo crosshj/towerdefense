@@ -13,21 +13,29 @@
 	</head>
 
 	<body>
-		Create Sprite Atlas with:
-		<a href="https://www.leshylabs.com/apps/sstool/">Leshy SS tool</a>
-
-		<h3>Upload JSON and Image</h3>
-		<label for="jsonInput">Sprite Atlas</label>
-		<input type="file" id="jsonInput" accept=".json" /><br /><br />
-		<label for="imageInput">Spritesheet</label>
+		<h3>Source Image</h3>
 		<input type="file" id="imageInput" accept="image/*" /><br /><br />
-		<button id="submitButton">Submit</button><br /><br />
+
+		<h3>Cut With Sprite Atlas</h3>
+		Create Sprite Atlas with:
+		<a href="https://www.leshylabs.com/apps/sstool/">Leshy SS tool</a
+		><br /><br />
+		<input type="file" id="jsonInput" accept=".json" /><br /><br />
+		<button id="submitButton">Cut With Sprite Map</button><br /><br />
+
+		<h3>Cut With Squares</h3>
+		<input type="number" id="squareSize" value="128" /><br /><br />
+		<button id="equalSquaresButton">Cut Into Equal Squares</button>
+		<button onClick="createPsd()">Create PSD</button>
+		<br /><br />
 
 		<h3>Results</h3>
 		<div id="sliceResults">-- no results --</div>
 	</body>
 
 	<script type="module">
+		import * as agPsd from 'https://cdn.jsdelivr.net/npm/ag-psd@20.1.2/+esm';
+
 		document
 			.getElementById('submitButton')
 			.addEventListener('click', async () => {
@@ -36,11 +44,9 @@
 					document.getElementById('imageInput').files[0];
 
 				if (jsonFile && imageFile) {
-					// Read the JSON file
 					const jsonContent = await jsonFile.text();
 					const spritesMap = JSON.parse(jsonContent);
 
-					// Read the image file
 					const image = new Image();
 					image.onload = () => cutImageUp(image, spritesMap);
 					image.src = URL.createObjectURL(imageFile);
@@ -49,7 +55,26 @@
 				}
 			});
 
+		document
+			.getElementById('equalSquaresButton')
+			.addEventListener('click', async () => {
+				const imageFile =
+					document.getElementById('imageInput').files[0];
+				const squareSize = parseInt(
+					document.getElementById('squareSize').value
+				);
+
+				if (imageFile) {
+					const image = new Image();
+					image.onload = () => cutIntoEqualSquares(image, squareSize);
+					image.src = URL.createObjectURL(imageFile);
+				} else {
+					alert('Please select an image file.');
+				}
+			});
+
 		function cutImageUp(image, spritesMap) {
+			clearResults();
 			var imagePieces = [];
 			for (const piece of spritesMap) {
 				const { name, x, y, width, height } = piece;
@@ -69,29 +94,114 @@
 					canvas.height
 				);
 				const dataUri = canvas.toDataURL();
-				//imagePieces.push(dataUri);
-
-				const resultsDiv = document.getElementById('sliceResults');
-				resultsDiv.innerHTML = '';
-				const container = document.createElement('div');
-				container.style.maxHeight = '200px';
-				resultsDiv.append(container);
-
-				const link = document.createElement('a');
-				link.href = dataUri;
-				link.download = `${name}.png`;
-				link.textContent = `${name}.png`;
-				container.append(link);
-
-				const img = document.createElement('img');
-				img.src = dataUri;
-				img.alt = `${name}.png`;
-				img.style.maxHeight = '100%';
-				img.style.maxWidth = '200px';
-				container.append(img);
-
-				//container.append(document.createElement('br'));
+				displayResult(name, dataUri);
 			}
 		}
+
+		function cutIntoEqualSquares(image, squareSize) {
+			clearResults();
+			const cols = Math.floor(image.width / squareSize);
+			const rows = Math.floor(image.height / squareSize);
+
+			for (let y = 0; y < rows; y++) {
+				for (let x = 0; x < cols; x++) {
+					const canvas = document.createElement('canvas');
+					canvas.width = squareSize;
+					canvas.height = squareSize;
+					const context = canvas.getContext('2d');
+					context.drawImage(
+						image,
+						x * squareSize,
+						y * squareSize,
+						squareSize,
+						squareSize,
+						0,
+						0,
+						squareSize,
+						squareSize
+					);
+					const dataUri = canvas.toDataURL();
+					const name = `square_${x}_${y}`;
+					displayResult(name, dataUri);
+				}
+			}
+			// happens too soon, use the button instead
+			//createPsd();
+		}
+
+		function displayResult(name, dataUri) {
+			const resultsDiv = document.getElementById('sliceResults');
+			const container = document.createElement('div');
+			container.style.maxHeight = '200px';
+			resultsDiv.append(container);
+
+			const link = document.createElement('a');
+			link.href = dataUri;
+			link.download = `${name}.png`;
+			link.textContent = `${name}.png`;
+			container.append(link);
+
+			const img = document.createElement('img');
+			img.src = dataUri;
+			img.alt = `${name}.png`;
+			img.style.maxHeight = '100%';
+			img.style.maxWidth = '200px';
+			container.append(img);
+		}
+
+		function clearResults() {
+			document.getElementById('sliceResults').innerHTML = '';
+		}
+
+		async function createPsd() {
+			const resultsDiv = document.getElementById('sliceResults');
+			const imgs = resultsDiv.querySelectorAll('img');
+			const squareSize = parseInt(
+				document.getElementById('squareSize').value
+			);
+
+			const psd = {
+				width: squareSize,
+				height: squareSize,
+				children: []
+			};
+
+			for (const [index, img] of Object.entries(
+				Array.from(imgs).reverse()
+			)) {
+				const canvas = document.createElement('canvas');
+				canvas.width = squareSize;
+				canvas.height = squareSize;
+				const context = canvas.getContext('2d');
+				context.drawImage(img, 0, 0, squareSize, squareSize);
+
+				const imageData = context.getImageData(
+					0,
+					0,
+					canvas.width,
+					canvas.height
+				);
+
+				psd.children.push({
+					name: `layer_${imgs.length - index}`,
+					top: 0,
+					left: 0,
+					right: squareSize,
+					bottom: squareSize,
+					imageData: imageData
+				});
+			}
+
+			const buffer = agPsd.writePsd(psd);
+			const blob = new Blob([buffer], {
+				type: 'application/octet-stream'
+			});
+			const link = document.createElement('a');
+			link.textContent = 'sprites.psd';
+			link.href = URL.createObjectURL(blob);
+			link.download = 'sprites.psd';
+			resultsDiv.insertAdjacentElement('afterbegin', link);
+		}
+		window.createPsd = createPsd;
 	</script>
 </html>
