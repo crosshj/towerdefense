@@ -52,7 +52,7 @@
 		canvas {
 			background: #555;
 			image-rendering: pixelated;
-			zoom: 3;
+			zoom: 2;
 		}
 	</style>
 	<body>
@@ -67,6 +67,8 @@
 				<option value="./base_fighter_tex_pink.png">
 					Small Head Pink
 				</option>
+				<option value="fighterBaseIdle">Fighter Base Idle</option>
+				<option value="fighterBaseJumping">Fighter Base Jumping</option>
 				<option value="fighterBaseSwap1">Fighter Base Swap 1</option>
 				<option value="fighterBaseSwap2">Fighter Base Swap 2</option>
 			</select>
@@ -94,6 +96,12 @@
 				whichTexture === 'fighterBaseSwap1'
 					? 'sprite_swap'
 					: 'sprite_swap2';
+			if (whichTexture === 'fighterBaseJumping') {
+				anim = 'jumping';
+			}
+			if (whichTexture === 'fighterBaseIdle') {
+				anim = 'idle';
+			}
 			animSpeed = 1000 / 30;
 		}
 
