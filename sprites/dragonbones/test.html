@@ -72,6 +72,29 @@
 				<option value="fighterBaseSwap1">Fighter Base Swap 1</option>
 				<option value="fighterBaseSwap2">Fighter Base Swap 2</option>
 			</select>
+			<select required id="element-choice" value="">
+				<option value="" disabled selected hidden>
+					Choose element...
+				</option>
+				<option value="Normal">Normal</option>
+				<option value="Fire">Fire</option>
+				<option value="Water">Water</option>
+				<option value="Earth">Earth</option>
+				<option value="Air">Air</option>
+				<option value="Electric">Electric</option>
+				<option value="Ice">Ice</option>
+				<option value="Plant">Plant</option>
+				<option value="Poison">Poison</option>
+				<option value="Psychic">Psychic</option>
+				<option value="Ghost">Ghost</option>
+				<option value="Steel">Steel</option>
+				<option value="Bug">Bug</option>
+				<option value="Dragon">Dragon</option>
+				<option value="Fairy">Fairy</option>
+				<option value="Fighting">Fighting</option>
+				<option value="Rock">Rock</option>
+				<option value="Dark">Dark</option>
+			</select>
 			<button id="model-switch" type="button">SWITCH</button>
 		</div>
 	</body>
@@ -81,6 +104,7 @@
 		const whichTexture =
 			localStorage.getItem('spriteModelChoice') ||
 			'./base_fighter_tex.png';
+		const whichElement = localStorage.getItem('spriteElementChoice');
 
 		let skeleton = './base_fighter_ske.json';
 		let atlas = './base_fighter_tex.json';
@@ -104,13 +128,20 @@
 			}
 			animSpeed = 1000 / 30;
 		}
+		if (whichElement) {
+			texture = `./FighterBase/Elements/${whichElement}_tex.png`;
+		}
 
 		document
 			.getElementById('model-switch')
 			.addEventListener('mousedown', () => {
 				const modelChoice =
-					document.getElementById('model-choice').value;
+					document.getElementById('model-choice').value ||
+					localStorage.getItem('spriteModelChoice');
 				localStorage.setItem('spriteModelChoice', modelChoice);
+				const elementChoice =
+					document.getElementById('element-choice').value;
+				localStorage.setItem('spriteElementChoice', elementChoice);
 				document.location.reload();
 			});
 
