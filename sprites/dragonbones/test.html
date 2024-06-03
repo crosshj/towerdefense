@@ -140,7 +140,8 @@
 					localStorage.getItem('spriteModelChoice');
 				localStorage.setItem('spriteModelChoice', modelChoice);
 				const elementChoice =
-					document.getElementById('element-choice').value;
+					document.getElementById('element-choice').value ||
+					localStorage.getItem('spriteElementChoice');
 				localStorage.setItem('spriteElementChoice', elementChoice);
 				document.location.reload();
 			});
