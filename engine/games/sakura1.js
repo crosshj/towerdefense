@@ -1,30 +1,21 @@
-export const japanese1 = () => {
-	const towerX = 200;
-	const towerColor1 = '#24b';
-	const towerColor2 = '#934';
+import { getUser } from '../../user/getUser.js';
 
-	const basicChar = {
-		type: 'attacker',
-		hp: 3000,
-		respawn: 35,
-		range: 400,
-		attack: 110,
-		x: towerX + 140,
-		move: 50,
-		critChance: 0.07,
-		critMult: 5
-	};
+export const sakura1 = async () => {
+	const user = await getUser();
+
+	const towerX = 200;
+	const towerColor2 = '#934';
 
 	const basicOppChar = {
 		type: 'defender',
 		hp: 3000,
-		respawn: 40,
+		respawn: 59,
 		range: 560,
-		attack: 95,
-		move: 40,
+		attack: 87,
+		move: 60,
 		x: towerX + 140,
-		critChance: 0.1,
-		critMult: 5
+		critChance: 0.01,
+		critMult: 2
 	};
 
 	return {
@@ -39,18 +30,10 @@ export const japanese1 = () => {
 				background: 'asianSceneBackground'
 			},
 			stage: {
-				background: 'backgroundJapanese1'
+				background: 'backgroundSakura1'
 			},
 			towers: [
-				{
-					type: 'attacker',
-					dims: [200, 343],
-					x: towerX,
-					color: towerColor1,
-					hp: 30000,
-					deployed: [],
-					team: [basicChar]
-				},
+				user.tower,
 				{
 					type: 'defender',
 					dims: [200, 343],
@@ -62,6 +45,8 @@ export const japanese1 = () => {
 				}
 			],
 			tick: 0,
+
+			// this stuff has to come from user
 			missile: {
 				charge: 100,
 				chargeRate: 2

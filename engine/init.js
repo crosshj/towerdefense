@@ -16,7 +16,7 @@ import { fast1 } from './games/fast1.js';
 import { fieldStage1 } from './games/field1.js';
 import { ghostStage1 } from './games/ghost1.js';
 import { oceanStage1 } from './games/ocean1.js';
-import { japanese1 } from './games/japanese1.js';
+import { sakura1 } from './games/sakura1.js';
 
 const games = [
 	balancedGame1,
@@ -25,7 +25,7 @@ const games = [
 	fieldStage1,
 	ghostStage1,
 	oceanStage1,
-	japanese1
+	sakura1
 	//
 ];
 
@@ -36,7 +36,8 @@ export const startGame = async ({ menu, which }) => {
 		return;
 	}
 	menu.hide();
-	const state = new State(thisGame().state);
+	const gameInstance = await thisGame();
+	const state = new State(gameInstance.state);
 	state.assets = await loadAssets();
 	state.actions = getActions(state);
 

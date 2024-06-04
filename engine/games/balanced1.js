@@ -1,4 +1,4 @@
-export const balancedGame1 = () => {
+export const balancedGame1 = async () => {
 	const towerX = 200;
 	const towerColor1 = '#24b';
 	const towerColor2 = '#934';

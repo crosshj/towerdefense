@@ -28,8 +28,8 @@ const template = () => `
                 <select required id="demo-choice" value="">
                     <option value="" disabled selected hidden>Select Stage...</option>
                     <option value="-1" disabled>---</option>
+                    <option value="6">Sakura</option>
                     <option value="1">Tropical Graveyard</option>
-                    <option value="6">Japanese</option>
                     <option value="3">Sunny Field</option>
                     <option value="2">Fast: Blue is OP</option>
                     <option value="4">Ghost Stage 1</option>
