@@ -17,6 +17,7 @@ import { fieldStage1 } from './games/field1.js';
 import { ghostStage1 } from './games/ghost1.js';
 import { oceanStage1 } from './games/ocean1.js';
 import { sakura1 } from './games/sakura1.js';
+import { createPauseScreen } from '../visuals/menuPause.js';
 
 const games = [
 	balancedGame1,
@@ -41,8 +42,14 @@ export const startGame = async ({ menu, which }) => {
 	state.assets = await loadAssets();
 	state.actions = getActions(state);
 
+	// TODO: this should be recalled from user's last choice
+	// for now, it doesn't even work so doesn't matter
+	state.auto = true;
+
+	const pauseScreen = createPauseScreen(document.body, state);
 	const controls = new Controls({
 		state,
+		pauseScreen,
 		showTicker: false,
 		showScreenInfo: false,
 		showEffects: true

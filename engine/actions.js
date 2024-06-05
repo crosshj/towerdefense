@@ -5,8 +5,17 @@ const mineralMap = getMineralMap();
 
 export const getActions = (state) => {
 	return {
+		restartGame: () => {
+			alert('this does not work right now');
+		},
+		mainMenu: () => {
+			document.location.reload();
+		},
 		pauseToggle: () => {
 			state.paused = !state.paused;
+		},
+		autoToggle: () => {
+			state.auto = !state.auto;
 		},
 		missileFire: () => {
 			if (state.paused) return;

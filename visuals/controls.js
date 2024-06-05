@@ -30,7 +30,7 @@ const getDomRoot = () => {
 	return root;
 };
 
-const createTopControls = ({ root, showEffects, state } = {}) => {
+const createTopControls = ({ root, pauseScreen, showEffects, state } = {}) => {
 	const top = document.createElement('div');
 	top.classList.add('controls-top');
 
@@ -51,18 +51,38 @@ const createTopControls = ({ root, showEffects, state } = {}) => {
 		</div>
 		<div class="mineral">
 		</div>
-		<div class="pause button">I I</div>
+		<div
+			style="position: relative;"
+		>
+			<div class="pause button">I I</div>
+			<div class="auto button">AUTO</div>
+		</div>
 	`;
+
 	const pauseButton = top.querySelector('.pause.button');
-	pauseButton.addEventListener('click', () => {
-		pauseButton.innerText = state.paused ? 'I I' : '▶';
-		pauseButton.style.backgroundColor = state.paused ? '' : '#478347';
-		pauseButton.style.color = state.paused ? '' : 'white';
+	pauseButton.addEventListener('mousedown', () => {
+		// pauseButton.innerText = state.paused ? 'I I' : '▶';
+		// pauseButton.style.backgroundColor = state.paused ? '' : '#478347';
+		// pauseButton.style.color = state.paused ? '' : 'white';
+		pauseScreen.show();
 		state.actions.pauseToggle();
 	});
 
+	const autoButton = top.querySelector('.auto.button');
+	if (state.auto) {
+		autoButton.classList.add('active');
+	}
+	autoButton.addEventListener('mousedown', () => {
+		if (state.auto) {
+			autoButton.classList.remove('active');
+		} else {
+			autoButton.classList.add('active');
+		}
+		state.actions.autoToggle();
+	});
+
 	const effectsContainer = top.querySelector('.effects');
-	effectsContainer.addEventListener('click', (e) => {
+	effectsContainer.addEventListener('mousedown', (e) => {
 		const { effect = 'none' } = e?.target?.dataset;
 		if (effect === 'none') return;
 		if (effect === 'teamSwitch' && !e.target.classList.contains('p-100')) {
@@ -143,7 +163,7 @@ const createBottomControls = ({ root, state }) => {
 	const missileButtonProgress = bottom.querySelector(
 		'.missile.button .progress'
 	);
-	missileButton.addEventListener('click', () => {
+	missileButton.addEventListener('mousedown', () => {
 		if (!missileButtonProgress.classList.contains(`p-100`)) return;
 		state.actions.missileFire();
 	});
@@ -154,7 +174,7 @@ const createBottomControls = ({ root, state }) => {
 	const mineralButtonLevelIndicator = bottom.querySelector(
 		'.mineral.button .levelIndicator'
 	);
-	mineralButton.addEventListener('click', () => {
+	mineralButton.addEventListener('mousedown', () => {
 		if (!mineralButtonProgress.classList.contains(`p-100`)) return;
 		state.actions.mineralLevel({
 			updateLevel: (levelNumber) => {
@@ -180,7 +200,13 @@ const createTicker = (root) => {
 };
 
 export default class Controls {
-	constructor({ state, showTicker, showScreenInfo, showEffects } = {}) {
+	constructor({
+		state,
+		pauseScreen,
+		showTicker,
+		showScreenInfo,
+		showEffects
+	} = {}) {
 		const root = getDomRoot();
 
 		this.showTicker = showTicker;
@@ -190,7 +216,7 @@ export default class Controls {
 		if (showScreenInfo) {
 			ScreenInfo(root);
 		}
-		this.top = createTopControls({ root, state, showEffects });
+		this.top = createTopControls({ root, state, pauseScreen, showEffects });
 		this.bottom = createBottomControls({ root, state });
 
 		this.updateMineral = this.top.updateMineral;

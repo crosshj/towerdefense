@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap');
 
+.hidden {
+	display: none !important;
+}
+.font-rubik {
+	font-family: 'Rubik Mono One', 'Courier New', Courier, monospace;
+}
+
 div#controls {
 	position: absolute;
 	left: 0;
@@ -110,7 +117,8 @@ div#controls {
 		sans-serif;
 }
 .controls-top .effects > div,
-.controls-top .pause {
+.controls-top .pause,
+.controls-top .auto.button {
 	background-color: #555;
 	height: 100%;
 	aspect-ratio: 1/1;
@@ -151,6 +159,34 @@ div#controls {
 	margin-right: 25px;
 	display: flex;
 	align-items: center;
+}
+/* prettier-ignore */
+.controls-top .auto.button {
+	--text-outline-color: #0007;
+	font-family: 'Rubik Mono One', 'Courier New', Courier, monospace;
+	letter-spacing: -1px;
+	position: absolute;
+	top: 62px;
+	font-size: 13px;
+	box-shadow: 0 2px 2px 0 var(--text-outline-color), 2px 0 2px 0 var(--text-outline-color);
+	border: 2px solid;
+	background:#c3c2c26b;
+	/* font-family: monospace; */
+	opacity: 1;
+	font-weight: 900;
+	text-shadow: 
+		1px 1px 0px var(--text-outline-color);   /* bottom */
+}
+/* prettier-ignore */
+.controls-top .auto.button.active {
+	--text-outline-color: #ffac00;
+	border-color: white;
+	color: #ffff97;
+	box-shadow: 
+		-1px -1px 5px var(--text-outline-color), /* top */
+		1px -1px 5px var(--text-outline-color),  /* right */
+		-1px 1px 5px var(--text-outline-color),  /* left */
+		1px 1px 5px var(--text-outline-color);   /* bottom */
 }
 
 .controls-bottom .button {

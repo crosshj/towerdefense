@@ -1,5 +1,6 @@
 import { startGame } from '../engine/init.js';
 import { loadSounds } from './assets.js';
+import './menuPause.js';
 
 const template = () => `
 <div
