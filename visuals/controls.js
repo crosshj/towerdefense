@@ -264,7 +264,8 @@ export default class Controls {
 		if (state.paused) return;
 		const attackerTower = state.towers.find((x) => x.type === 'attacker');
 		const currentTeam =
-			attackerTower?.teams?.[0]?.[attackerTower.selectedTeam];
+			attackerTower?.teams?.[0]?.[attackerTower.selectedTeam] ||
+			attackerTower.team;
 		if (!currentTeam) return;
 		for (const [unitIndex, unit] of Object.entries(currentTeam)) {
 			if (typeof unit.spawnTicker === 'undefined') {

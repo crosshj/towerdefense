@@ -198,7 +198,7 @@ div#controls {
 	}
 	.progress {
 		width: 50px;
-		background: #0005;
+		background: #0009;
 		margin-top: 7px;
 		height: 10px;
 		margin-bottom: 7px;
@@ -207,7 +207,7 @@ div#controls {
 
 		.progress-bar {
 			height: 100%;
-			background: #3169a8;
+			background: #00d8e3;
 		}
 	}
 }
