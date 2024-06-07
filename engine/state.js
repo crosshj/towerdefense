@@ -22,13 +22,6 @@ export const toggleCoords = (state, coordMode) => {
 const assignId = (x) => (x.id = Math.random().toString().slice(2));
 const setHpMax = (x) => (x.hpMax = x.hp);
 
-const spawnCharInstance = (char, deployed) => {
-	const newChar = clone(char);
-	assignId(newChar);
-	setHpMax(newChar);
-	deployed.push(newChar);
-};
-
 const getById = (state, id) =>
 	[
 		...state.towers,
@@ -49,7 +42,6 @@ export default class State {
 		});
 
 		state.getById = (id) => getById(state, id);
-		state.spawnCharInstance = spawnCharInstance;
 
 		state.global = () => toggleCoords(state, 'global');
 		return state;

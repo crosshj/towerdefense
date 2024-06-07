@@ -188,6 +188,36 @@ const createBottomControls = ({ root, state }) => {
 		});
 	});
 
+	const unitElements = Array.from(bottom.querySelectorAll('.team')).map(
+		(el) => {
+			const image = el.querySelector(':first-child');
+			const title = el.querySelector(':last-child');
+			return {
+				el,
+				image,
+				title
+			};
+		}
+	);
+	bottom.updateUnitCooldown = (unit) => {
+		const { index } = unit;
+		const unitEl = unitElements[index];
+		const coolDownProgress =
+			100 - Math.floor((100 * unit.spawnTicker) / unit.respawn);
+		//console.log({ index, coolDownProgress });
+		if (coolDownProgress === 100) {
+			unitEl.el.classList.remove('disabled');
+			unitEl.title.innerText = `team ${Number(index) + 1}`;
+			return;
+		}
+		unitEl.el.classList.add('disabled');
+		unitEl.title.innerHTML = `
+		<div class="progress">
+			<div class="progress-bar" style="width: ${coolDownProgress}%;"></div>
+		</div>
+		`;
+	};
+
 	root.insertAdjacentElement('beforeend', bottom);
 	return bottom;
 };
@@ -229,5 +259,21 @@ export default class Controls {
 		const el = this.bottom.querySelector(`.${which} .progress`);
 		if (el.classList.contains(`p-${amount}`)) return;
 		updateProgress(el, amount);
+	}
+	updateTeam(state) {
+		if (state.paused) return;
+		const attackerTower = state.towers.find((x) => x.type === 'attacker');
+		const currentTeam =
+			attackerTower?.teams?.[0]?.[attackerTower.selectedTeam];
+		if (!currentTeam) return;
+		for (const [unitIndex, unit] of Object.entries(currentTeam)) {
+			if (typeof unit.spawnTicker === 'undefined') {
+				continue;
+			}
+			this.bottom.updateUnitCooldown({
+				...unit,
+				index: unitIndex
+			});
+		}
 	}
 }

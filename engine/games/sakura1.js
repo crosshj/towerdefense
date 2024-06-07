@@ -9,7 +9,7 @@ export const sakura1 = async () => {
 	const basicOppChar = {
 		type: 'defender',
 		hp: 3000,
-		respawn: 59,
+		respawn: 118,
 		range: 560,
 		attack: 87,
 		move: 60,

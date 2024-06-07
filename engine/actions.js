@@ -1,3 +1,4 @@
+import { clone } from '../utils/utils.js';
 import { getMineralMap } from './mineral.js';
 import { spawnMissile } from './update/missile.js';
 
@@ -37,6 +38,15 @@ export const getActions = (state) => {
 			}
 			ui.disableEffect();
 			console.log('do state-related effect spawn');
+		},
+		spawnCharInstance: (char, deployed) => {
+			const assignId = (x) => (x.id = Math.random().toString().slice(2));
+			const setHpMax = (x) => (x.hpMax = x.hp);
+
+			const newChar = clone(char);
+			assignId(newChar);
+			setHpMax(newChar);
+			deployed.push(newChar);
 		}
 	};
 };

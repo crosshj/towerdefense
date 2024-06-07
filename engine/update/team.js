@@ -16,7 +16,10 @@ export const spawnTeam = (state) => {
 	const { towers } = state;
 	const iterate = (char, deployed) => {
 		if (char.spawnTicker) return char.spawnTicker--;
-		state.spawnCharInstance(char, deployed);
+		if (char.type === 'attacker' && !state.auto) {
+			return;
+		}
+		state.actions.spawnCharInstance(char, deployed);
 		char.spawnTicker = char.respawn;
 	};
 	const spawn = (tower) =>
@@ -25,6 +28,24 @@ export const spawnTeam = (state) => {
 		});
 	towers.forEach(spawn);
 };
+/*
+export const spawnTeam = (state) => {
+	const { towers } = state;
+	for (const tower of towers) {
+		if (tower.type === 'defender') {
+			console.log({ defenderTower: tower });
+		}
+		for (const unit of tower.team) {
+			if (unit.spawnTicker) return unit.spawnTicker--;
+			if (tower.type === 'attacker' && !state.auto) {
+				continue;
+			}
+			unit.spawnTicker = unit.respawn;
+			state.actions.spawnCharInstance(unit, tower.deployed);
+		}
+	}
+};
+*/
 
 export const targetOpponents = (state) => {
 	const { towers } = state.global();

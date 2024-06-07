@@ -11,7 +11,7 @@ const towerColor1 = '#00e5e6';
 const basicChar = {
 	type: 'attacker',
 	hp: 3000,
-	respawn: 21,
+	respawn: 40,
 	range: 560,
 	attack: 20,
 	x: towerX + 140,
@@ -87,6 +87,8 @@ export const getUser = async () => {
 
 	//TODO: should really be sending whole team, but something deploys them all at once...
 	tower.team = [teams[0].a[0]];
+	tower.teams = teams;
+	tower.selectedTeam = 'a';
 
 	const thisUser = {
 		tower

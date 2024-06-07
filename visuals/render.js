@@ -47,6 +47,7 @@ const render = (state, ctx, gif, controls) => {
 		state.mineral.amount || 0,
 		state.mineral.capacity || 0
 	);
+	controls.updateTeam(state);
 
 	const drawGuides = () => {
 		const line = (x, y, x1, y2, color = '#555') => {
