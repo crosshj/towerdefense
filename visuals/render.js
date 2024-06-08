@@ -45,7 +45,6 @@ const render = (state, ctx, gif, controls) => {
 	controls.updateTeam(state);
 
 	const drawGuides = () => {
-		return false; //this is only for debuggin backgrounds
 		const line = (x, y, x1, y2, color = '#555') => {
 			ctx.strokeStyle = color;
 			ctx.beginPath();
@@ -69,7 +68,8 @@ const render = (state, ctx, gif, controls) => {
 			fieldHeight //dw dh
 		);
 
-		drawGuides();
+		//this is only for debuggin backgrounds
+		//drawGuides();
 		return; //build background in assets and remove from here
 
 		// image, dx, dy
