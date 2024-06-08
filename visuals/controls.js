@@ -197,7 +197,7 @@ const createBottomControls = ({ root, state }) => {
 				<div class="thumbnail">
 					<div class="unit"></div>
 					<div class="rank">
-						${new Array(unit?.rank || 0).fill('*').join('')}
+						${new Array(unit?.rank || 0).fill('★').join('')}
 					</div>
 					<div class="cost">
 						<div class="indicator">

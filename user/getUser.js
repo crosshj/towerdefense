@@ -22,6 +22,31 @@ const basicChar = {
 	mineralCost: 100
 };
 
+/* prettier-ignore */
+const exampleUser = {
+	tower: {
+		level: 100
+	},
+	teams: [
+		{
+			a: [
+				{ unit: 'blue-1', rank: 1, mineralCost: 100, hp: 3000, attack: 20, range: 450 },
+				{ unit: 'blue-2', rank: 2, mineralCost: 150, hp: 20000, attack: 15, range: 350 },
+				{ unit: 'blue-3', rank: 3, mineralCost: 250, hp: 4000, attack: 40, range: 800 },
+				{ unit: 'blue-4', rank: 4, mineralCost: 350, hp: 6000, attack: 60, range: 600 },
+				{ unit: 'blue-5', rank: 5, mineralCost: 450, hp: 7000, attack: 80, range: 1000 }
+			],
+			b: [
+				{ unit: 'blue-6', rank: 4, mineralCost: 600 },
+				{ unit: 'blue-7', rank: 4, mineralCost: 700 },
+				{ unit: 'blue-8', rank: 4, mineralCost: 800 },
+				{ unit: 'blue-9', rank: 5, mineralCost: 1000 },
+				{ unit: 'blue-10', rank: 5, mineralCost: 1300 }
+			]
+		}
+	]
+};
+
 const getTeamsDetails = async (teams) => {
 	const filledTeams = clone(teams);
 	for (const team of filledTeams) {
@@ -56,31 +81,6 @@ const getTowerDetails = async (tower) => {
 		...basicTower,
 		...tower
 	});
-};
-
-/* prettier-ignore */
-const exampleUser = {
-	tower: {
-		level: 100
-	},
-	teams: [
-		{
-			a: [
-				{ unit: 'blue-1', rank: 1, mineralCost: 100, hp: 3000, attack: 20 },
-				{ unit: 'blue-2', rank: 1, mineralCost: 150, hp: 10000, attack: 1 },
-				{ unit: 'blue-3', rank: 2, mineralCost: 250, hp: 4000, attack: 30 },
-				{ unit: 'blue-4', rank: 3, mineralCost: 350, hp: 5000, attack: 40 },
-				{ unit: 'blue-5', rank: 3, mineralCost: 450, hp: 6000, attack: 50 }
-			],
-			b: [
-				{ unit: 'blue-6', rank: 4, mineralCost: 600 },
-				{ unit: 'blue-7', rank: 4, mineralCost: 700 },
-				{ unit: 'blue-8', rank: 4, mineralCost: 800 },
-				{ unit: 'blue-9', rank: 5, mineralCost: 1000 },
-				{ unit: 'blue-10', rank: 5, mineralCost: 1300 }
-			]
-		}
-	]
 };
 
 /* TODO: this will be a call to backend to get user details */

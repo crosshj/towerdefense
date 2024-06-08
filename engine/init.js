@@ -29,6 +29,8 @@ const games = [
 ];
 
 export const startGame = async ({ menu, which }) => {
+	document.querySelector('body > .container').scrollLeft = 0;
+
 	const thisGame = games[which];
 	if (typeof thisGame !== 'function') {
 		alert('no game selected!');

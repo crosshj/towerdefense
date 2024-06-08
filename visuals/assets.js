@@ -194,7 +194,9 @@ export const loadAssets = async ({ root = './' } = {}) => {
 
 const sounds = {};
 export const loadSounds = async (key) => {
-	if (sounds[key]) return sounds[key];
+	// TODO: this should work, I think. But it leads to doubling background music
+	//if (sounds[key]) return sounds[key];
+
 	if (key === 'menuBackground') {
 		const MAXVOL = 0.75;
 		const bg = new Howl({
