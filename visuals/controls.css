@@ -111,6 +111,7 @@ div#controls {
 */
 .controls-bottom .team {
 	&.disabled,
+	&.cooldown,
 	&.mineralShort {
 		filter: brightness(0.75);
 	}
@@ -125,6 +126,9 @@ div#controls {
 		div:last-child {
 			display: none;
 		}
+	}
+	& > * {
+		pointer-events: none;
 	}
 
 	.thumbnail {

@@ -192,6 +192,7 @@ const createBottomControls = ({ root, state }) => {
 	const unitElements = Array.from(bottom.querySelectorAll('.team')).map(
 		(el, index) => {
 			const unit = currentTeam[index];
+			el.dataset.id = unit?.unit;
 			el.innerHTML = `
 				<div class="thumbnail">
 					<div class="unit"></div>
@@ -234,15 +235,14 @@ const createBottomControls = ({ root, state }) => {
 		const unitEl = unitElements[index];
 		const coolDownProgress =
 			100 - Math.floor((100 * unit.spawnTicker) / unit.respawn);
-		//console.log({ index, coolDownProgress });
 		if (coolDownProgress === 100) {
-			unitEl.el.classList.remove('disabled');
-			unitEl.cost.classList.remove('hidden');
-			unitEl.progress.classList.add('hidden');
+			unitEl.el.classList.remove('cooldown');
+			unitEl.cost.classList.remove('hidden'); // TODO: do with csss instead
+			unitEl.progress.classList.add('hidden'); // TODO: do with csss instead
 		} else {
-			unitEl.el.classList.add('disabled');
-			unitEl.cost.classList.add('hidden');
-			unitEl.progress.classList.remove('hidden');
+			unitEl.el.classList.add('cooldown');
+			unitEl.cost.classList.add('hidden'); // TODO: do with csss instead
+			unitEl.progress.classList.remove('hidden'); // TODO: do with csss instead
 			requestAnimationFrame(() => {
 				unitEl.progressBar.style.width = coolDownProgress + '%';
 			});
@@ -262,6 +262,23 @@ const createBottomControls = ({ root, state }) => {
 			unitEl.el.classList.add('mineralShort');
 		}
 	};
+
+	bottom.addEventListener('mousedown', (e) => {
+		const { target } = e;
+		if (target.classList.contains('team')) {
+			const isLocked =
+				target.classList.contains('cooldown') ||
+				target.classList.contains('mineralShort');
+			if (isLocked) {
+				return;
+			}
+			const id = target.dataset.id;
+			state.actions.deployUnit({
+				unitId: id,
+				tower: attackerTower
+			});
+		}
+	});
 
 	root.insertAdjacentElement('beforeend', bottom);
 	return bottom;

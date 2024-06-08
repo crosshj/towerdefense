@@ -4,6 +4,18 @@ import { spawnMissile } from './update/missile.js';
 
 const mineralMap = getMineralMap();
 
+const spawnCharInstance = (state) => (char, deployed) => {
+	const assignId = (x) => (x.id = Math.random().toString().slice(2));
+	const setHpMax = (x) => (x.hpMax = x.hp);
+	const newChar = clone(char);
+	assignId(newChar);
+	setHpMax(newChar);
+	deployed.push(newChar);
+	if (char.type === 'attacker') {
+		state.mineral.amount -= char.mineralCost || 100;
+	}
+};
+
 export const getActions = (state) => {
 	return {
 		restartGame: () => {
@@ -17,6 +29,7 @@ export const getActions = (state) => {
 		},
 		autoToggle: () => {
 			state.auto = !state.auto;
+			localStorage.setItem('auto', state.auto);
 		},
 		missileFire: () => {
 			if (state.paused) return;
@@ -40,13 +53,13 @@ export const getActions = (state) => {
 			console.log('do state-related effect spawn');
 		},
 		spawnCharInstance: (char, deployed) => {
-			const assignId = (x) => (x.id = Math.random().toString().slice(2));
-			const setHpMax = (x) => (x.hpMax = x.hp);
-
-			const newChar = clone(char);
-			assignId(newChar);
-			setHpMax(newChar);
-			deployed.push(newChar);
+			spawnCharInstance(state)(char, deployed);
+		},
+		deployUnit: ({ unitId, tower }) => {
+			const unit = tower.teams[0][tower.selectedTeam].find(
+				(x) => x.unit === unitId
+			);
+			spawnCharInstance(state)(unit, tower.deployed);
 		}
 	};
 };

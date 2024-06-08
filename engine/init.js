@@ -40,9 +40,9 @@ export const startGame = async ({ menu, which }) => {
 	state.assets = await loadAssets();
 	state.actions = getActions(state);
 
-	// TODO: this should be recalled from user's last choice
-	// for now, it doesn't even work so doesn't matter
-	state.auto = true;
+	if (typeof state.auto === 'undefined') {
+		state.auto = true;
+	}
 
 	let bgMusic = {
 		start: () => {},

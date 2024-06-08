@@ -28,8 +28,7 @@ const getTeamsDetails = async (teams) => {
 		for (const [index, char] of Object.entries(team.a)) {
 			team.a[index] = {
 				...basicChar,
-				...char,
-				mineralCost: (1 + Number(index)) * basicChar.mineralCost
+				...char
 			};
 		}
 		for (const [index, char] of Object.entries(team.a)) {
@@ -59,6 +58,7 @@ const getTowerDetails = async (tower) => {
 	});
 };
 
+/* prettier-ignore */
 const exampleUser = {
 	tower: {
 		level: 100
@@ -66,18 +66,18 @@ const exampleUser = {
 	teams: [
 		{
 			a: [
-				{ unit: 1, level: 100 },
-				{ unit: 2, level: 100 },
-				{ unit: 3, level: 100 },
-				{ unit: 4, level: 100 },
-				{ unit: 5, level: 100 }
+				{ unit: 'blue-1', rank: 1, mineralCost: 100, hp: 3000, attack: 20 },
+				{ unit: 'blue-2', rank: 1, mineralCost: 150, hp: 10000, attack: 1 },
+				{ unit: 'blue-3', rank: 2, mineralCost: 250, hp: 4000, attack: 30 },
+				{ unit: 'blue-4', rank: 3, mineralCost: 350, hp: 5000, attack: 40 },
+				{ unit: 'blue-5', rank: 3, mineralCost: 450, hp: 6000, attack: 50 }
 			],
 			b: [
-				{ unit: 6, level: 100 },
-				{ unit: 7, level: 100 },
-				{ unit: 8, level: 100 },
-				{ unit: 9, level: 100 },
-				{ unit: 10, level: 100 }
+				{ unit: 'blue-6', rank: 4, mineralCost: 600 },
+				{ unit: 'blue-7', rank: 4, mineralCost: 700 },
+				{ unit: 'blue-8', rank: 4, mineralCost: 800 },
+				{ unit: 'blue-9', rank: 5, mineralCost: 1000 },
+				{ unit: 'blue-10', rank: 5, mineralCost: 1300 }
 			]
 		}
 	]
@@ -94,8 +94,8 @@ export const getUser = async () => {
 	tower.selectedTeam = 'a';
 
 	const thisUser = {
+		auto: localStorage.getItem('auto') === 'true',
 		tower
 	};
-	console.log({ thisUser });
 	return thisUser;
 };

@@ -20,6 +20,7 @@ export const sakura1 = async () => {
 
 	return {
 		state: {
+			auto: user.auto,
 			throttle: 67,
 			record: false,
 			field: {
