@@ -1,3 +1,4 @@
+import { getThumbnail } from './objects/unit.js';
 import ScreenInfo from './screen.js';
 
 const progressClasses = [
@@ -220,6 +221,8 @@ const createBottomControls = ({ root, state }) => {
 				progress: el.querySelector('.cost .progress'),
 				progressBar: el.querySelector('.cost .progress-bar')
 			};
+			const thumbnailDataUri = getThumbnail(unit, state);
+			element.image.style.backgroundImage = `url(${thumbnailDataUri})`;
 			return element;
 		}
 	);

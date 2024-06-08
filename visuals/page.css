@@ -32,13 +32,14 @@ body {
 	background: #0a0d19;
 	margin: 0;
 	align-items: center;
-	overscroll-behavior: none;
 	overflow: hidden;
+	overscroll-behavior: none;
 }
 .container {
 	width: 100%;
 	height: 100%;
 	overflow: scroll;
+	overscroll-behavior: none;
 }
 canvas {
 	height: 100%;

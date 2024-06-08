@@ -33,7 +33,7 @@ export const balancedGame1 = async () => {
 			record: false,
 			field: {
 				height: 800,
-				width: 2300
+				width: 1777
 			},
 			sounds: {
 				background: 'tropicalShadowsBackground'

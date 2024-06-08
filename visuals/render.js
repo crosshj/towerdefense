@@ -4,6 +4,7 @@ import GifMaker from './gif.js';
 import { renderMissile } from './objects/missile.js';
 import Controls from './controls.js';
 import { createPauseScreen } from './menuPause.js';
+import { getCharRenderer } from './objects/unit.js';
 
 const BOTTOM_OFFSET = 60;
 
@@ -32,15 +33,7 @@ const render = (state, ctx, gif, controls) => {
 	const bottom = (height) => fieldHeight - height - SCALAR(BOTTOM_OFFSET);
 	const center = (x, width) => x - width / 2;
 
-	const {
-		bgMid,
-		bgTop,
-		bgBottom,
-		teeRunBlue,
-		teeRunRed,
-		teeAttackBlue,
-		teeAttackRed
-	} = state.assets.images;
+	const { bgMid, bgTop, bgBottom } = state.assets.images;
 	const bgimg = state.assets.images[state?.stage?.background || 'background'];
 
 	controls.updateProgress('missile', state.missile.charge || 0);
@@ -52,6 +45,7 @@ const render = (state, ctx, gif, controls) => {
 	controls.updateTeam(state);
 
 	const drawGuides = () => {
+		return false; //this is only for debuggin backgrounds
 		const line = (x, y, x1, y2, color = '#555') => {
 			ctx.strokeStyle = color;
 			ctx.beginPath();
@@ -228,50 +222,15 @@ const render = (state, ctx, gif, controls) => {
 		ctx.fill();
 	};
 
-	const renderCharacter = ({
-		x: centerX,
-		hp,
-		hpMax,
-		color,
-		type,
-		target,
-		tick = 0
-	}) => {
-		const frame = {
-			defender: target ? teeAttackRed[tick % 6] : teeRunRed[tick % 6],
-			attacker: target ? teeAttackBlue[tick % 6] : teeRunBlue[tick % 6]
-		}[type];
-		const scale = 0.88;
-		const sprite = {
-			x: center(centerX, SCALAR(frame.width * scale)),
-			y: bottom(SCALAR(frame.height * scale)) + SCALAR(10),
-			width: SCALAR(frame.width * scale),
-			height: SCALAR(frame.height * scale),
-			img: frame
-		};
-		const shadowX =
-			type === 'attacker'
-				? target
-					? sprite.x + 40
-					: sprite.x - 20
-				: sprite.x;
-		shadow({ ...sprite, width: 120, x: shadowX, y: sprite.y - 8 });
-		ctx.drawImage(
-			sprite.img,
-			sprite.x,
-			sprite.y,
-			sprite.width,
-			sprite.height
-		);
-		hp > 0 &&
-			healthBar({
-				...sprite,
-				hp,
-				hpMax,
-				x: centerX,
-				width: 20
-			});
-	};
+	const renderCharacter = getCharRenderer({
+		state,
+		center,
+		SCALAR,
+		bottom,
+		shadow,
+		ctx,
+		healthBar
+	});
 
 	ctx.clearRect(0, 0, fieldWidth, fieldHeight);
 	drawBackground();
