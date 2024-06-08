@@ -110,7 +110,8 @@ div#controls {
 } 
 */
 .controls-bottom .team {
-	&.disabled {
+	&.disabled,
+	&.mineralShort {
 		filter: brightness(0.75);
 	}
 	&.empty {

@@ -249,6 +249,20 @@ const createBottomControls = ({ root, state }) => {
 		}
 	};
 
+	bottom.updateUnitCanDeploy = (unit, state) => {
+		const { index } = unit;
+		const unitEl = unitElements[index];
+		const { amount: mineralAmount } = state.mineral;
+		const canDeploy = unit.mineralCost <= mineralAmount;
+		const mineralShort = unitEl.el.classList.contains('mineralShort');
+		if (mineralShort && canDeploy) {
+			unitEl.el.classList.remove('mineralShort');
+		}
+		if (!canDeploy && !mineralShort) {
+			unitEl.el.classList.add('mineralShort');
+		}
+	};
+
 	root.insertAdjacentElement('beforeend', bottom);
 	return bottom;
 };
@@ -299,6 +313,13 @@ export default class Controls {
 			attackerTower.team;
 		if (!currentTeam) return;
 		for (const [unitIndex, unit] of Object.entries(currentTeam)) {
+			this.bottom.updateUnitCanDeploy(
+				{
+					...unit,
+					index: unitIndex
+				},
+				state
+			);
 			if (typeof unit.spawnTicker === 'undefined') {
 				continue;
 			}
