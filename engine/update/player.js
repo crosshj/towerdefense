@@ -13,13 +13,16 @@ const chargeMissile = (state) => {
 };
 
 const updateMineral = (state) => {
-	const mineralRate = 1;
+	const mineralRate = 4;
 	const thisLevel = mineralMap[state.mineral.level - 1];
 	const nextLevel = mineralMap[state.mineral.level];
 	state.mineral.capacity = thisLevel.amount;
 	state.mineral.levelCost = nextLevel?.cost || 0;
-	if (state.mineral.amount >= state.mineral.capacity) return;
+	if (state.mineral.amount === state.mineral.capacity) return;
 	state.mineral.amount += mineralRate;
+	if (state.mineral.amount >= state.mineral.capacity) {
+		state.mineral.amount = state.mineral.capacity;
+	}
 };
 
 export default {

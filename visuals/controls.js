@@ -121,12 +121,14 @@ const createTopControls = ({ root, pauseScreen, showEffects, state } = {}) => {
 	const mineralCurrentAmount = top.querySelector('.mineral .currentAmount');
 	const mineralMaxAmount = top.querySelector('.mineral .maxAmount');
 	top.updateMineral = (amount, total) => {
-		if (mineralCurrentAmount.innerText !== amount + '') {
-			mineralCurrentAmount.innerText = amount;
-		}
-		if (mineralMaxAmount.innerText !== total + '') {
-			mineralMaxAmount.innerText = total;
-		}
+		requestAnimationFrame(() => {
+			if (mineralCurrentAmount.innerText !== amount + '') {
+				mineralCurrentAmount.innerText = amount;
+			}
+			if (mineralMaxAmount.innerText !== total + '') {
+				mineralMaxAmount.innerText = total;
+			}
+		});
 	};
 	root.insertAdjacentElement('beforeend', top);
 	return top;
@@ -238,7 +240,9 @@ const createBottomControls = ({ root, state }) => {
 			unitEl.el.classList.add('disabled');
 			unitEl.cost.classList.add('hidden');
 			unitEl.progress.classList.remove('hidden');
-			unitEl.progressBar.style.width = coolDownProgress + '%';
+			requestAnimationFrame(() => {
+				unitEl.progressBar.style.width = coolDownProgress + '%';
+			});
 		}
 	};
 

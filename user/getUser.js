@@ -28,7 +28,8 @@ const getTeamsDetails = async (teams) => {
 		for (const [index, char] of Object.entries(team.a)) {
 			team.a[index] = {
 				...basicChar,
-				...char
+				...char,
+				mineralCost: (1 + Number(index)) * basicChar.mineralCost
 			};
 		}
 		for (const [index, char] of Object.entries(team.a)) {
