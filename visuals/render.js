@@ -2,6 +2,8 @@ import { cleanError, colorShade } from '../utils/utils.js';
 import { toggleCoords } from '../engine/state.js';
 import GifMaker from './gif.js';
 import { renderMissile } from './objects/missile.js';
+import Controls from './controls.js';
+import { createPauseScreen } from './menuPause.js';
 
 const BOTTOM_OFFSET = 60;
 
@@ -318,8 +320,16 @@ const tryRender = (state, ctx, gif, controls) => {
 };
 
 export default class Render {
-	constructor({ state, controls }) {
+	constructor({ state }) {
 		const { ctx, gif } = initDom(state);
+		const pauseScreen = createPauseScreen(document.body, state);
+		const controls = new Controls({
+			state,
+			pauseScreen,
+			showTicker: false, // for debugging
+			showScreenInfo: false, // for debugging
+			showEffects: true //TODO: this depends on statee, ie. what effects are used in game setup
+		});
 		return () => tryRender(state, ctx, gif, controls);
 	}
 }

@@ -34,13 +34,17 @@ div#controls {
 .controls-bottom .symbol {
 	font-size: 60px;
 	line-height: 55px;
+	&.mineralIcon {
+		font-size: 40px;
+		margin-bottom: -9px;
+	}
 }
 .controls-bottom .symbol-smaller {
 	font-size: 45px;
 	line-height: 40px;
 }
 /* prettier-ignore */
-.controls-bottom > div {
+.controls-bottom > div:not(.team) {
 	border-radius: 15px;
 	display: flex;
 	flex-direction: column;
@@ -72,6 +76,133 @@ div#controls {
 .controls-bottom .team {
 	height: 80%;
 	aspect-ratio: 101 / 100;
+}
+/* 
+.controls-bottom .team {
+	&.disabled {
+		filter: brightness(0.75);
+	}
+	&.empty {
+		box-shadow: none;
+		background: #886337;
+		filter: brightness(0.5) saturate(0.5);
+		border: 2px dashed #e5950f;
+
+		.symbol-smaller,
+		div:last-child {
+			display: none;
+		}
+	}
+	.progress {
+		width: 50px;
+		background: #0009;
+		margin-top: 7px;
+		height: 10px;
+		margin-bottom: 7px;
+		border-radius: 24px;
+		overflow: hidden;
+
+		.progress-bar {
+			height: 100%;
+			background: #00d8e3;
+		}
+	}
+} 
+*/
+.controls-bottom .team {
+	&.disabled {
+		filter: brightness(0.75);
+	}
+	&.empty {
+		border-radius: 10px;
+		box-shadow: none;
+		background: #886337;
+		filter: brightness(0.5) saturate(0.5);
+		border: 2px dashed #e5950f;
+
+		.symbol-smaller,
+		div:last-child {
+			display: none;
+		}
+	}
+
+	.thumbnail {
+		--background-color: #ffe168;
+		--background-stripe-color: #ffcc00;
+		background: repeating-linear-gradient(
+			var(--background-color),
+			var(--background-color) 6px,
+			var(--background-stripe-color) 7px
+		);
+		width: 100%;
+		height: 100%;
+		border: 3px solid #e3b637;
+		border-radius: 10px;
+		display: grid;
+		grid-template: 1fr / 1fr;
+		place-items: center;
+		overflow: hidden;
+		box-shadow: inset 0px 0px 7px black, 0 0 0px 1.5px black;
+
+		& > * {
+			grid-column: 1 / 1;
+			grid-row: 1 / 1;
+		}
+
+		.rank {
+			color: #ffd700;
+			display: flex;
+			justify-content: center;
+			margin-bottom: auto;
+			letter-spacing: 1px;
+			text-shadow: 1px 0px black, -1px 0px black, 0px 1px black,
+				0px -1px black;
+			font-size: 11px;
+			line-height: 23px;
+			font-family: 'Press Start 2P';
+			padding-left: 2px;
+		}
+		.unit {
+			background-image: var(--thumbnailUrl);
+			background-size: contain;
+			width: 58px;
+			height: 58px;
+		}
+		.cost {
+			color: white;
+			background-color: #4449;
+			display: flex;
+			justify-content: center;
+
+			height: 16px;
+			line-height: 16px;
+			margin-top: auto;
+			width: 100%;
+			.indicator {
+				font-size: 10px;
+				display: flex;
+				justify-content: center;
+				span:first-child {
+					margin-right: 3px;
+					text-shadow: 1px 1px black;
+				}
+			}
+			.progress {
+				width: 50px;
+				background: #0009;
+				margin-top: 3px;
+				margin-bottom: 3px;
+				height: 10px;
+				border-radius: 24px;
+				overflow: hidden;
+
+				.progress-bar {
+					height: 100%;
+					background: #00d8e3;
+				}
+			}
+		}
+	}
 }
 
 /* ticker */
@@ -159,6 +290,13 @@ div#controls {
 	margin-right: 25px;
 	display: flex;
 	align-items: center;
+	span:first-child {
+		text-shadow: 1px 2px 0 black, 0px -1px 0 black;
+	}
+	.currentAmount {
+		margin-left: 0.25em;
+		color: #70b8fb;
+	}
 }
 /* prettier-ignore */
 .controls-top .auto.button {
@@ -192,25 +330,6 @@ div#controls {
 .controls-bottom .button {
 	position: relative;
 }
-.controls-bottom .team {
-	&.disabled {
-		filter: brightness(0.75);
-	}
-	.progress {
-		width: 50px;
-		background: #0009;
-		margin-top: 7px;
-		height: 10px;
-		margin-bottom: 7px;
-		border-radius: 24px;
-		overflow: hidden;
-
-		.progress-bar {
-			height: 100%;
-			background: #00d8e3;
-		}
-	}
-}
 
 .controls-bottom .progress.vertical {
 	position: absolute;
@@ -233,6 +352,7 @@ div#controls {
 .controls-bottom .progress.orange {
 	background: #ffe9be;
 }
+
 .progress.vertical.p-0 {
 	top: 100%;
 }

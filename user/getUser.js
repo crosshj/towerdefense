@@ -17,7 +17,9 @@ const basicChar = {
 	x: towerX + 140,
 	move: 50,
 	critChance: 0.035,
-	critMult: 2
+	critMult: 2,
+	rank: 5,
+	mineralCost: 100
 };
 
 const getTeamsDetails = async (teams) => {

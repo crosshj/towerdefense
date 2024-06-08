@@ -2,7 +2,6 @@ import Engine from './engine.js';
 import Render from '../visuals/render.js';
 import State from './state.js';
 import { loadAssets, loadSounds } from '../visuals/assets.js';
-import Controls from '../visuals/controls.js';
 import { getActions } from './actions.js';
 
 import { updateGameStatus } from './update/game.js';
@@ -17,7 +16,6 @@ import { fieldStage1 } from './games/field1.js';
 import { ghostStage1 } from './games/ghost1.js';
 import { oceanStage1 } from './games/ocean1.js';
 import { sakura1 } from './games/sakura1.js';
-import { createPauseScreen } from '../visuals/menuPause.js';
 
 const games = [
 	balancedGame1,
@@ -45,15 +43,6 @@ export const startGame = async ({ menu, which }) => {
 	// TODO: this should be recalled from user's last choice
 	// for now, it doesn't even work so doesn't matter
 	state.auto = true;
-
-	const pauseScreen = createPauseScreen(document.body, state);
-	const controls = new Controls({
-		state,
-		pauseScreen,
-		showTicker: false,
-		showScreenInfo: false,
-		showEffects: true
-	});
 
 	let bgMusic = {
 		start: () => {},
@@ -95,7 +84,7 @@ export const startGame = async ({ menu, which }) => {
 		}
 	};
 
-	const render = new Render({ state, controls });
+	const render = new Render({ state });
 
 	const highPriority = () => {
 		// this is a non-throttled activity?
@@ -105,8 +94,7 @@ export const startGame = async ({ menu, which }) => {
 		state,
 		highPriority,
 		gameLoop,
-		render,
-		controls
+		render
 	});
 	engine.start();
 };

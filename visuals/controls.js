@@ -50,6 +50,10 @@ const createTopControls = ({ root, pauseScreen, showEffects, state } = {}) => {
 			${effects}
 		</div>
 		<div class="mineral">
+			<span>💎</span>
+			<span class="currentAmount"></span>
+			/
+			<span class="maxAmount"></span>
 		</div>
 		<div
 			style="position: relative;"
@@ -114,10 +118,15 @@ const createTopControls = ({ root, pauseScreen, showEffects, state } = {}) => {
 	});
 
 	const mineralEl = top.querySelector('.mineral');
+	const mineralCurrentAmount = top.querySelector('.mineral .currentAmount');
+	const mineralMaxAmount = top.querySelector('.mineral .maxAmount');
 	top.updateMineral = (amount, total) => {
-		const newText = `⬖ ${amount}/${total}`;
-		if (mineralEl.innerText === newText) return;
-		mineralEl.innerText = newText;
+		if (mineralCurrentAmount.innerText !== amount + '') {
+			mineralCurrentAmount.innerText = amount;
+		}
+		if (mineralMaxAmount.innerText !== total + '') {
+			mineralMaxAmount.innerText = total;
+		}
 	};
 	root.insertAdjacentElement('beforeend', top);
 	return top;
@@ -132,28 +141,13 @@ const createBottomControls = ({ root, state }) => {
 			<div class="progress p-0 vertical orange"></div>
 			<div>missile</div>
 		</div>
-        <div class="team">
-			<div class="symbol-smaller">웃</div>
-			<div>team 1</div>
-		</div>
-        <div class="team">
-			<div class="symbol-smaller">웃</div>
-			<div>team 2</div>
-		</div>
-		<div class="team">
-			<div class="symbol-smaller">웃</div>
-			<div>team 3</div>
-		</div>
-		<div class="team">
-			<div class="symbol-smaller">웃</div>
-			<div>team 4</div>
-		</div>
-		<div class="team">
-			<div class="symbol-smaller">웃</div>
-			<div>team 5</div>
-		</div>
+        <div class="team"></div>
+		<div class="team"></div>
+		<div class="team"></div>
+		<div class="team"></div>
+		<div class="team"></div>
 		<div class="mineral button">
-			<div class="symbol">⬖</div>
+			<div class="symbol mineralIcon">💎</div>
 			<div class="progress p-0 vertical blue"></div>
 			<div class="levelIndicator">Lv.1</div>
 		</div>
@@ -188,17 +182,48 @@ const createBottomControls = ({ root, state }) => {
 		});
 	});
 
+	const attackerTower = state.towers.find((x) => x.type === 'attacker');
+	const currentTeam =
+		attackerTower?.teams?.[0]?.[attackerTower.selectedTeam] ||
+		attackerTower.team;
 	const unitElements = Array.from(bottom.querySelectorAll('.team')).map(
-		(el) => {
-			const image = el.querySelector(':first-child');
-			const title = el.querySelector(':last-child');
-			return {
+		(el, index) => {
+			const unit = currentTeam[index];
+			el.innerHTML = `
+				<div class="thumbnail">
+					<div class="unit"></div>
+					<div class="rank">
+						${new Array(unit?.rank || 0).fill('*').join('')}
+					</div>
+					<div class="cost">
+						<div class="indicator">
+							<span>💎</span>
+							<span>${unit?.mineralCost || '---'}</span>
+						</div>
+						<div class="progress hidden">
+							<div class="progress-bar" style="width: 100%;"></div>
+						</div>
+					</div>
+				</div>
+				`;
+			if (typeof unit === 'undefined') {
+				el.classList.add('empty');
+			}
+			const element = {
 				el,
-				image,
-				title
+				image: el.querySelector('.unit'),
+				rank: el.querySelector('.rank'),
+				cost: el.querySelector('.cost .indicator'),
+				costAmount: el.querySelector('.cost .indicator:last-child'),
+				progress: el.querySelector('.cost .progress'),
+				progressBar: el.querySelector('.cost .progress-bar')
 			};
+			return element;
 		}
 	);
+
+	// TODO: bottom.switchTeam
+
 	bottom.updateUnitCooldown = (unit) => {
 		const { index } = unit;
 		const unitEl = unitElements[index];
@@ -207,15 +232,14 @@ const createBottomControls = ({ root, state }) => {
 		//console.log({ index, coolDownProgress });
 		if (coolDownProgress === 100) {
 			unitEl.el.classList.remove('disabled');
-			unitEl.title.innerText = `team ${Number(index) + 1}`;
-			return;
+			unitEl.cost.classList.remove('hidden');
+			unitEl.progress.classList.add('hidden');
+		} else {
+			unitEl.el.classList.add('disabled');
+			unitEl.cost.classList.add('hidden');
+			unitEl.progress.classList.remove('hidden');
+			unitEl.progressBar.style.width = coolDownProgress + '%';
 		}
-		unitEl.el.classList.add('disabled');
-		unitEl.title.innerHTML = `
-		<div class="progress">
-			<div class="progress-bar" style="width: ${coolDownProgress}%;"></div>
-		</div>
-		`;
 	};
 
 	root.insertAdjacentElement('beforeend', bottom);
