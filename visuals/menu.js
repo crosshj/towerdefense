@@ -17,6 +17,7 @@ const template = () => `
         background: linear-gradient(0deg, #290a3f, #15001a);
         font-size: 11px;
         z-index: 2;
+        flex-direction: column;
     "
 >
     <div
@@ -47,6 +48,7 @@ const template = () => `
             PLAY
         </button>
     </div>
+    <a href="/home/index.html" style="margin-top:2em;">home</a>
 </div>
 `;
 
