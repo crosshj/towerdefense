@@ -90,6 +90,7 @@ async function drawOffscreenCanvas() {
 
 function draw() {
 	context.clearRect(0, 0, canvas.width, canvas.height);
+	//drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
 	context.drawImage(
 		offscreenCanvas,
 		offsetX,
@@ -99,7 +100,7 @@ function draw() {
 		0,
 		0,
 		canvas.width,
-		canvas.height
+		window.innerHeight
 	);
 }
 
