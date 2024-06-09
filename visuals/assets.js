@@ -42,14 +42,14 @@ const transparent = (canvas, ctx) => {
 	ctx.putImageData(imageData, 0, 0);
 };
 
-const colorize = (color) => (canvas, ctx) => {
+export const colorize = (color) => (canvas, ctx) => {
 	const clone = cloneCanvas(canvas);
 	const { width, height } = canvas;
 
 	clone.ctx.drawImage(canvas, 0, 0, width, height);
 
 	clone.ctx.globalCompositeOperation = 'normal';
-	clone.ctx.fillStyle = color + 'b';
+	clone.ctx.fillStyle = color.length === 4 ? color + 'b' : color + 'B0';
 	clone.ctx.fillRect(0, 0, width, height);
 
 	clone.ctx.globalCompositeOperation = 'destination-in';
@@ -96,19 +96,30 @@ const images = {
 		),
 	bgBottom: ({ background: bg }) => Tile()(bg, 0, 168, bg.width, 32),
 	teeGames: 'assets/teeGames.png',
-	teeRunBlue: ({ teeGames: img }) =>
-		subD(6, 378 - 186, (i, w) =>
-			Tile((c, ct) => {
-				transparent(c, ct);
-				colorize(blueColor)(c, ct);
-			})(img, 15 + i * (w + 1), 285 + 84, w, 56)
-		),
+
+	// defender
 	teeRunRed: ({ teeGames: img }) =>
 		subD(6, 378 - 186, (i, w) =>
 			Tile((c, ct) => {
 				transparent(c, ct);
 				colorize(redColor)(c, ct);
 				flipH()(c, ct);
+			})(img, 15 + i * (w + 1), 285 + 84, w, 56)
+		),
+	teeAttackRed: ({ teeGames: img }) =>
+		subD(6, 378 - 28, (i, w) =>
+			Tile((c, ct) => {
+				transparent(c, ct);
+				colorize(redColor)(c, ct);
+				flipH()(c, ct);
+			})(img, 15 + i * (w + 1), 285 + 602, w, 58)
+		),
+	// attacker
+	teeRunBlue: ({ teeGames: img }) =>
+		subD(6, 378 - 186, (i, w) =>
+			Tile((c, ct) => {
+				transparent(c, ct);
+				colorize(blueColor)(c, ct);
 			})(img, 15 + i * (w + 1), 285 + 84, w, 56)
 		),
 	teeAttackBlue: ({ teeGames: img }) =>
@@ -118,12 +129,18 @@ const images = {
 				colorize(blueColor)(c, ct);
 			})(img, 15 + i * (w + 1), 285 + 602, w, 58)
 		),
-	teeAttackRed: ({ teeGames: img }) =>
+
+	// attacker custom color
+	teeRunPlain: ({ teeGames: img }) =>
+		subD(6, 378 - 186, (i, w) =>
+			Tile((c, ct) => {
+				transparent(c, ct);
+			})(img, 15 + i * (w + 1), 285 + 84, w, 56)
+		),
+	teeAttackPlain: ({ teeGames: img }) =>
 		subD(6, 378 - 28, (i, w) =>
 			Tile((c, ct) => {
 				transparent(c, ct);
-				colorize(redColor)(c, ct);
-				flipH()(c, ct);
 			})(img, 15 + i * (w + 1), 285 + 602, w, 58)
 		)
 };

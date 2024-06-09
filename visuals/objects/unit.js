@@ -1,3 +1,5 @@
+import { colorize } from '../assets.js';
+
 const imageToCanvas = (base_image) => {
 	const canvas = document.createElement('canvas');
 	const ctx = canvas.getContext('2d');
@@ -21,16 +23,21 @@ const cropCanvas = (
 };
 
 export const getThumbnail = (unit, state) => {
+	const blueDefaultColor = '#24b';
 	// todo: read unit and act correctly
-	const { teeRunBlue, teeAttackBlue } = state.assets.images;
-	const thumbnailCanvas = imageToCanvas(teeAttackBlue[0]);
-	const thumbnailDataUri = cropCanvas(thumbnailCanvas, {
+	const { teeAttackPlain } = state.assets.images;
+	const thumbnailCanvas = imageToCanvas(teeAttackPlain[0]);
+	const thumbnailCropped = cropCanvas(thumbnailCanvas, {
 		x: 5,
 		y: -5,
 		width: 32,
 		height: 32
-	}).toDataURL();
-	return thumbnailDataUri;
+	});
+	colorize(unit?.color || blueDefaultColor)(
+		thumbnailCropped,
+		thumbnailCropped.getContext('2d')
+	);
+	return thumbnailCropped.toDataURL();
 };
 
 export const getCharRenderer = ({
@@ -42,14 +49,63 @@ export const getCharRenderer = ({
 	shadow,
 	healthBar
 }) => {
-	const { teeRunBlue, teeRunRed, teeAttackBlue, teeAttackRed } =
-		state.assets.images;
+	const {
+		teeRunBlue,
+		teeAttackBlue,
+		teeRunPlain,
+		teeAttackPlain,
+		teeRunRed,
+		teeAttackRed
+		//
+	} = state.assets.images;
 
-	return ({ x: centerX, hp, hpMax, color, type, target, tick = 0 }) => {
-		const frame = {
-			defender: target ? teeAttackRed[tick % 6] : teeRunRed[tick % 6],
-			attacker: target ? teeAttackBlue[tick % 6] : teeRunBlue[tick % 6]
-		}[type];
+	const attacking = {
+		default: teeAttackBlue
+	};
+	const running = {
+		default: teeRunBlue
+	};
+	const { teams } = state.towers[0];
+
+	if (teams) {
+		for (const unit of [...teams[0].a, ...teams[0].b]) {
+			running[unit.unit] = [];
+			for (const frame of teeRunPlain) {
+				const canvas = imageToCanvas(frame);
+				colorize(unit?.color || blueDefaultColor)(
+					canvas,
+					canvas.getContext('2d')
+				);
+				running[unit.unit].push(canvas);
+			}
+			attacking[unit.unit] = [];
+			for (const frame of teeAttackPlain) {
+				const canvas = imageToCanvas(frame);
+				colorize(unit?.color || blueDefaultColor)(
+					canvas,
+					canvas.getContext('2d')
+				);
+				attacking[unit.unit].push(canvas);
+			}
+		}
+	}
+
+	const getFrame = (unit) => {
+		const { target, tick, type } = unit;
+		if (type === 'defender') {
+			return target ? teeAttackRed[tick % 6] : teeRunRed[tick % 6];
+		}
+		const attackingFrames = attacking[unit?.unit] || attacking.default;
+		const runningFrames = running[unit?.unit] || running.default;
+		const frame = target
+			? attackingFrames[tick % 6]
+			: runningFrames[tick % 6];
+		return frame;
+	};
+
+	return (unit) => {
+		const { x: centerX, hp, hpMax, type, target } = unit;
+		const frame = getFrame(unit);
 		const scale = 0.88;
 		const sprite = {
 			x: center(centerX, SCALAR(frame.width * scale)),

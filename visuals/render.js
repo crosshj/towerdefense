@@ -27,6 +27,8 @@ const initDom = (state) => {
 	return { ctx, gif };
 };
 
+let renderCharacter;
+
 const render = (state, ctx, gif, controls) => {
 	const { width: fieldWidth, height: fieldHeight } = state.field;
 	const SCALAR = (x) => x * 4;
@@ -222,15 +224,17 @@ const render = (state, ctx, gif, controls) => {
 		ctx.fill();
 	};
 
-	const renderCharacter = getCharRenderer({
-		state,
-		center,
-		SCALAR,
-		bottom,
-		shadow,
-		ctx,
-		healthBar
-	});
+	renderCharacter =
+		renderCharacter ||
+		getCharRenderer({
+			state,
+			center,
+			SCALAR,
+			bottom,
+			shadow,
+			ctx,
+			healthBar
+		});
 
 	ctx.clearRect(0, 0, fieldWidth, fieldHeight);
 	drawBackground();
@@ -247,9 +251,11 @@ const render = (state, ctx, gif, controls) => {
 	});
 
 	if (state.towers[0].status === 'dead') {
+		renderCharacter = undefined;
 		alert('You lose!');
 	}
 	if (state.towers[1].status === 'dead') {
+		renderCharacter = undefined;
 		alert('You win!');
 	}
 
