@@ -105,12 +105,14 @@ function draw() {
 }
 
 function handleScroll(event) {
-	const deltaX = event.deltaX;
-	offsetX = Math.min(
-		Math.max(offsetX + deltaX, 0),
-		offscreenWidth - canvas.width
-	);
-	draw();
+	requestAnimationFrame(() => {
+		const deltaX = event.deltaX;
+		offsetX = Math.min(
+			Math.max(offsetX + deltaX, 0),
+			offscreenWidth - canvas.width
+		);
+		draw();
+	});
 }
 
 function handleTap(event) {
