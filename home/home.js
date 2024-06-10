@@ -69,9 +69,10 @@ async function drawOffscreenCanvas() {
 	offscreenCanvas.width = offscreenWidth;
 	offscreenCanvas.height = offscreenHeight;
 
+	offscreenContext.fillStyle = 'red';
+	offscreenContext.fillRect(0, 0, offscreenWidth, offscreenHeight);
+
 	offscreenContext.drawImage(bgImage, 0, 0);
-	//offscreenContext.fillStyle = 'white';
-	//offscreenContext.fillRect(0, 0, offscreenWidth, offscreenHeight);
 
 	offscreenContext.strokeStyle = 'black';
 	offscreenContext.lineWidth = 1;
@@ -89,18 +90,27 @@ async function drawOffscreenCanvas() {
 }
 
 function draw() {
-	context.clearRect(0, 0, canvas.width, canvas.height);
+	//context.clearRect(0, 0, canvas.width, canvas.height);
 	//drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
+
+	const shrunkHeight =
+		canvas.height >= offscreenHeight ? canvas.height : offscreenHeight;
+
+	const stretchedHeight =
+		canvas.height >= offscreenHeight
+			? canvas.height * (canvas.height / offscreenHeight)
+			: canvas.height;
+
 	context.drawImage(
 		offscreenCanvas,
 		offsetX,
 		0,
 		canvas.width,
-		canvas.height,
+		shrunkHeight,
 		0,
 		0,
 		canvas.width,
-		window.innerHeight
+		stretchedHeight
 	);
 }
 
