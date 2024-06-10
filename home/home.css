@@ -31,5 +31,5 @@ body {
 	width: 100vw;
 	height: 100vh;
 	touch-action: none; /* Prevent default scroll behavior */
-	image-rendering: pixelated;
+	/* image-rendering: pixelated; */
 }
