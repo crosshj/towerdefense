@@ -34,7 +34,29 @@ function getClick(relativeX, relativeY) {
 		const pixelData = canvas.getContext('2d').getImageData(0, 0, 1, 1).data;
 		return rgbToHex(pixelData);
 	}
-	const pixel = getPixel(bgClickMap, relativeX, relativeY);
+	const bgClickCanvas = document.createElement('canvas');
+	bgClickCanvas.width = canvas.width;
+	bgClickCanvas.height = canvas.height;
+
+	const bgClickContext = bgClickCanvas.getContext('2d');
+	const shrunkHeight =
+		canvas.height >= offscreenHeight ? canvas.height : offscreenHeight;
+	const stretchedHeight =
+		canvas.height >= offscreenHeight
+			? canvas.height * (canvas.height / offscreenHeight)
+			: canvas.height;
+	bgClickContext.drawImage(
+		bgClickMap,
+		offsetX,
+		0,
+		canvas.width,
+		shrunkHeight,
+		0,
+		0,
+		canvas.width,
+		stretchedHeight
+	);
+	const pixel = getPixel(bgClickCanvas, relativeX, relativeY);
 	const whichItem =
 		{
 			'#01ffde': 'mainStage',
@@ -132,7 +154,7 @@ function handleTap(event) {
 
 	const relativeX = x + offsetX;
 	const relativeY = y;
-	const whichItem = getClick(relativeX, relativeY);
+	const whichItem = getClick(x, y);
 	if (whichItem === 'mainStage') {
 		document.location.href = '/';
 	}
