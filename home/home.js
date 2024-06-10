@@ -163,18 +163,49 @@ function handleTap(event) {
 
 canvas.addEventListener('click', handleTap);
 
+let isTouching = false;
 let touchStartX = 0;
+let velocity = 0;
+let lastTimestamp = 0;
+const friction = 0.93; // adjust for desired inertia
 
 canvas.addEventListener('touchstart', (event) => {
+	isTouching = true;
 	touchStartX = event.touches[0].clientX;
+	velocity = 0; // reset velocity on new touch
+	lastTimestamp = event.timeStamp;
 });
 
 canvas.addEventListener('touchmove', (event) => {
 	const touchEndX = event.touches[0].clientX;
 	const deltaX = touchStartX - touchEndX;
 	touchStartX = touchEndX;
+
+	const deltaTime = event.timeStamp - lastTimestamp;
+	velocity = deltaX / deltaTime;
+	lastTimestamp = event.timeStamp;
+
 	handleScroll({ deltaX });
 });
+canvas.addEventListener('touchend', () => {
+	isTouching = false;
+	applyInertia();
+});
+function applyInertia() {
+	if (!isTouching) {
+		velocity *= friction;
+		offsetX += velocity * 16; // assuming 60fps, adjust if needed
+
+		// Constrain scrollY to the bounds of the large canvas
+		offsetX = Math.max(0, Math.min(offsetX, offscreenWidth - canvas.width));
+
+		draw();
+
+		if (Math.abs(velocity) > 0.1) {
+			requestAnimationFrame(applyInertia);
+		}
+	}
+}
 
 // Add a listener for the wheel event to handle two-finger scroll on trackpads
 canvas.addEventListener(
