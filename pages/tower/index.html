@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>Tower Defense</title>
+		<title>TD</title>
 		<meta charset="utf-8" />
 		<meta name="description" content="" />
 		<meta name="author" content="" />
@@ -9,27 +9,13 @@
 		<link rel="manifest" href="/manifest.json" />
 		<link rel="icon" type="image/png" href="/assets/favicon.png" />
 		<link rel="stylesheet" href="/visuals/page.css" />
-		<link rel="stylesheet" href="/visuals/controls.css" />
 	</head>
 
 	<body>
 		<div class="container">
 			<canvas></canvas>
 		</div>
-		<div
-			style="
-				background: url(/assets/linerangers1.png);
-				position: absolute;
-				top: 0;
-				left: 0;
-				right: 0;
-				bottom: 0;
-				opacity: 0.25;
-				background-size: contain;
-				display: none;
-			"
-		></div>
+		<script src="/utils/disableSwipe.js"></script>
+		<script src="./index.js"></script>
 	</body>
-	<script src="/visuals/menu.js" type="module"></script>
-	<script src="/utils/disableSwipe.js"></script>
 </html>

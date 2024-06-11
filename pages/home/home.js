@@ -10,6 +10,37 @@ const offscreenWidth = 2400; // Fixed width of 1900px
 const offscreenHeight = 500;
 let bgClickMap;
 
+const clickColorMap = {
+	'#01ffde': 'mainStage',
+	'#010cfe': 'lab',
+	'#0088ff': 'guild',
+	'#01d0ff': 'guildRaid',
+	'#00ff7b': 'specialStage',
+	'#89fe02': 'arena',
+	'#f8ff02': 'pvp',
+	'#ffbd00': 'tower',
+	'#fe0005': 'team1',
+	'#ff006b': 'team2',
+	'#fe00c7': 'team3',
+	'#e600ff': 'team4',
+	'#aa00ff': 'team5'
+};
+const clickUrlMap = {
+	mainStage: '/',
+	guild: '/pages/guild/index.html',
+	lab: '/pages/lab/index.html',
+	guildRaid: '/pages/guildRaid/index.html',
+	specialStage: '/pages/specialStage/index.html',
+	arena: '/pages/arena/index.html',
+	pvp: '/pages/pvp/index.html',
+	tower: '/pages/tower/index.html',
+	team1: '/pages/team/index.html?slot=1',
+	team2: '/pages/team/index.html?slot=2',
+	team3: '/pages/team/index.html?slot=3',
+	team4: '/pages/team/index.html?slot=4',
+	team5: '/pages/team/index.html?slot=5'
+};
+
 const loadImage = async (url) => {
 	let img = new Image();
 	return new Promise((r) => {
@@ -57,22 +88,7 @@ function getClick(relativeX, relativeY) {
 		stretchedHeight
 	);
 	const pixel = getPixel(bgClickCanvas, relativeX, relativeY);
-	const whichItem =
-		{
-			'#01ffde': 'mainStage',
-			'#010cfe': 'lab',
-			'#0088ff': 'guild',
-			'#01d0ff': 'guildRaid',
-			'#00ff7b': 'specialStage',
-			'#89fe02': 'arena',
-			'#f8ff02': 'pvp',
-			'#ffbd00': 'tower',
-			'#fe0005': 'team1',
-			'#ff006b': 'team2',
-			'#fe00c7': 'team3',
-			'#e600ff': 'team4',
-			'#aa00ff': 'team5'
-		}[pixel] || 'noItem';
+	const whichItem = clickColorMap[pixel] || 'noItem';
 	return whichItem;
 }
 
@@ -151,12 +167,10 @@ function handleTap(event) {
 	const rect = canvas.getBoundingClientRect();
 	const x = event.clientX - rect.left;
 	const y = event.clientY - rect.top;
-
-	const relativeX = x + offsetX;
-	const relativeY = y;
 	const whichItem = getClick(x, y);
-	if (whichItem === 'mainStage') {
-		document.location.href = '/';
+	const goToUrl = clickUrlMap[whichItem];
+	if (goToUrl) {
+		document.location.href = goToUrl;
 	}
 	console.log({ whichItem });
 }
