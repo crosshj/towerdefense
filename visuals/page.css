@@ -46,8 +46,8 @@ body {
 	overscroll-behavior: none;
 
 	&.fixed canvas {
-		height: 100%;
-		width: 100%;
+		height: auto;
+		width: auto;
 	}
 }
 canvas {
