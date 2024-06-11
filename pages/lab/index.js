@@ -1,3 +1,5 @@
+import { scrollable } from '../../utils/scrollable.js';
+
 const pageTitle = 'LAB';
 
 const initDom = (state) => {
@@ -14,15 +16,15 @@ const initDom = (state) => {
 	return { canvas, ctx };
 };
 
-const setup = () => {
+const setup = async () => {
 	document.title += `: ${pageTitle}`;
 	const { canvas, ctx } = initDom();
-
-	ctx.fillStyle = '#999';
-	ctx.font = '30px Arial';
-	ctx.textAlign = 'center';
-	ctx.textBaseline = 'middle';
-	ctx.fillText(pageTitle, canvas.width / 2, canvas.height / 2);
+	await scrollable({
+		image: '/pages/lab/lab_bg.png',
+		vertical: true,
+		canvas,
+		ctx
+	});
 
 	canvas.addEventListener('mousedown', () => {
 		document.location.href = '/pages/home/index.html';
