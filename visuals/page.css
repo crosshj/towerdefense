@@ -44,22 +44,25 @@ body {
 	height: 100%;
 	overflow: scroll;
 	overscroll-behavior: none;
-
-	&.fixed {
-		overflow: hidden;
-		& > canvas {
-			position: absolute;
-			top: 0;
-			bottom: 0;
-			left: 0;
-			right: 0;
-			height: 100vh;
-			width: 100vw;
-			image-rendering: unset;
-			transform: unset;
-		}
-	}
 }
+
+.container.fixed {
+	overflow: hidden;
+}
+.container.fixed > canvas {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 100vh;
+	width: 100vw;
+	image-rendering: unset;
+	transform: unset;
+	filter: unset;	
+}
+
+
 canvas {
 	height: 100%;
 	image-rendering: pixelated;
