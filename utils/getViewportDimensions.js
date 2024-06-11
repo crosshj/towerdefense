@@ -1,4 +1,4 @@
-function getViewportDimensions() {
+export const getViewportDimensions = () => {
   // Create a temporary element to measure height
   const tempHeightElement = document.createElement('div');
   tempHeightElement.style.height = '100vh';
@@ -22,4 +22,3 @@ function getViewportDimensions() {
   return { height, width };
 }
 
-module.exports.getViewportDimensions = getViewportDimensions;
