@@ -57,9 +57,6 @@ body {
 	right: 0;
 	height: 100%;
 	width: 100%;
-	image-rendering: unset;
-	transform: unset;
-	filter: unset;	
 }
 
 
@@ -67,7 +64,7 @@ canvas {
 	height: 100%;
 	image-rendering: pixelated;
 	transform: translateX(0px);
-	filter: contrast(1.05);
+	/* 	filter: contrast(1.05); */
 }
 
 .container.dev {
