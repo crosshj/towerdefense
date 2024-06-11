@@ -44,6 +44,11 @@ body {
 	height: 100%;
 	overflow: scroll;
 	overscroll-behavior: none;
+
+	&.fixed canvas {
+		height: 100%;
+		width: 100%;
+	}
 }
 canvas {
 	height: 100%;
