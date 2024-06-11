@@ -1,3 +1,4 @@
+import { getViewportDimensions } from '../../utils/getViewportDimensions.js';
 import { scrollable } from '../../utils/scrollable.js';
 
 const pageTitle = 'LAB';
@@ -5,8 +6,9 @@ const pageTitle = 'LAB';
 const initDom = (state) => {
 	const dom = document.querySelector('.container');
 	const canvas = dom.querySelector('canvas');
-	canvas.width = window.innerWidth;
-	canvas.height = window.innerHeight;
+	const viewport = getViewportDimensions();
+	canvas.width = viewport.width;
+	canvas.height = viewport.height;
 	const ctx = canvas.getContext('2d', {
 		antialias: false,
 		depth: false,
