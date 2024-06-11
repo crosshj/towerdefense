@@ -1,3 +1,5 @@
+import { getViewportDimensions } from '../../utils/getViewportDimensions.js';
+
 const canvas = document.getElementById('canvas');
 const context = canvas.getContext('2d');
 const offscreenCanvas = document.createElement('canvas');
@@ -94,8 +96,9 @@ function getClick(relativeX, relativeY) {
 }
 
 async function resizeCanvas() {
-	canvas.width = window.innerWidth;
-	canvas.height = window.innerHeight;
+	const viewport = getViewportDimensions();
+	canvas.width = viewport.width;
+	canvas.height = viewport.height;
 	offsetX = (offscreenWidth - canvas.width) / 2; // Center the offscreen canvas
 	await drawOffscreenCanvas();
 	draw();
