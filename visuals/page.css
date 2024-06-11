@@ -48,8 +48,8 @@ body {
 	&.fixed {
 		overflow: hidden;
 		& > canvas {
-			height: 100vh;
-			width: 100vw;
+			height: auto;
+			width: auto;
 		}
 	}
 }
