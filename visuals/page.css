@@ -45,9 +45,12 @@ body {
 	overflow: scroll;
 	overscroll-behavior: none;
 
-	&.fixed canvas {
-		height: auto;
-		width: auto;
+	&.fixed {
+		overflow: hidden;
+		& > canvas {
+			height: 100vh;
+			width: 100vw;
+		}
 	}
 }
 canvas {
