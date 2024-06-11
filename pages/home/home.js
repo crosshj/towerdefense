@@ -11,17 +11,17 @@ const offscreenHeight = 500;
 let bgClickMap;
 
 const clickColorMap = {
-	'#01ffde': 'mainStage',
-	'#010cfe': 'lab',
+	'#00ffdd': 'mainStage',
+	'#000cff': 'lab',
 	'#0088ff': 'guild',
-	'#01d0ff': 'guildRaid',
+	'#00d0ff': 'guildRaid',
 	'#00ff7b': 'specialStage',
-	'#89fe02': 'arena',
-	'#f8ff02': 'pvp',
-	'#ffbd00': 'tower',
-	'#fe0005': 'team1',
-	'#ff006b': 'team2',
-	'#fe00c7': 'team3',
+	'#88ff00': 'arena',
+	'#f6ff00': 'pvp',
+	'#ffbf00': 'tower',
+	'#ff0004': 'team1',
+	'#ff006a': 'team2',
+	'#ff00c8': 'team3',
 	'#e600ff': 'team4',
 	'#aa00ff': 'team5'
 };
@@ -88,6 +88,7 @@ function getClick(relativeX, relativeY) {
 		stretchedHeight
 	);
 	const pixel = getPixel(bgClickCanvas, relativeX, relativeY);
+	console.log(pixel);
 	const whichItem = clickColorMap[pixel] || 'noItem';
 	return whichItem;
 }
@@ -102,7 +103,7 @@ async function resizeCanvas() {
 
 async function drawOffscreenCanvas() {
 	const bgImage = await loadImage('./home_bg.jpg');
-	bgClickMap = await loadImage('./clickMap_bg.jpg');
+	bgClickMap = await loadImage('./home_bg_clicks.png');
 
 	offscreenCanvas.width = offscreenWidth;
 	offscreenCanvas.height = offscreenHeight;
