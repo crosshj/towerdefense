@@ -34,7 +34,8 @@ body {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	background: #0a0d19;
+	/* background: #0a0d19; */
+	background: black;
 	margin: 0;
 	align-items: center;
 	overflow: hidden;
