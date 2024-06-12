@@ -28,7 +28,7 @@ const clickColorMap = {
 	'#aa00ff': 'team5'
 };
 const clickUrlMap = {
-	mainStage: '/',
+	mainStage: '/pages/mainStage/index.html',
 	guild: '/pages/guild/index.html',
 	lab: '/pages/lab/index.html',
 	guildRaid: '/pages/guildRaid/index.html',
