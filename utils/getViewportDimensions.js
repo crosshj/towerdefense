@@ -21,7 +21,7 @@ export const getViewportDimensions = () => {
   document.body.removeChild(tempHeightElement);
   */
 	const height = window.innerHeight;
-	const width = window.width;
+	const width = window.innerWidth;
 
 	return { height, width };
 };
