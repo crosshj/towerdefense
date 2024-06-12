@@ -12,7 +12,7 @@ const initDom = (state) => {
 	const ctx = canvas.getContext('2d', {
 		antialias: false,
 		depth: false,
-		desynchronized: false
+		desynchronized: true
 	});
 	ctx.imageSmoothingEnabled = false;
 	return { canvas, ctx };

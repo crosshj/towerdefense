@@ -179,8 +179,6 @@ function handleTap(event) {
 	console.log({ whichItem });
 }
 
-canvas.addEventListener('click', handleTap);
-
 let isTouching = false;
 let touchStartX = 0;
 let velocity = 0;
@@ -225,6 +223,8 @@ function applyInertia() {
 		}
 	}
 }
+
+canvas.addEventListener('click', handleTap);
 
 // Add a listener for the wheel event to handle two-finger scroll on trackpads
 canvas.addEventListener(
