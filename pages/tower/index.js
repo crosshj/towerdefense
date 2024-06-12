@@ -3,10 +3,10 @@ import { scrollable } from '../../utils/scrollable.js';
 
 const pageTitle = 'TOWER';
 
-const initDom = (state) => {
+const initDom = async (state) => {
 	const dom = document.querySelector('.container');
 	const canvas = dom.querySelector('canvas');
-	const viewport = getViewportDimensions();
+	const viewport = await getViewportDimensions();
 	canvas.width = viewport.width;
 	canvas.height = viewport.height;
 	const ctx = canvas.getContext('2d', {
@@ -18,9 +18,9 @@ const initDom = (state) => {
 	return { canvas, ctx };
 };
 
-const setup = () => {
+const setup = async () => {
 	document.title += `: ${pageTitle}`;
-	const { canvas, ctx } = initDom();
+	const { canvas, ctx } = await initDom();
 
 	ctx.fillStyle = '#999';
 	ctx.font = '30px Arial';

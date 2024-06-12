@@ -1,4 +1,19 @@
-export const getViewportDimensions = () => {
+const domLoaded = async () => {
+	return await new Promise((resolve) => {
+		function onLoaded() {
+			removeEventListener('DOMContentLoaded', onLoaded);
+			resolve();
+		}
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', onLoaded);
+		} else {
+			onLoaded();
+		}
+	});
+};
+
+export const getViewportDimensions = async () => {
+	await domLoaded();
 	/*
   // Create a temporary element to measure height
   const tempHeightElement = document.createElement('div');

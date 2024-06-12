@@ -3,10 +3,10 @@ import { scrollable } from '../../utils/scrollable.js';
 
 const pageTitle = 'LAB';
 
-const initDom = (state) => {
+const initDom = async (state) => {
 	const dom = document.querySelector('.container');
 	const canvas = dom.querySelector('canvas');
-	const viewport = getViewportDimensions();
+	const viewport = await getViewportDimensions();
 	canvas.width = viewport.width;
 	canvas.height = viewport.height;
 	const ctx = canvas.getContext('2d', {
@@ -20,7 +20,8 @@ const initDom = (state) => {
 
 const setup = async () => {
 	document.title += `: ${pageTitle}`;
-	const { canvas, ctx } = initDom();
+	const { canvas, ctx } = await initDom();
+
 	await scrollable({
 		image: '/pages/lab/lab_bg.png',
 		vertical: true,

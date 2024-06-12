@@ -3,24 +3,24 @@ import { scrollable } from '../../utils/scrollable.js';
 
 const pageTitle = 'TEAM';
 
-const initDom = (state) => {
+const initDom = async (state) => {
 	const dom = document.querySelector('.container');
 	const canvas = dom.querySelector('canvas');
-	const viewport = getViewportDimensions();
+	const viewport = await getViewportDimensions();
 	canvas.width = viewport.width;
 	canvas.height = viewport.height;
 	const ctx = canvas.getContext('2d', {
 		antialias: false,
 		depth: false,
-		desynchronized: false
+		desynchronized: true
 	});
 	ctx.imageSmoothingEnabled = false;
 	return { canvas, ctx };
 };
 
-const setup = () => {
+const setup = async () => {
 	document.title += `: ${pageTitle}`;
-	const { canvas, ctx } = initDom();
+	const { canvas, ctx } = await initDom();
 
 	ctx.fillStyle = '#999';
 	ctx.font = '30px Arial';

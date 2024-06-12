@@ -96,7 +96,7 @@ function getClick(relativeX, relativeY) {
 }
 
 async function resizeCanvas() {
-	const viewport = getViewportDimensions();
+	const viewport = await getViewportDimensions();
 	canvas.width = viewport.width;
 	canvas.height = viewport.height;
 	offsetX = (offscreenWidth - canvas.width) / 2; // Center the offscreen canvas
