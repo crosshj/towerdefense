@@ -1,4 +1,5 @@
 export const getViewportDimensions = () => {
+	/*
   // Create a temporary element to measure height
   const tempHeightElement = document.createElement('div');
   tempHeightElement.style.height = '100vh';
@@ -18,7 +19,9 @@ export const getViewportDimensions = () => {
 
   // Remove the temporary element
   document.body.removeChild(tempHeightElement);
+  */
+	const height = window.innerHeight;
+	const width = window.width;
 
-  return { height, width };
-}
-
+	return { height, width };
+};
