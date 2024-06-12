@@ -167,24 +167,10 @@ function handleScroll(event) {
 	});
 }
 
-let isTouching = false;
-let touchStartX = 0;
-let velocity = 0;
-let lastTimestamp = 0;
-const friction = 0.93; // adjust for desired inertia
-
 function handleTap(event) {
-	if (event.touches) {
-		isTouching = true;
-		touchStartX = event.touches[0].clientX;
-		velocity = 0; // reset velocity on new touch
-		lastTimestamp = event.timeStamp;
-	}
 	const rect = canvas.getBoundingClientRect();
-	const x =
-		(event.touches ? event.touches[0].clientX : event.clientX) - rect.left;
-	const y =
-		(event.touches ? event.touches[0].clientY : event.clientY) - rect.top;
+	const x = event.clientX - rect.left;
+	const y = event.clientY - rect.top;
 	const whichItem = getClick(x, y);
 	const goToUrl = clickUrlMap[whichItem];
 	if (goToUrl) {
@@ -193,11 +179,21 @@ function handleTap(event) {
 	console.log({ whichItem });
 }
 
-if ('ontouchstart' in window) {
-	canvas.addEventListener('touchstart', handleTap);
-} else {
-	canvas.addEventListener('mousedown', handleTap);
-}
+canvas.addEventListener('click', handleTap);
+
+let isTouching = false;
+let touchStartX = 0;
+let velocity = 0;
+let lastTimestamp = 0;
+const friction = 0.93; // adjust for desired inertia
+
+canvas.addEventListener('touchstart', (event) => {
+	event.preventDefault();
+	isTouching = true;
+	touchStartX = event.touches[0].clientX;
+	velocity = 0; // reset velocity on new touch
+	lastTimestamp = event.timeStamp;
+});
 
 canvas.addEventListener('touchmove', (event) => {
 	const touchEndX = event.touches[0].clientX;
