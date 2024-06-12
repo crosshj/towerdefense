@@ -28,6 +28,7 @@ html {
 ::-webkit-scrollbar {
 	width: 0px;
 	height: 0px;
+	-webkit-appearance: none;
 }
 body {
 	display: flex;
@@ -58,7 +59,6 @@ body {
 	height: 100%;
 	width: 100%;
 }
-
 
 canvas {
 	height: 100%;
