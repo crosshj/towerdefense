@@ -15,7 +15,8 @@ const domLoaded = async () => {
 export const getViewportDimensions = async () => {
 	await domLoaded();
 
-	// Create a temporary element to measure height
+	document.body.style.height = '100vh';
+	document.body.style.width = '100vw';
 	const tempHeightElement = document.createElement('div');
 	tempHeightElement.style.height = '100vh';
 	tempHeightElement.style.width = '100vw';
@@ -24,15 +25,9 @@ export const getViewportDimensions = async () => {
 	tempHeightElement.style.left = '0';
 	tempHeightElement.style.visibility = 'hidden';
 	tempHeightElement.style.pointerEvents = 'none';
-
-	// Append it to the body
 	document.body.appendChild(tempHeightElement);
-
-	// Get the dimensions in pixels
 	const height = tempHeightElement.clientHeight;
 	const width = tempHeightElement.clientWidth;
-
-	// Remove the temporary element
 	document.body.removeChild(tempHeightElement);
 
 	// const height = window.innerHeight;
