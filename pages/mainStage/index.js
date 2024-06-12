@@ -1,7 +1,7 @@
 import { getViewportDimensions } from '../../utils/getViewportDimensions.js';
 import { scrollable } from '../../utils/scrollable.js';
 
-const pageTitle = 'ARENA';
+const pageTitle = 'MAIN STAGE';
 
 const initDom = (state) => {
 	const dom = document.querySelector('.container');

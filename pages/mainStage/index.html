@@ -14,11 +14,24 @@
 		<link rel="stylesheet" href="/visuals/page.css" />
 	</head>
 
-	<body style="overflow: hidden">
+	<style>
+		.loading {
+			position: absolute;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			right: 0;
+			background: black;
+			z-index: 999;
+		}
+	</style>
+
+	<body>
+		<div class="loading"></div>
 		<div class="container fixed" style="overflow: hidden">
-			<!-- <canvas></canvas> -->
+			<canvas></canvas>
 		</div>
 		<script src="/utils/disableSwipe.js"></script>
-		<!-- <script src="./index.js" type="module"></script> -->
+		<script src="./index.js" type="module"></script>
 	</body>
 </html>
