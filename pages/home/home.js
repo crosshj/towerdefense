@@ -186,7 +186,7 @@ let lastTimestamp = 0;
 const friction = 0.93; // adjust for desired inertia
 
 canvas.addEventListener('touchstart', (event) => {
-	event.preventDefault();
+	//event.preventDefault();
 	isTouching = true;
 	touchStartX = event.touches[0].clientX;
 	velocity = 0; // reset velocity on new touch
