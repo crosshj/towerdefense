@@ -20,8 +20,13 @@ export const getViewportDimensions = () => {
   // Remove the temporary element
   document.body.removeChild(tempHeightElement);
   */
-	const height = window.innerHeight;
-	const width = window.innerWidth;
+	document.body.style.height = '100vh';
+	document.body.style.width = '100vw';
+
+	// const height = window.innerHeight;
+	// const width = window.innerWidth;
+	const height = document.body.clientHeight;
+	const width = document.body.clientWidth;
 
 	return { height, width };
 };
