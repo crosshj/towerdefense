@@ -29,12 +29,15 @@ function imageWithHorizontalMarks(img) {
 }
 
 const vertical = async (args) => {
-	const { image, canvas, ctx } = args;
+	const { image, canvas, ctx, scrollBottom } = args;
 	// const background = await loadImage(image);
 	const background = imageWithHorizontalMarks(await loadImage(image));
 	const originalWidth = background.width;
 	const newWidth = canvas.width;
 	let offsetY = 0;
+	if (typeof scrollBottom !== 'undefined') {
+		offsetY = scrollBottom + (background.height - canvas.height);
+	}
 
 	const draw = () => {
 		ctx.drawImage(
