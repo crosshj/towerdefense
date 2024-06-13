@@ -80,9 +80,9 @@ const vertical = async (args) => {
 		lastTimestamp = event.timeStamp;
 	});
 	canvas.addEventListener('touchmove', (event) => {
-		const touchEndX = event.touches[0].clientY;
-		const deltaY = touchStartY - touchEndX;
-		touchStartY = touchEndX;
+		const touchEndY = event.touches[0].clientY;
+		const deltaY = touchStartY - touchEndY;
+		touchStartY = touchEndY;
 		const deltaTime = event.timeStamp - lastTimestamp;
 		velocity = deltaY / deltaTime;
 		lastTimestamp = event.timeStamp;
@@ -101,6 +101,94 @@ const vertical = async (args) => {
 			offsetY = Math.max(
 				0,
 				Math.min(offsetY, background.height - canvas.height)
+			);
+
+			draw();
+
+			if (Math.abs(velocity) > 0.1) {
+				requestAnimationFrame(applyInertia);
+			}
+		}
+	}
+	canvas.addEventListener(
+		'wheel',
+		(event) => {
+			handleScroll(event);
+			event.preventDefault();
+		},
+		{ passive: false }
+	);
+};
+
+const horizontal = async (args) => {
+	const { image, canvas, ctx } = args;
+	const background = await loadImage(image);
+	const originalHeight = background.height;
+	const newHeight = canvas.height;
+	let offsetX = 0;
+
+	const draw = () => {
+		ctx.drawImage(
+			background,
+			offsetX,
+			0,
+			canvas.width,
+			originalHeight,
+			0,
+			0,
+			canvas.width,
+			newHeight
+		);
+	};
+	draw();
+
+	//TODO: add scrolling
+
+	function handleScroll(event) {
+		requestAnimationFrame(() => {
+			const deltaX = event.deltaX;
+			offsetX = Math.min(
+				Math.max(offsetX + deltaX, 0),
+				background.width - canvas.width
+			);
+			draw();
+		});
+	}
+
+	let isTouching = false;
+	let touchStartX = 0;
+	let velocity = 0;
+	let lastTimestamp = 0;
+	const friction = 0.93; // adjust for desired inertia
+
+	canvas.addEventListener('touchstart', (event) => {
+		isTouching = true;
+		touchStartX = event.touches[0].clientX;
+		velocity = 0;
+		lastTimestamp = event.timeStamp;
+	});
+	canvas.addEventListener('touchmove', (event) => {
+		const touchEndX = event.touches[0].clientX;
+		const deltaX = touchStartX - touchEndX;
+		touchStartX = touchEndX;
+		const deltaTime = event.timeStamp - lastTimestamp;
+		velocity = deltaX / deltaTime;
+		lastTimestamp = event.timeStamp;
+		handleScroll({ deltaX });
+	});
+	canvas.addEventListener('touchend', () => {
+		isTouching = false;
+		applyInertia();
+	});
+	function applyInertia() {
+		if (!isTouching) {
+			velocity *= friction;
+			offsetX += velocity * 16; // assuming 60fps, adjust if needed
+
+			// Constrain scrollY to the bounds of the large canvas
+			offsetX = Math.max(
+				0,
+				Math.min(offsetX, background.width - canvas.width)
 			);
 
 			draw();

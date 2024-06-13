@@ -1,10 +1,10 @@
 import { scrollable } from '../utils/scrollable.js';
 
-export const canvasVertical = async (args) => {
-	const { parent, image, width, scrollBottom } = args;
+export const canvasHorizontal = async (args) => {
+	const { parent, image, height } = args;
 	const canvas = document.createElement('canvas');
-	canvas.width = width;
-	canvas.height = parent.clientHeight;
+	canvas.width = parent.clientWidth;
+	canvas.height = height;
 	const ctx = canvas.getContext('2d', {
 		antialias: false,
 		depth: false,
@@ -15,8 +15,7 @@ export const canvasVertical = async (args) => {
 	if (image) {
 		await scrollable({
 			image,
-			vertical: true,
-			scrollBottom,
+			horizontal: true,
 			canvas,
 			ctx
 		});

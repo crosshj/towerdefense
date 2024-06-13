@@ -1,4 +1,4 @@
-import { canvasVertical } from '../../visuals/canvas-vertical.js';
+import { canvasVertical } from '../../visuals/canvas.js';
 
 const pageTitle = 'MAIN STAGE';
 
