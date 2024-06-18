@@ -1,0 +1,27 @@
+<html>
+	<head>
+		<title>TD: Game Standard</title>
+		<meta charset="utf-8" />
+		<meta name="description" content="" />
+		<meta name="author" content="" />
+		<meta
+			name="viewport"
+			content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+		/>
+		<meta name="mobile-web-app-capable" content="yes" />
+		<link rel="manifest" href="/manifest.json" />
+		<link rel="icon" type="image/png" href="/assets/favicon.png" />
+		<link rel="stylesheet" href="/visuals/page.css" />
+	</head>
+
+	<body style="justify-content: center; height: 100%; color: white"></body>
+	<script>
+		const params = Object.fromEntries(
+			new URLSearchParams(window.location.search)
+		);
+		document.body.innerHTML = params.zone;
+		document.body.addEventListener('click', () => {
+			document.location.href = params.back || '/';
+		});
+	</script>
+</html>

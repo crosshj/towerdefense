@@ -1,7 +1,7 @@
 import { scrollable } from '../utils/scrollable.js';
 
 export const canvasHorizontal = async (args) => {
-	const { parent, image, height } = args;
+	const { parent, image, height, clickMap, clickHandle } = args;
 	const canvas = document.createElement('canvas');
 	canvas.width = parent.clientWidth;
 	canvas.height = height;
@@ -17,14 +17,16 @@ export const canvasHorizontal = async (args) => {
 			image,
 			horizontal: true,
 			canvas,
-			ctx
+			ctx,
+			clickMap,
+			clickHandle
 		});
 	}
 	return { canvas, ctx };
 };
 
 export const canvasVertical = async (args) => {
-	const { parent, image, width, scrollBottom } = args;
+	const { parent, image, width, scrollBottom, clickMap, clickHandle } = args;
 	const canvas = document.createElement('canvas');
 	canvas.width = width;
 	canvas.height = parent.clientHeight;
@@ -41,7 +43,9 @@ export const canvasVertical = async (args) => {
 			vertical: true,
 			scrollBottom,
 			canvas,
-			ctx
+			ctx,
+			clickMap,
+			clickHandle
 		});
 	}
 	return { canvas, ctx };
