@@ -7,8 +7,8 @@ const clickColorMap = {
 	'#6efd00': 'openField',
 	'#00fddb': 'water',
 	'#0061fd': 'asian',
-	'#8700fd': 'haunted',
-	'#000000': 'none'
+	'#8700fd': 'haunted'
+	// '#000000': 'none'
 };
 
 const setup = async () => {
@@ -21,6 +21,7 @@ const setup = async () => {
 		clickMap: '/pages/mainStage/background_clicks.png',
 		clickHandle: (color) => {
 			const which = clickColorMap[color];
+			if (!which) return;
 			//console.log(which || color);
 			document.location.href = `/pages/game/standard.html?zone=${which}&back=/pages/mainStage/index.html`;
 		}
