@@ -18,44 +18,31 @@ function imageWithHorizontalMarks(img) {
 	ctx.fillStyle = '#999';
 	ctx.font = '16px Arial';
 	ctx.textAlign = 'center';
-	// for (let y = 100; y < img.height; y += 100) {
-	// 	ctx.beginPath();
-	// 	ctx.moveTo(0, y);
-	// 	ctx.lineTo(img.width, y);
-	// 	ctx.stroke();
-	// 	ctx.fillText(`${y}px`, img.width / 2, y - 5);
-	// }
+	for (let y = 100; y < img.height; y += 100) {
+		ctx.beginPath();
+		ctx.moveTo(0, y);
+		ctx.lineTo(img.width, y);
+		ctx.stroke();
+		ctx.fillText(`${y}px`, img.width / 2, y - 5);
+	}
 	return canvas;
 }
 
-function getClick({
-	map: bgClickMap,
-	x: relativeX,
-	y: relativeY,
+function drawBGClickCanvas({
+	bgClickCanvas,
+	canvas,
+	bgClickMap,
 	offsetX,
-	offsetY,
-	canvas
+	offsetY
 }) {
-	function componentToHex(c) {
-		const hex = c.toString(16);
-		return hex.length == 1 ? '0' + hex : hex;
-	}
-	function rgbToHex([r, g, b]) {
-		return '#' + componentToHex(r) + componentToHex(g) + componentToHex(b);
-	}
-	function getPixel(img, x, y) {
-		let canvas = document.createElement('canvas');
-		canvas.width = 1;
-		canvas.height = 1;
-		canvas.getContext('2d').drawImage(img, x, y, 1, 1, 0, 0, 1, 1);
-		const pixelData = canvas.getContext('2d').getImageData(0, 0, 1, 1).data;
-		return rgbToHex(pixelData);
-	}
-	const bgClickCanvas = document.createElement('canvas');
-	bgClickCanvas.width = canvas.width;
-	bgClickCanvas.height = canvas.height;
-
+	// bgClickCanvas.width = canvas.width;
+	// bgClickCanvas.height = canvas.height;
+	bgClickCanvas.width = document.body.clientWidth;
+	bgClickCanvas.height = document.body.clientHeight;
 	const bgClickContext = bgClickCanvas.getContext('2d');
+
+	bgClickContext.save();
+	bgClickContext.globalAlpha = 1.0;
 	if (typeof offsetX !== 'undefined') {
 		const originalHeight = bgClickMap.height;
 		const newHeight = canvas.height;
@@ -86,14 +73,37 @@ function getClick({
 			canvas.height
 		);
 	}
+	bgClickContext.restore();
+}
+
+function getClick({
+	x: relativeX,
+	y: relativeY,
+	bgClickCanvas,
+	drawClickCanvas
+}) {
+	const c2h = (c) => {
+		const hex = c.toString(16);
+		return hex.length == 1 ? '0' + hex : hex;
+	};
+	const rgbToHex = ([r, g, b]) => '#' + c2h(r) + c2h(g) + c2h(b);
+	const getPixel = (img, x, y) => {
+		const canvas = document.createElement('canvas');
+		canvas.width = 1;
+		canvas.height = 1;
+		canvas.getContext('2d').drawImage(img, x, y, 1, 1, 0, 0, 1, 1);
+		const pixelData = canvas.getContext('2d').getImageData(0, 0, 1, 1).data;
+		return rgbToHex(pixelData);
+	};
+	drawClickCanvas();
 	const pixel = getPixel(bgClickCanvas, relativeX, relativeY);
 	return pixel;
 }
 
 const vertical = async (args) => {
 	const { image, canvas, ctx, scrollBottom, clickMap, clickHandle } = args;
-	// const background = await loadImage(image);
-	const background = imageWithHorizontalMarks(await loadImage(image));
+	const background = await loadImage(image);
+	//const background = imageWithHorizontalMarks(await loadImage(image));
 	const originalWidth = background.width;
 	const newWidth = canvas.width;
 	let offsetY = 0;
@@ -101,19 +111,26 @@ const vertical = async (args) => {
 		offsetY = scrollBottom + (background.height - canvas.height);
 	}
 
+	let drawClickCanvas;
 	if (clickMap && clickHandle) {
 		const bgClickMap = await loadImage(clickMap);
+		const bgClickCanvas = document.createElement('canvas');
+		drawClickCanvas = (target) =>
+			drawBGClickCanvas({
+				bgClickCanvas: target,
+				canvas,
+				bgClickMap,
+				offsetY
+			});
 		function handleTap(event) {
 			const rect = canvas.getBoundingClientRect();
 			const x = event.clientX - rect.left;
 			const y = event.clientY - rect.top;
 			const whichItem = getClick({
-				map: bgClickMap,
 				x,
 				y,
-				offsetY,
-				canvas,
-				background
+				bgClickCanvas,
+				drawClickCanvas: () => drawClickCanvas(bgClickCanvas)
 			});
 			clickHandle(whichItem);
 		}
@@ -121,6 +138,7 @@ const vertical = async (args) => {
 	}
 
 	const draw = () => {
+		//ctx.clearRect(0, 0, canvas.width, canvas.height);
 		ctx.drawImage(
 			background,
 			0,
@@ -132,6 +150,8 @@ const vertical = async (args) => {
 			newWidth,
 			canvas.height
 		);
+
+		//drawClickCanvas(canvas);
 	};
 	draw();
 
@@ -208,19 +228,27 @@ const horizontal = async (args) => {
 	const newHeight = canvas.height;
 	let offsetX = 0;
 
+	let drawClickCanvas;
 	if (clickMap && clickHandle) {
 		const bgClickMap = await loadImage(clickMap);
+		const bgClickCanvas = document.createElement('canvas');
+
+		drawClickCanvas = (target) =>
+			drawBGClickCanvas({
+				bgClickCanvas: target,
+				canvas,
+				bgClickMap,
+				offsetX
+			});
 		function handleTap(event) {
 			const rect = canvas.getBoundingClientRect();
 			const x = event.clientX - rect.left;
 			const y = event.clientY - rect.top;
 			const whichItem = getClick({
-				map: bgClickMap,
 				x,
 				y,
-				offsetX,
-				canvas,
-				background
+				bgClickCanvas,
+				drawClickCanvas: () => drawClickCanvas(bgClickCanvas)
 			});
 			clickHandle(whichItem);
 		}
@@ -239,6 +267,7 @@ const horizontal = async (args) => {
 			canvas.width,
 			newHeight
 		);
+		//drawClickCanvas(canvas);
 	};
 	draw();
 
