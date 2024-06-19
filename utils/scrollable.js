@@ -35,17 +35,15 @@ function drawBGClickCanvas({
 	offsetX,
 	offsetY
 }) {
-	// bgClickCanvas.width = canvas.width;
-	// bgClickCanvas.height = canvas.height;
-	bgClickCanvas.width = document.body.clientWidth;
-	bgClickCanvas.height = document.body.clientHeight;
+	bgClickCanvas.width = canvas.clientWidth;
+	bgClickCanvas.height = canvas.clientHeight;
 	const bgClickContext = bgClickCanvas.getContext('2d');
 
 	bgClickContext.save();
 	bgClickContext.globalAlpha = 1.0;
 	if (typeof offsetX !== 'undefined') {
 		const originalHeight = bgClickMap.height;
-		const newHeight = canvas.height;
+		const newHeight = canvas.clientHeight;
 		bgClickContext.drawImage(
 			bgClickMap,
 			offsetX,
@@ -60,7 +58,7 @@ function drawBGClickCanvas({
 	}
 	if (typeof offsetY !== 'undefined') {
 		const originalWidth = bgClickMap.width;
-		const newWidth = canvas.width;
+		const newWidth = canvas.clientWidth;
 		bgClickContext.drawImage(
 			bgClickMap,
 			0,
