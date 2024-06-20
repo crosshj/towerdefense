@@ -86,7 +86,7 @@ const setup = async () => {
 	const bg = await canvasHorizontal({
 		parent: document.body,
 		image: '/pages/home/background.jpg',
-		offsetX: 1200 - 915 / 2,
+		offsetX: 1200 - document.body.clientWidth / 2,
 		height: 500,
 		clickMap: '/pages/home/background_clicks.png',
 		clickHandle: (color) => {
