@@ -20,7 +20,7 @@ const clickColorMap = {
 
 const setup = async () => {
 	document.title += `: ${pageTitle}`;
-	await canvasHorizontal({
+	const bg = await canvasHorizontal({
 		parent: document.body,
 		image: '/pages/home/background.jpg',
 		offsetX: 1200 - 915 / 2,
@@ -34,18 +34,18 @@ const setup = async () => {
 			}back=/pages/home/index.html`;
 		}
 	});
-	const controls = await canvasVertical({
-		parent: document.body,
-		width: 950
-	});
+	// const controls = await canvasVertical({
+	// 	parent: document.body,
+	// 	width: 950
+	// });
 
-	controls.ctx.fillStyle = '#777';
-	controls.ctx.font = '30px Arial';
-	controls.ctx.textAlign = 'left';
-	controls.ctx.textBaseline = 'top';
-	controls.ctx.fillText(pageTitle, 15, 15);
-	controls.canvas.style.zIndex = 1;
-	controls.canvas.style.pointerEvents = 'none';
+	// controls.ctx.fillStyle = '#777';
+	// controls.ctx.font = '30px Arial';
+	// controls.ctx.textAlign = 'left';
+	// controls.ctx.textBaseline = 'top';
+	// controls.ctx.fillText(pageTitle, 15, 15);
+	// controls.canvas.style.zIndex = 1;
+	// controls.canvas.style.pointerEvents = 'none';
 };
 
 setup();
