@@ -18,8 +18,71 @@ const clickColorMap = {
 	'#aa00ff': '/pages/team/index.html?slot=5'
 };
 
+const drawControls = () => {
+	const container = document.createElement('div');
+	container.classList.add('controls');
+	container.innerHTML = `
+		<div class="header">
+			<div class="level">
+				<div class="background"></div>
+				<div class="banner">
+					<div></div>
+					<div>Newbie</div>
+					<div>Level</div>
+					<div>1</div>
+				</div>
+				<div class="user">
+					<div class="image"></div>
+				</div>
+			</div>
+			<div class="buttons">
+				<div class="event">Event</div>
+				<div class="buff">Buff</div>
+			</div>
+			<div class="statsAndQuest">
+				<div class="stats"">
+					<div class="feathers">
+						F: 5007/100 max
+					</div>
+					<div class="gems">
+						G: 2489
+					</div>
+					<div class="coins">
+						C: 810
+					</div>
+					<div class="friends">
+						FP: 0
+					</div>
+				</div>
+				<div class="quest">
+					Quest
+				</div>
+			</div>
+		</div>
+		
+		<div class="resources">
+			<div class="exp">EXP</div>
+		</div>
+		
+		<div class="navigation">
+			<div class="my-team">My Team</div>
+			<div class="upgrade">Upgrade</div>
+			<div class="collect">Collect</div>
+			<div class="shop">Shop</div>
+			<div class="friends">Friends</div>
+			<div class="pass">Pass</div>
+			<div class="giftbox">Giftbox</div>
+			<div class="settings">⚙</div>
+		</div>
+	`;
+	document.body.insertAdjacentElement('afterbegin', container);
+};
+
 const setup = async () => {
 	document.title += `: ${pageTitle}`;
+
+	drawControls();
+
 	const bg = await canvasHorizontal({
 		parent: document.body,
 		image: '/pages/home/background.jpg',

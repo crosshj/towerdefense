@@ -73,3 +73,17 @@ export function appendCSSRule(css) {
 	style.appendChild(document.createTextNode(css));
 	document.head.appendChild(style);
 }
+
+export const domLoaded = async () => {
+	return await new Promise((resolve) => {
+		function onLoaded() {
+			removeEventListener('DOMContentLoaded', onLoaded);
+			resolve();
+		}
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', onLoaded);
+		} else {
+			onLoaded();
+		}
+	});
+};

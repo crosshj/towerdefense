@@ -1,6 +1,9 @@
 import { scrollable } from '../utils/scrollable.js';
+import { domLoaded } from '../utils/utils.js';
 
 export const canvasHorizontal = async (args) => {
+	document.body.style.background = '#000';
+	await domLoaded();
 	const { parent, image, height, offsetX, clickMap, clickHandle } = args;
 	const canvas = document.createElement('canvas');
 	canvas.width = parent.clientWidth;
@@ -27,6 +30,8 @@ export const canvasHorizontal = async (args) => {
 };
 
 export const canvasVertical = async (args) => {
+	document.body.style.background = '#000';
+	await domLoaded();
 	const { parent, image, width, scrollBottom, clickMap, clickHandle } = args;
 	const canvas = document.createElement('canvas');
 	canvas.width = width;
