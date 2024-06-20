@@ -224,7 +224,7 @@ const horizontal = async (args) => {
 	const background = await loadImage(image);
 	const originalHeight = background.height;
 	const newHeight = canvas.height;
-	let offsetX = 0;
+	let offsetX = args.offsetX || 0;
 
 	let drawClickCanvas;
 	if (clickMap && clickHandle) {

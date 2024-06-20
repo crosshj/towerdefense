@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>TD</title>
+		<title>TD: Team</title>
 		<meta charset="utf-8" />
 		<meta name="description" content="" />
 		<meta name="author" content="" />
@@ -11,14 +11,34 @@
 		<meta name="mobile-web-app-capable" content="yes" />
 		<link rel="manifest" href="/manifest.json" />
 		<link rel="icon" type="image/png" href="/assets/favicon.png" />
-		<link rel="stylesheet" href="/visuals/page.css" />
+		<!-- <link rel="stylesheet" href="/visuals/page.css" /> -->
 	</head>
 
-	<body style="margin: 0">
-		<div class="container fixed">
-			<canvas></canvas>
-		</div>
-		<script src="/utils/disableSwipe.js"></script>
-		<script defer src="./index.js" type="module"></script>
-	</body>
+	<body
+		style="
+			margin: 0;
+			background-color: black;
+			color: white;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			overflow: hidden;
+			position: fixed;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			font-size: 2em;
+			font-family: monospace;
+		"
+	></body>
+	<script>
+		const params = Object.fromEntries(
+			new URLSearchParams(window.location.search)
+		);
+		document.body.innerHTML = 'team ' + params.slot;
+		document.body.addEventListener('click', () => {
+			document.location.href = params.back || '/';
+		});
+	</script>
 </html>

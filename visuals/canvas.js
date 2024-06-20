@@ -1,7 +1,7 @@
 import { scrollable } from '../utils/scrollable.js';
 
 export const canvasHorizontal = async (args) => {
-	const { parent, image, height, clickMap, clickHandle } = args;
+	const { parent, image, height, offsetX, clickMap, clickHandle } = args;
 	const canvas = document.createElement('canvas');
 	canvas.width = parent.clientWidth;
 	canvas.height = height;
@@ -18,6 +18,7 @@ export const canvasHorizontal = async (args) => {
 			horizontal: true,
 			canvas,
 			ctx,
+			offsetX,
 			clickMap,
 			clickHandle
 		});
