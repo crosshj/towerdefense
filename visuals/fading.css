@@ -1,0 +1,13 @@
+body {
+	opacity: 0;
+	transition: opacity 0.25s ease-in-out;
+	/* transition: opacity 0.35s cubic-bezier(0.4, 0, 1, 1); */
+}
+
+body.fade-in {
+	opacity: 1;
+}
+
+body.fade-out {
+	opacity: 0;
+}

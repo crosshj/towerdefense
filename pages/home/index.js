@@ -25,56 +25,63 @@ const drawControls = () => {
 		<div class="header">
 			<div class="level">
 				<div class="background"></div>
-				<div class="banner">
+				<div class="banner clickable">
 					<div></div>
 					<div>Newbie</div>
 					<div>Level</div>
 					<div>1</div>
 				</div>
-				<div class="user">
+				<div class="user clickable">
 					<div class="image"></div>
 				</div>
 			</div>
 			<div class="buttons">
-				<div class="event">Event</div>
-				<div class="buff">Buff</div>
+				<div class="event clickable">Event</div>
+				<div class="buff clickable">Buff</div>
 			</div>
 			<div class="statsAndQuest">
 				<div class="stats"">
-					<div class="feathers">
+					<div class="feathers clickable">
 						F: 5007/100 max
 					</div>
-					<div class="gems">
+					<div class="gems clickable">
 						G: 2489
 					</div>
-					<div class="coins">
+					<div class="coins clickable">
 						C: 810
 					</div>
-					<div class="friends">
+					<div class="friends clickable">
 						FP: 0
 					</div>
 				</div>
-				<div class="quest">
+				<div class="quest clickable">
 					Quest
 				</div>
 			</div>
 		</div>
 		
 		<div class="resources">
-			<div class="exp">EXP</div>
+			<div class="exp clickable">EXP</div>
 		</div>
 		
 		<div class="navigation">
-			<div class="my-team">My Team</div>
-			<div class="upgrade">Upgrade</div>
-			<div class="collect">Collect</div>
-			<div class="shop">Shop</div>
-			<div class="friends">Friends</div>
-			<div class="pass">Pass</div>
-			<div class="giftbox">Giftbox</div>
-			<div class="settings">⚙</div>
+			<div class="my-team clickable">My Team</div>
+			<div class="upgrade clickable">Upgrade</div>
+			<div class="collect clickable">Collect</div>
+			<div class="shop clickable">Shop</div>
+			<div class="friends clickable">Friends</div>
+			<div class="pass clickable">Pass</div>
+			<div class="giftbox clickable">Giftbox</div>
+			<div class="settings clickable">⚙</div>
 		</div>
 	`;
+	container.addEventListener('mousedown', (event) => {
+		const which = Array.from(event.target.classList)
+			.filter((x) => x !== 'clickable')
+			.join('_');
+		const wipURL = `/pages/_wip/index.html?which=${which}&back=/pages/home/index.html`;
+		window.fadingNavigate(wipURL);
+	});
 	document.body.insertAdjacentElement('afterbegin', container);
 };
 
@@ -92,9 +99,10 @@ const setup = async () => {
 		clickHandle: (color) => {
 			const which = clickColorMap[color];
 			if (!which) return;
-			document.location.href = `${which}${
+			const clickUrl = `${which}${
 				which.includes('?') ? '&' : '?'
 			}back=/pages/home/index.html`;
+			window.fadingNavigate(clickUrl);
 		}
 	});
 	// const controls = await canvasVertical({
@@ -110,5 +118,4 @@ const setup = async () => {
 	// controls.canvas.style.zIndex = 1;
 	// controls.canvas.style.pointerEvents = 'none';
 };
-
 setup();

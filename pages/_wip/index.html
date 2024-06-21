@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>TD: Team</title>
+		<title>TD: WIP</title>
 		<meta charset="utf-8" />
 		<meta name="description" content="" />
 		<meta name="author" content="" />
@@ -12,13 +12,12 @@
 		<link rel="manifest" href="/manifest.json" />
 		<link rel="icon" type="image/png" href="/assets/favicon.png" />
 		<!-- <link rel="stylesheet" href="/visuals/page.css" /> -->
-
 		<link rel="stylesheet" href="/visuals/fading.css" />
 		<script src="/visuals/fading.js"></script>
 	</head>
 
-	<body
-		style="
+	<style>
+		body {
 			margin: 0;
 			background-color: black;
 			color: white;
@@ -33,8 +32,11 @@
 			left: 0;
 			font-size: 2em;
 			font-family: monospace;
-		"
-	></body>
+		}
+	</style>
+
+	<body></body>
+
 	<script>
 		const params = Object.fromEntries(
 			new URLSearchParams(window.location.search)
@@ -43,7 +45,7 @@
 		<div style="
 			margin-bottom: 20px;
 		">
-			team ${params.slot}
+			WIP: ${params.which}
 		</div>
 		`;
 		document.body.addEventListener('click', () => {
