@@ -79,8 +79,11 @@ const drawControls = () => {
 		const which = Array.from(event.target.classList)
 			.filter((x) => x !== 'clickable')
 			.join('_');
-		const wipURL = `/pages/_wip/index.html?which=${which}&back=/pages/home/index.html`;
-		window.fadingNavigate(wipURL);
+		let url = `/pages/_wip/index.html?which=${which}&back=/pages/home/index.html`;
+		if (which === 'my-team') {
+			url = '/pages/my-team/index.html?back=/pages/home/index.html';
+		}
+		window.fadingNavigate(url);
 	});
 	document.body.insertAdjacentElement('afterbegin', container);
 };

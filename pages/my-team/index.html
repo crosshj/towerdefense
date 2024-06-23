@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+		/>
+		<title>TD: My Team</title>
+		<link rel="stylesheet" href="index.css" />
+		<link rel="stylesheet" href="/visuals/fading.css" />
+		<script src="/visuals/fading.js"></script>
+	</head>
+	<body>
+		<div class="background"></div>
+		<div class="main-header">
+			<div class="back-button">&#x25C0;</div>
+			<div class="title">TEAM</div>
+			<div class="flex-spacer"></div>
+			<div class="currency">
+				<span>Rubies: 10</span>
+				<span>Coins: 1,830,118</span>
+			</div>
+		</div>
+
+		<div class="sub-header">
+			<div class="team-controls">
+				<div class="raid-indicator">RAID</div>
+				<div class="team-dropdown">
+					<select>
+						<option>Team 1</option>
+						<option>Team 2</option>
+						<option>Team 3</option>
+						<option>Team 4</option>
+						<option>Team 5</option>
+					</select>
+				</div>
+			</div>
+		</div>
+
+		<div class="team-slots">
+			<div class="team-slot blank"></div>
+			<div class="team-slot blank"></div>
+			<div class="team-slot blank"></div>
+			<div class="team-slot blank"></div>
+			<div class="team-slot blank"></div>
+		</div>
+
+		<div class="controls">
+			<div class="total-characters">54/500</div>
+			<div class="flex-spacer"></div>
+			<button>Sort By</button>
+			<button>Filter</button>
+			<button>Sell</button>
+		</div>
+
+		<div class="all-characters" id="all-characters">
+			<!-- Characters will be populated by JavaScript -->
+		</div>
+
+		<script src="index.js" type="module"></script>
+	</body>
+</html>
