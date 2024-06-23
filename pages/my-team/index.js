@@ -84,4 +84,14 @@ document.addEventListener('DOMContentLoaded', async () => {
 			window.fadingNavigate(params.back || '/');
 		}
 	});
+
+	setTimeout(() => {
+		const displayBak = document.body.style.display;
+		requestAnimationFrame(() => {
+			document.body.style.display = 'none';
+			requestAnimationFrame(() => {
+				document.body.style.display = displayBak;
+			});
+		});
+	}, 100);
 });
