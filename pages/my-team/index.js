@@ -93,5 +93,5 @@ document.addEventListener('DOMContentLoaded', async () => {
 				document.body.style.display = displayBak;
 			});
 		});
-	}, 100);
+	}, 1000);
 });
