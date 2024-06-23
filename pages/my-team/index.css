@@ -4,7 +4,7 @@ body {
 	padding: 0;
 	display: grid;
 	grid-template-rows: 8vh 8vh 41vh 8vh 35vh;
-	height: 100vh;
+	/* height: 100vh; */
 	box-sizing: border-box;
 	overscroll-behavior: none;
 	overflow: hidden;
