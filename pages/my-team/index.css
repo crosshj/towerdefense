@@ -3,7 +3,7 @@ body {
 	margin: 0;
 	padding: 0;
 	display: grid;
-	grid-template-rows: 8% 8% 1fr 8% 140px;
+	grid-template-rows: 8% 8% auto 8% 35%;
 	height: 100vh;
 	box-sizing: border-box;
 	overscroll-behavior: none;
