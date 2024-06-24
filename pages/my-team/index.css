@@ -48,22 +48,27 @@ body {
 	margin-inline: auto;
 	width: 100%;
 	padding-top: 13px;
-	.back-button {
-		width: 30px;
-		height: 30px;
-		background-color: yellow;
-		border: 1px solid black;
-		border-radius: 50%;
+	.title-container {
+		margin-top: -7px;
 		display: flex;
-		justify-content: center;
 		align-items: center;
-		font-size: 16px;
-		cursor: pointer;
-	}
-	.title {
-		font-size: 24px;
-		font-weight: bold;
-		margin-left: 0.5em;
+		.back-button {
+			width: 30px;
+			height: 30px;
+			background-color: yellow;
+			border: 1px solid black;
+			border-radius: 50%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-size: 16px;
+			cursor: pointer;
+		}
+		.title {
+			font-size: 24px;
+			font-weight: bold;
+			margin-left: 0.5em;
+		}
 	}
 	.currency {
 		display: flex;

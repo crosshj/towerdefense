@@ -119,8 +119,13 @@
 		justify-content: center;
 		gap: 15px;
 
+		.wip {
+			background-color: #794301;
+			color: #fcd14d;
+		}
+
 		& > div {
-			color: #ffbf00;
+			color: #b79632;
 			width: 70px;
 			aspect-ratio: 1 / 1;
 			box-sizing: border-box;

@@ -54,9 +54,9 @@ const drawControls = () => {
 		</div>
 		
 		<div class="navigation">
-			<div class="my-team clickable">My Team</div>
+			<div class="my-team clickable wip">My Team</div>
 			<div class="upgrade clickable">Upgrade</div>
-			<div class="collect clickable">Collect</div>
+			<div class="collect clickable wip">Collect</div>
 			<div class="shop clickable">Shop</div>
 			<div class="friends clickable">Friends</div>
 			<div class="pass clickable">Pass</div>
@@ -70,10 +70,14 @@ const drawControls = () => {
 	container.addEventListener('mousedown', (event) => {
 		const which = Array.from(event.target.classList)
 			.filter((x) => x !== 'clickable')
+			.filter((x) => x !== 'wip')
 			.join('_');
 		let url = `/pages/_wip/index.html?which=${which}&back=/pages/home/index.html`;
 		if (which === 'my-team') {
 			url = '/pages/my-team/index.html?back=/pages/home/index.html';
+		}
+		if (which === 'collect') {
+			url = '/pages/collect/index.html?back=/pages/home/index.html';
 		}
 		window.fadingNavigate(url);
 	});
