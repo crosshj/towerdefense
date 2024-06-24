@@ -1,4 +1,5 @@
 import { canvasHorizontal, canvasVertical } from '../../visuals/canvas.js';
+import { statsElement } from '../../visuals/stats/stats.js';
 
 const pageTitle = 'HOME';
 
@@ -41,18 +42,6 @@ const drawControls = () => {
 			</div>
 			<div class="statsAndQuest">
 				<div class="stats"">
-					<div class="feathers clickable">
-						F: 5007/100 max
-					</div>
-					<div class="gems clickable">
-						G: 2489
-					</div>
-					<div class="coins clickable">
-						C: 810
-					</div>
-					<div class="friends clickable">
-						FP: 0
-					</div>
 				</div>
 				<div class="quest clickable">
 					Quest
@@ -75,6 +64,9 @@ const drawControls = () => {
 			<div class="settings clickable">⚙</div>
 		</div>
 	`;
+	const statsContainer = container.querySelector('.stats');
+	statsElement({ container: statsContainer });
+
 	container.addEventListener('mousedown', (event) => {
 		const which = Array.from(event.target.classList)
 			.filter((x) => x !== 'clickable')

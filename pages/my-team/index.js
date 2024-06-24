@@ -1,8 +1,16 @@
 import { getCharacters } from '../../user/getCharacters.js';
+import { statsElement } from '../../visuals/stats/stats.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
 	const characters = await getCharacters();
 	const allCharactersDiv = document.getElementById('all-characters');
+
+	const statsContainer = document.querySelector('.container .currency');
+	statsElement({
+		container: statsContainer,
+		feathers: false,
+		friendPoints: false
+	});
 
 	characters.forEach((character) => {
 		const characterCard = document.createElement('div');
@@ -20,6 +28,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 		});
 		allCharactersDiv.appendChild(characterCard);
 	});
+
+	//total
+	const totalContainer = document.querySelector(
+		'.container .total-characters'
+	);
+	totalContainer.innerHTML = `TOTAL ${characters.length} / 700`;
 
 	const slots = document.querySelectorAll('.team-slot');
 

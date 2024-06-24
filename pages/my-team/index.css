@@ -17,13 +17,14 @@ body {
 }
 
 .container {
+	--inner-max-width: min(97vw, 840px);
 	position: fixed;
 	top: 0;
 	left: 0;
 	bottom: 0;
 	right: 0;
 	display: grid;
-	grid-template-rows: 8% 8% 41% 8% 35%;
+	grid-template-rows: 10% 12% 35% 8% 35%;
 	overflow: hidden;
 }
 
@@ -36,7 +37,6 @@ body {
 .controls,
 .team-slots,
 .all-characters {
-	padding: 0 10px;
 	box-sizing: border-box;
 }
 
@@ -44,9 +44,13 @@ body {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	max-width: var(--inner-max-width);
+	margin-inline: auto;
+	width: 100%;
+	padding-top: 13px;
 	.back-button {
-		width: 24px;
-		height: 24px;
+		width: 30px;
+		height: 30px;
 		background-color: yellow;
 		border: 1px solid black;
 		border-radius: 50%;
@@ -81,6 +85,7 @@ body {
 		background: #4f270f66;
 		padding: 0.5em 1em;
 		border-radius: 14px;
+		margin-top: 7px;
 		.raid-indicator {
 			background-color: #c22121;
 			color: #f1b3b3;
@@ -125,8 +130,21 @@ body {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	max-width: var(--inner-max-width);
+	margin-inline: auto;
+	width: 100%;
+
 	.total-characters {
 		font-size: 14px;
+		color: #e9c2aa;
+		background: #a4815c;
+		padding: 0.45em;
+		border-radius: 7px;
+		font-weight: bold;
+		border: 2px solid #c8985e;
+		border-bottom-color: #745836;
+		border-right-color: #745836;
+		margin-bottom: 2px;
 	}
 	button {
 		margin-left: 10px;

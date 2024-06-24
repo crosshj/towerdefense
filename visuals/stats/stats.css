@@ -1,0 +1,12 @@
+.stats {
+	display: flex;
+	color: white;
+	& > div {
+		background: #3b3b3b;
+		padding-inline: 16px;
+		margin-left: 10px;
+		border-radius: 20px;
+		padding-block: 4px;
+		min-width: 50px;
+	}
+}
