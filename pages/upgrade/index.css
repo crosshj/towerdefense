@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Concert+One&display=swap');
 
 body {
 	font-family: Arial, sans-serif;
@@ -194,7 +194,7 @@ button {
 			.title {
 				margin-top: 0.5em;
 				font-size: 18px;
-				font-family: 'Rubik Mono One', 'Courier New', Courier, monospace;
+				font-family: "Concert One", sans-serif;
 				-webkit-text-stroke: 2px black;
 				color: yellow;
 			}
