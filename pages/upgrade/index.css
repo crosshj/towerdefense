@@ -47,6 +47,7 @@ button {
 	display: flex;
     justify-content: center;
     align-items: center;
+	letter-spacing: 1px;
 }
 
 .main-header,
@@ -84,7 +85,7 @@ button {
 			-webkit-text-stroke: 1.5px black;
 			-webkit-text-fill-color: #00c7ff;
 			font-size: 35px;
-            letter-spacing: -2px;
+            letter-spacing: -1.5px;
             font-family: "Passion One", sans-serif;
             font-weight: 400;
 		}
@@ -165,9 +166,9 @@ button {
 			font-weight: 400;
 
 			.title {
-				/* margin-top: 10px; */
+				margin-top: 10px;
                 font-size: 32px;
-                letter-spacing: -2px;
+                letter-spacing: -1px;
                 font-family: "Passion One", sans-serif;
                 -webkit-text-stroke: 1.5px black;
                 color: yellow;
