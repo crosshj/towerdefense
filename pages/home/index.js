@@ -55,7 +55,7 @@ const drawControls = () => {
 		
 		<div class="navigation">
 			<div class="my-team clickable wip">My Team</div>
-			<div class="upgrade clickable">Upgrade</div>
+			<div class="upgrade clickable wip">Upgrade</div>
 			<div class="collect clickable wip">Collect</div>
 			<div class="shop clickable">Shop</div>
 			<div class="friends clickable">Friends</div>
@@ -78,6 +78,9 @@ const drawControls = () => {
 		}
 		if (which === 'collect') {
 			url = '/pages/collect/index.html?back=/pages/home/index.html';
+		}
+		if (which === 'upgrade') {
+			url = '/pages/upgrade/index.html?back=/pages/home/index.html';
 		}
 		window.fadingNavigate(url);
 	});
