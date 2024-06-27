@@ -38,7 +38,8 @@
 		);
 		document.body.innerHTML = params.zone;
 		document.body.addEventListener('click', () => {
-			document.location.href = params.back || '/';
+			// document.location.href = params.back || '/';
+			window.history.back();
 		});
 	</script>
 </html>

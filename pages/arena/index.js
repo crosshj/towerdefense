@@ -29,7 +29,8 @@ const setup = async () => {
 	ctx.fillText(pageTitle, canvas.width / 2, canvas.height / 2);
 
 	canvas.addEventListener('mousedown', () => {
-		document.location.href = '/pages/home/index.html';
+		// document.location.href = '/pages/home/index.html';
+		window.history.back();
 	});
 };
 

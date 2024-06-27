@@ -23,7 +23,7 @@ const setup = async () => {
 			const which = clickColorMap[color];
 			if (!which) return;
 			//console.log(which || color);
-			document.location.href = `/pages/game/standard.html?zone=${which}&back=/pages/mainStage/index.html`;
+			document.location.href = `/pages/game/standard.html?zone=${which}`;
 		}
 	});
 	const controls = await canvasVertical({

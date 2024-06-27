@@ -72,15 +72,15 @@ const drawControls = () => {
 			.filter((x) => x !== 'clickable')
 			.filter((x) => x !== 'wip')
 			.join('_');
-		let url = `/pages/_wip/index.html?which=${which}&back=/pages/home/index.html`;
+		let url = `/pages/_wip/index.html?which=${which}`;
 		if (which === 'my-team') {
-			url = '/pages/my-team/index.html?back=/pages/home/index.html';
+			url = '/pages/my-team/index.html';
 		}
 		if (which === 'collect') {
-			url = '/pages/collect/index.html?back=/pages/home/index.html';
+			url = '/pages/collect/index.html';
 		}
 		if (which === 'upgrade') {
-			url = '/pages/upgrade/index.html?back=/pages/home/index.html';
+			url = '/pages/upgrade/index.html';
 		}
 		window.fadingNavigate(url);
 	});

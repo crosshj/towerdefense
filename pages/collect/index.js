@@ -44,7 +44,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 	document.body.addEventListener('mousedown', (event) => {
 		// console.log(event.target);
 		if (event.target.classList.contains('back-button')) {
-			window.fadingNavigate(params.back || '/');
+			// window.fadingNavigate(params.back || '/');
+			window.history.back();
 		}
 	});
 });
