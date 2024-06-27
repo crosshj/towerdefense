@@ -214,6 +214,29 @@ export const loadSounds = async (key) => {
 	// TODO: this should work, I think. But it leads to doubling background music
 	//if (sounds[key]) return sounds[key];
 
+	if (key === 'slowedSurf') {
+		const MAXVOL = 0.65;
+		const bg = new Howl({
+			src: ['/assets/audio/slowedSurf.wav'],
+			volume: 0,
+			preload: true,
+			autoplay: true,
+			loop: true,
+			paused: true
+		});
+		sounds.menuBackground = {
+			stop: () => {
+				bg.fade(MAXVOL, 0, 1000, undefined, () => {
+					bg.stop();
+				});
+			},
+			start: (fadeTime) => {
+				bg.play();
+				bg.fade(0, MAXVOL, fadeTime || 1000);
+			}
+		};
+		return sounds.menuBackground;
+	}
 	if (key === 'menuBackground') {
 		const MAXVOL = 0.75;
 		const bg = new Howl({
@@ -230,9 +253,9 @@ export const loadSounds = async (key) => {
 					bg.stop();
 				});
 			},
-			start: () => {
+			start: (fadeTime) => {
 				bg.play();
-				bg.fade(0, MAXVOL, 1000);
+				bg.fade(0, MAXVOL, fadeTime || 1000);
 			}
 		};
 		return sounds.menuBackground;

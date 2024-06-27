@@ -1,3 +1,4 @@
+import { loadSounds } from '../../visuals/assets.js';
 import { canvasVertical } from '../../visuals/canvas.js';
 
 const pageTitle = 'MAIN STAGE';
@@ -12,6 +13,9 @@ const clickColorMap = {
 };
 
 const setup = async () => {
+	const bgMusic = await loadSounds('menuBackground');
+	bgMusic.start(2000);
+
 	window.parent.postMessage({
 		_: 'title',
 		title: pageTitle,
@@ -34,8 +38,9 @@ const setup = async () => {
 		clickHandle: (color) => {
 			const which = clickColorMap[color];
 			if (!which) return;
-			//console.log(which || color);
-			document.location.href = `/pages/game/standard.html?zone=${which}`;
+			const src = `/pages/game/standard.html?zone=${which}`;
+			bgMusic.stop();
+			window.parent.postMessage({ _: 'navigate', src });
 		}
 	});
 	window.parent.postMessage({ _: 'loaded' });

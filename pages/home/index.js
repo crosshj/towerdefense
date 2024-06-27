@@ -1,3 +1,4 @@
+import { loadSounds } from '../../visuals/assets.js';
 import { canvasHorizontal, canvasVertical } from '../../visuals/canvas.js';
 import { statsRequest } from '../../visuals/stats/stats.js';
 
@@ -91,6 +92,9 @@ const drawControls = () => {
 };
 
 const setup = async () => {
+	// const bgMusic = await loadSounds('slowedSurf');
+	// bgMusic.start(4000);
+
 	document.title += `: ${pageTitle}`;
 	window.parent.postMessage({
 		_: 'title',
@@ -109,6 +113,7 @@ const setup = async () => {
 		clickHandle: (color) => {
 			const which = clickColorMap[color];
 			if (!which) return;
+			// bgMusic.stop();
 			// const clickUrl = `${which}${
 			// 	which.includes('?') ? '&' : '?'
 			// }back=/pages/home/index.html`;
