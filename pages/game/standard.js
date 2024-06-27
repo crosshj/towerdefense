@@ -25,9 +25,15 @@ const onLoaded = () => {
 		visibility: 'hidden'
 	});
 	// document.body.innerHTML = params.zone;
-	console.log(params);
+	// console.log(params);
 	const menu = {
-		hide: () => {}
+		hide: () => {},
+		show: () => {
+			window.parent.postMessage({
+				_: 'navigate',
+				src: '/pages/mainStage/index.html'
+			});
+		}
 	};
 	startGame({
 		which: zoneMap[params.zone] || 1,
