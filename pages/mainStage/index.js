@@ -12,6 +12,18 @@ const clickColorMap = {
 };
 
 const setup = async () => {
+	window.parent.postMessage({
+		_: 'title',
+		title: pageTitle,
+		visibility: 'visible'
+	});
+	const args = {
+		feathers: true,
+		gems: true,
+		coins: true,
+		friendPoints: false
+	};
+	window.parent.postMessage({ _: 'stats', ...args });
 	document.title += `: ${pageTitle}`;
 	const bg = await canvasVertical({
 		parent: document.body,
@@ -26,18 +38,6 @@ const setup = async () => {
 			document.location.href = `/pages/game/standard.html?zone=${which}`;
 		}
 	});
-	const controls = await canvasVertical({
-		parent: document.body,
-		width: 950
-	});
-
-	controls.ctx.fillStyle = '#777';
-	controls.ctx.font = '30px Arial';
-	controls.ctx.textAlign = 'left';
-	controls.ctx.textBaseline = 'top';
-	controls.ctx.fillText(pageTitle, 15, 15);
-	controls.canvas.style.zIndex = 1;
-	controls.canvas.style.pointerEvents = 'none';
 };
 
 setup();

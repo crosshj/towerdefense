@@ -28,9 +28,17 @@ const setup = async () => {
 	ctx.textBaseline = 'middle';
 	ctx.fillText(pageTitle, canvas.width / 2, canvas.height / 2);
 
-	canvas.addEventListener('mousedown', () => {
-		// document.location.href = '/pages/home/index.html';
-		window.history.back();
+	window.parent.postMessage({
+		_: 'stats',
+		feathers: false,
+		gems: false,
+		coins: false,
+		friendPoints: false
+	});
+	window.parent.postMessage({
+		_: 'title',
+		title: 'GUILD',
+		visibility: 'visible'
 	});
 };
 

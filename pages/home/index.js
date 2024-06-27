@@ -1,5 +1,5 @@
 import { canvasHorizontal, canvasVertical } from '../../visuals/canvas.js';
-import { statsElement } from '../../visuals/stats/stats.js';
+import { statsRequest } from '../../visuals/stats/stats.js';
 
 const pageTitle = 'HOME';
 
@@ -41,7 +41,7 @@ const drawControls = () => {
 				<div class="buff clickable">Buff</div>
 			</div>
 			<div class="statsAndQuest">
-				<div class="stats"">
+				<div class="stats">
 				</div>
 				<div class="quest clickable">
 					Quest
@@ -64,8 +64,7 @@ const drawControls = () => {
 			<div class="settings clickable">⚙</div>
 		</div>
 	`;
-	const statsContainer = container.querySelector('.stats');
-	statsElement({ container: statsContainer });
+	statsRequest();
 
 	container.addEventListener('mousedown', (event) => {
 		const which = Array.from(event.target.classList)
@@ -89,6 +88,11 @@ const drawControls = () => {
 
 const setup = async () => {
 	document.title += `: ${pageTitle}`;
+	window.parent.postMessage({
+		_: 'title',
+		title: '',
+		visibility: 'hidden'
+	});
 
 	drawControls();
 

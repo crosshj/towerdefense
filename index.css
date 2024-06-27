@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Passion+One:wght@400;700;900&display=swap');
+
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	overscroll-behavior: none;
+	height: 100vh;
+	width: 100vw;
+	overflow: hidden;
+	background: black;
+}
+
+.container {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	padding-left: 1em;
+	padding-right: 1em;
+	box-sizing: border-box;
+	pointer-events: none;
+}
+
+.main-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: start;
+	max-width: var(--inner-max-width);
+	margin-inline: auto;
+	width: 100%;
+	padding-top: 13px;
+	.title-container {
+		pointer-events: all;
+		margin-top: -7px;
+		display: flex;
+		align-items: center;
+		.back-button {
+			width: 30px;
+			height: 30px;
+			background-color: yellow;
+			border: 1px solid black;
+			border-radius: 50%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-size: 16px;
+			cursor: pointer;
+		}
+		.title {
+			margin-left: 0.5em;
+			color: #00c7ff;
+			-webkit-text-stroke: 1.5px black;
+			-webkit-text-fill-color: #00c7ff;
+			font-size: 35px;
+			letter-spacing: -1.5px;
+			font-family: 'Passion One', sans-serif;
+			font-weight: 400;
+		}
+	}
+	.currency {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		gap: 10px;
+	}
+}

@@ -19,10 +19,13 @@ const spawnCharInstance = (state) => (char, deployed) => {
 export const getActions = (state) => {
 	return {
 		restartGame: () => {
-			alert('this does not work right now');
+			document.location.reload();
 		},
 		mainMenu: () => {
-			document.location.reload();
+			window.parent.postMessage({
+				_: 'navigate',
+				src: '/pages/mainStage/index.html'
+			});
 		},
 		pauseToggle: () => {
 			state.paused = !state.paused;

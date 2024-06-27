@@ -1,14 +1,16 @@
-import { statsElement } from '../../visuals/stats/stats.js';
-
 document.addEventListener('DOMContentLoaded', async () => {
-	const statsContainer = document.querySelector('.container .currency');
-	statsElement({
-		container: statsContainer,
-		gems: true,
-		feathers: false,
-		friendPoints: false,
-		coins: true
+	window.parent.postMessage({
+		_: 'title',
+		title: 'UPGRADE',
+		visibility: 'visible'
 	});
+	const args = {
+		feathers: false,
+		gems: true,
+		coins: true,
+		friendPoints: false
+	};
+	window.parent.postMessage({ _: 'stats', ...args });
 
 	const upgradeEls = Array.from(
 		document.querySelectorAll('.upgrades-list .upgrade')

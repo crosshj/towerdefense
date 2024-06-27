@@ -9,22 +9,17 @@ const setup = async () => {
 		image: '/pages/lab/background.png',
 		width: 950
 	});
-	const controls = await canvasVertical({
-		parent: document.body,
-		width: 950
+	window.parent.postMessage({
+		_: 'stats',
+		feathers: false,
+		gems: true,
+		coins: false,
+		friendPoints: false
 	});
-
-	controls.ctx.fillStyle = '#777';
-	controls.ctx.font = '30px Arial';
-	controls.ctx.textAlign = 'left';
-	controls.ctx.textBaseline = 'top';
-	controls.ctx.fillText(pageTitle, 15, 15);
-	controls.canvas.style.zIndex = 1;
-	controls.canvas.style.pointerEvents = 'none';
-
-	bg.canvas.addEventListener('mousedown', () => {
-		// document.location.href = '/pages/home/index.html';
-		window.history.back();
+	window.parent.postMessage({
+		_: 'title',
+		title: 'LAB',
+		visibility: 'visible'
 	});
 };
 

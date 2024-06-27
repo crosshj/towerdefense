@@ -41,6 +41,20 @@
 		const params = Object.fromEntries(
 			new URLSearchParams(window.location.search)
 		);
+
+		window.parent.postMessage({
+			_: 'stats',
+			feathers: false,
+			gems: false,
+			coins: false,
+			friendPoints: false
+		});
+		window.parent.postMessage({
+			_: 'title',
+			title: params.which,
+			visibility: 'visible'
+		});
+
 		document.body.innerHTML = `
 		<div style="
 			margin-bottom: 20px;
@@ -48,9 +62,5 @@
 			WIP: ${params.which}
 		</div>
 		`;
-		document.body.addEventListener('click', () => {
-			// window.fadingNavigate(params.back || '/');
-			window.history.back();
-		});
 	</script>
 </html>

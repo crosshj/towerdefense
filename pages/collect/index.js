@@ -1,6 +1,6 @@
 import { getCharacters } from '../../user/getCharacters.js';
 import { getCollection } from '../../user/getCollection.js';
-import { statsElement } from '../../visuals/stats/stats.js';
+import { statsRequest } from '../../visuals/stats/stats.js';
 
 const buildCollectionList = async (collected) => {
 	const listEl = document.querySelector('.collection-list');
@@ -16,9 +16,7 @@ const buildCollectionList = async (collected) => {
 document.addEventListener('DOMContentLoaded', async () => {
 	const collected = await getCollection();
 
-	const statsContainer = document.querySelector('.container .currency');
-	statsElement({
-		container: statsContainer,
+	statsRequest({
 		feathers: false,
 		friendPoints: false,
 		coins: false

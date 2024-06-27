@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>TD: Team</title>
+		<title>TD: Game Standard</title>
 		<meta charset="utf-8" />
 		<meta name="description" content="" />
 		<meta name="author" content="" />
@@ -12,9 +12,6 @@
 		<link rel="manifest" href="/manifest.json" />
 		<link rel="icon" type="image/png" href="/assets/favicon.png" />
 		<!-- <link rel="stylesheet" href="/visuals/page.css" /> -->
-
-		<link rel="stylesheet" href="/visuals/fading.css" />
-		<script src="/visuals/fading.js"></script>
 	</head>
 
 	<body
@@ -39,13 +36,6 @@
 		const params = Object.fromEntries(
 			new URLSearchParams(window.location.search)
 		);
-		document.body.innerHTML = `
-		<div style="
-			margin-bottom: 20px;
-		">
-			team ${params.slot}
-		</div>
-		`;
 		window.parent.postMessage({
 			_: 'stats',
 			feathers: false,
@@ -55,8 +45,9 @@
 		});
 		window.parent.postMessage({
 			_: 'title',
-			title: 'Team ' + params.slot,
+			title: params.zone,
 			visibility: 'visible'
 		});
+		document.body.innerHTML = params.zone;
 	</script>
 </html>

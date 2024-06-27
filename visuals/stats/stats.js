@@ -43,3 +43,7 @@ export const statsElement = async (args) => {
         </div>
     `;
 };
+
+export const statsRequest = async (args) => {
+	window.parent.postMessage({ _: 'stats', ...args });
+};

@@ -84,6 +84,9 @@
 			display: flex;
 			flex-direction: column;
 			gap: 8px;
+			.stats {
+				min-height: 25px;
+			}
 			.quest {
 				margin-left: auto;
 				width: 55px;

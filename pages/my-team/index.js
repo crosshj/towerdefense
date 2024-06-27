@@ -1,16 +1,21 @@
 import { getCharacters } from '../../user/getCharacters.js';
-import { statsElement } from '../../visuals/stats/stats.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
 	const characters = await getCharacters();
 	const allCharactersDiv = document.getElementById('all-characters');
 
-	const statsContainer = document.querySelector('.container .currency');
-	statsElement({
-		container: statsContainer,
-		feathers: false,
-		friendPoints: false
+	window.parent.postMessage({
+		_: 'title',
+		title: 'TEAM',
+		visibility: 'visible'
 	});
+	const args = {
+		feathers: false,
+		gems: true,
+		coins: true,
+		friendPoints: false
+	};
+	window.parent.postMessage({ _: 'stats', ...args });
 
 	characters.forEach((character) => {
 		const characterCard = document.createElement('div');
@@ -96,7 +101,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 		// console.log(event.target);
 		if (event.target.classList.contains('back-button')) {
 			// window.fadingNavigate(params.back || '/');
-			window.history.back();
+			// window.history.back();
+			window.parent.postMessage({
+				_: 'navigate',
+				src: params.back
+			});
 		}
 	});
 });
