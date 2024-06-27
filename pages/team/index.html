@@ -47,7 +47,8 @@
 		</div>
 		`;
 		document.body.addEventListener('click', () => {
-			window.fadingNavigate(params.back || '/');
+			// window.fadingNavigate(params.back || '/');
+			window.history.back();
 		});
 	</script>
 </html>

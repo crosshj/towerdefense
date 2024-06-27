@@ -23,7 +23,8 @@ const setup = async () => {
 	controls.canvas.style.pointerEvents = 'none';
 
 	bg.canvas.addEventListener('mousedown', () => {
-		document.location.href = '/pages/home/index.html';
+		// document.location.href = '/pages/home/index.html';
+		window.history.back();
 	});
 };
 
