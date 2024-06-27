@@ -21,6 +21,7 @@ const setup = async () => {
 		title: 'LAB',
 		visibility: 'visible'
 	});
+	window.parent.postMessage({ _: 'loaded' });
 };
 
-setup();
+document.addEventListener('DOMContentLoaded', setup);

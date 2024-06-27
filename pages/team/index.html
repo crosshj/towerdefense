@@ -11,10 +11,6 @@
 		<meta name="mobile-web-app-capable" content="yes" />
 		<link rel="manifest" href="/manifest.json" />
 		<link rel="icon" type="image/png" href="/assets/favicon.png" />
-		<!-- <link rel="stylesheet" href="/visuals/page.css" /> -->
-
-		<link rel="stylesheet" href="/visuals/fading.css" />
-		<script src="/visuals/fading.js"></script>
 	</head>
 
 	<body
@@ -58,5 +54,6 @@
 			title: 'Team ' + params.slot,
 			visibility: 'visible'
 		});
+		window.parent.postMessage({ _: 'loaded' });
 	</script>
 </html>

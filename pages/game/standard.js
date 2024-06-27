@@ -39,5 +39,6 @@ const onLoaded = () => {
 		which: zoneMap[params.zone] || 1,
 		menu
 	});
+	window.parent.postMessage({ _: 'loaded' });
 };
 document.addEventListener('DOMContentLoaded', onLoaded);

@@ -40,6 +40,7 @@ const setup = async () => {
 		title: 'GUILD RAID',
 		visibility: 'visible'
 	});
+	window.parent.postMessage({ _: 'loaded' });
 };
 
-setup();
+document.addEventListener('DOMContentLoaded', setup);

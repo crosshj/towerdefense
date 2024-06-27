@@ -35,15 +35,5 @@ document.addEventListener('DOMContentLoaded', async () => {
 			</div>
 		`;
 	}
-
-	const params = Object.fromEntries(
-		new URLSearchParams(window.location.search)
-	);
-	document.body.addEventListener('mousedown', (event) => {
-		// console.log(event.target);
-		if (event.target.classList.contains('back-button')) {
-			// window.fadingNavigate(params.back || '/');
-			window.history.back();
-		}
-	});
+	window.parent.postMessage({ _: 'loaded' });
 });

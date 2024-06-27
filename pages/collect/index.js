@@ -16,11 +16,18 @@ const buildCollectionList = async (collected) => {
 document.addEventListener('DOMContentLoaded', async () => {
 	const collected = await getCollection();
 
-	statsRequest({
-		feathers: false,
-		friendPoints: false,
-		coins: false
+	window.parent.postMessage({
+		_: 'title',
+		title: 'UPGRADE',
+		visibility: 'visible'
 	});
+	const args = {
+		feathers: false,
+		gems: true,
+		coins: false,
+		friendPoints: false
+	};
+	window.parent.postMessage({ _: 'stats', ...args });
 
 	const chooserEl = document.querySelector('.chooser');
 	chooserEl.addEventListener('mousedown', (e) => {
@@ -36,14 +43,5 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 	await buildCollectionList(collected);
 
-	const params = Object.fromEntries(
-		new URLSearchParams(window.location.search)
-	);
-	document.body.addEventListener('mousedown', (event) => {
-		// console.log(event.target);
-		if (event.target.classList.contains('back-button')) {
-			// window.fadingNavigate(params.back || '/');
-			window.history.back();
-		}
-	});
+	window.parent.postMessage({ _: 'loaded' });
 });

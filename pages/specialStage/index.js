@@ -22,6 +22,7 @@ const setup = async () => {
 		title: 'Special Stage',
 		visibility: 'visible'
 	});
+	window.parent.postMessage({ _: 'loaded' });
 };
 
-setup();
+document.addEventListener('DOMContentLoaded', setup);

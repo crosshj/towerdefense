@@ -20,14 +20,6 @@ const initDom = async (state) => {
 
 const setup = async () => {
 	document.title += `: ${pageTitle}`;
-	const { canvas, ctx } = await initDom();
-
-	ctx.fillStyle = '#999';
-	ctx.font = '30px Arial';
-	ctx.textAlign = 'center';
-	ctx.textBaseline = 'middle';
-	ctx.fillText(pageTitle, canvas.width / 2, canvas.height / 2);
-
 	window.parent.postMessage({
 		_: 'stats',
 		feathers: false,
@@ -40,6 +32,15 @@ const setup = async () => {
 		title: 'GUILD',
 		visibility: 'visible'
 	});
+
+	const { canvas, ctx } = await initDom();
+	ctx.fillStyle = '#999';
+	ctx.font = '30px Arial';
+	ctx.textAlign = 'center';
+	ctx.textBaseline = 'middle';
+	ctx.fillText(pageTitle, canvas.width / 2, canvas.height / 2);
+
+	window.parent.postMessage({ _: 'loaded' });
 };
 
-setup();
+document.addEventListener('DOMContentLoaded', setup);

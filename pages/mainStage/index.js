@@ -38,6 +38,7 @@ const setup = async () => {
 			document.location.href = `/pages/game/standard.html?zone=${which}`;
 		}
 	});
+	window.parent.postMessage({ _: 'loaded' });
 };
 
-setup();
+document.addEventListener('DOMContentLoaded', setup);

@@ -20,18 +20,27 @@ const initDom = async (state) => {
 
 const setup = async () => {
 	document.title += `: ${pageTitle}`;
-	const { canvas, ctx } = await initDom();
+	window.parent.postMessage({
+		_: 'stats',
+		feathers: false,
+		gems: false,
+		coins: false,
+		friendPoints: false
+	});
+	window.parent.postMessage({
+		_: 'title',
+		title: 'ARENA',
+		visibility: 'visible'
+	});
 
+	const { canvas, ctx } = await initDom();
 	ctx.fillStyle = '#999';
 	ctx.font = '30px Arial';
 	ctx.textAlign = 'center';
 	ctx.textBaseline = 'middle';
 	ctx.fillText(pageTitle, canvas.width / 2, canvas.height / 2);
 
-	canvas.addEventListener('mousedown', () => {
-		// document.location.href = '/pages/home/index.html';
-		window.history.back();
-	});
+	window.parent.postMessage({ _: 'loaded' });
 };
 
-setup();
+document.addEventListener('DOMContentLoaded', setup);

@@ -40,6 +40,7 @@ const setup = async () => {
 		title: 'TOWER',
 		visibility: 'visible'
 	});
+	window.parent.postMessage({ _: 'loaded' });
 };
 
-setup();
+document.addEventListener('DOMContentLoaded', setup);

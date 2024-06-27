@@ -81,7 +81,11 @@ const drawControls = () => {
 		if (which === 'upgrade') {
 			url = '/pages/upgrade/index.html';
 		}
-		window.fadingNavigate(url);
+		//window.fadingNavigate(url);
+		window.parent.postMessage({
+			_: 'navigate',
+			src: url
+		});
 	});
 	document.body.insertAdjacentElement('afterbegin', container);
 };
@@ -105,10 +109,14 @@ const setup = async () => {
 		clickHandle: (color) => {
 			const which = clickColorMap[color];
 			if (!which) return;
-			const clickUrl = `${which}${
-				which.includes('?') ? '&' : '?'
-			}back=/pages/home/index.html`;
-			window.fadingNavigate(clickUrl);
+			// const clickUrl = `${which}${
+			// 	which.includes('?') ? '&' : '?'
+			// }back=/pages/home/index.html`;
+			//window.fadingNavigate(clickUrl);
+			window.parent.postMessage({
+				_: 'navigate',
+				src: which
+			});
 		}
 	});
 	// const controls = await canvasVertical({
@@ -123,5 +131,6 @@ const setup = async () => {
 	// controls.ctx.fillText(pageTitle, 15, 15);
 	// controls.canvas.style.zIndex = 1;
 	// controls.canvas.style.pointerEvents = 'none';
+	window.parent.postMessage({ _: 'loaded' });
 };
 setup();

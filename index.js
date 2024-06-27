@@ -1,6 +1,8 @@
 import { statsElement } from '/visuals/stats/stats.js';
 import { loadSounds } from '/visuals/assets.js';
 
+const FADE_MS = 350;
+
 let bgMusic, coreSounds;
 const onLoaded = async () => {
 	// bgMusic = await loadSounds('menuBackground');
@@ -17,7 +19,11 @@ document.body.addEventListener('mousedown', (event) => {
 	// console.log(event.target);
 	if (event.target.classList.contains('back-button')) {
 		const mainIframe = document.querySelector('iframe');
-		mainIframe.src = '/pages/home/index.html';
+		document.body.classList.remove('fade-in');
+		document.body.classList.add('fade-out');
+		setTimeout(() => {
+			mainIframe.src = '/pages/home/index.html';
+		}, FADE_MS);
 	}
 });
 
@@ -35,7 +41,15 @@ window.addEventListener('message', function (event) {
 	}
 	if (_ === 'navigate') {
 		const mainIframe = document.querySelector('iframe');
-		mainIframe.src = args.src || '/pages/home/index.html';
+		document.body.classList.remove('fade-in');
+		document.body.classList.add('fade-out');
+		setTimeout(() => {
+			mainIframe.src = args.src || '/pages/home/index.html';
+		}, FADE_MS);
+	}
+	if (_ === 'loaded') {
+		document.body.classList.add('fade-in');
+		document.body.classList.remove('fade-out');
 	}
 	if (_ === 'title') {
 		titleContainer.style.visibility = args.visibility;

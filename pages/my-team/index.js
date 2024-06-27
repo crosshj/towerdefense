@@ -108,4 +108,5 @@ document.addEventListener('DOMContentLoaded', async () => {
 			});
 		}
 	});
+	window.parent.postMessage({ _: 'loaded' });
 });
