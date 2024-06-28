@@ -6,7 +6,7 @@ const FADE_MS = 350;
 let bgMusic;
 const onLoaded = async () => {
 	if (!bgMusic) {
-		bgMusic = await loadSounds('slowedSurf');
+		bgMusic = await loadSounds('march');
 		bgMusic.start(4000);
 	}
 };
