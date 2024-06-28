@@ -15,8 +15,8 @@ const isWIP = [
 	'my-team',
 	'collect',
 	'upgrade',
-	'shop'
-	//'friends',
+	'shop',
+	'friends'
 	//'pass',
 	//'giftbox',
 	//'settings',
@@ -77,7 +77,7 @@ const drawControls = () => {
 			<div class="upgrade clickable wip">Upgrade</div>
 			<div class="collect clickable wip">Collect</div>
 			<div class="shop clickable wip">Shop</div>
-			<div class="friends clickable">Friends</div>
+			<div class="friends clickable wip">Friends</div>
 			<div class="pass clickable">Pass</div>
 			<div class="giftbox clickable">Giftbox</div>
 			<div class="settings clickable">⚙</div>
