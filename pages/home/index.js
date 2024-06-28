@@ -4,6 +4,24 @@ import { statsRequest } from '../../visuals/stats/stats.js';
 
 const pageTitle = 'HOME';
 
+const isWIP = [
+	//'banner',
+	//'user',
+	//'event',
+	//'buff',
+	//'quest',
+	//'exp',
+
+	'my-team',
+	'collect',
+	'upgrade',
+	'shop'
+	//'friends',
+	//'pass',
+	//'giftbox',
+	//'settings',
+];
+
 const clickColorMap = {
 	'#00ffdd': '/pages/mainStage/index.html',
 	'#000cff': '/pages/lab/index.html',
@@ -58,7 +76,7 @@ const drawControls = () => {
 			<div class="my-team clickable wip">My Team</div>
 			<div class="upgrade clickable wip">Upgrade</div>
 			<div class="collect clickable wip">Collect</div>
-			<div class="shop clickable">Shop</div>
+			<div class="shop clickable wip">Shop</div>
 			<div class="friends clickable">Friends</div>
 			<div class="pass clickable">Pass</div>
 			<div class="giftbox clickable">Giftbox</div>
@@ -73,28 +91,19 @@ const drawControls = () => {
 			.filter((x) => x !== 'wip')
 			.join('_');
 		let url = `/pages/_wip/index.html?which=${which}`;
-		if (which === 'my-team') {
-			url = '/pages/my-team/index.html';
+		if (isWIP.includes(which)) {
+			url = `/pages/${which}/index.html`;
 		}
-		if (which === 'collect') {
-			url = '/pages/collect/index.html';
-		}
-		if (which === 'upgrade') {
-			url = '/pages/upgrade/index.html';
-		}
-		//window.fadingNavigate(url);
 		window.parent.postMessage({
 			_: 'navigate',
 			src: url
 		});
 	});
+
 	document.body.insertAdjacentElement('afterbegin', container);
 };
 
 const setup = async () => {
-	// const bgMusic = await loadSounds('slowedSurf');
-	// bgMusic.start(4000);
-
 	document.title += `: ${pageTitle}`;
 	window.parent.postMessage({
 		_: 'title',
@@ -113,29 +122,14 @@ const setup = async () => {
 		clickHandle: (color) => {
 			const which = clickColorMap[color];
 			if (!which) return;
-			// bgMusic.stop();
-			// const clickUrl = `${which}${
-			// 	which.includes('?') ? '&' : '?'
-			// }back=/pages/home/index.html`;
-			//window.fadingNavigate(clickUrl);
 			window.parent.postMessage({
 				_: 'navigate',
 				src: which
 			});
 		}
 	});
-	// const controls = await canvasVertical({
-	// 	parent: document.body,
-	// 	width: 950
-	// });
 
-	// controls.ctx.fillStyle = '#777';
-	// controls.ctx.font = '30px Arial';
-	// controls.ctx.textAlign = 'left';
-	// controls.ctx.textBaseline = 'top';
-	// controls.ctx.fillText(pageTitle, 15, 15);
-	// controls.canvas.style.zIndex = 1;
-	// controls.canvas.style.pointerEvents = 'none';
 	window.parent.postMessage({ _: 'loaded' });
 };
-setup();
+
+document.addEventListener('DOMContentLoaded', setup);
