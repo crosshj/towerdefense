@@ -6,7 +6,7 @@ const hideInstallButton = () => {
 	installButton.classList.add('hidden');
 };
 
-const showInstallButton = () => {
+const showInstallButton = (args) => {
 	if (installButton) {
 		return;
 	}
@@ -32,7 +32,7 @@ const beforeInstallHandler = (args) => async (event) => {
 	event.preventDefault();
 	localStorage.setItem('APP_INSTALLED', 'false');
 	installPrompt = event;
-	showInstallButton();
+	showInstallButton(args);
 	// console.log('beforeInstallHandler');
 };
 
