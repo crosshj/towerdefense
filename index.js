@@ -6,18 +6,6 @@ const FADE_MS = 350;
 
 installable();
 
-let bgMusic;
-const onLoaded = async () => {
-	if (!bgMusic) {
-		bgMusic = await loadSounds('march');
-		bgMusic.start(4000);
-	}
-};
-document.addEventListener('DOMContentLoaded', onLoaded);
-// window.addEventListener('pageshow', function (event) {
-// 	if (event.persisted) onLoaded();
-// });
-
 function navigate(args = {}) {
 	document.body.classList.remove('fade-in');
 	document.body.classList.add('fade-out');
@@ -66,3 +54,15 @@ window.addEventListener('message', async function (event) {
 		titleEl.innerHTML = args.title;
 	}
 });
+
+let bgMusic;
+const onLoaded = async () => {
+	if (!bgMusic) {
+		bgMusic = await loadSounds('march');
+		bgMusic.start(4000);
+	}
+};
+document.addEventListener('DOMContentLoaded', onLoaded);
+// window.addEventListener('pageshow', function (event) {
+// 	if (event.persisted) onLoaded();
+// });

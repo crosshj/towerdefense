@@ -16,8 +16,10 @@ const showInstallButton = () => {
 	//TODO: add installButton to dom
 };
 
-const beforeInstallHandler = (event) => {
+const beforeInstallHandler = async (event) => {
 	event.preventDefault();
+	const relatedApps = await navigator.getInstalledRelatedApps();
+	console.log({ relatedApps });
 	installPrompt = event;
 	showInstallButton();
 	console.log('beforeInstallHandler');
