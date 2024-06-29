@@ -17,6 +17,7 @@ const showInstallButton = () => {
 		if (!installPrompt) return;
 		await installPrompt.prompt();
 		hideInstallButton();
+		localStorage.setItem('APP_INSTALLED', true);
 	});
 	const splash = document.querySelector('.splash');
 	splash.append(installButton);
@@ -24,6 +25,7 @@ const showInstallButton = () => {
 
 const beforeInstallHandler = async (event) => {
 	event.preventDefault();
+	localStorage.setItem('APP_INSTALLED', false);
 	installPrompt = event;
 	showInstallButton();
 	console.log('beforeInstallHandler');
