@@ -1,7 +1,10 @@
+import { installable } from './utils/installable.js';
 import { loadSounds } from '/visuals/assets.js';
 import { statsElement } from '/visuals/stats/stats.js';
 
 const FADE_MS = 350;
+
+installable();
 
 let bgMusic;
 const onLoaded = async () => {
@@ -14,6 +17,7 @@ document.addEventListener('DOMContentLoaded', onLoaded);
 // window.addEventListener('pageshow', function (event) {
 // 	if (event.persisted) onLoaded();
 // });
+
 function navigate(args = {}) {
 	document.body.classList.remove('fade-in');
 	document.body.classList.add('fade-out');
@@ -35,9 +39,7 @@ function navigate(args = {}) {
 }
 
 document.body.addEventListener('mousedown', async (event) => {
-	if (event.target.classList.contains('back-button')) {
-		navigate();
-	}
+	if (event.target.classList.contains('back-button')) return navigate();
 });
 
 window.addEventListener('message', async function (event) {
