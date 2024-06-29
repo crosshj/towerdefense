@@ -12,6 +12,7 @@ const showInstallButton = () => {
 	}
 	installButton = document.createElement('button');
 	installButton.innerHTML = 'INSTALL';
+	installButton.classList.add('styled-button');
 	installButton.addEventListener('mousedown', async () => {
 		if (!installPrompt) return;
 		await installPrompt.prompt();

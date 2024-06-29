@@ -17,6 +17,25 @@ body {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+
+	.styled-button {
+		background-color: #4caf50; /* Green background */
+		border: none; /* No border */
+		color: white; /* White text */
+		padding: 10px 20px; /* Padding inside the button */
+		text-align: center; /* Center text */
+		text-decoration: none; /* No underline */
+		display: inline-block; /* Display as inline block */
+		font-size: 16px; /* Font size */
+		margin: 4px 2px; /* Margin around the button */
+		cursor: pointer; /* Cursor pointer on hover */
+		border-radius: 5px; /* Rounded corners */
+	}
+
+	/* Hover effect */
+	.styled-button:hover {
+		background-color: #45a049; /* Darker green */
+	}
 }
 
 iframe {
