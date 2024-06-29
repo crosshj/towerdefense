@@ -108,7 +108,7 @@ const onLoaded = async () => {
 		setupPlayable();
 		return;
 	}
-	setupSplash(installed);
+	setupSplash(install);
 };
 document.addEventListener('DOMContentLoaded', onLoaded);
 // window.addEventListener('pageshow', function (event) {
