@@ -37,6 +37,8 @@ const beforeInstallHandler = (args) => async (event) => {
 };
 
 export const installable = async (args) => {
+	// TODO: is this desktop or mobile?
+	// TODO: is this installed or not?
 	if (window.matchMedia('(display-mode: standalone)').matches) {
 		return 'standalone';
 	}
