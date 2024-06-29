@@ -18,14 +18,14 @@ const showInstallButton = () => {
 
 const beforeInstallHandler = async (event) => {
 	event.preventDefault();
-	const relatedApps = await navigator.getInstalledRelatedApps();
-	console.log({ relatedApps });
 	installPrompt = event;
 	showInstallButton();
 	console.log('beforeInstallHandler');
 };
 
-export const installable = () => {
+export const installable = async () => {
 	console.log('installable');
+	const relatedApps = await navigator.getInstalledRelatedApps();
+	console.log({ relatedApps });
 	window.addEventListener('beforeinstallprompt', beforeInstallHandler);
 };
