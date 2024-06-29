@@ -29,7 +29,10 @@ const beforeInstallHandler = (args) => async (event) => {
 	installPrompt = event;
 	showInstallButton();
 	// console.log('beforeInstallHandler');
-	if (args?.onInstall) args.onInstall();
+	if (args?.onInstall) {
+		console.log({ installEvent: event });
+		//args.onInstall();
+	}
 };
 
 export const installable = async (args) => {
