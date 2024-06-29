@@ -11,13 +11,20 @@ body {
 	background: black;
 }
 
+.splash {
+	color: white;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
 iframe {
 	border: 0;
 	position: fixed;
 	left: 0;
 	top: 0;
 }
-
 .container {
 	position: fixed;
 	left: 0;

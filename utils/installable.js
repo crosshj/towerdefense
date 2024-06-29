@@ -13,7 +13,7 @@ const showInstallButton = () => {
 		await installPrompt.prompt();
 		hideInstallButton();
 	});
-	//TODO: add installButton to dom
+	document.body.append(installButton);
 };
 
 const beforeInstallHandler = async (event) => {
@@ -26,9 +26,10 @@ const beforeInstallHandler = async (event) => {
 export const installable = async () => {
 	console.log('installable');
 	if (window.matchMedia('(display-mode: standalone)').matches) {
-		console.log('running in standalone mode');
+		return 'standalone';
 	}
 	const relatedApps = await navigator.getInstalledRelatedApps();
 	console.log({ relatedApps: Array.from(relatedApps) });
+
 	window.addEventListener('beforeinstallprompt', beforeInstallHandler);
 };

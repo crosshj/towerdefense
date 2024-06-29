@@ -4,7 +4,45 @@ import { statsElement } from '/visuals/stats/stats.js';
 
 const FADE_MS = 350;
 
-installable();
+const setupPlayable = () => {
+	const iframe = `
+	<iframe
+		src="/pages/home/index.html"
+		width="100%"
+		height="100%"
+	></iframe>
+	`;
+	const container = `
+	<div class="container">
+		<div class="main-header">
+			<div class="title-container" style="visibility: hidden">
+				<div class="back-button">&#x25C0;</div>
+				<div class="title"></div>
+			</div>
+			<div class="stats"></div>
+		</div>
+	</div>
+	`;
+	const containerEl = document.createElement('div');
+	document.body.insertAdjacentElement('afterbegin', containerEl);
+	containerEl.outerHTML = container;
+
+	const iframeEl = document.createElement('iframe');
+	document.body.insertAdjacentElement('afterbegin', iframeEl);
+	iframeEl.outerHTML = iframe;
+};
+
+const setupSplash = () => {
+	const splash = `
+	<div class="splash">
+		<h1>Tee Dee</h1>
+		<span>Tower Defense for all!</span>
+	</div>
+	`;
+	const splashEl = document.createElement('div');
+	document.body.insertAdjacentElement('afterbegin', splashEl);
+	splashEl.outerHTML = splash;
+};
 
 function navigate(args = {}) {
 	document.body.classList.remove('fade-in');
@@ -25,7 +63,6 @@ function navigate(args = {}) {
 		onLoaded();
 	}
 }
-
 document.body.addEventListener('mousedown', async (event) => {
 	if (event.target.classList.contains('back-button')) return navigate();
 });
@@ -57,10 +94,16 @@ window.addEventListener('message', async function (event) {
 
 let bgMusic;
 const onLoaded = async () => {
-	if (!bgMusic) {
-		bgMusic = await loadSounds('march');
-		bgMusic.start(4000);
+	const install = await installable();
+	if (install === 'standalone') {
+		if (!bgMusic) {
+			bgMusic = await loadSounds('march');
+			bgMusic.start(4000);
+		}
+		setupPlayable();
+		return;
 	}
+	setupSplash();
 };
 document.addEventListener('DOMContentLoaded', onLoaded);
 // window.addEventListener('pageshow', function (event) {
