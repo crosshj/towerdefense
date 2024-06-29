@@ -40,6 +40,9 @@ export const installable = async (args) => {
 	if (window.matchMedia('(display-mode: standalone)').matches) {
 		return 'standalone';
 	}
+	if (window.matchMedia('(display-mode: fullscreen)').matches) {
+		return 'fullscreen';
+	}
 	const isInstalled = localStorage.getItem('APP_INSTALLED') === 'true';
 	if (isInstalled) {
 		return 'installed';

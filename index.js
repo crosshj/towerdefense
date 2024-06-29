@@ -103,7 +103,7 @@ const onLoaded = async () => {
 		onInstall: () => document.location.reload()
 	});
 	const isLocal = document.location.host.startsWith('127.0.0.1');
-	if (install === 'standalone' || isLocal) {
+	if (['fullscreen', 'standalone'].includes(install) || isLocal) {
 		if (!bgMusic) {
 			bgMusic = await loadSounds('march');
 			bgMusic.start(4000);
