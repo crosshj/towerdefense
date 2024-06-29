@@ -25,6 +25,9 @@ const beforeInstallHandler = async (event) => {
 
 export const installable = async () => {
 	console.log('installable');
+	if (window.matchMedia('(display-mode: standalone)').matches) {
+		console.log('running in standalone mode');
+	}
 	const relatedApps = await navigator.getInstalledRelatedApps();
 	console.log({ relatedApps });
 	window.addEventListener('beforeinstallprompt', beforeInstallHandler);
