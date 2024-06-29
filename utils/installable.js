@@ -17,7 +17,7 @@ const showInstallButton = () => {
 		if (!installPrompt) return;
 		await installPrompt.prompt();
 		hideInstallButton();
-		localStorage.setItem('APP_INSTALLED', true);
+		localStorage.setItem('APP_INSTALLED', 'true');
 	});
 	const splash = document.querySelector('.splash');
 	splash.append(installButton);
@@ -25,17 +25,21 @@ const showInstallButton = () => {
 
 const beforeInstallHandler = async (event) => {
 	event.preventDefault();
-	localStorage.setItem('APP_INSTALLED', false);
+	localStorage.setItem('APP_INSTALLED', 'false');
 	installPrompt = event;
 	showInstallButton();
 	console.log('beforeInstallHandler');
 };
 
 export const installable = async () => {
-	console.log('installable');
 	if (window.matchMedia('(display-mode: standalone)').matches) {
 		return 'standalone';
 	}
+	const isInstalled = localStorage.getItem('APP_INSTALLED') === 'true';
+	if (isInstalled) {
+		return 'installed';
+	}
+
 	const relatedApps = await navigator.getInstalledRelatedApps();
 	console.log({ relatedApps: Array.from(relatedApps) });
 

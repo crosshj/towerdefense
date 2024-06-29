@@ -32,11 +32,16 @@ const setupPlayable = () => {
 	iframeEl.outerHTML = iframe;
 };
 
-const setupSplash = () => {
+const setupSplash = (installState) => {
 	const splash = `
 	<div class="splash">
 		<h1>Tee Dee</h1>
 		<span>Tower Defense for all!</span>
+		${
+			installState === 'installed'
+				? '<a href="https://teedee.us" class="open">LAUNCH</a>'
+				: ''
+		}
 	</div>
 	`;
 	const splashEl = document.createElement('div');
@@ -103,7 +108,7 @@ const onLoaded = async () => {
 		setupPlayable();
 		return;
 	}
-	setupSplash();
+	setupSplash(installed);
 };
 document.addEventListener('DOMContentLoaded', onLoaded);
 // window.addEventListener('pageshow', function (event) {

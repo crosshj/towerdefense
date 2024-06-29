@@ -18,11 +18,14 @@ body {
 	justify-content: center;
 	align-items: center;
 
-	.hidden {
-		display: none;
+	h1 {
+		margin-bottom: 0;
+	}
+	span {
+		margin-bottom: 1em;
 	}
 
-	.styled-button {
+	button {
 		background-color: #4caf50; /* Green background */
 		border: none; /* No border */
 		color: white; /* White text */
@@ -34,11 +37,12 @@ body {
 		margin: 4px 2px; /* Margin around the button */
 		cursor: pointer; /* Cursor pointer on hover */
 		border-radius: 5px; /* Rounded corners */
-	}
-
-	/* Hover effect */
-	.styled-button:hover {
-		background-color: #45a049; /* Darker green */
+		&.hidden {
+			display: none;
+		}
+		&:hover {
+			background-color: #45a049; /* Darker green */
+		}
 	}
 }
 
