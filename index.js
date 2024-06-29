@@ -39,7 +39,7 @@ const setupSplash = (installState) => {
 		<span>Tower Defense for all!</span>
 		${
 			installState === 'installed'
-				? '<a href="https://teedee.us" class="open">LAUNCH</a>'
+				? '<p>You have installed this app.  Open it the way you open any app on your system.</p>'
 				: ''
 		}
 	</div>
