@@ -29,6 +29,6 @@ export const installable = async () => {
 		console.log('running in standalone mode');
 	}
 	const relatedApps = await navigator.getInstalledRelatedApps();
-	console.log({ relatedApps });
+	console.log({ relatedApps: Array.from(relatedApps) });
 	window.addEventListener('beforeinstallprompt', beforeInstallHandler);
 };
