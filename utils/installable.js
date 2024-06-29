@@ -29,6 +29,8 @@ const beforeInstallHandler = (args) => async (event) => {
 	installPrompt = event;
 	showInstallButton();
 	// console.log('beforeInstallHandler');
+	const userChoice = await event.userChoice;
+	console.log({ userChoice });
 	if (args?.onInstall) {
 		console.log({ installEvent: event });
 		//args.onInstall();
