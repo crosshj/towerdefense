@@ -99,8 +99,11 @@ window.addEventListener('message', async function (event) {
 
 let bgMusic;
 const onLoaded = async () => {
-	const install = await installable();
-	if (install === 'standalone') {
+	const install = await installable({
+		onInstall: () => document.location.reload()
+	});
+	const isLocal = document.location.host.startsWith('127.0.0.1');
+	if (install === 'standalone' || isLocal) {
 		if (!bgMusic) {
 			bgMusic = await loadSounds('march');
 			bgMusic.start(4000);

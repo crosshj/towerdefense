@@ -23,15 +23,16 @@ const showInstallButton = () => {
 	splash.append(installButton);
 };
 
-const beforeInstallHandler = async (event) => {
+const beforeInstallHandler = (args) => async (event) => {
 	event.preventDefault();
 	localStorage.setItem('APP_INSTALLED', 'false');
 	installPrompt = event;
 	showInstallButton();
-	console.log('beforeInstallHandler');
+	// console.log('beforeInstallHandler');
+	if (args?.onInstall) args.onInstall();
 };
 
-export const installable = async () => {
+export const installable = async (args) => {
 	if (window.matchMedia('(display-mode: standalone)').matches) {
 		return 'standalone';
 	}
@@ -43,5 +44,5 @@ export const installable = async () => {
 	const relatedApps = await navigator.getInstalledRelatedApps();
 	console.log({ relatedApps: Array.from(relatedApps) });
 
-	window.addEventListener('beforeinstallprompt', beforeInstallHandler);
+	window.addEventListener('beforeinstallprompt', beforeInstallHandler(args));
 };
