@@ -16,8 +16,13 @@ const showInstallButton = () => {
 	installButton.addEventListener('mousedown', async () => {
 		if (!installPrompt) return;
 		await installPrompt.prompt();
-		hideInstallButton();
-		localStorage.setItem('APP_INSTALLED', 'true');
+		const userChoice = await installPrompt.userChoice;
+		console.log({ userChoice });
+		if (userChoice?.outcome !== 'dismissed') {
+			hideInstallButton();
+			localStorage.setItem('APP_INSTALLED', 'true');
+			args.onInstall();
+		}
 	});
 	const splash = document.querySelector('.splash');
 	splash.append(installButton);
@@ -29,12 +34,6 @@ const beforeInstallHandler = (args) => async (event) => {
 	installPrompt = event;
 	showInstallButton();
 	// console.log('beforeInstallHandler');
-	const userChoice = await event.userChoice;
-	console.log({ userChoice });
-	if (args?.onInstall) {
-		console.log({ installEvent: event });
-		//args.onInstall();
-	}
 };
 
 export const installable = async (args) => {
