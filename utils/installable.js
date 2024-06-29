@@ -7,13 +7,18 @@ const hideInstallButton = () => {
 };
 
 const showInstallButton = () => {
+	if (installButton) {
+		return;
+	}
 	installButton = document.createElement('button');
+	installButton.innerHTML = 'INSTALL';
 	installButton.addEventListener('mousedown', async () => {
 		if (!installPrompt) return;
 		await installPrompt.prompt();
 		hideInstallButton();
 	});
-	document.body.append(installButton);
+	const splash = document.querySelector('.splash');
+	splash.append(installButton);
 };
 
 const beforeInstallHandler = async (event) => {
