@@ -18,6 +18,10 @@ body {
 	justify-content: center;
 	align-items: center;
 
+	.hidden {
+		display: none;
+	}
+
 	.styled-button {
 		background-color: #4caf50; /* Green background */
 		border: none; /* No border */
