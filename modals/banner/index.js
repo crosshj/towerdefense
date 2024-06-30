@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 		});
 	});
 	document.body.addEventListener('mousedown', () => {
-		console.log('clicked on document body');
 		window.parent.postMessage({
 			_: 'navigate'
 		});
