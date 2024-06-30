@@ -18,8 +18,8 @@ const isWIP = [
 	'shop',
 	'friends',
 	'pass',
-	'giftbox'
-	//'settings',
+	'giftbox',
+	'settings'
 ];
 
 const clickColorMap = {
@@ -80,7 +80,7 @@ const drawControls = () => {
 			<div class="friends clickable wip">Friends</div>
 			<div class="pass clickable wip">Pass</div>
 			<div class="giftbox modal clickable wip">Giftbox</div>
-			<div class="settings clickable">⚙</div>
+			<div class="settings modal clickable wip">⚙</div>
 		</div>
 	`;
 	statsRequest();

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+		/>
+		<title>TD: Settings</title>
+		<link rel="stylesheet" href="index.css" />
+
+		<link rel="stylesheet" href="/visuals/stats/stats.css" />
+	</head>
+	<body>
+		<div class="background"></div>
+		<div class="container">
+			<div class="container-bg"></div>
+			<div class="close-button">X</div>
+			<div class="content">
+				<div class="header">
+					<div class="chooser">
+						<div data-tab="notice" class="selected">NOTICE</div>
+						<div data-tab="game">GAME</div>
+						<div data-tab="alert">ALERT</div>
+						<div data-tab="account">ACCOUNT</div>
+					</div>
+				</div>
+				<div class="items-list">
+					<div class="tab-pane notice selected">
+						<button class="with-icon placeholder-icon">
+							NOTICE
+						</button>
+						<button class="with-icon placeholder-icon">HELP</button>
+						<button class="with-icon placeholder-icon">
+							MOVIE
+						</button>
+						<button class="with-icon placeholder-icon">
+							MORE GAMES
+						</button>
+					</div>
+					<div class="tab-pane game">
+						<div class="toggleContainer">
+							<div class="labeledToggle">
+								<div class="label">BGM</div>
+								<label class="switch round">
+									<input id="setting-bgm" type="checkbox" />
+									<span class="slider round"></span>
+								</label>
+							</div>
+							<div class="labeledToggle">
+								<div class="label">Sound Effects</div>
+								<label class="switch round">
+									<input id="setting-sfx" type="checkbox" />
+									<span class="slider"></span>
+								</label>
+							</div>
+						</div>
+						<div class="toggleContainer">
+							<div class="labeledToggle">
+								<div class="label">High Quality Animation</div>
+								<label class="switch round">
+									<input
+										id="setting-animation-hq"
+										type="checkbox"
+									/>
+									<span class="slider round"></span>
+								</label>
+							</div>
+						</div>
+						<div class="flex-spacer"></div>
+						<div class="flex-spacer"></div>
+						<button>LANGUAGES</button>
+						<button>PURCHASE INFO</button>
+						<button>SEND GAME LOG</button>
+						<button>RESOURCE CHECK</button>
+					</div>
+					<div class="tab-pane alert">
+						<div class="toggleContainer">
+							<div class="labeledToggle">
+								<div class="label">Courtesy</div>
+								<label class="switch round">
+									<input
+										id="setting-alert-courtesy"
+										type="checkbox"
+									/>
+									<span class="slider round"></span>
+								</label>
+								<div class="explain">OFF 22:00 to 10:00</div>
+							</div>
+						</div>
+						<div class="toggleContainer">
+							<div class="labeledToggle">
+								<div class="label">Event</div>
+								<label class="switch round">
+									<input
+										id="setting-alert-event"
+										type="checkbox"
+									/>
+									<span class="slider round"></span>
+								</label>
+							</div>
+						</div>
+						<div class="toggleContainer">
+							<div class="labeledToggle">
+								<div class="label">Max Feather</div>
+								<label class="switch round">
+									<input
+										id="setting-alert-maxFeather"
+										type="checkbox"
+									/>
+									<span class="slider round"></span>
+								</label>
+							</div>
+						</div>
+						<div class="toggleContainer">
+							<div class="labeledToggle">
+								<div class="label">Guild Raid</div>
+								<label class="switch round">
+									<input
+										id="setting-alert-guildRaid"
+										type="checkbox"
+									/>
+									<span class="slider round"></span>
+								</label>
+							</div>
+						</div>
+						<div class="toggleContainer">
+							<div class="labeledToggle">
+								<div class="label">Guild</div>
+								<label class="switch round">
+									<input
+										id="setting-alert-guild"
+										type="checkbox"
+									/>
+									<span class="slider round"></span>
+								</label>
+							</div>
+						</div>
+						<div class="toggleContainer">
+							<div class="labeledToggle">
+								<div class="label">PVP</div>
+								<label class="switch round">
+									<input
+										id="setting-alert-pvp"
+										type="checkbox"
+									/>
+									<span class="slider round"></span>
+								</label>
+							</div>
+						</div>
+					</div>
+					<div class="tab-pane account">ACCOUNT PANE</div>
+				</div>
+			</div>
+			<div class="info">Current Version 0.0.1</div>
+		</div>
+
+		<script src="index.js" type="module"></script>
+	</body>
+</html>

@@ -1,4 +1,5 @@
 import { Howl } from 'https://cdn.jsdelivr.net/npm/howler@2.2.4/+esm';
+import { getSettings } from '../user/settings.js';
 
 const proxy = 'https://api.allorigins.win/raw?url=';
 
@@ -209,11 +210,19 @@ export const loadAssets = async ({ root = './' } = {}) => {
 	return { images };
 };
 
+const nullSound = {
+	start: () => {},
+	stop: () => {},
+	play: () => {}
+};
+
 const sounds = {};
 export const loadSounds = async (key) => {
+	const settngs = await getSettings();
 	// TODO: this should work, I think. But it leads to doubling background music
 	//if (sounds[key]) return sounds[key];
 	if (key === 'march') {
+		if (!settngs.bgm) return nullSound;
 		const MAXVOL = 0.45;
 		const bg = new Howl({
 			src: ['/assets/audio/march.wav'],
@@ -237,6 +246,7 @@ export const loadSounds = async (key) => {
 		return sounds.menuBackground;
 	}
 	if (key === 'slowedSurf') {
+		if (!settngs.bgm) return nullSound;
 		const MAXVOL = 0.65;
 		const bg = new Howl({
 			src: ['/assets/audio/slowedSurf.wav'],
@@ -260,6 +270,7 @@ export const loadSounds = async (key) => {
 		return sounds.menuBackground;
 	}
 	if (key === 'menuBackground') {
+		if (!settngs.bgm) return nullSound;
 		const MAXVOL = 0.75;
 		const bg = new Howl({
 			src: ['/assets/audio/EtherealTraverse.wav'],
@@ -283,6 +294,7 @@ export const loadSounds = async (key) => {
 		return sounds.menuBackground;
 	}
 	if (key === 'tropicalShadowsBackground') {
+		if (!settngs.bgm) return nullSound;
 		const MAXVOL = 0.6;
 		const bg = new Howl({
 			src: ['/assets/audio/TropicalShadows.wav'],
@@ -306,6 +318,7 @@ export const loadSounds = async (key) => {
 		return sounds.tropicalShadowsBackground;
 	}
 	if (key === 'sunnyFieldBackground') {
+		if (!settngs.bgm) return nullSound;
 		const MAXVOL = 0.45;
 		const bg = new Howl({
 			src: ['/assets/audio/SunnyField.wav'],
@@ -329,6 +342,7 @@ export const loadSounds = async (key) => {
 		return sounds.sunnyFieldBackground;
 	}
 	if (key === 'asianSceneBackground') {
+		if (!settngs.bgm) return nullSound;
 		const MAXVOL = 0.6;
 		const bg = new Howl({
 			src: ['/assets/audio/AsianScene.wav'],
@@ -353,6 +367,7 @@ export const loadSounds = async (key) => {
 	}
 	//coreSounds
 	if (key === 'coreSounds') {
+		if (!settngs.sfx) return nullSound;
 		const MAXVOL = 0.4;
 		const sprites = new Howl({
 			src: ['/assets/audio/coreSounds.wav'],
