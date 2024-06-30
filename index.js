@@ -59,8 +59,9 @@ function showModal(args = {}) {
 }
 function closeModal() {
 	const modalIframe = document.querySelector('iframe.modal');
-	if (!modalIframe) return;
+	if (!modalIframe) return false;
 	modalIframe.remove();
+	return true;
 }
 
 function navigate(args = {}) {
@@ -108,8 +109,8 @@ window.addEventListener('message', async function (event) {
 		return showModal(args);
 	}
 	if (_ === 'navigate') {
-		closeModal();
-		if (!args?.src) return;
+		const modalClosed = closeModal();
+		if (modalClosed && !args?.src) return;
 		navigate(args);
 	}
 	if (_ === 'loaded') {
