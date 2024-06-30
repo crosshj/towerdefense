@@ -19,7 +19,10 @@ export const getSettings = async () => {
 		return clone(defaultSettings);
 	}
 	try {
-		return JSON.parse(userSettingsSrc);
+		return {
+			...clone(defaultSettings),
+			...JSON.parse(userSettingsSrc)
+		};
 	} catch (e) {
 		return clone(defaultSettings);
 	}
