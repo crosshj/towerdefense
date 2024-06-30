@@ -67,15 +67,13 @@ function closeModal() {
 function navigate(args = {}) {
 	document.body.classList.remove('fade-in');
 	document.body.classList.add('fade-out');
-	setTimeout(() => {
+	setTimeout(async () => {
 		document.querySelector('iframe').remove();
 		const mainIframe = document.createElement('iframe');
 		mainIframe.width = '100%';
 		mainIframe.height = '100%';
+		mainIframe.src = args.src || '/pages/home/index.html';
 		document.body.insertAdjacentElement('afterBegin', mainIframe);
-		setTimeout(() => {
-			mainIframe.src = args.src || '/pages/home/index.html';
-		}, FADE_MS);
 		if (args?.src === '/pages/mainStage/index.html' && bgMusic) {
 			bgMusic.stop();
 			bgMusic = undefined;
@@ -84,12 +82,16 @@ function navigate(args = {}) {
 			['/pages/home/index.html', undefined].includes(args?.src) &&
 			!bgMusic
 		) {
-			onLoaded();
+			bgMusic = await loadSounds('march');
+			bgMusic.start(4000);
 		}
 	}, FADE_MS);
 }
 document.body.addEventListener('mousedown', async (event) => {
-	if (event.target.classList.contains('back-button')) return navigate();
+	if (event.target.classList.contains('back-button')) {
+		closeModal();
+		return navigate();
+	}
 });
 
 window.addEventListener('message', async function (event) {
@@ -103,6 +105,7 @@ window.addEventListener('message', async function (event) {
 			container: statsContainer,
 			...args
 		});
+		return;
 	}
 	if (_ === 'navigate' && (args?.src || '').includes('/modals/')) {
 		closeModal();
@@ -112,14 +115,17 @@ window.addEventListener('message', async function (event) {
 		const modalClosed = closeModal();
 		if (modalClosed && !args?.src) return;
 		navigate(args);
+		return;
 	}
 	if (_ === 'loaded') {
 		document.body.classList.add('fade-in');
 		document.body.classList.remove('fade-out');
+		return;
 	}
 	if (_ === 'title') {
 		titleContainer.style.visibility = args.visibility;
 		titleEl.innerHTML = args.title;
+		return;
 	}
 });
 
