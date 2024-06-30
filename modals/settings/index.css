@@ -21,6 +21,7 @@ body {
 		.label {
 			font-size: 17px;
 			margin-bottom: 8px;
+			white-space: nowrap;
 		}
 	}
 }
