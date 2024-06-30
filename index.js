@@ -49,6 +49,20 @@ const setupSplash = (installState) => {
 	splashEl.outerHTML = splash;
 };
 
+function showModal(args = {}) {
+	const modalIframe = document.createElement('iframe');
+	modalIframe.width = '100%';
+	modalIframe.height = '100%';
+	modalIframe.classList.add('modal');
+	modalIframe.src = args.src;
+	document.body.insertAdjacentElement('beforeEnd', modalIframe);
+}
+function closeModal() {
+	const modalIframe = document.querySelector('iframe.modal');
+	if (!modalIframe) return;
+	modalIframe.remove();
+}
+
 function navigate(args = {}) {
 	document.body.classList.remove('fade-in');
 	document.body.classList.add('fade-out');
@@ -89,7 +103,13 @@ window.addEventListener('message', async function (event) {
 			...args
 		});
 	}
+	if (_ === 'navigate' && (args?.src || '').includes('/modals/')) {
+		closeModal();
+		return showModal(args);
+	}
 	if (_ === 'navigate') {
+		closeModal();
+		if (!args?.src) return;
 		navigate(args);
 	}
 	if (_ === 'loaded') {

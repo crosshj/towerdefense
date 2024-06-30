@@ -1,0 +1,249 @@
+@import url('https://fonts.googleapis.com/css2?family=Passion+One:wght@400;700;900&display=swap');
+
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	overscroll-behavior: none;
+}
+
+.font-smaller {
+	font-size: 0.8em;
+}
+
+.background {
+	background: #000b;
+	background-size: 100% 100%;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	z-index: -1;
+}
+.info {
+	position: absolute;
+	bottom: 1px;
+	left: 0;
+	right: 0;
+	color: #a77854;
+	display: flex;
+	justify-content: center;
+	font-size: 13px;
+	align-items: center;
+}
+.container {
+	--inner-max-width: min(97vw, 840px);
+	position: fixed;
+	top: 2vh;
+	left: 30vh;
+	bottom: 2vh;
+	right: 30vh;
+	overflow: hidden;
+	.content {
+		position: absolute;
+		display: flex;
+		flex-direction: column;
+		top: 18px;
+		bottom: 22px;
+		left: 2px;
+		right: 2px;
+
+		.header,
+		.footer {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+		.header {
+			padding-bottom: 6px;
+			.title {
+				margin-left: 20px;
+				color: yellow;
+				-webkit-text-stroke: 1.5px black;
+				-webkit-text-fill-color: yellow;
+				font-size: 35px;
+				letter-spacing: -1.5px;
+				font-family: 'Passion One', sans-serif;
+				font-weight: 400;
+			}
+			.chooser {
+				display: flex;
+				justify-content: end;
+				font-size: 18px;
+				box-sizing: border-box;
+				--dark-color: #482414;
+				flex: 1;
+				margin-right: 35px;
+				.selected {
+					color: yellow;
+					box-shadow: none;
+					background: var(--dark-color);
+				}
+				& > div {
+					width: 35%;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					text-align: center;
+					line-height: 16px;
+					color: white;
+					padding-block: 5px;
+					padding-inline: 20px;
+					box-sizing: border-box;
+					font-weight: 900;
+					background: linear-gradient(180deg, #886135, #785830);
+					border: 1px solid var(--dark-color);
+				}
+				& > div:first-child {
+					border-top-left-radius: 5px;
+					border-bottom-left-radius: 5px;
+				}
+				& > div:last-child {
+					border-top-right-radius: 5px;
+					border-bottom-right-radius: 5px;
+				}
+			}
+		}
+		.footer {
+			padding-top: 6px;
+			& > div {
+				flex: 1;
+				display: flex;
+				justify-content: center;
+			}
+			.actions {
+				margin-right: 20px;
+				justify-content: end;
+			}
+			.total {
+				span {
+					background: #0003;
+					color: hsl(26 33% 53% / 1);
+					padding: 5px 9px;
+					margin-inline: auto;
+					font-family: 'Passion One';
+					letter-spacing: 3px;
+					border-radius: 5px;
+				}
+			}
+		}
+	}
+	.close-button {
+		position: absolute;
+		right: 0;
+		top: 0;
+		background: yellow;
+		font-weight: 900;
+		width: 27px;
+		aspect-ratio: 1 / 1;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border-radius: 50%;
+		user-select: none;
+		border: 2px solid black;
+	}
+	.container-bg {
+		position: absolute;
+		left: 0;
+		top: 10px;
+		bottom: 16px;
+		right: 0;
+		background: #6f371f;
+		z-index: -1;
+		border-radius: 10px;
+		box-sizing: border-box;
+		border: 2px solid black;
+	}
+}
+
+.flex-spacer {
+	flex: 1;
+}
+
+button {
+	background: yellow;
+	padding: 0.2em;
+	border-radius: 0.5em;
+	color: #4c2615;
+	text-transform: uppercase;
+	border-color: #492413;
+	font-family: 'Passion One', sans-serif;
+	font-weight: 400;
+	font-size: 19px;
+	letter-spacing: 1px;
+	min-width: 130px;
+}
+
+.main-header,
+.sub-header,
+.controls,
+.team-slots,
+.all-characters {
+	box-sizing: border-box;
+}
+
+.items-list {
+	overflow-y: auto;
+	box-sizing: border-box;
+	background-color: #905527;
+	display: flex;
+	.banner,
+	.list,
+	.list .item,
+	.list .item .icon {
+		border-radius: 7px;
+	}
+	.banner {
+		background: #5e8561;
+		width: 27%;
+		margin: 6px;
+		box-sizing: border-box;
+	}
+	.list {
+		display: flex;
+		flex-direction: column;
+		margin: 6px;
+		box-sizing: border-box;
+		flex: 1;
+		margin-left: 0;
+		overflow-y: auto;
+		scrollbar-width: none;
+		box-sizing: border-box;
+		--dark-color: #0002;
+		.item {
+			flex: 1;
+			min-height: 75px;
+			margin: 0.1em 0.4em;
+			box-sizing: border-box;
+			border-bottom: 1px solid var(--dark-color);
+			border-radius: 0;
+			padding: 5px;
+			display: flex;
+			gap: 5px;
+			.icon,
+			.actions {
+				height: 100%;
+				aspect-ratio: 1 / 1;
+			}
+			.icon {
+				background: #fff3;
+			}
+			.details {
+				flex: 1;
+			}
+			.details,
+			.actions {
+				background: #fff1;
+			}
+		}
+		.item:last-child {
+			border-bottom: 0;
+		}
+		.item.selected {
+			background: var(--dark-color);
+			border-radius: inherit;
+		}
+	}
+}

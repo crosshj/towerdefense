@@ -17,8 +17,8 @@ const isWIP = [
 	'upgrade',
 	'shop',
 	'friends',
-	'pass'
-	//'giftbox',
+	'pass',
+	'giftbox'
 	//'settings',
 ];
 
@@ -79,7 +79,7 @@ const drawControls = () => {
 			<div class="shop clickable wip">Shop</div>
 			<div class="friends clickable wip">Friends</div>
 			<div class="pass clickable wip">Pass</div>
-			<div class="giftbox clickable">Giftbox</div>
+			<div class="giftbox modal clickable wip">Giftbox</div>
 			<div class="settings clickable">⚙</div>
 		</div>
 	`;
@@ -88,11 +88,16 @@ const drawControls = () => {
 	container.addEventListener('mousedown', (event) => {
 		const which = Array.from(event.target.classList)
 			.filter((x) => x !== 'clickable')
+			.filter((x) => x !== 'modal')
 			.filter((x) => x !== 'wip')
 			.join('_');
 		let url = `/pages/_wip/index.html?which=${which}`;
+		if (event.target.classList.contains('modal')) {
+			url = url.replace('/pages/', '/modals/');
+		}
 		if (isWIP.includes(which)) {
-			url = `/pages/${which}/index.html`;
+			url = url.replace('/_wip/', `/${which}/`);
+			url = url.replace(`?which=${which}`, '');
 		}
 		window.parent.postMessage({
 			_: 'navigate',
