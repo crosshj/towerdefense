@@ -5,12 +5,12 @@ import { statsRequest } from '../../visuals/stats/stats.js';
 const pageTitle = 'HOME';
 
 const isWIP = [
-	//'banner',
-	//'user',
-	//'event',
-	//'buff',
-	//'quest',
-	//'exp',
+	'banner',
+	'user',
+	'event',
+	'buff',
+	'quest',
+	'exp',
 
 	'my-team',
 	'collect',
@@ -45,31 +45,31 @@ const drawControls = () => {
 		<div class="header">
 			<div class="level">
 				<div class="background"></div>
-				<div class="banner clickable">
+				<div class="banner modal clickable wip">
 					<div></div>
 					<div>Newbie</div>
 					<div>Level</div>
 					<div>1</div>
 				</div>
-				<div class="user clickable">
+				<div class="user modal clickable wip">
 					<div class="image"></div>
 				</div>
 			</div>
 			<div class="buttons">
-				<div class="event clickable">Event</div>
-				<div class="buff clickable">Buff</div>
+				<div class="event modal clickable wip">News</div>
+				<div class="buff modal clickable wip">Buff</div>
 			</div>
 			<div class="statsAndQuest">
 				<div class="stats">
 				</div>
-				<div class="quest clickable">
+				<div class="quest modal clickable wip">
 					Quest
 				</div>
 			</div>
 		</div>
 		
 		<div class="resources">
-			<div class="exp clickable">EXP</div>
+			<div class="exp modal clickable wip">EXP</div>
 		</div>
 		
 		<div class="navigation">
