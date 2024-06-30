@@ -1,0 +1,229 @@
+@import url('https://fonts.googleapis.com/css2?family=Passion+One:wght@400;700;900&display=swap');
+
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	overscroll-behavior: none;
+}
+
+.background {
+	background: url(./bg.png);
+	background-size: 100% 100%;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	z-index: -1;
+}
+
+.container {
+	--inner-max-width: min(97vw, 840px);
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	display: grid;
+	grid-template-rows: 10% 10% 78%;
+	grid-template-columns: 1fr 67% 1fr;
+	overflow: hidden;
+}
+.main-header {
+	grid-column: 1 / -1;
+}
+.sub-header {
+	grid-column: 2 / 2;
+}
+.items-list {
+	grid-row: 3;
+	grid-column: 2 / 2;
+}
+
+.flex-spacer {
+	flex: 1;
+}
+
+button {
+	background: #1e2430;
+	padding: 0.4em 0.6em;
+	border-radius: 0.5em;
+	color: #b3c7d1;
+	text-transform: uppercase;
+	border-color: #8facbb;
+	font-family: 'Passion One', sans-serif;
+	font-weight: 400;
+	font-size: 17px;
+	letter-spacing: 1px;
+}
+
+.main-header,
+.sub-header,
+.controls,
+.team-slots,
+.all-characters {
+	box-sizing: border-box;
+}
+
+.main-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: start;
+	max-width: var(--inner-max-width);
+	margin-inline: auto;
+	width: 100%;
+	padding-top: 13px;
+	.title-container {
+		margin-top: -7px;
+		display: flex;
+		align-items: center;
+		.back-button {
+			width: 30px;
+			height: 30px;
+			background-color: yellow;
+			border: 1px solid black;
+			border-radius: 50%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-size: 16px;
+			cursor: pointer;
+		}
+		.title {
+			margin-left: 0.5em;
+			color: #00c7ff;
+			-webkit-text-stroke: 1px black;
+			-webkit-text-fill-color: #00c7ff;
+			font-size: 35px;
+			letter-spacing: -1.5px;
+			font-family: 'Passion One', sans-serif;
+			font-weight: 400;
+		}
+	}
+	.chooser {
+		display: flex;
+		position: fixed;
+		left: 18vw;
+		right: 18vw;
+		width: 100%;
+		max-width: 64vw;
+		top: 11vh;
+		justify-content: center;
+		font-size: 18px;
+		box-sizing: border-box;
+		--dark-color: #27305a;
+		.selected {
+			color: white;
+			box-shadow: none;
+			background: var(--dark-color);
+		}
+		& > div {
+			width: 20%;
+			display: flex;
+			justify-content: center;
+			color: #456a92;
+			padding-block: 0.35em;
+			box-sizing: border-box;
+			font-weight: 900;
+			background: linear-gradient(180deg, #c2e7f8, #8ebcd1);
+			border: 1px solid var(--dark-color);
+		}
+		& > div:nth-child(1) {
+			border-top-left-radius: 5px;
+			border-bottom-left-radius: 5px;
+		}
+		& > div:nth-child(3) {
+			border-top-right-radius: 5px;
+			border-bottom-right-radius: 5px;
+		}
+		& > div:last-child {
+			margin-left: 10px;
+			border-radius: 5px;
+		}
+	}
+	.currency {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		gap: 10px;
+	}
+}
+
+.sub-header {
+	display: flex;
+	align-items: center;
+	padding-inline: 1em;
+	gap: 0.5em;
+	color: #90adbc;
+	.total {
+		margin-right: 0.8em;
+	}
+}
+
+.items-list {
+	height: 100%;
+	max-height: 400px; /* Set the desired height for the container */
+	overflow-y: auto; /* Enable vertical scrolling */
+	box-sizing: border-box;
+	/* background-color: #1e2430; */
+	display: flex;
+	.banner,
+	.list,
+	.list .item,
+	.list .item .icon {
+		border-radius: 7px;
+	}
+	.banner {
+		background: #5d84ad;
+		width: 27%;
+		margin: 6px;
+		box-sizing: border-box;
+	}
+	.list {
+		background: #303a68;
+		display: flex;
+		flex-direction: column;
+		margin: 6px;
+		box-sizing: border-box;
+		flex: 1;
+		margin-left: 0;
+		overflow-y: auto;
+		scrollbar-width: none;
+		box-sizing: border-box;
+		--dark-color: #27305a;
+		.item {
+			flex: 1;
+			min-height: 85px;
+			margin: 0.1em 0.4em;
+			box-sizing: border-box;
+			border-bottom: 1px solid var(--dark-color);
+			border-radius: 0;
+			padding: 5px;
+			display: flex;
+			gap: 5px;
+			.icon,
+			.actions {
+				height: 100%;
+				aspect-ratio: 1 / 1;
+			}
+			.icon {
+				background: #fff3;
+			}
+			.details {
+				flex: 1;
+			}
+			.details,
+			.actions {
+				background: #8881;
+			}
+		}
+		.item:last-child {
+			border-bottom: 0;
+		}
+		.item.selected {
+			background: var(--dark-color);
+			border-radius: inherit;
+		}
+	}
+}

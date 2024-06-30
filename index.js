@@ -52,21 +52,26 @@ const setupSplash = (installState) => {
 function navigate(args = {}) {
 	document.body.classList.remove('fade-in');
 	document.body.classList.add('fade-out');
-	document.querySelector('iframe').remove();
-	const mainIframe = document.createElement('iframe');
-	mainIframe.width = '100%';
-	mainIframe.height = '100%';
-	document.body.insertAdjacentElement('afterBegin', mainIframe);
 	setTimeout(() => {
-		mainIframe.src = args.src || '/pages/home/index.html';
+		document.querySelector('iframe').remove();
+		const mainIframe = document.createElement('iframe');
+		mainIframe.width = '100%';
+		mainIframe.height = '100%';
+		document.body.insertAdjacentElement('afterBegin', mainIframe);
+		setTimeout(() => {
+			mainIframe.src = args.src || '/pages/home/index.html';
+		}, FADE_MS);
+		if (args?.src === '/pages/mainStage/index.html' && bgMusic) {
+			bgMusic.stop();
+			bgMusic = undefined;
+		}
+		if (
+			['/pages/home/index.html', undefined].includes(args?.src) &&
+			!bgMusic
+		) {
+			onLoaded();
+		}
 	}, FADE_MS);
-	if (args?.src === '/pages/mainStage/index.html' && bgMusic) {
-		bgMusic.stop();
-		bgMusic = undefined;
-	}
-	if (['/pages/home/index.html', undefined].includes(args?.src) && !bgMusic) {
-		onLoaded();
-	}
 }
 document.body.addEventListener('mousedown', async (event) => {
 	if (event.target.classList.contains('back-button')) return navigate();
