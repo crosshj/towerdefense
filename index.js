@@ -3,6 +3,7 @@ import { loadSounds } from '/visuals/assets.js';
 import { statsElement } from '/visuals/stats/stats.js';
 
 const FADE_MS = 350;
+let whereIsBack;
 
 const setupPlayable = () => {
 	const iframe = `
@@ -90,7 +91,7 @@ function navigate(args = {}) {
 document.body.addEventListener('mousedown', async (event) => {
 	if (event.target.classList.contains('back-button')) {
 		closeModal();
-		return navigate();
+		return navigate({ src: whereIsBack });
 	}
 });
 
@@ -125,6 +126,7 @@ window.addEventListener('message', async function (event) {
 	if (_ === 'title') {
 		titleContainer.style.visibility = args.visibility;
 		titleEl.innerHTML = args.title;
+		whereIsBack = args?.back ? args.back : undefined;
 		return;
 	}
 });

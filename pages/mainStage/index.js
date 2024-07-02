@@ -38,7 +38,7 @@ const setup = async () => {
 		clickHandle: (color) => {
 			const which = clickColorMap[color];
 			if (!which) return;
-			const src = `/pages/game/standard.html?zone=${which}`;
+			const src = `/pages/game/selectTeam/index.html?zone=${which}`;
 			bgMusic.stop();
 			window.parent.postMessage({ _: 'navigate', src });
 		}
