@@ -1,11 +1,11 @@
 I'm making a game and starting with Line Rangers style.
 
-## What I like about LR:
+### What I like about LR:
 
 -   visuals (except would prefer less cute)
 -   gameplay
 
-## What I dislike about LR:
+### What I dislike about LR:
 
 -   money-grabbing
 -   disconnected from community/players
@@ -15,7 +15,7 @@ I'm making a game and starting with Line Rangers style.
     line)
 -   in-game communication sucks (this is why people use discord?)
 
-## reference
+### reference
 
 farming - https://www.youtube.com/watch?v=ymFPPRrahUA  
 shows team building - https://youtu.be/9sv721j4jsQ?t=372  
@@ -23,7 +23,7 @@ https://www.youtube.com/watch?v=g2dhxDY8f7U
 https://developer.chrome.com/docs/web-platform/declarative-link-capturing
 https://stackoverflow.com/questions/58633304/pwa-home-screen-uninstall-dom-event
 
-## notes
+### notes
 
 https://web.dev/articles/pwas-in-app-stores
 
@@ -54,5 +54,5 @@ http://dragonbones.com/en/download.html#runLibrary
 
 -->
 
-https://teedee.us
+https://teedee.us  
 https://bit.ly/TowerDefenseGoGo
