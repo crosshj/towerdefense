@@ -1,8 +1,12 @@
 import { getCharacters } from '../../user/getCharacters.js';
+import { getTeams } from '../../user/teams.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
 	const characters = await getCharacters();
 	const allCharactersDiv = document.getElementById('all-characters');
+
+	const teams = await getTeams();
+	console.log({ teams });
 
 	window.parent.postMessage({
 		_: 'title',
@@ -28,9 +32,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 		characterCard.dataset.mineralCost = character.mineralCost;
 		characterCard.dataset.stars = character.stars;
 		characterCard.addEventListener('dragstart', dragStart);
-		characterCard.addEventListener('touchstart', touchStart, {
-			passive: true
-		});
+		// characterCard.addEventListener('touchstart', touchStart, {
+		// 	passive: true
+		// });
 		allCharactersDiv.appendChild(characterCard);
 	});
 
@@ -45,8 +49,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 	slots.forEach((slot) => {
 		slot.addEventListener('dragover', dragOver);
 		slot.addEventListener('drop', drop);
-		slot.addEventListener('touchmove', touchMove, { passive: false });
-		slot.addEventListener('touchend', touchEnd, { passive: true });
+		// slot.addEventListener('touchmove', touchMove, { passive: false });
+		// slot.addEventListener('touchend', touchEnd, { passive: true });
 	});
 
 	function dragStart(e) {
@@ -70,28 +74,28 @@ document.addEventListener('DOMContentLoaded', async () => {
 		)}`;
 	}
 
-	let touchCharacterCard = null;
+	// let touchCharacterCard = null;
 
-	function touchStart(e) {
-		console.log('touch started');
-		touchCharacterCard = e.target;
-	}
+	// function touchStart(e) {
+	// 	console.log('touch started');
+	// 	touchCharacterCard = e.target;
+	// }
 
-	function touchMove(e) {
-		e.preventDefault();
-	}
+	// function touchMove(e) {
+	// 	e.preventDefault();
+	// }
 
-	function touchEnd(e) {
-		if (!touchCharacterCard) return;
-		const displayName = touchCharacterCard.dataset.displayName;
-		const mineralCost = touchCharacterCard.dataset.mineralCost;
-		const stars = touchCharacterCard.dataset.stars;
-		e.target.innerHTML = `${displayName}<br />${'★'.repeat(
-			stars
-		)}<br />${mineralCost}`;
-		e.target.classList.remove('blank');
-		touchCharacterCard = null;
-	}
+	// function touchEnd(e) {
+	// 	if (!touchCharacterCard) return;
+	// 	const displayName = touchCharacterCard.dataset.displayName;
+	// 	const mineralCost = touchCharacterCard.dataset.mineralCost;
+	// 	const stars = touchCharacterCard.dataset.stars;
+	// 	e.target.innerHTML = `${displayName}<br />${'★'.repeat(
+	// 		stars
+	// 	)}<br />${mineralCost}`;
+	// 	e.target.classList.remove('blank');
+	// 	touchCharacterCard = null;
+	// }
 
 	const params = Object.fromEntries(
 		new URLSearchParams(window.location.search)

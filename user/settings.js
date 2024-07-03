@@ -1,3 +1,5 @@
+import { clone } from '../utils/utils.js';
+
 const LS_NAME = 'USER_SETTINGS';
 
 const defaultSettings = {
@@ -11,8 +13,6 @@ const defaultSettings = {
 	'alert-guild': false,
 	'alert-pvp': false
 };
-const clone = (x) => JSON.parse(JSON.stringify(x));
-
 export const getSettings = async () => {
 	const userSettingsSrc = localStorage.getItem(LS_NAME);
 	if (!userSettingsSrc) {

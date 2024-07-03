@@ -1,5 +1,16 @@
 export const clone = (x) => JSON.parse(JSON.stringify(x));
 
+export const generateUUID = () => {
+	const time = Date.now().toString(16).padStart(12, '0'); // 48 bits of timestamp
+	const random = 'xxxxxxxxxxxx'.replace(/[x]/g, () =>
+		Math.floor(Math.random() * 16).toString(16)
+	); // 48 bits of randomness
+	return `${time.slice(0, 8)}-${time.slice(8, 12)}-7${random.slice(
+		0,
+		3
+	)}-${random.slice(3, 6)}-${random.slice(6)}`;
+};
+
 export const cleanError = (e) => {
 	e.stack = e.stack
 		.split('\n')
