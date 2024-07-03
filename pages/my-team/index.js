@@ -1,13 +1,21 @@
 import { getCharacters } from '../../user/getCharacters.js';
-import { getTeams } from '../../user/teams.js';
+import { getTeams, setTeams } from '../../user/teams.js';
+
+const saveTeam = async ({ teams }) => {
+	const teamSlots = Array.from(document.querySelectorAll('.team-slot')).map(
+		(x) => ({ ...x.dataset })
+	);
+	const selected = document.querySelector('.team-dropdown select').value;
+	const current = teams[selected];
+	await setTeams({
+		[selected]: {
+			a: teamSlots,
+			b: current.b
+		}
+	});
+};
 
 document.addEventListener('DOMContentLoaded', async () => {
-	const characters = await getCharacters();
-	const allCharactersDiv = document.getElementById('all-characters');
-
-	const teams = await getTeams();
-	console.log({ teams });
-
 	window.parent.postMessage({
 		_: 'title',
 		title: 'TEAM',
@@ -21,20 +29,39 @@ document.addEventListener('DOMContentLoaded', async () => {
 	};
 	window.parent.postMessage({ _: 'stats', ...args });
 
+	const characters = await getCharacters();
+	const allCharactersDiv = document.getElementById('all-characters');
+	const teams = await getTeams();
+	console.log({ teams });
+
+	const selected = document.querySelector('.team-dropdown select').value;
+	const current = teams[selected]?.a;
+
 	characters.forEach((character) => {
 		const characterCard = document.createElement('div');
 		characterCard.className = 'character-card';
-		characterCard.draggable = true;
-		characterCard.innerHTML = `${character.displayName}<br>Lv. ${
-			character.level
-		}<br />${'★'.repeat(character.stars)}`;
+		if (current.map((x) => x.id).includes(character.id)) {
+			characterCard.classList.add('used');
+		}
+		characterCard.innerHTML = `
+			<div class="icon"></div>
+			<div class="details">
+				${character.displayName}
+				<br>
+				Lv. ${character.level}
+				<br />
+				${'★'.repeat(character.stars)}
+			</div>
+		`;
 		characterCard.dataset.displayName = character.displayName;
 		characterCard.dataset.mineralCost = character.mineralCost;
 		characterCard.dataset.stars = character.stars;
-		characterCard.addEventListener('dragstart', dragStart);
-		// characterCard.addEventListener('touchstart', touchStart, {
-		// 	passive: true
-		// });
+		characterCard.dataset.id = character.id;
+
+		const charIcon = characterCard.querySelector('.icon');
+		charIcon.draggable = true;
+		charIcon.addEventListener('dragstart', dragStart);
+		charIcon.addEventListener('dragend', dragEnd);
 		allCharactersDiv.appendChild(characterCard);
 	});
 
@@ -46,56 +73,64 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 	const slots = document.querySelectorAll('.team-slot');
 
-	slots.forEach((slot) => {
+	slots.forEach((slot, i) => {
 		slot.addEventListener('dragover', dragOver);
 		slot.addEventListener('drop', drop);
-		// slot.addEventListener('touchmove', touchMove, { passive: false });
-		// slot.addEventListener('touchend', touchEnd, { passive: true });
+		const char = characters.find((x) => x.id === current[i]?.id);
+		if (char) {
+			slot.innerHTML = `
+				${char.displayName}
+				<br>
+				Mineral: ${char.mineralCost}
+				<br>
+				Stars: ${'★'.repeat(char.stars)}
+			`;
+			slot.classList.remove('blank');
+			slot.dataset.id = char.id;
+		}
 	});
 
+	let draggingEl;
 	function dragStart(e) {
-		console.log('drag started');
-		e.dataTransfer.setData('text/plain', e.target.innerHTML);
-		e.dataTransfer.setData('mineralCost', e.target.dataset.mineralCost);
-		e.dataTransfer.setData('stars', e.target.dataset.stars);
+		const parent = e.target.parentNode;
+		if (parent.classList.contains('used')) {
+			e.preventDefault();
+			return false;
+		}
+		draggingEl = parent;
+		draggingEl.classList.add('dragging');
+		e.dataTransfer.setData('displayName', parent.dataset.displayName);
+		e.dataTransfer.setData('mineralCost', parent.dataset.mineralCost);
+		e.dataTransfer.setData('stars', parent.dataset.stars);
+		e.dataTransfer.setData('id', parent.dataset.id);
+		const img = new Image();
+		img.src = '/assets/teamDragImage.png';
+		e.dataTransfer.setDragImage(img, 75 / 2, 40);
 	}
-
+	function dragEnd() {
+		if (!draggingEl) {
+			return;
+		}
+		draggingEl.classList.remove('dragging');
+	}
 	function dragOver(e) {
 		e.preventDefault();
 	}
-
 	function drop(e) {
 		e.preventDefault();
-		const data = e.dataTransfer.getData('text');
+		draggingEl.classList.remove('dragging');
+		draggingEl.classList.add('used');
+		draggingEl = undefined;
+		const name = e.dataTransfer.getData('displayName');
 		const mineralCost = e.dataTransfer.getData('mineralCost');
 		const stars = e.dataTransfer.getData('stars');
-		e.target.innerHTML = `${data}<br>Mineral Cost: ${mineralCost}<br>Stars: ${'★'.repeat(
+		e.target.dataset.id = e.dataTransfer.getData('id');
+		e.target.innerHTML = `${name}<br>Mineral: ${mineralCost}<br>Stars: ${'★'.repeat(
 			stars
 		)}`;
+		e.target.classList.remove('blank');
+		saveTeam({ teams });
 	}
-
-	// let touchCharacterCard = null;
-
-	// function touchStart(e) {
-	// 	console.log('touch started');
-	// 	touchCharacterCard = e.target;
-	// }
-
-	// function touchMove(e) {
-	// 	e.preventDefault();
-	// }
-
-	// function touchEnd(e) {
-	// 	if (!touchCharacterCard) return;
-	// 	const displayName = touchCharacterCard.dataset.displayName;
-	// 	const mineralCost = touchCharacterCard.dataset.mineralCost;
-	// 	const stars = touchCharacterCard.dataset.stars;
-	// 	e.target.innerHTML = `${displayName}<br />${'★'.repeat(
-	// 		stars
-	// 	)}<br />${mineralCost}`;
-	// 	e.target.classList.remove('blank');
-	// 	touchCharacterCard = null;
-	// }
 
 	const params = Object.fromEntries(
 		new URLSearchParams(window.location.search)

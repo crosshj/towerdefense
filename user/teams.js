@@ -5,30 +5,119 @@ const LS_NAME = 'USER_TEAMS';
 /* prettier-ignore */
 const defaultValue = {
 	'Team 1': {
-		a: [],
-		b: []
+		a: [
+			{ id: '019079cf-cb56-7f47-f03-7ef27d' },
+			{ id: '019079cf-cb56-7f2b-f72-56f0fd' },
+			{ id: '019079cf-cb56-7777-53f-64e88d' },
+			{ id: '019079cf-cb56-71dd-1d6-d8a311' },
+			{ id: '019079cf-cb56-7000-b9b-4b1e11' },
+		],
+		b: [
+			{ id: "019079cf-cb56-7e80-856-904532" },
+			{ id: "019079cf-cb56-7589-c23-ebf63f" },
+			{ id: "019079cf-cb56-7ee1-f65-88f817" },
+			{ id: "019079cf-cb56-77d7-db9-efc3da" },
+			{ id: "019079cf-cb56-7ea0-337-0ad0de" }
+		]
 	},
 	'Team 2': {
-		a: [],
-		b: []
+		a: [
+			{ id: '019079cf-cb56-7f47-f03-7ef27d' },
+			{ id: '019079cf-cb56-7f2b-f72-56f0fd' },
+			{ id: '019079cf-cb56-7777-53f-64e88d' },
+			{ id: '019079cf-cb56-71dd-1d6-d8a311' },
+			{ id: '019079cf-cb56-7000-b9b-4b1e11' },
+		],
+		b: [
+			{ id: "019079cf-cb56-7e80-856-904532" },
+			{ id: "019079cf-cb56-7589-c23-ebf63f" },
+			{ id: "019079cf-cb56-7ee1-f65-88f817" },
+			{ id: "019079cf-cb56-77d7-db9-efc3da" },
+			{ id: "019079cf-cb56-7ea0-337-0ad0de" }
+		]
 	},
 	'Team 3': {
-		a: [],
-		b: []
+		a: [
+			{ id: '019079cf-cb56-7f47-f03-7ef27d' },
+			{ id: '019079cf-cb56-7f2b-f72-56f0fd' },
+			{ id: '019079cf-cb56-7777-53f-64e88d' },
+			{ id: '019079cf-cb56-71dd-1d6-d8a311' },
+			{ id: '019079cf-cb56-7000-b9b-4b1e11' },
+		],
+		b: [
+			{ id: "019079cf-cb56-7e80-856-904532" },
+			{ id: "019079cf-cb56-7589-c23-ebf63f" },
+			{ id: "019079cf-cb56-7ee1-f65-88f817" },
+			{ id: "019079cf-cb56-77d7-db9-efc3da" },
+			{ id: "019079cf-cb56-7ea0-337-0ad0de" }
+		]
 	},
 	'Team 4': {
-		a: [],
-		b: []
+		a: [
+			{ id: '019079cf-cb56-7f47-f03-7ef27d' },
+			{ id: '019079cf-cb56-7f2b-f72-56f0fd' },
+			{ id: '019079cf-cb56-7777-53f-64e88d' },
+			{ id: '019079cf-cb56-71dd-1d6-d8a311' },
+			{ id: '019079cf-cb56-7000-b9b-4b1e11' },
+		],
+		b: [
+			{ id: "019079cf-cb56-7e80-856-904532" },
+			{ id: "019079cf-cb56-7589-c23-ebf63f" },
+			{ id: "019079cf-cb56-7ee1-f65-88f817" },
+			{ id: "019079cf-cb56-77d7-db9-efc3da" },
+			{ id: "019079cf-cb56-7ea0-337-0ad0de" }
+		]
 	},
 	'Team 5': {
-		a: [],
-		b: []
+		a: [
+			{ id: '019079cf-cb56-7f47-f03-7ef27d' },
+			{ id: '019079cf-cb56-7f2b-f72-56f0fd' },
+			{ id: '019079cf-cb56-7777-53f-64e88d' },
+			{ id: '019079cf-cb56-71dd-1d6-d8a311' },
+			{ id: '019079cf-cb56-7000-b9b-4b1e11' },
+		],
+		b: [
+			{ id: "019079cf-cb56-7e80-856-904532" },
+			{ id: "019079cf-cb56-7589-c23-ebf63f" },
+			{ id: "019079cf-cb56-7ee1-f65-88f817" },
+			{ id: "019079cf-cb56-77d7-db9-efc3da" },
+			{ id: "019079cf-cb56-7ea0-337-0ad0de" }
+		]
 	},
-	'Defense': {
-		a: [],
-		b: []
+	Defense: {
+		a: [
+			{ id: '019079cf-cb56-7f47-f03-7ef27d' },
+			{ id: '019079cf-cb56-7f2b-f72-56f0fd' },
+			{ id: '019079cf-cb56-7777-53f-64e88d' },
+			{ id: '019079cf-cb56-71dd-1d6-d8a311' },
+			{ id: '019079cf-cb56-7000-b9b-4b1e11' },
+		],
+		b: [
+			{ id: "019079cf-cb56-7e80-856-904532" },
+			{ id: "019079cf-cb56-7589-c23-ebf63f" },
+			{ id: "019079cf-cb56-7ee1-f65-88f817" },
+			{ id: "019079cf-cb56-77d7-db9-efc3da" },
+			{ id: "019079cf-cb56-7ea0-337-0ad0de" }
+		]
 	}
 };
+[
+	{
+		id: '019079cf-cb56-7e80-856-904532'
+	},
+	{
+		id: '019079cf-cb56-7589-c23-ebf63f'
+	},
+	{
+		id: '019079cf-cb56-7ee1-f65-88f817'
+	},
+	{
+		id: '019079cf-cb56-77d7-db9-efc3da'
+	},
+	{
+		id: '019079cf-cb56-7ea0-337-0ad0de'
+	}
+];
 
 export const getTeams = async () => {
 	const lsValue = localStorage.getItem(LS_NAME);
