@@ -45,11 +45,11 @@ character - 200px
 
 blaster master -
 https://www.spriters-resource.com/resources/sheets/113/116445.png?updated=1557048859
-dry
-bones -https://www.spriters-resource.com/resources/sheets/8/7871.png?updated=1460953762
 
-the dry bones sprite sheet gets me thinking it would be nice to make a bones
-system https://cdn.rawgit.com/flyover/spriter.ts/master/demo/index.html
+dry bones -
+https://www.spriters-resource.com/resources/sheets/8/7871.png?updated=1460953762
+
+https://cdn.rawgit.com/flyover/spriter.ts/master/demo/index.html
 http://dragonbones.com/en/download.html#runLibrary
 
 -->
