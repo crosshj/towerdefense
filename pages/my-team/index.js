@@ -1,6 +1,15 @@
 import { getCharacters } from '../../user/getCharacters.js';
 import { getTeams, setTeams } from '../../user/teams.js';
 
+function getDataURI(image) {
+	const canvas = document.createElement('canvas');
+	const ctx = canvas.getContext('2d');
+	canvas.width = image.width;
+	canvas.height = image.height;
+	ctx.drawImage(image, 0, 0);
+	return canvas.toDataURL('image/png');
+}
+
 const saveTeam = async ({ teams }) => {
 	const teamSlots = Array.from(document.querySelectorAll('.team-slot')).map(
 		(x) => ({ ...x.dataset })
@@ -83,6 +92,21 @@ const characterUpdater =
 		}
 	};
 
+const characterImageGetter = async () => {
+	//const allImages = await getAllImages();
+	const allImages = {};
+	allImages.default = await new Promise((resolve) => {
+		const img = new Image();
+		img.src = '/assets/teamDragImage.png';
+		img.onload = () => {
+			resolve(getDataURI(img));
+		};
+	});
+	return (character) => {
+		return allImages.default;
+	};
+};
+
 document.addEventListener('DOMContentLoaded', async () => {
 	let switchTeam, updateCharacters;
 	window.parent.postMessage({
@@ -102,6 +126,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 	const allCharactersDiv = document.getElementById('all-characters');
 	const teams = await getTeams();
 
+	const getCharImage = await characterImageGetter();
+
 	// team switch
 	const selectedTeamEl = document.querySelector(
 		'.team-dropdown custom-select'
@@ -116,22 +142,39 @@ document.addEventListener('DOMContentLoaded', async () => {
 		...teams[selectedTeamEl.value].b
 	];
 
+	const characterDiv = (c) => {
+		return `
+		<div class="stars">
+			${'★'.repeat(c.stars)}
+		</div>
+		<div class="info">
+			<div class="icon">
+				<img src="${getCharImage(c)}">
+			</div>
+			<div class="details">
+				<div class="name">
+					${c.displayName}
+				</div>
+				<div class="level flex space-between">
+					<div>Lv.</div>
+					<div>${c.level}</div>
+				</div>
+				<div class="mineral flex space-between">
+					<div class="mineral-icon">▲</div>
+					<div>${c.mineralCost}</div>
+				</div>
+			</div>
+		</div>
+	`;
+	};
+
 	characters.forEach((character) => {
 		const characterCard = document.createElement('div');
 		characterCard.className = 'character-card';
 		if (all.map((x) => x.id).includes(character.id)) {
 			characterCard.classList.add('used');
 		}
-		characterCard.innerHTML = `
-			<div class="icon"></div>
-			<div class="details">
-				${character.displayName}
-				<br>
-				Lv. ${character.level}
-				<br />
-				${'★'.repeat(character.stars)}
-			</div>
-		`;
+		characterCard.innerHTML = characterDiv(character);
 		characterCard.dataset.displayName = character.displayName;
 		characterCard.dataset.mineralCost = character.mineralCost;
 		characterCard.dataset.stars = character.stars;
