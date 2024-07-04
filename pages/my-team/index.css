@@ -230,6 +230,7 @@ body {
 			}
 		}
 		.mineral {
+			margin-top: 5px;
 			.mineral-icon {
 				color: #00f8f8;
 				margin-right: 4px;
