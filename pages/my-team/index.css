@@ -33,6 +33,9 @@ body {
 .flex-spacer {
 	flex: 1;
 }
+.hidden {
+	display: none;
+}
 
 .main-header,
 .sub-header,
@@ -96,23 +99,64 @@ body {
 		max-width: 583px;
 		margin: auto;
 		width: 100%;
-		background: #4f270f66;
-		padding: 0.5em 1em;
-		border-radius: 14px;
 		margin-top: 7px;
-		.raid-indicator {
-			background-color: #c22121;
-			color: #f1b3b3;
-			padding: 5px;
-			border-radius: 5px;
+		align-items: center;
+		gap: 5px;
+		.team-switch {
+			position: relative;
+			width: 35px;
+			height: 35px;
+			& > div {
+				position: absolute;
+				width: 20px;
+				height: 20px;
+				border: 1px solid black;
+				background-color: #a07b55;
+				color: yellow;
+				font-weight: 900;
+				border-radius: 50%;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+			& > div.selected {
+				bottom: 0;
+				right: 0;
+				z-index: 1;
+				width: 25px;
+				height: 25px;
+				box-shadow: 0 0 5px 2px white;
+			}
+			& > div:not(.selected) {
+				top: -3px;
+				left: -3px;
+				opacity: 0.6;
+			}
 		}
-		.team-dropdown select {
-			padding: 5px;
-			background: transparent;
-			color: #e2dcdc;
-			border-color: #e4e4e4;
-			border-radius: 5px;
-			padding-inline: 1em;
+		.team-info {
+			background: #4f270f66;
+			padding: 0.25em 0.5em;
+			border-radius: 8px;
+			min-height: 28px;
+			flex: 1;
+			display: flex;
+			.raid-indicator {
+				background-color: #c22121;
+				color: #f1b3b3;
+				padding: 5px;
+				border-radius: 5px;
+			}
+		}
+		.team-dropdown custom-select {
+			--select-bg-color: #e4c19e;
+			--select-border-color: #6d5032;
+			--select-border-radius: 7px;
+			--select-text-color: #333;
+			--select-hover-bg-color: #c59d75;
+			--select-disabled-color: #ccc;
+			--select-width: 120px;
+			--select-active-bg-color: #775838;
+			--select-active-color: white;
 		}
 	}
 }
@@ -203,6 +247,8 @@ body {
 			margin-right: 10px;
 		}
 		.details {
+			width: 120px;
+			overflow: hidden;
 			display: flex;
 			flex-direction: column;
 			align-items: center;

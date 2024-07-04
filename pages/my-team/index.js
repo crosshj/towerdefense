@@ -5,17 +5,86 @@ const saveTeam = async ({ teams }) => {
 	const teamSlots = Array.from(document.querySelectorAll('.team-slot')).map(
 		(x) => ({ ...x.dataset })
 	);
-	const selected = document.querySelector('.team-dropdown select').value;
+	const selected = document.querySelector(
+		'.team-dropdown custom-select'
+	).value;
 	const current = teams[selected];
-	await setTeams({
-		[selected]: {
+	const subTeam = document
+		.querySelector('.team-switch .selected')
+		.innerText.toLowerCase();
+
+	/* prettier-ignore */
+	const newTeam = subTeam === 'a'
+		? {
 			a: teamSlots,
 			b: current.b
 		}
+		: {
+			a: current.a,
+			b: teamSlots
+		};
+	await setTeams({
+		[selected]: newTeam
 	});
+	teams[selected] = newTeam;
 };
 
+const teamSwitcher =
+	({ slots, teams, characters }) =>
+	() => {
+		const subTeam = document
+			.querySelector('.team-switch .selected')
+			.innerText.toLowerCase();
+		const selected = document.querySelector(
+			'.team-dropdown custom-select'
+		).value;
+		const current = teams[selected][subTeam];
+		slots.forEach((slot, i) => {
+			const char = characters.find((x) => x.id === current[i]?.id);
+			if (char) {
+				slot.innerHTML = `
+					${char.displayName}
+					<br>
+					Mineral: ${char.mineralCost}
+					<br>
+					Stars: ${'★'.repeat(char.stars)}
+				`;
+				slot.classList.remove('blank');
+				slot.dataset.id = char.id;
+			} else {
+				slot.classList.add('blank');
+				slot.dataset.id = undefined;
+			}
+		});
+		const raidIndicator = document.querySelector('.raid-indicator');
+		if (selected === 'Team 1') {
+			raidIndicator.classList.remove('hidden');
+		} else {
+			raidIndicator.classList.add('hidden');
+		}
+	};
+
+const characterUpdater =
+	({ teams }) =>
+	() => {
+		const charDivs = Array.from(
+			document.querySelectorAll('#all-characters .character-card')
+		);
+		const selected = document.querySelector(
+			'.team-dropdown custom-select'
+		).value;
+		const current = [...teams[selected].a, ...teams[selected].b];
+		for (const characterCard of charDivs) {
+			if (current.map((x) => x.id).includes(characterCard.dataset.id)) {
+				characterCard.classList.add('used');
+			} else {
+				characterCard.classList.remove('used');
+			}
+		}
+	};
+
 document.addEventListener('DOMContentLoaded', async () => {
+	let switchTeam, updateCharacters;
 	window.parent.postMessage({
 		_: 'title',
 		title: 'TEAM',
@@ -32,15 +101,25 @@ document.addEventListener('DOMContentLoaded', async () => {
 	const characters = await getCharacters();
 	const allCharactersDiv = document.getElementById('all-characters');
 	const teams = await getTeams();
-	console.log({ teams });
 
-	const selected = document.querySelector('.team-dropdown select').value;
-	const current = teams[selected]?.a;
+	// team switch
+	const selectedTeamEl = document.querySelector(
+		'.team-dropdown custom-select'
+	);
+	selectedTeamEl.addEventListener('change', () => {
+		switchTeam && switchTeam();
+		updateCharacters && updateCharacters();
+	});
+	const current = teams[selectedTeamEl.value]?.a;
+	const all = [
+		...teams[selectedTeamEl.value].a,
+		...teams[selectedTeamEl.value].b
+	];
 
 	characters.forEach((character) => {
 		const characterCard = document.createElement('div');
 		characterCard.className = 'character-card';
-		if (current.map((x) => x.id).includes(character.id)) {
+		if (all.map((x) => x.id).includes(character.id)) {
 			characterCard.classList.add('used');
 		}
 		characterCard.innerHTML = `
@@ -70,6 +149,16 @@ document.addEventListener('DOMContentLoaded', async () => {
 		'.container .total-characters'
 	);
 	totalContainer.innerHTML = `TOTAL ${characters.length} / 700`;
+
+	//subteam switch
+	const teamSwitch = document.querySelector('.team-switch');
+	teamSwitch.addEventListener('mousedown', () => {
+		const children = Array.from(teamSwitch.children);
+		for (const child of children) {
+			child.classList.toggle('selected');
+		}
+		switchTeam && switchTeam();
+	});
 
 	const slots = document.querySelectorAll('.team-slot');
 
@@ -116,10 +205,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 	function dragOver(e) {
 		e.preventDefault();
 	}
-	function drop(e) {
+	async function drop(e) {
 		e.preventDefault();
 		draggingEl.classList.remove('dragging');
-		draggingEl.classList.add('used');
+		// draggingEl.classList.add('used');
 		draggingEl = undefined;
 		const name = e.dataTransfer.getData('displayName');
 		const mineralCost = e.dataTransfer.getData('mineralCost');
@@ -129,12 +218,24 @@ document.addEventListener('DOMContentLoaded', async () => {
 			stars
 		)}`;
 		e.target.classList.remove('blank');
-		saveTeam({ teams });
+		await saveTeam({ teams });
+		updateCharacters && updateCharacters();
 	}
 
 	const params = Object.fromEntries(
 		new URLSearchParams(window.location.search)
 	);
+
+	switchTeam = teamSwitcher({
+		slots,
+		teams,
+		characters
+	});
+
+	updateCharacters = characterUpdater({
+		teams,
+		characters
+	});
 
 	document.body.addEventListener('mousedown', (event) => {
 		// console.log(event.target);
