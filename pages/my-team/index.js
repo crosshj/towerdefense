@@ -1,14 +1,49 @@
 import { getCharacters } from '../../user/getCharacters.js';
 import { getTeams, setTeams } from '../../user/teams.js';
+import { characterImageGetter } from '../../visuals/assets.character.js';
 
-function getDataURI(image) {
-	const canvas = document.createElement('canvas');
-	const ctx = canvas.getContext('2d');
-	canvas.width = image.width;
-	canvas.height = image.height;
-	ctx.drawImage(image, 0, 0);
-	return canvas.toDataURL('image/png');
-}
+const characterDiv = (c, getCharImage) => {
+	return `
+		<div class="stars">
+			${'★'.repeat(c.stars)}
+		</div>
+		<div class="info">
+			<div class="icon">
+				<img src="${getCharImage(c)}">
+			</div>
+			<div class="details">
+				<div class="name">
+					${c.displayName}
+				</div>
+				<div class="level flex space-between">
+					<div>Lv.</div>
+					<div>${c.level}</div>
+				</div>
+				<div class="mineral flex space-between">
+					<div class="mineral-icon">▲</div>
+					<div>${c.mineralCost}</div>
+				</div>
+			</div>
+		</div>
+	`;
+};
+const slotDiv = (c, getCharImage) => {
+	return `
+			<div class="icon">
+				<img src="${getCharImage(c)}">
+			</div>
+			<div class="base">
+				<div class="cylinder"></div>
+				<div class="stars">
+					${'★'.repeat(c.stars)}
+				</div>
+			</div>
+			<div class="mineral flex space-between">
+				<div class="mineral-icon">▲</div>
+				<div>${c.mineralCost}</div>
+			</div>
+		`;
+};
 
 const saveTeam = async ({ teams }) => {
 	const teamSlots = Array.from(document.querySelectorAll('.team-slot')).map(
@@ -32,6 +67,7 @@ const saveTeam = async ({ teams }) => {
 			a: current.a,
 			b: teamSlots
 		};
+	console.log({ newTeam, oldTeam: teams[selected] });
 	await setTeams({
 		[selected]: newTeam
 	});
@@ -39,7 +75,7 @@ const saveTeam = async ({ teams }) => {
 };
 
 const teamSwitcher =
-	({ slots, teams, characters }) =>
+	({ slots, teams, characters, getCharImage }) =>
 	() => {
 		const subTeam = document
 			.querySelector('.team-switch .selected')
@@ -51,13 +87,7 @@ const teamSwitcher =
 		slots.forEach((slot, i) => {
 			const char = characters.find((x) => x.id === current[i]?.id);
 			if (char) {
-				slot.innerHTML = `
-					${char.displayName}
-					<br>
-					Mineral: ${char.mineralCost}
-					<br>
-					Stars: ${'★'.repeat(char.stars)}
-				`;
+				slot.innerHTML = slotDiv(char, getCharImage);
 				slot.classList.remove('blank');
 				slot.dataset.id = char.id;
 			} else {
@@ -91,21 +121,6 @@ const characterUpdater =
 			}
 		}
 	};
-
-const characterImageGetter = async () => {
-	//const allImages = await getAllImages();
-	const allImages = {};
-	allImages.default = await new Promise((resolve) => {
-		const img = new Image();
-		img.src = '/assets/teamDragImage.png';
-		img.onload = () => {
-			resolve(getDataURI(img));
-		};
-	});
-	return (character) => {
-		return allImages.default;
-	};
-};
 
 document.addEventListener('DOMContentLoaded', async () => {
 	let switchTeam, updateCharacters;
@@ -142,39 +157,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 		...teams[selectedTeamEl.value].b
 	];
 
-	const characterDiv = (c) => {
-		return `
-		<div class="stars">
-			${'★'.repeat(c.stars)}
-		</div>
-		<div class="info">
-			<div class="icon">
-				<img src="${getCharImage(c)}">
-			</div>
-			<div class="details">
-				<div class="name">
-					${c.displayName}
-				</div>
-				<div class="level flex space-between">
-					<div>Lv.</div>
-					<div>${c.level}</div>
-				</div>
-				<div class="mineral flex space-between">
-					<div class="mineral-icon">▲</div>
-					<div>${c.mineralCost}</div>
-				</div>
-			</div>
-		</div>
-	`;
-	};
-
 	characters.forEach((character) => {
 		const characterCard = document.createElement('div');
 		characterCard.className = 'character-card';
 		if (all.map((x) => x.id).includes(character.id)) {
 			characterCard.classList.add('used');
 		}
-		characterCard.innerHTML = characterDiv(character);
+		characterCard.innerHTML = characterDiv(character, getCharImage);
 		characterCard.dataset.displayName = character.displayName;
 		characterCard.dataset.mineralCost = character.mineralCost;
 		characterCard.dataset.stars = character.stars;
@@ -204,19 +193,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 	});
 
 	const slots = document.querySelectorAll('.team-slot');
-
 	slots.forEach((slot, i) => {
 		slot.addEventListener('dragover', dragOver);
 		slot.addEventListener('drop', drop);
 		const char = characters.find((x) => x.id === current[i]?.id);
 		if (char) {
-			slot.innerHTML = `
-				${char.displayName}
-				<br>
-				Mineral: ${char.mineralCost}
-				<br>
-				Stars: ${'★'.repeat(char.stars)}
-			`;
+			slot.innerHTML = slotDiv(char, getCharImage);
 			slot.classList.remove('blank');
 			slot.dataset.id = char.id;
 		}
@@ -224,7 +206,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 	let draggingEl;
 	function dragStart(e) {
-		const parent = e.target.parentNode;
+		const parent = e.target.closest('.character-card ');
 		if (parent.classList.contains('used')) {
 			e.preventDefault();
 			return false;
@@ -235,9 +217,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 		e.dataTransfer.setData('mineralCost', parent.dataset.mineralCost);
 		e.dataTransfer.setData('stars', parent.dataset.stars);
 		e.dataTransfer.setData('id', parent.dataset.id);
-		const img = new Image();
-		img.src = '/assets/teamDragImage.png';
-		e.dataTransfer.setDragImage(img, 75 / 2, 40);
+		const dragImage = parent.querySelector('.icon img').cloneNode(true);
+		dragImage.style.zoom = 1;
+		// const img = new Image();
+		// img.src = '/assets/teamDragImage.png';
+		e.dataTransfer.setDragImage(dragImage, 75 / 2, 40);
 	}
 	function dragEnd() {
 		if (!draggingEl) {
@@ -250,17 +234,21 @@ document.addEventListener('DOMContentLoaded', async () => {
 	}
 	async function drop(e) {
 		e.preventDefault();
+		const slot = e.target.closest('.team-slot');
 		draggingEl.classList.remove('dragging');
 		// draggingEl.classList.add('used');
 		draggingEl = undefined;
 		const name = e.dataTransfer.getData('displayName');
 		const mineralCost = e.dataTransfer.getData('mineralCost');
 		const stars = e.dataTransfer.getData('stars');
-		e.target.dataset.id = e.dataTransfer.getData('id');
-		e.target.innerHTML = `${name}<br>Mineral: ${mineralCost}<br>Stars: ${'★'.repeat(
-			stars
-		)}`;
-		e.target.classList.remove('blank');
+		slot.dataset.id = e.dataTransfer.getData('id');
+		const char = {
+			displayName: name,
+			stars,
+			mineralCost
+		};
+		slot.innerHTML = slotDiv(char, getCharImage);
+		slot.classList.remove('blank');
 		await saveTeam({ teams });
 		updateCharacters && updateCharacters();
 	}
@@ -272,7 +260,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 	switchTeam = teamSwitcher({
 		slots,
 		teams,
-		characters
+		characters,
+		getCharImage
 	});
 
 	updateCharacters = characterUpdater({
