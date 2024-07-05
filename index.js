@@ -17,7 +17,7 @@ const setupPlayable = () => {
 	<div class="container">
 		<div class="main-header">
 			<div class="title-container" style="visibility: hidden">
-				<div class="back-button">&#x25C0;</div>
+				<div class="back-button">⬅</div>
 				<div class="title"></div>
 			</div>
 			<div class="stats"></div>
