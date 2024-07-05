@@ -17,7 +17,12 @@ const setupPlayable = () => {
 	<div class="container">
 		<div class="main-header">
 			<div class="title-container" style="visibility: hidden">
-				<div class="back-button">⬅</div>
+				<div class="back-button">
+					<svg viewBox="0 0 100 100">
+						<path d="M 30 50 L 75 50" stroke="black" stroke-width="11"/>
+						<path d="M 50 30 L 25 50 L 50 70" fill="black"/>
+					</svg>
+				</div>
 				<div class="title"></div>
 			</div>
 			<div class="stats"></div>
