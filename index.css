@@ -87,6 +87,9 @@ iframe {
 			align-items: center;
 			font-size: 16px;
 			cursor: pointer;
+			svg {
+				pointer-events: none;
+			}
 		}
 		.title {
 			margin-left: 10px;
