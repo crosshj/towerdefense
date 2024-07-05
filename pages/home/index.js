@@ -1,3 +1,6 @@
+import { getCharacters } from '../../user/getCharacters.js';
+import { getTeams } from '../../user/teams.js';
+import { characterImageGetter } from '../../visuals/assets.character.js';
 import { loadSounds } from '../../visuals/assets.js';
 import { canvasHorizontal, canvasVertical } from '../../visuals/canvas.js';
 import { statsRequest } from '../../visuals/stats/stats.js';
@@ -31,11 +34,26 @@ const clickColorMap = {
 	'#88ff00': '/pages/arena/index.html',
 	'#f6ff00': '/pages/pvp/index.html',
 	'#ffbf00': '/pages/tower/index.html',
-	'#ff0004': '/pages/team/index.html?slot=1',
-	'#ff006a': '/pages/team/index.html?slot=2',
-	'#ff00c8': '/pages/team/index.html?slot=3',
-	'#e600ff': '/pages/team/index.html?slot=4',
-	'#aa00ff': '/pages/team/index.html?slot=5'
+
+	'#e51a1d': '/pages/team/index.html?sub=a&slot=1',
+	'#e51a7c': '/pages/team/index.html?sub=a&slot=2',
+	'#d11ae5': '/pages/team/index.html?sub=a&slot=3',
+	'#8a1ae5': '/pages/team/index.html?sub=a&slot=4',
+	'#2b1ae5': '/pages/team/index.html?sub=a&slot=5',
+
+	'#53e51a': '/pages/team/index.html?sub=b&slot=1',
+	'#b2e51a': '/pages/team/index.html?sub=b&slot=2',
+	'#e59b1a': '/pages/team/index.html?sub=b&slot=3',
+	'#e5541a': '/pages/team/index.html?sub=b&slot=4',
+	'#e51a3f': '/pages/team/index.html?sub=b&slot=5'
+};
+
+const loadImage = async (url) => {
+	let img = new Image();
+	return new Promise((r) => {
+		img.onload = () => r(img);
+		img.src = url;
+	});
 };
 
 const drawControls = () => {
@@ -108,6 +126,96 @@ const drawControls = () => {
 	document.body.insertAdjacentElement('afterbegin', container);
 };
 
+const getRaidTeam = async () => {
+	const characters = await getCharacters();
+	const teams = await getTeams();
+	const getCharImage = await characterImageGetter();
+	const raidTeam = teams['Team 1'];
+	for (const [k, v] of Object.entries(raidTeam.a)) {
+		raidTeam.a[k] = characters.find((c) => c.id === v.id);
+		raidTeam.a[k].image = await loadImage(getCharImage(raidTeam.a[k]));
+	}
+	for (const [k, v] of Object.entries(raidTeam.b)) {
+		raidTeam.b[k] = characters.find((c) => c.id === v.id);
+		raidTeam.b[k].image = await loadImage(getCharImage(raidTeam.b[k]));
+	}
+	return raidTeam;
+};
+
+const drawTeam = ({ bg, raidTeam }) => {
+	bg.ctx.drawImage(
+		raidTeam.a[0].image,
+		bg.canvas.width / 2 - 37.5 - 127,
+		bg.canvas.height / 2 - 50 + 70,
+		75 * 0.75,
+		100 * 0.75
+	);
+	bg.ctx.drawImage(
+		raidTeam.a[1].image,
+		bg.canvas.width / 2 - 37.5 - 127 - 130,
+		bg.canvas.height / 2 - 50 + 70,
+		75 * 0.75,
+		100 * 0.75
+	);
+	bg.ctx.drawImage(
+		raidTeam.a[2].image,
+		bg.canvas.width / 2 - 37.5 - 127 - 212,
+		bg.canvas.height / 2 - 26,
+		75 * 0.75,
+		100 * 0.75
+	);
+	bg.ctx.drawImage(
+		raidTeam.a[3].image,
+		bg.canvas.width / 2 - 37.5 - 137 - 55,
+		bg.canvas.height / 2 - 70,
+		75 * 0.75,
+		100 * 0.75
+	);
+	bg.ctx.drawImage(
+		raidTeam.a[4].image,
+		bg.canvas.width / 2 - 37.5 - 92,
+		bg.canvas.height / 2 - 70,
+		75 * 0.75,
+		100 * 0.75
+	);
+
+	bg.ctx.drawImage(
+		raidTeam.b[0].image,
+		bg.canvas.width / 2 - 37.5 + 147,
+		bg.canvas.height / 2 - 50 + 70,
+		75 * 0.75,
+		100 * 0.75
+	);
+	bg.ctx.drawImage(
+		raidTeam.b[1].image,
+		bg.canvas.width / 2 - 37.5 + 147 + 130,
+		bg.canvas.height / 2 - 50 + 70,
+		75 * 0.75,
+		100 * 0.75
+	);
+	bg.ctx.drawImage(
+		raidTeam.b[2].image,
+		bg.canvas.width / 2 - 37.5 + 127 + 230,
+		bg.canvas.height / 2 - 26,
+		75 * 0.75,
+		100 * 0.75
+	);
+	bg.ctx.drawImage(
+		raidTeam.b[3].image,
+		bg.canvas.width / 2 - 37.5 + 137 + 75,
+		bg.canvas.height / 2 - 70,
+		75 * 0.75,
+		100 * 0.75
+	);
+	bg.ctx.drawImage(
+		raidTeam.b[4].image,
+		bg.canvas.width / 2 - 37.5 + 112,
+		bg.canvas.height / 2 - 70,
+		75 * 0.75,
+		100 * 0.75
+	);
+};
+
 const setup = async () => {
 	document.title += `: ${pageTitle}`;
 	window.parent.postMessage({
@@ -118,21 +226,29 @@ const setup = async () => {
 
 	drawControls();
 
+	const raidTeam = await getRaidTeam();
+
 	const bg = await canvasHorizontal({
 		parent: document.body,
-		image: '/pages/home/background.jpg',
+		image: '/pages/home/background.png',
 		offsetX: 1200 - document.body.clientWidth / 2,
 		height: 500,
 		clickMap: '/pages/home/background_clicks.png',
 		clickHandle: (color) => {
 			const which = clickColorMap[color];
-			if (!which) return;
+			if (!which) {
+				console.log(color);
+				return;
+			}
 			window.parent.postMessage({
 				_: 'navigate',
 				src: which
 			});
 		}
+		// onDraw: () => {}
 	});
+
+	drawTeam({ bg, raidTeam });
 
 	window.parent.postMessage({ _: 'loaded' });
 };

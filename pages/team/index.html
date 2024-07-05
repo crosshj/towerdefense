@@ -39,7 +39,7 @@
 		<div style="
 			margin-bottom: 20px;
 		">
-			team ${params.slot}
+			team ${params.sub.toUpperCase()}:${params.slot}
 		</div>
 		`;
 		window.parent.postMessage({
@@ -51,7 +51,7 @@
 		});
 		window.parent.postMessage({
 			_: 'title',
-			title: 'Team ' + params.slot,
+			title: `Team ${params.sub.toUpperCase()}:${params.slot}`,
 			visibility: 'visible'
 		});
 		window.parent.postMessage({ _: 'loaded' });
