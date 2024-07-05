@@ -48,10 +48,27 @@ const clickColorMap = {
 	'#e51a3f': '/pages/team/index.html?sub=b&slot=5'
 };
 
-const loadImage = async (url) => {
+const loadImage = async (url, flipHorizontal) => {
 	let img = new Image();
-	return new Promise((r) => {
-		img.onload = () => r(img);
+	return new Promise((resolve) => {
+		img.onload = () => {
+			if (flipHorizontal) {
+				const canvas = document.createElement('canvas');
+				const ctx = canvas.getContext('2d');
+				canvas.width = img.width;
+				canvas.height = img.height;
+
+				ctx.translate(canvas.width, 0);
+				ctx.scale(-1, 1);
+				ctx.drawImage(img, 0, 0);
+
+				const flippedImage = new Image();
+				flippedImage.onload = () => resolve(flippedImage);
+				flippedImage.src = canvas.toDataURL();
+			} else {
+				resolve(img);
+			}
+		};
 		img.src = url;
 	});
 };
@@ -137,80 +154,85 @@ const getRaidTeam = async () => {
 	}
 	for (const [k, v] of Object.entries(raidTeam.b)) {
 		raidTeam.b[k] = characters.find((c) => c.id === v.id);
-		raidTeam.b[k].image = await loadImage(getCharImage(raidTeam.b[k]));
+		const flip = true;
+		raidTeam.b[k].image = await loadImage(
+			getCharImage(raidTeam.b[k]),
+			flip
+		);
 	}
 	return raidTeam;
 };
 
-const drawTeam = ({ bg, raidTeam }) => {
-	bg.ctx.drawImage(
+const drawTeam = ({ ctx, width, height, raidTeam }) => {
+	ctx.globalCompositeOperation = 'source-over';
+	ctx.drawImage(
 		raidTeam.a[0].image,
-		bg.canvas.width / 2 - 37.5 - 127,
-		bg.canvas.height / 2 - 50 + 70,
+		width / 2 - 37.5 - 127,
+		height / 2 - 50 + 70,
 		75 * 0.75,
 		100 * 0.75
 	);
-	bg.ctx.drawImage(
+	ctx.drawImage(
 		raidTeam.a[1].image,
-		bg.canvas.width / 2 - 37.5 - 127 - 130,
-		bg.canvas.height / 2 - 50 + 70,
+		width / 2 - 37.5 - 127 - 130,
+		height / 2 - 50 + 70,
 		75 * 0.75,
 		100 * 0.75
 	);
-	bg.ctx.drawImage(
+	ctx.drawImage(
 		raidTeam.a[2].image,
-		bg.canvas.width / 2 - 37.5 - 127 - 212,
-		bg.canvas.height / 2 - 26,
+		width / 2 - 37.5 - 127 - 212,
+		height / 2 - 26,
 		75 * 0.75,
 		100 * 0.75
 	);
-	bg.ctx.drawImage(
+	ctx.drawImage(
 		raidTeam.a[3].image,
-		bg.canvas.width / 2 - 37.5 - 137 - 55,
-		bg.canvas.height / 2 - 70,
+		width / 2 - 37.5 - 137 - 55,
+		height / 2 - 70,
 		75 * 0.75,
 		100 * 0.75
 	);
-	bg.ctx.drawImage(
+	ctx.drawImage(
 		raidTeam.a[4].image,
-		bg.canvas.width / 2 - 37.5 - 92,
-		bg.canvas.height / 2 - 70,
+		width / 2 - 37.5 - 92,
+		height / 2 - 70,
 		75 * 0.75,
 		100 * 0.75
 	);
 
-	bg.ctx.drawImage(
+	ctx.drawImage(
 		raidTeam.b[0].image,
-		bg.canvas.width / 2 - 37.5 + 147,
-		bg.canvas.height / 2 - 50 + 70,
+		width / 2 - 37.5 + 147,
+		height / 2 - 50 + 70,
 		75 * 0.75,
 		100 * 0.75
 	);
-	bg.ctx.drawImage(
+	ctx.drawImage(
 		raidTeam.b[1].image,
-		bg.canvas.width / 2 - 37.5 + 147 + 130,
-		bg.canvas.height / 2 - 50 + 70,
+		width / 2 - 37.5 + 147 + 130,
+		height / 2 - 50 + 70,
 		75 * 0.75,
 		100 * 0.75
 	);
-	bg.ctx.drawImage(
+	ctx.drawImage(
 		raidTeam.b[2].image,
-		bg.canvas.width / 2 - 37.5 + 127 + 230,
-		bg.canvas.height / 2 - 26,
+		width / 2 - 37.5 + 127 + 230,
+		height / 2 - 26,
 		75 * 0.75,
 		100 * 0.75
 	);
-	bg.ctx.drawImage(
+	ctx.drawImage(
 		raidTeam.b[3].image,
-		bg.canvas.width / 2 - 37.5 + 137 + 75,
-		bg.canvas.height / 2 - 70,
+		width / 2 - 37.5 + 137 + 75,
+		height / 2 - 70,
 		75 * 0.75,
 		100 * 0.75
 	);
-	bg.ctx.drawImage(
+	ctx.drawImage(
 		raidTeam.b[4].image,
-		bg.canvas.width / 2 - 37.5 + 112,
-		bg.canvas.height / 2 - 70,
+		width / 2 - 37.5 + 112,
+		height / 2 - 70,
 		75 * 0.75,
 		100 * 0.75
 	);
@@ -244,11 +266,11 @@ const setup = async () => {
 				_: 'navigate',
 				src: which
 			});
+		},
+		onDraw: ({ ctx, width, height }) => {
+			drawTeam({ ctx, width, height, raidTeam });
 		}
-		// onDraw: () => {}
 	});
-
-	drawTeam({ bg, raidTeam });
 
 	window.parent.postMessage({ _: 'loaded' });
 };

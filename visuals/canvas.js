@@ -4,7 +4,8 @@ import { domLoaded } from '../utils/utils.js';
 export const canvasHorizontal = async (args) => {
 	document.body.style.background = '#000';
 	await domLoaded();
-	const { parent, image, height, offsetX, clickMap, clickHandle } = args;
+	const { parent, image, height, offsetX, clickMap, clickHandle, onDraw } =
+		args;
 	const canvas = document.createElement('canvas');
 	canvas.width = parent.clientWidth;
 	canvas.height = height;
@@ -23,7 +24,8 @@ export const canvasHorizontal = async (args) => {
 			ctx,
 			offsetX,
 			clickMap,
-			clickHandle
+			clickHandle,
+			onDraw
 		});
 	}
 	return { canvas, ctx };
@@ -32,7 +34,15 @@ export const canvasHorizontal = async (args) => {
 export const canvasVertical = async (args) => {
 	document.body.style.background = '#000';
 	await domLoaded();
-	const { parent, image, width, scrollBottom, clickMap, clickHandle } = args;
+	const {
+		parent,
+		image,
+		width,
+		scrollBottom,
+		clickMap,
+		clickHandle,
+		onDraw
+	} = args;
 	const canvas = document.createElement('canvas');
 	canvas.width = width;
 	canvas.height = parent.clientHeight;
@@ -51,7 +61,8 @@ export const canvasVertical = async (args) => {
 			canvas,
 			ctx,
 			clickMap,
-			clickHandle
+			clickHandle,
+			onDraw
 		});
 	}
 	return { canvas, ctx };

@@ -220,7 +220,7 @@ const vertical = async (args) => {
 };
 
 const horizontal = async (args) => {
-	const { image, canvas, ctx, clickMap, clickHandle } = args;
+	const { image, canvas, ctx, clickMap, clickHandle, onDraw } = args;
 	const background = await loadImage(image);
 	const originalHeight = background.height;
 	const newHeight = canvas.height;
@@ -254,8 +254,21 @@ const horizontal = async (args) => {
 	}
 
 	const draw = () => {
+		const bgCanvas = document.createElement('canvas');
+		bgCanvas.width = background.width;
+		bgCanvas.height = background.height;
+		const bgCtx = bgCanvas.getContext('2d');
+		bgCtx.drawImage(background, 0, 0, background.width, background.height);
+
+		if (onDraw) {
+			onDraw({
+				ctx: bgCtx,
+				width: background.width,
+				height: background.height
+			});
+		}
 		ctx.drawImage(
-			background,
+			bgCanvas,
 			offsetX,
 			0,
 			canvas.width,
