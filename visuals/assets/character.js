@@ -1,3 +1,27 @@
+import { getAnimateable } from '/vendor/DragonBones/Animateable.js';
+
+async function _todo() {
+	const skeleton = '/assets/character/FighterBase/FighterBase_ske.json';
+	const atlas = '/assets/character/FighterBase/FighterBase_tex.json';
+	const texture = '/assets/character/FighterBase/FighterBase_tex.png';
+	const width = 100;
+	const height = 100;
+	const animation = await getAnimateable({
+		width,
+		height,
+		skeleton,
+		atlas,
+		texture
+	});
+	// TODO: should get thumbnails and animateable character here
+	/*
+		animation.thumbnail; //is a cropped canvas
+		animation.canvas;
+		animation.setAnimation("run");
+		animation.advanceTime();
+	*/
+}
+
 function getDataURI(image) {
 	const canvas = document.createElement('canvas');
 	const ctx = canvas.getContext('2d');

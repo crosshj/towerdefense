@@ -10,8 +10,6 @@
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="full-screen" content="true" />
 		<meta name="screen-orientation" content="portrait" />
-
-		<script src="js/dragonBones.js"></script>
 	</head>
 	<style>
 		* {
@@ -130,8 +128,14 @@
 					Choose model...
 				</option>
 				<option value="-1" disabled>---</option>
-				<option value="./base_fighter_tex.png">Big Head White</option>
-				<option value="./base_fighter_tex_pink.png">
+				<option
+					value="/assets/character/base_fighter/base_fighter_tex.png"
+				>
+					Big Head White
+				</option>
+				<option
+					value="/assets/character/base_fighter/base_fighter_tex_pink.png"
+				>
 					Small Head Pink
 				</option>
 				<option value="fighterBaseIdle">Fighter Base Idle</option>
@@ -166,23 +170,23 @@
 		</div>
 	</body>
 	<script type="module">
-		import { POJFactory, POJArmatureDisplay } from './test.js';
+		import { getAnimateable } from '/vendor/DragonBones/Animateable.js';
 
 		const whichTexture =
 			localStorage.getItem('spriteModelChoice') ||
-			'./base_fighter_tex.png';
+			'/assets/character/base_fighter/base_fighter_tex.png';
 		const whichElement = localStorage.getItem('spriteElementChoice');
 
-		let skeleton = './base_fighter_ske.json';
-		let atlas = './base_fighter_tex.json';
+		let skeleton = '/assets/character/base_fighter/base_fighter_ske.json';
+		let atlas = '/assets/character/base_fighter/base_fighter_tex.json';
 		let texture = whichTexture;
 		let anim = 'look_up';
 		let animSpeed = 1000 / 40;
 
 		if (whichTexture.startsWith('fighterBase')) {
-			skeleton = './FighterBase/FighterBase_ske.json';
-			atlas = './FighterBase/FighterBase_tex.json';
-			texture = './FighterBase/FighterBase_tex.png';
+			skeleton = '/assets/character/FighterBase/FighterBase_ske.json';
+			atlas = '/assets/character/FighterBase/FighterBase_tex.json';
+			texture = '/assets/character/FighterBase/FighterBase_tex.png';
 			anim =
 				whichTexture === 'fighterBaseSwap1'
 					? 'sprite_swap'
@@ -196,7 +200,7 @@
 			animSpeed = 1000 / 30;
 		}
 		if (whichTexture.startsWith('fighterBase') && whichElement) {
-			texture = `./FighterBase/Elements/${whichElement}_tex.png`;
+			texture = `/assets/character/FighterBase/Elements/${whichElement}_tex.png`;
 		}
 
 		document
@@ -214,18 +218,18 @@
 			});
 
 		const canvas = document.getElementById('test-canvas');
-		const em = new POJArmatureDisplay(null);
-		const dbInstance = new dragonBones.DragonBones(em);
-		const factory = new POJFactory(dbInstance, canvas);
+		const animation = await getAnimateable({
+			canvas,
+			skeleton,
+			atlas,
+			texture
+		});
 
-		await factory.loadData({ skeleton, atlas, texture });
-		window.armature = factory.buildArmatureDisplay('Armature');
-
-		armature.animation.play(anim);
+		animation.setAnimation(anim);
 		const switchAnim = () => {
 			const newAnim = anim === 'run' ? 'look_up' : 'run';
 			anim = newAnim;
-			armature.animation.play(newAnim);
+			animation.setAnimation(anim);
 		};
 
 		let count = 0;
@@ -238,27 +242,13 @@
 				}
 			}
 			window.requestAnimationFrame(() => {
-				factory.advanceTime(1 / 24);
+				animation.advanceTime();
 			});
 		}, animSpeed);
 
-		const cropCanvas = (
-			canvas,
-			{ x = -5, y = -23, width = 128, height = 128 } = {}
-		) => {
-			const newCanvas = document.createElement('canvas');
-			newCanvas.width = width;
-			newCanvas.height = height;
-			newCanvas
-				.getContext('2d')
-				.drawImage(canvas, x, y, width, height, 0, 0, width, height);
-			return newCanvas;
-		};
-
-		let root = document.querySelector(':root');
 		function updateThumbnail() {
-			console.log({ canvas: factory.canvas });
-			const dataUrl = cropCanvas(factory.canvas).toDataURL();
+			const root = document.querySelector(':root');
+			const dataUrl = animation.thumbnail.toDataURL();
 			root.style.setProperty('--thumbnailUrl', `url('${dataUrl}')`);
 		}
 		updateThumbnail();
