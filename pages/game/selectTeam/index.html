@@ -10,6 +10,7 @@
 		<link rel="stylesheet" href="index.css" />
 
 		<link rel="stylesheet" href="/visuals/stats/stats.css" />
+		<script src="/components/custom-select.js" defer></script>
 	</head>
 	<body>
 		<div class="background">
@@ -23,7 +24,7 @@
 			</div>
 
 			<div class="sub-header">
-				<div class="level-name">Level Name</div>
+				<div class="level-name"></div>
 				<div class="rewards">
 					<div class="label">Possible Rewards</div>
 					<div class="reward-icon"></div>
@@ -37,13 +38,13 @@
 						<span>MY TEAM ></span>
 					</div>
 					<div class="team-selector">
-						<select>
-							<option>TEAM 1</option>
-							<option>TEAM 2</option>
-							<option>TEAM 3</option>
-							<option>TEAM 4</option>
-							<option>TEAM 5</option>
-						</select>
+						<custom-select>
+							<option selected>Team 1</option>
+							<option>Team 2</option>
+							<option>Team 3</option>
+							<option>Team 4</option>
+							<option>Team 5</option>
+						</custom-select>
 					</div>
 					<div></div>
 				</div>
@@ -60,13 +61,55 @@
 					<div></div>
 				</div>
 				<div class="effects">
-					<div></div>
-					<div></div>
-					<div></div>
-					<div></div>
+					<div class="meteor">
+						<div class="iconContainer">
+							<div class="icon">☄</div>
+							<div class="countBadge">1</div>
+						</div>
+						<div class="usageContainer">
+							<div class="cost">Free</div>
+							<input type="checkbox" />
+						</div>
+					</div>
+					<div class="ice">
+						<div class="iconContainer">
+							<div class="icon">🧊</div>
+							<div class="countBadge">1</div>
+						</div>
+						<div class="usageContainer">
+							<div class="cost">Free</div>
+							<input type="checkbox" />
+						</div>
+					</div>
+					<div class="tornado">
+						<div class="iconContainer">
+							<div class="icon">🌪</div>
+							<div class="countBadge">1</div>
+						</div>
+						<div class="usageContainer">
+							<div class="cost">Free</div>
+							<input type="checkbox" />
+						</div>
+					</div>
+					<div class="invincible">
+						<div class="iconContainer">
+							<div class="icon">🛡</div>
+							<div class="countBadge">1</div>
+						</div>
+						<div class="usageContainer">
+							<div class="cost">Free</div>
+							<input type="checkbox" />
+						</div>
+					</div>
 				</div>
 				<div class="actions">
-					<div></div>
+					<div class="options">
+						<div class="auto">AUTO</div>
+						<div class="speedDouble">
+							<span>X</span>
+							<span class="largeFont">2</span>
+						</div>
+					</div>
 					<div>
 						<button class="next-button">NEXT</button>
 					</div>

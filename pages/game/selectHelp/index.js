@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 	const params = Object.fromEntries(
 		new URLSearchParams(window.location.search)
 	);
+	console.log({ params });
+
 	const locationMap = await getLocationMap();
 	const location = locationMap[params.zone];
 	window.parent.postMessage({
@@ -17,12 +19,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 		_: 'title',
 		title: location.title,
 		visibility: 'visible',
-		back: `/pages/game/selectTeam/index.html?zone=${params.zone}`
+		back: `/pages/game/selectTeam/index.html?${params.toString()}`
 	});
 
 	const nextButton = document.querySelector('button.next-button');
 	nextButton.addEventListener('mousedown', () => {
-		const src = `/pages/game/standard.html?zone=${params.zone}`;
+		const src = `/pages/game/standard.html?zone=${params.zone}&team=${params.team}`;
 		window.parent.postMessage({ _: 'navigate', src });
 	});
 

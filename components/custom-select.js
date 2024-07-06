@@ -39,8 +39,9 @@ class CustomSelect extends HTMLElement {
                     border-color: #555 transparent transparent transparent;
                 }
                 .select-items div, .select-selected {
-                    padding: 8px 16px;
-                    /* border: 1px solid transparent; */
+                    padding-block: var(--select-items-py, 8px);
+					padding-inline: 16px;
+					/* border: 1px solid transparent; */
                     cursor: pointer;
                 }
                 .select-items {
