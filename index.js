@@ -1,5 +1,5 @@
 import { installable } from './utils/installable.js';
-import { loadSounds } from '/visuals/assets.js';
+import { loadSounds } from '/visuals/assets/assets.js';
 import { statsElement } from '/visuals/stats/stats.js';
 
 const FADE_MS = 350;

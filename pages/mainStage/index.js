@@ -1,4 +1,4 @@
-import { loadSounds } from '../../visuals/assets.js';
+import { loadSounds } from '../../visuals/assets/assets.js';
 import { canvasVertical } from '../../visuals/canvas.js';
 
 const pageTitle = 'MAIN STAGE';

@@ -1,4 +1,4 @@
-import { loadSounds } from '../../visuals/assets.js';
+import { loadSounds } from '../../visuals/assets/assets.js';
 const coreSounds = await loadSounds('coreSounds');
 
 const MISSILE_SPEED = 450;

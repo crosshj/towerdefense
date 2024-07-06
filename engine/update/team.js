@@ -1,5 +1,5 @@
 import { unNest } from '../../utils/utils.js';
-import { loadSounds } from '../../visuals/assets.js';
+import { loadSounds } from '../../visuals/assets/assets.js';
 const coreSounds = await loadSounds('coreSounds');
 
 export const moveDeployed = (state) => {

@@ -1,7 +1,7 @@
 import Engine from './engine.js';
 import Render from '../visuals/render.js';
 import State from './state.js';
-import { loadAssets, loadSounds } from '../visuals/assets.js';
+import { loadAssets, loadSounds } from '../visuals/assets/assets.js';
 import { getActions } from './actions.js';
 
 import { updateGameStatus } from './update/game.js';

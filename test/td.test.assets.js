@@ -1,5 +1,5 @@
 import { htmlToElement } from '../../../.tools/misc.mjs';
-import { loadAssets } from '../visuals/assets.js';
+import { loadAssets } from '../visuals/assets/assets.js';
 
 const append = (html) => {
 	const el = htmlToElement(html);
