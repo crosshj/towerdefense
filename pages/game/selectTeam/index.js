@@ -72,6 +72,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 	);
 	console.log({ params });
 
+	//TODO: handle params when navigating back from next screen (or store game state & use)
+
 	const selector = document.querySelector('.team-selector custom-select');
 	selector.addEventListener('change', updateTeamIcons);
 	await updateTeamIcons();
@@ -90,7 +92,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 	});
 	window.parent.postMessage({
 		_: 'title',
-		title: location?.title || 'TD: Select Team',
+		title: location?.title || 'Select Team',
 		visibility: 'visible',
 		back: '/pages/mainStage/index.html'
 	});

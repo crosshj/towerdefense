@@ -19,7 +19,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 		_: 'title',
 		title: location.title,
 		visibility: 'visible',
-		back: `/pages/game/selectTeam/index.html?${params.toString()}`
+		back: `/pages/game/selectTeam/index.html?${new URLSearchParams(
+			params
+		).toString()}`
 	});
 
 	const nextButton = document.querySelector('button.next-button');
