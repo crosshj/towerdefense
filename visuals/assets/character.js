@@ -22,6 +22,9 @@ export const characterAnimationGetter = async (character) => {
 	if (character.type === 'defender') {
 		texture = '/assets/character/FighterBase/Elements/Poison_tex.png';
 	}
+	if (character.element) {
+		texture = `/assets/character/FighterBase/Elements/${character.element}_tex.png`;
+	}
 	const width = 128;
 	const height = 140;
 	const framerate = 8;
@@ -106,6 +109,33 @@ function getLetterDataURI(image, letter) {
 	return canvas.toDataURL('image/png');
 }
 
+const addBoned = async (allImages) => {
+	const elements = [
+		'Air',
+		'Bug',
+		'Dark',
+		'Dragon',
+		'Earth',
+		'Electric',
+		'Fairy',
+		'Fighting',
+		'Fire',
+		'Ghost',
+		'Ice',
+		'Normal',
+		'Plant',
+		'Poison',
+		'Psychic',
+		'Rock',
+		'Steel',
+		'Water'
+	];
+	for (const element of elements) {
+		const animation = await characterAnimationGetter({ element });
+		allImages[element] = animation.canvas.toDataURL();
+	}
+};
+
 export const characterImageGetter = async () => {
 	//const allImages = await getAllImages();
 	const allImages = {};
@@ -118,7 +148,13 @@ export const characterImageGetter = async () => {
 			};
 		});
 	}
+	await addBoned(allImages);
+
 	return (character) => {
+		console.log({ character });
+		if (character.element) {
+			return allImages[character.element];
+		}
 		return allImages[character.displayName[0].toLowerCase()];
 	};
 };

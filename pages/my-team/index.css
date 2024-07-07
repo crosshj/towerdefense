@@ -186,6 +186,9 @@ body {
 		}
 		.icon {
 			zoom: 0.85;
+			img {
+				max-width: 91px;
+			}
 		}
 		.base {
 			position: relative;

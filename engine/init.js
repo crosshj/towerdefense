@@ -35,7 +35,8 @@ const adjustGame = async (game, params) => {
 	// set team
 	if ('54321'.split('').includes(params.team)) {
 		const currentTeamName = 'Team ' + params.team;
-		const currentTeam = await getTeam(currentTeamName);
+		const flipBTeam = false;
+		const currentTeam = await getTeam(currentTeamName, flipBTeam);
 		const allTowerChars = [
 			...attackerTower.teams[0].a,
 			...attackerTower.teams[0].b
@@ -44,7 +45,6 @@ const adjustGame = async (game, params) => {
 		for (const [i, char] of Object.entries(allTowerChars)) {
 			char.image = allCurrentChars[i].image;
 		}
-		console.log({ team: attackerTower.teams[0] });
 	}
 
 	// set effects
