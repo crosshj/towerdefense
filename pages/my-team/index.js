@@ -213,15 +213,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 		}
 		draggingEl = parent;
 		draggingEl.classList.add('dragging');
-		e.dataTransfer.setData('displayName', parent.dataset.displayName);
-		e.dataTransfer.setData('mineralCost', parent.dataset.mineralCost);
-		e.dataTransfer.setData('stars', parent.dataset.stars);
 		e.dataTransfer.setData('id', parent.dataset.id);
 		const dragImage = parent.querySelector('.icon img').cloneNode(true);
 		dragImage.style.zoom = 1;
-		// const img = new Image();
-		// img.src = '/assets/teamDragImage.png';
-		e.dataTransfer.setDragImage(dragImage, 75 / 2, 40);
+		e.dataTransfer.setDragImage(dragImage, 128 / 2, 40);
 	}
 	function dragEnd() {
 		if (!draggingEl) {
@@ -238,15 +233,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 		draggingEl.classList.remove('dragging');
 		// draggingEl.classList.add('used');
 		draggingEl = undefined;
-		const name = e.dataTransfer.getData('displayName');
-		const mineralCost = e.dataTransfer.getData('mineralCost');
-		const stars = e.dataTransfer.getData('stars');
-		slot.dataset.id = e.dataTransfer.getData('id');
-		const char = {
-			displayName: name,
-			stars,
-			mineralCost
-		};
+		const id = e.dataTransfer.getData('id');
+		slot.dataset.id = id;
+		const char = characters.find((x) => x.id === id);
+
 		slot.innerHTML = slotDiv(char, getCharImage);
 		slot.classList.remove('blank');
 		await saveTeam({ teams });

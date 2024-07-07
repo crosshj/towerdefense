@@ -1,6 +1,9 @@
 import { getAnimateable } from '/vendor/DragonBones/Animateable.js';
 
-export const characterAnimationGetter = async (character) => {
+export const characterAnimationGetter = async (
+	character,
+	{ width = 128, height = 140 } = {}
+) => {
 	const skeleton = '/assets/character/FighterBase/FighterBase_ske.json';
 	const atlas = '/assets/character/FighterBase/FighterBase_tex.json';
 	let texture = '/assets/character/FighterBase/Elements/Normal_tex.png';
@@ -25,8 +28,6 @@ export const characterAnimationGetter = async (character) => {
 	if (character.element) {
 		texture = `/assets/character/FighterBase/Elements/${character.element}_tex.png`;
 	}
-	const width = 128;
-	const height = 140;
 	const framerate = 8;
 	const animation = await getAnimateable({
 		width,
@@ -130,8 +131,13 @@ const addBoned = async (allImages) => {
 		'Steel',
 		'Water'
 	];
+	const width = 120;
+	const height = 128;
 	for (const element of elements) {
-		const animation = await characterAnimationGetter({ element });
+		const animation = await characterAnimationGetter(
+			{ element },
+			{ width, height }
+		);
 		allImages[element] = animation.canvas.toDataURL();
 	}
 };
@@ -151,7 +157,6 @@ export const characterImageGetter = async () => {
 	await addBoned(allImages);
 
 	return (character) => {
-		console.log({ character });
 		if (character.element) {
 			return allImages[character.element];
 		}
