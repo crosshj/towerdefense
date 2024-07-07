@@ -30,6 +30,20 @@ const games = [
 	//
 ];
 
+const attributes = [
+	'image',
+	'rank',
+	'displayName',
+	'element',
+	'level',
+	'stars',
+	'rank',
+	'mineralCost',
+	'hp',
+	'attack',
+	'range'
+];
+//TODO: eventually just rely on attributes from team, not from tower state
 const adjustGame = async (game, params) => {
 	const attackerTower = game?.state?.towers?.[0];
 	// set team
@@ -43,7 +57,9 @@ const adjustGame = async (game, params) => {
 		];
 		const allCurrentChars = [...currentTeam.a, ...currentTeam.b];
 		for (const [i, char] of Object.entries(allTowerChars)) {
-			char.image = allCurrentChars[i].image;
+			for (const attr of attributes) {
+				char[attr] = allCurrentChars[i][attr];
+			}
 		}
 	}
 

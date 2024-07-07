@@ -67,7 +67,6 @@ const saveTeam = async ({ teams }) => {
 			a: current.a,
 			b: teamSlots
 		};
-	console.log({ newTeam, oldTeam: teams[selected] });
 	await setTeams({
 		[selected]: newTeam
 	});

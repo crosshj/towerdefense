@@ -7,21 +7,21 @@ export const characterAnimationGetter = async (
 	const skeleton = '/assets/character/FighterBase/FighterBase_ske.json';
 	const atlas = '/assets/character/FighterBase/FighterBase_tex.json';
 	let texture = '/assets/character/FighterBase/Elements/Normal_tex.png';
-	if (character.unit === 'blue-1') {
-		texture = '/assets/character/FighterBase/Elements/Fighting_tex.png';
-	}
-	if (character.unit === 'blue-2') {
-		texture = '/assets/character/FighterBase/Elements/Rock_tex.png';
-	}
-	if (character.unit === 'blue-3') {
-		texture = '/assets/character/FighterBase/Elements/Fairy_tex.png';
-	}
-	if (character.unit === 'blue-4') {
-		texture = '/assets/character/FighterBase/Elements/Air_tex.png';
-	}
-	if (character.unit === 'blue-5') {
-		texture = '/assets/character/FighterBase/Elements/Dragon_tex.png';
-	}
+	// if (character.unit === 'blue-1') {
+	// 	texture = '/assets/character/FighterBase/Elements/Fighting_tex.png';
+	// }
+	// if (character.unit === 'blue-2') {
+	// 	texture = '/assets/character/FighterBase/Elements/Rock_tex.png';
+	// }
+	// if (character.unit === 'blue-3') {
+	// 	texture = '/assets/character/FighterBase/Elements/Fairy_tex.png';
+	// }
+	// if (character.unit === 'blue-4') {
+	// 	texture = '/assets/character/FighterBase/Elements/Air_tex.png';
+	// }
+	// if (character.unit === 'blue-5') {
+	// 	texture = '/assets/character/FighterBase/Elements/Dragon_tex.png';
+	// }
 	if (character.type === 'defender') {
 		texture = '/assets/character/FighterBase/Elements/Poison_tex.png';
 	}
