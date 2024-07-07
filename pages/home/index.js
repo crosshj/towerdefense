@@ -198,8 +198,6 @@ const setup = async () => {
 		visibility: 'hidden'
 	});
 
-	drawControls();
-
 	const raidTeam = await getTeam('Team 1');
 
 	const bg = await canvasHorizontal({
@@ -223,6 +221,8 @@ const setup = async () => {
 			drawTeam({ ctx, width, height, raidTeam });
 		}
 	});
+
+	drawControls();
 
 	window.parent.postMessage({ _: 'loaded' });
 };
