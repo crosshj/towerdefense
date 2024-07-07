@@ -1,5 +1,3 @@
-import { POJFactory, POJArmatureDisplay } from './POJFactory.js';
-
 const cropCanvas = (
 	canvas,
 	{ x = -5, y = -23, width = 128, height = 128 } = {}
@@ -13,7 +11,15 @@ const cropCanvas = (
 	return newCanvas;
 };
 
+const getFactory = async () => {
+	if (!window.dragonBones) {
+		await import('./dragonBones.js');
+	}
+	return import('./POJFactory.js');
+};
+
 export const getAnimateable = async (args) => {
+	const { POJFactory, POJArmatureDisplay } = await getFactory();
 	const {
 		canvas: canvasSrc,
 		width,

@@ -14,6 +14,8 @@ const spawnCharInstance = (state) => (char, deployed) => {
 	if (char.type === 'attacker') {
 		state.mineral.amount -= char.mineralCost || 100;
 	}
+	state.assets.initChar(newChar);
+	return newChar;
 };
 
 export const getActions = (state) => {
@@ -56,7 +58,7 @@ export const getActions = (state) => {
 			console.log('do state-related effect spawn');
 		},
 		spawnCharInstance: (char, deployed) => {
-			spawnCharInstance(state)(char, deployed);
+			return spawnCharInstance(state)(char, deployed);
 		},
 		deployUnit: ({ unitId, tower }) => {
 			const unit = tower.teams[0][tower.selectedTeam].find(

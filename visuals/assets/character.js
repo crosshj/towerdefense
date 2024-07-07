@@ -1,18 +1,41 @@
 import { getAnimateable } from '/vendor/DragonBones/Animateable.js';
 
-async function _todo() {
+export const characterAnimationGetter = async (character) => {
+	console.log({ character });
+	//TODO: get anim based on character
 	const skeleton = '/assets/character/FighterBase/FighterBase_ske.json';
 	const atlas = '/assets/character/FighterBase/FighterBase_tex.json';
-	const texture = '/assets/character/FighterBase/FighterBase_tex.png';
-	const width = 100;
-	const height = 100;
+	let texture = '/assets/character/FighterBase/Elements/Normal_tex.png';
+	if (character.unit === 'blue-1') {
+		texture = '/assets/character/FighterBase/Elements/Fighting_tex.png';
+	}
+	if (character.unit === 'blue-2') {
+		texture = '/assets/character/FighterBase/Elements/Rock_tex.png';
+	}
+	if (character.unit === 'blue-3') {
+		texture = '/assets/character/FighterBase/Elements/Fairy_tex.png';
+	}
+	if (character.unit === 'blue-4') {
+		texture = '/assets/character/FighterBase/Elements/Air_tex.png';
+	}
+	if (character.unit === 'blue-5') {
+		texture = '/assets/character/FighterBase/Elements/Dragon_tex.png';
+	}
+	if (character.type === 'defender') {
+		texture = '/assets/character/FighterBase/Elements/Poison_tex.png';
+	}
+	const width = 128;
+	const height = 140;
+	const framerate = 8;
 	const animation = await getAnimateable({
 		width,
 		height,
+		framerate,
 		skeleton,
 		atlas,
 		texture
 	});
+	animation.setAnimation('jumping');
 	// TODO: should get thumbnails and animateable character here
 	/*
 		animation.thumbnail; //is a cropped canvas
@@ -20,7 +43,8 @@ async function _todo() {
 		animation.setAnimation("run");
 		animation.advanceTime();
 	*/
-}
+	return animation;
+};
 
 function getDataURI(image) {
 	const canvas = document.createElement('canvas');

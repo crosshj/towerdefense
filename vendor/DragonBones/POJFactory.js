@@ -1,4 +1,3 @@
-import './dragonBones.js';
 const {
 	Slot,
 	TextureData,
@@ -7,7 +6,7 @@ const {
 	BaseObject,
 	Armature,
 	Transform
-} = dragonBones;
+} = window.dragonBones;
 
 const log =
 	(which, that) =>

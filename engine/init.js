@@ -16,6 +16,7 @@ import { fieldStage1 } from './games/field1.js';
 import { ghostStage1 } from './games/ghost1.js';
 import { oceanStage1 } from './games/ocean1.js';
 import { sakura1 } from './games/sakura1.js';
+import { characterAnimationGetter } from '../visuals/assets/character.js';
 
 const games = [
 	balancedGame1,
@@ -39,7 +40,20 @@ export const startGame = async ({ menu, which }) => {
 	menu.hide();
 	const gameInstance = await thisGame();
 	const state = new State(gameInstance.state);
-	state.assets = await loadAssets();
+
+	state.assets = await loadAssets(); //
+	state.assets.animations = {};
+	const animations = {};
+	state.assets.initChar = (charInstance) => {
+		const animation = characterAnimationGetter(charInstance);
+		animations[charInstance.id] = 'pending';
+		animation.then((x) => {
+			animations[charInstance.id] = x;
+		});
+		state.assets.animations[charInstance.id] = () =>
+			animations[charInstance.id];
+	};
+
 	state.actions = getActions(state);
 
 	if (typeof state.auto === 'undefined') {
@@ -56,7 +70,7 @@ export const startGame = async ({ menu, which }) => {
 	}
 	bgMusic.start();
 
-	const gameLoop = () => {
+	const gameLoop = async () => {
 		try {
 			if (state.paused) {
 				return true;

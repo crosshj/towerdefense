@@ -12,6 +12,7 @@ export const moveDeployed = (state) => {
 	deployed.forEach(move);
 };
 
+// this is for auto-spawning both attackers and defenders
 export const spawnTeam = (state) => {
 	const { towers } = state;
 	const iterate = (char, deployed) => {
@@ -22,11 +23,11 @@ export const spawnTeam = (state) => {
 		state.actions.spawnCharInstance(char, deployed);
 		char.spawnTicker = char.respawn;
 	};
-	const spawn = (tower) =>
-		tower.team.forEach((char) => {
+	for (const tower of towers) {
+		for (const char of tower.team) {
 			iterate(char, tower.deployed);
-		});
-	towers.forEach(spawn);
+		}
+	}
 };
 /*
 export const spawnTeam = (state) => {
