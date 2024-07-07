@@ -1,8 +1,6 @@
 import { getAnimateable } from '/vendor/DragonBones/Animateable.js';
 
 export const characterAnimationGetter = async (character) => {
-	console.log({ character });
-	//TODO: get anim based on character
 	const skeleton = '/assets/character/FighterBase/FighterBase_ske.json';
 	const atlas = '/assets/character/FighterBase/FighterBase_tex.json';
 	let texture = '/assets/character/FighterBase/Elements/Normal_tex.png';

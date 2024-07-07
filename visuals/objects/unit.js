@@ -24,6 +24,14 @@ const cropCanvas = (
 };
 
 export const getThumbnail = (unit, state) => {
+	if (unit.image) {
+		const newCanvas = document.createElement('canvas');
+		newCanvas.width = 128;
+		newCanvas.height = 128;
+		const newCanvasCtx = newCanvas.getContext('2d');
+		newCanvasCtx.drawImage(unit.image, 0, 20, 128, 128);
+		return newCanvas.toDataURL();
+	}
 	const blueDefaultColor = '#24b';
 	// todo: read unit and act correctly
 	const { teeAttackPlain } = state.assets.images;

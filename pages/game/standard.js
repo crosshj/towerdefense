@@ -13,6 +13,8 @@ const onLoaded = () => {
 	const params = Object.fromEntries(
 		new URLSearchParams(window.location.search)
 	);
+	console.log({ params });
+
 	window.parent.postMessage({
 		_: 'stats',
 		feathers: false,
@@ -37,6 +39,7 @@ const onLoaded = () => {
 	};
 	startGame({
 		which: zoneMap[params.zone] || 1,
+		params,
 		menu
 	});
 	window.parent.postMessage({ _: 'loaded' });

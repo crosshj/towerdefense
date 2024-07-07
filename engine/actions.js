@@ -58,7 +58,7 @@ export const getActions = (state) => {
 			console.log('do state-related effect spawn');
 		},
 		spawnCharInstance: (char, deployed) => {
-			return spawnCharInstance(state)(char, deployed);
+			spawnCharInstance(state)(char, deployed);
 		},
 		deployUnit: ({ unitId, tower }) => {
 			const unit = tower.teams[0][tower.selectedTeam].find(

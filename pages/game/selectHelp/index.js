@@ -26,7 +26,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 	const nextButton = document.querySelector('button.next-button');
 	nextButton.addEventListener('mousedown', () => {
-		const src = `/pages/game/standard.html?zone=${params.zone}&team=${params.team}`;
+		const newParams = {
+			...params
+			//TODO: friend
+		};
+		const queryString = new URLSearchParams(newParams).toString();
+		const src = `/pages/game/standard.html?${queryString}`;
 		window.parent.postMessage({ _: 'navigate', src });
 	});
 

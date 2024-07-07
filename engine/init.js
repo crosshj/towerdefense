@@ -17,6 +17,7 @@ import { ghostStage1 } from './games/ghost1.js';
 import { oceanStage1 } from './games/ocean1.js';
 import { sakura1 } from './games/sakura1.js';
 import { characterAnimationGetter } from '../visuals/assets/character.js';
+import { getTeam } from '../pages/_utils/getTeam.js';
 
 const games = [
 	balancedGame1,
@@ -29,7 +30,29 @@ const games = [
 	//
 ];
 
-export const startGame = async ({ menu, which }) => {
+const adjustGame = async (game, params) => {
+	const attackerTower = game?.state?.towers?.[0];
+	// set team
+	if ('54321'.split('').includes(params.team)) {
+		const currentTeamName = 'Team ' + params.team;
+		const currentTeam = await getTeam(currentTeamName);
+		const allTowerChars = [
+			...attackerTower.teams[0].a,
+			...attackerTower.teams[0].b
+		];
+		const allCurrentChars = [...currentTeam.a, ...currentTeam.b];
+		for (const [i, char] of Object.entries(allTowerChars)) {
+			char.image = allCurrentChars[i].image;
+		}
+		console.log({ team: attackerTower.teams[0] });
+	}
+
+	// set effects
+	// set auto
+	//console.log({ attackerTower, params });
+};
+
+export const startGame = async ({ menu, which, params }) => {
 	document.querySelector('body > .container').scrollLeft = 0;
 
 	const thisGame = games[which];
@@ -39,6 +62,7 @@ export const startGame = async ({ menu, which }) => {
 	}
 	menu.hide();
 	const gameInstance = await thisGame();
+	await adjustGame(gameInstance, params);
 	const state = new State(gameInstance.state);
 
 	state.assets = await loadAssets(); //
