@@ -318,10 +318,9 @@ body {
 				border-radius: 7px;
 				background: linear-gradient(0deg, #0003, #0008);
 				img {
-					zoom: 0.8;
-					margin-top: 20px;
-					margin-left: auto;
-					margin-right: auto;
+					margin-left: -3px;
+					margin-top: 10px;
+					width: 90px;
 				}
 			}
 			.details {
@@ -351,5 +350,23 @@ body {
 	}
 	.character-card.used {
 		filter: brightness(0.7);
+		position: relative;
+		overflow: hidden;
+		&:before {
+			position: absolute;
+			content: 'IN USE';
+			background-color: #0099ff;
+			color: white;
+			width: 90px;
+			height: 20px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			transform: rotate(-45deg);
+			left: -26px;
+			top: 6px;
+			font-size: 10px;
+			font-weight: 600;
+		}
 	}
 }

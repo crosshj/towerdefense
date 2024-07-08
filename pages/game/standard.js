@@ -26,21 +26,38 @@ const onLoaded = () => {
 		_: 'title',
 		visibility: 'hidden'
 	});
-	// document.body.innerHTML = params.zone;
-	// console.log(params);
+
+	const gameOver = async ({ state }) => {
+		const status = 'win';
+		window.parent.postMessage({
+			_: 'navigate',
+			src: `/modals/gameOver/index.html?status=${status}`
+		});
+
+		//TODO: save game results
+		const showGameResults = async () => {
+			window.parent.postMessage({
+				_: 'navigate',
+				src: `/pages/game/results/index.html`
+			});
+		};
+		setTimeout(showGameResults, 2000);
+	};
+
 	const menu = {
 		hide: () => {},
 		show: () => {
-			window.parent.postMessage({
-				_: 'navigate',
-				src: '/pages/mainStage/index.html'
-			});
+			// window.parent.postMessage({
+			// 	_: 'navigate',
+			// 	src: '/pages/mainStage/index.html'
+			// });
 		}
 	};
 	startGame({
 		which: zoneMap[params.zone] || 1,
 		params,
-		menu
+		menu,
+		gameOver
 	});
 	window.parent.postMessage({ _: 'loaded' });
 };

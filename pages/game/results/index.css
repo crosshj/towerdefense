@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Passion+One:wght@400;700;900&display=swap');
+
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	overscroll-behavior: none;
+
+	--rows: 10% 27% 1fr;
+	--dark-bar-top: 37%;
+}
+
+body:after {
+	content: 'TODO';
+	position: fixed;
+	left: 21%;
+	top: 23%;
+	font-size: 200px;
+	font-weight: 900;
+	opacity: 0.05;
+	transform: rotate(-36deg);
+}
+
+.background {
+	background: url(./bg.png);
+	background-size: 100% 100%;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	z-index: -1;
+	.bluebar {
+		position: fixed;
+		top: var(--dark-bar-top);
+		height: 100px;
+		width: 100%;
+		background: #202944;
+	}
+}
+
+.container {
+	--inner-max-width: min(97vw, 840px);
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	display: grid;
+	grid-template-rows: var(--rows);
+	grid-template-columns: 1fr 67% 1fr;
+	overflow: hidden;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.flex-spacer {
+	flex: 1;
+}

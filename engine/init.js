@@ -68,7 +68,7 @@ const adjustGame = async (game, params) => {
 	//console.log({ attackerTower, params });
 };
 
-export const startGame = async ({ menu, which, params }) => {
+export const startGame = async ({ menu, which, params, gameOver }) => {
 	document.querySelector('body > .container').scrollLeft = 0;
 
 	const thisGame = games[which];
@@ -146,11 +146,18 @@ export const startGame = async ({ menu, which, params }) => {
 		// this is a non-throttled activity?
 	};
 
+	const onGameOver = async () => {
+		bgMusic.stop();
+		menu.show();
+		await gameOver({ state });
+	};
+
 	const engine = new Engine({
 		state,
 		highPriority,
 		gameLoop,
-		render
+		render,
+		onGameOver
 	});
 	engine.start();
 };

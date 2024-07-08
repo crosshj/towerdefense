@@ -252,11 +252,13 @@ const render = (state, ctx, gif, controls) => {
 
 	if (state.towers[0].status === 'dead') {
 		renderCharacter = undefined;
-		alert('You lose!');
+		return false;
+		// alert('You lose!');
 	}
 	if (state.towers[1].status === 'dead') {
 		renderCharacter = undefined;
-		alert('You win!');
+		return false;
+		// alert('You win!');
 	}
 
 	if (!state.record) return;
@@ -276,7 +278,11 @@ const render = (state, ctx, gif, controls) => {
 
 const tryRender = (state, ctx, gif, controls) => {
 	try {
-		render(state, ctx, gif, controls);
+		const renderResult = render(state, ctx, gif, controls);
+		//TODO: should not be trying a render if either towers are dead
+		if (renderResult === false) {
+			return false;
+		}
 		return true;
 	} catch (e) {
 		console.error(cleanError(e));

@@ -1,7 +1,7 @@
 import * as rxjs from 'https://cdn.skypack.dev/rxjs';
 import * as operators from 'https://cdn.skypack.dev/rxjs/operators';
 const { animationFrameScheduler, of } = rxjs;
-const { takeWhile, filter, tap, repeat } = operators;
+const { takeWhile, filter, tap, repeat, finalize } = operators;
 
 const throttle = (MIN_TIME, state) => () => {
 	const curr = performance.now();
@@ -12,7 +12,7 @@ const throttle = (MIN_TIME, state) => () => {
 
 export default class Engine {
 	constructor(args) {
-		const { state, highPriority, gameLoop, render } = args;
+		const { state, highPriority, gameLoop, render, onGameOver } = args;
 
 		const { throttle: throttleAmount = 67 } = state;
 
@@ -21,7 +21,8 @@ export default class Engine {
 			tap(highPriority),
 			filter(throttle(throttleAmount, state)),
 			takeWhile(gameLoop),
-			takeWhile(render)
+			takeWhile(render),
+			finalize(onGameOver)
 		];
 
 		const loop = of(null, animationFrameScheduler).pipe(...gameSteps);
