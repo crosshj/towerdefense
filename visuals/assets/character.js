@@ -22,10 +22,10 @@ export const characterAnimationGetter = async (
 	// if (character.unit === 'blue-5') {
 	// 	texture = '/assets/character/FighterBase/Elements/Dragon_tex.png';
 	// }
-	if (character.type === 'defender') {
+	if (character?.type === 'defender') {
 		texture = '/assets/character/FighterBase/Elements/Poison_tex.png';
 	}
-	if (character.element) {
+	if (character?.element) {
 		texture = `/assets/character/FighterBase/Elements/${character.element}_tex.png`;
 	}
 	const framerate = 8;
@@ -157,7 +157,7 @@ export const characterImageGetter = async () => {
 	await addBoned(allImages);
 
 	return (character) => {
-		if (character.element) {
+		if (character?.element) {
 			return allImages[character.element];
 		}
 		return allImages[character.displayName[0].toLowerCase()];
