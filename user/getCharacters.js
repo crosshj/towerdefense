@@ -261,7 +261,7 @@ export const getCharacters = async () => [
 	},
 	{
 		id: '019079cf-cb56-7f2b-f72-56f0fd',
-		displayName: 'Tom',
+		displayName: 'Toto Bato',
 		element: 'Rock',
 		level: 120,
 		stars: 2,
@@ -285,7 +285,7 @@ export const getCharacters = async () => [
 	},
 	{
 		id: '019079cf-cb56-7d7b-469-3b4bb5',
-		displayName: 'Whispy',
+		displayName: 'Vispi',
 		element: 'Air',
 		level: 130,
 		stars: 4,
@@ -297,7 +297,7 @@ export const getCharacters = async () => [
 	},
 	{
 		id: '019079cf-cb56-7211-2f3-2bc714',
-		displayName: 'Darvos',
+		displayName: 'Drat',
 		element: 'Dragon',
 		level: 135,
 		stars: 5,
@@ -309,7 +309,7 @@ export const getCharacters = async () => [
 	},
 	{
 		id: '019079cf-cb56-76cd-ff8-6d0542',
-		displayName: 'Steve',
+		displayName: 'Antonio',
 		element: 'Bug',
 		level: 140,
 		stars: 4,
@@ -322,7 +322,7 @@ export const getCharacters = async () => [
 
 	{
 		id: '019079cf-cb56-76c6-e56-7459e0',
-		displayName: 'Draven',
+		displayName: 'Bumpier',
 		element: 'Dark',
 		level: 130,
 		stars: 4,
@@ -334,7 +334,7 @@ export const getCharacters = async () => [
 	},
 	{
 		id: '019079cf-cb56-7b0b-ad4-36b3eb',
-		displayName: 'Terradis',
+		displayName: 'Tabi-Tabi Po',
 		element: 'Earth',
 		level: 110,
 		stars: 4,
@@ -359,7 +359,7 @@ export const getCharacters = async () => [
 
 	{
 		id: '019079cf-cb56-7ea0-337-0ad0de',
-		displayName: 'Inferno',
+		displayName: 'Santelmo',
 		element: 'Fire',
 		level: 170,
 		stars: 5,
@@ -371,7 +371,7 @@ export const getCharacters = async () => [
 	},
 	{
 		id: '019079cf-cb56-7777-53f-64e88d',
-		displayName: 'Espiritos',
+		displayName: 'Multo',
 		element: 'Ghost',
 		level: 180,
 		stars: 5,
@@ -407,7 +407,7 @@ export const getCharacters = async () => [
 	},
 	{
 		id: '019079cf-cb56-71dd-1d6-d8a311',
-		displayName: 'Flora',
+		displayName: 'Prickles',
 		element: 'Plant',
 		level: 140,
 		stars: 2,
@@ -419,7 +419,7 @@ export const getCharacters = async () => [
 	},
 	{
 		id: '019079cf-cb56-7358-a31-edf4b2',
-		displayName: 'Cracknine',
+		displayName: 'Crack9',
 		element: 'Poison',
 		level: 145,
 		stars: 2,
@@ -431,7 +431,7 @@ export const getCharacters = async () => [
 	},
 	{
 		id: '019079cf-cb56-7661-466-8868c6',
-		displayName: 'Robius',
+		displayName: 'Robia',
 		element: 'Psychic',
 		level: 150,
 		stars: 5,
@@ -443,7 +443,7 @@ export const getCharacters = async () => [
 	},
 	{
 		id: '019079cf-cb56-71e2-738-b6d9c2',
-		displayName: 'Jorrel',
+		displayName: 'Barbell',
 		element: 'Steel',
 		level: 125,
 		stars: 3,
@@ -455,7 +455,7 @@ export const getCharacters = async () => [
 	},
 	{
 		id: '019079cf-cb56-7b4d-652-890dd9',
-		displayName: 'Amorphus',
+		displayName: 'Wap Wap',
 		element: 'Water',
 		level: 160,
 		stars: 4,
