@@ -34,13 +34,15 @@ export const getTeam = async (teamName = 'Team 1', flipBTeam = true) => {
 	const raidTeam = teams[teamName];
 	for (const [k, v] of Object.entries(raidTeam.a)) {
 		raidTeam.a[k] = characters.find((c) => c.id === v.id);
+		if (!raidTeam.a[k]) {
+			raidTeam.a[k] = { ...v };
+		}
 		raidTeam.a[k].image = await loadImage(getCharImage(raidTeam.a[k]));
 	}
 	for (const [k, v] of Object.entries(raidTeam.b)) {
 		raidTeam.b[k] = characters.find((c) => c.id === v.id);
 		if (!raidTeam.b[k]) {
-			// raidTeam.b[k] = {};
-			continue;
+			raidTeam.b[k] = { ...v };
 		}
 		raidTeam.b[k].image = await loadImage(
 			getCharImage(raidTeam.b[k]),
