@@ -50,7 +50,7 @@ body {
 		color: yellow;
 		text-align: center;
 		font-weight: 900;
-		-webkit-text-stroke: 3px black;
+		-webkit-text-stroke: 1.5px black;
 		background: linear-gradient(
 			to top,
 			orange 25px,
@@ -61,6 +61,29 @@ body {
 		);
 		background-clip: text;
 		-webkit-text-fill-color: transparent;
+	}
+	.actions {
+		display: flex;
+		justify-content: center;
+		margin-top: 22px;
+		gap: 10px;
+		button {
+			width: 160px;
+			color: white;
+			padding: 10px;
+			border: 1px solid black;
+			border-radius: 7px;
+			font-size: 20px;
+		}
+		.lose-continue {
+			background: #18a318;
+			span.icon {
+				color: red;
+			}
+		}
+		.lose-cancel {
+			background: #13a7d9;
+		}
 	}
 }
 

@@ -28,7 +28,7 @@ const onLoaded = () => {
 	});
 
 	const gameOver = async ({ state }) => {
-		const status = 'win';
+		const status = state.towers[1].status === 'dead' ? 'win' : 'lose';
 		window.parent.postMessage({
 			_: 'navigate',
 			src: `/modals/gameOver/index.html?status=${status}`
@@ -41,7 +41,9 @@ const onLoaded = () => {
 				src: `/pages/game/results/index.html`
 			});
 		};
-		setTimeout(showGameResults, 2000);
+		if (status === 'win') {
+			setTimeout(showGameResults, 2000);
+		}
 	};
 
 	const menu = {

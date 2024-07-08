@@ -9,4 +9,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 	} else {
 		loseSplash.classList.remove('hidden');
 	}
+	const loseCancel = document.querySelector('.lose-cancel');
+	loseCancel.addEventListener('mousedown', () => {
+		window.parent.postMessage({
+			_: 'navigate',
+			src: '/pages/mainStage/index.html'
+		});
+	});
 });
