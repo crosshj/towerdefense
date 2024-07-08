@@ -160,6 +160,7 @@ export const characterImageGetter = async () => {
 		if (character?.element) {
 			return allImages[character.element];
 		}
-		return allImages[character.displayName[0].toLowerCase()];
+		const name = (character?.displayName?.[0] || 'a').toLowerCase();
+		return allImages[name];
 	};
 };
