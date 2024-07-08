@@ -38,6 +38,10 @@ export const getTeam = async (teamName = 'Team 1', flipBTeam = true) => {
 	}
 	for (const [k, v] of Object.entries(raidTeam.b)) {
 		raidTeam.b[k] = characters.find((c) => c.id === v.id);
+		if (!raidTeam.b[k]) {
+			// raidTeam.b[k] = {};
+			continue;
+		}
 		raidTeam.b[k].image = await loadImage(
 			getCharImage(raidTeam.b[k]),
 			flipBTeam
