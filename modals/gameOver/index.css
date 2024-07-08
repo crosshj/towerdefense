@@ -65,7 +65,7 @@ body {
 	.actions {
 		display: flex;
 		justify-content: center;
-		margin-top: 22px;
+		margin-top: 30px;
 		gap: 10px;
 		button {
 			width: 160px;
