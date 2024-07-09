@@ -16,4 +16,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 			src: '/pages/mainStage/index.html'
 		});
 	});
+
+	/* TODO: ads continue
+		https://www.playwire.com/rewarded-video-ads-resources
+	*/
 });
