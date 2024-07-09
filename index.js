@@ -8,7 +8,7 @@ let whereIsBack;
 const setupPlayable = () => {
 	const iframe = `
 	<iframe
-		src="/pages/home/index.html"
+		src="/pages/startup/index.html"
 		width="100%"
 		height="100%"
 	></iframe>

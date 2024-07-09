@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Passion+One:wght@400;700;900&display=swap');
+
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	overscroll-behavior: none;
+}
+
+.background {
+	background: url(./bg.png);
+	background-size: 100% 100%;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	z-index: -1;
+	.bluebar {
+		position: fixed;
+		top: var(--dark-bar-top);
+		height: 100px;
+		width: 100%;
+		background: #202944;
+	}
+}
+
+button {
+	min-width: 7rem;
+	border: 1px solid;
+	background: transparent;
+	color: inherit;
+	border-radius: 5px;
+	text-transform: uppercase;
+	min-height: 2rem;
+	&.hidden {
+		display: none;
+	}
+	&.main {
+		background: #18ad18;
+		color: white;
+		border: 0;
+		font-weight: 700;
+		box-shadow: 0 6px 0px 0px #087019, inset 0 3px #fff4;
+	}
+	&.secondary {
+		border: 0;
+		color: #aaa;
+	}
+}
+
+.container {
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	overflow: hidden;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 1rem;
+
+	color: white;
+	opacity: 1;
+	&.hidden {
+		opacity: 0;
+	}
+
+	.title {
+		font-size: 40px;
+	}
+
+	.actions {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+}
+
+.flex-spacer {
+	flex: 1;
+}
