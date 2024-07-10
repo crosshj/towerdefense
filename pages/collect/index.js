@@ -1,6 +1,4 @@
-import { getCharacters } from '../../user/getCharacters.js';
 import { getCollection } from '../../user/getCollection.js';
-import { statsRequest } from '../../visuals/stats/stats.js';
 
 const buildCollectionList = async (collected) => {
 	const listEl = document.querySelector('.collection-list');

@@ -1,21 +1,31 @@
+### Remaining Tasks with Adjusted Priority Ratings:
+
+-   [ ] Develop rewards system and implement reward screens (Priority: 1)
+-   [ ] Enable player progression and unit collection updates (Priority: 2)
+-   [ ] Integrate backend and implement user authentication (Priority: 3)
+-   [ ] Develop competition system and implement notifications for competition
+        events (Priority: 4)
+-   [ ] Add levels to the main stage (Priority: 5)
+-   [ ] Develop characters, enemies, and bosses (Priority: 5)
+
 ### todo
 
--   [ ] Use characters configured in my-team in main screen and gameplay.
--   [ ] Implement features to determine win/loss outcomes.
 -   [ ] Add reward system for characters, coins, and other achievements.
 -   [ ] Develop real user profile functionality in the database or locally.
 -   [ ] Integrate user profile into game mechanics.
 -   [ ] Enable adding, inviting, and helping friends.
 -   [ ] Develop the shop for purchasing resources.
 -   [ ] Implement transaction processes.
--   [ ] Improve interaction with various screens (e.g., close button
-        functionality).
 -   [ ] towers and characters are "real" looking
--   [ ] actual characters with different strengths, etc
 -   [ ] effects buttons do something
 -   [ ] zoom
 -   [ ] critical hits (visual indicator)
 -   [ ] stop screen going to sleep automatically (prevent)
+-   [x] Use characters configured in my-team in main screen and gameplay.
+-   [x] Implement features to determine win/loss outcomes.
+-   [x] Improve interaction with various screens (e.g., close button
+        functionality).
+-   [x] actual characters with different strengths, etc
 -   [x] Create a dummy list of all characters.
 -   [x] Allow users to assign and save characters to teams.
 -   [x] Implement main stage with a spot for five characters.

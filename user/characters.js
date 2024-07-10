@@ -1,3 +1,7 @@
+/*
+ALL CHARACTERS THAT THE USER HAS AVAILABLE
+*/
+
 const LEGACY_DEPRECATE = [
 	{
 		id: '019079cf-cb56-7e71-cbf-8c0a55',
