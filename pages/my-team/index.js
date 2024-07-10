@@ -1,4 +1,4 @@
-import { getCharacters } from '../../user/getCharacters.js';
+import { getCharacters } from '../../user/characters.js';
 import { getTeams, setTeams } from '../../user/teams.js';
 import { characterImageGetter } from '../../visuals/assets/character.js';
 

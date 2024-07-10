@@ -22,7 +22,7 @@ const basicChar = {
 	mineralCost: 100
 };
 
-// DEPRECATE: the following should come from getCharacters
+// DEPRECATE: teams  should come from getCharacters
 
 /* prettier-ignore */
 const exampleUser = {
