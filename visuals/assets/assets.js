@@ -79,6 +79,7 @@ const images = {
 	backgroundGhost1: 'assets/bg-ghost1.png',
 	backgroundOcean1: 'assets/bg-ocean1.png',
 	backgroundSakura1: 'assets/background-sakura2.png',
+	backgroundTropicalGraveyard1: 'assets/background/tropicalGraveyard1.png',
 	bgTop: ({ background: bg }) =>
 		Tile()(
 			bg,

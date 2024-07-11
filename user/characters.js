@@ -256,42 +256,52 @@ const LEGACY_DEPRECATE = [
 
 const defaultCharacterList = [
 	{
+		// 1-star fighting
 		id: '019079cf-cb56-7f47-f03-7ef27d',
-		experience: 2841
+		experience: 4500 // maxed-ish
 	},
 	{
+		// 2-star rock
 		id: '019079cf-cb56-7f2b-f72-56f0fd',
-		experience: 4095
+		experience: 16000 // maxed-ish
 	},
 	{
+		// 3-star fairy
 		id: '019079cf-cb56-74e4-310-d79f9e',
-		experience: 3726
+		experience: 55000 // maxed-ish
 	},
 	{
+		// 4-star air/flying
 		id: '019079cf-cb56-7d7b-469-3b4bb5',
-		experience: 9058
+		experience: 100000 // maxed-ish
 	},
 	{
+		// 5-star dragon
 		id: '019079cf-cb56-7211-2f3-2bc714',
-		experience: 6512
+		experience: 250000 // maxed-ish
 	},
 	{
+		// 4-star bug
 		id: '019079cf-cb56-76cd-ff8-6d0542',
-		experience: 1975
+		experience: 100000 // maxed-ish
 	},
 	{
+		// 4-star dark
 		id: '019079cf-cb56-76c6-e56-7459e0',
 		experience: 840
 	},
 	{
+		// 4-star earth
 		id: '019079cf-cb56-7b0b-ad4-36b3eb',
 		experience: 7631
 	},
 	{
+		// 5-star electric
 		id: '019079cf-cb56-7020-725-206b2f',
 		experience: 3344
 	},
 	{
+		// 5-star fire
 		id: '019079cf-cb56-7ea0-337-0ad0de',
 		experience: 7951
 	},
@@ -333,19 +343,19 @@ export const getCharacters = async () => {
 	const lsValue = localStorage.getItem(LS_NAME);
 	if (!lsValue) {
 		return clone([
-			...(await hydrateCharacters(defaultCharacterList)),
-			...LEGACY_DEPRECATE
+			...(await hydrateCharacters(defaultCharacterList))
+			// ...LEGACY_DEPRECATE
 		]);
 	}
 	try {
 		return clone([
-			...(await hydrateCharacters(lsValue)),
-			...LEGACY_DEPRECATE //
+			...(await hydrateCharacters(lsValue))
+			// ...LEGACY_DEPRECATE //
 		]);
 	} catch (e) {
 		return clone([
-			...(await hydrateCharacters(defaultCharacterList)),
-			...LEGACY_DEPRECATE
+			...(await hydrateCharacters(defaultCharacterList))
+			// ...LEGACY_DEPRECATE
 		]);
 	}
 };

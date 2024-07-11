@@ -1,3 +1,5 @@
+https://pokemondb.net/type
+
 | Element Type         | Primary Color | Secondary Color | Tertiary Color | Advantages                                    | Disadvantages                                                 |
 | -------------------- | ------------- | --------------- | -------------- | --------------------------------------------- | ------------------------------------------------------------- |
 | Normal               | #A8A878       | #C6C6A7         | #D9D9A5        | Few specific advantages                       | Fighting                                                      |

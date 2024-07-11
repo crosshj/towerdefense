@@ -16,12 +16,15 @@ import { fieldStage1 } from './games/field1.js';
 import { ghostStage1 } from './games/ghost1.js';
 import { oceanStage1 } from './games/ocean1.js';
 import { sakura1 } from './games/sakura1.js';
+import { tropicalGraveyard1 } from './games/tropicalGraveyard1.js';
+
 import { characterAnimationGetter } from '../visuals/assets/character.js';
 import { getTeam } from '../pages/_utils/getTeam.js';
 
 const games = [
 	balancedGame1,
-	balancedLongField1,
+	// balancedLongField1,
+	tropicalGraveyard1,
 	fast1,
 	fieldStage1,
 	ghostStage1,

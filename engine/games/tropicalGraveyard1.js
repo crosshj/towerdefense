@@ -1,21 +1,20 @@
 import { getUser } from '../../user/getUser.js';
 
-export const sakura1 = async () => {
+export const tropicalGraveyard1 = async () => {
 	const user = await getUser();
-
 	const towerX = 200;
-	const towerColor2 = '#934';
+	const towerColor2 = '#604050';
 
 	const basicOppChar = {
 		type: 'defender',
 		hp: 3000,
-		respawn: 40,
+		respawn: 118,
 		range: 560,
-		attack: 95,
-		move: 40,
+		attack: 87,
+		move: 60,
 		x: towerX + 140,
-		critChance: 0.1,
-		critMult: 5
+		critChance: 0.01,
+		critMult: 2
 	};
 
 	return {
@@ -28,10 +27,10 @@ export const sakura1 = async () => {
 				width: 4000
 			},
 			sounds: {
-				background: 'asianSceneBackground'
+				background: 'tropicalShadowsBackground'
 			},
 			stage: {
-				background: 'backgroundSakura1'
+				background: 'backgroundTropicalGraveyard1'
 			},
 			towers: [
 				user.tower,
@@ -46,6 +45,8 @@ export const sakura1 = async () => {
 				}
 			],
 			tick: 0,
+
+			// this stuff has to come from user
 			missile: {
 				charge: 100,
 				chargeRate: 3

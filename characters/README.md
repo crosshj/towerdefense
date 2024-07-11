@@ -31,6 +31,8 @@ each level 1225
 so i guess just max level hp minus level 1 hp divided by max level-1
 level 4 hp is 13475 (9800+1225+1225+1225)
 seems to work unless new rangers are different
+
+https://rangers.lerico.net/en/ranger/u135e-dickey
 ```
 
 ### max level by \*'s
