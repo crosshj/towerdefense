@@ -1,4 +1,4 @@
-import { getStats } from '../../user/getStats.js';
+import { getStats } from '../../user/stats.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
 	const stats = await getStats();

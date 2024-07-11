@@ -22,7 +22,7 @@ const basicChar = {
 	mineralCost: 100
 };
 
-// DEPRECATE: teams  should come from getCharacters
+// DEPRECATE teams: should come from getCharacters
 
 /* prettier-ignore */
 const exampleUser = {
@@ -48,7 +48,6 @@ const exampleUser = {
         }
     ]
 };
-
 const getTeamsDetails = async (teams) => {
 	const filledTeams = clone(teams);
 	for (const team of filledTeams) {
@@ -78,6 +77,7 @@ const basicTower = {
 	deployed: [],
 	team: []
 };
+
 const getTowerDetails = async (tower) => {
 	return clone({
 		...basicTower,

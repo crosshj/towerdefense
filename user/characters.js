@@ -359,3 +359,18 @@ export const getCharacters = async () => {
 		]);
 	}
 };
+
+// level is complete, give characters exp
+export const addCharactersEXP = async (chars, expAmount) => {};
+
+// player gets a character as a reward
+export const newCharacter = async () => {};
+
+// player sells characters
+export const sellCharacters = async (chars) => {};
+
+// individual character is UPGRADED (with inputs like: other chars, materials, etc)
+export const upgradeCharacter = async (char, inputs) => {};
+
+// individual character is EVOLVED (with inputs like: materials, etc)
+export const evolveCharacter = async (char, inputs) => {};

@@ -1,4 +1,4 @@
-import { getUser } from '../../user/getUser.js';
+import { getUser } from '../../user/user.js';
 
 export const balancedLongField1 = async () => {
 	const user = await getUser();
