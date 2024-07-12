@@ -51,3 +51,9 @@ export const getTeam = async (teamName = 'Team 1', flipBTeam = true) => {
 	}
 	return raidTeam;
 };
+
+export const getTeamFromNumber = async (teamNumber, flipBTeam = false) => {
+	const teamName = 'Team ' + teamNumber;
+	const team = await getTeam(teamName, flipBTeam);
+	return team;
+};

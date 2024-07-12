@@ -257,114 +257,118 @@ const LEGACY_DEPRECATE = [
 const defaultCharacterList = [
 	{
 		// 1-star fighting
-		id: '019079cf-cb56-7f47-f03-7ef27d',
-		experience: 4500 // maxed-ish
+		id: '019079cf-cb56-7f47-f03-7ef27d'
 	},
 	{
 		// 2-star rock
-		id: '019079cf-cb56-7f2b-f72-56f0fd',
-		experience: 16000 // maxed-ish
+		id: '019079cf-cb56-7f2b-f72-56f0fd'
 	},
 	{
 		// 3-star fairy
-		id: '019079cf-cb56-74e4-310-d79f9e',
-		experience: 55000 // maxed-ish
+		id: '019079cf-cb56-74e4-310-d79f9e'
 	},
 	{
 		// 4-star air/flying
-		id: '019079cf-cb56-7d7b-469-3b4bb5',
-		experience: 100000 // maxed-ish
+		id: '019079cf-cb56-7d7b-469-3b4bb5'
 	},
 	{
 		// 5-star dragon
-		id: '019079cf-cb56-7211-2f3-2bc714',
-		experience: 250000 // maxed-ish
+		id: '019079cf-cb56-7211-2f3-2bc714'
 	},
 	{
 		// 4-star bug
-		id: '019079cf-cb56-76cd-ff8-6d0542',
-		experience: 100000 // maxed-ish
+		id: '019079cf-cb56-76cd-ff8-6d0542'
 	},
 	{
 		// 4-star dark
-		id: '019079cf-cb56-76c6-e56-7459e0',
-		experience: 840
+		id: '019079cf-cb56-76c6-e56-7459e0'
 	},
 	{
 		// 4-star earth
-		id: '019079cf-cb56-7b0b-ad4-36b3eb',
-		experience: 7631
+		id: '019079cf-cb56-7b0b-ad4-36b3eb'
 	},
 	{
 		// 5-star electric
-		id: '019079cf-cb56-7020-725-206b2f',
-		experience: 3344
+		id: '019079cf-cb56-7020-725-206b2f'
 	},
 	{
 		// 5-star fire
-		id: '019079cf-cb56-7ea0-337-0ad0de',
-		experience: 7951
+		id: '019079cf-cb56-7ea0-337-0ad0de'
 	},
 	{
-		id: '019079cf-cb56-7777-53f-64e88d',
-		experience: 5389
+		id: '019079cf-cb56-7777-53f-64e88d'
 	},
 	{
-		id: '019079cf-cb56-7a7f-741-8f5588',
-		experience: 1377
+		id: '019079cf-cb56-7a7f-741-8f5588'
 	},
 	{
-		id: '019079cf-cb56-7004-2bb-144d0e',
-		experience: 2964
+		id: '019079cf-cb56-7004-2bb-144d0e'
 	},
 	{
-		id: '019079cf-cb56-71dd-1d6-d8a311',
-		experience: 4388
+		id: '019079cf-cb56-71dd-1d6-d8a311'
 	},
 	{
-		id: '019079cf-cb56-7358-a31-edf4b2',
-		experience: 100
+		id: '019079cf-cb56-7358-a31-edf4b2'
 	},
 	{
-		id: '019079cf-cb56-7661-466-8868c6',
-		experience: 6057
+		id: '019079cf-cb56-7661-466-8868c6'
 	},
 	{
-		id: '019079cf-cb56-71e2-738-b6d9c2',
-		experience: 5099
+		id: '019079cf-cb56-71e2-738-b6d9c2'
 	},
 	{
-		id: '019079cf-cb56-7b4d-652-890dd9',
-		experience: 7514
+		id: '019079cf-cb56-7b4d-652-890dd9'
 	}
 ];
 
-export const getCharacters = async () => {
-	const lsValue = localStorage.getItem(LS_NAME);
-	if (!lsValue) {
-		return clone([
-			...(await hydrateCharacters(defaultCharacterList))
-			// ...LEGACY_DEPRECATE
-		]);
-	}
+export const getCharacters = async (hydrate = true) => {
+	const lsValue = localStorage.getItem(LS_NAME) || '';
+	let characters;
 	try {
-		return clone([
-			...(await hydrateCharacters(lsValue))
-			// ...LEGACY_DEPRECATE //
-		]);
+		characters = JSON.parse(lsValue);
 	} catch (e) {
-		return clone([
-			...(await hydrateCharacters(defaultCharacterList))
-			// ...LEGACY_DEPRECATE
-		]);
+		characters = clone(defaultCharacterList);
 	}
+
+	if (!hydrate) {
+		return characters;
+	}
+	const hydratedCharacters = await hydrateCharacters(characters);
+	return hydratedCharacters;
 };
 
 // level is complete, give characters exp
-export const addCharactersEXP = async (chars, expAmount) => {};
+export const addCharactersEXP = async (chars, expAmount) => {
+	const hydrated = false;
+	const allChars = await getCharacters(hydrated);
+	for (const { id } of chars) {
+		const thisChar = allChars.find((x) => x.id === id);
+		if (!thisChar) {
+			debugger;
+		}
+		thisChar.experience = thisChar.experience || 0;
+		thisChar.experience += expAmount;
+		//TODO: note when this causes a char to level up?
+		//TODO: cap experience based on stars
+	}
+	localStorage.setItem(LS_NAME, JSON.stringify(allChars));
+};
 
 // player gets a character as a reward
-export const newCharacter = async () => {};
+export const addNewCharacter = async (char) => {
+	// TODO: need a better way to map characters besides UUID's
+	// because charInstance id, versus character class id
+	return;
+	const chars = await getCharacters();
+	const newChars = [
+		...chars,
+		{
+			id: char.id,
+			experience: 0
+		}
+	];
+	localStorage.setItem(LS_NAME, JSON.stringify(newChars));
+};
 
 // player sells characters
 export const sellCharacters = async (chars) => {};

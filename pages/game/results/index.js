@@ -1,5 +1,7 @@
 import { getStageRewards } from '../../../stages/index.js';
+import { addCharactersEXP, addNewCharacter } from '../../../user/characters.js';
 import { addStats } from '../../../user/stats.js';
+import { getTeamFromNumber } from '../../_utils/getTeam.js';
 
 const updateRewards = async (rewards) => {
 	const params = Object.fromEntries(
@@ -15,6 +17,15 @@ const updateRewards = async (rewards) => {
 		coins: totalCoins,
 		exp: exp.player
 	});
+
+	if (bonus.type === 'char') {
+		await addNewCharacter({
+			id: bonus.key
+		});
+	}
+
+	const team = await getTeamFromNumber(params.team);
+	await addCharactersEXP([...team.a, ...team.b], exp.unit);
 
 	//TODO: update team exp, characters, effects from rewards/params
 	console.log({ rewards, params });

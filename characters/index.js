@@ -24,15 +24,16 @@ HP, Attack Speed, Attack, Defense
 
 */
 
-const withLevelInfo = (unit, totalExp) => {
+const withLevelInfo = (unit, totalExp = 0) => {
 	const { currentLevel, expToNext, levelExpPercent } = getLevelInfo({
 		totalExp,
-		a: 5 * unit.rank
+		a: 5 * unit.rank,
+		b: 6000
 	});
 	return {
 		...unit,
 		stars: unit.rank,
-		level: currentLevel,
+		level: currentLevel || 1,
 		levelNext: expToNext,
 		levelNextPercent: levelExpPercent
 	};
