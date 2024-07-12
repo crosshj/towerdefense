@@ -2,6 +2,9 @@ import { getStageRewards } from '../../../stages/index.js';
 import { addStats } from '../../../user/stats.js';
 
 const updateRewards = async (rewards) => {
+	const params = Object.fromEntries(
+		new URLSearchParams(window.location.search)
+	);
 	const { bonus, exp, coins } = rewards;
 
 	await addStats({
@@ -9,8 +12,8 @@ const updateRewards = async (rewards) => {
 		exp: exp.player
 	});
 
-	//TODO: update team exp from rewards
-	console.log(rewards);
+	//TODO: update team exp, characters, effects from rewards/params
+	console.log({ rewards, params });
 
 	const userCoinDom = document.querySelector('.userCoin');
 	const userEXPDom = document.querySelector('.userEXP');
