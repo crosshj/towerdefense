@@ -38,13 +38,13 @@ https://rangers.lerico.net/en/ranger/u135e-dickey
 ### max level by \*'s
 
 ```
-1: 10 -> 30
-2: 20 -> 40
+1: 20 -> 40
+2: 30 -> 50
 3: 40 -> 60
-4: 50 -> 70
-5: 80 -> 100
-6: 100 -> 120
-7: 120 -> 140
-8: 140 -> 160 (hyper/ultimate 240) - LP 100
+4: 50 -> 70 (hyper/ultimate 170 & LP 100)
+5: 60 -> 80 (hyper/ultimate 180 & LP 100)
+6: 80 -> 100 (hyper/ultimate 200 & LP 100)
+7: 100 -> 120 (hyper/ultimate 220 & LP 100)
+8: 120 -> 140 (hyper/ultimate 240 & LP 100)
 9: 160 -> 180
 ```
