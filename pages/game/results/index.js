@@ -6,9 +6,13 @@ const updateRewards = async (rewards) => {
 		new URLSearchParams(window.location.search)
 	);
 	const { bonus, exp, coins } = rewards;
+	const totalCoins =
+		bonus.type === 'coin' && bonus.amount
+			? coins + bonus.amount //
+			: coins;
 
 	await addStats({
-		coins,
+		coins: totalCoins,
 		exp: exp.player
 	});
 
