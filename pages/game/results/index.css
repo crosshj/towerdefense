@@ -10,7 +10,7 @@ body {
 	--dark-bar-top: 37%;
 }
 
-body:after {
+/* body:after {
 	content: 'TODO';
 	position: fixed;
 	left: 21%;
@@ -19,7 +19,7 @@ body:after {
 	font-weight: 900;
 	opacity: 0.05;
 	transform: rotate(-36deg);
-}
+} */
 
 .background {
 	background: url(./bg.png);
@@ -46,13 +46,28 @@ body:after {
 	left: 0;
 	bottom: 0;
 	right: 0;
-	display: grid;
-	grid-template-rows: var(--rows);
-	grid-template-columns: 1fr 67% 1fr;
+
 	overflow: hidden;
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+
+	.result {
+		margin-left: 35%;
+		margin-right: auto;
+
+		p {
+			margin: 0;
+		}
+		&.bonus {
+			margin-top: 1em;
+		}
+	}
+
+	.message {
+		margin-top: 28px;
+	}
 }
 
 .flex-spacer {

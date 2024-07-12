@@ -34,11 +34,12 @@ const onLoaded = () => {
 			src: `/modals/gameOver/index.html?status=${status}`
 		});
 
-		//TODO: save game results
 		const showGameResults = async () => {
+			const queryString = new URLSearchParams(params).toString();
+			const src = `/pages/game/results/index.html?${queryString}`;
 			window.parent.postMessage({
 				_: 'navigate',
-				src: `/pages/game/results/index.html`
+				src
 			});
 		};
 		if (status === 'win') {
