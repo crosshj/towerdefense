@@ -2,18 +2,18 @@ import { getUser } from '../../user/user.js';
 
 export const getRewards = async () => {
 	return {
-		coin: 4000,
+		coins: 4000,
 		exp: {
 			player: 6000,
 			unit: 6000
 		},
 		bonus: {
 			coin: { type: 'coin', probability: 1, amount: 5000 },
-			meteor: { type: 'effect', probability: 0.9 },
-			ice: { type: 'effect', probability: 0.9 },
-			tornado: { type: 'effect', probability: 0.9 },
-			invincible: { type: 'effect', probability: 0.9 },
-			'019079cf-cb56-7358-a31-edf4b2': { type: 'char', probability: 0.3 },
+			meteor: { type: 'effect', probability: 0.5 },
+			ice: { type: 'effect', probability: 0.5 },
+			tornado: { type: 'effect', probability: 0.5 },
+			invincible: { type: 'effect', probability: 0.5 },
+			'019079cf-cb56-7358-a31-edf4b2': { type: 'char', probability: 0.1 },
 			'019079cf-cb56-7f47-f03-7ef27d': { type: 'char', probability: 0.1 }
 		}
 	};

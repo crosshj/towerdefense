@@ -1,7 +1,15 @@
 import { getStageRewards } from '../../../stages/index.js';
+import { addStats } from '../../../user/stats.js';
 
 const updateRewards = async (rewards) => {
-	//TODO: update user records for rewards
+	const { bonus, exp, coins } = rewards;
+
+	await addStats({
+		coins,
+		exp: exp.player
+	});
+
+	//TODO: update team exp from rewards
 	console.log(rewards);
 
 	const userCoinDom = document.querySelector('.userCoin');
@@ -9,16 +17,16 @@ const updateRewards = async (rewards) => {
 	const teamEXPDom = document.querySelector('.teamEXP');
 	const bonusDom = document.querySelector('.bonus');
 
-	userCoinDom.innerHTML = `<p>COIN: ${rewards.coin}</p>`;
-	userEXPDom.innerHTML = `<p>User EXP: ${rewards.exp.player}</p>`;
-	teamEXPDom.innerHTML = `<p>Team EXP: ${rewards.exp.unit}</p>`;
+	userCoinDom.innerHTML = `<p>COIN: ${coins}</p>`;
+	userEXPDom.innerHTML = `<p>User EXP: ${exp.player}</p>`;
+	teamEXPDom.innerHTML = `<p>Team EXP: ${exp.unit}</p>`;
 
 	/* prettier-ignore */
 	bonusDom.innerHTML = `
-		<p>BONUS type: ${rewards.bonus.type}</p>
-		<p>BONUS name: ${rewards.bonus.key}</p>
-		${rewards.bonus.amount
-			? `<p>BONUS amount: ${rewards.bonus.amount}</p>`
+		<p>BONUS type: ${bonus.type}</p>
+		<p>BONUS name: ${bonus.key}</p>
+		${bonus.amount
+			? `<p>BONUS amount: ${bonus.amount}</p>`
 			: ``
 		}
 	`;

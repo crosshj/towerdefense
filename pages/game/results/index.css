@@ -53,6 +53,14 @@ body {
 	justify-content: center;
 	align-items: center;
 
+	.title {
+		font-size: 32px;
+		margin-bottom: 1em;
+		color: yellow;
+		text-shadow: 1px 1px #063755c2, 2px 2px #063755c2;
+		font-weight: 900;
+	}
+
 	.result {
 		margin-left: 35%;
 		margin-right: auto;
@@ -67,6 +75,7 @@ body {
 
 	.message {
 		margin-top: 28px;
+		opacity: 0.5;
 	}
 }
 
