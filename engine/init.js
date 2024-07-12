@@ -9,29 +9,10 @@ import TeamUpdates from './update/team.js';
 import PlayerUpdates from './update/player.js';
 import MissileUpdates from './update/missile.js';
 
-import { balancedGame1 } from './games/balanced1.js';
-import { balancedLongField1 } from './games/balancedLongField1.js';
-import { fast1 } from './games/fast1.js';
-import { fieldStage1 } from './games/field1.js';
-import { ghostStage1 } from './games/ghost1.js';
-import { oceanStage1 } from './games/ocean1.js';
-import { sakura1 } from './games/sakura1.js';
-import { tropicalGraveyard1 } from './games/tropicalGraveyard1.js';
+import { getStage } from '../stages/index.js';
 
 import { characterAnimationGetter } from '../visuals/assets/character.js';
 import { getTeam } from '../pages/_utils/getTeam.js';
-
-const games = [
-	balancedGame1,
-	// balancedLongField1,
-	tropicalGraveyard1,
-	fast1,
-	fieldStage1,
-	ghostStage1,
-	oceanStage1,
-	sakura1
-	//
-];
 
 const attributes = [
 	'image',
@@ -74,7 +55,8 @@ const adjustGame = async (game, params) => {
 export const startGame = async ({ menu, which, params, gameOver }) => {
 	document.querySelector('body > .container').scrollLeft = 0;
 
-	const thisGame = games[which];
+	const thisGame = await getStage(params);
+
 	if (typeof thisGame !== 'function') {
 		alert('no game selected!');
 		return;

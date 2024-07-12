@@ -1,19 +1,10 @@
-export const oceanStage1 = () => {
-	const towerX = 200;
-	const towerColor1 = '#24b';
-	const towerColor2 = '#934';
+import { getUser } from '../../user/user.js';
 
-	const basicChar = {
-		type: 'attacker',
-		hp: 3000,
-		respawn: 35,
-		range: 400,
-		attack: 110,
-		x: towerX + 140,
-		move: 50,
-		critChance: 0.07,
-		critMult: 5
-	};
+export default async () => {
+	const user = await getUser();
+
+	const towerX = 200;
+	const towerColor2 = '#934';
 
 	const basicOppChar = {
 		type: 'defender',
@@ -29,25 +20,21 @@ export const oceanStage1 = () => {
 
 	return {
 		state: {
+			auto: user.auto,
 			throttle: 67,
 			record: false,
 			field: {
 				height: 800,
-				width: 3700
+				width: 4000
+			},
+			sounds: {
+				background: 'sunnyFieldBackground'
 			},
 			stage: {
-				background: 'backgroundOcean1'
+				background: 'backgroundField1'
 			},
 			towers: [
-				{
-					type: 'attacker',
-					dims: [200, 343],
-					x: towerX,
-					color: towerColor1,
-					hp: 30000,
-					deployed: [],
-					team: [basicChar]
-				},
+				user.tower,
 				{
 					type: 'defender',
 					dims: [200, 343],
@@ -60,8 +47,8 @@ export const oceanStage1 = () => {
 			],
 			tick: 0,
 			missile: {
-				charge: 0,
-				chargeRate: 30
+				charge: 100,
+				chargeRate: 3
 			},
 			mineral: {
 				charge: 0, // level charge

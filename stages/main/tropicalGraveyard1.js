@@ -1,6 +1,6 @@
 import { getUser } from '../../user/user.js';
 
-export const tropicalGraveyard1 = async () => {
+export default async () => {
 	const user = await getUser();
 	const towerX = 200;
 	const towerColor2 = '#604050';

@@ -57,6 +57,7 @@ const onLoaded = () => {
 	};
 	startGame({
 		which: zoneMap[params.zone] || 1,
+		zone: params.zone,
 		params,
 		menu,
 		gameOver
