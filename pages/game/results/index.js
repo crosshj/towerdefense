@@ -1,5 +1,6 @@
 import { getStageRewards } from '../../../stages/index.js';
 import { addCharactersEXP, addNewCharacter } from '../../../user/characters.js';
+import { updateEffectsCount } from '../../../user/effects.js';
 import { addStats } from '../../../user/stats.js';
 import { getTeamFromNumber } from '../../_utils/getTeam.js';
 
@@ -8,26 +9,36 @@ const updateRewards = async (rewards) => {
 		new URLSearchParams(window.location.search)
 	);
 	const { bonus, exp, coins } = rewards;
+
+	// update coins
 	const totalCoins =
 		bonus.type === 'coin' && bonus.amount
 			? coins + bonus.amount //
 			: coins;
-
 	await addStats({
 		coins: totalCoins,
 		exp: exp.player
 	});
 
+	// update characters
 	if (bonus.type === 'char') {
 		await addNewCharacter({
 			code: bonus.key
 		});
 	}
 
+	// update effects
+	if (bonus.type === 'effect') {
+		await updateEffectsCount({
+			[bonus.key]: 1
+		});
+	}
+
+	// update team EXP
 	const team = await getTeamFromNumber(params.team);
 	await addCharactersEXP([...team.a, ...team.b], exp.unit);
 
-	//TODO: update team exp, characters, effects from rewards/params
+	// TODO: update player EXP
 	console.log({ rewards, params });
 
 	const userCoinDom = document.querySelector('.userCoin');
