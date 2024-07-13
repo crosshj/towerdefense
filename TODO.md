@@ -25,11 +25,14 @@
 
 -   [ ] sell characters
 -   [ ] upgrade/combine characters
+-   [ ] remove charcter from team
+-   [ ] re-order team
 
 (in-game)
 
 -   [ ] switch team
 -   [ ] retarget based on new character spawned
+-   [ ] auto/X2 from params
 -   [ ] effects buttons do something (and reduce count when used)
 -   [ ] effects show up (not) if selected (not) in game setup
 -   [ ] towers and characters are "real" looking
@@ -72,6 +75,16 @@
         screen).
 -   [x] auto mode versus interactive mode
 -   [x] Connect settings for background music and sound effects.
+
+### history
+
+-   basic game simulation
+-   core components of gameplay with mocked data & visual placeholders
+-   expanded gameplay with mocked levels
+-   basic creation of all(most) core screens/pages/modals + working out
+    visuals/audio
+-   connecting screens to games / "real" characters
+-   character / player progression
 
 ### audio
 
