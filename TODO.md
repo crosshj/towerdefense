@@ -1,4 +1,4 @@
-### Remaining Tasks with Adjusted Priority Ratings:
+## Overview:
 
 -   [ ] Develop rewards system and implement reward screens (Priority: 1)
 -   [ ] Enable player progression and unit collection updates (Priority: 2)
@@ -8,19 +8,49 @@
 -   [ ] Add levels to the main stage (Priority: 5)
 -   [ ] Develop characters, enemies, and bosses (Priority: 5)
 
-### todo
+### TODO
 
--   [ ] Add reward system for characters, coins, and other achievements.
--   [ ] Develop real user profile functionality in the database or locally.
--   [ ] Integrate user profile into game mechanics.
+(resource-related / rewards-related)
+
+-   [ ] feathers are used when starting level
+-   [ ] level cannot be started without feathers
+-   [ ] feathers increase over time
+-   [ ] notification when feathers are full
+
+-   [ ] player levels up based on experience
+-   [ ] character levels affect stats
+-   [ ] character detail screen
+-   [ ] level caps (so char doesn't level up over a certain point)
+-   [ ] rewards screen shows player/character level up events
+
+-   [ ] sell characters
+-   [ ] upgrade/combine characters
+
+(in-game)
+
+-   [ ] switch team
+-   [ ] retarget based on new character spawned
+-   [ ] effects buttons do something (and reduce count when used)
+-   [ ] effects show up (not) if selected (not) in game setup
+-   [ ] towers and characters are "real" looking
+-   [ ] zoom
+-   [ ] critical hits (visual indicator)
+-   [ ] character misses + visual indicator
+
+(social)
+
 -   [ ] Enable adding, inviting, and helping friends.
 -   [ ] Develop the shop for purchasing resources.
 -   [ ] Implement transaction processes.
--   [ ] towers and characters are "real" looking
--   [ ] effects buttons do something
--   [ ] zoom
--   [ ] critical hits (visual indicator)
+-   [ ] feedback
+-   [ ] save to YouTube
+
+(misc)
+
 -   [ ] stop screen going to sleep automatically (prevent)
+
+(done)
+
 -   [x] Use characters configured in my-team in main screen and gameplay.
 -   [x] Implement features to determine win/loss outcomes.
 -   [x] Improve interaction with various screens (e.g., close button
