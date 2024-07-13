@@ -20,7 +20,7 @@ const updateRewards = async (rewards) => {
 
 	if (bonus.type === 'char') {
 		await addNewCharacter({
-			id: bonus.key
+			code: bonus.key
 		});
 	}
 

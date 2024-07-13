@@ -13,8 +13,8 @@ export const getRewards = async () => {
 			ice: { type: 'effect', probability: 0.5 },
 			tornado: { type: 'effect', probability: 0.5 },
 			invincible: { type: 'effect', probability: 0.5 },
-			'019079cf-cb56-7358-a31-edf4b2': { type: 'char', probability: 0.1 },
-			'019079cf-cb56-7f47-f03-7ef27d': { type: 'char', probability: 0.1 }
+			'u0001-5-crack9': { type: 'char', probability: 0.1 },
+			'u0001-1-macho': { type: 'char', probability: 0.1 }
 		}
 	};
 };

@@ -35,6 +35,11 @@ seems to work unless new rangers are different
 https://rangers.lerico.net/en/ranger/u135e-dickey
 ```
 
+```
+LCMS:
+if you're maxing a ranger on exp 2x days then the UL is enough to cover the 5 level gain so 140-145-150... but from 190-195 you need the UL + one 6* ranger then for 195-200 it's UL + two 6* rangers and so on
+```
+
 ### max level by \*'s
 
 ```

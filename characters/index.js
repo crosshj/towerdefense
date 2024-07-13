@@ -40,9 +40,10 @@ const withLevelInfo = (unit, totalExp = 0) => {
 };
 
 const charMapper = {
-	'019079cf-cb56-7f47-f03-7ef27d': ({ experience }) => {
+	'u0001-1-macho': ({ experience, id }) => {
 		const unit = {
-			id: '019079cf-cb56-7f47-f03-7ef27d',
+			id,
+			code: 'u0001-1-macho',
 			displayName: 'Macho',
 			element: 'Fighting',
 			rank: 1,
@@ -53,9 +54,10 @@ const charMapper = {
 		};
 		return withLevelInfo(unit, experience);
 	},
-	'019079cf-cb56-7f2b-f72-56f0fd': ({ experience }) => {
+	'u0001-2-toto': ({ experience, id }) => {
 		const unit = {
-			id: '019079cf-cb56-7f2b-f72-56f0fd',
+			id,
+			code: 'u0001-2-toto',
 			displayName: 'Toto Bato',
 			element: 'Rock',
 			rank: 2,
@@ -66,9 +68,10 @@ const charMapper = {
 		};
 		return withLevelInfo(unit, experience);
 	},
-	'019079cf-cb56-74e4-310-d79f9e': ({ experience }) => {
+	'u0001-3-twinkle': ({ experience, id }) => {
 		const unit = {
-			id: '019079cf-cb56-74e4-310-d79f9e',
+			id,
+			code: 'u0001-3-twinkle',
 			displayName: 'Twinkle',
 			element: 'Fairy',
 			rank: 3,
@@ -79,9 +82,10 @@ const charMapper = {
 		};
 		return withLevelInfo(unit, experience);
 	},
-	'019079cf-cb56-7d7b-469-3b4bb5': ({ experience }) => {
+	'u0001-4-vispi': ({ experience, id }) => {
 		const unit = {
-			id: '019079cf-cb56-7d7b-469-3b4bb5',
+			id,
+			code: 'u0001-4-vispi',
 			displayName: 'Vispi',
 			element: 'Air',
 			rank: 4,
@@ -92,9 +96,10 @@ const charMapper = {
 		};
 		return withLevelInfo(unit, experience);
 	},
-	'019079cf-cb56-7211-2f3-2bc714': ({ experience }) => {
+	'u0001-5-drat': ({ experience, id }) => {
 		const unit = {
-			id: '019079cf-cb56-7211-2f3-2bc714',
+			id,
+			code: 'u0001-5-drat',
 			displayName: 'Drat',
 			element: 'Dragon',
 			rank: 5,
@@ -105,9 +110,10 @@ const charMapper = {
 		};
 		return withLevelInfo(unit, experience);
 	},
-	'019079cf-cb56-76cd-ff8-6d0542': ({ experience }) => {
+	'u0001-4-antonio': ({ experience, id }) => {
 		const unit = {
-			id: '019079cf-cb56-76cd-ff8-6d0542',
+			id,
+			code: 'u0001-4-antonio',
 			displayName: 'Antonio',
 			element: 'Bug',
 			rank: 4,
@@ -118,9 +124,10 @@ const charMapper = {
 		};
 		return withLevelInfo(unit, experience);
 	},
-	'019079cf-cb56-76c6-e56-7459e0': ({ experience }) => {
+	'u0001-4-bumpier': ({ experience, id }) => {
 		const unit = {
-			id: '019079cf-cb56-76c6-e56-7459e0',
+			id,
+			code: 'u0001-4-bumpier',
 			displayName: 'Bumpier',
 			element: 'Dark',
 			rank: 4,
@@ -131,9 +138,10 @@ const charMapper = {
 		};
 		return withLevelInfo(unit, experience);
 	},
-	'019079cf-cb56-7b0b-ad4-36b3eb': ({ experience }) => {
+	'u0001-4-tabi': ({ experience, id }) => {
 		const unit = {
-			id: '019079cf-cb56-7b0b-ad4-36b3eb',
+			id,
+			code: 'u0001-4-tabi',
 			displayName: 'Tabi-Tabi Po',
 			element: 'Earth',
 			rank: 4,
@@ -144,9 +152,10 @@ const charMapper = {
 		};
 		return withLevelInfo(unit, experience);
 	},
-	'019079cf-cb56-7020-725-206b2f': ({ experience }) => {
+	'u0001-5-electopus': ({ experience, id }) => {
 		const unit = {
-			id: '019079cf-cb56-7020-725-206b2f',
+			id,
+			code: 'u0001-5-electopus',
 			displayName: 'Electopus',
 			element: 'Electric',
 			rank: 5,
@@ -157,9 +166,10 @@ const charMapper = {
 		};
 		return withLevelInfo(unit, experience);
 	},
-	'019079cf-cb56-7ea0-337-0ad0de': ({ experience }) => {
+	'u0001-5-santelmo': ({ experience, id }) => {
 		const unit = {
-			id: '019079cf-cb56-7ea0-337-0ad0de',
+			id,
+			code: 'u0001-5-santelmo',
 			displayName: 'Santelmo',
 			element: 'Fire',
 			rank: 5,
@@ -170,9 +180,10 @@ const charMapper = {
 		};
 		return withLevelInfo(unit, experience);
 	},
-	'019079cf-cb56-7777-53f-64e88d': ({ experience }) => {
+	'u0001-5-multo': ({ experience, id }) => {
 		const unit = {
-			id: '019079cf-cb56-7777-53f-64e88d',
+			id,
+			code: 'u0001-5-multo',
 			displayName: 'Multo',
 			element: 'Ghost',
 			rank: 5,
@@ -183,9 +194,10 @@ const charMapper = {
 		};
 		return withLevelInfo(unit, experience);
 	},
-	'019079cf-cb56-7a7f-741-8f5588': ({ experience }) => {
+	'u0001-5-kelvin': ({ experience, id }) => {
 		const unit = {
-			id: '019079cf-cb56-7a7f-741-8f5588',
+			id,
+			code: 'u0001-5-kelvin',
 			displayName: 'Kelvin',
 			element: 'Ice',
 			rank: 5,
@@ -196,9 +208,10 @@ const charMapper = {
 		};
 		return withLevelInfo(unit, experience);
 	},
-	'019079cf-cb56-7004-2bb-144d0e': ({ experience }) => {
+	'u0001-5-blanko': ({ experience, id }) => {
 		const unit = {
-			id: '019079cf-cb56-7004-2bb-144d0e',
+			id,
+			code: 'u0001-5-blanko',
 			displayName: 'Blanko',
 			element: 'Normal',
 			rank: 5,
@@ -209,9 +222,10 @@ const charMapper = {
 		};
 		return withLevelInfo(unit, experience);
 	},
-	'019079cf-cb56-71dd-1d6-d8a311': ({ experience }) => {
+	'u0001-5-prickles': ({ experience, id }) => {
 		const unit = {
-			id: '019079cf-cb56-71dd-1d6-d8a311',
+			id,
+			code: 'u0001-5-prickles',
 			displayName: 'Prickles',
 			element: 'Plant',
 			rank: 5,
@@ -222,9 +236,10 @@ const charMapper = {
 		};
 		return withLevelInfo(unit, experience);
 	},
-	'019079cf-cb56-7358-a31-edf4b2': ({ experience }) => {
+	'u0001-5-crack9': ({ experience, id }) => {
 		const unit = {
-			id: '019079cf-cb56-7358-a31-edf4b2',
+			id,
+			code: 'u0001-5-crack9',
 			displayName: 'Crack9',
 			element: 'Poison',
 			rank: 5,
@@ -235,9 +250,10 @@ const charMapper = {
 		};
 		return withLevelInfo(unit, experience);
 	},
-	'019079cf-cb56-7661-466-8868c6': ({ experience }) => {
+	'u0001-5-robia': ({ experience, id }) => {
 		const unit = {
-			id: '019079cf-cb56-7661-466-8868c6',
+			id,
+			code: 'u0001-5-robia',
 			displayName: 'Robia',
 			element: 'Psychic',
 			rank: 5,
@@ -248,9 +264,10 @@ const charMapper = {
 		};
 		return withLevelInfo(unit, experience);
 	},
-	'019079cf-cb56-71e2-738-b6d9c2': ({ experience }) => {
+	'u0001-5-barbell': ({ experience, id }) => {
 		const unit = {
-			id: '019079cf-cb56-71e2-738-b6d9c2',
+			id,
+			code: 'u0001-5-barbell',
 			displayName: 'Barbell',
 			element: 'Steel',
 			rank: 5,
@@ -261,9 +278,10 @@ const charMapper = {
 		};
 		return withLevelInfo(unit, experience);
 	},
-	'019079cf-cb56-7b4d-652-890dd9': ({ experience }) => {
+	'u0001-5-wap': ({ experience, id }) => {
 		const unit = {
-			id: '019079cf-cb56-7b4d-652-890dd9',
+			id,
+			code: 'u0001-5-wap',
 			displayName: 'Wap Wap',
 			element: 'Water',
 			rank: 5,
@@ -279,7 +297,7 @@ const charMapper = {
 export const hydrateCharacters = async (playerCharacters) => {
 	const hydrated = [];
 	for (const char of playerCharacters) {
-		const mapper = charMapper[char?.id];
+		const mapper = charMapper[char?.code];
 		if (typeof mapper !== 'function') continue;
 		hydrated.push(mapper(char));
 	}

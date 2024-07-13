@@ -1,7 +1,7 @@
 /*
 ALL CHARACTERS THAT THE USER HAS AVAILABLE
 */
-import { clone } from '../utils/utils.js';
+import { clone, generateUUID } from '../utils/utils.js';
 import { hydrateCharacters } from '../characters/index.js';
 
 const LS_NAME = 'USER_CHARACTERS';
@@ -257,67 +257,93 @@ const LEGACY_DEPRECATE = [
 const defaultCharacterList = [
 	{
 		// 1-star fighting
-		id: '019079cf-cb56-7f47-f03-7ef27d'
+		id: '019079cf-cb56-7f47-f03-7ef27d',
+		code: 'u0001-1-macho'
 	},
 	{
 		// 2-star rock
-		id: '019079cf-cb56-7f2b-f72-56f0fd'
+		id: '019079cf-cb56-7f2b-f72-56f0fd',
+		code: 'u0001-2-toto'
 	},
 	{
 		// 3-star fairy
-		id: '019079cf-cb56-74e4-310-d79f9e'
+		id: '019079cf-cb56-74e4-310-d79f9e',
+		code: 'u0001-3-twinkle'
 	},
 	{
 		// 4-star air/flying
-		id: '019079cf-cb56-7d7b-469-3b4bb5'
+		id: '019079cf-cb56-7d7b-469-3b4bb5',
+		code: 'u0001-4-vispi'
 	},
 	{
 		// 5-star dragon
-		id: '019079cf-cb56-7211-2f3-2bc714'
+		id: '019079cf-cb56-7211-2f3-2bc714',
+		code: 'u0001-5-drat'
 	},
 	{
 		// 4-star bug
-		id: '019079cf-cb56-76cd-ff8-6d0542'
+		id: '019079cf-cb56-76cd-ff8-6d0542',
+		code: 'u0001-4-antonio'
 	},
 	{
 		// 4-star dark
-		id: '019079cf-cb56-76c6-e56-7459e0'
+		id: '019079cf-cb56-76c6-e56-7459e0',
+		code: 'u0001-4-bumpier'
 	},
 	{
 		// 4-star earth
-		id: '019079cf-cb56-7b0b-ad4-36b3eb'
+		id: '019079cf-cb56-7b0b-ad4-36b3eb',
+		code: 'u0001-4-tabi'
 	},
 	{
 		// 5-star electric
-		id: '019079cf-cb56-7020-725-206b2f'
+		id: '019079cf-cb56-7020-725-206b2f',
+		code: 'u0001-5-electopus'
 	},
 	{
 		// 5-star fire
-		id: '019079cf-cb56-7ea0-337-0ad0de'
+		id: '019079cf-cb56-7ea0-337-0ad0de',
+		code: 'u0001-5-santelmo'
 	},
 	{
-		id: '019079cf-cb56-7777-53f-64e88d'
+		// 5-star ghost
+		id: '019079cf-cb56-7777-53f-64e88d',
+		code: 'u0001-5-multo'
 	},
 	{
-		id: '019079cf-cb56-7a7f-741-8f5588'
+		// 5-star ice
+		id: '019079cf-cb56-7a7f-741-8f5588',
+		code: 'u0001-5-kelvin'
 	},
 	{
-		id: '019079cf-cb56-7004-2bb-144d0e'
+		// 5-star normal
+		id: '019079cf-cb56-7004-2bb-144d0e',
+		code: 'u0001-5-blanko'
 	},
 	{
-		id: '019079cf-cb56-71dd-1d6-d8a311'
+		// 5-star plant
+		id: '019079cf-cb56-71dd-1d6-d8a311',
+		code: 'u0001-5-prickles'
 	},
 	{
-		id: '019079cf-cb56-7358-a31-edf4b2'
+		// 5-star poison
+		id: '019079cf-cb56-7358-a31-edf4b2',
+		code: 'u0001-5-crack9'
 	},
 	{
-		id: '019079cf-cb56-7661-466-8868c6'
+		// 5-star psychic
+		id: '019079cf-cb56-7661-466-8868c6',
+		code: 'u0001-5-robia'
 	},
 	{
-		id: '019079cf-cb56-71e2-738-b6d9c2'
+		// 5-star steel
+		id: '019079cf-cb56-71e2-738-b6d9c2',
+		code: 'u0001-5-barbell'
 	},
 	{
-		id: '019079cf-cb56-7b4d-652-890dd9'
+		// 5-star water
+		id: '019079cf-cb56-7b4d-652-890dd9',
+		code: 'u0001-5-wap'
 	}
 ];
 
@@ -356,14 +382,13 @@ export const addCharactersEXP = async (chars, expAmount) => {
 
 // player gets a character as a reward
 export const addNewCharacter = async (char) => {
-	// TODO: need a better way to map characters besides UUID's
-	// because charInstance id, versus character class id
-	return;
-	const chars = await getCharacters();
+	const hydrated = false;
+	const allChars = await getCharacters(hydrated);
 	const newChars = [
-		...chars,
+		...allChars,
 		{
-			id: char.id,
+			id: generateUUID(),
+			code: char.code,
 			experience: 0
 		}
 	];
