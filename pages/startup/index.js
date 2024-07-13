@@ -1,6 +1,8 @@
 const resetGame = () => {
-	// TODO: ask if sure
 	localStorage.removeItem('USER_TEAMS');
+	localStorage.removeItem('USER_EFFECTS');
+	localStorage.removeItem('USER_CHARACTERS');
+	localStorage.removeItem('USER_STATS');
 };
 
 const setupActionsNew = ({ gameStarted }) => {
