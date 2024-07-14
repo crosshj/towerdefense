@@ -62,6 +62,7 @@ body {
 		border-radius: 50%;
 		user-select: none;
 		border: 2px solid black;
+		z-index: 1;
 	}
 	.container-bg {
 		position: absolute;
@@ -223,6 +224,7 @@ body {
 			display: flex;
 			justify-content: center;
 			align-items: center;
+			text-align: center;
 		}
 	}
 }

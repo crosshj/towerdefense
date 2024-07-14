@@ -32,17 +32,17 @@ const clickColorMap = {
 	'#f6ff00': '/pages/pvp/index.html',
 	'#ffbf00': '/pages/tower/index.html',
 
-	'#e51a1d': '/pages/team/index.html?sub=a&slot=1',
-	'#e51a7c': '/pages/team/index.html?sub=a&slot=2',
-	'#d11ae5': '/pages/team/index.html?sub=a&slot=3',
-	'#8a1ae5': '/pages/team/index.html?sub=a&slot=4',
-	'#2b1ae5': '/pages/team/index.html?sub=a&slot=5',
+	'#e51a1d': '/modals/character/detail.html?sub=a&slot=1',
+	'#e51a7c': '/modals/character/detail.html?sub=a&slot=2',
+	'#d11ae5': '/modals/character/detail.html?sub=a&slot=3',
+	'#8a1ae5': '/modals/character/detail.html?sub=a&slot=4',
+	'#2b1ae5': '/modals/character/detail.html?sub=a&slot=5',
 
-	'#53e51a': '/pages/team/index.html?sub=b&slot=1',
-	'#b2e51a': '/pages/team/index.html?sub=b&slot=2',
-	'#e59b1a': '/pages/team/index.html?sub=b&slot=3',
-	'#e5541a': '/pages/team/index.html?sub=b&slot=4',
-	'#e51a3f': '/pages/team/index.html?sub=b&slot=5'
+	'#53e51a': '/modals/character/detail.html?sub=b&slot=1',
+	'#b2e51a': '/modals/character/detail.html?sub=b&slot=2',
+	'#e59b1a': '/modals/character/detail.html?sub=b&slot=3',
+	'#e5541a': '/modals/character/detail.html?sub=b&slot=4',
+	'#e51a3f': '/modals/character/detail.html?sub=b&slot=5'
 };
 
 const drawControls = () => {
