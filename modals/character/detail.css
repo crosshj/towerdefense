@@ -1,0 +1,228 @@
+@import url('https://fonts.googleapis.com/css2?family=Passion+One:wght@400;700;900&display=swap');
+@import url('/visuals/components.css');
+
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	overscroll-behavior: none;
+}
+
+.font-smaller {
+	font-size: 0.8em;
+}
+
+.flex-spacer {
+	flex: 1;
+}
+
+button {
+	background: yellow;
+	padding: 0.2em;
+	border-radius: 0.5em;
+	color: #4c2615;
+	text-transform: uppercase;
+	border-color: #492413;
+	font-family: 'Passion One', sans-serif;
+	font-weight: 400;
+	font-size: 19px;
+	letter-spacing: 1px;
+	min-width: 130px;
+}
+body {
+	& > .background {
+		background: #000b;
+		background-size: 100% 100%;
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		z-index: -1;
+	}
+}
+
+.container {
+	position: fixed;
+	top: 2vh;
+	bottom: -1vh;
+	left: 30vh;
+	right: 30vh;
+	.close-button {
+		position: absolute;
+		right: -11px;
+		top: 0;
+		background: yellow;
+		font-weight: 900;
+		width: 27px;
+		aspect-ratio: 1 / 1;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border-radius: 50%;
+		user-select: none;
+		border: 2px solid black;
+	}
+	.container-bg {
+		position: absolute;
+		left: 0;
+		top: 10px;
+		bottom: 16px;
+		right: 0;
+		background: #fceecd;
+		z-index: -1;
+		border-radius: 10px;
+		box-sizing: border-box;
+		border: 2px solid black;
+	}
+	.content {
+		position: absolute;
+		display: grid;
+		grid-template-columns: 40% auto;
+
+		top: 12px;
+		bottom: 18px;
+		left: 2px;
+		right: 2px;
+
+		.left,
+		.right {
+			padding: 15px;
+			display: flex;
+			flex-direction: column;
+		}
+
+		.left {
+			grid-column: 1;
+			display: grid;
+			grid-template-rows: repeat(3, min-content) 1fr min-content min-content;
+			gap: 10px;
+			border-right: 1px solid black;
+			align-items: center;
+			& > .stars,
+			& > .name,
+			& > .element,
+			& > .character {
+				display: flex;
+				justify-content: center;
+			}
+			.stars {
+				color: yellow;
+				text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black,
+					0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black;
+			}
+			& > .name {
+				flex-direction: column;
+				align-items: center;
+				margin-top: -5px;
+				.second {
+					text-transform: uppercase;
+				}
+			}
+			& > .element {
+				margin-top: -6px;
+				gap: 5px;
+				justify-content: center;
+				background-color: #e6d19f;
+				margin-right: auto;
+				margin-left: auto;
+				padding: 3px 9px;
+				border-radius: 7px;
+				color: #6b1515;
+				.circle {
+					width: 20px;
+					border-radius: 50%;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+				}
+				& > .icon {
+					background: green;
+				}
+				& > .help {
+					background-color: red;
+					color: yellow;
+				}
+			}
+			& > .character {
+				position: relative;
+				width: 100%;
+				height: 100%;
+				box-sizing: border-box;
+				max-width: 77%;
+				margin-inline: auto;
+
+				.background {
+					position: absolute;
+					left: 0;
+					right: 0;
+					top: 0;
+					bottom: 0;
+					background-color: #3333;
+				}
+				.image {
+					width: 105px;
+					height: 92%;
+					background: grey;
+					margin: auto;
+					border-radius: 12px;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					color: white;
+				}
+			}
+			& > .gear {
+				width: 100%;
+				height: 50px;
+				display: flex;
+				gap: 10px;
+				& > div {
+					flex: 1;
+					background-color: #212d39;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					border-radius: 7px;
+				}
+				.more {
+					max-width: 29px;
+					aspect-ratio: 1 / 1;
+					margin: auto;
+					color: #8d2121;
+					background: yellow;
+					box-sizing: border-box;
+					border: 2px solid #0002;
+					font-weight: 900;
+				}
+			}
+			& > .actions {
+				display: flex;
+				justify-content: space-between;
+				gap: 7px;
+				button {
+					min-width: unset;
+					height: auto;
+					flex: 1;
+					font-size: 19px;
+					line-height: 14px;
+					padding-block: 6px;
+					&.levelUp {
+						background: red;
+						color: white;
+					}
+					&.potentialUp {
+						background: #4bc7f7;
+						color: white;
+					}
+				}
+			}
+		}
+		.right {
+			grid-column: 2;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+	}
+}
