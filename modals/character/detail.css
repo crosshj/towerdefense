@@ -168,6 +168,7 @@ body {
 		}
 
 		.left {
+			box-sizing: border-box;
 			grid-column: 1;
 			display: grid;
 			grid-template-rows: repeat(3, min-content) 1fr min-content min-content;
@@ -258,6 +259,7 @@ body {
 			display: grid;
 			grid-template-rows: min-content min-content min-content 1fr min-content;
 			gap: 10px;
+			box-sizing: border-box;
 
 			& > .rowOne {
 				display: flex;
