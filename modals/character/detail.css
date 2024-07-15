@@ -70,7 +70,7 @@ body {
 		top: 10px;
 		bottom: 16px;
 		right: 0;
-		background: #fceecd;
+		background: #fdf6e2;
 		z-index: -1;
 		border-radius: 10px;
 		box-sizing: border-box;
@@ -80,6 +80,8 @@ body {
 		position: absolute;
 		display: grid;
 		grid-template-columns: 40% auto;
+
+		color: #6c1515;
 
 		top: 12px;
 		bottom: 18px;
@@ -91,6 +93,78 @@ body {
 			padding: 15px;
 			display: flex;
 			flex-direction: column;
+		}
+
+		.blackTextOutline {
+			text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black,
+				0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black;
+		}
+
+		.circle {
+			width: 20px;
+			border-radius: 50%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		.circle.icon {
+			background: green;
+			color: white;
+		}
+		.circle.help {
+			background-color: red;
+			color: yellow;
+		}
+
+		.pill {
+			border-radius: 10px;
+			background: grey;
+			color: white;
+			padding-inline: 7px;
+			&.purple {
+				background: #c921c9;
+				color: yellow;
+			}
+		}
+
+		.group {
+			background: #f5e7c7;
+			border-radius: 7px;
+			padding: 5px 10px;
+
+			label {
+				opacity: 0.6;
+			}
+		}
+
+		.actions {
+			display: flex;
+			justify-content: space-between;
+			gap: 7px;
+			button {
+				min-width: unset;
+				height: auto;
+				flex: 1;
+				font-size: 19px;
+				line-height: 14px;
+				padding-block: 6px;
+				&.levelUp {
+					background: red;
+					color: white;
+				}
+				&.potentialUp {
+					background: #4bc7f7;
+					color: white;
+				}
+				&.ultraEvolve {
+					background: rgb(56, 57, 113);
+					color: white;
+				}
+				&.hyperEvolve {
+					background: rgb(201, 7, 194);
+					color: white;
+				}
+			}
 		}
 
 		.left {
@@ -109,8 +183,6 @@ body {
 			}
 			.stars {
 				color: yellow;
-				text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black,
-					0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black;
 			}
 			& > .name {
 				flex-direction: column;
@@ -124,26 +196,8 @@ body {
 				margin-top: -6px;
 				gap: 5px;
 				justify-content: center;
-				background-color: #e6d19f;
 				margin-right: auto;
 				margin-left: auto;
-				padding: 3px 9px;
-				border-radius: 7px;
-				color: #6b1515;
-				.circle {
-					width: 20px;
-					border-radius: 50%;
-					display: flex;
-					justify-content: center;
-					align-items: center;
-				}
-				& > .icon {
-					background: green;
-				}
-				& > .help {
-					background-color: red;
-					color: yellow;
-				}
 			}
 			& > .character {
 				position: relative;
@@ -197,34 +251,201 @@ body {
 					font-weight: 900;
 				}
 			}
-			& > .actions {
+		}
+		.right {
+			padding-right: 18px;
+			grid-column: 2;
+			display: grid;
+			grid-template-rows: min-content min-content min-content 1fr min-content;
+			gap: 10px;
+
+			& > .rowOne {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				.level {
+					font-weight: 900;
+					color: #6c1515;
+					margin-right: 10px;
+				}
+				.cap {
+					margin-right: auto;
+					padding-block: 2px;
+					font-weight: 900;
+				}
+				.percent {
+					flex: 1;
+					position: relative;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					margin-inline: 10px;
+					border-radius: 20px;
+					border: 1px solid #ba974a;
+					overflow: hidden;
+					padding-block: 1px;
+					.number {
+						color: yellow;
+						z-index: 2;
+					}
+					.bar {
+						position: absolute;
+						left: 0;
+						right: 0;
+						top: 0;
+						bottom: 0;
+						background-color: #4bc7f7;
+					}
+					/* prettier-ignore */
+					.bar {
+						&.fill-10 { right: 90%; }
+						&.fill-20 { right: 80%; }
+						&.fill-30 { right: 70%; }
+						&.fill-40 { right: 60%; }
+						&.fill-50 { right: 50%; }
+						&.fill-60 { right: 40%; }
+						&.fill-70 { right: 30%; }
+						&.fill-80 { right: 20%; }
+						&.fill-90 { right: 10%; }
+						&.fill-100 { right: 0; }
+					}
+				}
+				.professorPoints {
+					display: flex;
+					font-weight: 900;
+					color: #1ced1c;
+					background: brown;
+					padding-inline: 7px;
+					border-radius: 10px;
+					padding-block: 2px;
+					min-width: 50px;
+					justify-content: space-between;
+				}
+			}
+			& > .rowTwo {
 				display: flex;
 				justify-content: space-between;
-				gap: 7px;
-				button {
-					min-width: unset;
-					height: auto;
+				gap: 10px;
+				.type {
+					display: flex;
+					gap: 10px;
+				}
+				.mineral {
 					flex: 1;
-					font-size: 19px;
-					line-height: 14px;
-					padding-block: 6px;
-					&.levelUp {
-						background: red;
-						color: white;
+					display: flex;
+					gap: 10px;
+					.mineral.icon {
+						color: #00f8f8;
 					}
-					&.potentialUp {
-						background: #4bc7f7;
-						color: white;
+				}
+				.details {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					border: 1px solid;
+					padding-inline: 8px;
+					border-radius: 7px;
+					gap: 3px;
+					opacity: 0.6;
+
+					&.closed .contract {
+						display: none;
+					}
+					&.open .expand {
+						display: none;
 					}
 				}
 			}
-		}
-		.right {
-			grid-column: 2;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			text-align: center;
+			& > .separator {
+				height: 2px;
+				background: currentColor;
+				opacity: 0.1;
+			}
+			& > .details {
+				.basic {
+					display: flex;
+					flex-direction: column;
+					gap: 10px;
+					.metrics {
+						display: flex;
+						gap: 5px;
+
+						& > div {
+							flex: 1;
+							display: flex;
+							justify-content: space-between;
+						}
+						.attack {
+						}
+						.health {
+							.health.icon {
+								color: red;
+								background: transparent;
+								font-size: 23px;
+								line-height: 17px;
+							}
+						}
+						.defense {
+							.defense.icon {
+							}
+						}
+					}
+					.speed {
+						& > div:not(:last-child) {
+							border-bottom: solid 1px;
+							border-bottom-color: #6c151530;
+							padding-bottom: 5px;
+							margin-bottom: 5px;
+						}
+						.attackSpeed {
+							display: flex;
+							justify-content: space-between;
+						}
+						.moveSpeed {
+							display: flex;
+							justify-content: space-between;
+						}
+					}
+					.skill .square,
+					.ability .square {
+						width: 35px;
+						aspect-ratio: 1 / 1;
+						border-radius: 5px;
+						background: #e3d5b5;
+					}
+					.skill {
+						display: flex;
+						gap: 5px;
+						align-items: center;
+					}
+					.ability {
+						display: flex;
+						gap: 5px;
+						align-items: center;
+					}
+				}
+			}
+			& > .actions {
+				.lock {
+					font-size: 22px;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					width: 30px;
+					height: 30px;
+					border-radius: 50%;
+					margin-block: auto;
+					border: 2px solid grey;
+					opacity: 0.5;
+					.icon {
+						filter: grayscale(1) contrast(0);
+					}
+					&.locked {
+						background-color: yellow;
+						opacity: 1;
+					}
+				}
+			}
 		}
 	}
 }

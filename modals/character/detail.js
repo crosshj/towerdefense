@@ -4,8 +4,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 	);
 	console.log({ params });
 
-	const rightPane = document.querySelector('.container .content > .right');
-	rightPane.innerHTML = `WIP/TODO:<br/> load Team ${params.sub}, Slot ${params.slot}`;
+	// const rightPane = document.querySelector('.container .content > .right');
+	// rightPane.innerHTML = `WIP/TODO:<br/> load Team ${params.sub}, Slot ${params.slot}`;
 
 	const closeButton = document.querySelector('.close-button');
 	closeButton.addEventListener('pointerdown', () => {
