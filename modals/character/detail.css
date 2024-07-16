@@ -48,7 +48,7 @@ body {
 	bottom: -1vh;
 	left: 30vh;
 	right: 30vh;
-	.close-button {
+	.closeButton {
 		position: absolute;
 		right: -11px;
 		top: 0;
@@ -62,9 +62,9 @@ body {
 		border-radius: 50%;
 		user-select: none;
 		border: 2px solid black;
-		z-index: 1;
+		z-index: 3;
 	}
-	.container-bg {
+	.containerBg {
 		position: absolute;
 		left: 0;
 		top: 10px;
@@ -106,6 +106,7 @@ body {
 			display: flex;
 			justify-content: center;
 			align-items: center;
+			border: 1px solid black;
 		}
 		.circle.icon {
 			background: green;
@@ -175,6 +176,21 @@ body {
 			gap: 10px;
 			border-right: 1px solid black;
 			align-items: center;
+
+			position: relative;
+			overflow: hidden;
+			& > .loading {
+				position: absolute;
+				left: 0;
+				right: 0;
+				top: 0;
+				bottom: 0;
+				background: #fdf6e2;
+				z-index: 1;
+				border-top-left-radius: 20px;
+				border-bottom-left-radius: 20px;
+			}
+
 			& > .stars,
 			& > .name,
 			& > .element,
@@ -210,16 +226,18 @@ body {
 
 				.background {
 					position: absolute;
-					left: 0;
-					right: 0;
-					top: 0;
-					bottom: 0;
-					background-color: #3333;
+					left: 3px;
+					right: 3px;
+					top: 3px;
+					bottom: 3px;
+					background: #333;
+					opacity: 0.3;
+					z-index: -1;
+					box-shadow: inset 0 0 15px 10px #fdf6e2;
 				}
 				.image {
 					width: 105px;
 					height: 92%;
-					background: grey;
 					margin: auto;
 					border-radius: 12px;
 					display: flex;
@@ -261,6 +279,20 @@ body {
 			gap: 10px;
 			box-sizing: border-box;
 
+			position: relative;
+			overflow: hidden;
+			& > .loading {
+				position: absolute;
+				left: 0;
+				right: 0;
+				top: 0;
+				bottom: 0;
+				background: #fdf6e2;
+				z-index: 1;
+				border-top-right-radius: 20px;
+				border-bottom-right-radius: 20px;
+			}
+
 			& > .rowOne {
 				display: flex;
 				align-items: center;
@@ -274,6 +306,7 @@ body {
 					margin-right: auto;
 					padding-block: 2px;
 					font-weight: 900;
+					visibility: hidden;
 				}
 				.percent {
 					flex: 1;
@@ -286,6 +319,7 @@ body {
 					border: 1px solid #ba974a;
 					overflow: hidden;
 					padding-block: 1px;
+					max-width: 125px;
 					.number {
 						color: yellow;
 						z-index: 2;
@@ -300,6 +334,7 @@ body {
 					}
 					/* prettier-ignore */
 					.bar {
+						&.fill-0 { right: 100%; }
 						&.fill-10 { right: 90%; }
 						&.fill-20 { right: 80%; }
 						&.fill-30 { right: 70%; }
