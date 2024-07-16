@@ -164,3 +164,13 @@ export const characterImageGetter = async () => {
 		return allImages[name];
 	};
 };
+
+export const characterImageFromElement = async (element) => {
+	const width = 120;
+	const height = 128;
+	const animation = await characterAnimationGetter(
+		{ element },
+		{ width, height }
+	);
+	return animation.canvas.toDataURL();
+};

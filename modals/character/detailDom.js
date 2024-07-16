@@ -46,7 +46,7 @@ export const nodeTree = {
 					},
 					professorPoints: {
 						icon: undefined,
-						number: undefined
+						amount: undefined
 					}
 				},
 				rowTwo: {
@@ -79,8 +79,8 @@ export const nodeTree = {
 							}
 						},
 						speed: {
-							attackSpeed: undefined,
-							moveSpeed: undefined
+							attackSpeed: { value: undefined },
+							moveSpeed: { value: undefined }
 						},
 						skill: {
 							skillOne: undefined,

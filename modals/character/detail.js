@@ -1,4 +1,4 @@
-import { getTeamFromNumber } from '../../pages/_utils/getTeam.js';
+import { getCharacterFromTeam } from '../../pages/_utils/getCharacter.js';
 import { nodeTree, populateNodeTree } from './detailDom.js';
 
 const getElementColor = (element) => {
@@ -17,13 +17,12 @@ const getElementColor = (element) => {
 };
 
 const updateValues = async ({ params, nodeTree }) => {
-	const { sub, slot, team = 1 } = params;
-	const currentTeam = await getTeamFromNumber(team);
-	const character = currentTeam[sub][Number(slot) - 1];
+	const character = await getCharacterFromTeam(params);
 
 	window.character = character;
 	window.nodeTree = nodeTree;
 
+	//left
 	const { left, right } = nodeTree.container.content;
 	left.stars.innerText = '★'.repeat(character.stars);
 	left.character.image.append(character.image);
@@ -33,21 +32,56 @@ const updateValues = async ({ params, nodeTree }) => {
 	left.character.background.style.background = getElementColor(
 		character.element
 	);
-	left.loading.style.display = 'none';
 
+	//right
 	right.rowOne.level.current.innerText = character.level;
+	right.rowOne.level.max.innerText = character.maxLevel;
+
+	if (character.uncappedLevel > 0 && character.uncappedLevel < 4) {
+		right.rowOne.cap.classList.remove('hidden');
+		right.rowOne.cap.innerText = `+${character.uncappedLevel}`;
+	}
+	if (character.uncappedLevel === 4) {
+		right.rowOne.cap.classList.remove('hidden');
+		right.rowOne.cap.innerText = `MAX`;
+	}
 	const levelPercent =
 		Math.floor(Number(character.levelNextPercent) / 10) * 10;
 	right.rowOne.percent.number.innerText =
 		Math.floor(character.levelNextPercent) + '%';
 	right.rowOne.percent.bar.classList.remove('fill-0');
 	right.rowOne.percent.bar.classList.add('fill-' + levelPercent);
-	right.loading.style.display = 'none';
+	right.rowOne.professorPoints.amount.innerText =
+		character.professorPoints + '';
+
+	if (character.type === 'Intelligence') {
+		right.rowTwo.type.icon.style.background = '#a45df6';
+		right.rowTwo.type.icon.innerText = '⚲';
+	}
+	if (character.type === 'Strength') {
+		right.rowTwo.type.icon.style.background = '#004cff';
+		right.rowTwo.type.icon.innerText = '𝌩';
+	}
+	if (character.type === 'Agility') {
+		right.rowTwo.type.icon.style.background = '#ffbe00';
+		right.rowTwo.type.icon.style.color = 'black';
+		right.rowTwo.type.icon.innerText = '⍦';
+	}
+	right.rowTwo.type.name.innerText = character.type;
 	right.rowTwo.mineral.amount.innerText = character.mineralCost + '';
 	right.details.basic.metrics.attack.value.innerText = character.attack + '';
 	right.details.basic.metrics.health.value.innerText = character.hp + '';
 	right.details.basic.metrics.defense.value.innerText =
-		character.defense || 0 + '';
+		character.defense + '';
+
+	right.details.basic.speed.attackSpeed.value.innerText =
+		character.attackSpeedText;
+	right.details.basic.speed.moveSpeed.value.innerText =
+		character.moveSpeedText;
+
+	// finished loading
+	left.loading.style.display = 'none';
+	right.loading.style.display = 'none';
 };
 
 const attachHandlers = (nodeTree) => {

@@ -22,7 +22,26 @@ Magical DEF:  304 - 2,926 - 6,726
 changes with level:
 HP, Attack Speed, Attack, Defense
 
+
+
+https://www.reddit.com/r/LineRangers/comments/3wslpz/the_diference_between_physical_and_magical_attack/
 */
+
+const getDefense = (unit, totalExp) => {
+	return unit.defense || 0;
+};
+const getHealth = (unit, totalExp) => {
+	return unit.hp;
+};
+const getAttack = (unit, totalExp) => {
+	return unit.attack;
+};
+const getAttackSpeedText = (unit, totalExp) => {
+	return 'Normal';
+};
+const getMoveSpeedText = (unit, totalExp) => {
+	return 'Normal';
+};
 
 const withLevelInfo = (unit, totalExp = 0) => {
 	const { currentLevel, expToNext, levelExpPercent } = getLevelInfo({
@@ -35,7 +54,15 @@ const withLevelInfo = (unit, totalExp = 0) => {
 		stars: unit.rank,
 		level: currentLevel || 1,
 		levelNext: expToNext,
-		levelNextPercent: levelExpPercent
+		levelNextPercent: levelExpPercent,
+		hp: getHealth(unit, totalExp),
+		attack: getAttack(unit, totalExp),
+		defense: getDefense(unit, totalExp),
+		attackSpeedText: getAttackSpeedText(unit, totalExp),
+		moveSpeedText: getMoveSpeedText(unit, totalExp),
+		maxLevel: 130, //TODO, get from unit.rank & unit.uncappedLevel
+		uncappedLevel: 0, //TODO, this should be saved when combining units
+		professorPoints: 1 //TODO, this should be saved when combining units
 	};
 };
 
@@ -46,11 +73,12 @@ const charMapper = {
 			code: 'u0001-1-macho',
 			displayName: 'Macho',
 			element: 'Fighting',
+			type: 'Agility',
 			rank: 1,
 			mineralCost: 100,
 			hp: 3000,
 			attack: 20,
-			range: 450
+			range: 1000
 		};
 		return withLevelInfo(unit, experience);
 	},
@@ -60,6 +88,7 @@ const charMapper = {
 			code: 'u0001-2-toto',
 			displayName: 'Toto Bato',
 			element: 'Rock',
+			type: 'Strength',
 			rank: 2,
 			mineralCost: 150,
 			hp: 20000,
@@ -74,6 +103,7 @@ const charMapper = {
 			code: 'u0001-3-twinkle',
 			displayName: 'Twinkle',
 			element: 'Fairy',
+			type: 'Intelligence',
 			rank: 3,
 			mineralCost: 250,
 			hp: 4000,
@@ -88,11 +118,12 @@ const charMapper = {
 			code: 'u0001-4-vispi',
 			displayName: 'Vispi',
 			element: 'Air',
+			type: 'Agility',
 			rank: 4,
 			mineralCost: 350,
 			hp: 6000,
-			attack: 60,
-			range: 600
+			attack: 100,
+			range: 500
 		};
 		return withLevelInfo(unit, experience);
 	},
@@ -102,6 +133,7 @@ const charMapper = {
 			code: 'u0001-5-drat',
 			displayName: 'Drat',
 			element: 'Dragon',
+			type: 'Agility',
 			rank: 5,
 			mineralCost: 450,
 			hp: 7000,
@@ -116,6 +148,7 @@ const charMapper = {
 			code: 'u0001-4-antonio',
 			displayName: 'Antonio',
 			element: 'Bug',
+			type: 'Agility',
 			rank: 4,
 			mineralCost: 500,
 			hp: 6000,
@@ -130,6 +163,7 @@ const charMapper = {
 			code: 'u0001-4-bumpier',
 			displayName: 'Bumpier',
 			element: 'Dark',
+			type: 'Intelligence',
 			rank: 4,
 			mineralCost: 550,
 			hp: 6000,
@@ -144,6 +178,7 @@ const charMapper = {
 			code: 'u0001-4-tabi',
 			displayName: 'Tabi-Tabi Po',
 			element: 'Earth',
+			type: 'Agility',
 			rank: 4,
 			mineralCost: 600,
 			hp: 6000,
@@ -158,6 +193,7 @@ const charMapper = {
 			code: 'u0001-5-electopus',
 			displayName: 'Electopus',
 			element: 'Electric',
+			type: 'Agility',
 			rank: 5,
 			mineralCost: 700,
 			hp: 7000,
@@ -172,6 +208,7 @@ const charMapper = {
 			code: 'u0001-5-santelmo',
 			displayName: 'Santelmo',
 			element: 'Fire',
+			type: 'Agility',
 			rank: 5,
 			mineralCost: 450,
 			hp: 7000,
@@ -186,6 +223,7 @@ const charMapper = {
 			code: 'u0001-5-multo',
 			displayName: 'Multo',
 			element: 'Ghost',
+			type: 'Intelligence',
 			rank: 5,
 			mineralCost: 450,
 			hp: 7000,
@@ -200,6 +238,7 @@ const charMapper = {
 			code: 'u0001-5-kelvin',
 			displayName: 'Kelvin',
 			element: 'Ice',
+			type: 'Agility',
 			rank: 5,
 			mineralCost: 450,
 			hp: 7000,
@@ -214,6 +253,7 @@ const charMapper = {
 			code: 'u0001-5-blanko',
 			displayName: 'Blanko',
 			element: 'Normal',
+			type: 'Strength',
 			rank: 5,
 			mineralCost: 450,
 			hp: 7000,
@@ -228,6 +268,7 @@ const charMapper = {
 			code: 'u0001-5-prickles',
 			displayName: 'Prickles',
 			element: 'Plant',
+			type: 'Agility',
 			rank: 5,
 			mineralCost: 450,
 			hp: 7000,
@@ -242,6 +283,7 @@ const charMapper = {
 			code: 'u0001-5-crack9',
 			displayName: 'Crack9',
 			element: 'Poison',
+			type: 'Agility',
 			rank: 5,
 			mineralCost: 450,
 			hp: 7000,
@@ -256,6 +298,7 @@ const charMapper = {
 			code: 'u0001-5-robia',
 			displayName: 'Robia',
 			element: 'Psychic',
+			type: 'Intelligence',
 			rank: 5,
 			mineralCost: 450,
 			hp: 7000,
@@ -270,6 +313,7 @@ const charMapper = {
 			code: 'u0001-5-barbell',
 			displayName: 'Barbell',
 			element: 'Steel',
+			type: 'Strength',
 			rank: 5,
 			mineralCost: 450,
 			hp: 7000,
@@ -284,6 +328,7 @@ const charMapper = {
 			code: 'u0001-5-wap',
 			displayName: 'Wap Wap',
 			element: 'Water',
+			type: 'Agility',
 			rank: 5,
 			mineralCost: 450,
 			hp: 7000,

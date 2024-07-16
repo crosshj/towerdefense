@@ -297,18 +297,20 @@ body {
 				display: flex;
 				align-items: center;
 				justify-content: space-between;
-				.level {
+				& > .level {
 					font-weight: 900;
 					color: #6c1515;
 					margin-right: 10px;
 				}
-				.cap {
+				& > .cap {
 					margin-right: auto;
 					padding-block: 2px;
 					font-weight: 900;
-					visibility: hidden;
+					&.hidden {
+						visibility: hidden;
+					}
 				}
-				.percent {
+				& > .percent {
 					flex: 1;
 					position: relative;
 					display: flex;
@@ -347,7 +349,7 @@ body {
 						&.fill-100 { right: 0; }
 					}
 				}
-				.professorPoints {
+				& > .professorPoints {
 					display: flex;
 					font-weight: 900;
 					color: #1ced1c;
@@ -366,6 +368,9 @@ body {
 				.type {
 					display: flex;
 					gap: 10px;
+					& > .icon {
+						line-height: 10px;
+					}
 				}
 				.mineral {
 					flex: 1;
@@ -412,9 +417,13 @@ body {
 							display: flex;
 							justify-content: space-between;
 						}
-						.attack {
+						& > .attack {
+							.attack.icon {
+								color: white;
+								background: #00b6ff;
+							}
 						}
-						.health {
+						& > .health {
 							.health.icon {
 								color: red;
 								background: transparent;
@@ -422,7 +431,7 @@ body {
 								line-height: 17px;
 							}
 						}
-						.defense {
+						& > .defense {
 							.defense.icon {
 							}
 						}
