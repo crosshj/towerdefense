@@ -4,8 +4,8 @@ export const getRewards = async () => {
 	return {
 		coins: 4000,
 		exp: {
-			player: 6000,
-			unit: 6000
+			player: 48000,
+			unit: 48000
 		},
 		bonus: {
 			coin: { type: 'coin', probability: 1, amount: 5000 },

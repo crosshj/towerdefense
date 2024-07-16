@@ -3,6 +3,7 @@ ALL CHARACTERS THAT THE USER HAS AVAILABLE
 */
 
 import { getLevelInfo } from '../utils/experience.js';
+import { unitsMapper } from './units/units.js';
 
 /*
 Example: https://rangers.lerico.net/en/ranger/u003u-bella
@@ -27,317 +28,123 @@ HP, Attack Speed, Attack, Defense
 https://www.reddit.com/r/LineRangers/comments/3wslpz/the_diference_between_physical_and_magical_attack/
 */
 
-const getDefense = (unit, totalExp) => {
-	return unit.defense || 0;
-};
 const getHealth = (unit, totalExp) => {
 	return unit.hp;
 };
+
+const getMaxLevel = (unit) => {
+	//TODO: also look at unit.uncappedLevel
+	if (unit.rank === 1) {
+		return 20;
+	}
+	if (unit.rank === 2) {
+		return 30;
+	}
+	if (unit.rank === 3) {
+		return 40;
+	}
+	if (unit.rank === 4) {
+		return 50;
+	}
+	if (unit.rank === 5) {
+		return 60;
+	}
+	if (unit.rank === 6) {
+		return 80;
+	}
+	if (unit.rank === 7) {
+		return 100;
+	}
+	if (unit.rank === 8) {
+		return 120;
+	}
+	if (unit.rank === 9) {
+		return 160;
+	}
+	return 0;
+};
+
+// defense
+const getDefense = (unit, totalExp) => {
+	return unit.defense || 0;
+};
+const getPhysicalDefense = (unit, totalExp) => {
+	return unit.defense || 0;
+};
+const getMagicDefense = (unit, totalExp) => {
+	return unit.defense || 0;
+};
+
+// attack
 const getAttack = (unit, totalExp) => {
 	return unit.attack;
 };
+const getPhysicalAttack = (unit, totalExp) => {
+	return unit.attack;
+};
+const getMagicAttack = (unit, totalExp) => {
+	return unit.attack;
+};
+
+// speed
 const getAttackSpeedText = (unit, totalExp) => {
 	return 'Normal';
 };
 const getMoveSpeedText = (unit, totalExp) => {
 	return 'Normal';
 };
+const getAttackSpeed = (unit, totalExp) => {
+	return 1;
+};
+const getMoveSpeed = (unit, totalExp) => {
+	return 1;
+};
 
 const withLevelInfo = (unit, totalExp = 0) => {
-	const { currentLevel, expToNext, levelExpPercent } = getLevelInfo({
+	let { currentLevel, expToNext, levelExpPercent } = getLevelInfo({
 		totalExp,
 		a: 5 * unit.rank,
 		b: 6000
 	});
+	const uncappedLevel = 0; //TODO, this should be saved when combining units
+	const maxLevel = getMaxLevel(unit);
+
+	if (currentLevel > maxLevel) {
+		currentLevel = maxLevel;
+		expToNext = 0;
+		levelExpPercent = 0;
+	}
+
 	return {
 		...unit,
 		stars: unit.rank,
+
+		maxLevel,
+		uncappedLevel,
 		level: currentLevel || 1,
 		levelNext: expToNext,
 		levelNextPercent: levelExpPercent,
+
+		professorPoints: 1, //TODO, this should be saved when combining units
+
 		hp: getHealth(unit, totalExp),
 		attack: getAttack(unit, totalExp),
 		defense: getDefense(unit, totalExp),
+
 		attackSpeedText: getAttackSpeedText(unit, totalExp),
 		moveSpeedText: getMoveSpeedText(unit, totalExp),
-		maxLevel: 130, //TODO, get from unit.rank & unit.uncappedLevel
-		uncappedLevel: 0, //TODO, this should be saved when combining units
-		professorPoints: 1 //TODO, this should be saved when combining units
+
+		// TODO: use these in-game
+		physicalAttack: getAttack(unit, totalExp),
+		physicalDefense: getDefense(unit, totalExp),
+		magicAttack: getAttack(unit, totalExp),
+		magicDefense: getDefense(unit, totalExp),
+		attackSpeed: getAttackSpeed(unit, totalExp),
+		moveSpeed: getMoveSpeed(unit, totalExp)
 	};
 };
 
-const charMapper = {
-	'u0001-1-macho': ({ experience, id }) => {
-		const unit = {
-			id,
-			code: 'u0001-1-macho',
-			displayName: 'Macho',
-			element: 'Fighting',
-			type: 'Agility',
-			rank: 1,
-			mineralCost: 100,
-			hp: 3000,
-			attack: 20,
-			range: 1000
-		};
-		return withLevelInfo(unit, experience);
-	},
-	'u0001-2-toto': ({ experience, id }) => {
-		const unit = {
-			id,
-			code: 'u0001-2-toto',
-			displayName: 'Toto Bato',
-			element: 'Rock',
-			type: 'Strength',
-			rank: 2,
-			mineralCost: 150,
-			hp: 20000,
-			attack: 15,
-			range: 350
-		};
-		return withLevelInfo(unit, experience);
-	},
-	'u0001-3-twinkle': ({ experience, id }) => {
-		const unit = {
-			id,
-			code: 'u0001-3-twinkle',
-			displayName: 'Twinkle',
-			element: 'Fairy',
-			type: 'Intelligence',
-			rank: 3,
-			mineralCost: 250,
-			hp: 4000,
-			attack: 40,
-			range: 800
-		};
-		return withLevelInfo(unit, experience);
-	},
-	'u0001-4-vispi': ({ experience, id }) => {
-		const unit = {
-			id,
-			code: 'u0001-4-vispi',
-			displayName: 'Vispi',
-			element: 'Air',
-			type: 'Agility',
-			rank: 4,
-			mineralCost: 350,
-			hp: 6000,
-			attack: 100,
-			range: 500
-		};
-		return withLevelInfo(unit, experience);
-	},
-	'u0001-5-drat': ({ experience, id }) => {
-		const unit = {
-			id,
-			code: 'u0001-5-drat',
-			displayName: 'Drat',
-			element: 'Dragon',
-			type: 'Agility',
-			rank: 5,
-			mineralCost: 450,
-			hp: 7000,
-			attack: 80,
-			range: 1000
-		};
-		return withLevelInfo(unit, experience);
-	},
-	'u0001-4-antonio': ({ experience, id }) => {
-		const unit = {
-			id,
-			code: 'u0001-4-antonio',
-			displayName: 'Antonio',
-			element: 'Bug',
-			type: 'Agility',
-			rank: 4,
-			mineralCost: 500,
-			hp: 6000,
-			attack: 60,
-			range: 600
-		};
-		return withLevelInfo(unit, experience);
-	},
-	'u0001-4-bumpier': ({ experience, id }) => {
-		const unit = {
-			id,
-			code: 'u0001-4-bumpier',
-			displayName: 'Bumpier',
-			element: 'Dark',
-			type: 'Intelligence',
-			rank: 4,
-			mineralCost: 550,
-			hp: 6000,
-			attack: 60,
-			range: 600
-		};
-		return withLevelInfo(unit, experience);
-	},
-	'u0001-4-tabi': ({ experience, id }) => {
-		const unit = {
-			id,
-			code: 'u0001-4-tabi',
-			displayName: 'Tabi-Tabi Po',
-			element: 'Earth',
-			type: 'Agility',
-			rank: 4,
-			mineralCost: 600,
-			hp: 6000,
-			attack: 60,
-			range: 600
-		};
-		return withLevelInfo(unit, experience);
-	},
-	'u0001-5-electopus': ({ experience, id }) => {
-		const unit = {
-			id,
-			code: 'u0001-5-electopus',
-			displayName: 'Electopus',
-			element: 'Electric',
-			type: 'Agility',
-			rank: 5,
-			mineralCost: 700,
-			hp: 7000,
-			attack: 80,
-			range: 1000
-		};
-		return withLevelInfo(unit, experience);
-	},
-	'u0001-5-santelmo': ({ experience, id }) => {
-		const unit = {
-			id,
-			code: 'u0001-5-santelmo',
-			displayName: 'Santelmo',
-			element: 'Fire',
-			type: 'Agility',
-			rank: 5,
-			mineralCost: 450,
-			hp: 7000,
-			attack: 80,
-			range: 1000
-		};
-		return withLevelInfo(unit, experience);
-	},
-	'u0001-5-multo': ({ experience, id }) => {
-		const unit = {
-			id,
-			code: 'u0001-5-multo',
-			displayName: 'Multo',
-			element: 'Ghost',
-			type: 'Intelligence',
-			rank: 5,
-			mineralCost: 450,
-			hp: 7000,
-			attack: 80,
-			range: 1000
-		};
-		return withLevelInfo(unit, experience);
-	},
-	'u0001-5-kelvin': ({ experience, id }) => {
-		const unit = {
-			id,
-			code: 'u0001-5-kelvin',
-			displayName: 'Kelvin',
-			element: 'Ice',
-			type: 'Agility',
-			rank: 5,
-			mineralCost: 450,
-			hp: 7000,
-			attack: 80,
-			range: 1000
-		};
-		return withLevelInfo(unit, experience);
-	},
-	'u0001-5-blanko': ({ experience, id }) => {
-		const unit = {
-			id,
-			code: 'u0001-5-blanko',
-			displayName: 'Blanko',
-			element: 'Normal',
-			type: 'Strength',
-			rank: 5,
-			mineralCost: 450,
-			hp: 7000,
-			attack: 80,
-			range: 1000
-		};
-		return withLevelInfo(unit, experience);
-	},
-	'u0001-5-prickles': ({ experience, id }) => {
-		const unit = {
-			id,
-			code: 'u0001-5-prickles',
-			displayName: 'Prickles',
-			element: 'Plant',
-			type: 'Agility',
-			rank: 5,
-			mineralCost: 450,
-			hp: 7000,
-			attack: 80,
-			range: 1000
-		};
-		return withLevelInfo(unit, experience);
-	},
-	'u0001-5-crack9': ({ experience, id }) => {
-		const unit = {
-			id,
-			code: 'u0001-5-crack9',
-			displayName: 'Crack9',
-			element: 'Poison',
-			type: 'Agility',
-			rank: 5,
-			mineralCost: 450,
-			hp: 7000,
-			attack: 80,
-			range: 1000
-		};
-		return withLevelInfo(unit, experience);
-	},
-	'u0001-5-robia': ({ experience, id }) => {
-		const unit = {
-			id,
-			code: 'u0001-5-robia',
-			displayName: 'Robia',
-			element: 'Psychic',
-			type: 'Intelligence',
-			rank: 5,
-			mineralCost: 450,
-			hp: 7000,
-			attack: 80,
-			range: 1000
-		};
-		return withLevelInfo(unit, experience);
-	},
-	'u0001-5-barbell': ({ experience, id }) => {
-		const unit = {
-			id,
-			code: 'u0001-5-barbell',
-			displayName: 'Barbell',
-			element: 'Steel',
-			type: 'Strength',
-			rank: 5,
-			mineralCost: 450,
-			hp: 7000,
-			attack: 80,
-			range: 1000
-		};
-		return withLevelInfo(unit, experience);
-	},
-	'u0001-5-wap': ({ experience, id }) => {
-		const unit = {
-			id,
-			code: 'u0001-5-wap',
-			displayName: 'Wap Wap',
-			element: 'Water',
-			type: 'Agility',
-			rank: 5,
-			mineralCost: 450,
-			hp: 7000,
-			attack: 80,
-			range: 1000
-		};
-		return withLevelInfo(unit, experience);
-	}
-};
+const charMapper = unitsMapper({ withLevelInfo });
 
 export const hydrateCharacters = async (playerCharacters) => {
 	const hydrated = [];
