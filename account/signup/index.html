@@ -49,9 +49,22 @@
 		<div class="container">
 			<h1>Sign Up</h1>
 			<form action="/signup" method="POST">
-				<input type="text" name="name" placeholder="Name" required />
-				<input type="email" name="email" placeholder="Email" required />
 				<input
+					id="username"
+					type="text"
+					name="username"
+					placeholder="Username"
+					required
+				/>
+				<input
+					id="email"
+					type="email"
+					name="email"
+					placeholder="Email"
+					required
+				/>
+				<input
+					id="password"
 					type="password"
 					name="password"
 					placeholder="Password"
@@ -60,5 +73,39 @@
 				<button type="submit">Sign Up</button>
 			</form>
 		</div>
+
+		<script>
+			document
+				.getElementById('signupForm')
+				.addEventListener('submit', async function (event) {
+					event.preventDefault();
+
+					const name = document.getElementById('username').value;
+					const email = document.getElementById('email').value;
+					const password = document.getElementById('password').value;
+
+					const response = await fetch(
+						'https://datamosh.vercel.app/api/teedee/signUp',
+						{
+							method: 'POST',
+							headers: {
+								'Content-Type': 'application/json'
+							},
+							body: JSON.stringify({
+								username: name,
+								email: email,
+								password: password
+							})
+						}
+					);
+
+					if (response.ok) {
+						document.body.innerHTML =
+							'Your account was created.  Check your email to verify.';
+					} else {
+						document.body.innerHTML = 'Signup failed.';
+					}
+				});
+		</script>
 	</body>
 </html>
