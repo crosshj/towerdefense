@@ -99,3 +99,5 @@
 
 -   allow exporting a character animation as video/gif
     https://stackoverflow.com/questions/50681683/how-to-save-canvas-animation-as-gif-or-webm
+
+-   sign up using passkey https://browser-passkey-demo.vercel.app/
