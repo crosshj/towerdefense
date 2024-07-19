@@ -1,14 +1,6 @@
 import { startGame } from '/engine/init.js';
 import '/visuals/menuPause.js';
 
-const zoneMap = {
-	openField: 3,
-	tropicalGraveyard: 1,
-	water: 5,
-	asian: 6, //sakura
-	haunted: 4
-};
-
 const onLoaded = () => {
 	const params = Object.fromEntries(
 		new URLSearchParams(window.location.search)
@@ -57,7 +49,6 @@ const onLoaded = () => {
 		}
 	};
 	startGame({
-		which: zoneMap[params.zone] || 1,
 		zone: params.zone,
 		params,
 		menu,

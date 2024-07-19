@@ -1,5 +1,3 @@
-import { getUser } from '../../user/user.js';
-
 export const getRewards = async () => {
 	return {
 		coins: 4000,
@@ -20,8 +18,6 @@ export const getRewards = async () => {
 };
 
 export default async () => {
-	const user = await getUser();
-
 	const towerX = 200;
 	const towerColor2 = '#934';
 
@@ -39,7 +35,7 @@ export default async () => {
 
 	return {
 		state: {
-			auto: user.auto,
+			auto: undefined,
 			throttle: 67,
 			record: false,
 			field: {
@@ -53,7 +49,7 @@ export default async () => {
 				background: 'backgroundGhost1'
 			},
 			towers: [
-				user.tower,
+				undefined,
 				{
 					type: 'defender',
 					dims: [200, 343],

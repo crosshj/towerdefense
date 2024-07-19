@@ -12,7 +12,7 @@ export const getLocationMap = async () => {
 			title: 'STAGE 3',
 			name: 'Water Zone'
 		},
-		asian: {
+		sakura: {
 			title: 'STAGE 4',
 			name: 'Sakura'
 		},

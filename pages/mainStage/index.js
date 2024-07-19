@@ -7,7 +7,7 @@ const clickColorMap = {
 	'#fdf900': 'tropicalGraveyard',
 	'#6efd00': 'openField',
 	'#00fddb': 'water',
-	'#0061fd': 'asian',
+	'#0061fd': 'sakura',
 	'#8700fd': 'haunted'
 	// '#000000': 'none'
 };

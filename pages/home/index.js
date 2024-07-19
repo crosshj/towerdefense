@@ -45,7 +45,7 @@ const clickColorMap = {
 	'#e51a3f': '/modals/character/detail.html?sub=b&slot=5'
 };
 
-const drawControls = () => {
+const drawControls = async () => {
 	const container = document.createElement('div');
 	container.classList.add('controls');
 	container.innerHTML = `
@@ -222,7 +222,7 @@ const setup = async () => {
 		}
 	});
 
-	drawControls();
+	await drawControls();
 
 	window.parent.postMessage({ _: 'loaded' });
 };
