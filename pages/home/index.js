@@ -1,3 +1,4 @@
+import { getUser } from '../../user/user.js';
 import { canvasHorizontal } from '../../visuals/canvas.js';
 import { statsRequest } from '../../visuals/stats/stats.js';
 import { getTeam } from '../_utils/getTeam.js';
@@ -46,17 +47,33 @@ const clickColorMap = {
 };
 
 const drawControls = async () => {
+	const user = await getUser();
 	const container = document.createElement('div');
 	container.classList.add('controls');
 	container.innerHTML = `
 		<div class="header">
 			<div class="level">
 				<div class="background"></div>
-				<div class="banner modal clickable wip">
-					<div></div>
-					<div>Newbie</div>
-					<div>Level</div>
-					<div>1</div>
+				<div class="banner modal clickable wip ${user.grade.toLowerCase()}">
+					<div class="progress">
+						<div class="progressContainer">
+							<div class="progressBar progress-50"></div>
+						</div>
+					</div>
+					<div class="grade">
+						<span>${user.grade}</span>
+					</div>
+					<div class="levelLabel">
+						<span>Level</span>
+					</div>
+					<div class="levelNumber">
+						<span>${user.level}</span>
+					</div>
+					<div class="bottom">
+						<svg viewBox="0 0 100 100" preserveAspectRatio="none">
+							<polygon points="0,0 100,0 50,100" />
+						</svg>
+					</div>
 				</div>
 				<div class="user modal clickable wip">
 					<div class="image"></div>
@@ -94,6 +111,16 @@ const drawControls = async () => {
 
 	container.addEventListener('mousedown', (event) => {
 		const which = Array.from(event.target.classList)
+			.filter(
+				(x) =>
+					![
+						'normal',
+						'master',
+						'smaster',
+						'umaster',
+						'legend'
+					].includes(x)
+			)
 			.filter((x) => x !== 'clickable')
 			.filter((x) => x !== 'modal')
 			.filter((x) => x !== 'wip')

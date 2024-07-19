@@ -30,8 +30,8 @@ body {
 	--padding-inline: 15px;
 	color: #cb802a;
 	position: fixed;
-	top: 27vh;
-	left: 1vw;
+	top: 23.5vh;
+	left: 2vw;
 	background: yellow;
 	display: grid;
 	grid-template-rows: repeat(3, auto);
