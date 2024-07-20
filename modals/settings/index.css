@@ -55,6 +55,9 @@ body {
 		font-size: 13px;
 		align-items: center;
 		padding-inline: 10px;
+		& > span {
+			white-space: pre;
+		}
 	}
 	.close-button {
 		position: absolute;

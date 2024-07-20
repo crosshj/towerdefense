@@ -1,4 +1,5 @@
 import { getSettings, setSettings } from '../../user/settings.js';
+import { getVersionString } from './version.js';
 
 const attachSettings = async () => {
 	const settings = await getSettings();
@@ -40,7 +41,14 @@ const attachSettings = async () => {
 	}
 };
 
+const updateVersionString = () => {
+	const versionSpan = document.querySelector('.versionString');
+	const versionString = getVersionString();
+	versionSpan.innerText = versionString;
+};
+
 document.addEventListener('DOMContentLoaded', async () => {
+	updateVersionString();
 	await attachSettings();
 	const chooserEl = document.querySelector('.chooser');
 	const itemsListEl = document.querySelector('.items-list');
