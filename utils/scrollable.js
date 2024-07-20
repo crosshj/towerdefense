@@ -132,7 +132,7 @@ const vertical = async (args) => {
 			});
 			clickHandle(whichItem);
 		}
-		canvas.addEventListener('click', handleTap);
+		canvas.addEventListener('pointerdown', handleTap);
 	}
 
 	const draw = () => {
@@ -256,7 +256,7 @@ const horizontal = async (args) => {
 			});
 			clickHandle(whichItem);
 		}
-		canvas.addEventListener('click', handleTap);
+		canvas.addEventListener('pointerdown', handleTap);
 	}
 
 	const draw = () => {

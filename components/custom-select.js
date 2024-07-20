@@ -112,7 +112,7 @@ class CustomSelect extends HTMLElement {
 		const itemsContainer = this.shadowRoot.querySelector('.select-items');
 		const items = this.shadowRoot.querySelectorAll('.select-items div');
 
-		selectedElement.addEventListener('click', (e) => {
+		selectedElement.addEventListener('pointerdown', (e) => {
 			e.stopPropagation();
 			// this.closeAllSelect(selectedElement);
 			itemsContainer.classList.toggle('select-hide');
@@ -120,7 +120,7 @@ class CustomSelect extends HTMLElement {
 		});
 
 		items.forEach((item) => {
-			item.addEventListener('click', (e) => {
+			item.addEventListener('pointerdown', (e) => {
 				if (item.hasAttribute('disabled')) return;
 				const previousSelected =
 					this.shadowRoot.querySelector('.same-as-selected');
@@ -136,7 +136,7 @@ class CustomSelect extends HTMLElement {
 			});
 		});
 
-		document.addEventListener('click', () => this.closeAllSelect());
+		document.addEventListener('pointerdown', () => this.closeAllSelect());
 	}
 
 	closeAllSelect(element) {
