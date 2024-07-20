@@ -175,14 +175,14 @@ const vertical = async (args) => {
 	canvas.style.touchAction = 'none';
 	canvas.addEventListener('pointerdown', (event) => {
 		isTouching = true;
-		touchStartY = event.touches[0].clientY;
+		touchStartY = event.clientY;
 		velocity = 0;
 		lastTimestamp = event.timeStamp;
 		canvas.setPointerCapture(event.pointerId);
 	});
 	canvas.addEventListener('pointermove', (event) => {
 		if (!isTouching) return;
-		const touchEndY = event.touches[0].clientY;
+		const touchEndY = event.clientY;
 		const deltaY = touchStartY - touchEndY;
 		touchStartY = touchEndY;
 		const deltaTime = event.timeStamp - lastTimestamp;
