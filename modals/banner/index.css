@@ -45,6 +45,23 @@ body {
 		background: #0001;
 		padding-inline: var(--padding-inline);
 		padding-block: 5px;
+		.levelInfo {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			& > div {
+				display: flex;
+				flex-direction: column;
+			}
+			.gradeIcon {
+				width: 25px;
+				height: 28px;
+				background: #9c901180;
+			}
+			.gradeLevelInfo {
+				font-weight: 900;
+			}
+		}
 	}
 	.info {
 		display: flex;

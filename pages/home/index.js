@@ -50,6 +50,7 @@ const drawControls = async () => {
 	const user = await getUser();
 	const container = document.createElement('div');
 	container.classList.add('controls');
+	const progressAmountClass = 'progress-' + user.levelInfo.levelExpPercent10;
 	container.innerHTML = `
 		<div class="header">
 			<div class="level">
@@ -57,7 +58,7 @@ const drawControls = async () => {
 				<div class="banner modal clickable wip ${user.grade.toLowerCase()}">
 					<div class="progress">
 						<div class="progressContainer">
-							<div class="progressBar progress-50"></div>
+							<div class="progressBar ${progressAmountClass}"></div>
 						</div>
 					</div>
 					<div class="grade">
@@ -67,7 +68,7 @@ const drawControls = async () => {
 						<span>Level</span>
 					</div>
 					<div class="levelNumber">
-						<span>${user.level}</span>
+						<span>${user.levelInfo.level}</span>
 					</div>
 					<div class="bottom">
 						<svg viewBox="0 0 100 100" preserveAspectRatio="none">

@@ -1,15 +1,49 @@
-/*
-in the future, this will be where we get information about a given user
-for now, this will return an example user's info
-*/
+import { getUserLevelInfo } from '../utils/experience.js';
+import { clone } from '../utils/utils.js';
 
-/* TODO: this will be a call to backend to get user details */
+const LS_NAME = 'USER_INFO';
+
+const rankToGrade = {
+	1: 'normal',
+	2: 'master',
+	3: 'smaster',
+	4: 'umaster',
+	5: 'legend'
+};
+
+const defaultValue = {
+	rank: 1,
+	exp: 0
+};
+
 export const getUser = async () => {
+	const lsValue = localStorage.getItem(LS_NAME);
+	let user;
+	try {
+		user = {
+			...clone(defaultValue),
+			...JSON.parse(lsValue)
+		};
+	} catch (e) {
+		user = clone(defaultValue);
+	}
 	const thisUser = {
 		auto: localStorage.getItem('auto') === 'true',
-		level: 1, //TODO: get level from experience
-		experience: 0,
-		grade: 'legend'
+		grade: rankToGrade[user.rank],
+		levelInfo: getUserLevelInfo(user.exp, user.rank)
 	};
 	return thisUser;
+};
+
+export const addUserExperience = async (expAmount) => {
+	const lsValue = localStorage.getItem(LS_NAME) || '';
+	let value = clone(defaultValue);
+	try {
+		value = JSON.parse(lsValue);
+	} catch (e) {}
+	value.exp += expAmount;
+
+	//TODO: when exp causes rank to bump
+
+	localStorage.setItem(LS_NAME, JSON.stringify(value));
 };
