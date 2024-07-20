@@ -4,5 +4,5 @@ export const getVersionString = () => {
 	if (currentHash.includes('_HASH')) {
 		return currentVersion;
 	}
-	return currentVersion + '-' + currentHash.slice(0, 10);
+	return currentVersion + '-' + currentHash.slice(0, 7);
 };
