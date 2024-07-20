@@ -140,7 +140,13 @@ const withLevelInfo = (unit, totalExp = 0) => {
 		magicAttack: getAttack(unit, totalExp),
 		magicDefense: getDefense(unit, totalExp),
 		attackSpeed: getAttackSpeed(unit, totalExp),
-		moveSpeed: getMoveSpeed(unit, totalExp)
+		moveSpeed: getMoveSpeed(unit, totalExp),
+
+		// TODO: these things are needed by game, but not currently here
+		critChance: 0.01,
+		critMult: 2,
+		move: 60,
+		unit: unit.id
 	};
 };
 

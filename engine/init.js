@@ -12,47 +12,23 @@ import MissileUpdates from './update/missile.js';
 import { getStage } from '../stages/index.js';
 
 import { characterAnimationGetter } from '../visuals/assets/character.js';
-import { getTeam } from '../pages/_utils/getTeam.js';
+import { getTeamFromNumber } from '../pages/_utils/getTeam.js';
+import { getTower } from '../user/tower.js';
 
-const attributes = [
-	'image',
-	'rank',
-	'displayName',
-	'element',
-	'level',
-	'stars',
-	'rank',
-	'mineralCost',
-	'hp',
-	'attack',
-	'range'
-];
-//TODO: eventually just rely on attributes from team, not from tower state
 const adjustGame = async (game, params) => {
-	const attackerTower = game?.state?.towers?.[0];
-	// set team
-	if ('54321'.split('').includes(params.team)) {
-		const currentTeamName = 'Team ' + params.team;
-		const flipBTeam = false;
-		const currentTeam = await getTeam(currentTeamName, flipBTeam);
-		const allTowerChars = [
-			...attackerTower.teams[0].a,
-			...attackerTower.teams[0].b
-		];
-		const allCurrentChars = [...currentTeam.a, ...currentTeam.b];
-		for (const [i, char] of Object.entries(allTowerChars)) {
-			for (const attr of attributes) {
-				char[attr] = allCurrentChars[i][attr];
-			}
-		}
-	}
+	const attackerTower = await getTower();
 
-	// set effects
-	// set auto
-	//console.log({ attackerTower, params });
+	attackerTower.teams = [await getTeamFromNumber(params.team)];
+	attackerTower.selectedTeam = attackerTower.selectedTeam || 'a';
+
+	attackerTower.type = 'attacker';
+	attackerTower.deployed = [];
+	attackerTower.team = []; //TODO: really need this? yes, unfortunately for now
+
+	game.state.towers[0] = attackerTower;
 };
 
-export const startGame = async ({ menu, which, params, gameOver }) => {
+export const startGame = async ({ menu, params, gameOver }) => {
 	document.querySelector('body > .container').scrollLeft = 0;
 
 	const thisGame = await getStage(params);

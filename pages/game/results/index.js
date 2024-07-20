@@ -2,6 +2,7 @@ import { getStageRewards } from '../../../stages/index.js';
 import { addCharactersEXP, addNewCharacter } from '../../../user/characters.js';
 import { updateEffectsCount } from '../../../user/effects.js';
 import { addStats } from '../../../user/stats.js';
+import { addUserExperience } from '../../../user/user.js';
 import { getTeamFromNumber } from '../../_utils/getTeam.js';
 
 const updateRewards = async (rewards) => {
@@ -38,8 +39,8 @@ const updateRewards = async (rewards) => {
 	const team = await getTeamFromNumber(params.team);
 	await addCharactersEXP([...team.a, ...team.b], exp.unit);
 
-	// TODO: update player EXP
-	console.log({ rewards, params });
+	// update player EXP
+	await addUserExperience(rewards.exp.player);
 
 	const userCoinDom = document.querySelector('.userCoin');
 	const userEXPDom = document.querySelector('.userEXP');

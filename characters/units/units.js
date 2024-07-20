@@ -213,7 +213,7 @@ export const unitsMapper = ({ withLevelInfo }) => ({
 		const unit = {
 			id,
 			code: 'u0001-5-crack9',
-			displayName: 'Crack9',
+			displayName: 'Bumba',
 			element: 'Poison',
 			type: 'Agility',
 			rank: 5,

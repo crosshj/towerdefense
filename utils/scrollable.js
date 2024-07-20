@@ -132,7 +132,7 @@ const vertical = async (args) => {
 			});
 			clickHandle(whichItem);
 		}
-		canvas.addEventListener('click', handleTap);
+		canvas.addEventListener('pointerdown', handleTap);
 	}
 
 	const draw = () => {
@@ -172,14 +172,17 @@ const vertical = async (args) => {
 	let lastTimestamp = 0;
 	const friction = 0.93; // adjust for desired inertia
 
-	canvas.addEventListener('touchstart', (event) => {
+	canvas.style.touchAction = 'none';
+	canvas.addEventListener('pointerdown', (event) => {
 		isTouching = true;
-		touchStartY = event.touches[0].clientY;
+		touchStartY = event.clientY;
 		velocity = 0;
 		lastTimestamp = event.timeStamp;
+		canvas.setPointerCapture(event.pointerId);
 	});
-	canvas.addEventListener('touchmove', (event) => {
-		const touchEndY = event.touches[0].clientY;
+	canvas.addEventListener('pointermove', (event) => {
+		if (!isTouching) return;
+		const touchEndY = event.clientY;
 		const deltaY = touchStartY - touchEndY;
 		touchStartY = touchEndY;
 		const deltaTime = event.timeStamp - lastTimestamp;
@@ -187,10 +190,13 @@ const vertical = async (args) => {
 		lastTimestamp = event.timeStamp;
 		handleScroll({ deltaY });
 	});
-	canvas.addEventListener('touchend', () => {
+	canvas.addEventListener('pointerup', (event) => {
+		if (!isTouching) return;
 		isTouching = false;
 		applyInertia();
+		canvas.releasePointerCapture(event.pointerId);
 	});
+
 	function applyInertia() {
 		if (!isTouching) {
 			velocity *= friction;
@@ -250,7 +256,7 @@ const horizontal = async (args) => {
 			});
 			clickHandle(whichItem);
 		}
-		canvas.addEventListener('click', handleTap);
+		canvas.addEventListener('pointerdown', handleTap);
 	}
 
 	const draw = () => {
@@ -299,14 +305,17 @@ const horizontal = async (args) => {
 	let lastTimestamp = 0;
 	const friction = 0.93; // adjust for desired inertia
 
-	canvas.addEventListener('touchstart', (event) => {
+	canvas.style.touchAction = 'none';
+	canvas.addEventListener('pointerdown', (event) => {
 		isTouching = true;
-		touchStartX = event.touches[0].clientX;
+		touchStartX = event.clientX;
 		velocity = 0;
 		lastTimestamp = event.timeStamp;
+		canvas.setPointerCapture(event.pointerId);
 	});
-	canvas.addEventListener('touchmove', (event) => {
-		const touchEndX = event.touches[0].clientX;
+	canvas.addEventListener('pointermove', (event) => {
+		if (!isTouching) return;
+		const touchEndX = event.clientX;
 		const deltaX = touchStartX - touchEndX;
 		touchStartX = touchEndX;
 		const deltaTime = event.timeStamp - lastTimestamp;
@@ -314,26 +323,28 @@ const horizontal = async (args) => {
 		lastTimestamp = event.timeStamp;
 		handleScroll({ deltaX });
 	});
-	canvas.addEventListener('touchend', () => {
+	canvas.addEventListener('pointerup', (event) => {
+		if (!isTouching) return;
 		isTouching = false;
 		applyInertia();
+		canvas.releasePointerCapture(event.pointerId);
 	});
+
 	function applyInertia() {
-		if (!isTouching) {
-			velocity *= friction;
-			offsetX += velocity * 16; // assuming 60fps, adjust if needed
+		if (isTouching) return;
+		velocity *= friction;
+		offsetX += velocity * 16; // assuming 60fps, adjust if needed
 
-			// Constrain scrollY to the bounds of the large canvas
-			offsetX = Math.max(
-				0,
-				Math.min(offsetX, background.width - canvas.width)
-			);
+		// Constrain scrollY to the bounds of the large canvas
+		offsetX = Math.max(
+			0,
+			Math.min(offsetX, background.width - canvas.width)
+		);
 
-			draw();
+		draw();
 
-			if (Math.abs(velocity) > 0.1) {
-				requestAnimationFrame(applyInertia);
-			}
+		if (Math.abs(velocity) > 0.1) {
+			requestAnimationFrame(applyInertia);
 		}
 	}
 
