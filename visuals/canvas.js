@@ -25,7 +25,8 @@ export const canvasHorizontal = async (args) => {
 			offsetX,
 			clickMap,
 			clickHandle,
-			onDraw
+			onDraw,
+			onScroll: args.onScroll
 		});
 	}
 	return { canvas, ctx };
@@ -38,6 +39,7 @@ export const canvasVertical = async (args) => {
 		parent,
 		image,
 		width,
+		offsetY,
 		scrollBottom,
 		clickMap,
 		clickHandle,
@@ -62,7 +64,9 @@ export const canvasVertical = async (args) => {
 			ctx,
 			clickMap,
 			clickHandle,
-			onDraw
+			onDraw,
+			offsetY,
+			onScroll: args.onScroll
 		});
 	}
 	return { canvas, ctx };

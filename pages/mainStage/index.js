@@ -1,3 +1,4 @@
+import { debounce } from '../../utils/debounce.js';
 import { loadSounds } from '../../visuals/assets/assets.js';
 import { canvasVertical } from '../../visuals/canvas.js';
 
@@ -12,9 +13,15 @@ const clickColorMap = {
 	// '#000000': 'none'
 };
 
+const onScroll = (args) => {
+	localStorage.setItem('MAIN_SCROLL', args.offsetY);
+};
+
 const setup = async () => {
 	const bgMusic = await loadSounds('menuBackground');
 	bgMusic.start(2000);
+
+	const offsetY = localStorage.getItem('MAIN_SCROLL') || undefined;
 
 	window.parent.postMessage({
 		_: 'title',
@@ -41,7 +48,9 @@ const setup = async () => {
 			const src = `/pages/game/selectTeam/index.html?zone=${which}`;
 			bgMusic.stop();
 			window.parent.postMessage({ _: 'navigate', src });
-		}
+		},
+		offsetY: offsetY ? JSON.parse(offsetY) : undefined,
+		onScroll: debounce(onScroll)
 	});
 	window.parent.postMessage({ _: 'loaded' });
 };

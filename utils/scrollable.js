@@ -99,13 +99,22 @@ function getClick({
 }
 
 const vertical = async (args) => {
-	const { image, canvas, ctx, scrollBottom, clickMap, clickHandle } = args;
+	const {
+		image,
+		canvas,
+		ctx,
+		scrollBottom,
+		clickMap,
+		clickHandle,
+		onScroll
+	} = args;
+
 	const background = await loadImage(image);
 	//const background = imageWithHorizontalMarks(await loadImage(image));
 	const originalWidth = background.width;
 	const newWidth = canvas.width;
-	let offsetY = 0;
-	if (typeof scrollBottom !== 'undefined') {
+	let offsetY = args.offsetY || 0;
+	if (typeof offsetY === 'undefined' && typeof scrollBottom !== 'undefined') {
 		offsetY = scrollBottom + (background.height - canvas.height);
 	}
 
@@ -162,6 +171,7 @@ const vertical = async (args) => {
 				Math.max(offsetY + deltaY, 0),
 				background.height - canvas.height
 			);
+			onScroll && onScroll({ offsetY });
 			draw();
 		});
 	}
@@ -208,6 +218,7 @@ const vertical = async (args) => {
 				Math.min(offsetY, background.height - canvas.height)
 			);
 
+			onScroll && onScroll({ offsetY });
 			draw();
 
 			if (Math.abs(velocity) > 0.1) {
@@ -226,7 +237,8 @@ const vertical = async (args) => {
 };
 
 const horizontal = async (args) => {
-	const { image, canvas, ctx, clickMap, clickHandle, onDraw } = args;
+	const { image, canvas, ctx, clickMap, clickHandle, onDraw, onScroll } =
+		args;
 	const background = await loadImage(image);
 	const originalHeight = background.height;
 	const newHeight = canvas.height;
@@ -295,6 +307,7 @@ const horizontal = async (args) => {
 				Math.max(offsetX + deltaX, 0),
 				background.width - canvas.width
 			);
+			onScroll && onScroll({ offsetX });
 			draw();
 		});
 	}
@@ -341,6 +354,7 @@ const horizontal = async (args) => {
 			Math.min(offsetX, background.width - canvas.width)
 		);
 
+		onScroll && onScroll({ offsetX });
 		draw();
 
 		if (Math.abs(velocity) > 0.1) {
