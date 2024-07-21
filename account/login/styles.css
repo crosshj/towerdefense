@@ -13,7 +13,12 @@ body {
 	text-align: center;
 }
 .container h1 {
-	color: #18ad18;
+	color: #ffffff;
+}
+.container h3 {
+	color: #ffffff;
+	font-weight: 100;
+	font-size: 14px;
 }
 .container form {
 	display: flex;
