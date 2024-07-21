@@ -16,7 +16,30 @@ const defaultValue = {
 	exp: 0
 };
 
+const getUserFromAPI = async () => {
+	try {
+		const userToken = sessionStorage.getItem('USER_TOKEN');
+		if (!userToken) return;
+		const opts = {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ token: userToken })
+		};
+		const user = await fetch(
+			'https://datamosh.vercel.app/api/teedee/players/getByToken',
+			opts
+		).then((x) => x.json());
+		if (user.error) throw new Error(user.error);
+		return user;
+	} catch (e) {
+		return;
+	}
+};
+
 export const getUser = async () => {
+	const apiUser = await getUserFromAPI();
 	const lsValue = localStorage.getItem(LS_NAME);
 	let user;
 	try {
@@ -30,7 +53,8 @@ export const getUser = async () => {
 	const thisUser = {
 		auto: localStorage.getItem('auto') === 'true',
 		grade: rankToGrade[user.rank],
-		levelInfo: getUserLevelInfo(user.exp, user.rank)
+		levelInfo: getUserLevelInfo(user.exp, user.rank),
+		apiUser
 	};
 	return thisUser;
 };

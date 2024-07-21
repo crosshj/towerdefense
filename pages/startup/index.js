@@ -1,3 +1,5 @@
+import { getUser } from '../../user/user.js';
+
 const resetGame = () => {
 	localStorage.removeItem('USER_TEAMS');
 	localStorage.removeItem('USER_EFFECTS');
@@ -47,7 +49,35 @@ const setupActionsContinue = ({ gameStarted }) => {
 	});
 };
 
+const setupActionLogin = ({ gameStarted }) => {
+	const button = document.querySelector('.actions .login');
+	if (gameStarted) {
+		button.classList.add('main');
+	} else {
+		button.classList.add('secondary');
+	}
+	button.addEventListener('pointerdown', () => {
+		document.location = '/account/login/index.html';
+	});
+};
+const setupActionSignUp = ({ gameStarted }) => {
+	const button = document.querySelector('.actions .signUp');
+	if (gameStarted) {
+		button.classList.add('secondary');
+	} else {
+		button.classList.add('main');
+	}
+	button.addEventListener('pointerdown', () => {
+		document.location = '/account/signup/index.html';
+	});
+};
+
 document.addEventListener('DOMContentLoaded', async () => {
+	const user = await getUser();
+	console.log({
+		user
+	});
+
 	const gameStarted = localStorage.getItem('GAME_STARTED');
 
 	window.parent.postMessage({
@@ -63,6 +93,14 @@ document.addEventListener('DOMContentLoaded', async () => {
 		visibility: 'hidden'
 	});
 
+	if (user.apiUser) {
+		window.parent.postMessage({
+			_: 'navigate',
+			src: '/pages/home/index.html'
+		});
+		return;
+	}
+
 	const sessionActive = sessionStorage.getItem('SESSION_ACTIVE') === 'true';
 	if (sessionActive) {
 		window.parent.postMessage({
@@ -75,9 +113,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 	const containerDiv = document.querySelector('.container');
 	containerDiv.classList.remove('hidden');
 
-	setupActionsNew({ gameStarted });
-
-	setupActionsContinue({ gameStarted });
+	setupActionLogin({ gameStarted });
+	setupActionSignUp({ gameStarted });
+	// setupActionsNew({ gameStarted });
+	// setupActionsContinue({ gameStarted });
 
 	window.parent.postMessage({ _: 'loaded' });
 });
