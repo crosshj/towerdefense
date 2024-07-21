@@ -15,7 +15,7 @@ document
 					'Content-Type': 'application/json'
 				},
 				body: JSON.stringify({
-					username: name,
+					name: name,
 					email: email,
 					password: password
 				})
