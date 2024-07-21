@@ -9,6 +9,7 @@ body {
 	justify-content: center;
 	align-items: center;
 	height: 100vh;
+	color: white;
 }
 .container {
 	padding: 20px;
