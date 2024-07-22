@@ -1,4 +1,5 @@
 import { getSettings, setSettings } from '../../user/settings.js';
+import { getUser } from '../../user/user.js';
 import { getVersionString } from './version.js';
 
 const attachSettings = async () => {
@@ -47,9 +48,17 @@ const updateVersionString = () => {
 	versionSpan.innerText = versionString;
 };
 
+const updateUserPane = async () => {
+	const user = await getUser();
+	const accountPane = document.querySelector('.tab-pane.account');
+	accountPane.innerHTML = JSON.stringify(user.apiUser, null, 2);
+};
+
 document.addEventListener('DOMContentLoaded', async () => {
 	updateVersionString();
 	await attachSettings();
+	await updateUserPane();
+
 	const chooserEl = document.querySelector('.chooser');
 	const itemsListEl = document.querySelector('.items-list');
 	chooserEl.addEventListener('mousedown', (e) => {

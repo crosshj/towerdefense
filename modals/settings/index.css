@@ -228,6 +228,8 @@ body {
 				display: flex;
 				justify-content: center;
 				align-items: center;
+				color: #e9bf8f;
+				white-space: pre;
 			}
 		}
 		.footer {
