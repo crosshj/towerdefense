@@ -64,9 +64,8 @@ button {
 	gap: 1rem;
 
 	color: white;
-	opacity: 1;
 	&.hidden {
-		opacity: 0;
+		display: none;
 	}
 
 	.title {

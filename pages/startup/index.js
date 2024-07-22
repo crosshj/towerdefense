@@ -57,6 +57,7 @@ const setupActionLogin = ({ gameStarted }) => {
 		button.classList.add('secondary');
 	}
 	button.addEventListener('pointerdown', () => {
+		sessionStorage.setItem('SESSION_ACTIVE', 'true');
 		window.parent.postMessage({
 			_: 'navigate',
 			src: '/account/login/index.html'
@@ -88,19 +89,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 		return;
 	}
 
-	const user = await getUser();
-
-	//TODO: if user.apiUser.verfied===false - mention this, don't go further
-
-	if (user.apiUser) {
-		sessionStorage.setItem('SESSION_ACTIVE', 'true');
-		window.parent.postMessage({
-			_: 'navigate',
-			src: '/pages/home/index.html'
-		});
-		return;
-	}
-
 	window.parent.postMessage({
 		_: 'stats',
 		feathers: false,
@@ -114,15 +102,24 @@ document.addEventListener('DOMContentLoaded', async () => {
 		visibility: 'hidden'
 	});
 
+	const user = await getUser();
 	const gameStarted = localStorage.getItem('GAME_STARTED');
 
-	const containerDiv = document.querySelector('.container');
-	containerDiv.classList.remove('hidden');
+	//TODO: if user.apiUser.verfied===false - mention this, don't go further
 
+	console.log(user.apiUser);
+	setupActionsNew({ gameStarted });
+	setupActionsContinue({ gameStarted });
 	setupActionLogin({ gameStarted });
 	setupActionSignUp({ gameStarted });
-	// setupActionsNew({ gameStarted });
-	// setupActionsContinue({ gameStarted });
+
+	if (user.apiUser) {
+		const containerDiv = document.querySelector('.container.game');
+		containerDiv.classList.remove('hidden');
+	} else {
+		const containerDiv = document.querySelector('.container.account');
+		containerDiv.classList.remove('hidden');
+	}
 
 	window.parent.postMessage({ _: 'loaded' });
 });
