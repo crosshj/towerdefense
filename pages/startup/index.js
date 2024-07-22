@@ -57,7 +57,10 @@ const setupActionLogin = ({ gameStarted }) => {
 		button.classList.add('secondary');
 	}
 	button.addEventListener('pointerdown', () => {
-		document.location = '/account/login/index.html';
+		window.parent.postMessage({
+			_: 'navigate',
+			src: '/account/login/index.html'
+		});
 	});
 };
 const setupActionSignUp = ({ gameStarted }) => {
@@ -68,7 +71,10 @@ const setupActionSignUp = ({ gameStarted }) => {
 		button.classList.add('main');
 	}
 	button.addEventListener('pointerdown', () => {
-		document.location = '/account/signup/index.html';
+		window.parent.postMessage({
+			_: 'navigate',
+			src: '/account/signup/index.html'
+		});
 	});
 };
 
@@ -83,6 +89,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 	}
 
 	const user = await getUser();
+
+	//TODO: if user.apiUser.verfied===false - mention this, don't go further
+
 	if (user.apiUser) {
 		sessionStorage.setItem('SESSION_ACTIVE', 'true');
 		window.parent.postMessage({

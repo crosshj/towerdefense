@@ -1,4 +1,3 @@
-// index.js
 document.addEventListener('DOMContentLoaded', function () {
 	const spinner = document.getElementById('spinner');
 	const content = document.getElementById('content');
@@ -34,4 +33,19 @@ document.addEventListener('DOMContentLoaded', function () {
 			spinner.style.display = 'none';
 			errorMessage.style.display = 'block';
 		});
+	if (window.parent) {
+		window.parent.postMessage({
+			_: 'stats',
+			feathers: false,
+			gems: false,
+			coins: false,
+			friendPoints: false
+		});
+		window.parent.postMessage({
+			_: 'title',
+			title: '',
+			visibility: 'hidden'
+		});
+		window.parent.postMessage({ _: 'loaded' });
+	}
 });
