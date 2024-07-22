@@ -1,33 +1,38 @@
-import { getViewportDimensions } from '../../utils/getViewportDimensions.js';
-import { scrollable } from '../../utils/scrollable.js';
-
 const pageTitle = 'PVP';
 
-const initDom = async (state) => {
-	const dom = document.querySelector('.container');
-	const canvas = dom.querySelector('canvas');
-	const viewport = await getViewportDimensions();
-	canvas.width = viewport.width;
-	canvas.height = viewport.height;
-	const ctx = canvas.getContext('2d', {
-		antialias: false,
-		depth: false,
-		desynchronized: true
-	});
-	ctx.imageSmoothingEnabled = false;
-	return { canvas, ctx };
+const PlayerRow = (player) => {
+	const div = document.createElement('div');
+	div.classList.add('player');
+	div.innerHTML = `
+		<div class="rank">${player.i}</div>
+		<div class="icon"></div>
+		<div class="details">
+			<div class="level">U Lv. 24</div>
+			<div class="name">username</div>
+		</div>
+		<div class="trophies">
+			<div class="trophyIcon">🏆</div>
+			<div class="trophyAmount">199</div>
+		</div>
+	`;
+	return div;
+};
+
+const updatePlayersList = async () => {
+	const tierPlayers = document.querySelector('.tierPlayers');
+	const players = new Array(30).fill();
+	for (const [i, player] of Object.entries(players)) {
+		tierPlayers.append(
+			PlayerRow({
+				i: Number(i) + 1,
+				...player
+			})
+		);
+	}
 };
 
 const setup = async () => {
-	document.title += `: ${pageTitle}`;
-	const { canvas, ctx } = await initDom();
-
-	ctx.fillStyle = '#999';
-	ctx.font = '30px Arial';
-	ctx.textAlign = 'center';
-	ctx.textBaseline = 'middle';
-	ctx.fillText(pageTitle, canvas.width / 2, canvas.height / 2);
-
+	await updatePlayersList();
 	window.parent.postMessage({
 		_: 'stats',
 		feathers: true,

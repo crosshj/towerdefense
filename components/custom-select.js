@@ -23,7 +23,7 @@ class CustomSelect extends HTMLElement {
                     width: var(--select-width, 200px);
                 }
                 .select-selected {
-                    background-color: var(--select-bg-color, #e4c19e);
+                    background-color: var(--select-closed-bg-color, #e4c19e);
                     border: 1px solid var(--select-border-color, #b1a392);
                     border-radius: var(--select-border-radius, 0px);
                     color: var(--select-text-color, #333);
@@ -33,10 +33,10 @@ class CustomSelect extends HTMLElement {
                 .select-selected:after {
                     content: "";
                     position: absolute;
-                    top: 14px;
+                    top: calc(50% - 3px);
                     right: 10px;
                     border: 6px solid transparent;
-                    border-color: #555 transparent transparent transparent;
+                    border-color: currentColor transparent transparent transparent;
                 }
                 .select-items div, .select-selected {
                     padding-block: var(--select-items-py, 8px);
@@ -54,6 +54,7 @@ class CustomSelect extends HTMLElement {
                     background-color: var(--select-bg-color, #e4c19e);
                     border: 1px solid var(--select-border-color, #b1a392);
                     overflow: hidden;
+					color: var(--select-items-color, inherit);
                 }
                 .select-items div:hover {
                     background-color: var(--select-hover-bg-color, #f1f1f1);

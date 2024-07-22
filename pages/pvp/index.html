@@ -1,24 +1,42 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 	<head>
-		<title>TD</title>
-		<meta charset="utf-8" />
-		<meta name="description" content="" />
-		<meta name="author" content="" />
+		<meta charset="UTF-8" />
 		<meta
 			name="viewport"
 			content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
 		/>
-		<meta name="mobile-web-app-capable" content="yes" />
-		<link rel="manifest" href="/manifest.json" />
-		<link rel="icon" type="image/png" href="/assets/favicon.png" />
-		<link rel="stylesheet" href="/visuals/page.css" />
+		<title>TD: PVP</title>
+		<link rel="stylesheet" href="index.css" />
+		<script src="/components/custom-select.js" defer></script>
 	</head>
-
-	<body style="margin: 0">
-		<div class="container fixed">
-			<canvas></canvas>
+	<body>
+		<div class="background"></div>
+		<div class="container">
+			<div class="left">
+				<div class="message">
+					<span>Season end:</span>
+					<span class="highlight">4 day(s) 18:30:45</span>
+					<span>left</span>
+				</div>
+				<div class="header">
+					<div class="title">RANKER INFO</div>
+					<div class="tierSelector">
+						<custom-select>
+							<option>BRONZE III</option>
+							<option>BRONZE II</option>
+							<option selected>BRONZE I</option>
+						</custom-select>
+					</div>
+					<button class="infoButton">!</button>
+				</div>
+				<div class="tierPlayers"></div>
+			</div>
+			<div class="right">
+				<div class="tierName">BRONZE</div>
+			</div>
 		</div>
-		<script src="/utils/disableSwipe.js"></script>
-		<script src="./index.js" type="module"></script>
+
+		<script src="index.js" type="module"></script>
 	</body>
 </html>
