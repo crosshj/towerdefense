@@ -25,7 +25,7 @@ document
 			.then((response) => response.json())
 			.then((data) => {
 				localStorage.setItem('GAME_STARTED', new Date().toISOString());
-				sessionStorage.setItem('USER_TOKEN', data.token);
+				localStorage.setItem('USER_TOKEN', data.token);
 				document.location = '/';
 			})
 			.catch((error) => {

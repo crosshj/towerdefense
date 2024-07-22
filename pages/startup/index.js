@@ -73,12 +73,24 @@ const setupActionSignUp = ({ gameStarted }) => {
 };
 
 document.addEventListener('DOMContentLoaded', async () => {
-	const user = await getUser();
-	console.log({
-		user
-	});
+	const sessionActive = sessionStorage.getItem('SESSION_ACTIVE') === 'true';
+	if (sessionActive) {
+		window.parent.postMessage({
+			_: 'navigate',
+			src: '/pages/home/index.html'
+		});
+		return;
+	}
 
-	const gameStarted = localStorage.getItem('GAME_STARTED');
+	const user = await getUser();
+	if (user.apiUser) {
+		sessionStorage.setItem('SESSION_ACTIVE', 'true');
+		window.parent.postMessage({
+			_: 'navigate',
+			src: '/pages/home/index.html'
+		});
+		return;
+	}
 
 	window.parent.postMessage({
 		_: 'stats',
@@ -93,22 +105,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 		visibility: 'hidden'
 	});
 
-	if (user.apiUser) {
-		window.parent.postMessage({
-			_: 'navigate',
-			src: '/pages/home/index.html'
-		});
-		return;
-	}
-
-	const sessionActive = sessionStorage.getItem('SESSION_ACTIVE') === 'true';
-	if (sessionActive) {
-		window.parent.postMessage({
-			_: 'navigate',
-			src: '/pages/home/index.html'
-		});
-		return;
-	}
+	const gameStarted = localStorage.getItem('GAME_STARTED');
 
 	const containerDiv = document.querySelector('.container');
 	containerDiv.classList.remove('hidden');

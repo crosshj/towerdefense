@@ -18,7 +18,7 @@ const defaultValue = {
 
 const getUserFromAPI = async () => {
 	try {
-		const userToken = sessionStorage.getItem('USER_TOKEN');
+		const userToken = localStorage.getItem('USER_TOKEN');
 		if (!userToken) return;
 		const opts = {
 			method: 'POST',
