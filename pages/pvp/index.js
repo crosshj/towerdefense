@@ -1,4 +1,5 @@
 import { getUserLevelInfo } from '../../utils/experience.js';
+import { getUser } from '../../user/user.js';
 
 const pageTitle = 'PVP';
 
@@ -48,7 +49,19 @@ const updatePlayersList = async () => {
 	}
 };
 
+const updateUserInfo = async () => {
+	const user = await getUser();
+	console.log({ user });
+	const userNameEl = document.querySelector('.userName');
+	userNameEl.innerHTML = user.apiUser.name || '---';
+	const rankingNumberEl = document.querySelector('.rankingNumber');
+	rankingNumberEl.innerHTML = '22';
+	const trophiesNumberEl = document.querySelector('.trophiesNumber');
+	trophiesNumberEl.innerHTML = '0';
+};
+
 const setup = async () => {
+	await updateUserInfo();
 	await updatePlayersList();
 	window.parent.postMessage({
 		_: 'stats',

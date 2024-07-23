@@ -67,6 +67,7 @@ body {
 				font-size: 20px;
 				margin-right: auto;
 				font-weight: 900;
+				text-wrap: nowrap;
 			}
 			.tierSelector {
 				font-weight: 600;
@@ -152,6 +153,100 @@ body {
 		right: 16.25%;
 		top: 11.5%;
 		bottom: 9%;
+		gap: 0.2rem;
+		color: white;
+
+		& > div {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.tierNumber {
+			margin-top: 2.75rem;
+			background: black;
+			width: 25px;
+			height: 25px;
+			border-radius: 50%;
+			box-shadow: 0 0 0px 2px #855a47, 0 0 0px 4px #3c0a09;
+		}
+		.userName {
+			font-size: 0.9rem;
+		}
+		.stats {
+			display: flex;
+			gap: 15px;
+			align-items: center;
+			width: 100%;
+			& > div {
+				display: flex;
+				gap: 5px;
+			}
+			.rankingIcon,
+			.trophyIcon {
+				fill: white;
+				height: 20px;
+				text {
+					fill: #800000;
+					font-size: 32px;
+					text-anchor: middle;
+				}
+			}
+		}
+		.separator {
+			width: 90%;
+			height: 2px;
+			background-color: black;
+			border-bottom: 1px solid;
+			opacity: 0.15;
+		}
+		.actions {
+			margin-top: 3px;
+			button.record {
+				background: #5b4299;
+				color: white;
+				border-color: #700081;
+			}
+		}
+		.pvpActions {
+			width: 95%;
+			display: flex;
+			flex-direction: column;
+			gap: 4px;
+			margin-top: auto;
+			margin-bottom: 0;
+			& > * {
+				width: 100%;
+			}
+			button {
+				color: white;
+				border-color: black;
+				width: 100%;
+				font-size: 20px;
+				min-height: 40px;
+				max-height: 40px;
+				padding: unset;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+			.doubleRow {
+				display: flex;
+				align-items: center;
+				text-wrap: nowrap;
+				gap: 5px;
+				& > button {
+					font-size: 15px;
+				}
+			}
+			/* prettier-ignore */
+			button {
+				&.defenders { background: #54B848; }
+				&.swapShop { background: #9d907b; }
+				&.friendBattle { background: #3eaed0; }
+				&.battle { background: #d22714; }
+			}
+		}
 	}
 }
 
