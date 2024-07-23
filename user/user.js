@@ -78,6 +78,19 @@ export const getUser = async () => {
 	} catch (e) {
 		user = clone(defaultValue);
 	}
+
+	if (apiUser) {
+		user.rank = apiUser.data.rank || user.rank;
+		user.exp = apiUser.data.exp || user.exp;
+		localStorage.setItem(
+			LS_NAME,
+			JSON.stringify({
+				rank: user.rank,
+				exp: user.exp
+			})
+		);
+	}
+
 	const thisUser = {
 		auto: localStorage.getItem('auto') === 'true',
 		grade: rankToGrade[user.rank],

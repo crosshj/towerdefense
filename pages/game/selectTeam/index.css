@@ -240,6 +240,7 @@ button {
 				--select-active-bg-color: #afc4d0;
 				--select-active-color: #333;
 				--select-items-py: 5px;
+				--select-closed-bg-color: #cfd4d7;
 			}
 		}
 	}

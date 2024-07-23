@@ -30,6 +30,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 						new Date().toISOString()
 					);
 					localStorage.setItem('USER_TOKEN', data.token);
+					localStorage.setItem(
+						'USER_INFO',
+						JSON.stringify({
+							exp: data.exp || 0,
+							rank: data.rank || 1
+						})
+					);
 					document.location = '/';
 				})
 				.catch((error) => {
