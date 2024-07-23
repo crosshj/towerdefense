@@ -19,7 +19,8 @@ const defaultValue = {
 const getUserFromAPI = async () => {
 	try {
 		const userToken = localStorage.getItem('USER_TOKEN');
-		if (!userToken) return;
+		if (!userToken)
+			throw new Error('missing token, cannot get user from API');
 		const opts = {
 			method: 'POST',
 			headers: {
@@ -29,6 +30,33 @@ const getUserFromAPI = async () => {
 		};
 		const user = await fetch(
 			'https://datamosh.vercel.app/api/teedee/players/getByToken',
+			opts
+		).then((x) => x.json());
+		if (user.error) throw new Error(user.error);
+		return user;
+	} catch (e) {
+		console.log(e);
+		return;
+	}
+};
+
+const updateUserFromAPI = async (data) => {
+	try {
+		const userToken = localStorage.getItem('USER_TOKEN');
+		if (!userToken)
+			throw new Error('missing token, cannot get user from API');
+		const opts = {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				token: userToken,
+				...data
+			})
+		};
+		const user = await fetch(
+			'https://datamosh.vercel.app/api/teedee/players/setByToken',
 			opts
 		).then((x) => x.json());
 		if (user.error) throw new Error(user.error);
@@ -60,6 +88,7 @@ export const getUser = async () => {
 };
 
 export const addUserExperience = async (expAmount) => {
+	const apiUser = await getUserFromAPI();
 	const lsValue = localStorage.getItem(LS_NAME) || '';
 	let value = clone(defaultValue);
 	try {
@@ -67,6 +96,12 @@ export const addUserExperience = async (expAmount) => {
 	} catch (e) {}
 	value.exp += expAmount;
 
+	await updateUserFromAPI({
+		...(apiUser.data || {}),
+		rank: value.rank,
+		exp: value.exp,
+		expModifiedDate: new Date()
+	});
 	//TODO: when exp causes rank to bump
 
 	localStorage.setItem(LS_NAME, JSON.stringify(value));

@@ -1,14 +1,25 @@
+import { getUserLevelInfo } from '../../utils/experience.js';
+
 const pageTitle = 'PVP';
 
 const PlayerRow = (player) => {
+	player.levelInfo = getUserLevelInfo(
+		player.data.exp || 0,
+		player.data.rank || 1
+	);
+	console.log(player);
 	const div = document.createElement('div');
 	div.classList.add('player');
 	div.innerHTML = `
 		<div class="rank">${player.i}</div>
 		<div class="icon"></div>
 		<div class="details">
-			<div class="level">U Lv. 24</div>
-			<div class="name">username</div>
+			<div class="level">
+                <div class="gradeIcon ${player.levelInfo.grade}"></div>
+                <span>Lv.</span>
+                <span>${player.levelInfo.level}</span>
+            </div>
+			<div class="name">${player.name}</div>
 		</div>
 		<div class="trophies">
 			<div class="trophyIcon">🏆</div>
@@ -20,7 +31,13 @@ const PlayerRow = (player) => {
 
 const updatePlayersList = async () => {
 	const tierPlayers = document.querySelector('.tierPlayers');
-	const players = new Array(30).fill();
+	// const players = new Array(30).fill();
+	let players = await fetch(
+		'https://datamosh.vercel.app/api/teedee/players'
+	).then((x) => x.json());
+	players = players.sort(
+		(a, b) => new Date(b.last_login) - new Date(a.last_login)
+	);
 	for (const [i, player] of Object.entries(players)) {
 		tierPlayers.append(
 			PlayerRow({

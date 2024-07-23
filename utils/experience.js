@@ -1,3 +1,18 @@
+const rankToGrade = {
+	1: 'normal',
+	2: 'master',
+	3: 'smaster',
+	4: 'umaster',
+	5: 'legend'
+};
+const friendlyGradName = {
+	normal: 'Normal',
+	master: 'Master',
+	smaster: 'Super Master',
+	umaster: 'Ultra Master',
+	legend: 'Legend'
+};
+
 export function getExpForLevel({ level, a, b, c }) {
 	// quadratic progression common in many games
 	// Coefficients
@@ -67,11 +82,17 @@ export function getLevelInfo({ totalExp, maxLevel, a = 5, b = 0, c = 0 }) {
 	legend  -> 803,765
 */
 export function getUserLevelInfo(totalExp, rank) {
-	return getLevelInfo({
+	const levelInfo = getLevelInfo({
 		totalExp,
 		maxLevel: 99,
 		a: 52111 * rank,
 		b: 54321 * rank,
 		c: 54321 * rank
 	});
+	const grade = rankToGrade[rank];
+	return {
+		grade,
+		gradeFriendly: friendlyGradName[grade],
+		...levelInfo
+	};
 }

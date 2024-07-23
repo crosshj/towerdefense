@@ -123,6 +123,24 @@ body {
 					margin-left: auto;
 					display: flex;
 				}
+				& > .details {
+					.level {
+						display: flex;
+						gap: 3px;
+						.gradeIcon {
+							height: 17px;
+							width: 15px;
+						}
+						/* prettier-ignore */
+						.gradeIcon {
+						   &.normal { display: none; }
+                           &.master { background-color: red; }
+                           &.smaster { background-color: green; }
+                           &.umaster { background-color: blue; }
+                           &.legend { background-color: black; }
+						}
+					}
+				}
 			}
 			.player + .player {
 				border-top: 1px solid #c3af8f;
