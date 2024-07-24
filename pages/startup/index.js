@@ -7,6 +7,29 @@ const resetGame = () => {
 	localStorage.removeItem('USER_STATS');
 };
 
+const updateLogin = async () => {
+	try {
+		const userToken = localStorage.getItem('USER_TOKEN');
+		if (!userToken) throw new Error('missing token, cannot update login');
+		const opts = {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ token: userToken })
+		};
+		const update = await fetch(
+			'https://datamosh.vercel.app//api/teedee/loginUpdate',
+			opts
+		).then((x) => x.json());
+		if (!update.success) throw new Error('login update failed');
+		return;
+	} catch (e) {
+		console.log(e);
+		return;
+	}
+};
+
 const setupActionsNew = ({ gameStarted }) => {
 	const actionsNewButton = document.querySelector('.actions .new');
 	if (!gameStarted) {
@@ -40,7 +63,8 @@ const setupActionsContinue = ({ gameStarted }) => {
 	} else {
 		actionsContinueButton.classList.add('main');
 	}
-	actionsContinueButton.addEventListener('mousedown', () => {
+	actionsContinueButton.addEventListener('mousedown', async () => {
+		await updateLogin();
 		sessionStorage.setItem('SESSION_ACTIVE', 'true');
 		window.parent.postMessage({
 			_: 'navigate',
