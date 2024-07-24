@@ -19,7 +19,7 @@ const updateLogin = async () => {
 			body: JSON.stringify({ token: userToken })
 		};
 		const update = await fetch(
-			'https://datamosh.vercel.app//api/teedee/loginUpdate',
+			'https://datamosh.vercel.app/api/teedee/loginUpdate',
 			opts
 		).then((x) => x.json());
 		if (!update.success) throw new Error('login update failed');
