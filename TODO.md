@@ -1,14 +1,10 @@
-## Overview:
+### Current
 
--   [ ] Develop rewards system and implement reward screens (Priority: 1)
--   [ ] Enable player progression and unit collection updates (Priority: 2)
--   [ ] Integrate backend and implement user authentication (Priority: 3)
--   [ ] Develop competition system and implement notifications for competition
-        events (Priority: 4)
--   [ ] Add levels to the main stage (Priority: 5)
--   [ ] Develop characters, enemies, and bosses (Priority: 5)
+-   [ ] competition system and notifications for competition events
+-   [ ] Add levels to the main stage
+-   [ ] Develop characters, enemies, and bosses
 
-### TODO
+### Backlog
 
 (resource-related / rewards-related)
 
@@ -20,7 +16,6 @@
 -   [ ] player levels up based on experience
 -   [ ] character levels affect stats
 -   [ ] character detail screen
--   [ ] level caps (so char doesn't level up over a certain point)
 -   [ ] rewards screen shows player/character level up events
 
 -   [ ] sell characters
@@ -34,7 +29,7 @@
 -   [ ] retarget based on new character spawned
 -   [ ] auto/X2 from params
 -   [ ] effects buttons do something (and reduce count when used)
--   [ ] effects show up (not) if selected (not) in game setup
+-   [ ] effects show up (or not) if selected (or not) in game setup
 -   [ ] towers and characters are "real" looking
 -   [ ] zoom
 -   [ ] critical hits (visual indicator)
@@ -54,6 +49,10 @@
 
 (done)
 
+-   [x] level caps (so char doesn't level up over a certain point)
+-   [x] Develop rewards system and implement reward screens
+-   [x] Enable player progression and unit collection updates
+-   [x] Integrate backend and implement user authentication
 -   [x] Use characters configured in my-team in main screen and gameplay.
 -   [x] Implement features to determine win/loss outcomes.
 -   [x] Improve interaction with various screens (e.g., close button

@@ -47,22 +47,32 @@ const updatePlayersList = async () => {
 			})
 		);
 	}
+	return players;
 };
 
-const updateUserInfo = async () => {
+function getPlayerPosition(players, playerName) {
+	for (let i = 0; i < players.length; i++) {
+		if (players[i].name === playerName) {
+			return i + 1;
+		}
+	}
+	return -1;
+}
+const updateUserInfo = async ({ players }) => {
 	const user = await getUser();
-	console.log({ user });
+	user.position = getPlayerPosition(players, user.apiUser.name);
+	console.log({ players, user });
 	const userNameEl = document.querySelector('.userName');
 	userNameEl.innerHTML = user.apiUser.name || '---';
 	const rankingNumberEl = document.querySelector('.rankingNumber');
-	rankingNumberEl.innerHTML = '22';
+	rankingNumberEl.innerHTML = user.position;
 	const trophiesNumberEl = document.querySelector('.trophiesNumber');
 	trophiesNumberEl.innerHTML = '0';
 };
 
 const setup = async () => {
-	await updateUserInfo();
-	await updatePlayersList();
+	const players = await updatePlayersList();
+	await updateUserInfo({ players });
 	window.parent.postMessage({
 		_: 'stats',
 		feathers: true,
