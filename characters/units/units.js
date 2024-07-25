@@ -1,3 +1,10 @@
+const animations = [
+	{ code: 'idle', displayName: 'Idle' },
+	{ code: 'jumping', displayName: 'Jumping' },
+	{ code: 'sprite_swap', displayName: 'Swapping 1' },
+	{ code: 'sprite_swap2', displayName: 'Swapping 2' }
+];
+
 const allUnits = {
 	'u0001-1-macho': {
 		displayName: 'Macho',
@@ -178,11 +185,25 @@ const allUnits = {
 		hp: 7000,
 		attack: 80,
 		range: 1000
+	},
+	'u0001-4-watashi': {
+		displayName: 'Openhyman',
+		element: 'Normal',
+		type: 'Agility',
+		rank: 4,
+		mineralCost: 150,
+		hp: 20000,
+		attack: 15,
+		range: 350
 	}
 };
 
 export const listAvailableUnits = () => {
 	return Object.entries(allUnits).map(([code, v]) => ({ code, ...v }));
+};
+
+export const listAvailableAnimations = () => {
+	return animations;
 };
 
 export const unitsMapper = ({ withLevelInfo }) => {
