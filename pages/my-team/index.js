@@ -1,6 +1,9 @@
 import { getCharacters } from '../../user/characters.js';
 import { getTeams, setTeams } from '../../user/teams.js';
-import { characterImageGetter } from '../../visuals/assets/character.js';
+import {
+	characterImageFromDef,
+	characterImageGetter
+} from '../../visuals/assets/character.js';
 
 const characterDiv = (c, getCharImage) => {
 	return `
