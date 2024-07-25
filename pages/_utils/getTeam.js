@@ -1,6 +1,9 @@
 import { getCharacters } from '../../user/characters.js';
 import { getTeams } from '../../user/teams.js';
-import { characterImageGetter } from '../../visuals/assets/character.js';
+import {
+	characterImageFromDef,
+	characterImageGetter
+} from '../../visuals/assets/character.js';
 
 const loadImage = async (url, flipHorizontal) => {
 	let img = new Image();
@@ -30,14 +33,15 @@ const loadImage = async (url, flipHorizontal) => {
 export const getTeam = async (teamName = 'Team 1', flipBTeam = true) => {
 	const characters = await getCharacters();
 	const teams = await getTeams();
-	const getCharImage = await characterImageGetter();
 	const raidTeam = teams[teamName];
 	for (const [k, v] of Object.entries(raidTeam.a)) {
 		raidTeam.a[k] = characters.find((c) => c.id === v.id);
 		if (!raidTeam.a[k]) {
 			raidTeam.a[k] = { ...v };
 		}
-		raidTeam.a[k].image = await loadImage(getCharImage(raidTeam.a[k]));
+		raidTeam.a[k].image = await loadImage(
+			await characterImageFromDef(raidTeam.a[k])
+		);
 	}
 	for (const [k, v] of Object.entries(raidTeam.b)) {
 		raidTeam.b[k] = characters.find((c) => c.id === v.id);
@@ -45,7 +49,7 @@ export const getTeam = async (teamName = 'Team 1', flipBTeam = true) => {
 			raidTeam.b[k] = { ...v };
 		}
 		raidTeam.b[k].image = await loadImage(
-			getCharImage(raidTeam.b[k]),
+			await characterImageFromDef(raidTeam.b[k]),
 			flipBTeam
 		);
 	}

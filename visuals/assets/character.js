@@ -1,3 +1,4 @@
+import { listAvailableUnits } from '../../characters/units/units.js';
 import { getAnimateable } from '/vendor/DragonBones/Animateable.js';
 
 export const characterAnimationGetter = async (
@@ -25,8 +26,14 @@ export const characterAnimationGetter = async (
 	if (character?.type === 'defender') {
 		texture = '/assets/character/FighterBase/Elements/Poison_tex.png';
 	}
-	if (character?.element) {
+	if (character?.element && !character?.code) {
 		texture = `/assets/character/FighterBase/Elements/${character.element}_tex.png`;
+	}
+	if (character?.code) {
+		texture = `/assets/character/FighterBase/skins/${character.code.replace(
+			'u0001-',
+			''
+		)}_tex.png`;
 	}
 	const framerate = 8;
 	const animation = await getAnimateable({
@@ -111,34 +118,13 @@ function getLetterDataURI(image, letter) {
 }
 
 const addBoned = async (allImages) => {
-	const elements = [
-		'Air',
-		'Bug',
-		'Dark',
-		'Dragon',
-		'Earth',
-		'Electric',
-		'Fairy',
-		'Fighting',
-		'Fire',
-		'Ghost',
-		'Ice',
-		'Normal',
-		'Plant',
-		'Poison',
-		'Psychic',
-		'Rock',
-		'Steel',
-		'Water'
-	];
-	const width = 120;
-	const height = 128;
-	for (const element of elements) {
-		const animation = await characterAnimationGetter(
-			{ element },
-			{ width, height }
-		);
-		allImages[element] = animation.canvas.toDataURL();
+	const allUnits = listAvailableUnits();
+	for (const unit of allUnits) {
+		const animation = await characterAnimationGetter(unit, {
+			width,
+			height
+		});
+		allImages[unit.code] = animation.canvas.toDataURL();
 	}
 };
 
@@ -157,6 +143,9 @@ export const characterImageGetter = async () => {
 	await addBoned(allImages);
 
 	return (character) => {
+		if (character?.code) {
+			return allImages[character.code];
+		}
 		if (character?.element) {
 			return allImages[character.element];
 		}
@@ -165,12 +154,12 @@ export const characterImageGetter = async () => {
 	};
 };
 
-export const characterImageFromElement = async (element) => {
+export const characterImageFromDef = async (character) => {
 	const width = 120;
 	const height = 128;
-	const animation = await characterAnimationGetter(
-		{ element },
-		{ width, height }
-	);
+	const animation = await characterAnimationGetter(character, {
+		width,
+		height
+	});
 	return animation.canvas.toDataURL();
 };

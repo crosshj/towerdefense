@@ -1,6 +1,6 @@
 import { getCharacters } from '../../user/characters.js';
 import { getTeams } from '../../user/teams.js';
-import { characterImageFromElement } from '../../visuals/assets/character.js';
+import { characterImageFromDef } from '../../visuals/assets/character.js';
 
 const loadImage = async (url, flipHorizontal) => {
 	let img = new Image();
@@ -35,7 +35,7 @@ export const getCharacterFromTeam = async (params) => {
 
 	const { id: charId } = teams['Team ' + team][sub][Number(slot) - 1];
 	const character = characters.find((c) => c.id === charId);
-	const charImage = await characterImageFromElement(character.element);
+	const charImage = await characterImageFromDef(character);
 	character.image = await loadImage(charImage);
 
 	return character;
