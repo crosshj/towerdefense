@@ -195,6 +195,16 @@ const allUnits = {
 		hp: 20000,
 		attack: 15,
 		range: 350
+	},
+	'u0001-1-benny': {
+		displayName: 'Benny Lava',
+		element: 'Fire',
+		type: 'Agility',
+		rank: 1,
+		mineralCost: 100,
+		hp: 20000,
+		attack: 100,
+		range: 700
 	}
 };
 
