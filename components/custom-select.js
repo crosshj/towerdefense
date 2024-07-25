@@ -1,9 +1,97 @@
-// custom-select.js
+const $style = {
+	selectedColor: 'CanvasText',
+	selectedBg: 'Canvas',
+	borderRadius: '0px',
+	hoverBgColor: 'ButtonFace',
+	disabledColor: '#ccc'
+};
+
+const style = `
+option {
+    display: none;
+}
+.custom-select {
+    position: relative;
+    font-size: 16px;
+    width: var(--select-width, auto);
+}
+.select-selected {
+    color: var(--select-text-color, ${$style.selectedColor});
+    background-color: var(--select-closed-bg-color, var(--select-bg-color, ${$style.selectedBg}));
+    border-radius: var(--select-border-radius, ${$style.borderRadius});
+    border: 1px solid var(--select-border-color, currentColor);
+    padding: 10px;
+    cursor: pointer;
+	padding-right: 32px;
+}
+.select-selected:after {
+    content: "";
+    position: absolute;
+    top: calc(50% - 3px);
+    right: 10px;
+    border: 6px solid transparent;
+    border-color: currentColor transparent transparent transparent;
+}
+.select-items div {
+    padding-block: var(--select-items-py, 8px);
+    padding-inline: 16px;
+    cursor: pointer;
+}
+.select-items {
+    color: var(--select-items-color, inherit);
+    border-radius: var(--select-border-radius, ${$style.borderRadius});
+    background-color: var(--select-bg-color, Canvas);
+    border: 1px solid var(--select-border-color, currentColor);
+    position: absolute;
+    z-index: 99;
+    top: 100%;
+    width: 100%;
+    margin-top: 3px;
+    overflow: hidden;
+    box-sizing: border-box;
+	max-height: var(--select-items-max-height, 300px);
+    overflow-y: auto;
+}
+.select-items div:hover {
+    background-color: var(--select-hover-bg-color, ${$style.hoverBgColor});
+}
+.select-hide {
+    display: none;
+}
+.select-arrow-active {
+    background-color: var(--select-active-bg-color, ${$style.hoverBgColor});
+    color: var(--select-active-color, currentColor);
+}
+.select-arrow-active:after {
+    content: '';
+    border-color: transparent transparent currentColor transparent;
+    top: calc(50% - 10px);
+}
+.select-items div[disabled] {
+    color: var(--select-disabled-color, ${$style.disabledColor});
+    pointer-events: none;
+}
+.active {
+    position: relative;
+}
+.active:before {
+    content: '';
+    position: absolute;
+    left:0; right:0; top:0; bottom:0;
+    background-color: var(--select-hover-bg-color, ${$style.hoverBgColor});
+    opacity: 0.6;
+	z-index: -1;
+}
+`;
+
 class CustomSelect extends HTMLElement {
+	listeners = [];
 	constructor() {
 		super();
 		this.attachShadow({ mode: 'open' });
+		this.style.display = 'none';
 		this.render();
+		this.observeMutations();
 	}
 
 	connectedCallback() {
@@ -16,77 +104,18 @@ class CustomSelect extends HTMLElement {
 			options.find((option) => option.selected) || options[0];
 
 		this.shadowRoot.innerHTML = `
-            <style>
-                .custom-select {
-                    position: relative;
-                    font-size: 16px;
-                    width: var(--select-width, 200px);
-                }
-                .select-selected {
-                    background-color: var(--select-closed-bg-color, #e4c19e);
-                    border: 1px solid var(--select-border-color, #b1a392);
-                    border-radius: var(--select-border-radius, 0px);
-                    color: var(--select-text-color, #333);
-                    padding: 10px;
-                    cursor: pointer;
-                }
-                .select-selected:after {
-                    content: "";
-                    position: absolute;
-                    top: calc(50% - 3px);
-                    right: 10px;
-                    border: 6px solid transparent;
-                    border-color: currentColor transparent transparent transparent;
-                }
-                .select-items div, .select-selected {
-                    padding-block: var(--select-items-py, 8px);
-					padding-inline: 16px;
-					/* border: 1px solid transparent; */
-                    cursor: pointer;
-                }
-                .select-items {
-                    position: absolute;
-                    z-index: 99;
-                    top: 100%;
-                    width: 100%;
-                    border-radius: var(--select-border-radius, 0px);
-                    margin-top: 3px;
-                    background-color: var(--select-bg-color, #e4c19e);
-                    border: 1px solid var(--select-border-color, #b1a392);
-                    overflow: hidden;
-					color: var(--select-items-color, inherit);
-                }
-                .select-items div:hover {
-                    background-color: var(--select-hover-bg-color, #f1f1f1);
-                }
-                .select-hide {
-                    display: none;
-                }
-                .select-arrow-active {
-                    background-color: var(--select-active-bg-color, red);
-                    color: var(--select-active-color, white);
-                }
-                .select-arrow-active:after {
-                    border-color: transparent transparent currentColor transparent;
-                    top: 7px;
-                }
-                .select-items div[disabled] {
-                    color: var(--select-disabled-color, #ccc);
-                    pointer-events: none;
-                }
-                .same-as-selected {
-                    background-color: var(--select-hover-bg-color, #f1f1f1);
-                }
-            </style>
+            <style>${style}</style>
 
             <div class="custom-select">
-                <div class="select-selected">${selectedOption.innerHTML}</div>
+                <div class="select-selected">${
+					selectedOption ? selectedOption.innerHTML : ''
+				}</div>
                 <div class="select-items select-hide">
                     ${options
 						.map((option) => {
 							const classes = [];
 							if (option.selected) {
-								classes.push('same-as-selected');
+								classes.push('active');
 							}
 							const disabled = option.disabled ? ' disabled' : '';
 							return `
@@ -95,46 +124,55 @@ class CustomSelect extends HTMLElement {
                                 data-value="${option.value}"
                                 class="${classes.join(' ')}"
                             >
-                                ${option.innerHTML}
+                                <span>${option.innerHTML}</span>
                             </div>
-                            `;
+                        `;
 						})
 						.join('')}
                 </div>
             </div>
         `;
 
-		this.selectedValue = selectedOption.value;
+		this.selectedValue = selectedOption ? selectedOption.value : '';
+		this.addEventListeners(); // Re-add event listeners after rendering
+		this.style.display = '';
 	}
 
 	addEventListeners() {
+		for (const [el, event, listener] of this.listeners) {
+			el.removeEventListener(event, listener);
+		}
+		this.listeners = [];
 		const selectedElement =
 			this.shadowRoot.querySelector('.select-selected');
 		const itemsContainer = this.shadowRoot.querySelector('.select-items');
 		const items = this.shadowRoot.querySelectorAll('.select-items div');
 
-		selectedElement.addEventListener('pointerdown', (e) => {
+		const selectListener = (e) => {
 			e.stopPropagation();
-			// this.closeAllSelect(selectedElement);
 			itemsContainer.classList.toggle('select-hide');
 			selectedElement.classList.toggle('select-arrow-active');
-		});
+		};
+		selectedElement.addEventListener('pointerdown', selectListener);
+		this.listeners.push([selectedElement, 'pointerdown', selectListener]);
 
 		items.forEach((item) => {
-			item.addEventListener('pointerdown', (e) => {
+			const listener = (e) => {
 				if (item.hasAttribute('disabled')) return;
 				const previousSelected =
-					this.shadowRoot.querySelector('.same-as-selected');
+					this.shadowRoot.querySelector('.active');
 				if (previousSelected) {
-					previousSelected.classList.remove('same-as-selected');
+					previousSelected.classList.remove('active');
 				}
 				selectedElement.innerHTML = item.innerHTML;
 				this.selectedValue = item.getAttribute('data-value');
-				item.classList.add('same-as-selected');
+				item.classList.add('active');
 				itemsContainer.classList.add('select-hide');
 				selectedElement.classList.remove('select-arrow-active');
 				this.dispatchEvent(new Event('change'));
-			});
+			};
+			item.addEventListener('pointerdown', listener);
+			this.listeners.push([item, 'pointerdown', listener]);
 		});
 
 		document.addEventListener('pointerdown', () => this.closeAllSelect());
@@ -155,7 +193,11 @@ class CustomSelect extends HTMLElement {
 		});
 	}
 
-	// Getter and setter for value
+	observeMutations() {
+		const observer = new MutationObserver(() => this.render());
+		observer.observe(this, { childList: true, subtree: true });
+	}
+
 	get value() {
 		return this.selectedValue;
 	}
@@ -165,11 +207,11 @@ class CustomSelect extends HTMLElement {
 		items.forEach((item) => {
 			if (item.getAttribute('data-value') === newValue) {
 				const previousSelected =
-					this.shadowRoot.querySelector('.same-as-selected');
+					this.shadowRoot.querySelector('.active');
 				if (previousSelected) {
-					previousSelected.classList.remove('same-as-selected');
+					previousSelected.classList.remove('active');
 				}
-				item.classList.add('same-as-selected');
+				item.classList.add('active');
 				this.shadowRoot.querySelector('.select-selected').innerHTML =
 					item.innerHTML;
 				this.selectedValue = newValue;
