@@ -118,6 +118,8 @@ function getLetterDataURI(image, letter) {
 }
 
 const addBoned = async (allImages) => {
+	const width = 120;
+	const height = 128;
 	const allUnits = listAvailableUnits();
 	for (const unit of allUnits) {
 		const animation = await characterAnimationGetter(unit, {
