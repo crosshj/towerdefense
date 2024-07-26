@@ -215,6 +215,16 @@ const allUnits = {
 		hp: 30000,
 		attack: 100,
 		range: 625
+	},
+	'u0001-4-violet': {
+		displayName: 'Violet',
+		element: 'Psychic',
+		type: 'Intelligence',
+		rank: 4,
+		mineralCost: 150,
+		hp: 10000,
+		attack: 200,
+		range: 1000
 	}
 };
 
