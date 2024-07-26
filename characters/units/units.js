@@ -232,7 +232,7 @@ const allUnits = {
 		type: 'Intelligence',
 		rank: 4,
 		mineralCost: 150,
-		hp: 10000,
+		hp: 20000,
 		attack: 200,
 		range: 1000
 	}
