@@ -240,7 +240,7 @@ const allUnits = {
 		displayName: 'Rose',
 		element: 'Plant',
 		type: 'Agility',
-		rank: 4,
+		rank: 3,
 		mineralCost: 150,
 		hp: 25000,
 		attack: 250,
