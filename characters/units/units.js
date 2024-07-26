@@ -216,6 +216,16 @@ const allUnits = {
 		attack: 100,
 		range: 625
 	},
+	'u0001-4-crimson': {
+		displayName: 'Crimson',
+		element: 'Normal',
+		type: 'Agility',
+		rank: 4,
+		mineralCost: 150,
+		hp: 40000,
+		attack: 300,
+		range: 425
+	},
 	'u0001-4-violet': {
 		displayName: 'Violet',
 		element: 'Psychic',
