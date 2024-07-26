@@ -11,8 +11,8 @@ export const getRewards = async () => {
 			ice: { type: 'effect', probability: 0.5 },
 			tornado: { type: 'effect', probability: 0.5 },
 			invincible: { type: 'effect', probability: 0.5 },
-			'u0001-4-violet': { type: 'char', probability: 0.4 },
-			'u0001-1-benny': { type: 'char', probability: 0.25 }
+			'u0001-4-violet': { type: 'char', probability: 0.3 },
+			'u0001-1-benny': { type: 'char', probability: 0.3 }
 		}
 	};
 };
@@ -23,10 +23,10 @@ export default async () => {
 
 	const basicOppChar = {
 		type: 'defender',
-		hp: 3000,
+		hp: 7000,
 		respawn: 40,
 		range: 560,
-		attack: 95,
+		attack: 100,
 		move: 40,
 		x: towerX + 140,
 		critChance: 0.1,
@@ -55,7 +55,7 @@ export default async () => {
 					dims: [200, 343],
 					x: towerX,
 					color: towerColor2,
-					hp: 30000,
+					hp: 60000,
 					deployed: [],
 					team: [basicOppChar]
 				}
