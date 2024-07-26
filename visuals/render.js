@@ -23,7 +23,7 @@ const initDom = (state) => {
 		new GifMaker({
 			...state.field
 		});
-	ctx.imageSmoothingEnabled = false;
+	ctx.imageSmoothingEnabled = true;
 	return { ctx, gif };
 };
 

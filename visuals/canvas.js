@@ -14,7 +14,7 @@ export const canvasHorizontal = async (args) => {
 		depth: false,
 		desynchronized: true
 	});
-	ctx.imageSmoothingEnabled = false;
+	ctx.imageSmoothingEnabled = true;
 	parent.insertAdjacentElement('afterbegin', canvas);
 	if (image) {
 		await scrollable({
@@ -53,7 +53,7 @@ export const canvasVertical = async (args) => {
 		depth: false,
 		desynchronized: true
 	});
-	ctx.imageSmoothingEnabled = false;
+	ctx.imageSmoothingEnabled = true;
 	parent.insertAdjacentElement('afterbegin', canvas);
 	if (image) {
 		await scrollable({
