@@ -49,10 +49,14 @@ export const getActions = (state) => {
 			updateLevel(state.mineral.level);
 		},
 		triggerEffect: (ui) => {
+			// TODO: this is polluted, ui changes should happen in ui - FIX THIS
 			if (ui.effect === 'teamSwitch') {
-				ui.switchTeam();
-				console.log('do state-related team switch');
-				return;
+				const [attackerTower] = state.towers;
+				attackerTower.selectedTeam =
+					attackerTower.selectedTeam === 'a' ? 'b' : 'a';
+				ui.updateTeamSwitcher();
+				ui.controls.bottom.updateTeam(state);
+				return state;
 			}
 			ui.disableEffect();
 			console.log('do state-related effect spawn');
