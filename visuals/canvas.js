@@ -10,11 +10,12 @@ export const canvasHorizontal = async (args) => {
 	canvas.width = parent.clientWidth;
 	canvas.height = height;
 	const ctx = canvas.getContext('2d', {
-		antialias: false,
+		antialias: true,
 		depth: false,
 		desynchronized: true
 	});
 	ctx.imageSmoothingEnabled = true;
+	ctx.imageSmoothingQuality = 'high';
 	parent.insertAdjacentElement('afterbegin', canvas);
 	if (image) {
 		await scrollable({
@@ -49,11 +50,12 @@ export const canvasVertical = async (args) => {
 	canvas.width = width;
 	canvas.height = parent.clientHeight;
 	const ctx = canvas.getContext('2d', {
-		antialias: false,
+		antialias: true,
 		depth: false,
 		desynchronized: true
 	});
 	ctx.imageSmoothingEnabled = true;
+	ctx.imageSmoothingQuality = 'high';
 	parent.insertAdjacentElement('afterbegin', canvas);
 	if (image) {
 		await scrollable({
