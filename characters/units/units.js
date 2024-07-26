@@ -194,7 +194,7 @@ const allUnits = {
 		mineralCost: 150,
 		hp: 20000,
 		attack: 15,
-		range: 350
+		range: 400
 	},
 	'u0001-1-benny': {
 		displayName: 'Benny Lava',
