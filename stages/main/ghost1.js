@@ -11,8 +11,9 @@ export const getRewards = async () => {
 			ice: { type: 'effect', probability: 0.5 },
 			tornado: { type: 'effect', probability: 0.5 },
 			invincible: { type: 'effect', probability: 0.5 },
-			'u0001-1-benny': { type: 'char', probability: 0.3 },
-			'u0001-4-watashi': { type: 'char', probability: 0.3 }
+			'u0001-4-violet': { type: 'char', probability: 0.4 },
+			'u0001-1-benny': { type: 'char', probability: 0.2 },
+			'u0001-4-watashi': { type: 'char', probability: 0.15 }
 		}
 	};
 };
