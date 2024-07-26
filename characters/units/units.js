@@ -205,6 +205,16 @@ const allUnits = {
 		hp: 20000,
 		attack: 100,
 		range: 700
+	},
+	'u0001-4-slabb': {
+		displayName: 'Slabb',
+		element: 'Poison',
+		type: 'Strength',
+		rank: 4,
+		mineralCost: 200,
+		hp: 30000,
+		attack: 100,
+		range: 625
 	}
 };
 
