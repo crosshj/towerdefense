@@ -14,6 +14,7 @@ div#controls {
 	pointer-events: none;
 	overflow: hidden;
 	overscroll-behavior: none;
+	user-select: none;
 }
 .controls-bottom,
 .controls-top {

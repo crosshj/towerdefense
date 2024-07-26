@@ -1,4 +1,5 @@
 .controls {
+	user-select: none;
 	box-sizing: border-box;
 	color: white;
 	position: fixed;

@@ -9,6 +9,7 @@ body {
 	width: 100vw;
 	overflow: hidden;
 	background: black;
+	user-select: none;
 }
 
 .splash {
