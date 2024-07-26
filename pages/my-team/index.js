@@ -186,7 +186,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 	//subteam switch
 	const teamSwitch = document.querySelector('.team-switch');
-	teamSwitch.addEventListener('mousedown', () => {
+	teamSwitch.addEventListener('pointerdown', () => {
 		const children = Array.from(teamSwitch.children);
 		for (const child of children) {
 			child.classList.toggle('selected');

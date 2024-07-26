@@ -31,7 +31,13 @@ const getDomRoot = () => {
 	return root;
 };
 
-const createTopControls = ({ root, pauseScreen, showEffects, state } = {}) => {
+const createTopControls = ({
+	root,
+	controls,
+	pauseScreen,
+	showEffects,
+	state
+} = {}) => {
 	const top = document.createElement('div');
 	top.classList.add('controls-top');
 
@@ -65,7 +71,7 @@ const createTopControls = ({ root, pauseScreen, showEffects, state } = {}) => {
 	`;
 
 	const pauseButton = top.querySelector('.pause.button');
-	pauseButton.addEventListener('mousedown', () => {
+	pauseButton.addEventListener('pointerdown', () => {
 		// pauseButton.innerText = state.paused ? 'I I' : '▶';
 		// pauseButton.style.backgroundColor = state.paused ? '' : '#478347';
 		// pauseButton.style.color = state.paused ? '' : 'white';
@@ -77,7 +83,7 @@ const createTopControls = ({ root, pauseScreen, showEffects, state } = {}) => {
 	if (state.auto) {
 		autoButton.classList.add('active');
 	}
-	autoButton.addEventListener('mousedown', () => {
+	autoButton.addEventListener('pointerdown', () => {
 		if (state.auto) {
 			autoButton.classList.remove('active');
 		} else {
@@ -87,7 +93,7 @@ const createTopControls = ({ root, pauseScreen, showEffects, state } = {}) => {
 	});
 
 	const effectsContainer = top.querySelector('.effects');
-	effectsContainer.addEventListener('mousedown', (e) => {
+	effectsContainer.addEventListener('pointerdown', (e) => {
 		const { effect = 'none' } = e?.target?.dataset;
 		if (effect === 'none') return;
 		if (effect === 'teamSwitch' && !e.target.classList.contains('p-100')) {
@@ -95,10 +101,12 @@ const createTopControls = ({ root, pauseScreen, showEffects, state } = {}) => {
 		}
 		state.actions.triggerEffect({
 			effect,
+			controls,
 			disableEffect: () => {
 				e.target.classList.add('disabled');
 			},
-			switchTeam: () => {
+			//this could be done without needing state actions to do it?
+			updateTeamSwitcher: () => {
 				const newText = e.target.innerText === 'A' ? 'B' : 'A';
 				e.target.innerText = newText;
 				let currentProgress = 0;
@@ -160,7 +168,7 @@ const createBottomControls = ({ root, state }) => {
 	const missileButtonProgress = bottom.querySelector(
 		'.missile.button .progress'
 	);
-	missileButton.addEventListener('mousedown', () => {
+	missileButton.addEventListener('pointerdown', () => {
 		if (!missileButtonProgress.classList.contains(`p-100`)) return;
 		state.actions.missileFire();
 	});
@@ -171,7 +179,7 @@ const createBottomControls = ({ root, state }) => {
 	const mineralButtonLevelIndicator = bottom.querySelector(
 		'.mineral.button .levelIndicator'
 	);
-	mineralButton.addEventListener('mousedown', () => {
+	mineralButton.addEventListener('pointerdown', () => {
 		if (!mineralButtonProgress.classList.contains(`p-100`)) return;
 		state.actions.mineralLevel({
 			updateLevel: (levelNumber) => {
@@ -192,17 +200,15 @@ const createBottomControls = ({ root, state }) => {
 	const unitElements = Array.from(bottom.querySelectorAll('.team')).map(
 		(el, index) => {
 			const unit = currentTeam[index];
-			el.dataset.id = unit?.unit;
+
 			el.innerHTML = `
 				<div class="thumbnail">
 					<div class="unit"></div>
-					<div class="rank">
-						${new Array(unit?.rank || 0).fill('★').join('')}
-					</div>
+					<div class="rank"></div>
 					<div class="cost">
 						<div class="indicator">
 							<span>💎</span>
-							<span>${unit?.mineralCost || '---'}</span>
+							<span class="number"></span>
 						</div>
 						<div class="progress hidden">
 							<div class="progress-bar" style="width: 100%;"></div>
@@ -210,25 +216,45 @@ const createBottomControls = ({ root, state }) => {
 					</div>
 				</div>
 				`;
-			if (typeof unit === 'undefined') {
-				el.classList.add('empty');
-			}
 			const element = {
 				el,
 				image: el.querySelector('.unit'),
 				rank: el.querySelector('.rank'),
 				cost: el.querySelector('.cost .indicator'),
-				costAmount: el.querySelector('.cost .indicator:last-child'),
+				costAmount: el.querySelector('.cost .indicator .number'),
 				progress: el.querySelector('.cost .progress'),
 				progressBar: el.querySelector('.cost .progress-bar')
 			};
-			const thumbnailDataUri = getThumbnail(unit, state);
-			element.image.style.backgroundImage = `url(${thumbnailDataUri})`;
 			return element;
 		}
 	);
 
-	// TODO: bottom.switchTeam
+	const updateTeam = (currentState) => {
+		const attackerTower = currentState.towers.find(
+			(x) => x.type === 'attacker'
+		);
+		const currentTeam =
+			attackerTower?.teams?.[0]?.[attackerTower.selectedTeam] ||
+			attackerTower.team;
+		for (const [i, unitEl] of Object.entries(unitElements)) {
+			const unit = currentTeam[Number(i)];
+			if (typeof unit === 'undefined') {
+				unitEl.el.classList.add('empty');
+				unitEl.el.dataset.id = undefined;
+				continue;
+			}
+			unitEl.el.dataset.id = unit?.unit;
+			unitEl.rank.innerHTML = new Array(unit?.rank || 0)
+				.fill('★')
+				.join('');
+			unitEl.costAmount.innerHTML = unit?.mineralCost || '---';
+			const thumbnailDataUri = getThumbnail(unit, currentState);
+			unitEl.image.style.backgroundImage = `url(${thumbnailDataUri})`;
+			//TODO: update progress/cooldown/candeploy, how?
+		}
+	};
+	bottom.updateTeam = updateTeam;
+	updateTeam(state);
 
 	bottom.updateUnitCooldown = (unit) => {
 		const { index } = unit;
@@ -263,7 +289,7 @@ const createBottomControls = ({ root, state }) => {
 		}
 	};
 
-	bottom.addEventListener('mousedown', (e) => {
+	bottom.addEventListener('pointerdown', (e) => {
 		const { target } = e;
 		if (target.classList.contains('team')) {
 			const isLocked =
@@ -308,7 +334,13 @@ export default class Controls {
 		if (showScreenInfo) {
 			ScreenInfo(root);
 		}
-		this.top = createTopControls({ root, state, pauseScreen, showEffects });
+		this.top = createTopControls({
+			root,
+			state,
+			controls: this,
+			pauseScreen,
+			showEffects
+		});
 		this.bottom = createBottomControls({ root, state });
 
 		this.updateMineral = this.top.updateMineral;

@@ -46,7 +46,6 @@ export const startGame = async ({ menu, params, gameOver }) => {
 	state.assets.animations = {};
 	const animations = {};
 	state.assets.initChar = (charInstance) => {
-		console.log(charInstance);
 		const animation = characterAnimationGetter(charInstance);
 		animations[charInstance.id] = 'pending';
 		animation.then((x) => {
