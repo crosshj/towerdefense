@@ -12,7 +12,7 @@ export const getRewards = async () => {
 			tornado: { type: 'effect', probability: 0.5 },
 			invincible: { type: 'effect', probability: 0.5 },
 			'u0001-5-crack9': { type: 'char', probability: 0.1 },
-			'u0001-1-macho': { type: 'char', probability: 0.1 }
+			'u0001-4-crimson': { type: 'char', probability: 0.3 }
 		}
 	};
 };
