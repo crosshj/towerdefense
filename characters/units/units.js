@@ -235,6 +235,16 @@ const allUnits = {
 		hp: 20000,
 		attack: 200,
 		range: 1000
+	},
+	'u0001-3-rose': {
+		displayName: 'Rose',
+		element: 'Plant',
+		type: 'Agility',
+		rank: 4,
+		mineralCost: 150,
+		hp: 25000,
+		attack: 250,
+		range: 800
 	}
 };
 

@@ -125,7 +125,7 @@ const attachControls = () => {
 const onLoaded = async () => {
 	attachControls();
 	const units = listAvailableUnits();
-	const selectedUnit = 21; // 18=Openhymen
+	const selectedUnit = 23; // 18=Openhymen
 	const selectedAnim = 1; // 1=jumping
 	await updateCharactersList({ selected: selectedUnit, units });
 	await updateAnimationsList({ selected: selectedAnim });
