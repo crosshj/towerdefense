@@ -72,8 +72,9 @@ const allUnits = {
 		type: 'Agility',
 		rank: 4,
 		mineralCost: 350,
-		hp: 6000,
-		attack: 60,
+		attack: '411 - 2,959 - 7,198',
+		hp: '4,270 - 30,436 - 74,009',
+		defense: '43 - 337 - 823',
 		range: 600
 	},
 	'u0001-4-bumpier': {
@@ -82,8 +83,9 @@ const allUnits = {
 		type: 'Intelligence',
 		rank: 4,
 		mineralCost: 350,
-		hp: 6000,
-		attack: 60,
+		attack: '411 - 2,959 - 7,198',
+		hp: '4,270 - 30,436 - 74,009',
+		defense: '43 - 337 - 823',
 		range: 600
 	},
 	'u0001-4-tabi': {
@@ -92,8 +94,9 @@ const allUnits = {
 		type: 'Agility',
 		rank: 4,
 		mineralCost: 350,
-		hp: 6000,
-		attack: 60,
+		attack: '411 - 2,959 - 7,198',
+		hp: '4,270 - 30,436 - 74,009',
+		defense: '43 - 337 - 823',
 		range: 600
 	},
 	'u0001-5-electopus': {
@@ -103,8 +106,9 @@ const allUnits = {
 		rank: 5,
 		mineralCost: 450,
 		attack: 340,
-		hp: 8991,
-		defense: 577,
+		attack: '1,328 - 11,122 - 25,996',
+		hp: '3,978 - 33,360 - 77,976',
+		defense: '317 - 2,736 - 6,401',
 		range: 1000
 	},
 	'u0001-5-santelmo': {
@@ -113,8 +117,9 @@ const allUnits = {
 		type: 'Agility',
 		rank: 5,
 		mineralCost: 450,
-		hp: 7000,
-		attack: 80,
+		attack: '1,328 - 11,122 - 25,996',
+		hp: '3,978 - 33,360 - 77,976',
+		defense: '317 - 2,736 - 6,401',
 		range: 1000
 	},
 	'u0001-5-multo': {
@@ -123,8 +128,9 @@ const allUnits = {
 		type: 'Intelligence',
 		rank: 5,
 		mineralCost: 450,
-		hp: 7000,
-		attack: 80,
+		attack: '1,328 - 11,122 - 25,996',
+		hp: '3,978 - 33,360 - 77,976',
+		defense: '317 - 2,736 - 6,401',
 		range: 1000
 	},
 	'u0001-5-kelvin': {
@@ -133,8 +139,9 @@ const allUnits = {
 		type: 'Agility',
 		rank: 5,
 		mineralCost: 450,
-		hp: 7000,
-		attack: 80,
+		attack: '1,328 - 11,122 - 25,996',
+		hp: '3,978 - 33,360 - 77,976',
+		defense: '317 - 2,736 - 6,401',
 		range: 1000
 	},
 	'u0001-5-blanko': {
@@ -143,8 +150,9 @@ const allUnits = {
 		type: 'Strength',
 		rank: 5,
 		mineralCost: 450,
-		hp: 7000,
-		attack: 80,
+		attack: '1,328 - 11,122 - 25,996',
+		hp: '3,978 - 33,360 - 77,976',
+		defense: '317 - 2,736 - 6,401',
 		range: 1000
 	},
 	'u0001-5-prickles': {
@@ -153,8 +161,9 @@ const allUnits = {
 		type: 'Agility',
 		rank: 5,
 		mineralCost: 450,
-		hp: 7000,
-		attack: 80,
+		attack: '1,328 - 11,122 - 25,996',
+		hp: '3,978 - 33,360 - 77,976',
+		defense: '317 - 2,736 - 6,401',
 		range: 1000
 	},
 	'u0001-5-crack9': {
@@ -163,8 +172,9 @@ const allUnits = {
 		type: 'Agility',
 		rank: 5,
 		mineralCost: 450,
-		hp: 7000,
-		attack: 80,
+		attack: '1,328 - 11,122 - 25,996',
+		hp: '3,978 - 33,360 - 77,976',
+		defense: '317 - 2,736 - 6,401',
 		range: 1000
 	},
 	'u0001-5-robia': {
@@ -173,8 +183,9 @@ const allUnits = {
 		type: 'Intelligence',
 		rank: 5,
 		mineralCost: 450,
-		hp: 7000,
-		attack: 80,
+		attack: '1,328 - 11,122 - 25,996',
+		hp: '3,978 - 33,360 - 77,976',
+		defense: '317 - 2,736 - 6,401',
 		range: 1000
 	},
 	'u0001-5-barbell': {
@@ -183,8 +194,9 @@ const allUnits = {
 		type: 'Strength',
 		rank: 5,
 		mineralCost: 450,
-		hp: 7000,
-		attack: 80,
+		attack: '1,328 - 11,122 - 25,996',
+		hp: '3,978 - 33,360 - 77,976',
+		defense: '317 - 2,736 - 6,401',
 		range: 1000
 	},
 	'u0001-5-wap': {
@@ -193,8 +205,9 @@ const allUnits = {
 		type: 'Agility',
 		rank: 5,
 		mineralCost: 450,
-		hp: 7000,
-		attack: 80,
+		attack: '1,328 - 11,122 - 25,996',
+		hp: '3,978 - 33,360 - 77,976',
+		defense: '317 - 2,736 - 6,401',
 		range: 1000
 	},
 	// Openhyman
