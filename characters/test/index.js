@@ -35,20 +35,28 @@ const characterStats = async (character) => {
 	console.log({ minHydrated, maxHydrated, uncappedMax });
 
 	const levelHTML = `
-		<span class="property">LEVEL</span>
-		<span class="value">${minHydrated.level} - ${maxHydrated.level} - ${uncappedMax.level}</span>
+		<span class="property"></span>
+		<span class="value">${minHydrated.level}</span>
+		<span class="value">${maxHydrated.level}</span>
+		<span class="value">${uncappedMax.level}</span>
 	`;
 	const hpHTML = `
 		<span class="property">HP</span>
-		<span class="value">${minHydrated.hp} - ${maxHydrated.hp} - ${uncappedMax.hp}</span>
+		<span class="value">${minHydrated.hp}</span>
+		<span class="value">${maxHydrated.hp}</span>
+		<span class="value">${uncappedMax.hp}</span>
 	`;
 	const attackHTML = `
 		<span class="property">ATTACK</span>
-		<span class="value">${minHydrated.attack} - ${maxHydrated.attack} - ${uncappedMax.attack}</span>
+		<span class="value">${minHydrated.attack}</span>
+		<span class="value">${maxHydrated.attack}</span>
+		<span class="value">${uncappedMax.attack}</span>
 	`;
 	const defenseHTML = `
 		<span class="property">DEFENSE</span>
-		<span class="value">${minHydrated.defense} - ${maxHydrated.defense} - ${uncappedMax.defense}</span>
+		<span class="value">${minHydrated.defense}</span>
+		<span class="value">${maxHydrated.defense}</span>
+		<span class="value">${uncappedMax.defense}</span>
 	`;
 
 	const minHydratedHTML = Object.entries(minHydrated)
@@ -73,9 +81,14 @@ const characterStats = async (character) => {
 			return a[0].localeCompare(b[0]);
 		})
 		.map((x) => {
+			const columns = x[1]?.split
+				? x[1].split('-').map((x) => x.trim())
+				: [x[1], '', ''];
 			return `
 			<span class="property">${x[0]}</span>
-			<span class="value">${x[1]}</span>
+			<span class="value">${columns[0]}</span>
+			<span class="value">${columns[1]}</span>
+			<span class="value">${columns[2]}</span>
 	`;
 		})
 		.join('');
@@ -155,7 +168,7 @@ const updateCharactersList = async ({ selected = 0, units } = {}) => {
 	listEl.innerHTML = unitsList.map(
 		(x, i) => `
         <option ${i === selected ? 'selected' : ''} value=${x.code}>${
-			x.displayName
+			i + ' - ' + x.displayName
 		}</option>
     `
 	);
@@ -204,7 +217,7 @@ const attachControls = () => {
 const onLoaded = async () => {
 	attachControls();
 	const units = listAvailableUnits();
-	const selectedUnit = 1; // 18=Openhymen
+	const selectedUnit = 23; // 18=Openhymen
 	const selectedAnim = 1; // 1=jumping
 	await updateCharactersList({ selected: selectedUnit, units });
 	await updateAnimationsList({ selected: selectedAnim });
