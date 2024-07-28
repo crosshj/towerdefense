@@ -6,54 +6,64 @@ const animations = [
 ];
 
 const allUnits = {
+	// like https://rangers.lerico.net/en/ranger/u1-ron
 	'u0001-1-macho': {
 		displayName: 'Macho',
 		element: 'Fighting',
 		type: 'Agility',
 		rank: 1,
 		mineralCost: 100,
-		hp: 3000,
-		attack: 20,
+		attack: '72 - 243 - 761',
+		hp: '413 - 1,401 - 4,394',
+		defense: '14 - 52 - 166',
 		range: 1000
 	},
+	// like https://rangers.lerico.net/en/ranger/u030e-ron
 	'u0001-2-toto': {
 		displayName: 'Toto Bato',
 		element: 'Rock',
 		type: 'Strength',
 		rank: 2,
 		mineralCost: 150,
-		hp: 20000,
-		attack: 15,
+		attack: '139 - 661 - 1,838',
+		hp: '998 - 4,623 - 12,821',
+		defense: '22 - 109 - 304',
 		range: 350
 	},
+	// like https://rangers.lerico.net/en/ranger/u031e-ron
 	'u0001-3-twinkle': {
 		displayName: 'Twinkle',
 		element: 'Fairy',
 		type: 'Intelligence',
 		rank: 3,
 		mineralCost: 250,
-		hp: 4000,
-		attack: 40,
+		attack: '246 - 1,455 - 3,735',
+		hp: '2,128 - 12,502 - 32,080',
+		defense: '32 - 188 - 482',
 		range: 800
 	},
+	// like https://rangers.lerico.net/en/ranger/u032e-ron
 	'u0001-4-vispi': {
 		displayName: 'Vispi',
 		element: 'Air',
 		type: 'Agility',
 		rank: 4,
 		mineralCost: 350,
-		hp: 6000,
-		attack: 100,
+		attack: '411 - 2,959 - 7,198',
+		hp: '4,270 - 30,436 - 74,009',
+		defense: '43 - 337 - 823',
 		range: 500
 	},
+	// like https://rangers.lerico.net/en/ranger/u13-lia
 	'u0001-5-drat': {
 		displayName: 'Drat',
 		element: 'Dragon',
 		type: 'Agility',
 		rank: 5,
 		mineralCost: 450,
-		hp: 7000,
-		attack: 80,
+		attack: '1,328 - 11,122 - 25,996',
+		hp: '3,978 - 33,360 - 77,976',
+		defense: '317 - 2,736 - 6,401',
 		range: 1000
 	},
 	'u0001-4-antonio': {
@@ -61,7 +71,7 @@ const allUnits = {
 		element: 'Bug',
 		type: 'Agility',
 		rank: 4,
-		mineralCost: 500,
+		mineralCost: 350,
 		hp: 6000,
 		attack: 60,
 		range: 600
@@ -71,7 +81,7 @@ const allUnits = {
 		element: 'Dark',
 		type: 'Intelligence',
 		rank: 4,
-		mineralCost: 550,
+		mineralCost: 350,
 		hp: 6000,
 		attack: 60,
 		range: 600
@@ -81,7 +91,7 @@ const allUnits = {
 		element: 'Earth',
 		type: 'Agility',
 		rank: 4,
-		mineralCost: 600,
+		mineralCost: 350,
 		hp: 6000,
 		attack: 60,
 		range: 600
@@ -91,9 +101,10 @@ const allUnits = {
 		element: 'Electric',
 		type: 'Agility',
 		rank: 5,
-		mineralCost: 700,
-		hp: 7000,
-		attack: 80,
+		mineralCost: 450,
+		attack: 340,
+		hp: 8991,
+		defense: 577,
 		range: 1000
 	},
 	'u0001-5-santelmo': {
@@ -186,6 +197,7 @@ const allUnits = {
 		attack: 80,
 		range: 1000
 	},
+	// Openhyman
 	'u0001-4-watashi': {
 		displayName: 'Openhyman',
 		element: 'Normal',
@@ -259,10 +271,11 @@ export const listAvailableAnimations = () => {
 export const unitsMapper = ({ withLevelInfo }) => {
 	const mapped = {};
 	for (const [key, value] of Object.entries(allUnits)) {
-		mapped[key] = ({ experience, id }) => {
+		mapped[key] = ({ experience, uncappedLevel = 0, id }) => {
 			const withId = {
 				id,
 				code: key,
+				uncappedLevel,
 				...value
 			};
 			return withLevelInfo(withId, experience);

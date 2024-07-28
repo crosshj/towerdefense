@@ -13,6 +13,18 @@ const friendlyGradName = {
 	legend: 'Legend'
 };
 
+export function getGrowth({ base, level, linear, quadratic }) {
+	if (!base || base === 0) {
+		return 0;
+	}
+	return Math.floor(
+		base + //
+			linear * level +
+			quadratic * level * level
+	);
+	// return Math.floor(base * Math.exp(growthRate * level));
+}
+
 export function getExpForLevel({ level, a, b, c }) {
 	// quadratic progression common in many games
 	// Coefficients

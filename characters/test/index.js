@@ -1,5 +1,6 @@
 import { getAnimateable } from '/vendor/DragonBones/Animateable.js';
 import { listAvailableAnimations, listAvailableUnits } from '../units/units.js';
+import { hydrateCharacters } from '../index.js';
 
 const animationControls = {};
 
@@ -11,7 +12,88 @@ const updateThumbnail = ({ animation }) => {
 	root.style.setProperty('--thumbnailUrl', `url('${dataUrl}')`);
 };
 
+const characterStats = async (character) => {
+	const statsDiv = document.querySelector('.stats');
+	const [minHydrated, maxHydrated, uncappedMax] = await hydrateCharacters([
+		{
+			id: 'test-test-test',
+			experience: 0,
+			code: character
+		},
+		{
+			id: 'test-test-test',
+			experience: 99999999999999999,
+			code: character
+		},
+		{
+			id: 'test-test-test',
+			experience: 99999999999999999,
+			code: character,
+			uncappedLevel: 4
+		}
+	]);
+	console.log({ minHydrated, maxHydrated, uncappedMax });
+
+	const levelHTML = `
+		<span class="property">LEVEL</span>
+		<span class="value">${minHydrated.level} - ${maxHydrated.level} - ${uncappedMax.level}</span>
+	`;
+	const hpHTML = `
+		<span class="property">HP</span>
+		<span class="value">${minHydrated.hp} - ${maxHydrated.hp} - ${uncappedMax.hp}</span>
+	`;
+	const attackHTML = `
+		<span class="property">ATTACK</span>
+		<span class="value">${minHydrated.attack} - ${maxHydrated.attack} - ${uncappedMax.attack}</span>
+	`;
+	const defenseHTML = `
+		<span class="property">DEFENSE</span>
+		<span class="value">${minHydrated.defense} - ${maxHydrated.defense} - ${uncappedMax.defense}</span>
+	`;
+
+	const minHydratedHTML = Object.entries(minHydrated)
+		.filter((x) => {
+			return ![
+				'id',
+				'unit',
+				'code',
+				'displayName',
+				'element',
+				'move',
+				'moveSpeed',
+				'moveSpeedText',
+				'stars',
+				'professorPoints',
+				'levelNextPercent',
+				'type',
+				'uncappedLevel'
+			].includes(x[0]);
+		})
+		.sort((a, b) => {
+			return a[0].localeCompare(b[0]);
+		})
+		.map((x) => {
+			return `
+			<span class="property">${x[0]}</span>
+			<span class="value">${x[1]}</span>
+	`;
+		})
+		.join('');
+
+	statsDiv.innerHTML = [
+		levelHTML,
+		attackHTML,
+		hpHTML,
+		defenseHTML
+		//minHydratedHTML
+	].join('');
+};
+
 const switchCharacter = async ({ character, animation: animName }) => {
+	await characterStats(character);
+
+	//TODO: if animation is same (animName) as already loaded, just change animation and exit
+
 	const regex = /^(u\d+)-(.+)$/;
 	const [_, base, tex] = character.match(regex);
 	const canvas = document.getElementById('test-canvas');
@@ -19,8 +101,6 @@ const switchCharacter = async ({ character, animation: animName }) => {
 	const skeleton = '/assets/character/FighterBase/FighterBase_ske.json';
 	const atlas = '/assets/character/FighterBase/FighterBase_tex.json';
 	const texture = `/assets/character/FighterBase/skins/${tex}_tex.png`;
-
-	console.log(`${tex}_tex`);
 
 	const animation = await getAnimateable({
 		canvas,
@@ -35,7 +115,6 @@ const switchCharacter = async ({ character, animation: animName }) => {
 	animationControls.play = () => {
 		if (!animSet) {
 			animSet = true;
-			console.log({ animName });
 			animation.setAnimation(animName);
 		}
 		const animSpeed = 1000 / 40;
@@ -66,7 +145,7 @@ const switchCharacter = async ({ character, animation: animName }) => {
 const onChange = async () => {
 	const character = document.getElementById('charactersList').value;
 	const animation = document.getElementById('animationsList').value;
-	console.log(`${character} - ${animation}`);
+	// console.log(`${character} - ${animation}`);
 	await switchCharacter({ character, animation });
 };
 
@@ -125,7 +204,7 @@ const attachControls = () => {
 const onLoaded = async () => {
 	attachControls();
 	const units = listAvailableUnits();
-	const selectedUnit = 23; // 18=Openhymen
+	const selectedUnit = 1; // 18=Openhymen
 	const selectedAnim = 1; // 1=jumping
 	await updateCharactersList({ selected: selectedUnit, units });
 	await updateAnimationsList({ selected: selectedAnim });

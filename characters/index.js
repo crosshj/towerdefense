@@ -2,78 +2,98 @@
 ALL CHARACTERS THAT THE USER HAS AVAILABLE
 */
 
-import { getLevelInfo } from '../utils/experience.js';
+import { getLevelInfo, getGrowth } from '../utils/experience.js';
+import { calculateCoefficients } from './units/calculateStats.js';
 import { unitsMapper } from './units/units.js';
 
-const getHealth = (unit, totalExp) => {
-	return unit.hp;
-};
-
 const getMaxLevel = (unit) => {
-	//TODO: also look at unit.uncappedLevel
 	if (unit.rank === 1) {
-		return 20;
+		return 20 + (unit.uncappedLevel || 0) * 5;
 	}
 	if (unit.rank === 2) {
-		return 30;
+		return 30 + (unit.uncappedLevel || 0) * 5;
 	}
 	if (unit.rank === 3) {
-		return 40;
+		return 40 + (unit.uncappedLevel || 0) * 5;
 	}
 	if (unit.rank === 4) {
-		return 50;
+		return 50 + (unit.uncappedLevel || 0) * 5;
 	}
 	if (unit.rank === 5) {
-		return 60;
+		return 60 + (unit.uncappedLevel || 0) * 5;
 	}
 	if (unit.rank === 6) {
-		return 80;
+		return 80 + (unit.uncappedLevel || 0) * 5;
 	}
 	if (unit.rank === 7) {
-		return 100;
+		return 100 + (unit.uncappedLevel || 0) * 5;
 	}
 	if (unit.rank === 8) {
-		return 120;
+		return 120 + (unit.uncappedLevel || 0) * 5;
 	}
 	if (unit.rank === 9) {
-		return 160;
+		return 160 + (unit.uncappedLevel || 0) * 5;
 	}
 	return 0;
 };
 
+// health
+const getHealth = (unit, currentLevel) => {
+	if (typeof unit.hp === 'number') return unit.hp;
+	const rankGrowth = calculateCoefficients(unit.rank, unit.hp);
+	const val = getGrowth({
+		...rankGrowth,
+		level: currentLevel
+	});
+	return val;
+};
+
 // defense
-const getDefense = (unit, totalExp) => {
+const getDefense = (unit, currentLevel) => {
+	if (!unit.defense) return 0;
+	if (typeof unit.defense === 'number') return unit.defense;
+	const rankGrowth = calculateCoefficients(unit.rank, unit.defense);
+	const val = getGrowth({
+		...rankGrowth,
+		level: currentLevel
+	});
+	return val;
+};
+const getPhysicalDefense = (unit, currentLevel) => {
 	return unit.defense || 0;
 };
-const getPhysicalDefense = (unit, totalExp) => {
-	return unit.defense || 0;
-};
-const getMagicDefense = (unit, totalExp) => {
+const getMagicDefense = (unit, currentLevel) => {
 	return unit.defense || 0;
 };
 
 // attack
-const getAttack = (unit, totalExp) => {
+const getAttack = (unit, currentLevel) => {
+	if (typeof unit.attack === 'number') return unit.attack;
+	const rankGrowth = calculateCoefficients(unit.rank, unit.attack);
+	const val = getGrowth({
+		...rankGrowth,
+		level: currentLevel
+	});
+	return val;
+};
+const getPhysicalAttack = (unit, currentLevel) => {
 	return unit.attack;
 };
-const getPhysicalAttack = (unit, totalExp) => {
-	return unit.attack;
-};
-const getMagicAttack = (unit, totalExp) => {
+const getMagicAttack = (unit, currentLevel) => {
 	return unit.attack;
 };
 
 // speed
-const getAttackSpeedText = (unit, totalExp) => {
+const getAttackSpeedText = (unit, currentLevel) => {
 	return 'Normal';
 };
-const getMoveSpeedText = (unit, totalExp) => {
+const getMoveSpeedText = (unit, currentLevel) => {
 	return 'Normal';
 };
-const getAttackSpeed = (unit, totalExp) => {
+const getAttackSpeed = (unit, currentLevel) => {
 	return 1;
 };
-const getMoveSpeed = (unit, totalExp) => {
+const getMoveSpeed = (unit, currentLevel) => {
 	return 1;
 };
 
@@ -104,20 +124,20 @@ const withLevelInfo = (unit, totalExp = 0) => {
 
 		professorPoints: 1, //TODO, this should be saved when combining units
 
-		hp: getHealth(unit, totalExp),
-		attack: getAttack(unit, totalExp),
-		defense: getDefense(unit, totalExp),
+		hp: getHealth(unit, currentLevel),
+		attack: getAttack(unit, currentLevel),
+		defense: getDefense(unit, currentLevel),
 
-		attackSpeedText: getAttackSpeedText(unit, totalExp),
-		moveSpeedText: getMoveSpeedText(unit, totalExp),
+		attackSpeedText: getAttackSpeedText(unit, currentLevel),
+		moveSpeedText: getMoveSpeedText(unit, currentLevel),
 
 		// TODO: use these in-game
-		physicalAttack: getAttack(unit, totalExp),
-		physicalDefense: getDefense(unit, totalExp),
-		magicAttack: getAttack(unit, totalExp),
-		magicDefense: getDefense(unit, totalExp),
-		attackSpeed: getAttackSpeed(unit, totalExp),
-		moveSpeed: getMoveSpeed(unit, totalExp),
+		physicalAttack: getAttack(unit, currentLevel),
+		physicalDefense: getDefense(unit, currentLevel),
+		magicAttack: getAttack(unit, currentLevel),
+		magicDefense: getDefense(unit, currentLevel),
+		attackSpeed: getAttackSpeed(unit, currentLevel),
+		moveSpeed: getMoveSpeed(unit, currentLevel),
 
 		// TODO: these things are needed by game, but not currently here
 		critChance: 0.01,
