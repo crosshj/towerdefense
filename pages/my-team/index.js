@@ -1,52 +1,9 @@
 import { getCharacters } from '../../user/characters.js';
 import { getTeams, setTeams } from '../../user/teams.js';
-import {
-	characterImageFromDef,
-	characterImageGetter
-} from '../../visuals/assets/character.js';
-
-const characterDiv = (c, getCharImage) => {
-	return `
-		<div class="stars">
-			${'★'.repeat(c.stars)}
-		</div>
-		<div class="info">
-			<div class="icon">
-				<img src="${getCharImage(c)}">
-			</div>
-			<div class="details">
-				<div class="name">
-					${c.displayName}
-				</div>
-				<div class="level flex space-between">
-					<div>Lv.</div>
-					<div>${c.level}</div>
-				</div>
-				<div class="mineral flex space-between">
-					<div class="mineral-icon">▲</div>
-					<div>${c.mineralCost}</div>
-				</div>
-			</div>
-		</div>
-	`;
-};
-const slotDiv = (c, getCharImage) => {
-	return `
-			<div class="icon">
-				<img src="${getCharImage(c)}">
-			</div>
-			<div class="base">
-				<div class="cylinder"></div>
-				<div class="stars">
-					${'★'.repeat(c.stars)}
-				</div>
-			</div>
-			<div class="mineral flex space-between">
-				<div class="mineral-icon">▲</div>
-				<div>${c.mineralCost}</div>
-			</div>
-		`;
-};
+import { characterImageGetter } from '../../visuals/assets/character.js';
+import { characterDiv } from './components.js';
+import { slotDiv } from './components.js';
+import { handlePointerEvents } from './handlePointerEvents.js';
 
 const saveTeam = async ({ teams }) => {
 	const teamSlots = Array.from(document.querySelectorAll('.team-slot')).map(
@@ -172,9 +129,18 @@ document.addEventListener('DOMContentLoaded', async () => {
 		characterCard.dataset.id = character.id;
 
 		const charIcon = characterCard.querySelector('.icon');
-		charIcon.draggable = true;
-		charIcon.addEventListener('dragstart', dragStart);
-		charIcon.addEventListener('dragend', dragEnd);
+		handlePointerEvents({
+			element: charIcon,
+			onTap: () => {
+				const src = `/modals/character/detail.html?id=${character.id}`;
+				window.parent.postMessage({
+					_: 'navigate',
+					src
+				});
+			},
+			onDragStart: dragStart,
+			onDragEnd: dragEnd
+		});
 		allCharactersDiv.appendChild(characterCard);
 	});
 
@@ -204,27 +170,37 @@ document.addEventListener('DOMContentLoaded', async () => {
 			slot.classList.remove('blank');
 			slot.dataset.id = char.id;
 		}
+		slot.addEventListener('pointerdown', () => {
+			if (!slot.dataset.id) return;
+			const src = `/modals/character/detail.html?id=${slot.dataset.id}`;
+			window.parent.postMessage({
+				_: 'navigate',
+				src
+			});
+		});
 	});
 
 	let draggingEl;
 	function dragStart(e) {
-		const parent = e.target.closest('.character-card ');
+		const parent = e.target.closest('.character-card');
 		if (parent.classList.contains('used')) {
 			e.preventDefault();
 			return false;
 		}
 		draggingEl = parent;
 		draggingEl.classList.add('dragging');
-		e.dataTransfer.setData('id', parent.dataset.id);
-		const dragImage = parent.querySelector('.icon img').cloneNode(true);
-		dragImage.style.zoom = 1;
-		e.dataTransfer.setDragImage(dragImage, 128 / 2, 40);
+		draggingEl.id = parent.dataset.id;
 	}
-	function dragEnd() {
+	function dragEnd(e) {
 		if (!draggingEl) {
 			return;
 		}
 		draggingEl.classList.remove('dragging');
+		const droppedOn = document.elementFromPoint(e.clientX, e.clientY);
+		drop({
+			preventDefault: () => {},
+			target: droppedOn
+		});
 	}
 	function dragOver(e) {
 		e.preventDefault();
@@ -233,9 +209,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 		e.preventDefault();
 		const slot = e.target.closest('.team-slot');
 		draggingEl.classList.remove('dragging');
-		// draggingEl.classList.add('used');
+		const { id } = draggingEl;
 		draggingEl = undefined;
-		const id = e.dataTransfer.getData('id');
 		slot.dataset.id = id;
 		const char = characters.find((x) => x.id === id);
 
@@ -261,7 +236,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 		characters
 	});
 
-	document.body.addEventListener('mousedown', (event) => {
+	document.body.addEventListener('pointerdown', (event) => {
 		// console.log(event.target);
 		if (event.target.classList.contains('back-button')) {
 			// window.fadingNavigate(params.back || '/');

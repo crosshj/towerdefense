@@ -67,8 +67,18 @@ function closeModal() {
 	const modalIframe = document.querySelector('iframe.modal');
 	if (!modalIframe) return false;
 	modalIframe.remove();
+	setTimeout(() => {
+		// console.log(document.activeElement);
+		document.querySelector('body > iframe').contentWindow.focus();
+		// document.body.focus();
+		// console.log(document.activeElement);
+	}, 300);
 	return true;
 }
+
+document.addEventListener('focusin', (ev) => {
+	document.previousActiveElement = ev.target;
+});
 
 function navigate(args = {}) {
 	document.body.classList.remove('fade-in');

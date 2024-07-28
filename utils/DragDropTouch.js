@@ -1,4 +1,6 @@
+// https://github.com/drag-drop-touch-js/dragdroptouch
 let DragDropTouch;
+/* prettier-ignore */
 (function (DragDropTouch_1) {
     'use strict';
     /**

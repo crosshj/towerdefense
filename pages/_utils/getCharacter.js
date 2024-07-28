@@ -27,16 +27,20 @@ const loadImage = async (url, flipHorizontal) => {
 	});
 };
 
-export const getCharacterFromTeam = async (params) => {
-	const { sub, slot, team = 1 } = params;
-
+export const getCharacterById = async (params) => {
+	const { id: charId } = params;
 	const characters = await getCharacters();
-	const teams = await getTeams();
-
-	const { id: charId } = teams['Team ' + team][sub][Number(slot) - 1];
 	const character = characters.find((c) => c.id === charId);
 	const charImage = await characterImageFromDef(character);
 	character.image = await loadImage(charImage);
-
 	return character;
+};
+
+export const getCharacterFromTeam = async (params) => {
+	const { id: idParam, sub, slot, team = 1 } = params;
+	if (idParam) return await getCharacterById(params);
+
+	const teams = await getTeams();
+	const { id } = teams['Team ' + team][sub][Number(slot) - 1];
+	return await getCharacterById({ id });
 };
