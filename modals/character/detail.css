@@ -77,9 +77,10 @@ body {
 		border: 2px solid black;
 	}
 	.content {
+		font-size: 14px;
 		position: absolute;
 		display: grid;
-		grid-template-columns: 40% auto;
+		grid-template-columns: 37% 63%;
 
 		color: #6c1515;
 
@@ -101,7 +102,9 @@ body {
 		}
 
 		.circle {
-			width: 20px;
+			width: 15px;
+			height: 15px;
+			font-size: 0.95em;
 			border-radius: 50%;
 			display: flex;
 			justify-content: center;
@@ -141,14 +144,14 @@ body {
 		.actions {
 			display: flex;
 			justify-content: space-between;
-			gap: 7px;
+			gap: 0.5em;
 			button {
 				min-width: unset;
 				height: auto;
 				flex: 1;
-				font-size: 19px;
-				line-height: 14px;
-				padding-block: 6px;
+				font-size: 1.3em;
+				line-height: 1em;
+				padding-block: 0.2em;
 				&.levelUp {
 					background: red;
 					color: white;
@@ -301,6 +304,7 @@ body {
 					font-weight: 900;
 					color: #6c1515;
 					margin-right: 10px;
+					font-size: 1.1em;
 				}
 				& > .cap {
 					margin-right: auto;
@@ -351,6 +355,7 @@ body {
 				}
 				& > .professorPoints {
 					display: flex;
+					align-items: center;
 					font-weight: 900;
 					color: #1ced1c;
 					background: brown;
@@ -364,31 +369,37 @@ body {
 			& > .rowTwo {
 				display: flex;
 				justify-content: space-between;
-				gap: 10px;
-				.type {
+				gap: 0.4em;
+				& > div {
 					display: flex;
-					gap: 10px;
-					& > .icon {
-						line-height: 10px;
-					}
+					align-items: center;
+					justify-content: center;
+					gap: 0.3em;
+				}
+
+				.type {
+					gap: 0.3em;
 				}
 				.mineral {
 					flex: 1;
-					display: flex;
-					gap: 10px;
 					.mineral.icon {
 						color: #00f8f8;
 					}
 				}
 				.details {
-					display: flex;
-					justify-content: center;
-					align-items: center;
 					border: 1px solid;
 					padding-inline: 8px;
 					border-radius: 7px;
 					gap: 3px;
 					opacity: 0.6;
+					font-size: 0.9em;
+					font-weight: 900;
+
+					.expand,
+					.contract {
+						font-size: 0.9em;
+						letter-spacing: -2px;
+					}
 
 					&.closed .contract {
 						display: none;
@@ -415,6 +426,7 @@ body {
 						& > div {
 							flex: 1;
 							display: flex;
+							align-items: center;
 							justify-content: space-between;
 						}
 						& > .attack {
