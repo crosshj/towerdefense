@@ -280,6 +280,16 @@ const allUnits = {
 		hp: 15000,
 		attack: 200,
 		range: 200
+	},
+	'u0001-2-roboto': {
+		displayName: 'Roboto',
+		element: 'Normal',
+		type: 'Intelligence',
+		rank: 2,
+		mineralCost: 200,
+		hp: 20000,
+		attack: 300,
+		range: 300
 	}
 };
 
