@@ -119,6 +119,7 @@ const vertical = async (args) => {
 	}
 
 	let drawClickCanvas;
+	let handleTap;
 	if (clickMap && clickHandle) {
 		const bgClickMap = await loadImage(clickMap);
 		const bgClickCanvas = document.createElement('canvas');
@@ -129,7 +130,7 @@ const vertical = async (args) => {
 				bgClickMap,
 				offsetY
 			});
-		function handleTap(event) {
+		handleTap = (event) => {
 			const rect = canvas.getBoundingClientRect();
 			const x = event.clientX - rect.left;
 			const y = event.clientY - rect.top;
@@ -140,8 +141,7 @@ const vertical = async (args) => {
 				drawClickCanvas: () => drawClickCanvas(bgClickCanvas)
 			});
 			clickHandle(whichItem);
-		}
-		canvas.addEventListener('pointerdown', handleTap);
+		};
 	}
 
 	const draw = () => {
@@ -201,6 +201,9 @@ const vertical = async (args) => {
 		handleScroll({ deltaY });
 	});
 	canvas.addEventListener('pointerup', (event) => {
+		//TODO: was this a tap or a drag?
+		handleTap && handleTap(event);
+
 		if (!isTouching) return;
 		isTouching = false;
 		applyInertia();
@@ -245,6 +248,7 @@ const horizontal = async (args) => {
 	let offsetX = args.offsetX || 0;
 
 	let drawClickCanvas;
+	let handleTap;
 	if (clickMap && clickHandle) {
 		const bgClickMap = await loadImage(clickMap);
 		const bgClickCanvas = document.createElement('canvas');
@@ -256,7 +260,7 @@ const horizontal = async (args) => {
 				bgClickMap,
 				offsetX
 			});
-		function handleTap(event) {
+		handleTap = (event) => {
 			const rect = canvas.getBoundingClientRect();
 			const x = event.clientX - rect.left;
 			const y = event.clientY - rect.top;
@@ -267,8 +271,7 @@ const horizontal = async (args) => {
 				drawClickCanvas: () => drawClickCanvas(bgClickCanvas)
 			});
 			clickHandle(whichItem);
-		}
-		canvas.addEventListener('pointerdown', handleTap);
+		};
 	}
 
 	const draw = () => {
@@ -337,6 +340,9 @@ const horizontal = async (args) => {
 		handleScroll({ deltaX });
 	});
 	canvas.addEventListener('pointerup', (event) => {
+		//TODO: was this a tap or a drag?
+		handleTap && handleTap(event);
+
 		if (!isTouching) return;
 		isTouching = false;
 		applyInertia();
