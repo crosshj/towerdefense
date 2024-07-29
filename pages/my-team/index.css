@@ -5,6 +5,7 @@ body {
 	margin: 0;
 	padding: 0;
 	overscroll-behavior: none;
+	user-select: none;
 }
 
 .background {
@@ -302,7 +303,7 @@ body {
 
 		&:not(.used) {
 			.icon img {
-				touch-action: non;
+				touch-action: none;
 			}
 		}
 

@@ -16,10 +16,10 @@ export const handlePointerEvents = (args) => {
 		isDragging = false;
 
 		// Prevent default drag behavior
-		//e.preventDefault();
+		e.preventDefault();
 
 		// Capture pointer events
-		//element.setPointerCapture(e.pointerId);
+		element.setPointerCapture(e.pointerId);
 
 		const onPointerMove = (e) => {
 			if (isUsed) return;
@@ -37,6 +37,7 @@ export const handlePointerEvents = (args) => {
 			if (!dragImage && pointerWithinGrandparent) return;
 
 			const parent = e.target.closest('.character-card');
+			if (!parent) return;
 			if (!dragImage) {
 				dragImage = parent.querySelector('.icon img').cloneNode(true);
 				dragImage.style.zoom = 1;

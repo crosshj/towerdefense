@@ -43,6 +43,7 @@ body {
 }
 
 .container {
+	user-select: none;
 	position: fixed;
 	top: 2vh;
 	bottom: -1vh;
