@@ -210,16 +210,17 @@ const allUnits = {
 		defense: '317 - 2,736 - 6,401',
 		range: 1000
 	},
-	// Openhyman
+	// Openhyman - like https://rangers.lerico.net/en/ranger/u064e-lucas
 	'u0001-4-watashi': {
 		displayName: 'Openhyman',
 		element: 'Normal',
 		type: 'Agility',
 		rank: 4,
-		mineralCost: 150,
-		hp: 20000,
-		attack: 15,
-		range: 520
+		mineralCost: 540,
+		attack: '340 - 2,447 - 5,953',
+		hp: '3,132 - 22,340 - 54,324',
+		defense: '33 - 278 - 680',
+		range: 486
 	},
 	'u0001-1-benny': {
 		displayName: 'Benny Lava',
