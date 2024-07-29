@@ -270,6 +270,16 @@ const allUnits = {
 		hp: 25000,
 		attack: 250,
 		range: 800
+	},
+	'u0001-2-ogre': {
+		displayName: 'Ogre',
+		element: 'Darkness',
+		type: 'Strength',
+		rank: 2,
+		mineralCost: 100,
+		hp: 15000,
+		attack: 200,
+		range: 200
 	}
 };
 
