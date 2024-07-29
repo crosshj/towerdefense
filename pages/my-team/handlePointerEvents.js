@@ -23,7 +23,6 @@ export const handlePointerEvents = (args) => {
 
 		const onPointerMove = (e) => {
 			if (isUsed) return;
-			e.preventDefault();
 			const grandparent = element.closest('.all-characters');
 			if (!grandparent) return;
 
@@ -38,6 +37,8 @@ export const handlePointerEvents = (args) => {
 
 			const parent = e.target.closest('.character-card');
 			if (!parent) return;
+
+			e.preventDefault();
 			if (!dragImage) {
 				dragImage = parent.querySelector('.icon img').cloneNode(true);
 				dragImage.style.zoom = 1;
@@ -70,7 +71,10 @@ export const handlePointerEvents = (args) => {
 
 		const onPointerUp = (e) => {
 			if (!isDragging) {
-				if (typeof onTap === 'function') {
+				const outsideThreshold =
+					Math.abs(e.clientX - startX) > scrollThreshold ||
+					Math.abs(e.clientY - startY) > scrollThreshold;
+				if (!outsideThreshold && typeof onTap === 'function') {
 					onTap(e);
 				}
 			} else {
