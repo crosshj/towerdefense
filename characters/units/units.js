@@ -322,6 +322,28 @@ const allUnits = {
 		hp: 10000,
 		defense: 0,
 		range: 400
+	},
+	'u0001-4-pineman': {
+		displayName: 'Pineman',
+		element: 'Normal',
+		type: 'Intelligence',
+		rank: 4,
+		mineralCost: 180,
+		attack: 200,
+		hp: 10000,
+		defense: 0,
+		range: 400
+	},
+	'u0001-4-aynstine': {
+		displayName: 'Aynstine',
+		element: 'Normal',
+		type: 'Intelligence',
+		rank: 4,
+		mineralCost: 180,
+		attack: 200,
+		hp: 10000,
+		defense: 0,
+		range: 400
 	}
 };
 
