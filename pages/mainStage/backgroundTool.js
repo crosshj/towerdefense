@@ -1,13 +1,13 @@
 const stageDetails = [
-	{ name: 'Final Realm', color: '#8B008B' }, // DarkMagenta
+	{ name: 'Mythical Pantheon', color: '#8B008B' }, // DarkMagenta
 	{ name: 'Industrial Complex', color: '#556B2F' }, // Dark Olive Green
 	{ name: 'Frozen Tundra', color: '#B0C4DE' }, // Light Steel Blue (lighter and greyer)
 	{ name: 'Thunder Oasis', color: '#FFD700' }, // Gold (less saturated)
 	{ name: 'Tropical Graveyard', color: '#9370DB' }, // Medium Purple (less saturated)
-	{ name: 'Highlands', color: '#A9A9A9' }, // DarkGray
+	{ name: 'Rocky Highlands', color: '#A9A9A9' }, // DarkGray
 	{ name: 'Sakura', color: '#FFB6C1' }, // LightPink
 	{ name: 'Coastal', color: '#00BFFF' }, // DeepSkyBlue
-	{ name: 'Forest', color: '#228B22' }, // ForestGreen
+	{ name: 'Forest Path', color: '#228B22' }, // ForestGreen
 	{ name: 'Meadow', color: '#98FB98' } // PaleGreen
 ];
 
@@ -440,15 +440,15 @@ const onLoaded = () => {
 			const color = numberToColor(i);
 			let url = 'url';
 			if (i <= 10) url = 'openField-' + i;
-			if (i <= 20 && i > 10) url = 'openField-' + i; //TODO: 'forest'
+			if (i <= 20 && i > 10) url = 'forest-' + i; //TODO: 'forest'
 			if (i <= 30 && i > 20) url = 'water-' + i;
 			if (i <= 40 && i > 30) url = 'sakura-' + i;
-			if (i <= 50 && i > 40) url = 'sakura-' + i; //TODO: highlands
-			if (i <= 60 && i > 50) url = 'tropicalGraveyard-' + i;
-			if (i <= 70 && i > 60) url = 'tropicalGraveyard-' + i; // TODO: thunderOasis
-			if (i <= 80 && i > 70) url = 'haunted-' + i; // TODO: tundra
-			if (i <= 90 && i > 80) url = 'haunted-' + i; // TODO: industrial
-			if (i <= 100 && i > 90) url = 'haunted-' + i; // TODO: final realm
+			if (i <= 50 && i > 40) url = 'highlands-' + i; //TODO: highlands
+			if (i <= 60 && i > 50) url = 'tropical-' + i;
+			if (i <= 70 && i > 60) url = 'oasis-' + i; // TODO: thunderOasis
+			if (i <= 80 && i > 70) url = 'tundra-' + i; // TODO: tundra
+			if (i <= 90 && i > 80) url = 'industrial-' + i; // TODO: industrial
+			if (i <= 100 && i > 90) url = 'pantheon-' + i; // TODO: final realm
 			clicks[color] = url;
 		}
 		window.clicks = clicks;

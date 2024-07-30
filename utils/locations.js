@@ -1,24 +1,34 @@
 export const getLocationMap = async () => {
 	const locationMap = {
-		tropicalGraveyard: {
-			title: 'STAGE 1',
-			name: 'Tropical Graveyard'
-		},
 		openField: {
-			title: 'STAGE 2',
 			name: 'Open Field'
 		},
+		forest: {
+			name: 'Forest Path'
+		},
 		water: {
-			title: 'STAGE 3',
-			name: 'Water Zone'
+			name: 'Coastal Region'
 		},
 		sakura: {
-			title: 'STAGE 4',
 			name: 'Sakura'
 		},
-		haunted: {
-			title: 'STAGE 5',
-			name: 'Haunted Mansion'
+		highlands: {
+			name: 'Rocky Highlands'
+		},
+		tropical: {
+			name: 'Tropical Graveyard'
+		},
+		oasis: {
+			name: 'Thunder Oasis'
+		},
+		tundra: {
+			name: 'Frozen Tundra'
+		},
+		industrial: {
+			name: 'Industrial Complex'
+		},
+		pantheon: {
+			name: 'Mystical Pantheon'
 		}
 	};
 	return locationMap;

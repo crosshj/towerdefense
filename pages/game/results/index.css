@@ -10,17 +10,6 @@ body {
 	--dark-bar-top: 37%;
 }
 
-/* body:after {
-	content: 'TODO';
-	position: fixed;
-	left: 21%;
-	top: 23%;
-	font-size: 200px;
-	font-weight: 900;
-	opacity: 0.05;
-	transform: rotate(-36deg);
-} */
-
 .background {
 	background: url(./bg.png);
 	background-size: 100% 100%;

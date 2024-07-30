@@ -8,6 +8,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 	const locationMap = await getLocationMap();
 	const location = locationMap[params.zone];
+	if (params?.number) {
+		location.title = 'STAGE ' + params.number;
+	}
+
 	window.parent.postMessage({
 		_: 'stats',
 		feathers: true,

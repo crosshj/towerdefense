@@ -1,9 +1,14 @@
 const stageMap = {
-	tropicalGraveyard1: './main/tropical1.js',
+	openField1: './main/field1.js',
+	forest1: './main/forest1.js',
+	water1: './main/water1.js',
 	sakura1: './main/sakura1.js',
-	haunted1: './main/ghost1.js',
-	water1: './main/ocean1.js',
-	openField1: './main/field1.js'
+	highlands1: './main/highlands1.js',
+	tropical1: './main/tropical1.js',
+	oasis1: './main/oasis1.js',
+	tundra1: './main/tundra1.js',
+	industrial1: './main/industrial1.js',
+	pantheon1: './main/pantheon1.js'
 };
 
 export const getStage = async (params) => {
