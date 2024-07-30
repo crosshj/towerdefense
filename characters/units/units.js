@@ -66,6 +66,7 @@ const allUnits = {
 		defense: '317 - 2,736 - 6,401',
 		range: 1000
 	},
+	// like https://rangers.lerico.net/en/ranger/u032e-ron
 	'u0001-4-antonio': {
 		displayName: 'Antonio',
 		element: 'Bug',
@@ -77,6 +78,7 @@ const allUnits = {
 		defense: '43 - 337 - 823',
 		range: 600
 	},
+	// like https://rangers.lerico.net/en/ranger/u032e-ron
 	'u0001-4-bumpier': {
 		displayName: 'Bumpier',
 		element: 'Dark',
@@ -88,6 +90,7 @@ const allUnits = {
 		defense: '43 - 337 - 823',
 		range: 600
 	},
+	// like https://rangers.lerico.net/en/ranger/u032e-ron
 	'u0001-4-tabi': {
 		displayName: 'Tabi-Tabi Po',
 		element: 'Earth',
@@ -99,6 +102,7 @@ const allUnits = {
 		defense: '43 - 337 - 823',
 		range: 600
 	},
+	// like https://rangers.lerico.net/en/ranger/u13-lia
 	'u0001-5-electopus': {
 		displayName: 'Electopus',
 		element: 'Electric',
@@ -111,6 +115,7 @@ const allUnits = {
 		defense: '317 - 2,736 - 6,401',
 		range: 1000
 	},
+	// like https://rangers.lerico.net/en/ranger/u13-lia
 	'u0001-5-santelmo': {
 		displayName: 'Santelmo',
 		element: 'Fire',
@@ -122,6 +127,7 @@ const allUnits = {
 		defense: '317 - 2,736 - 6,401',
 		range: 1000
 	},
+	// like https://rangers.lerico.net/en/ranger/u13-lia
 	'u0001-5-multo': {
 		displayName: 'Multo',
 		element: 'Ghost',
@@ -133,6 +139,7 @@ const allUnits = {
 		defense: '317 - 2,736 - 6,401',
 		range: 1000
 	},
+	// like https://rangers.lerico.net/en/ranger/u13-lia
 	'u0001-5-kelvin': {
 		displayName: 'Kelvin',
 		element: 'Ice',
@@ -144,6 +151,7 @@ const allUnits = {
 		defense: '317 - 2,736 - 6,401',
 		range: 1000
 	},
+	// like https://rangers.lerico.net/en/ranger/u13-lia
 	'u0001-5-blanko': {
 		displayName: 'Blanko',
 		element: 'Normal',
@@ -155,6 +163,7 @@ const allUnits = {
 		defense: '317 - 2,736 - 6,401',
 		range: 1000
 	},
+	// like https://rangers.lerico.net/en/ranger/u13-lia
 	'u0001-5-prickles': {
 		displayName: 'Prickles',
 		element: 'Plant',
@@ -166,6 +175,7 @@ const allUnits = {
 		defense: '317 - 2,736 - 6,401',
 		range: 1000
 	},
+	// like https://rangers.lerico.net/en/ranger/u13-lia
 	'u0001-5-crack9': {
 		displayName: 'Bumba',
 		element: 'Poison',
@@ -177,6 +187,7 @@ const allUnits = {
 		defense: '317 - 2,736 - 6,401',
 		range: 1000
 	},
+	// like https://rangers.lerico.net/en/ranger/u13-lia
 	'u0001-5-robia': {
 		displayName: 'Robia',
 		element: 'Psychic',
@@ -188,6 +199,7 @@ const allUnits = {
 		defense: '317 - 2,736 - 6,401',
 		range: 1000
 	},
+	// like https://rangers.lerico.net/en/ranger/u13-lia
 	'u0001-5-barbell': {
 		displayName: 'Barbell',
 		element: 'Steel',
@@ -199,6 +211,7 @@ const allUnits = {
 		defense: '317 - 2,736 - 6,401',
 		range: 1000
 	},
+	// like https://rangers.lerico.net/en/ranger/u13-lia
 	'u0001-5-wap': {
 		displayName: 'Wap Wap',
 		element: 'Water',
@@ -228,8 +241,9 @@ const allUnits = {
 		type: 'Agility',
 		rank: 1,
 		mineralCost: 100,
-		hp: 20000,
 		attack: 100,
+		hp: 20000,
+		defense: 0,
 		range: 700
 	},
 	'u0001-4-slabb': {
@@ -238,8 +252,9 @@ const allUnits = {
 		type: 'Strength',
 		rank: 4,
 		mineralCost: 200,
-		hp: 30000,
 		attack: 100,
+		hp: 30000,
+		defense: 0,
 		range: 625
 	},
 	'u0001-4-crimson': {
@@ -248,8 +263,9 @@ const allUnits = {
 		type: 'Agility',
 		rank: 4,
 		mineralCost: 150,
-		hp: 40000,
 		attack: 300,
+		hp: 40000,
+		defense: 0,
 		range: 425
 	},
 	'u0001-4-violet': {
@@ -258,8 +274,9 @@ const allUnits = {
 		type: 'Intelligence',
 		rank: 4,
 		mineralCost: 150,
-		hp: 20000,
 		attack: 200,
+		hp: 20000,
+		defense: 0,
 		range: 1000
 	},
 	'u0001-3-rose': {
@@ -268,8 +285,9 @@ const allUnits = {
 		type: 'Agility',
 		rank: 3,
 		mineralCost: 150,
-		hp: 25000,
 		attack: 250,
+		hp: 25000,
+		defense: 0,
 		range: 800
 	},
 	'u0001-2-ogre': {
@@ -278,8 +296,9 @@ const allUnits = {
 		type: 'Strength',
 		rank: 2,
 		mineralCost: 100,
-		hp: 15000,
 		attack: 200,
+		hp: 15000,
+		defense: 0,
 		range: 200
 	},
 	'u0001-2-roboto': {
@@ -288,8 +307,9 @@ const allUnits = {
 		type: 'Intelligence',
 		rank: 2,
 		mineralCost: 200,
-		hp: 20000,
 		attack: 300,
+		hp: 20000,
+		defense: 0,
 		range: 300
 	}
 };

@@ -1,5 +1,15 @@
 I'm making a game and starting with Line Rangers style.
 
+### Development Tools
+
+-   characters: http://127.0.0.1:8000/characters/test/index.html
+-   main stage map: http://127.0.0.1:8000/pages/mainStage/backgroundTool.html
+-   audio: http://127.0.0.1:8000/test/audio.html
+-   experience: http://127.0.0.1:8000/test/experience.html
+-   render: http://127.0.0.1:8000/test/render.html
+-   assets: http://127.0.0.1:8000/test/assets.html
+-   sprites: http://127.0.0.1:8000/characters/test/sprites/index.html
+
 ### What I like about LR:
 
 -   visuals (except would prefer less cute)
