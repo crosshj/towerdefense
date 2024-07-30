@@ -311,6 +311,17 @@ const allUnits = {
 		hp: 20000,
 		defense: 0,
 		range: 300
+	},
+	'u0001-4-boar': {
+		displayName: 'Boar',
+		element: 'Normal',
+		type: 'Intelligence',
+		rank: 4,
+		mineralCost: 180,
+		attack: 200,
+		hp: 10000,
+		defense: 0,
+		range: 400
 	}
 };
 
