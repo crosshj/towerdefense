@@ -1,21 +1,5 @@
-import { htmlToElement } from '../../../.tools/misc.mjs';
+import { append } from '../utils/htmlToElement.js';
 import { loadAssets } from '../visuals/assets/assets.js';
-
-const append = (html) => {
-	const el = htmlToElement(html);
-	document.body.append(el);
-	return el;
-};
-
-append(`
-	<style>
-		body { padding: 3em 0.5em; color: #777; }
-		/*body { background: #123851; }*/
-		img { width: 100%; max-height: 200px; }
-		img {object-fit: contain; object-position: left; }
-		img, canvas { image-rendering: pixelated; }
-	</style>
-`);
 
 const testSlices = async () => {
 	const { images } = await loadAssets({ root: '../' });
