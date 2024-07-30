@@ -35,6 +35,9 @@ const registerServiceWorker = async () => {
 const updateCache = async () => {
 	if (!navigator.serviceWorker.controller) {
 		console.log('service worker not available');
+		setTimeout(() => {
+			document.location.reload();
+		}, 5000);
 		return;
 	}
 	navigator.serviceWorker.controller.postMessage({
