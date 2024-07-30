@@ -20,11 +20,23 @@ const registerServiceWorker = async () => {
 	}
 	console.log('Service Worker registered with scope:', registration.scope);
 
+	// FAILSAFE: make sure progress is happening
+	let currentProgress = 0;
+	let previousProgress = 0;
+	setInterval(() => {
+		if (currentProgress === previousProgress) {
+			document.location.reload();
+		}
+	}, 5000);
+
 	// Listen for progress updates from the service worker
 	navigator.serviceWorker.addEventListener('message', (event) => {
 		if (event.data.type === 'progress') {
 			const progressBar = document.getElementById('progress-bar');
 			progressBar.value = event.data.progress;
+			previousProgress = currentProgress;
+			currentProgress = event.data.progress;
+
 			progressBar.classList.remove('hidden');
 			if (event.data.progress === 100) {
 				window.parent.postMessage({
