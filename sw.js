@@ -7,16 +7,28 @@ const cacheFiles = async (event) => {
 	let cachedCount = 0;
 
 	for (let i = 0; i < filesToCache.length; i++) {
-		await cache.add(filesToCache[i]);
-		cachedCount++;
-		const progress = (cachedCount / filesToCache.length) * 100;
-		const clients = await self.clients.matchAll();
-		clients.forEach((client) => {
-			client.postMessage({
-				type: 'progress',
-				progress: progress
+		try {
+			const response = await fetch(filesToCache[i]);
+			if (!response.ok) {
+				throw new Error(
+					`Request for ${filesToCache[i]} failed with status ${response.status}`
+				);
+			}
+			await cache.put(filesToCache[i], response.clone());
+			cachedCount++;
+			const progress = (cachedCount / filesToCache.length) * 100;
+			const clients = await self.clients.matchAll();
+			clients.forEach((client) => {
+				client.postMessage({
+					type: 'progress',
+					progress: progress
+				});
 			});
-		});
+		} catch (error) {
+			console.error(
+				`Failed to cache ${filesToCache[i]}: ${error.message}`
+			);
+		}
 	}
 };
 
