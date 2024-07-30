@@ -42,7 +42,7 @@ const assets = [
 	'/assets/character/FighterBase/skins/1-benny_tex.png',
 	'/assets/character/FighterBase/skins/1-macho_tex.png',
 	'/assets/character/FighterBase/skins/2-ogre_tex.png',
-	'/assets/character/FighterBase/skins/2-roboto_tex.png',
+	'/assets/character/FighterBase/skins/2-jet_tex.png',
 	'/assets/character/FighterBase/skins/2-toto_tex.png',
 	'/assets/character/FighterBase/skins/3-rose_tex.png',
 	'/assets/character/FighterBase/skins/3-twinkle_tex.png',
