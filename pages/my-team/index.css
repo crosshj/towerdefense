@@ -303,7 +303,7 @@ body {
 
 		&:not(.used) {
 			.icon img {
-				touch-action: none;
+				touch-action: pan-x;
 			}
 		}
 

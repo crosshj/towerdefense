@@ -84,7 +84,7 @@ export const handlePointerEvents = (args) => {
 			}
 			if (dragImage) {
 				document.body.removeChild(dragImage);
-				dragImage = null;
+				dragImage = undefined;
 			}
 
 			// Release pointer capture and remove the listeners
@@ -95,6 +95,11 @@ export const handlePointerEvents = (args) => {
 
 		document.body.addEventListener('pointermove', onPointerMove);
 		document.body.addEventListener('pointerup', onPointerUp);
+	});
+
+	element.addEventListener('pointerup', (e) => {
+		if (isDragging) return;
+		onTap && onTap(e);
 	});
 
 	element.addEventListener('dragstart', (e) => {

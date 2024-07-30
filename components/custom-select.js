@@ -20,8 +20,9 @@ option {
     background-color: var(--select-closed-bg-color, var(--select-bg-color, ${$style.selectedBg}));
     border-radius: var(--select-border-radius, ${$style.borderRadius});
     border: 1px solid var(--select-border-color, currentColor);
-    padding: 10px;
+	padding-block: var(--select-items-py, 8px);
     cursor: pointer;
+	padding-left: 10px;
 	padding-right: 32px;
 }
 .select-selected:after {
@@ -153,8 +154,8 @@ class CustomSelect extends HTMLElement {
 			itemsContainer.classList.toggle('select-hide');
 			selectedElement.classList.toggle('select-arrow-active');
 		};
-		selectedElement.addEventListener('pointerdown', selectListener);
-		this.listeners.push([selectedElement, 'pointerdown', selectListener]);
+		selectedElement.addEventListener('pointerup', selectListener);
+		this.listeners.push([selectedElement, 'pointerup', selectListener]);
 
 		items.forEach((item) => {
 			const listener = (e) => {
@@ -171,11 +172,11 @@ class CustomSelect extends HTMLElement {
 				selectedElement.classList.remove('select-arrow-active');
 				this.dispatchEvent(new Event('change'));
 			};
-			item.addEventListener('pointerdown', listener);
-			this.listeners.push([item, 'pointerdown', listener]);
+			item.addEventListener('pointerup', listener);
+			this.listeners.push([item, 'pointerup', listener]);
 		});
 
-		document.addEventListener('pointerdown', () => this.closeAllSelect());
+		document.addEventListener('pointerup', () => this.closeAllSelect());
 	}
 
 	closeAllSelect(element) {
