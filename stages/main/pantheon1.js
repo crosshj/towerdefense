@@ -12,7 +12,6 @@ export const getRewards = async () => {
 			tornado: { type: 'effect', probability: 0.5 },
 			invincible: { type: 'effect', probability: 0.5 },
 			'u0001-4-violet': { type: 'char', probability: 0.3 },
-			'u0001-1-benny': { type: 'char', probability: 0.3 },
 			'u0001-2-ogre': { type: 'char', probability: 0.3 }
 		}
 	};
