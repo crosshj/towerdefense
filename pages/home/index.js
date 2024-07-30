@@ -235,6 +235,7 @@ const setup = async () => {
 		height: 500,
 		clickMap: '/pages/home/background_clicks.png',
 		clickHandle: (color) => {
+			console.log('canvas clicked on!!!');
 			const which = clickColorMap[color];
 			if (!which) {
 				console.log(color);
@@ -256,3 +257,21 @@ const setup = async () => {
 };
 
 document.addEventListener('DOMContentLoaded', setup);
+
+const windowFocused = (e) => {
+	console.log(`this iframe just got focus: ${e.clientX} - ${e.clientY}`);
+	const canvasEl = document.body.querySelector('canvas');
+	canvasEl.focus();
+	canvasEl.dispatchEvent(
+		new MouseEvent('click', { bubbles: true, cancelable: true })
+	);
+};
+window.addEventListener('focus', windowFocused, true);
+document.body.addEventListener('pointerup', (e) => {
+	console.log(`this iframe just got clicked: ${e.clientX} - ${e.clientY}`);
+});
+
+const windowBlured = () => {
+	console.log('this iframe just got blurred');
+};
+window.addEventListener('blur', windowBlured, true);

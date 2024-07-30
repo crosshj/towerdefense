@@ -68,10 +68,15 @@ function closeModal() {
 	if (!modalIframe) return false;
 	modalIframe.remove();
 	setTimeout(() => {
-		// console.log(document.activeElement);
-		document.querySelector('body > iframe').contentWindow.focus();
-		// document.body.focus();
-		// console.log(document.activeElement);
+		const mainIframe = document.querySelector('body > iframe');
+		if (!mainIframe) return;
+		console.log('Before focus:', document.activeElement);
+		mainIframe.contentWindow.focus();
+		mainIframe.contentWindow.dispatchEvent(new Event('focus'));
+		const iframeDocument =
+			mainIframe.contentDocument || mainIframe.contentWindow.document;
+		iframeDocument.body.focus();
+		console.log('After focus:', document.activeElement);
 	}, 300);
 	return true;
 }
@@ -103,7 +108,7 @@ function navigate(args = {}) {
 		}
 	}, FADE_MS);
 }
-document.body.addEventListener('mousedown', async (event) => {
+document.body.addEventListener('pointerdown', async (event) => {
 	if (event.target.classList.contains('back-button')) {
 		closeModal();
 		return navigate({ src: whereIsBack });
