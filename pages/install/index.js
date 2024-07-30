@@ -65,7 +65,9 @@ const updateCache = async () => {
 const attachUpdateCacheButton = () => {
 	const cacheButton = document.getElementById('updateCacheButton');
 	if (!cacheButton) {
-		updateCache();
+		setTimeout(() => {
+			updateCache();
+		}, 1000);
 		return;
 	}
 	cacheButton.addEventListener('click', updateCache);
