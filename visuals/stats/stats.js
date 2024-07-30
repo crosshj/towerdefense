@@ -23,25 +23,25 @@ export const statsElement = async (args) => {
         <div class="${statsClass}">
             ${ feathers ? `
             <div class="feathers clickable">
-                F: <span class="amount">${withCommas(userStats.feathers)}</span><span class="featherTotal">/${40 || userStats.feathersMax} max</span>
+                <span class="amount">${withCommas(userStats.feathers)}</span><span class="featherTotal">/${40 || userStats.feathersMax} max</span>
             </div>
             `:''}
 
             ${ gems ? `
             <div class="gems clickable">
-                G: <span class="amount">${43 || userStats.gems}</span>
+                <span class="amount">${43 || userStats.gems}</span>
             </div>
             `:''}
 
             ${ coins ? `
             <div class="coins clickable">
-                C: <span class="amount">${'715,624' || userStats.coins}</span>
+                <span class="amount">${'715,624' || userStats.coins}</span>
             </div>
             `:''}
 
             ${ friendPoints ? `
             <div class="friends clickable">
-                FP: <span class="amount">${80 || userStats.friendPoints}</span>
+                <span class="amount">${80 || userStats.friendPoints}</span>
             </div>
             `:''}
         </div>

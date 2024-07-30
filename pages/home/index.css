@@ -34,17 +34,35 @@
 		justify-content: space-between;
 		.level {
 			--background-height: 50px;
-			--background-color: grey;
+			--background-color: #6c3b02;
 			margin-right: 10px;
 			display: flex;
-			.background {
-				width: 10px;
+
+			.background,
+			.user {
+				box-sizing: border-box;
 				height: var(--background-height);
 				background-color: var(--background-color);
+				border-radius: 7px;
+				border: 2px solid #1d1000;
 			}
-
+			.background {
+				width: 10px;
+				border-top-right-radius: 0;
+				border-bottom-right-radius: 0;
+				border-right: 0;
+				box-shadow: inset 4px 0 0px #ffffff2e /* highlight */,
+					0 3px 0px #00000033 /* main drop shadow */;
+			}
 			.banner {
-				width: 53px;
+				height: fit-content;
+
+				border-top: 3px solid black;
+				box-sizing: border-box;
+				border-top-right-radius: 3px;
+				border-top-left-radius: 3px;
+				margin-top: -4px;
+
 				--flag-color: grey;
 				&.normal {
 					--flag-color: #e1cc07;
@@ -65,37 +83,43 @@
 				&.legend {
 					--flag-color: #333;
 				}
-				& > div {
-					display: flex;
-					flex-direction: column;
-					align-items: center;
-					background-color: var(--flag-color);
-					width: 100%;
-					padding: 3px;
-					box-sizing: border-box;
-					margin-top: -1px;
-					line-height: 16px;
-				}
-				.grade {
-					font-size: 10px;
-					text-transform: uppercase;
-					height: 15px;
-					padding-top: 1px;
-				}
-				.progress {
-					height: 12px;
-					.progressContainer {
-						border-radius: 5px;
-						overflow: hidden;
-						background: #0006;
+				.border-container {
+					width: 53px;
+					border-left: 2px solid #00000087;
+					border-right: 2px solid #00000087;
+					/* box-sizing: border-box; */
+
+					& > div {
+						display: flex;
+						flex-direction: column;
+						align-items: center;
+						background-color: var(--flag-color);
 						width: 100%;
-						height: 100%;
-						.progressBar {
-							background: limegreen;
+						padding: 3px;
+						box-sizing: border-box;
+						margin-top: -1px;
+						line-height: 16px;
+					}
+					.grade {
+						font-size: 10px;
+						text-transform: uppercase;
+						height: 15px;
+						padding-top: 1px;
+					}
+					.progress {
+						height: 12px;
+						.progressContainer {
+							border-radius: 5px;
+							overflow: hidden;
+							background: #0006;
+							width: 100%;
 							height: 100%;
-						}
-						/* prettier-ignore */
-						.progressBar {
+							.progressBar {
+								background: limegreen;
+								height: 100%;
+							}
+							/* prettier-ignore */
+							.progressBar {
 							&.progress-0   { width: 0%; }
 							&.progress-10  { width: 10%; }
 							&.progress-20  { width: 20%; }
@@ -108,45 +132,60 @@
 							&.progress-90  { width: 90%; }
 							&.progress-100 { width: 100%; }
 						}
+						}
 					}
-				}
-				.levelLabel {
-					text-transform: uppercase;
-					& > span {
-						opacity: 0.7;
+					.levelLabel {
+						text-transform: uppercase;
+						& > span {
+							opacity: 0.7;
+						}
 					}
-				}
-				.levelNumber {
-					font-size: 24px;
-					font-weight: 900;
-					& > span {
-						opacity: 0.8;
+					.levelNumber {
+						font-size: 24px;
+						font-weight: 900;
+						& > span {
+							opacity: 0.8;
+						}
 					}
 				}
 				.bottom {
 					width: 100%;
-					height: 15px;
+					height: 25px;
 					padding: 0;
 					background-color: transparent;
 					svg {
 						fill: var(--flag-color);
 						width: 100%;
 						height: 100%;
+						.bottom-border {
+							stroke-width: 4;
+							stroke: #1e1202;
+						}
+						.shadow {
+							stroke-width: 20;
+							stroke: #00000033;
+						}
 					}
 				}
 			}
 			.user {
 				display: flex;
 				align-items: center;
+				justify-content: center;
+				padding-left: 3px;
 				width: 55px;
-				height: var(--background-height);
-				background-color: var(--background-color);
+				border-left: 0;
+				border-top-left-radius: 0;
+				border-bottom-left-radius: 0;
+				box-shadow: inset -1px 0 0px 2px #ffffff20 /* highlight */,
+					0 3px 0px #00000033 /* main drop shadow */;
 				.image {
-					margin-left: auto;
-					margin-right: 5px;
-					width: 40px;
-					height: 40px;
+					border-radius: 7px;
+					width: 38px;
+					height: 38px;
 					background: lightblue;
+					box-shadow: inset 0 0 5px 0px black, 0 0 6px 0px #ffffff8c,
+						inset 0 0 2px black;
 				}
 			}
 		}
@@ -206,11 +245,19 @@
 		grid-area: navigation;
 		display: flex;
 		justify-content: center;
-		gap: 15px;
+		gap: 12px;
 
 		.wip {
 			background-color: #794301;
 			color: #fcd14d;
+		}
+
+		& > div:not(.settings) {
+			border: 2px solid #1d1000;
+			box-shadow: inset 0 -9px hsl(33 98% 14% / 1),
+				inset 0 -11px 4px hsl(33 98% 35% / 1);
+			padding-bottom: 15px;
+			font-weight: 700;
 		}
 
 		& > div {
@@ -235,10 +282,22 @@
 			line-height: 27px;
 			margin-top: auto;
 			background: #737070;
-			color: #c3c2c2;
+			border-color: rgb(35, 44, 61);
 			text-shadow: 2px 4px 0px #454545;
 			border: 1px solid #131212;
 			margin-right: -35px;
+			padding: 0;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			svg {
+				width: 25px;
+				height: 25px;
+				fill: rgb(252, 251, 252);
+				.outline {
+					flood-color: rgb(68, 77, 79);
+				}
+			}
 		}
 	}
 }
