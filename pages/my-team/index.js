@@ -83,6 +83,8 @@ const characterUpdater =
 
 document.addEventListener('DOMContentLoaded', async () => {
 	let switchTeam, updateCharacters;
+	let draggingEl;
+
 	window.parent.postMessage({
 		_: 'title',
 		title: 'TEAM',
@@ -152,7 +154,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 	//subteam switch
 	const teamSwitch = document.querySelector('.team-switch');
-	teamSwitch.addEventListener('pointerdown', () => {
+	teamSwitch.addEventListener('pointerup', () => {
 		const children = Array.from(teamSwitch.children);
 		for (const child of children) {
 			child.classList.toggle('selected');
@@ -170,7 +172,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 			slot.classList.remove('blank');
 			slot.dataset.id = char.id;
 		}
-		slot.addEventListener('pointerdown', () => {
+		slot.addEventListener('pointerup', () => {
+			if (draggingEl) return;
 			if (!slot.dataset.id) return;
 			const src = `/modals/character/detail.html?id=${slot.dataset.id}`;
 			window.parent.postMessage({
@@ -180,7 +183,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 		});
 	});
 
-	let draggingEl;
 	function dragStart(e) {
 		const parent = e.target.closest('.character-card');
 		if (parent.classList.contains('used')) {
@@ -211,6 +213,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 		draggingEl.classList.remove('dragging');
 		const { id } = draggingEl;
 		draggingEl = undefined;
+		if (!slot) return;
 		slot.dataset.id = id;
 		const char = characters.find((x) => x.id === id);
 
@@ -236,7 +239,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 		characters
 	});
 
-	document.body.addEventListener('pointerdown', (event) => {
+	document.body.addEventListener('pointerup', (event) => {
 		// console.log(event.target);
 		if (event.target.classList.contains('back-button')) {
 			// window.fadingNavigate(params.back || '/');

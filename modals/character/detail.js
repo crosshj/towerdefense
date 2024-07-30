@@ -85,7 +85,7 @@ const updateValues = async ({ params, nodeTree }) => {
 };
 
 const attachHandlers = (nodeTree) => {
-	nodeTree.container.closeButton.addEventListener('pointerdown', () => {
+	nodeTree.container.closeButton.addEventListener('pointerup', () => {
 		window.parent.postMessage({
 			_: 'navigate'
 		});

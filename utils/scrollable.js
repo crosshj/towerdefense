@@ -261,7 +261,6 @@ const horizontal = async (args) => {
 				offsetX
 			});
 		handleTap = (event) => {
-			console.log('scrollable: handle tap');
 			const rect = canvas.getBoundingClientRect();
 			const x = event.clientX - rect.left;
 			const y = event.clientY - rect.top;
@@ -324,7 +323,6 @@ const horizontal = async (args) => {
 
 	canvas.style.touchAction = 'none';
 	canvas.addEventListener('pointerdown', (event) => {
-		console.log('horiz scrollable pointerdown');
 		isTouching = true;
 		touchStartX = event.clientX;
 		velocity = 0;
@@ -342,7 +340,6 @@ const horizontal = async (args) => {
 		handleScroll({ deltaX });
 	});
 	canvas.addEventListener('pointerup', (event) => {
-		console.log('horiz scrollable pointerdown');
 		//TODO: was this a tap or a drag?
 		handleTap && handleTap(event);
 

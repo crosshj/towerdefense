@@ -71,7 +71,7 @@ const createTopControls = ({
 	`;
 
 	const pauseButton = top.querySelector('.pause.button');
-	pauseButton.addEventListener('pointerdown', () => {
+	pauseButton.addEventListener('pointerup', () => {
 		// pauseButton.innerText = state.paused ? 'I I' : '▶';
 		// pauseButton.style.backgroundColor = state.paused ? '' : '#478347';
 		// pauseButton.style.color = state.paused ? '' : 'white';
@@ -83,7 +83,7 @@ const createTopControls = ({
 	if (state.auto) {
 		autoButton.classList.add('active');
 	}
-	autoButton.addEventListener('pointerdown', () => {
+	autoButton.addEventListener('pointerup', () => {
 		if (state.auto) {
 			autoButton.classList.remove('active');
 		} else {
@@ -93,7 +93,7 @@ const createTopControls = ({
 	});
 
 	const effectsContainer = top.querySelector('.effects');
-	effectsContainer.addEventListener('pointerdown', (e) => {
+	effectsContainer.addEventListener('pointerup', (e) => {
 		const { effect = 'none' } = e?.target?.dataset;
 		if (effect === 'none') return;
 		if (effect === 'teamSwitch' && !e.target.classList.contains('p-100')) {
@@ -168,7 +168,7 @@ const createBottomControls = ({ root, state }) => {
 	const missileButtonProgress = bottom.querySelector(
 		'.missile.button .progress'
 	);
-	missileButton.addEventListener('pointerdown', () => {
+	missileButton.addEventListener('pointerup', () => {
 		if (!missileButtonProgress.classList.contains(`p-100`)) return;
 		state.actions.missileFire();
 	});
@@ -179,7 +179,7 @@ const createBottomControls = ({ root, state }) => {
 	const mineralButtonLevelIndicator = bottom.querySelector(
 		'.mineral.button .levelIndicator'
 	);
-	mineralButton.addEventListener('pointerdown', () => {
+	mineralButton.addEventListener('pointerup', () => {
 		if (!mineralButtonProgress.classList.contains(`p-100`)) return;
 		state.actions.mineralLevel({
 			updateLevel: (levelNumber) => {
@@ -289,7 +289,7 @@ const createBottomControls = ({ root, state }) => {
 		}
 	};
 
-	bottom.addEventListener('pointerdown', (e) => {
+	bottom.addEventListener('pointerup', (e) => {
 		const { target } = e;
 		if (target.classList.contains('team')) {
 			const isLocked =

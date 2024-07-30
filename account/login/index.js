@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 	const contentDiv = document.getElementById('content');
 	const retryButton = document.getElementById('retry');
 
-	retryButton.addEventListener('pointerdown', () => {
+	retryButton.addEventListener('pointerup', () => {
 		errorMessage.style.display = 'none';
 		contentDiv.style.display = 'block';
 	});

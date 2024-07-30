@@ -108,7 +108,7 @@ function navigate(args = {}) {
 		}
 	}, FADE_MS);
 }
-document.body.addEventListener('pointerdown', async (event) => {
+document.body.addEventListener('pointerup', async (event) => {
 	if (event.target.classList.contains('back-button')) {
 		closeModal();
 		return navigate({ src: whereIsBack });

@@ -80,7 +80,7 @@ const setupActionLogin = ({ gameStarted }) => {
 	} else {
 		button.classList.add('secondary');
 	}
-	button.addEventListener('pointerdown', () => {
+	button.addEventListener('pointerup', () => {
 		sessionStorage.setItem('SESSION_ACTIVE', 'true');
 		window.parent.postMessage({
 			_: 'navigate',
@@ -95,7 +95,7 @@ const setupActionSignUp = ({ gameStarted }) => {
 	} else {
 		button.classList.add('main');
 	}
-	button.addEventListener('pointerdown', () => {
+	button.addEventListener('pointerup', () => {
 		window.parent.postMessage({
 			_: 'navigate',
 			src: '/account/signup/index.html'

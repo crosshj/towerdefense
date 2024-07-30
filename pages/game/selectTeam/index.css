@@ -230,6 +230,7 @@ button {
 				border-color: currentColor;
 			}
 			custom-select {
+				margin-top: -10px;
 				--select-bg-color: #cfd4d7;
 				--select-border-color: #202944;
 				--select-border-radius: 7px;
@@ -239,7 +240,7 @@ button {
 				--select-width: 190px;
 				--select-active-bg-color: #afc4d0;
 				--select-active-color: #333;
-				--select-items-py: 5px;
+				--select-items-py: 8px;
 				--select-closed-bg-color: #cfd4d7;
 			}
 		}
