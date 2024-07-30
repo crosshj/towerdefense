@@ -96,7 +96,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 	const params = Object.fromEntries(
 		new URLSearchParams(window.location.search)
 	);
+	const container = document.querySelector('.container ');
 	populateNodeTree(nodeTree);
 	attachHandlers(nodeTree);
 	await updateValues({ nodeTree, params });
+	container.classList.remove('loading');
 });
