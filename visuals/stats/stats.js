@@ -14,30 +14,34 @@ export const statsElement = async (args) => {
 
 	const userStats = await getStats();
 
+	const withCommas = (number) => {
+		return `2<span class="comma-span">,</span>529`;
+	};
+
 	//prettier-ignore
 	container.outerHTML = `
         <div class="${statsClass}">
             ${ feathers ? `
             <div class="feathers clickable">
-                F: ${userStats.feathers}/${userStats.feathersMax} max
+                F: <span class="amount">${withCommas(userStats.feathers)}</span><span class="featherTotal">/${40 || userStats.feathersMax} max</span>
             </div>
             `:''}
 
             ${ gems ? `
             <div class="gems clickable">
-                G: ${userStats.gems}
+                G: <span class="amount">${43 || userStats.gems}</span>
             </div>
             `:''}
 
             ${ coins ? `
             <div class="coins clickable">
-                C: ${userStats.coins}
+                C: <span class="amount">${'715,624' || userStats.coins}</span>
             </div>
             `:''}
 
             ${ friendPoints ? `
             <div class="friends clickable">
-                FP: ${userStats.friendPoints}
+                FP: <span class="amount">${80 || userStats.friendPoints}</span>
             </div>
             `:''}
         </div>

@@ -1,12 +1,59 @@
 .stats {
 	display: flex;
 	color: white;
+	zoom: 0.85;
+
 	& > div {
-		background: #3b3b3b;
+		display: flex;
+		align-items: center;
+		background: rgb(18 33 50);
 		padding-inline: 16px;
 		margin-left: 10px;
 		border-radius: 20px;
-		padding-block: 4px;
+		padding-block: 3px;
 		min-width: 50px;
+		font-size: 15px;
+		letter-spacing: 1.025px;
+		border: 2px solid black;
+		font-family: monospace;
+		box-shadow: inset 0 -1px #152532, 0 3px 0px #00000033;
+
+		.amount {
+			text-align: right;
+		}
+
+		.comma-span {
+			font-family: sans-serif;
+			width: 4px;
+			display: inline-block;
+			margin-left: -1px;
+		}
+
+		&.feathers {
+			.amount {
+				margin-top: -2px;
+				color: #faf006;
+				text-shadow: 0 2px 2px #faf006aa;
+			}
+			.featherTotal {
+				color: #858d9f;
+			}
+		}
+		&.coins {
+			.amount {
+				font-size: 0.75em;
+				min-width: 90px;
+			}
+		}
+		&.friends {
+			.amount {
+				min-width: 40px;
+			}
+		}
+		&.gems {
+			.amount {
+				min-width: 40px;
+			}
+		}
 	}
 }
