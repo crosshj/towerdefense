@@ -6,7 +6,11 @@ const registerServiceWorker = async () => {
 		return;
 	}
 	const registration = navigator.serviceWorker
-		.register('/sw.js')
+		.register('/sw.js', {
+			scope: '/',
+			type: 'module',
+			updateViaCache: 'none'
+		})
 		.catch((error) => {
 			console.log('Service Worker registration failed:', error);
 		});
