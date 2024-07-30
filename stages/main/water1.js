@@ -13,7 +13,7 @@ export const getRewards = async () => {
 			invincible: { type: 'effect', probability: 0.5 },
 			'u0001-5-crack9': { type: 'char', probability: 0.1 },
 			'u0001-4-crimson': { type: 'char', probability: 0.3 },
-			'u0001-2-roboto': { type: 'char', probability: 0.2 }
+			'u0001-2-jet': { type: 'char', probability: 0.2 }
 		}
 	};
 };

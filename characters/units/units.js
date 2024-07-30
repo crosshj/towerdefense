@@ -301,8 +301,8 @@ const allUnits = {
 		defense: 0,
 		range: 200
 	},
-	'u0001-2-roboto': {
-		displayName: 'Roboto',
+	'u0001-2-jet': {
+		displayName: 'Jet',
 		element: 'Normal',
 		type: 'Intelligence',
 		rank: 2,
