@@ -346,6 +346,18 @@ const allUnits = {
 		range: 520
 	},
 
+	'u0001-1-pete': {
+		displayName: 'Pete',
+		element: 'Normal',
+		type: 'Agility',
+		rank: 1,
+		mineralCost: 200,
+		attack: '67-238-752',
+		hp: '530 - 1,803 - 5,657',
+		defense: '65-236-749',
+		range: 300
+	},
+
 	//DEPRECATE!!! (use u0001-4-openhyman one instead)
 	'u0001-4-watashi': {
 		displayName: 'Openhyman',
