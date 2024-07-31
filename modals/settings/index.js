@@ -63,6 +63,10 @@ const attachSettings = async () => {
 			console.log('service worker not available');
 			return;
 		}
+		if (!(await notificationPermitted())) {
+			console.log('You must enable notifications.');
+			return;
+		}
 		navigator.serviceWorker.controller.postMessage({
 			type: 'testNotification'
 		});
