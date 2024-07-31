@@ -1,3 +1,5 @@
+let bgCanvas;
+
 const loadImage = async (url) => {
 	let img = new Image();
 	return new Promise((r) => {
@@ -145,6 +147,8 @@ const vertical = async (args) => {
 	}
 
 	const draw = () => {
+		//TODO: onDraw
+
 		//ctx.clearRect(0, 0, canvas.width, canvas.height);
 		ctx.drawImage(
 			background,
@@ -275,10 +279,15 @@ const horizontal = async (args) => {
 	}
 
 	const draw = () => {
-		const bgCanvas = document.createElement('canvas');
-		bgCanvas.width = background.width;
-		bgCanvas.height = background.height;
+		if (!bgCanvas) {
+			bgCanvas = document.createElement('canvas');
+			bgCanvas.width = background.width;
+			bgCanvas.height = background.height;
+		}
 		const bgCtx = bgCanvas.getContext('2d');
+		bgCtx.imageSmoothingEnabled = true;
+		bgCtx.imageSmoothingQuality = 'high';
+
 		bgCtx.drawImage(background, 0, 0, background.width, background.height);
 
 		if (onDraw) {
