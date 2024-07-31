@@ -9,55 +9,55 @@ export const stageCharacterDrops = {
 	forest1: {
 		'u0001-4-antonio': { type: 'char', probability: 0.1 },
 		'u0001-5-prickles': { type: 'char', probability: 0.1 },
-		'u0001-4-openhyman': { type: 'char', probability: 0.3 }
+		'u0001-4-openhyman': { type: 'char', probability: 0.4 }
 	},
 	// coastal: water, normal, flying
 	water1: {
 		'u0001-5-wap': { type: 'char', probability: 0.1 },
 		'u0001-2-jet': { type: 'char', probability: 0.1 },
-		'u0001-4-pineman': { type: 'char', probability: 0.3 }
+		'u0001-4-pineman': { type: 'char', probability: 0.4 }
 	},
 	// grass, fighting, dragon
 	sakura1: {
 		'u0001-1-macho': { type: 'char', probability: 0.1 },
-		'u0001-4-boar': { type: 'char', probability: 0.3 }
+		'u0001-4-boar': { type: 'char', probability: 0.4 }
 	},
 	// rock, ground, fighting
 	highlands1: {
 		'u0001-4-tabi': { type: 'char', probability: 0.1 },
-		'u0001-2-toto': { type: 'char', probability: 0.1 }
+		'u0001-2-toto': { type: 'char', probability: 0.4 }
 		// poor buddy problems #5 here!
 	},
 	// tropical graveyard: ghost, dark, grass
 	tropical1: {
 		'u0001-4-multo': { type: 'char', probability: 0.1 },
 		'u0001-4-bumpier': { type: 'char', probability: 0.1 },
-		'u0001-2-ogre': { type: 'char', probability: 0.3 }
+		'u0001-2-ogre': { type: 'char', probability: 0.4 }
 	},
 	// thunder oasis: electric, ground, rock, fire
 	oasis1: {
 		'u0001-5-electopus': { type: 'char', probability: 0.1 },
 		'u0001-5-santelmo': { type: 'char', probability: 0.1 },
 		'u0001-1-benny': { type: 'char', probability: 0.3 },
-		'u0001-3-rose': { type: 'char', probability: 0.3 }
+		'u0001-3-rose': { type: 'char', probability: 0.4 }
 	},
 	// ice, water, ground
 	tundra1: {
 		'u0001-5-kelvin': { type: 'char', probability: 0.1 },
 		'u0001-4-slabb': { type: 'char', probability: 0.2 },
-		'u0001-4-violet': { type: 'char', probability: 0.3 }
+		'u0001-4-violet': { type: 'char', probability: 0.4 }
 	},
 	// steel, poison, electric
 	industrial1: {
 		'u0001-5-barbell': { type: 'char', probability: 0.1 },
 		'u0001-5-crack9': { type: 'char', probability: 0.1 },
-		'u0001-2-jet': { type: 'char', probability: 0.3 }
+		'u0001-2-jet': { type: 'char', probability: 0.4 }
 	},
 	// dragon, fairy, psychic
 	pantheon1: {
 		'u0001-5-robia': { type: 'char', probability: 0.1 },
 		'u0001-3-twinkle': { type: 'char', probability: 0.1 },
 		'u0001-5-drat': { type: 'char', probability: 0.2 },
-		'u0001-4-crimson': { type: 'char', probability: 0.3 }
+		'u0001-4-crimson': { type: 'char', probability: 0.4 }
 	}
 };
