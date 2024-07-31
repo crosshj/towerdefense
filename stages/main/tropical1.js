@@ -1,3 +1,5 @@
+import { stageCharacterDrops } from './.drops.js';
+
 export const getRewards = async () => {
 	return {
 		coins: 4000,
@@ -11,8 +13,7 @@ export const getRewards = async () => {
 			ice: { type: 'effect', probability: 0.5 },
 			tornado: { type: 'effect', probability: 0.5 },
 			invincible: { type: 'effect', probability: 0.5 },
-			'u0001-4-slabb': { type: 'char', probability: 0.3 },
-			'u0001-4-watashi': { type: 'char', probability: 0.2 }
+			...stageCharacterDrops.tropical1
 		}
 	};
 };

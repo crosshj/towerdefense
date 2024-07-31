@@ -223,18 +223,6 @@ const allUnits = {
 		defense: '317 - 2,736 - 6,401',
 		range: 1000
 	},
-	// Openhyman - like https://rangers.lerico.net/en/ranger/u064e-lucas
-	'u0001-4-watashi': {
-		displayName: 'Openhyman',
-		element: 'Normal',
-		type: 'Agility',
-		rank: 4,
-		mineralCost: 540,
-		attack: '340 - 2,447 - 5,953',
-		hp: '3,132 - 22,340 - 54,324',
-		defense: '33 - 278 - 680',
-		range: 486
-	},
 	'u0001-1-benny': {
 		displayName: 'Benny Lava',
 		element: 'Fire',
@@ -248,7 +236,7 @@ const allUnits = {
 	},
 	'u0001-4-slabb': {
 		displayName: 'Slabb',
-		element: 'Poison',
+		element: 'Ice',
 		type: 'Strength',
 		rank: 4,
 		mineralCost: 200,
@@ -292,7 +280,7 @@ const allUnits = {
 	},
 	'u0001-2-ogre': {
 		displayName: 'Ogre',
-		element: 'Darkness',
+		element: 'Dark',
 		type: 'Strength',
 		rank: 2,
 		mineralCost: 100,
@@ -311,6 +299,18 @@ const allUnits = {
 		hp: 20000,
 		defense: 0,
 		range: 300
+	},
+	// Openhyman - like https://rangers.lerico.net/en/ranger/u064e-lucas
+	'u0001-4-openhyman': {
+		displayName: 'Openhyman',
+		element: 'Normal',
+		type: 'Agility',
+		rank: 4,
+		mineralCost: 540,
+		attack: '340 - 2,447 - 5,953',
+		hp: '3,132 - 22,340 - 54,324',
+		defense: '33 - 278 - 680',
+		range: 486
 	},
 	'u0001-4-boar': {
 		displayName: 'Boar',
@@ -344,7 +344,21 @@ const allUnits = {
 		hp: 20000,
 		defense: 0,
 		range: 520
+	},
+
+	//DEPRECATE!!! (use u0001-4-openhyman one instead)
+	'u0001-4-watashi': {
+		displayName: 'Openhyman',
+		element: 'Normal',
+		type: 'Agility',
+		rank: 4,
+		mineralCost: 540,
+		attack: '340 - 2,447 - 5,953',
+		hp: '3,132 - 22,340 - 54,324',
+		defense: '33 - 278 - 680',
+		range: 486
 	}
+	// ^^^ DEPRECATE
 };
 
 export const listAvailableUnits = () => {
