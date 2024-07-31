@@ -345,6 +345,7 @@ const allUnits = {
 		defense: 0,
 		range: 520
 	},
+
 	// link https://rangers.lerico.net/en/ranger/u18-ben
 	'u0001-1-pete': {
 		displayName: 'Pete',
@@ -356,6 +357,19 @@ const allUnits = {
 		hp: '530 - 1,803 - 5,657',
 		defense: '65-236-749',
 		range: 300
+	},
+
+	// https://rangers.lerico.net/en/ranger/u205e-zac
+	'u0001-2-coco': {
+		displayName: 'Coco',
+		element: 'Normal',
+		type: 'Strength',
+		rank: 2,
+		mineralCost: 240,
+		attack: '49-252-706',
+		hp: '1,104 - 5,106 - 14,159',
+		defense: '235 - 1,105 - 3,069',
+		range: 150
 	},
 
 	//DEPRECATE!!! (use u0001-4-openhyman one instead)
