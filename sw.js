@@ -1,3 +1,7 @@
+/*
+ chrome://inspect/#service-workers
+*/
+
 const cacheFiles = async (event) => {
 	const filesToCache = event.data.files;
 	// maybe get this from the event?
@@ -46,6 +50,12 @@ self.addEventListener('message', async (event) => {
 	if (event?.data?.type === 'updateCache') {
 		await cacheFiles(event);
 	}
+	if (event?.data?.type === 'testNotification') {
+		self.registration.showNotification('Test Notification', {
+			body: 'This is a test notification from TD!',
+			icon: 'assets/towerDefenseIcon.png'
+		});
+	}
 });
 
 self.addEventListener('fetch', (event) => {
@@ -78,4 +88,18 @@ self.addEventListener('fetch', (event) => {
 	// 		});
 	// 	})
 	// );
+});
+
+self.addEventListener('push', (event) => {
+	let data;
+	try {
+		data = event.data.json();
+	} catch (e) {
+		data = { title: 'Notification', body: event.data.text() };
+	}
+
+	self.registration.showNotification(data.title, {
+		body: data.body,
+		icon: 'assets/towerDefenseIcon.png'
+	});
 });

@@ -23,8 +23,15 @@ const registerServiceWorker = async () => {
 	// FAILSAFE: make sure progress is happening
 	let currentProgress = 0;
 	let previousProgress = 0;
+	const timeline = {};
 	setInterval(() => {
 		if (currentProgress === previousProgress) {
+			document.location.reload();
+		}
+		timeline[currentProgress] = timeline[currentProgress] || 0;
+		timeline[currentProgress]++;
+		const stuck = timeline[currentProgress] > 10;
+		if (stuck) {
 			document.location.reload();
 		}
 	}, 5000);
