@@ -53,7 +53,8 @@ self.addEventListener('message', async (event) => {
 	if (event?.data?.type === 'testNotification') {
 		self.registration.showNotification('Test Notification', {
 			body: 'This is a test notification from TD!',
-			icon: 'assets/towerDefenseIcon.png'
+			icon: 'assets/towerDefenseIconTransparent.png',
+			data: { url: 'https://teedee.us' }
 		});
 	}
 });
@@ -100,6 +101,27 @@ self.addEventListener('push', (event) => {
 
 	self.registration.showNotification(data.title, {
 		body: data.body,
-		icon: 'assets/towerDefenseIcon.png'
+		icon: 'assets/towerDefenseIconTransparent.png',
+		data: { url: 'https://teedee.us' }
 	});
+});
+
+self.addEventListener('notificationclick', function (event) {
+	event.notification.close();
+	const { url = 'https://teedee.us' } = event?.notification?.data || {};
+	event.waitUntil(
+		clients.matchAll({ type: 'window' }).then((windowClients) => {
+			// Check if there is already a window/tab open with the target URL
+			for (let i = 0; i < windowClients.length; i++) {
+				const client = windowClients[i];
+				if (client.url === url && 'focus' in client) {
+					return client.focus();
+				}
+			}
+			// If not, open a new window/tab
+			if (clients.openWindow) {
+				return clients.openWindow(url);
+			}
+		})
+	);
 });

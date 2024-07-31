@@ -18,39 +18,45 @@ const registerServiceWorker = async () => {
 		console.log('unable to register service worker');
 		return;
 	}
-	console.log('Service Worker registered with scope:', registration.scope);
+	console.log('Service Worker registered');
 
 	// FAILSAFE: make sure progress is happening
 	let currentProgress = 0;
 	let previousProgress = 0;
 	const timeline = {};
-	setInterval(() => {
+	const failsafeInterval = setInterval(() => {
+		if (currentProgress === 100) {
+			clearInterval(failsafeInterval);
+			return;
+		}
+		// should not stay stuck on 0
 		if (currentProgress === previousProgress) {
 			document.location.reload();
 		}
+		// should spend no longer than 30 seconds on one progress state
 		timeline[currentProgress] = timeline[currentProgress] || 0;
 		timeline[currentProgress]++;
-		const stuck = timeline[currentProgress] > 10;
+		const stuck = timeline[currentProgress] > 6;
 		if (stuck) {
 			document.location.reload();
 		}
 	}, 5000);
 
-	// Listen for progress updates from the service worker
 	navigator.serviceWorker.addEventListener('message', (event) => {
-		if (event.data.type === 'progress') {
-			const progressBar = document.getElementById('progress-bar');
-			progressBar.value = event.data.progress;
-			previousProgress = currentProgress;
-			currentProgress = event.data.progress;
+		if (event.data.type !== 'progress') return;
 
-			progressBar.classList.remove('hidden');
-			if (event.data.progress === 100) {
-				window.parent.postMessage({
-					_: 'navigate',
-					src: '/pages/startup/index.html'
-				});
-			}
+		const progressBar = document.getElementById('progress-bar');
+		progressBar.value = event.data.progress;
+		previousProgress = currentProgress;
+		currentProgress = event.data.progress;
+
+		progressBar.classList.remove('hidden');
+		if (event.data.progress === 100) {
+			clearInterval(failsafeInterval);
+			window.parent.postMessage({
+				_: 'navigate',
+				src: '/pages/startup/index.html'
+			});
 		}
 	});
 };
