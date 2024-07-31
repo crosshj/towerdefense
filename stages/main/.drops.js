@@ -30,7 +30,7 @@ export const stageCharacterDrops = {
 	},
 	// tropical graveyard: ghost, dark, grass
 	tropical1: {
-		'u0001-4-multo': { type: 'char', probability: 0.1 },
+		'u0001-5-multo': { type: 'char', probability: 0.1 },
 		'u0001-4-bumpier': { type: 'char', probability: 0.1 },
 		'u0001-2-ogre': { type: 'char', probability: 0.4 }
 	},
