@@ -345,7 +345,7 @@ const allUnits = {
 		defense: 0,
 		range: 520
 	},
-
+	// link https://rangers.lerico.net/en/ranger/u18-ben
 	'u0001-1-pete': {
 		displayName: 'Pete',
 		element: 'Normal',
