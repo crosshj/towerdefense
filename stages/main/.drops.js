@@ -3,6 +3,7 @@ export const stageCharacterDrops = {
 	field1: {
 		'u0001-5-blanko': { type: 'char', probability: 0.1 },
 		'u0001-4-vispi': { type: 'char', probability: 0.1 },
+		'u0001-1-pete': { type: 'char', probability: 0.2 },
 		'u0001-4-aynstine': { type: 'char', probability: 0.4 }
 	},
 	// grass, bug, normal
