@@ -2,6 +2,18 @@ import { getSettings, setSettings } from '../../user/settings.js';
 import { getUser } from '../../user/user.js';
 import { getVersionString } from './version.js';
 
+const notificationPermitted = async () => {
+	if ('Notification' in window && navigator.serviceWorker) {
+		if (Notification.permission === 'granted') {
+			return true;
+		} else if (Notification.permission !== 'denied') {
+			const permission = await Notification.requestPermission();
+			return permission === 'granted';
+		}
+	}
+	return false;
+};
+
 const attachSettings = async () => {
 	const settings = await getSettings();
 
@@ -36,10 +48,25 @@ const attachSettings = async () => {
 	for (const alert of alerts) {
 		const el = document.getElementById(`setting-${alert}`);
 		el.checked = settings[alert];
-		el.addEventListener('change', function () {
+		el.addEventListener('change', async function () {
+			if (this.checked && !(await notificationPermitted())) {
+				el.checked = false;
+				return;
+			}
 			setSettings({ [alert]: this.checked });
 		});
 	}
+
+	const testAlertButton = document.querySelector('.testAlert');
+	testAlertButton.addEventListener('pointerup', async () => {
+		if (!navigator.serviceWorker.controller) {
+			console.log('service worker not available');
+			return;
+		}
+		navigator.serviceWorker.controller.postMessage({
+			type: 'testNotification'
+		});
+	});
 };
 
 const updateVersionString = () => {
