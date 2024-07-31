@@ -54,6 +54,7 @@ self.addEventListener('message', async (event) => {
 		self.registration.showNotification('Test Notification', {
 			body: 'This is a test notification from TD!',
 			icon: 'assets/towerDefenseIconTransparent.png',
+			tag: 'teedee', //will replace other notifications with this tag
 			data: { url: 'https://teedee.us' }
 		});
 	}
@@ -102,6 +103,7 @@ self.addEventListener('push', (event) => {
 	self.registration.showNotification(data.title, {
 		body: data.body,
 		icon: 'assets/towerDefenseIconTransparent.png',
+		tag: 'teedee', //will replace other notifications with this tag
 		data: { url: 'https://teedee.us' }
 	});
 });
