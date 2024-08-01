@@ -371,17 +371,17 @@ const allUnits = {
 		defense: '235 - 1,105 - 3,069',
 		range: 150
 	},
-
+	// https://rangers.lerico.net/en/ranger/u73-xan
 	'u0001-5-bibly': {
 		displayName: 'Bibly',
-		element: 'Dark',
+		element: 'Fairy',
 		type: 'Agility',
 		rank: 5,
-		mineralCost: 240,
-		attack: '49-252-706',
-		hp: '1,104 - 5,106 - 14,159',
-		defense: '235 - 1,105 - 3,069',
-		range: 150
+		mineralCost: 830,
+		attack: '603 - 5,087 - 11,893',
+		hp: '2,241 - 18,820 - 43,992',
+		defense: '499 - 4,216 - 9,857',
+		range: 500
 	},
 
 	//DEPRECATE!!! (use u0001-4-openhyman one instead)
