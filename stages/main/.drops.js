@@ -13,11 +13,12 @@ export const stageCharacterDrops = {
 		'u0001-5-prickles': { type: 'char', probability: 0.1 },
 		'u0001-4-openhyman': { type: 'char', probability: 0.4 }
 	},
-	// coastal: water, normal, flying
+	// coastal: water, normal, flying(air)
 	water1: {
 		'u0001-5-wap': { type: 'char', probability: 0.1 },
 		'u0001-2-jet': { type: 'char', probability: 0.1 },
-		'u0001-4-pineman': { type: 'char', probability: 0.4 }
+		'u0001-4-pineman': { type: 'char', probability: 0.4 },
+		'u0001-2-tom': { type: 'char', probability: 0.4 }
 	},
 	// grass, fighting, dragon
 	sakura1: {

@@ -396,9 +396,35 @@ const allUnits = {
 		range: 500
 	},
 
+	// this character is a base for other characters
+	'u0001-0-guide': {
+		displayName: 'DO_NOT_USE',
+		element: 'Steel',
+		type: 'Intelligence',
+		rank: 0,
+		mineralCost: 180,
+		attack: '62 - 294 - 817',
+		hp: '639 - 2,959 - 8,206',
+		defense: '75 - 365 - 1,017',
+		range: 500
+	},
+
+	// https://rangers.lerico.net/en/ranger/u76-brownie
+	'u0001-2-tom': {
+		displayName: 'Major Tom',
+		element: 'Air',
+		type: 'Strength',
+		rank: 2,
+		mineralCost: 100,
+		attack: '109 - 375 - 1,179',
+		hp: '360 - 1,215 - 3,807',
+		defense: '247 - 855 - 2,691',
+		range: 30 * 5
+	},
+
 	//DEPRECATE!!! (use u0001-4-openhyman one instead)
 	'u0001-4-watashi': {
-		displayName: 'Openhyman',
+		displayName: '(DEPRECATE)',
 		element: 'Normal',
 		type: 'Agility',
 		rank: 4,
