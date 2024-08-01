@@ -53,6 +53,7 @@ export const stageCharacterDrops = {
 	industrial1: {
 		'u0001-5-barbell': { type: 'char', probability: 0.1 },
 		'u0001-5-crack9': { type: 'char', probability: 0.1 },
+		'u0001-2-zerosix': { type: 'char', probability: 0.2 },
 		'u0001-2-jet': { type: 'char', probability: 0.4 }
 	},
 	// dragon, fairy, psychic,
