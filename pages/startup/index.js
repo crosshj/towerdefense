@@ -118,7 +118,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 		feathers: false,
 		gems: false,
 		coins: false,
-		friendPoints: false
+		friendPoints: false,
+		menu: false
 	});
 	window.parent.postMessage({
 		_: 'title',
