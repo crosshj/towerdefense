@@ -55,10 +55,11 @@ export const stageCharacterDrops = {
 		'u0001-5-crack9': { type: 'char', probability: 0.1 },
 		'u0001-2-jet': { type: 'char', probability: 0.4 }
 	},
-	// dragon, fairy, psychic
+	// dragon, fairy, psychic,
 	pantheon1: {
 		'u0001-5-robia': { type: 'char', probability: 0.1 },
 		'u0001-3-twinkle': { type: 'char', probability: 0.1 },
+		'u0001-5-bibly': { type: 'char', probability: 0.3 },
 		'u0001-5-drat': { type: 'char', probability: 0.2 },
 		'u0001-4-crimson': { type: 'char', probability: 0.4 }
 	}
