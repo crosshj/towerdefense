@@ -108,10 +108,23 @@ function navigate(args = {}) {
 		}
 	}, FADE_MS);
 }
+
+const handleClickable = async (e) => {
+	const classList = Array.from(e.target.classList).filter(
+		(x) => x !== 'clickable'
+	);
+	console.log('handle click', classList);
+	const src = `/modals/_wip/index.html`;
+	showModal({ src });
+};
+
 document.body.addEventListener('pointerup', async (event) => {
 	if (event.target.classList.contains('back-button')) {
 		closeModal();
 		return navigate({ src: whereIsBack });
+	}
+	if (event.target.classList.contains('clickable')) {
+		return await handleClickable(event);
 	}
 });
 

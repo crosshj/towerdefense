@@ -39,7 +39,8 @@ document.addEventListener('DOMContentLoaded', function () {
 			feathers: false,
 			gems: false,
 			coins: false,
-			friendPoints: false
+			friendPoints: false,
+			menu: false
 		});
 		window.parent.postMessage({
 			_: 'title',

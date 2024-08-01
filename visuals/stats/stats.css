@@ -1,10 +1,47 @@
 .stats {
 	display: flex;
 	color: white;
-	padding-right: 20px;
+	padding-right: 10px;
 	zoom: 0.85;
 
-	& > div {
+	.clickable {
+		pointer-events: all;
+		& > * {
+			pointer-events: none;
+		}
+	}
+
+	.menu {
+		--button-width: 55px;
+		--button-height: 50px;
+		margin-left: 27px;
+		margin-right: -17px;
+		width: var(--button-width);
+		position: relative;
+		.menuContainer {
+			position: absolute;
+			left: 0;
+			top: -8px;
+			svg {
+				width: var(--button-width);
+				height: var(--button-height);
+				path.main {
+					fill: rgb(85, 187, 218);
+					stroke-width: 23px;
+					stroke: rgb(0, 0, 0);
+				}
+				path.arrowDown {
+					stroke: rgb(255, 255, 255);
+					fill: none;
+					stroke-linecap: round;
+					stroke-width: 45px;
+					stroke-linejoin: round;
+				}
+			}
+		}
+	}
+
+	& > div:not(.menu) {
 		display: flex;
 		align-items: center;
 		background: rgb(18 33 50);
@@ -55,7 +92,7 @@
 
 		&.feathers {
 			.amount {
-				margin-top: -2px;
+				margin-top: -1px;
 				color: #faf006;
 				text-shadow: 0 2px 2px #faf006aa;
 			}

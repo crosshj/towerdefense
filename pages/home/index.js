@@ -142,7 +142,9 @@ const drawControls = async () => {
 			</div>
 		</div>
 	`;
-	statsRequest();
+	statsRequest({
+		menu: false
+	});
 
 	const setUserImage = () => {
 		const userImageEl = container.querySelector('.user .image');
