@@ -36,11 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	if (window.parent) {
 		window.parent.postMessage({
 			_: 'stats',
-			feathers: false,
-			gems: false,
-			coins: false,
-			friendPoints: false,
-			menu: false
+			visibility: 'hidden'
 		});
 		window.parent.postMessage({
 			_: 'title',

@@ -115,11 +115,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 	window.parent.postMessage({
 		_: 'stats',
-		feathers: false,
-		gems: false,
-		coins: false,
-		friendPoints: false,
-		menu: false
+		visibility: 'hidden'
 	});
 	window.parent.postMessage({
 		_: 'title',

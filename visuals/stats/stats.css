@@ -15,9 +15,24 @@
 		--button-width: 55px;
 		--button-height: 50px;
 		margin-left: 27px;
-		margin-right: -17px;
+		margin-right: -13px;
 		width: var(--button-width);
 		position: relative;
+
+		&.open {
+			.menuContainer {
+				svg {
+					color: red;
+					g.closeX {
+						opacity: 1;
+					}
+					path.arrowDown {
+						opacity: 0;
+					}
+				}
+			}
+		}
+
 		.menuContainer {
 			position: absolute;
 			left: 0;
@@ -25,17 +40,23 @@
 			svg {
 				width: var(--button-width);
 				height: var(--button-height);
+				color: rgb(85, 187, 218);
 				path.main {
-					fill: rgb(85, 187, 218);
+					filter: drop-shadow(0 40px 10px rgba(0, 0, 0, 0.25));
 					stroke-width: 23px;
 					stroke: rgb(0, 0, 0);
 				}
-				path.arrowDown {
+				path.arrowDown,
+				g.closeX {
 					stroke: rgb(255, 255, 255);
+					filter: drop-shadow(0 20px 10px rgba(0, 0, 0, 0.25));
 					fill: none;
 					stroke-linecap: round;
 					stroke-width: 45px;
 					stroke-linejoin: round;
+				}
+				g.closeX {
+					opacity: 0;
 				}
 			}
 		}

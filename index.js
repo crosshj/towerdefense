@@ -67,6 +67,8 @@ function closeModal() {
 	const modalIframe = document.querySelector('iframe.modal');
 	if (!modalIframe) return false;
 	modalIframe.remove();
+	document.body.dispatchEvent(new CustomEvent('modalClose'));
+
 	setTimeout(() => {
 		const mainIframe = document.querySelector('body > iframe');
 		if (!mainIframe) return;
@@ -113,6 +115,12 @@ const handleClickable = async (e) => {
 	const classList = Array.from(e.target.classList).filter(
 		(x) => x !== 'clickable'
 	);
+	if (classList.includes('menu')) {
+		showModal({
+			src: `/modals/menu/index.html`
+		});
+		return;
+	}
 	console.log('handle click', classList);
 	const src = `/modals/_wip/index.html`;
 	showModal({ src });

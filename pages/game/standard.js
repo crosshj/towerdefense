@@ -9,10 +9,7 @@ const onLoaded = () => {
 
 	window.parent.postMessage({
 		_: 'stats',
-		feathers: false,
-		gems: false,
-		coins: false,
-		friendPoints: false
+		visibility: 'hidden'
 	});
 	window.parent.postMessage({
 		_: 'title',

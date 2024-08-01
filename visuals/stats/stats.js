@@ -1,13 +1,15 @@
 import { getStats } from '../../user/stats.js';
+import { menuButton } from './components.js';
 
 export const statsElement = async (args) => {
+	const isHidden = args?.visibility === 'hidden';
 	const {
 		container,
-		feathers = true,
-		gems = true,
-		coins = true,
-		friendPoints = true,
-		menu = true
+		feathers = !isHidden,
+		gems = !isHidden,
+		coins = !isHidden,
+		friendPoints = !isHidden,
+		menu = !isHidden
 	} = args;
 
 	container.classList.add('stats');
@@ -37,47 +39,56 @@ export const statsElement = async (args) => {
 
             ${ gems ? `
             <div class="gems clickable">
-                <span class="amount">${withCommas(userStats.gems)}</span>
+                <span class="amount">
+                    ${withCommas(userStats.gems)}
+                </span>
             </div>
             `:''}
 
             ${ coins ? `
             <div class="coins clickable">
-                <span class="amount">${withCommas(userStats.coins)}</span>
+                <span class="amount">
+                    ${withCommas(userStats.coins)}
+                </span>
             </div>
             `:''}
 
             ${ friendPoints ? `
             <div class="friends clickable">
-                <span class="amount">${withCommas(userStats.friendPoints)}</span>
+                <span class="amount">
+                    ${withCommas(userStats.friendPoints)}
+                </span>
             </div>
             `:''}
 
             ${ menu ? `
             <div class="menu clickable">
                 <div class="menuContainer">
-                    <svg viewBox="0 0 500 500" preserveAspectRatio="none">
-                        <path class="main" d="
-                            M 50 115 
-                            C 100 31 200 41 250 41 
-                            C 300 41 400 31 450 115 
-                            L 450 315 
-                            C 450 365 300 422 250 452 
-                            C 200 422 50 365 50 315 
-                            L 50 115 
-                            Z
-                        " />
-                        <path class="arrowDown" d="
-                            M 180 200
-                            L 250 280
-                            L 320 200
-                        " />
-                    </svg>
+                    ${menuButton()}
                 </div>
             </div>
             `:''}
         </div>
     `;
+
+	const menuButtonEl = document.querySelector('.container .stats .menu');
+	if (menuButtonEl) {
+		menuButtonEl.addEventListener('pointerdown', () => {
+			if (!menuButtonEl.classList.contains('open')) {
+				menuButtonEl.classList.add('open');
+				return;
+			}
+			menuButtonEl.classList.remove('open');
+			window.parent.postMessage({
+				_: 'navigate'
+			});
+		});
+		const removeOpenClass = () => {
+			console.log('remove open class');
+			menuButtonEl.classList.remove('open');
+		};
+		document.body.addEventListener('modalClose', removeOpenClass);
+	}
 };
 
 export const statsRequest = async (args) => {
