@@ -76,5 +76,6 @@
 	"handle_links": "preferred",
 	"iarc_rating_id": "WIP",
 	"share_target": {},
-	"widgets": []
+	"widgets": [],
+	"file_handlers": []
 }
