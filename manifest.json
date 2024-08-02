@@ -74,5 +74,6 @@
 		}
 	],
 	"handle_links": "preferred",
-	"iarc_rating_id": "WIP"
+	"iarc_rating_id": "WIP",
+	"share_target": {}
 }
