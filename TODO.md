@@ -43,6 +43,10 @@
 -   [ ] feedback
 -   [ ] save to YouTube
 
+(install)
+
+-   [ ] create APK - https://developers.google.com/codelabs/pwa-in-play#1
+
 (misc)
 
 -   [ ] stop screen going to sleep automatically (prevent)

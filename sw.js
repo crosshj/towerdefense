@@ -127,3 +127,29 @@ self.addEventListener('notificationclick', function (event) {
 		})
 	);
 });
+
+// background sync
+self.addEventListener('sync', (event) => {
+	if (event.tag === 'sync-tag') {
+		event.waitUntil(syncData());
+	}
+});
+function syncData() {
+	return new Promise((resolve) => {
+		console.log('Background sync triggered!');
+		resolve();
+	});
+}
+
+// periodic sync
+self.addEventListener('periodicsync', (event) => {
+	if (event.tag === 'periodic-sync-tag') {
+		event.waitUntil(periodicSyncData());
+	}
+});
+function periodicSyncData() {
+	return new Promise((resolve) => {
+		console.log('Periodic sync triggered!');
+		resolve();
+	});
+}

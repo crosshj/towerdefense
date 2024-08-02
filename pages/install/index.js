@@ -86,6 +86,32 @@ const attachUpdateCacheButton = () => {
 	cacheButton.addEventListener('click', updateCache);
 };
 
+const backgroundSync = async () => {
+	try {
+		navigator.serviceWorker.ready.then((registration) => {
+			return registration.sync.register('sync-tag');
+		});
+	} catch (e) {
+		console.log(e);
+	}
+};
+
+const periodicSync = async () => {
+	try {
+		navigator.serviceWorker.ready.then(async (registration) => {
+			try {
+				await registration.periodicSync.register('periodic-sync-tag', {
+					minInterval: 24 * 60 * 60 * 1000 // 1 day
+				});
+			} catch (error) {
+				console.error('Periodic Sync could not be registered!', error);
+			}
+		});
+	} catch (e) {
+		console.log(e);
+	}
+};
+
 const onLoaded = async () => {
 	await registerServiceWorker();
 	const sessionActive = sessionStorage.getItem('SESSION_ACTIVE') === 'true';
@@ -97,6 +123,8 @@ const onLoaded = async () => {
 		return;
 	}
 	attachUpdateCacheButton();
+	await backgroundSync();
+	await periodicSync();
 };
 
 document.addEventListener('DOMContentLoaded', onLoaded);
