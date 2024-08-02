@@ -98,6 +98,13 @@ const backgroundSync = async () => {
 
 const periodicSync = async () => {
 	try {
+		const status = await navigator.permissions.query({
+			name: 'periodic-background-sync'
+		});
+		if (status.state !== 'granted') {
+			console.log('periodic background sync not permitted');
+			return;
+		}
 		navigator.serviceWorker.ready.then(async (registration) => {
 			try {
 				await registration.periodicSync.register('periodic-sync-tag', {

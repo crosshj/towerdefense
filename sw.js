@@ -148,6 +148,8 @@ self.addEventListener('periodicsync', (event) => {
 	}
 });
 function periodicSyncData() {
+	// TODO: this is where feathers would be updated
+	// in order to tell backend about this, need user token
 	return new Promise((resolve) => {
 		console.log('Periodic sync triggered!');
 		resolve();
