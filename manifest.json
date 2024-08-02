@@ -85,14 +85,14 @@
 			"url": "link"
 		}
 	},
-	"widgets": {
-		"hello_world": {
+	"widgets": [
+		{
 			"name": "Hello World Widget",
 			"description": "A widget that says hello to the world.",
 			"url": "/pages/_wip/index.html?which=helloWorldWidget",
 			"default_position": "top-right"
 		}
-	},
+	],
 	"file_handlers": [
 		{
 			"action": "/pages/_wip/index.html?which=handleFile",
