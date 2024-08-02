@@ -8,7 +8,7 @@
 	"orientation": "landscape",
 	"scope": "https://teedee.us/",
 	"start_url": "https://teedee.us/",
-	"dir": "auto",
+	"dir": "ltr",
 	"lang": "en-US",
 	"icons": [
 		{
@@ -28,6 +28,40 @@
 		{
 			"platform": "webapp",
 			"url": "https://teedee.us/manifest.json"
+		}
+	],
+	"id": "tower.defense.game",
+	"display_override": [
+		"standalone",
+		"window-controls-overlay",
+		"minimal-ui",
+		"fullscreen"
+	],
+	"prefer_related_applications": false,
+	"shortcuts": [
+		{
+			"name": "Play",
+			"url": "https://teedee.us",
+			"description": "Play the game!"
+		}
+	],
+	"protocol_handlers": [
+		{
+			"protocol": "web+teedee",
+			"url": "/?s=%s"
+		}
+	],
+	"categories": ["games"],
+	"edge_side_panel": {
+		"preferred_width": 0
+	},
+	"screenshots": [
+		{
+			"src": "assets/Screenshot1-Pixel7.png",
+			"sizes": "2404x1081",
+			"type": "image/webp",
+			"form_factor": "wide",
+			"label": "Homescreen - Pixel 7"
 		}
 	]
 }
