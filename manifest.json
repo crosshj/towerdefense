@@ -73,5 +73,6 @@
 			"web_app_identity": "https://teedee.us/"
 		}
 	],
-	"handle_links": "preferred"
+	"handle_links": "preferred",
+	"iarc_rating_id": "WIP"
 }
