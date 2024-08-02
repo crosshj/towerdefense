@@ -63,5 +63,8 @@
 			"form_factor": "wide",
 			"label": "Homescreen - Pixel 7"
 		}
-	]
+	],
+	"launch_handler": {
+		"client_mode": ["focus-existing", "auto"]
+	}
 }
