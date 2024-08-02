@@ -2,48 +2,15 @@
  chrome://inspect/#service-workers
 */
 
-const cacheFiles = async (event) => {
-	const filesToCache = event.data.files;
-	// maybe get this from the event?
-	const CACHE_KEY = 'dynamic-cache-v1';
-	// maybe caches from other installs should be invalidated?
-	const cache = await caches.open(CACHE_KEY);
-	let cachedCount = 0;
-
-	for (let i = 0; i < filesToCache.length; i++) {
-		try {
-			const response = await fetch(filesToCache[i], {
-				cache: 'no-store'
-			});
-			if (!response.ok) {
-				throw new Error(
-					`Request for ${filesToCache[i]} failed with status ${response.status}`
-				);
-			}
-			await cache.put(filesToCache[i], response.clone());
-			cachedCount++;
-			const progress = (cachedCount / filesToCache.length) * 100;
-			const clients = await self.clients.matchAll();
-			clients.forEach((client) => {
-				client.postMessage({
-					type: 'progress',
-					progress: progress
-				});
-			});
-		} catch (error) {
-			console.error(
-				`Failed to cache ${filesToCache[i]}: ${error.message}`
-			);
-		}
-	}
-};
+import { cacheFiles } from './serviceWorker/cacheFiles.js';
+import { showNotification } from './serviceWorker/showNotifcation.js';
 
 self.addEventListener('install', (event) => {
-	self.skipWaiting(); // Activate worker immediately
+	self.skipWaiting();
 });
 
 self.addEventListener('activate', (event) => {
-	event.waitUntil(self.clients.claim()); // Become available to all pages
+	event.waitUntil(self.clients.claim());
 });
 
 self.addEventListener('message', async (event) => {
@@ -51,11 +18,9 @@ self.addEventListener('message', async (event) => {
 		await cacheFiles(event);
 	}
 	if (event?.data?.type === 'testNotification') {
-		self.registration.showNotification('Test Notification', {
-			body: 'This is a test notification from TD!',
-			icon: 'assets/towerDefenseIconTransparent.png',
-			tag: 'teedee', //will replace other notifications with this tag
-			data: { url: 'https://teedee.us' }
+		showNotification({
+			title: 'Test Notification',
+			body: 'This is a test notification from TD!'
 		});
 	}
 });
@@ -99,13 +64,7 @@ self.addEventListener('push', (event) => {
 	} catch (e) {
 		data = { title: 'Notification', body: event.data.text() };
 	}
-
-	self.registration.showNotification(data.title, {
-		body: data.body,
-		icon: 'assets/towerDefenseIconTransparent.png',
-		tag: 'teedee', //will replace other notifications with this tag
-		data: { url: 'https://teedee.us' }
-	});
+	showNotification(data);
 });
 
 self.addEventListener('notificationclick', function (event) {
