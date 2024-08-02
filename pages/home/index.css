@@ -210,7 +210,7 @@
 			flex-direction: column;
 			gap: 8px;
 			.stats {
-				min-height: 25px;
+				min-height: 35px;
 			}
 			.quest {
 				margin-left: auto;

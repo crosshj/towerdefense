@@ -143,7 +143,7 @@ const drawControls = async () => {
 		</div>
 	`;
 	statsRequest({
-		menu: false
+		menu: true
 	});
 
 	const setUserImage = () => {
@@ -152,7 +152,7 @@ const drawControls = async () => {
 	};
 	setUserImage();
 
-	container.addEventListener('mousedown', (event) => {
+	container.addEventListener('pointerup', (event) => {
 		const which = Array.from(event.target.classList)
 			.filter(
 				(x) =>

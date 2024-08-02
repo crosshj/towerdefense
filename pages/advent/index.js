@@ -1,4 +1,4 @@
-const pageTitle = 'GUILD RAID';
+const pageTitle = 'ADVENT';
 
 const setup = async () => {
 	const params = Object.fromEntries(
@@ -13,7 +13,7 @@ const setup = async () => {
 	window.parent.postMessage({
 		_: 'stats',
 		feathers: false,
-		gems: false,
+		gems: true,
 		coins: false,
 		friendPoints: false
 	});

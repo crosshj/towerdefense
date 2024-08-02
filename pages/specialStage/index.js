@@ -19,7 +19,7 @@ const setup = async () => {
 	});
 	window.parent.postMessage({
 		_: 'title',
-		title: 'Special Stage',
+		title: pageTitle,
 		visibility: 'visible'
 	});
 	window.parent.postMessage({ _: 'loaded' });

@@ -52,11 +52,18 @@ body {
 	display: grid;
 	grid-template-columns: auto auto auto auto;
 	gap: 0.5em;
+
+	.sectionLink:nth-child(4n + 1),
+	.sectionLink:nth-child(4n + 2) {
+		background: #62374a;
+		border-color: #ff8abe;
+	}
+
 	.sectionLink {
 		border-radius: 7px;
 		width: 70px;
 		aspect-ratio: 1 / 1;
-		border: 1px solid gold;
+		border: 1px solid #b2b2e0;
 		background: rgb(36 36 91 / 87%);
 		display: flex;
 		flex-direction: column;

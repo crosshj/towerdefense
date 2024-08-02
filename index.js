@@ -172,6 +172,27 @@ window.addEventListener('message', async function (event) {
 	}
 });
 
+const registerServiceWorker = async () => {
+	if (!('serviceWorker' in navigator)) {
+		console.log('unable to register service worker');
+		return;
+	}
+	const registration = navigator.serviceWorker
+		.register('/sw.js', {
+			scope: '/',
+			type: 'module',
+			updateViaCache: 'none'
+		})
+		.catch((error) => {
+			console.log('Service Worker registration failed:', error);
+		});
+	if (!registration) {
+		console.log('unable to register service worker');
+		return;
+	}
+	console.log('Service Worker registered');
+};
+
 let bgMusic;
 const onLoaded = async () => {
 	const install = await installable({
@@ -187,8 +208,10 @@ const onLoaded = async () => {
 		return;
 	}
 	setupSplash(install);
+	await registerServiceWorker();
 };
 document.addEventListener('DOMContentLoaded', onLoaded);
+
 // window.addEventListener('pageshow', function (event) {
 // 	if (event.persisted) onLoaded();
 // });

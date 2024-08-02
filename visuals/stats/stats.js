@@ -32,7 +32,7 @@ export const statsElement = async (args) => {
                     ${withCommas(userStats.feathers)}
                 </span>
                 <span class="featherTotal">
-                    /${userStats.feathersMax} max
+                    /${userStats.feathersMax}
                 </span>
             </div>
             `:''}
