@@ -128,7 +128,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 	//TODO: if user.apiUser.verfied===false - mention this, don't go further
 
-	console.log(user.apiUser);
 	setupActionsNew({ gameStarted });
 	setupActionsContinue({ gameStarted });
 	setupActionLogin({ gameStarted });

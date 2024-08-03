@@ -12,6 +12,7 @@ const rankToGrade = {
 };
 
 const defaultValue = {
+	name: 'Anonymous',
 	rank: 1,
 	exp: 0
 };
@@ -75,7 +76,6 @@ const getUserImage = async () => {
 };
 
 export const getUser = async () => {
-	const apiUser = await getUserFromAPI();
 	const lsValue = localStorage.getItem(LS_NAME);
 	let user;
 	try {
@@ -87,12 +87,15 @@ export const getUser = async () => {
 		user = clone(defaultValue);
 	}
 
+	const apiUser = await getUserFromAPI();
 	if (apiUser) {
+		user.name = apiUser.name || user.name;
 		user.rank = apiUser.data.rank || user.rank;
 		user.exp = apiUser.data.exp || user.exp;
 		localStorage.setItem(
 			LS_NAME,
 			JSON.stringify({
+				name: user.name,
 				rank: user.rank,
 				exp: user.exp
 			})

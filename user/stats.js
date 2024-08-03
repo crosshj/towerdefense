@@ -12,14 +12,14 @@ const defaultValue = {
 	exp: 0 // this is directly on user?
 };
 
-export const getStats = async (user) => {
-	const apiUser = user || (await getUserFromAPI());
+export const getStats = async () => {
 	const src = localStorage.getItem(LS_NAME) || '';
 	let value = clone(defaultValue);
 	try {
 		value = JSON.parse(src);
 	} catch (e) {}
 
+	const apiUser = await getUserFromAPI();
 	if (apiUser) {
 		value.feathers = apiUser.data.feathers || value.feathers;
 		value.feathersMax = apiUser.data.feathersMax || value.feathersMax;
@@ -42,7 +42,7 @@ export const getStats = async (user) => {
 
 export const addStats = async (newValue) => {
 	const apiUser = await getUserFromAPI();
-	const stats = await getStats(apiUser);
+	const stats = await getStats();
 	for (const k of Object.keys(defaultValue)) {
 		if (!newValue[k]) continue;
 		stats[k] = stats[k] || 0;

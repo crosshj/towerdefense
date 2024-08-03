@@ -36,9 +36,9 @@ const updatePlayersList = async () => {
 	let players = await fetch(
 		'https://datamosh.vercel.app/api/teedee/players'
 	).then((x) => x.json());
-	players = players.sort(
-		(a, b) => new Date(b.last_login) - new Date(a.last_login)
-	);
+	players = players
+		.filter((x) => typeof x.last_login === 'string')
+		.sort((a, b) => new Date(b.last_login) - new Date(a.last_login));
 	for (const [i, player] of Object.entries(players)) {
 		tierPlayers.append(
 			PlayerRow({
@@ -60,10 +60,10 @@ function getPlayerPosition(players, playerName) {
 }
 const updateUserInfo = async ({ players }) => {
 	const user = await getUser();
-	user.position = getPlayerPosition(players, user.apiUser.name);
+	user.position = getPlayerPosition(players, user.name);
 	console.log({ players, user });
 	const userNameEl = document.querySelector('.userName');
-	userNameEl.innerHTML = user.apiUser.name || '---';
+	userNameEl.innerHTML = user.name || '---';
 	const rankingNumberEl = document.querySelector('.rankingNumber');
 	rankingNumberEl.innerHTML = user.position;
 	const trophiesNumberEl = document.querySelector('.trophiesNumber');

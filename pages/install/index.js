@@ -36,7 +36,7 @@ const registerServiceWorker = async () => {
 		// should spend no longer than 30 seconds on one progress state
 		timeline[currentProgress] = timeline[currentProgress] || 0;
 		timeline[currentProgress]++;
-		const stuck = timeline[currentProgress] > 6;
+		const stuck = timeline[currentProgress] > 3;
 		if (stuck) {
 			document.location.reload();
 		}

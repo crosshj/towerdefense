@@ -130,11 +130,12 @@ const handleClickable = async (e) => {
 const handleAction = async (args) => {
 	if (args.minusFeathers) {
 		const stats = await addStats({ feathers: -1 * args.minusFeathers });
-		console.log({ stats });
 		const featherStatEl = document.querySelector(
 			'.container .stats .feathers .amount'
 		);
-		featherStatEl.innerText = stats.feathers;
+		if (featherStatEl) {
+			featherStatEl.innerText = stats.feathers;
+		}
 	}
 };
 

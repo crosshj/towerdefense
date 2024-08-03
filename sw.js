@@ -4,6 +4,11 @@
 
 import { cacheFiles } from './serviceWorker/cacheFiles.js';
 import { showNotification } from './serviceWorker/showNotifcation.js';
+import {
+	handleGetByToken,
+	handleSetByToken,
+	invalidateUserCache
+} from './serviceWorker/userHandler.js';
 
 self.addEventListener('install', (event) => {
 	self.skipWaiting();
@@ -16,6 +21,7 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('message', async (event) => {
 	if (event?.data?.type === 'updateCache') {
 		await cacheFiles(event);
+		await invalidateUserCache();
 	}
 	if (event?.data?.type === 'testNotification') {
 		showNotification({
@@ -27,6 +33,17 @@ self.addEventListener('message', async (event) => {
 
 self.addEventListener('fetch', (event) => {
 	const requestURL = new URL(event.request.url);
+
+	if (requestURL.pathname === '/api/teedee/players/getByToken') {
+		event.respondWith(handleGetByToken(event.request));
+		return;
+	}
+
+	if (requestURL.pathname === '/api/teedee/players/setByToken') {
+		event.respondWith(handleSetByToken(event.request));
+		return;
+	}
+
 	if (requestURL.pathname.includes('/api/')) {
 		// If the request contains '/api/', just fetch it from the network
 		event.respondWith(fetch(event.request));
