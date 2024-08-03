@@ -1,11 +1,12 @@
 import { animateOrb } from '/visuals/objects/orb.js';
 import { getLocationMap } from '../../../utils/locations.js';
+import { getStageInfo } from '../../../stages/index.js';
 
 const attachNextButton = async ({ location, params }) => {
-	const stage = params?.number;
+	const stage = await getStageInfo(params);
 	const nextButton = document.querySelector('button.next-button');
 
-	const featherCost = 1; //TODO: get this
+	const featherCost = stage.featherCost || 1;
 	console.log({ location, stage });
 
 	nextButton.innerHTML = `

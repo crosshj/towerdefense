@@ -11,6 +11,19 @@ const stageMap = {
 	pantheon1: './main/pantheon1.js'
 };
 
+export const featherCost = {
+	field1: 1,
+	forest1: 1,
+	water1: 1,
+	sakura1: 2,
+	highlands1: 2,
+	tropical1: 2,
+	oasis1: 3,
+	tundra1: 3,
+	industrial1: 3,
+	pantheon1: 4
+};
+
 export const getStage = async (params) => {
 	const { zone, name: paramsName } = params;
 	const name = zone || paramsName;
@@ -19,6 +32,20 @@ export const getStage = async (params) => {
 
 	const stage = await import(stagePath);
 	return stage.default;
+};
+
+export const getStageInfo = async (params) => {
+	const { zone, name: paramsName } = params;
+	const name = zone || paramsName;
+	const stagePath = stageMap[name] || stageMap[name + '1'];
+	if (!stagePath) return;
+
+	const stage = await import(stagePath);
+	const { state } = await stage.default();
+	return {
+		featherCost: featherCost[name] || featherCost[name + '1'],
+		...state
+	};
 };
 
 function pickRandom(items = {}) {
