@@ -28,4 +28,5 @@ export const addStats = async (newValue) => {
 		stats[k] += newValue[k];
 	}
 	localStorage.setItem(LS_NAME, JSON.stringify(stats));
+	return stats;
 };

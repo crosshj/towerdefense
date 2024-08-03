@@ -1,3 +1,4 @@
+import { addStats } from './user/stats.js';
 import { installable } from './utils/installable.js';
 import { loadSounds } from '/visuals/assets/assets.js';
 import { statsElement } from '/visuals/stats/stats.js';
@@ -126,6 +127,17 @@ const handleClickable = async (e) => {
 	showModal({ src });
 };
 
+const handleAction = async (args) => {
+	if (args.minusFeathers) {
+		const stats = await addStats({ feathers: -1 * args.minusFeathers });
+		console.log({ stats });
+		const featherStatEl = document.querySelector(
+			'.container .stats .feathers .amount'
+		);
+		featherStatEl.innerText = stats.feathers;
+	}
+};
+
 document.body.addEventListener('pointerup', async (event) => {
 	if (event.target.classList.contains('back-button')) {
 		closeModal();
@@ -168,6 +180,10 @@ window.addEventListener('message', async function (event) {
 		titleContainer.style.visibility = args.visibility;
 		titleEl.innerHTML = args.title;
 		whereIsBack = args?.back ? args.back : undefined;
+		return;
+	}
+	if (_ === 'action') {
+		await handleAction(args);
 		return;
 	}
 });
