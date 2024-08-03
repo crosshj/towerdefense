@@ -143,6 +143,7 @@ const drawControls = async () => {
 		</div>
 	`;
 	statsRequest({
+		friendPoints: false,
 		menu: true
 	});
 
