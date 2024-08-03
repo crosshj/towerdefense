@@ -419,20 +419,20 @@ const allUnits = {
 		attack: '109 - 375 - 1,179',
 		hp: '360 - 1,215 - 3,807',
 		defense: '247 - 855 - 2,691',
-		range: 30 * 5
+		range: 30 * 10
 	},
 
-	//
+	// https://rangers.lerico.net/en/ranger/u001e-bella
 	'u0001-1-zoe': {
 		displayName: 'Zoe',
 		element: 'Normal',
 		type: 'Agility',
 		rank: 1,
-		mineralCost: 100,
-		attack: '109 - 375 - 1,179',
-		hp: '360 - 1,215 - 3,807',
-		defense: '247 - 855 - 2,691',
-		range: 30 * 5
+		mineralCost: 240,
+		attack: '240 - 1,110 - 3,078',
+		hp: '1,776 - 8,214 - 22,777',
+		defense: '259 - 1,216 - 3,377',
+		range: 70 * 10
 	},
 
 	//DEPRECATE!!! (use u0001-4-openhyman one instead)
