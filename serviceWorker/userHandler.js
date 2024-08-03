@@ -65,11 +65,7 @@ export async function handleGetByToken(request) {
 	const token = requestBody.token;
 
 	// Create a custom cache key
-	const cacheKey = new Request('/api/teedee/players/getByToken', {
-		method: 'POST',
-		body: JSON.stringify({ token: token }),
-		headers: { 'Content-Type': 'application/json' }
-	});
+	const cacheKey = `getByToken-${token}`;
 
 	// Check if we already have the response cached
 	const cachedResponse = await caches.match(cacheKey);
@@ -101,27 +97,30 @@ export async function handleSetByToken(request) {
 	const requestBody = await request.clone().json();
 	const token = requestBody.token;
 
-	const response = await fetch(request);
-	const responseClone = await response.clone().json();
+	let networkResponse;
+	try {
+		networkResponse = await fetch(request);
+		await validateResponse(networkResponse);
+	} catch (error) {
+		await invalidateUserCache();
+		throw error;
+	}
 
-	// Add source and sourceDate to the response body
+	// Modify the response
+	const responseClone = await networkResponse.clone().json();
 	responseClone.source = 'setByToken';
 	responseClone.sourceDate = new Date().toISOString();
 
 	const modifiedResponse = new Response(JSON.stringify(responseClone), {
-		status: response.status,
-		statusText: response.statusText,
-		headers: response.headers
+		status: networkResponse.status,
+		statusText: networkResponse.statusText,
+		headers: networkResponse.headers
 	});
 
 	// Invalidate the cache for the `getByToken` endpoint
 	const cache = await caches.open('teedee-api-cache');
-	const getByTokenRequest = new Request('/api/teedee/players/getByToken', {
-		method: 'POST',
-		body: JSON.stringify({ token: token }),
-		headers: { 'Content-Type': 'application/json' }
-	});
-	await cache.put(getByTokenRequest, modifiedResponse.clone());
+	const cacheKey = `getByToken-${token}`;
+	await cache.put(cacheKey, modifiedResponse.clone());
 
-	return response;
+	return modifiedResponse;
 }
