@@ -16,7 +16,7 @@ const defaultValue = {
 	exp: 0
 };
 
-const getUserFromAPI = async () => {
+export const getUserFromAPI = async () => {
 	try {
 		const userToken = localStorage.getItem('USER_TOKEN');
 		if (!userToken)
@@ -40,7 +40,7 @@ const getUserFromAPI = async () => {
 	}
 };
 
-const updateUserFromAPI = async (data) => {
+export const updateUserFromAPI = async (data) => {
 	try {
 		const userToken = localStorage.getItem('USER_TOKEN');
 		if (!userToken)
