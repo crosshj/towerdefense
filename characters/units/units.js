@@ -422,6 +422,19 @@ const allUnits = {
 		range: 30 * 5
 	},
 
+	//
+	'u0001-1-zoe': {
+		displayName: 'Zoe',
+		element: 'Normal',
+		type: 'Agility',
+		rank: 1,
+		mineralCost: 100,
+		attack: '109 - 375 - 1,179',
+		hp: '360 - 1,215 - 3,807',
+		defense: '247 - 855 - 2,691',
+		range: 30 * 5
+	},
+
 	//DEPRECATE!!! (use u0001-4-openhyman one instead)
 	'u0001-4-watashi': {
 		displayName: '(DEPRECATE)',
