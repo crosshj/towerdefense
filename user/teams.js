@@ -153,8 +153,8 @@ export const setTeams = async (newValue) => {
 	const characters = await getCharacters();
 	await updateUserFromAPI({
 		...(apiUser.data || {}),
-		teams: compressTeams(value, characters),
-		characters: compressChars(characters)
+		teams: compressTeams(value, characters)
+		//characters: compressChars(characters)
 	});
 
 	localStorage.setItem(LS_NAME, JSON.stringify(value));
