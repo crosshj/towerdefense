@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Compress Characters / Team</title>
+		<meta name="description" content="" />
+		<meta name="author" content="" />
+		<meta
+			name="viewport"
+			content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+		/>
+		<meta name="mobile-web-app-capable" content="yes" />
+		<meta name="color-scheme" content="dark light" />
+		<link rel="icon" type="image/png" href="/assets/favicon.png" />
+		<script type="module" src="compressChars.js" defer></script>
+	</head>
+	<style>
+		body {
+			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+		}
+		pre {
+			background: #8883;
+			padding: 1em;
+			max-width: 80vw;
+			text-wrap: balance;
+			box-sizing: border-box;
+		}
+		.compressedAllChars,
+		.compressedTeams {
+			height: 8rem;
+			overflow-y: scroll;
+		}
+		.decomAllChars,
+		.decomTeams {
+			height: 200px;
+			overflow-y: scroll;
+		}
+	</style>
+
+	<body>
+		<h2>Compress Characters / Team</h2>
+
+		<h3>User Characters Compressed</h3>
+		<pre class="compressedAllChars"></pre>
+		<h3>Teams Compressed</h3>
+		<pre class="compressedTeams"></pre>
+
+		<h3>Statistics</h3>
+		<pre class="statistics"></pre>
+
+		<h3>User Characters De-compressed</h3>
+		<pre class="decomAllChars"></pre>
+		<h3>Teams De-compressed</h3>
+		<pre class="decomTeams"></pre>
+	</body>
+</html>
