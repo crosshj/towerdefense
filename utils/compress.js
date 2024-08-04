@@ -56,7 +56,7 @@ function decodeNumber(str, characterSet) {
 	}
 }
 
-export const compressChars = (lsCharacters, baseLength = -1) => {
+export const compressChars = (lsCharacters, baseLength = 36) => {
 	const characterSet = getCharacterSet(true).slice(0, baseLength);
 	const encode = (num) => encodeNumber(num, characterSet);
 	const compressed = lsCharacters
@@ -104,7 +104,7 @@ export const decompressChars = (compedString) => {
 	});
 };
 
-export const compressTeams = (lsTeam, lsCharacters, baseLength = -1) => {
+export const compressTeams = (lsTeam, lsCharacters, baseLength = 36) => {
 	const characterSet = getCharacterSet(true).slice(0, baseLength);
 	const encode = (num) => encodeNumber(num, characterSet);
 	const compressed = [];
@@ -143,7 +143,9 @@ export const decompressTeams = (compedString, characters) => {
 		const charCodes = lines[teamIndex].split(',');
 		for (const subteam of ['a', 'b']) {
 			for (let i = 0; i < 5; i++) {
-				const charIndex = decode(charCodes[i]);
+				const charIndex = decode(
+					charCodes[subteam === 'a' ? i : 5 + i]
+				);
 				const { id } = characters[charIndex];
 				teams[teamName][subteam].push({ id });
 			}

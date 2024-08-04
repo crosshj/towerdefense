@@ -127,15 +127,14 @@ const getValue = () => {
 
 export const getTeams = async () => {
 	let value = getValue();
-	// const apiUser = await getUserFromAPI();
-	// if (apiUser && apiUser.data.teams && apiUser.data.characters) {
-	// 	const decomp = decompressTeams(
-	// 		apiUser.data.teams,
-	// 		decompressChars(apiUser.data.characters)
-	// 	);
-	// 	localStorage.setItem(LS_NAME, JSON.stringify(decomp));
-	// 	value = decomp;
-	// }
+	const apiUser = await getUserFromAPI();
+	if (apiUser && apiUser.data.teams && apiUser.data.characters) {
+		const apiChars = decompressChars(apiUser.data.characters);
+		const decomp = decompressTeams(apiUser.data.teams, apiChars);
+		localStorage.setItem(LS_NAME, JSON.stringify(decomp));
+		value = decomp;
+		//console.log({ apiUser, teamsFromApi: decomp });
+	}
 	return value;
 };
 
