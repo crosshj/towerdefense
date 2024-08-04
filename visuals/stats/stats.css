@@ -119,6 +119,9 @@
 			}
 			.featherTotal {
 				color: #858d9f;
+				& .featherUpdate {
+					white-space: pre;
+				}
 			}
 			&:before {
 				content: '';

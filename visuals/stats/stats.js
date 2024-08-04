@@ -1,6 +1,66 @@
 import { getStats } from '../../user/stats.js';
 import { menuButton } from './components.js';
 
+const withCommas = (x) => {
+	return x
+		.toLocaleString('en', { useGrouping: true })
+		.replaceAll(/,/g, '<span class="comma-span">,</span>');
+};
+
+function minutesAndSeconds(seconds) {
+	let minutes = Math.floor(seconds / 60);
+	let secs = seconds % 60;
+	return `${(minutes + '').padStart(2, ' ')}:${(secs + '').padStart(2, '0')}`;
+}
+
+const attachFeatherUpdater = (userStats) => {
+	const feathersAmountEl = document.querySelector('.feathers .amount');
+	const updateFeathers = (stats) => {
+		if (!feathersAmountEl) return;
+		feathersAmountEl.innerHTML = withCommas(stats.feathers);
+	};
+
+	const featherUpdateEl = document.querySelector('.featherUpdate');
+	const refreshUpdate = (timeLeft) => {
+		if (typeof timeLeft === 'undefined') {
+			featherUpdateEl.innerText = '';
+			return;
+		}
+		if (!featherUpdateEl) return;
+		if (timeLeft === -1) {
+			featherUpdateEl.innerText = 'max';
+		} else {
+			featherUpdateEl.innerText = minutesAndSeconds(timeLeft);
+		}
+	};
+
+	let timeLeft;
+	const resetTime = (userStats) => {
+		const timeToFeather = 5; //10 * 60;
+		const maxedOut = userStats.feathers >= userStats.feathersMax;
+		timeLeft = maxedOut ? -1 : timeToFeather;
+	};
+
+	updateFeathers(userStats);
+	resetTime(userStats);
+	refreshUpdate(timeLeft);
+
+	if (timeLeft !== -1) {
+		const updateInterval = setInterval(() => {
+			timeLeft--;
+			if (timeLeft === 0) {
+				userStats.feathers++;
+				updateFeathers(userStats);
+				resetTime(userStats);
+			}
+			refreshUpdate(timeLeft);
+			if (timeLeft === -1) {
+				clearInterval(updateInterval);
+			}
+		}, 1000);
+	}
+};
+
 export const statsElement = async (args) => {
 	const isHidden = args?.visibility === 'hidden';
 	const {
@@ -17,12 +77,6 @@ export const statsElement = async (args) => {
 
 	const userStats = await getStats();
 
-	const withCommas = (x) => {
-		return x
-			.toLocaleString('en', { useGrouping: true })
-			.replaceAll(/,/g, '<span class="comma-span">,</span>');
-	};
-
 	//prettier-ignore
 	container.outerHTML = `
         <div class="${statsClass}">
@@ -31,9 +85,10 @@ export const statsElement = async (args) => {
                 <span class="amount">
                     ${withCommas(userStats.feathers)}
                 </span>
-                <span class="featherTotal">
-                    /${userStats.feathersMax}
-                </span>
+                <div class="featherTotal">
+                    <span>/${userStats.feathersMax}</span>
+                    <span class="featherUpdate"></span>
+                </div>
             </div>
             `:''}
 
@@ -89,6 +144,8 @@ export const statsElement = async (args) => {
 		};
 		document.body.addEventListener('modalClose', removeOpenClass);
 	}
+
+	attachFeatherUpdater(userStats);
 };
 
 export const statsRequest = async (args) => {
