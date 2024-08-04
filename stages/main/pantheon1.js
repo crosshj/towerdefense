@@ -1,4 +1,4 @@
-import { stageCharacterDrops } from './.drops.js';
+import { stageCharacterDrops } from '/$data/drops.js';
 
 export const getRewards = async () => {
 	return {
