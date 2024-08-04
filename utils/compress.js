@@ -56,7 +56,7 @@ function decodeNumber(str, characterSet) {
 	}
 }
 
-export const compressChars = (lsCharacters, baseLength = -1) => {
+export const compressChars = (lsCharacters, baseLength = 36) => {
 	const characterSet = getCharacterSet(true).slice(0, baseLength);
 	const encode = (num) => encodeNumber(num, characterSet);
 	const compressed = lsCharacters
@@ -104,7 +104,7 @@ export const decompressChars = (compedString) => {
 	});
 };
 
-export const compressTeams = (lsTeam, lsCharacters, baseLength = -1) => {
+export const compressTeams = (lsTeam, lsCharacters, baseLength = 36) => {
 	const characterSet = getCharacterSet(true).slice(0, baseLength);
 	const encode = (num) => encodeNumber(num, characterSet);
 	const compressed = [];
