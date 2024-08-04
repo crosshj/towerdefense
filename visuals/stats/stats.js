@@ -36,7 +36,8 @@ const attachFeatherUpdater = (userStats) => {
 
 	let timeLeft;
 	const resetTime = (userStats) => {
-		const timeToFeather = 5; //10 * 60;
+		//TODO: time to feather based on user stats
+		const timeToFeather = 10 * 60;
 		const maxedOut = userStats.feathers >= userStats.feathersMax;
 		timeLeft = maxedOut ? -1 : timeToFeather;
 	};
