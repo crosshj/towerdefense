@@ -110,12 +110,13 @@ export const getCharacters = async (hydrate = true) => {
 		characters = clone(defaultCharacterList);
 	}
 
-	// const apiUser = await getUserFromAPI();
-	// if (apiUser && apiUser.data.characters) {
-	// 	const decomp = decompressChars(apiUser.data.characters);
-	// 	localStorage.setItem(LS_NAME, JSON.stringify(decomp));
-	// 	characters = decomp;
-	// }
+	const apiUser = await getUserFromAPI();
+	if (apiUser && apiUser.data.characters) {
+		const decomp = decompressChars(apiUser.data.characters);
+		localStorage.setItem(LS_NAME, JSON.stringify(decomp));
+		characters = decomp;
+		//console.log({ apiUser, charactersFromApi: decomp });
+	}
 
 	if (!hydrate) {
 		return characters;

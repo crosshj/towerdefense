@@ -143,7 +143,9 @@ export const decompressTeams = (compedString, characters) => {
 		const charCodes = lines[teamIndex].split(',');
 		for (const subteam of ['a', 'b']) {
 			for (let i = 0; i < 5; i++) {
-				const charIndex = decode(charCodes[i]);
+				const charIndex = decode(
+					charCodes[subteam === 'a' ? i : 5 + i]
+				);
 				const { id } = characters[charIndex];
 				teams[teamName][subteam].push({ id });
 			}

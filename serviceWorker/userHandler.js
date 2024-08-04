@@ -27,6 +27,28 @@ async function storeToken(token) {
 	await tx.done;
 }
 
+async function getToken() {
+	const db = await openDB('teedee-api-cache', 1, {
+		upgrade(db) {
+			if (!db.objectStoreNames.contains('tokens')) {
+				db.createObjectStore('tokens');
+			}
+		}
+	});
+	const tx = db.transaction('tokens', 'readonly');
+	const store = tx.objectStore('tokens');
+	const request = store.get('player-token');
+
+	return new Promise((resolve, reject) => {
+		request.onsuccess = () => {
+			resolve(request.result);
+		};
+		request.onerror = (event) => {
+			reject(event.target.error);
+		};
+	});
+}
+
 async function validateResponse(response) {
 	if (!response.ok) {
 		// Invalidate the cache if the response status is not ok (2xx)
@@ -57,7 +79,21 @@ async function validateResponse(response) {
 
 export async function invalidateUserCache() {
 	const cache = await caches.open('teedee-api-cache');
-	await cache.delete('/api/teedee/players/getByToken');
+	const token = await getToken();
+	const cacheKey = `getByToken-${token}`;
+	console.log('invalidateUserCache: with key:', cacheKey);
+	const deleted = await cache.delete(cacheKey);
+	console.log('invalidateUserCache: key deleted:', deleted);
+
+	// delete entire cache
+	// const cacheName = 'teedee-api-cache';
+	// const cacheNames = await caches.keys();
+	// for (const name of cacheNames) {
+	// 	if (name === cacheName) {
+	// 		await caches.delete(name);
+	// 		break;
+	// 	}
+	// }
 }
 
 export async function handleGetByToken(request) {
@@ -70,6 +106,7 @@ export async function handleGetByToken(request) {
 	// Check if we already have the response cached
 	const cachedResponse = await caches.match(cacheKey);
 	if (cachedResponse) {
+		console.log('handleGetByToken: Cache hit for key:', cacheKey);
 		return cachedResponse;
 	}
 
@@ -86,6 +123,7 @@ export async function handleGetByToken(request) {
 	// Cache the response
 	const cache = await caches.open('teedee-api-cache');
 	await cache.put(cacheKey, networkResponse.clone());
+	console.log('handleGetByToken: Cached new response with key:', cacheKey);
 
 	// Store the token for future use
 	await storeToken(token);
@@ -121,6 +159,7 @@ export async function handleSetByToken(request) {
 	const cache = await caches.open('teedee-api-cache');
 	const cacheKey = `getByToken-${token}`;
 	await cache.put(cacheKey, modifiedResponse.clone());
+	console.log('handleSetByToken: Updating cache with key:', cacheKey);
 
 	return modifiedResponse;
 }
