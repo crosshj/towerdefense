@@ -3,6 +3,8 @@ ALL CHARACTERS THAT THE USER HAS AVAILABLE
 */
 import { clone, generateUUID } from '../utils/utils.js';
 import { hydrateCharacters } from '../characters/index.js';
+import { getUserFromAPI, updateUserFromAPI } from './user.js';
+import { compressChars, decompressChars } from '../utils/compress.js';
 
 const LS_NAME = 'USER_CHARACTERS';
 
@@ -108,6 +110,13 @@ export const getCharacters = async (hydrate = true) => {
 		characters = clone(defaultCharacterList);
 	}
 
+	// const apiUser = await getUserFromAPI();
+	// if (apiUser && apiUser.data.characters) {
+	// 	const decomp = decompressChars(apiUser.data.characters);
+	// 	localStorage.setItem(LS_NAME, JSON.stringify(decomp));
+	// 	characters = decomp;
+	// }
+
 	if (!hydrate) {
 		return characters;
 	}
@@ -129,6 +138,13 @@ export const addCharactersEXP = async (chars, expAmount) => {
 		//TODO: note when this causes a char to level up?
 		//TODO: cap experience based on stars
 	}
+
+	const apiUser = await getUserFromAPI();
+	await updateUserFromAPI({
+		...(apiUser.data || {}),
+		characters: compressChars(allChars)
+	});
+
 	localStorage.setItem(LS_NAME, JSON.stringify(allChars));
 };
 
@@ -144,6 +160,13 @@ export const addNewCharacter = async (char) => {
 			experience: 0
 		}
 	];
+
+	const apiUser = await getUserFromAPI();
+	await updateUserFromAPI({
+		...(apiUser.data || {}),
+		characters: compressChars(newChars)
+	});
+
 	localStorage.setItem(LS_NAME, JSON.stringify(newChars));
 };
 

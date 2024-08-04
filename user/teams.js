@@ -1,4 +1,12 @@
 import { clone } from '../utils/utils.js';
+import {
+	decompressTeams,
+	decompressChars,
+	compressTeams,
+	compressChars
+} from '../utils/compress.js';
+import { getUserFromAPI, updateUserFromAPI } from './user.js';
+import { getCharacters } from './characters.js';
 
 const LS_NAME = 'USER_TEAMS';
 
@@ -102,7 +110,7 @@ const defaultValue = {
 	}
 };
 
-export const getTeams = async () => {
+const getValue = () => {
 	const lsValue = localStorage.getItem(LS_NAME);
 	if (!lsValue) {
 		return clone(defaultValue);
@@ -117,6 +125,20 @@ export const getTeams = async () => {
 	}
 };
 
+export const getTeams = async () => {
+	let value = getValue();
+	// const apiUser = await getUserFromAPI();
+	// if (apiUser && apiUser.data.teams && apiUser.data.characters) {
+	// 	const decomp = decompressTeams(
+	// 		apiUser.data.teams,
+	// 		decompressChars(apiUser.data.characters)
+	// 	);
+	// 	localStorage.setItem(LS_NAME, JSON.stringify(decomp));
+	// 	value = decomp;
+	// }
+	return value;
+};
+
 export const setTeams = async (newValue) => {
 	const lsValue = localStorage.getItem(LS_NAME);
 	let value = clone(defaultValue);
@@ -127,5 +149,14 @@ export const setTeams = async (newValue) => {
 			...newValue
 		};
 	} catch (e) {}
+
+	const apiUser = await getUserFromAPI();
+	const characters = await getCharacters();
+	await updateUserFromAPI({
+		...(apiUser.data || {}),
+		teams: compressTeams(value, characters),
+		characters: compressChars(characters)
+	});
+
 	localStorage.setItem(LS_NAME, JSON.stringify(value));
 };

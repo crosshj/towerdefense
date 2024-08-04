@@ -89,11 +89,11 @@ export const decompressChars = (compedString) => {
 	const decode = (str) => decodeNumber(str, characterSet);
 
 	const lines = compressedData.trim().split('\n');
-	return lines.map((line) => {
+	return lines.map((line, i) => {
 		const [index, unitsIndex, exp, uncapped, gear1, gear2, gear3] =
 			line.split(',');
 		return {
-			id: generateUUID(),
+			id: i + '-localid',
 			code: Object.keys(unitsAll)[decode(unitsIndex)],
 			experience: decode(exp) * 100,
 			uncapped: Number(uncapped),
