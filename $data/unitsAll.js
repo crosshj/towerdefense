@@ -428,6 +428,19 @@ export const unitsAll = {
 		range: 70 * 10
 	},
 
+	// https://rangers.lerico.net/en/ranger/u56-frankie
+	'u0001-3-zar': {
+		displayName: 'Zar',
+		element: 'Normal',
+		type: 'Agility',
+		rank: 3,
+		mineralCost: 470,
+		attack: '188 - 1,124 - 2,887',
+		hp: '2,397 - 14,097 - 36,175',
+		defense: '28 - 184 - 475',
+		range: 70 * 10
+	},
+
 	//DEPRECATE!!! (use u0001-4-openhyman one instead)
 	'u0001-4-watashi': {
 		displayName: '(DEPRECATE)',
