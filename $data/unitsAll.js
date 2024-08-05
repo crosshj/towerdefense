@@ -441,6 +441,20 @@ export const unitsAll = {
 		range: 70 * 10
 	},
 
+	// https://rangers.lerico.net/en/ranger/u041e-jill
+	'u0001-4-liz': {
+		displayName: 'Liz',
+		element: 'Normal',
+		type: 'Strength',
+		rank: 4,
+		mineralCost: 150,
+		//mineral cost: 500,
+		attack: '148 - 1,079 - 2,626',
+		hp: '6,275 - 44,740 - 108,792',
+		defense: '391 - 2,841 - 6,914',
+		range: 70 * 10
+	},
+
 	//DEPRECATE!!! (use u0001-4-openhyman one instead)
 	'u0001-4-watashi': {
 		displayName: '(DEPRECATE)',
