@@ -24,15 +24,14 @@ export const stageCharacterDrops = {
 	},
 	// grass, fighting, dragon
 	sakura1: {
-		'u0001-4-liz': { type: 'char', probability: 0.4 },
 		'u0001-1-macho': { type: 'char', probability: 0.1 },
 		'u0001-4-boar': { type: 'char', probability: 0.4 }
 	},
 	// rock, ground, fighting
 	highlands1: {
 		'u0001-4-tabi': { type: 'char', probability: 0.1 },
-		'u0001-2-toto': { type: 'char', probability: 0.4 }
-		// poor buddy problems #5 here!
+		'u0001-2-toto': { type: 'char', probability: 0.1 },
+		'u0001-4-liz': { type: 'char', probability: 0.4 }
 	},
 	// tropical graveyard: ghost, dark, grass
 	tropical1: {
