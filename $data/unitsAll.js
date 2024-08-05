@@ -448,24 +448,25 @@ export const unitsAll = {
 		type: 'Strength',
 		rank: 4,
 		mineralCost: 150,
-		//mineral cost: 500,
+		//mineral cost: 200,
 		attack: '148 - 1,079 - 2,626',
 		hp: '6,275 - 44,740 - 108,792',
 		defense: '391 - 2,841 - 6,914',
-		range: 70 * 10
+		range: 114 * 4
 	},
 
-	//DEPRECATE!!! (use u0001-4-openhyman one instead)
-	'u0001-4-watashi': {
-		displayName: '(DEPRECATE)',
+	// https://rangers.lerico.net/en/ranger/u039e-jill
+	// evo for liz
+	'u0001-5-liz': {
+		displayName: 'Hassle Liz',
 		element: 'Normal',
-		type: 'Agility',
+		type: 'Strength',
 		rank: 4,
-		mineralCost: 540,
-		attack: '340 - 2,447 - 5,953',
-		hp: '3,132 - 22,340 - 54,324',
-		defense: '33 - 278 - 680',
-		range: 486
+		mineralCost: 200,
+		//mineral cost: 300,
+		attack: '59 - 291 - 812',
+		hp: '1,230 - 5,696 - 15,797',
+		defense: '203 - 957 - 2,659',
+		range: 114 * 4
 	}
-	// ^^^ DEPRECATE
 };
