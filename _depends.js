@@ -53,7 +53,6 @@ const assets = [
 	'/assets/character/FighterBase/skins/4-tabi_tex.png',
 	'/assets/character/FighterBase/skins/4-violet_tex.png',
 	'/assets/character/FighterBase/skins/4-vispi_tex.png',
-	'/assets/character/FighterBase/skins/4-watashi_tex.png',
 	'/assets/character/FighterBase/skins/5-barbell_tex.png',
 	'/assets/character/FighterBase/skins/5-blanko_tex.png',
 	'/assets/character/FighterBase/skins/5-crack9_tex.png',
