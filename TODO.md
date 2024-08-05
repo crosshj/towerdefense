@@ -50,6 +50,7 @@
 (misc)
 
 -   [ ] stop screen going to sleep automatically (prevent)
+-   [ ] github pages 404 customize
 
 (done)
 

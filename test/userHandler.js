@@ -1,5 +1,5 @@
 import { describe, setAutoRefresh } from '/test/.test.js';
-import { feathersModifier } from './userHandler.js';
+import { feathersModifier } from '../serviceWorker/userHandler.js';
 
 //setAutoRefresh(5000);
 
