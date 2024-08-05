@@ -2,7 +2,7 @@
 	display: flex;
 	color: white;
 	padding-right: 10px;
-	zoom: 0.75;
+	zoom: 0.8;
 
 	.clickable {
 		pointer-events: all;
