@@ -66,15 +66,95 @@ async function validateResponse(response) {
 		const responseClone = response.clone();
 		const responseBody = await responseClone.json();
 		if (responseBody.error) {
+			console.log({ apiError: responseBody.error });
 			// Invalidate the cache if the response body contains an error
 			await invalidateUserCache();
 			throw new Error('Response contains an error.');
 		}
 	} catch (error) {
 		// Handle JSON parsing errors
+		console.log(error);
 		await invalidateUserCache();
 		throw new Error('Failed to parse JSON.');
 	}
+}
+
+// Function to modify feathers and feathersUpdate
+// used by getByToken and setByToken, exported only for testing
+export function feathersModifier(user) {
+	const DO_NOT_UPDATE = -1;
+	const currentTime = new Date();
+	let feathersToAdd = 0;
+	const TEN_MINUTES = 10 * 60 * 1000;
+
+	if (!user || typeof user !== 'object' || !user.data) {
+		throw new Error('Invalid user object');
+	}
+
+	if (
+		typeof user.data.feathers !== 'number' ||
+		typeof user.data.feathersMax !== 'number'
+	) {
+		throw new Error('Invalid feathers or feathersMax format');
+	}
+
+	const feathersUpdateDate = new Date(user.data.feathersUpdate);
+	if (isNaN(feathersUpdateDate.getTime())) {
+		user.data.feathersUpdate = undefined;
+	}
+
+	// Initialize feathersUpdate if it does not exist
+	if (!user.data.feathersUpdate) {
+		if (user.data.feathers < user.data.feathersMax) {
+			user.data.feathersUpdate = new Date(
+				currentTime.getTime() + TEN_MINUTES
+			).toISOString();
+		} else {
+			user.data.feathersUpdate = DO_NOT_UPDATE;
+		}
+		return user;
+	}
+
+	// Calculate feathersToAdd based on the elapsed time since feathersUpdate
+	if (user.data.feathers < user.data.feathersMax) {
+		const timeElapsed = Math.floor(
+			(currentTime - feathersUpdateDate) / TEN_MINUTES
+		);
+		feathersToAdd = Math.max(timeElapsed, 0); // Ensure feathersToAdd is not negative
+	}
+
+	// Update feathers if feathersToAdd is greater than 0
+	if (feathersToAdd > 0) {
+		if (user.data.feathers + feathersToAdd > user.data.feathersMax) {
+			user.data.feathers = user.data.feathersMax;
+		} else {
+			user.data.feathers += feathersToAdd;
+		}
+	}
+
+	// If feathers are now maxed, set feathersUpdate to DO_NOT_UPDATE
+	if (user.data.feathers >= user.data.feathersMax) {
+		user.data.feathersUpdate = DO_NOT_UPDATE;
+	}
+
+	// Update feathersUpdate if needed (far past case)
+	if (feathersToAdd > 0 && user.data.feathersUpdate !== DO_NOT_UPDATE) {
+		const previousFeathersUpdate = new Date(user.data.feathersUpdate);
+		user.data.feathersUpdate = new Date(
+			previousFeathersUpdate.getTime() + TEN_MINUTES * feathersToAdd
+		).toISOString();
+	}
+
+	// If feathersUpdate is less than 10 minutes in the past, set it to 10 minutes from that time
+	const timeAgo = currentTime - new Date(user.data.feathersUpdate);
+	if (timeAgo < TEN_MINUTES) {
+		const previousFeathersUpdate = new Date(user.data.feathersUpdate);
+		user.data.feathersUpdate = new Date(
+			previousFeathersUpdate.getTime() + TEN_MINUTES * feathersToAdd
+		).toISOString();
+	}
+
+	return user;
 }
 
 export async function invalidateUserCache() {
@@ -107,7 +187,34 @@ export async function handleGetByToken(request) {
 	const cachedResponse = await caches.match(cacheKey);
 	if (cachedResponse) {
 		console.log('handleGetByToken: Cache hit for key:', cacheKey);
-		return cachedResponse;
+		const cachedBody = await cachedResponse.json();
+		const modifiedBody = feathersModifier(cachedBody);
+
+		// Check if feathersUpdate was initialized and needs to be updated in the cache
+		if (
+			modifiedBody.data.feathersUpdate &&
+			cachedBody.data.feathersUpdate !== modifiedBody.data.feathersUpdate
+		) {
+			// Create a new response with the modified body
+			const newResponse = new Response(JSON.stringify(modifiedBody), {
+				status: cachedResponse.status,
+				statusText: cachedResponse.statusText,
+				headers: cachedResponse.headers
+			});
+
+			// Update the cache with the new response
+			const cache = await caches.open('teedee-api-cache'); // Replace with your actual cache name
+			cache.put(cacheKey, newResponse);
+			console.log(
+				'handleGetByToken: Cache updated with new feathersUpdate'
+			);
+		}
+
+		return new Response(JSON.stringify(modifiedBody), {
+			status: cachedResponse.status,
+			statusText: cachedResponse.statusText,
+			headers: cachedResponse.headers
+		});
 	}
 
 	// Fetch from the network and validate
@@ -120,26 +227,47 @@ export async function handleGetByToken(request) {
 		throw error;
 	}
 
+	const networkBody = await networkResponse.clone().json();
+	const modifiedBody = feathersModifier(networkBody);
+	const modifiedResponse = new Response(JSON.stringify(modifiedBody), {
+		status: networkResponse.status,
+		statusText: networkResponse.statusText,
+		headers: networkResponse.headers
+	});
+
 	// Cache the response
 	const cache = await caches.open('teedee-api-cache');
-	await cache.put(cacheKey, networkResponse.clone());
+	await cache.put(cacheKey, modifiedResponse.clone());
 	console.log('handleGetByToken: Cached new response with key:', cacheKey);
 
 	// Store the token for future use
 	await storeToken(token);
 
-	return networkResponse;
+	return modifiedResponse;
 }
 
 export async function handleSetByToken(request) {
-	const requestBody = await request.clone().json();
-	const token = requestBody.token;
+	let requestBody = await request.clone().json();
+	const { token, ...data } = requestBody;
+	const user = { token, data };
+	const modifiedBody = feathersModifier(user);
 
 	let networkResponse;
 	try {
-		networkResponse = await fetch(request);
+		networkResponse = await fetch(
+			new Request(request, {
+				body: JSON.stringify({
+					...(modifiedBody?.data || {}),
+					token
+				}),
+				method: request.method,
+				headers: request.headers
+			})
+		);
 		await validateResponse(networkResponse);
 	} catch (error) {
+		// Handle JSON parsing errors
+		console.log(error);
 		await invalidateUserCache();
 		throw error;
 	}

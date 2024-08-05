@@ -26,11 +26,13 @@ export const getStats = async () => {
 		value.gems = apiUser.data.gems || value.gems;
 		value.coins = apiUser.data.coins || value.coins;
 		value.friendPoints = apiUser.data.friendPoints || value.friendPoints;
+		value.feathersUpdate = apiUser.data.feathersUpdate;
 		localStorage.setItem(
 			LS_NAME,
 			JSON.stringify({
 				feathers: value.feathers,
 				feathersMax: value.feathersMax,
+				feathersUpdate: value.feathersUpdate,
 				gems: value.gems,
 				coins: value.coins,
 				friendPoints: value.friendPoints

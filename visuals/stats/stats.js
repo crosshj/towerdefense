@@ -36,10 +36,21 @@ const attachFeatherUpdater = (userStats) => {
 
 	let timeLeft;
 	const resetTime = (userStats) => {
-		//TODO: time to feather based on user stats
-		const timeToFeather = 10 * 60;
+		const feathersUpdateDate = new Date(userStats.feathersUpdate);
+		let apiTimeLeft;
+		try {
+			apiTimeLeft = Math.floor((feathersUpdateDate - new Date()) / 1000);
+			apiTimeLeft = apiTimeLeft > 0 ? apiTimeLeft : 10 * 60 + apiTimeLeft;
+			apiTimeLeft =
+				Math.abs(apiTimeLeft) <= 10 * 60
+					? apiTimeLeft
+					: apiTimeLeft % (10 * 60);
+		} catch (e) {}
+		if (!apiTimeLeft || apiTimeLeft === -1) return -1;
+
+		console.log({ apiTimeLeft, userStats, feathersUpdateDate });
 		const maxedOut = userStats.feathers >= userStats.feathersMax;
-		timeLeft = maxedOut ? -1 : timeToFeather;
+		timeLeft = maxedOut ? -1 : apiTimeLeft;
 	};
 
 	updateFeathers(userStats);

@@ -1,0 +1,40 @@
+body {
+	font-family: 'Courier New', Courier, monospace;
+	font-size: 16px;
+}
+.test-case {
+	margin-bottom: 5px;
+}
+.pass:before,
+.fail:before,
+.todo:before,
+.skip:before {
+	margin-right: 10px;
+}
+.pass {
+	color: #aafbaa;
+}
+.pass:before {
+	content: '✔';
+	color: #00ff00;
+}
+.fail {
+	color: #ff0000;
+}
+.fail:before {
+	content: '✖';
+}
+.todo {
+	color: #999999;
+}
+.todo:before {
+	content: '✎';
+	color: hsl(300 96% 53% / 1);
+}
+.skip {
+	color: #ffff00;
+}
+.skip:before {
+	content: '○';
+	color: #ffff00;
+}
