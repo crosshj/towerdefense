@@ -470,13 +470,13 @@ export const unitsAll = {
 		range: 114 * 4
 	},
 
-	// https://rangers.lerico.net/en/ranger/u56-frankie
+	// https://rangers.lerico.net/en/ranger/u56-frankie (with reduce mineral cost)
 	'u0001-3-corpus': {
 		displayName: 'Corpus',
 		element: 'Dark',
 		type: 'Agility',
 		rank: 3,
-		mineralCost: 470,
+		mineralCost: 250,
 		attack: '188 - 1,124 - 2,887',
 		hp: '2,397 - 14,097 - 36,175',
 		defense: '28 - 184 - 475',
