@@ -482,5 +482,32 @@ export const unitsAll = {
 		hp: '2,397 - 14,097 - 36,175',
 		defense: '28 - 184 - 475',
 		range: 70 * 10
+	},
+
+	// https://rangers.lerico.net/en/ranger/u56-frankie
+	'u0001-3-arcus': {
+		displayName: 'Arcus',
+		element: 'Air',
+		type: 'Strength',
+		rank: 3,
+		mineralCost: 250,
+		// orig mineral cost: 470
+		attack: '188 - 1,124 - 2,887',
+		hp: '2,397 - 14,097 - 36,175',
+		defense: '28 - 184 - 475',
+		range: 50 * 10
+	},
+
+	// https://rangers.lerico.net/en/ranger/u71-cook
+	'u0001-3-pismud': {
+		displayName: 'Pismud',
+		element: 'Normal',
+		type: 'Agility',
+		rank: 3,
+		mineralCost: 250,
+		attack: '174 - 1,032 - 2,650',
+		hp: '2,205 - 12,969 - 33,280',
+		defense: '30 - 186 - 479',
+		range: 60 * 10
 	}
 };

@@ -11,6 +11,7 @@ export const stageCharacterDrops = {
 	// grass, bug, normal
 	forest1: {
 		'u0001-3-zar': { type: 'char', probability: 0.3 },
+		'u0001-3-pismud': { type: 'char', probability: 0.3 },
 		'u0001-4-antonio': { type: 'char', probability: 0.1 },
 		'u0001-5-prickles': { type: 'char', probability: 0.1 },
 		'u0001-4-openhyman': { type: 'char', probability: 0.4 }
@@ -19,6 +20,7 @@ export const stageCharacterDrops = {
 	water1: {
 		'u0001-5-wap': { type: 'char', probability: 0.1 },
 		'u0001-2-jet': { type: 'char', probability: 0.1 },
+		'u0001-3-arcus': { type: 'char', probability: 0.3 },
 		'u0001-4-pineman': { type: 'char', probability: 0.4 },
 		'u0001-2-tom': { type: 'char', probability: 0.4 }
 	},
