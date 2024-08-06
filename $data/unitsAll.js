@@ -396,10 +396,10 @@ export const unitsAll = {
 		type: 'Intelligence',
 		rank: 0,
 		mineralCost: 180,
-		attack: '62 - 294 - 817',
-		hp: '639 - 2,959 - 8,206',
-		defense: '75 - 365 - 1,017',
-		range: 500
+		attack: 0,
+		hp: 0,
+		defense: 0,
+		range: 1
 	},
 
 	// https://rangers.lerico.net/en/ranger/u76-brownie
@@ -468,5 +468,18 @@ export const unitsAll = {
 		hp: '1,230 - 5,696 - 15,797',
 		defense: '203 - 957 - 2,659',
 		range: 114 * 4
+	},
+
+	// https://rangers.lerico.net/en/ranger/u56-frankie
+	'u0001-3-corpus': {
+		displayName: 'Corpus',
+		element: 'Dark',
+		type: 'Agility',
+		rank: 3,
+		mineralCost: 470,
+		attack: '188 - 1,124 - 2,887',
+		hp: '2,397 - 14,097 - 36,175',
+		defense: '28 - 184 - 475',
+		range: 70 * 10
 	}
 };

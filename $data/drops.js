@@ -37,7 +37,8 @@ export const stageCharacterDrops = {
 	tropical1: {
 		'u0001-5-multo': { type: 'char', probability: 0.1 },
 		'u0001-4-bumpier': { type: 'char', probability: 0.1 },
-		'u0001-2-ogre': { type: 'char', probability: 0.4 }
+		'u0001-2-ogre': { type: 'char', probability: 0.4 },
+		'u0001-3-corpus': { type: 'char', probability: 0.4 }
 	},
 	// thunder oasis: electric, ground, rock, fire
 	oasis1: {
