@@ -81,11 +81,22 @@ async function validateResponse(response) {
 
 // Function to modify feathers and feathersUpdate
 // used by getByToken and setByToken, exported only for testing
-export function feathersModifier(user) {
+export function feathersModifier(user, isUpdating) {
 	const DO_NOT_UPDATE = -1;
 	const currentTime = new Date();
 	let feathersToAdd = 0;
 	const TEN_MINUTES = 10 * 60 * 1000;
+
+	if (
+		isUpdating &&
+		user.data.feathers < user.data.feathersMax &&
+		[undefined, DO_NOT_UPDATE].includes(user.data.feathersUpdate)
+	) {
+		user.data.feathersUpdate = new Date(
+			currentTime.getTime() + TEN_MINUTES
+		).toISOString();
+		return user;
+	}
 
 	if (!user || typeof user !== 'object' || !user.data) {
 		throw new Error('Invalid user object');
@@ -250,7 +261,7 @@ export async function handleSetByToken(request) {
 	let requestBody = await request.clone().json();
 	const { token, ...data } = requestBody;
 	const user = { token, data };
-	const modifiedBody = feathersModifier(user);
+	const modifiedBody = feathersModifier(user, true /*isUpdating*/);
 
 	let networkResponse;
 	try {

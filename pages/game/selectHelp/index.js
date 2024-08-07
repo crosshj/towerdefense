@@ -14,7 +14,7 @@ const attachNextButton = async ({ location, params }) => {
 		<span class="featherAmount">X${featherCost}</span>
 		<span>START</span>
 	`;
-	nextButton.addEventListener('mousedown', async () => {
+	nextButton.addEventListener('pointerup', async () => {
 		window.parent.postMessage({
 			_: 'action',
 			minusFeathers: featherCost
@@ -33,6 +33,12 @@ const attachNextButton = async ({ location, params }) => {
 		const queryString = new URLSearchParams(newParams).toString();
 		const src = `/pages/game/standard.html?${queryString}`;
 		window.parent.postMessage({ _: 'navigate', src });
+
+		//TODO: not sure if this is entirely necessary, was seeing issues with stats flashin, though
+		window.parent.postMessage({
+			_: 'stats',
+			visibility: 'hidden'
+		});
 	});
 };
 

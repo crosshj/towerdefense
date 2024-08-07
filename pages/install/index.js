@@ -1,4 +1,5 @@
 import { depends } from '../../_depends.js';
+import { isSessionActive } from '../../utils/session.js';
 
 const registerServiceWorker = async () => {
 	if (!('serviceWorker' in navigator)) {
@@ -121,7 +122,7 @@ const periodicSync = async () => {
 
 const onLoaded = async () => {
 	await registerServiceWorker();
-	const sessionActive = sessionStorage.getItem('SESSION_ACTIVE') === 'true';
+	const sessionActive = isSessionActive();
 	if (sessionActive) {
 		window.parent.postMessage({
 			_: 'navigate',

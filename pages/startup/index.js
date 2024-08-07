@@ -1,4 +1,5 @@
 import { getUser } from '../../user/user.js';
+import { isSessionActive, setSessionActive } from '../../utils/session.js';
 
 const resetGame = () => {
 	localStorage.removeItem('USER_TEAMS');
@@ -45,7 +46,7 @@ const setupActionsNew = ({ gameStarted }) => {
 			if (!choice) return;
 			resetGame();
 		}
-		sessionStorage.setItem('SESSION_ACTIVE', 'true');
+		setSessionActive();
 		if (!gameStarted) {
 			localStorage.setItem('GAME_STARTED', new Date().toISOString());
 		}
@@ -65,7 +66,7 @@ const setupActionsContinue = ({ gameStarted }) => {
 	}
 	actionsContinueButton.addEventListener('mousedown', async () => {
 		await updateLogin();
-		sessionStorage.setItem('SESSION_ACTIVE', 'true');
+		setSessionActive();
 		window.parent.postMessage({
 			_: 'navigate',
 			src: '/pages/home/index.html'
@@ -81,7 +82,7 @@ const setupActionLogin = ({ gameStarted }) => {
 		button.classList.add('secondary');
 	}
 	button.addEventListener('pointerup', () => {
-		sessionStorage.setItem('SESSION_ACTIVE', 'true');
+		setSessionActive();
 		window.parent.postMessage({
 			_: 'navigate',
 			src: '/account/login/index.html'
@@ -104,7 +105,7 @@ const setupActionSignUp = ({ gameStarted }) => {
 };
 
 document.addEventListener('DOMContentLoaded', async () => {
-	const sessionActive = sessionStorage.getItem('SESSION_ACTIVE') === 'true';
+	const sessionActive = isSessionActive();
 	if (sessionActive) {
 		window.parent.postMessage({
 			_: 'navigate',
