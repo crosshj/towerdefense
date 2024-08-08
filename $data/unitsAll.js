@@ -509,5 +509,19 @@ export const unitsAll = {
 		hp: '2,205 - 12,969 - 33,280',
 		defense: '30 - 186 - 479',
 		range: 60 * 10
+	},
+
+	// https://rangers.lerico.net/en/ranger/u041e-jill
+	'u0001-4-ruby': {
+		displayName: 'Ruby',
+		element: 'Normal',
+		type: 'Strength',
+		rank: 4,
+		mineralCost: 250,
+		// orig mineralcost 500
+		attack: '148 - 1,079 - 2,626',
+		hp: '6,275 - 44,740 - 108,792',
+		defense: '391 - 2,841 - 6,914',
+		range: 50 * 10
 	}
 };
