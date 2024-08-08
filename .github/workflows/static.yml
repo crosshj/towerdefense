@@ -31,10 +31,14 @@ jobs:
         steps:
             - name: Checkout
               uses: actions/checkout@v4
-            - name: Replace commit hash in modals/settings/index.html
+            - name: Commit hash in modals/settings/version.js
               run: |
                   COMMIT_HASH=$(git rev-parse HEAD)
                   sed -i "s/{GIT_COMMIT_HASH}/$COMMIT_HASH/g" modals/settings/version.js
+            - name: Commit hash in sw.js
+              run: |
+                  COMMIT_HASH=$(git rev-parse HEAD)
+                  sed -i "s/{GIT_COMMIT_HASH}/$COMMIT_HASH/g" sw.js
             - name: Setup Pages
               uses: actions/configure-pages@v5
             - name: Upload artifact
