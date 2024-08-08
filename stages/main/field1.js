@@ -25,13 +25,13 @@ export default async () => {
 	const basicOppChar = {
 		type: 'defender',
 		hp: 3000,
-		respawn: 40,
+		respawn: 100,
 		range: 560,
-		attack: 95,
-		move: 40,
+		attack: 25,
+		move: 20,
 		x: towerX + 140,
-		critChance: 0.1,
-		critMult: 5
+		critChance: 0.025,
+		critMult: 1.1
 	};
 
 	return {
