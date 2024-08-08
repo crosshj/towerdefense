@@ -100,6 +100,39 @@ function getClick({
 	return pixel;
 }
 
+class DragOrTapDetector {
+	constructor(movementThreshold = 5) {
+		this.movementThreshold = movementThreshold;
+		this.startX = 0;
+		this.startY = 0;
+		this.isDragging = false;
+	}
+
+	onDown(event) {
+		this.startX = event.clientX;
+		this.startY = event.clientY;
+		this.isDragging = false;
+	}
+
+	onMove(event) {
+		const currentX = event.clientX;
+		const currentY = event.clientY;
+		const deltaX = currentX - this.startX;
+		const deltaY = currentY - this.startY;
+
+		if (
+			Math.abs(deltaX) > this.movementThreshold ||
+			Math.abs(deltaY) > this.movementThreshold
+		) {
+			this.isDragging = true;
+		}
+
+		this.startX = currentX;
+		this.startY = currentY;
+		return this.isDragging;
+	}
+}
+
 const vertical = async (args) => {
 	const {
 		image,
@@ -186,16 +219,21 @@ const vertical = async (args) => {
 	let lastTimestamp = 0;
 	const friction = 0.93; // adjust for desired inertia
 
-	canvas.style.touchAction = 'none';
+	canvas.style.touchAction = 'pan-x';
+
+	const detector = new DragOrTapDetector(5);
+
 	canvas.addEventListener('pointerdown', (event) => {
 		isTouching = true;
 		touchStartY = event.clientY;
 		velocity = 0;
 		lastTimestamp = event.timeStamp;
+		detector.onDown(event);
 		canvas.setPointerCapture(event.pointerId);
 	});
 	canvas.addEventListener('pointermove', (event) => {
 		if (!isTouching) return;
+		detector.onMove(event);
 		const touchEndY = event.clientY;
 		const deltaY = touchStartY - touchEndY;
 		touchStartY = touchEndY;
@@ -205,12 +243,13 @@ const vertical = async (args) => {
 		handleScroll({ deltaY });
 	});
 	canvas.addEventListener('pointerup', (event) => {
-		//TODO: was this a tap or a drag?
-		handleTap && handleTap(event);
+		if (!detector.isDragging && handleTap) {
+			handleTap(event); // This is a click/tap
+		}
 
 		if (!isTouching) return;
-		isTouching = false;
 		applyInertia();
+		isTouching = false;
 		canvas.releasePointerCapture(event.pointerId);
 	});
 
@@ -308,7 +347,6 @@ const horizontal = async (args) => {
 			canvas.width,
 			newHeight
 		);
-		//drawClickCanvas(canvas);
 	};
 	draw();
 
@@ -330,16 +368,21 @@ const horizontal = async (args) => {
 	let lastTimestamp = 0;
 	const friction = 0.93; // adjust for desired inertia
 
-	canvas.style.touchAction = 'none';
+	canvas.style.touchAction = 'pan-y';
+
+	const detector = new DragOrTapDetector(5);
+
 	canvas.addEventListener('pointerdown', (event) => {
 		isTouching = true;
 		touchStartX = event.clientX;
 		velocity = 0;
 		lastTimestamp = event.timeStamp;
+		detector.onDown(event);
 		canvas.setPointerCapture(event.pointerId);
 	});
 	canvas.addEventListener('pointermove', (event) => {
 		if (!isTouching) return;
+		detector.onMove(event);
 		const touchEndX = event.clientX;
 		const deltaX = touchStartX - touchEndX;
 		touchStartX = touchEndX;
@@ -349,9 +392,9 @@ const horizontal = async (args) => {
 		handleScroll({ deltaX });
 	});
 	canvas.addEventListener('pointerup', (event) => {
-		//TODO: was this a tap or a drag?
-		handleTap && handleTap(event);
-
+		if (!detector.isDragging && handleTap) {
+			handleTap(event);
+		}
 		if (!isTouching) return;
 		isTouching = false;
 		applyInertia();
@@ -376,7 +419,6 @@ const horizontal = async (args) => {
 			requestAnimationFrame(applyInertia);
 		}
 	}
-
 	canvas.addEventListener(
 		'wheel',
 		(event) => {
