@@ -523,5 +523,19 @@ export const unitsAll = {
 		hp: '6,275 - 44,740 - 108,792',
 		defense: '391 - 2,841 - 6,914',
 		range: 50 * 10
+	},
+
+	// https://rangers.lerico.net/en/ranger/u106-cony
+	'u0001-3-timmy': {
+		displayName: 'Timmy',
+		element: 'Normal',
+		type: 'Intelligence',
+		rank: 3,
+		mineralCost: 290,
+		attack: '737 - 4,364 - 11,203',
+		hp: '1,117 - 6,577 - 16,879',
+		defense: '391 - 2,841 - 6,914',
+		// orig 0 - 0 - 0
+		range: 80 * 10
 	}
 };

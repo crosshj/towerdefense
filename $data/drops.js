@@ -10,6 +10,7 @@ export const stageCharacterDrops = {
 	},
 	// grass, bug, normal
 	forest1: {
+		'u0001-3-timmy': { type: 'char', probability: 0.3 },
 		'u0001-3-zar': { type: 'char', probability: 0.3 },
 		'u0001-3-pismud': { type: 'char', probability: 0.3 },
 		'u0001-4-antonio': { type: 'char', probability: 0.1 },
