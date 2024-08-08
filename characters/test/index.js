@@ -165,13 +165,15 @@ const onChange = async () => {
 const updateCharactersList = async ({ selected = 0, units } = {}) => {
 	const listEl = document.getElementById('charactersList');
 	const unitsList = units || listAvailableUnits();
-	listEl.innerHTML = unitsList.map(
-		(x, i) => `
+	listEl.innerHTML = unitsList
+		.map(
+			(x, i) => `
         <option ${i === selected ? 'selected' : ''} value=${x.code}>${
-			i + ' - ' + x.displayName
-		}</option>
+				i + ' - ' + x.displayName
+			}</option>
     `
-	);
+		)
+		.reverse();
 	listEl.addEventListener('change', onChange);
 };
 
@@ -214,13 +216,26 @@ const attachControls = () => {
 	});
 };
 
+const attachUpdateCacheButton = () => {
+	const updateCacheButton = document.querySelector('.updateCache');
+	updateCacheButton.addEventListener('pointerup', () => {
+		const understood = confirm(
+			'This will open a window with a progress bar.  When that is finished, close and come back here.'
+		);
+		if (!understood) return;
+		sessionStorage.removeItem('SESSION_ACTIVE');
+		window.open('/pages/install/');
+	});
+};
+
 const onLoaded = async () => {
 	attachControls();
 	const units = listAvailableUnits();
-	const selectedUnit = 43; // 18=Openhymen
+	const selectedUnit = units.length - 1; // 18=Openhymen
 	const selectedAnim = 1; // 1=jumping
 	await updateCharactersList({ selected: selectedUnit, units });
 	await updateAnimationsList({ selected: selectedAnim });
+	attachUpdateCacheButton();
 	onChange();
 };
 
