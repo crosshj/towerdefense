@@ -248,8 +248,8 @@ const vertical = async (args) => {
 		}
 
 		if (!isTouching) return;
-		applyInertia();
 		isTouching = false;
+		applyInertia();
 		canvas.releasePointerCapture(event.pointerId);
 	});
 
