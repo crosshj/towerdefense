@@ -219,7 +219,7 @@ const vertical = async (args) => {
 	let lastTimestamp = 0;
 	const friction = 0.93; // adjust for desired inertia
 
-	canvas.style.touchAction = 'pan-y';
+	canvas.style.touchAction = 'none';
 
 	const detector = new DragOrTapDetector(5);
 
@@ -368,7 +368,7 @@ const horizontal = async (args) => {
 	let lastTimestamp = 0;
 	const friction = 0.93; // adjust for desired inertia
 
-	canvas.style.touchAction = 'pan-y';
+	canvas.style.touchAction = 'none';
 
 	const detector = new DragOrTapDetector(5);
 
