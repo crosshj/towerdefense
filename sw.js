@@ -2,6 +2,13 @@
  chrome://inspect/#service-workers
 */
 
+const currentVersion = '0.0.1';
+const currentHash = '{GIT_COMMIT_HASH}'; //will be replaced with GH Action
+const version = currentHash.includes('_HASH')
+	? currentVersion
+	: currentVersion + '-' + currentHash.slice(0, 7);
+console.log(`TD: ${version}`);
+
 import { cacheFiles } from './serviceWorker/cacheFiles.js';
 import { showNotification } from './serviceWorker/showNotifcation.js';
 import {

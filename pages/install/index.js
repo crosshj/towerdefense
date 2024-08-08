@@ -1,12 +1,21 @@
 import { depends } from '../../_depends.js';
-import { isSessionActive } from '../../utils/session.js';
+//import { isSessionActive } from '../../utils/session.js';
+
+function getPromise() {
+	let resolve, reject;
+	const promise = new Promise((res, rej) => {
+		resolve = res;
+		reject = rej;
+	});
+	return { promise, resolve, reject };
+}
 
 const registerServiceWorker = async () => {
 	if (!('serviceWorker' in navigator)) {
 		console.log('unable to register service worker');
 		return;
 	}
-	const registration = navigator.serviceWorker
+	const registration = await navigator.serviceWorker
 		.register('/sw.js', {
 			scope: '/',
 			type: 'module',
@@ -20,71 +29,38 @@ const registerServiceWorker = async () => {
 		return;
 	}
 	console.log('Service Worker registered');
+	return registration;
+};
 
-	// FAILSAFE: make sure progress is happening
-	let currentProgress = 0;
-	let previousProgress = 0;
-	const timeline = {};
-	const failsafeInterval = setInterval(() => {
-		if (currentProgress === 100) {
-			clearInterval(failsafeInterval);
+const updateCache = async ({ onProgress }) => {
+	const { promise, resolve, reject } = getPromise();
+
+	const triggerUpdate = (worker) => {
+		if (!worker.controller) {
+			console.log('service worker not available');
+			setTimeout(() => {
+				document.location.reload();
+			}, 1000);
 			return;
 		}
-		// should not stay stuck on 0
-		if (currentProgress === previousProgress) {
-			document.location.reload();
-		}
-		// should spend no longer than 30 seconds on one progress state
-		timeline[currentProgress] = timeline[currentProgress] || 0;
-		timeline[currentProgress]++;
-		const stuck = timeline[currentProgress] > 3;
-		if (stuck) {
-			document.location.reload();
-		}
-	}, 5000);
+		worker.controller.postMessage({
+			type: 'updateCache',
+			files: depends
+		});
+		worker.addEventListener('message', (event) => {
+			onProgress(event);
+			if (event.data.progress === 100) {
+				resolve();
+			}
+		});
+		worker.addEventListener('controllerchange', () => {
+			console.log('service worker changed while cache in progress.');
+			triggerUpdate(navigator.serviceWorker);
+		});
+	};
+	triggerUpdate(navigator.serviceWorker);
 
-	navigator.serviceWorker.addEventListener('message', (event) => {
-		if (event.data.type !== 'progress') return;
-
-		const progressBar = document.getElementById('progress-bar');
-		progressBar.value = event.data.progress;
-		previousProgress = currentProgress;
-		currentProgress = event.data.progress;
-
-		progressBar.classList.remove('hidden');
-		if (event.data.progress === 100) {
-			clearInterval(failsafeInterval);
-			window.parent.postMessage({
-				_: 'navigate',
-				src: '/pages/startup/index.html'
-			});
-		}
-	});
-};
-
-const updateCache = async () => {
-	if (!navigator.serviceWorker.controller) {
-		console.log('service worker not available');
-		setTimeout(() => {
-			document.location.reload();
-		}, 5000);
-		return;
-	}
-	navigator.serviceWorker.controller.postMessage({
-		type: 'updateCache',
-		files: depends
-	});
-};
-
-const attachUpdateCacheButton = () => {
-	const cacheButton = document.getElementById('updateCacheButton');
-	if (!cacheButton) {
-		setTimeout(() => {
-			updateCache();
-		}, 1000);
-		return;
-	}
-	cacheButton.addEventListener('click', updateCache);
+	return promise;
 };
 
 const backgroundSync = async () => {
@@ -103,7 +79,7 @@ const periodicSync = async () => {
 			name: 'periodic-background-sync'
 		});
 		if (status.state !== 'granted') {
-			console.log('periodic background sync not permitted');
+			console.log('Periodic background sync not permitted');
 			return;
 		}
 		navigator.serviceWorker.ready.then(async (registration) => {
@@ -120,19 +96,31 @@ const periodicSync = async () => {
 	}
 };
 
+const progressListener = (event) => {
+	if (event.data.type !== 'progress') return;
+	const progressBar = document.getElementById('progress-bar');
+	progressBar.classList.remove('hidden');
+	if (event.data.progress > progressBar.value) {
+		progressBar.value = event.data.progress;
+	}
+};
+
 const onLoaded = async () => {
-	await registerServiceWorker();
-	const sessionActive = isSessionActive();
-	if (sessionActive) {
+	try {
+		//await registerServiceWorker(); //(might not be needed since done in main frame)
+		await updateCache({
+			onProgress: progressListener
+		});
+		// what if SW changes during one of these?
+		await backgroundSync();
+		await periodicSync();
+
 		window.parent.postMessage({
 			_: 'navigate',
 			src: '/pages/startup/index.html'
 		});
-		return;
+	} catch (e) {
+		console.log(e);
 	}
-	attachUpdateCacheButton();
-	await backgroundSync();
-	await periodicSync();
 };
-
 document.addEventListener('DOMContentLoaded', onLoaded);
