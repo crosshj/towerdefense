@@ -537,5 +537,20 @@ export const unitsAll = {
 		defense: '391 - 2,841 - 6,914',
 		// orig 0 - 0 - 0
 		range: 80 * 10
+	},
+
+	// https://rangers.lerico.net/en/ranger/u72-sol
+	'u0001-5-popo': {
+		displayName: 'Popo',
+		element: 'Dragon',
+		type: 'Agility',
+		rank: 5,
+		mineralCost: 150,
+		// orig mineral 790
+		attack: '1,053 - 8,841 - 20,666',
+		hp: '3,121 - 26,190 - 61,218',
+		defense: '391 - 2,841 - 6,914',
+		// orig 0 - 0 - 0
+		range: 70 * 10
 	}
 };
