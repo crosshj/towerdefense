@@ -9,6 +9,41 @@ is:service-worker-intercepted
 */
 
 const assets = [
+	// audio
+	'/assets/audio/AsianScene.wav',
+	'/assets/audio/coreSounds.wav',
+	'/assets/audio/EtherealTraverse.wav',
+	'/assets/audio/explosion1.wav',
+	'/assets/audio/march.wav',
+	'/assets/audio/slowedSurf.wav',
+	'/assets/audio/SunnyField.wav',
+	'/assets/audio/TropicalShadows.wav',
+
+	// user
+	'/user/characters.js',
+	'/user/effects.js',
+	'/user/getCollection.js',
+	'/user/getFriends.js',
+	'/user/settings.js',
+	'/user/user.js',
+	'/user/teams.js',
+
+	//utils
+	'/utils/compress.js',
+	'/utils/utils.js',
+	'/utils/experience.js',
+
+	// $data
+	'$data/unitsAll.js',
+	'$data/drops.js',
+
+	// visuals
+	'/visuals/assets/assets.js',
+	'/visuals/components.css',
+	'/visuals/assets/character.js',
+	'/visuals/stats/stats.css',
+	'/visuals/stats/stats.js',
+
 	// backgrounds
 	'/assets/background/forest1.png',
 	'/assets/background/highlands1.png',
@@ -19,6 +54,7 @@ const assets = [
 	'/assets/bg-ghost1.png',
 
 	//pages
+	'/pages/_utils/getCharacter.js',
 	'/pages/collect/bg.png',
 	'/pages/friends/bg.png',
 	'/pages/game/results/bg.png',
@@ -37,42 +73,110 @@ const assets = [
 	'/pages/startup/bg.png',
 	'/pages/upgrade/bg.png',
 
+	//modals
+	'/modals/banner/index.html',
+	'/modals/banner/index.css',
+	'/modals/banner/index.js',
+	'/modals/buff/index.html',
+	'/modals/buff/index.css',
+	'/modals/buff/index.js',
+	'/modals/character/detail.html',
+	'/modals/character/detail.css',
+	'/modals/character/detail.js',
+	'/modals/character/detailDom.js',
+	'/modals/event/index.html',
+	'/modals/event/index.css',
+	'/modals/event/index.js',
+	'/modals/exp/index.html',
+	'/modals/exp/index.css',
+	'/modals/exp/index.js',
+	'/modals/gameOver/index.html',
+	'/modals/gameOver/index.css',
+	'/modals/gameOver/index.js',
+	'/modals/giftbox/index.html',
+	'/modals/giftbox/index.css',
+	'/modals/giftbox/index.js',
+	'/modals/menu/index.html',
+	'/modals/menu/index.css',
+	'/modals/menu/index.js',
+	'/modals/quest/index.html',
+	'/modals/quest/index.css',
+	'/modals/quest/index.js',
+	'/modals/settings/index.html',
+	'/modals/settings/index.css',
+	'/modals/settings/index.js',
+	'/modals/settings/version.js',
+	'/modals/user/index.html',
+	'/modals/user/index.css',
+	'/modals/user/index.js',
+
 	// characters
+	'/characters/index.js',
+	'/characters/units/calculateStats.js',
+	'/characters/units/units.js',
+
+	'/assets/character/FighterBase/FighterBase_ske.json',
+	'/assets/character/FighterBase/FighterBase_tex.json',
+	'/assets/character/FighterBase/FighterBase_tex.png',
+	'/assets/character/FighterBase/Elements/Poison_tex.png',
 	'/assets/teamDragImage.png',
+
 	'/assets/character/FighterBase/skins/1-benny_tex.png',
 	'/assets/character/FighterBase/skins/1-macho_tex.png',
-	'/assets/character/FighterBase/skins/2-ogre_tex.png',
+	'/assets/character/FighterBase/skins/1-pete_tex.png',
+	'/assets/character/FighterBase/skins/1-zoe_tex.png',
+
+	'/assets/character/FighterBase/skins/2-coco_tex.png',
+	'/assets/character/FighterBase/skins/2-foxie_tex.png',
 	'/assets/character/FighterBase/skins/2-jet_tex.png',
+	'/assets/character/FighterBase/skins/2-ogre_tex.png',
+	'/assets/character/FighterBase/skins/2-pande_tex.png',
+	'/assets/character/FighterBase/skins/2-tom_tex.png',
 	'/assets/character/FighterBase/skins/2-toto_tex.png',
+	'/assets/character/FighterBase/skins/2-zerosix_tex.png',
+
+	'/assets/character/FighterBase/skins/3-arcus_tex.png',
+	'/assets/character/FighterBase/skins/3-corpus_tex.png',
+	'/assets/character/FighterBase/skins/3-pismud_tex.png',
 	'/assets/character/FighterBase/skins/3-rose_tex.png',
+	'/assets/character/FighterBase/skins/3-timmy_tex.png',
 	'/assets/character/FighterBase/skins/3-twinkle_tex.png',
+	'/assets/character/FighterBase/skins/3-zar_tex.png',
+
 	'/assets/character/FighterBase/skins/4-antonio_tex.png',
+	'/assets/character/FighterBase/skins/4-aynstine_tex.png',
+	'/assets/character/FighterBase/skins/4-boar_tex.png',
 	'/assets/character/FighterBase/skins/4-bumpier_tex.png',
 	'/assets/character/FighterBase/skins/4-crimson_tex.png',
+	'/assets/character/FighterBase/skins/4-liz_tex.png',
+	'/assets/character/FighterBase/skins/4-openhyman_tex.png',
+	'/assets/character/FighterBase/skins/4-pineman_tex.png',
+	'/assets/character/FighterBase/skins/4-ruby_tex.png',
 	'/assets/character/FighterBase/skins/4-slabb_tex.png',
 	'/assets/character/FighterBase/skins/4-tabi_tex.png',
 	'/assets/character/FighterBase/skins/4-violet_tex.png',
 	'/assets/character/FighterBase/skins/4-vispi_tex.png',
+
 	'/assets/character/FighterBase/skins/5-barbell_tex.png',
+	'/assets/character/FighterBase/skins/5-bibly_tex.png',
 	'/assets/character/FighterBase/skins/5-blanko_tex.png',
 	'/assets/character/FighterBase/skins/5-crack9_tex.png',
 	'/assets/character/FighterBase/skins/5-drat_tex.png',
 	'/assets/character/FighterBase/skins/5-electopus_tex.png',
 	'/assets/character/FighterBase/skins/5-kelvin_tex.png',
+	'/assets/character/FighterBase/skins/5-liz_tex.png',
 	'/assets/character/FighterBase/skins/5-multo_tex.png',
 	'/assets/character/FighterBase/skins/5-prickles_tex.png',
 	'/assets/character/FighterBase/skins/5-robia_tex.png',
 	'/assets/character/FighterBase/skins/5-santelmo_tex.png',
-	'/assets/character/FighterBase/skins/5-wap_tex.png',
-	'/assets/character/FighterBase/FighterBase_ske.json',
-	'/assets/character/FighterBase/FighterBase_tex.json',
-	'/assets/character/FighterBase/FighterBase_tex.png',
-	'/assets/character/FighterBase/Elements/Poison_tex.png'
+	'/assets/character/FighterBase/skins/5-wap_tex.png'
 ];
 
 const vendor = [
 	'/assets/teeGames.png',
 	'/vendor/DragonBones/dragonBones.js',
+	'/vendor/DragonBones/POJFactory.js',
+	'/vendor/DragonBones/Animateable.js',
 	'/vendor/gif-js/gif.js',
 	'/vendor/gif-js/gif.worker.js',
 	'/vendor/DragDropTouch.js'

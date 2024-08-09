@@ -280,7 +280,7 @@ const setup = async () => {
 		clickHandle: (color) => {
 			const which = clickColorMap[color];
 			if (!which) {
-				console.log(color);
+				color !== '#000000' && console.log(color);
 				return;
 			}
 			window.parent.postMessage({

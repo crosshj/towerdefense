@@ -68,3 +68,23 @@ http://dragonbones.com/en/download.html#runLibrary
 
 https://teedee.us  
 https://bit.ly/TowerDefenseGoGo
+
+### early game progress
+
+| lerico                                   | player | units | feathers | extra                                                  |
+| ---------------------------------------- | :----: | :---: | :------: | ------------------------------------------------------ |
+| https://rangers.lerico.net/en/stage/st01 |   3    |   1   |    5     | character gacha, etc tutorial, intial assets download? |
+| https://rangers.lerico.net/en/stage/st02 |   4    |   4   |          | treasure tutorial                                      |
+| https://rangers.lerico.net/en/stage/st03 |   6    |   8   |    6     | special quest tutorial                                 |
+| https://rangers.lerico.net/en/stage/st04 |   7    |  11   |          | daily missions tutorial                                |
+| https://rangers.lerico.net/en/stage/st05 |   9    |  13   |          | upgrade tutorial                                       |
+| https://rangers.lerico.net/en/stage/st06 |   10   |  16   |          |                                                        |
+| https://rangers.lerico.net/en/stage/st07 |   11   |  18   |    7     |                                                        |
+| https://rangers.lerico.net/en/stage/st08 |   13   |  21   |          |                                                        |
+| https://rangers.lerico.net/en/stage/st09 |   14   |  23   |          |                                                        |
+| https://rangers.lerico.net/en/stage/st10 |   15   |  24   |          | upgrade level caps tutorial                            |
+| https://rangers.lerico.net/en/stage/st11 |   17   |  25   |    8     |                                                        |
+| https://rangers.lerico.net/en/stage/st12 |   18   |  27   |          | gear tutorial                                          |
+
+Stages 0-6 - https://www.youtube.com/watch?v=slbiUyNp7MI  
+Stages 7-12 - https://www.youtube.com/watch?v=6YwhpSDSf-k

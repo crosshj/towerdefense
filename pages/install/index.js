@@ -1,5 +1,5 @@
 import { depends } from '../../_depends.js';
-//import { isSessionActive } from '../../utils/session.js';
+import { isSessionActive } from '../../utils/session.js';
 
 function getPromise() {
 	let resolve, reject;
@@ -106,6 +106,14 @@ const progressListener = (event) => {
 };
 
 const onLoaded = async () => {
+	const sessionActive = isSessionActive();
+	if (sessionActive) {
+		window.parent.postMessage({
+			_: 'navigate',
+			src: '/pages/home/index.html'
+		});
+		return;
+	}
 	try {
 		//await registerServiceWorker(); //(might not be needed since done in main frame)
 		await updateCache({

@@ -22,11 +22,11 @@ const attachFeatherUpdater = (userStats) => {
 
 	const featherUpdateEl = document.querySelector('.featherUpdate');
 	const refreshUpdate = (timeLeft) => {
+		if (!featherUpdateEl) return;
 		if (typeof timeLeft === 'undefined') {
 			featherUpdateEl.innerText = '';
 			return;
 		}
-		if (!featherUpdateEl) return;
 		if (timeLeft === -1) {
 			featherUpdateEl.innerText = 'max';
 		} else {
