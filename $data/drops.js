@@ -28,9 +28,9 @@ export const stageCharacterDrops = {
 	// grass, fighting, dragon
 	sakura1: {
 		'u0001-1-macho': { type: 'char', probability: 0.1 },
-		'u0001-4-ruby': { type: 'char', probability: 0.3 },
-		'u0001-4-boar': { type: 'char', probability: 0.4 },
-		'u0001-5-popo': { type: 'char', probability: 0.5 }
+		'u0001-4-ruby': { type: 'char', probability: 0.2 },
+		'u0001-4-boar': { type: 'char', probability: 0.25 },
+		'u0001-5-popo': { type: 'char', probability: 0.45 }
 	},
 	// rock, ground, fighting
 	highlands1: {

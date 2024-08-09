@@ -15,6 +15,8 @@ const attachNextButton = async ({ location, params }) => {
 		<span>START</span>
 	`;
 	nextButton.addEventListener('pointerup', async () => {
+		if (nextButton.classList.contains('clicked')) return;
+		nextButton.classList.add('clicked');
 		window.parent.postMessage({
 			_: 'action',
 			minusFeathers: featherCost
