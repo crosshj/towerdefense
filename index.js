@@ -5,6 +5,7 @@ import { statsElement } from '/visuals/stats/stats.js';
 
 const FADE_MS = 350;
 let whereIsBack;
+let bgMusic;
 
 const setupPlayable = () => {
 	const iframe = `
@@ -110,6 +111,7 @@ function navigate(args = {}) {
 			bgMusic.start(4000);
 		}
 	}, FADE_MS);
+	//TODO: all bg music should be handled heres
 }
 
 const handleClickable = async (e) => {
@@ -210,7 +212,6 @@ const registerServiceWorker = async () => {
 	console.log('Service Worker registered');
 };
 
-let bgMusic;
 const onLoaded = async () => {
 	const install = await installable({
 		onInstall: () => document.location.reload()
