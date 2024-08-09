@@ -78,21 +78,22 @@ const backgroundSync = async () => {
 
 const periodicSync = async () => {
 	try {
+		const registration = await navigator.serviceWorker.ready;
+		if ('periodicSync' in registration) {
+			const periodicSyncTags = await registration.periodicSync.getTags();
+			console.log({ periodicSyncTags });
+		}
 		const status = await navigator.permissions.query({
 			name: 'periodic-background-sync'
 		});
 		if (status.state !== 'granted') {
 			console.log('Periodic background sync not permitted');
 			return;
+		} else {
+			console.log('Periodic background sync permission granted.');
 		}
-		navigator.serviceWorker.ready.then(async (registration) => {
-			try {
-				await registration.periodicSync.register('periodic-sync-tag', {
-					minInterval: TEN_MINUTES
-				});
-			} catch (error) {
-				console.error('Periodic Sync could not be registered!', error);
-			}
+		await registration.periodicSync.register('periodic-sync-tag', {
+			minInterval: TEN_MINUTES
 		});
 	} catch (e) {
 		console.log(e);
