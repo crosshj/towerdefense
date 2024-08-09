@@ -179,6 +179,22 @@ export function feathersModifier(_user, isUpdating) {
 		user.data.feathersUpdate = new Date(newTime).toISOString();
 	}
 
+	if (user.data.feathersUpdate !== DO_NOT_UPDATE) {
+		// if too far in the future, walk back
+		let currentUpdateTime = new Date(user.data.feathersUpdate).getTime();
+		const tenMinutesFuture = currentTime.getTime() + TEN_MINUTES;
+		const tenMinutesPast = currentTime.getTime() - TEN_MINUTES;
+		while (currentUpdateTime > tenMinutesFuture) {
+			console.log('next update time is too far in future');
+			currentUpdateTime -= TEN_MINUTES;
+		}
+		while (currentUpdateTime < tenMinutesPast) {
+			console.log('next update time is too far in future');
+			currentUpdateTime += TEN_MINUTES;
+		}
+		user.data.feathersUpdate = new Date(currentUpdateTime).toISOString();
+	}
+
 	return user;
 }
 
@@ -276,6 +292,7 @@ export async function handleSetByToken(request) {
 	const { token, ...data } = requestBody;
 	const user = { token, data };
 	const modifiedBody = feathersModifier(user, true /*isUpdating*/);
+	console.log({ modifiedBody });
 
 	let networkResponse;
 	try {

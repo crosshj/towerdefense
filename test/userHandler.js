@@ -1,6 +1,6 @@
 import { describe, setAutoRefresh } from '/test/.test.js';
 import { feathersModifier } from '../serviceWorker/userHandler.js';
-import { sampleUser1, sampleUser2 } from './user.fixtures.js';
+import { sampleUser1, sampleUser2, sampleUser3 } from './user.fixtures.js';
 
 //setAutoRefresh(5000);
 
@@ -62,6 +62,23 @@ describe('SW: Feathers Modifier', (it) => {
 			expect(modified.data.feathers).toBe(50) &&
 			expect(modified.data.feathersUpdate).toBe(
 				'2024-08-09T02:10:00.000Z'
+			)
+		);
+	});
+
+	// updateFeathers too far in the future, correct this
+	it('should handle sampleUser3', ({ expect }) => {
+		timemachine.config({
+			dateString: '2024-08-09T22:35:47.789Z'
+		});
+		const user = sampleUser3;
+		const modified = feathersModifier(user);
+		logTest(user, modified);
+		timemachine.reset();
+		return (
+			expect(modified.data.feathers).toBe(19) &&
+			expect(modified.data.feathersUpdate).toBe(
+				'2024-08-09T22:45:42.485Z'
 			)
 		);
 	});
