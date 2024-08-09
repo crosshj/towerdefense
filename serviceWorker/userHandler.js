@@ -1,3 +1,11 @@
+const clone = (obj) => {
+	try {
+		return JSON.parse(JSON.stringify(obj));
+	} catch (e) {
+		return obj;
+	}
+};
+
 function openDB(name, version, { upgrade }) {
 	return new Promise((resolve, reject) => {
 		const request = indexedDB.open(name, version);
@@ -81,7 +89,8 @@ async function validateResponse(response) {
 
 // Function to modify feathers and feathersUpdate
 // used by getByToken and setByToken, exported only for testing
-export function feathersModifier(user, isUpdating) {
+export function feathersModifier(_user, isUpdating) {
+	const user = clone(_user);
 	const DO_NOT_UPDATE = -1;
 	const currentTime = new Date();
 	let feathersToAdd = 0;
@@ -109,6 +118,21 @@ export function feathersModifier(user, isUpdating) {
 		throw new Error('Invalid feathers or feathersMax format');
 	}
 
+	// should not accumulate when maxed
+	if (user.data.feathers >= user.data.feathersMax) {
+		user.data.feathersUpdate = DO_NOT_UPDATE;
+		return user;
+	}
+
+	if (
+		user.data.feathersUpdate + '' === '-1' &&
+		user.data.feathers < user.data.feathersMax
+	) {
+		user.data.feathersUpdate = new Date(
+			currentTime.getTime() + TEN_MINUTES
+		).toISOString();
+	}
+
 	const feathersUpdateDate = new Date(user.data.feathersUpdate);
 	if (isNaN(feathersUpdateDate.getTime())) {
 		user.data.feathersUpdate = undefined;
@@ -128,20 +152,20 @@ export function feathersModifier(user, isUpdating) {
 
 	// Calculate feathersToAdd based on the elapsed time since feathersUpdate
 	if (user.data.feathers < user.data.feathersMax) {
+		if (currentTime > feathersUpdateDate) {
+			feathersToAdd = 1;
+		}
 		const timeElapsed = Math.floor(
 			(currentTime - feathersUpdateDate) / TEN_MINUTES
 		);
-		feathersToAdd = Math.max(timeElapsed, 0); // Ensure feathersToAdd is not negative
+		feathersToAdd += Math.max(timeElapsed, 0);
 	}
 
-	// Update feathers if feathersToAdd is greater than 0
-	if (feathersToAdd > 0) {
-		if (user.data.feathers + feathersToAdd > user.data.feathersMax) {
-			user.data.feathers = user.data.feathersMax;
-		} else {
-			user.data.feathers += feathersToAdd;
-		}
+	// add feathers
+	if (user.data.feathers + feathersToAdd > user.data.feathersMax) {
+		feathersToAdd = user.data.feathersMax - user.data.feathers;
 	}
+	user.data.feathers += feathersToAdd;
 
 	// If feathers are now maxed, set feathersUpdate to DO_NOT_UPDATE
 	if (user.data.feathers >= user.data.feathersMax) {
@@ -150,19 +174,9 @@ export function feathersModifier(user, isUpdating) {
 
 	// Update feathersUpdate if needed (far past case)
 	if (feathersToAdd > 0 && user.data.feathersUpdate !== DO_NOT_UPDATE) {
-		const previousFeathersUpdate = new Date(user.data.feathersUpdate);
-		user.data.feathersUpdate = new Date(
-			previousFeathersUpdate.getTime() + TEN_MINUTES * feathersToAdd
-		).toISOString();
-	}
-
-	// If feathersUpdate is less than 10 minutes in the past, set it to 10 minutes from that time
-	const timeAgo = currentTime - new Date(user.data.feathersUpdate);
-	if (timeAgo < TEN_MINUTES) {
-		const previousFeathersUpdate = new Date(user.data.feathersUpdate);
-		user.data.feathersUpdate = new Date(
-			previousFeathersUpdate.getTime() + TEN_MINUTES * feathersToAdd
-		).toISOString();
+		const oldTime = new Date(user.data.feathersUpdate).getTime();
+		const newTime = oldTime + TEN_MINUTES * feathersToAdd;
+		user.data.feathersUpdate = new Date(newTime).toISOString();
 	}
 
 	return user;
