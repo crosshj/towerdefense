@@ -1,6 +1,9 @@
 import { depends } from '../../_depends.js';
 import { isSessionActive } from '../../utils/session.js';
 
+const ONE_DAY = 24 * 60 * 60 * 1000;
+const TEN_MINUTES = 10 * 60 * 1000;
+
 function getPromise() {
 	let resolve, reject;
 	const promise = new Promise((res, rej) => {
@@ -85,7 +88,7 @@ const periodicSync = async () => {
 		navigator.serviceWorker.ready.then(async (registration) => {
 			try {
 				await registration.periodicSync.register('periodic-sync-tag', {
-					minInterval: 24 * 60 * 60 * 1000 // 1 day
+					minInterval: TEN_MINUTES
 				});
 			} catch (error) {
 				console.error('Periodic Sync could not be registered!', error);

@@ -134,7 +134,10 @@ function periodicSyncData() {
 	// TODO: this is where feathers would be updated
 	// in order to tell backend about this, need user token
 	return new Promise((resolve) => {
-		console.log('Periodic sync triggered!');
+		showNotification({
+			title: 'Test Notification',
+			body: `Will feathers max notifcation work? Version: ${version}`
+		});
 		resolve();
 	});
 }
