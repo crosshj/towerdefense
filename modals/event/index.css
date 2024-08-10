@@ -198,10 +198,52 @@ body {
 				}
 			}
 			.tab-pane.notice {
-				display: grid;
-				grid-template-columns: 1fr 1fr;
-				grid-auto-rows: max-content;
+				display: flex;
+				flex-direction: column;
+				background-color: white;
+				overflow-y: auto;
+				overflow-x: hidden;
+				margin: 1em;
+				box-sizing: border-box;
+				margin-top: 0;
 				gap: 10px;
+				pointer-events: none;
+
+				.noticeContainer {
+					pointer-events: all;
+					& > * {
+						pointer-events: none;
+					}
+					.noticeContent {
+						display: block;
+					}
+					.noticeContent.closed {
+						display: none;
+					}
+					.noticeTitleRow {
+						display: flex;
+
+						.noticeTitleBox {
+							flex: 1;
+							.noticeTitle {
+								font-weight: 900;
+							}
+							.noticeDate {
+								color: grey;
+							}
+						}
+						.noticeCollapser {
+							min-width: 2em;
+						}
+
+						.noticeCollapser:before {
+							content: '🞁';
+						}
+						.noticeCollapser.closed:before {
+							content: '🞃';
+						}
+					}
+				}
 			}
 			.tab-pane.game {
 				display: grid;

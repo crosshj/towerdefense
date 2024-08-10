@@ -1,3 +1,36 @@
+import { exampleNotices } from './examplenotices.js';
+
+const setupNotices = async () => {
+	const noticeEl = document.querySelector(`.tab-pane.notice`);
+
+	const notices = exampleNotices;
+	noticeEl.innerHTML = notices
+		.map((x) => {
+			return `
+				<div class="noticeContainer">
+					<div class="noticeTitleRow">
+						<div class="noticeTitleBox">
+							<div class="noticeTitle">${x.title}</div>
+							<div class="noticeDate">${x.date}</div>
+						</div>
+						<div class="noticeCollapser closed"></div>
+					</div>
+					<div class="noticeContent closed">
+						${x.content}
+					</div>
+				</div>
+			`;
+		})
+		.join('\n');
+
+	noticeEl.addEventListener(`click`, (event) => {
+		const collapser = event.target.querySelector('.noticeCollapser');
+		collapser.classList.toggle('closed');
+		const content = event.target.querySelector('.noticeContent');
+		content.classList.toggle('closed');
+	});
+};
+
 document.addEventListener('DOMContentLoaded', async () => {
 	const chooserEl = document.querySelector('.chooser');
 	const itemsListEl = document.querySelector('.items-list');
@@ -21,4 +54,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 			_: 'navigate'
 		});
 	});
+
+	await setupNotices();
 });
