@@ -237,10 +237,10 @@ body {
 						}
 
 						.noticeCollapser:before {
-							content: '🞁';
+							content: '▲';
 						}
 						.noticeCollapser.closed:before {
-							content: '🞃';
+							content: '▼';
 						}
 					}
 				}
