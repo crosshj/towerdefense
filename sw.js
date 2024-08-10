@@ -4,12 +4,16 @@
 
 const currentVersion = '0.0.1';
 const currentHash = '{GIT_COMMIT_HASH}'; //will be replaced with GH Action
-const version = currentHash.includes('_HASH')
+self._version = currentHash.includes('_HASH')
 	? currentVersion
 	: currentVersion + '-' + currentHash.slice(0, 7);
-console.log(`TD: ${version}`);
+console.log(`TD: ${self._version}`);
 
 import { cacheFiles } from './serviceWorker/cacheFiles.js';
+import {
+	periodicSyncHandler,
+	registerPeriodicSync
+} from './serviceWorker/periodicSync.js';
 import { showNotification } from './serviceWorker/showNotifcation.js';
 import {
 	handleGetByToken,
@@ -27,6 +31,7 @@ self.addEventListener('activate', (event) => {
 
 self.addEventListener('message', async (event) => {
 	if (event?.data?.type === 'updateCache') {
+		await registerPeriodicSync(self.registration);
 		await cacheFiles(event);
 		await invalidateUserCache();
 	}
@@ -125,19 +130,4 @@ function syncData() {
 }
 
 // periodic sync
-self.addEventListener('periodicsync', (event) => {
-	if (event.tag === 'periodic-sync-tag') {
-		event.waitUntil(periodicSyncData());
-	}
-});
-function periodicSyncData() {
-	// TODO: this is where feathers would be updated
-	// in order to tell backend about this, need user token
-	return new Promise((resolve) => {
-		showNotification({
-			title: 'Test Notification',
-			body: `Will feathers max notifcation work? Version: ${version}`
-		});
-		resolve();
-	});
-}
+self.addEventListener('periodicsync', periodicSyncHandler);

@@ -81,7 +81,7 @@ const periodicSync = async () => {
 		const registration = await navigator.serviceWorker.ready;
 		if ('periodicSync' in registration) {
 			const periodicSyncTags = await registration.periodicSync.getTags();
-			console.log({ periodicSyncTags });
+			console.log(JSON.stringify({ periodicSyncTags }));
 		}
 		const status = await navigator.permissions.query({
 			name: 'periodic-background-sync'
@@ -125,7 +125,7 @@ const onLoaded = async () => {
 		});
 		// what if SW changes during one of these?
 		await backgroundSync();
-		await periodicSync();
+		//await periodicSync();
 
 		window.parent.postMessage({
 			_: 'navigate',
