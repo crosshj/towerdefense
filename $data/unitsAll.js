@@ -551,12 +551,25 @@ export const unitsAll = {
 		element: 'Dragon',
 		type: 'Agility',
 		rank: 5,
-		mineralCost: 150,
+		mineralCost: 350,
 		// orig mineral 790
 		attack: '1,053 - 8,841 - 20,666',
 		hp: '3,121 - 26,190 - 61,218',
 		defense: '391 - 2,841 - 6,914',
 		// orig 0 - 0 - 0
 		range: 70 * 10
+	},
+
+	// https://rangers.lerico.net/en/ranger/u056e-ham
+	'u0001-3-Poki': {
+		displayName: 'Poki',
+		element: 'Normal',
+		type: 'Strength',
+		rank: 3,
+		mineralCost: 380,
+		attack: '67 - 418 - 1,076',
+		hp: '3,211 - 18,889 - 48,472',
+		defense: '654 - 3,852 - 9,886',
+		range: 60 * 10
 	}
 };

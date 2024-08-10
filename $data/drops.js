@@ -6,6 +6,7 @@ export const stageCharacterDrops = {
 		'u0001-1-pete': { type: 'char', probability: 0.3 },
 		'u0001-1-zoe': { type: 'char', probability: 0.3 },
 		'u0001-2-coco': { type: 'char', probability: 0.2 },
+		'u0001-3-poki': { type: 'char', probability: 0.2 },
 		'u0001-4-aynstine': { type: 'char', probability: 0.4 }
 	},
 	// grass, bug, normal
