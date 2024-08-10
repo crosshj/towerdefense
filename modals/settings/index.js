@@ -6,7 +6,7 @@ const notificationPermitted = async () => {
 	if ('Notification' in window && navigator.serviceWorker) {
 		if (Notification.permission === 'granted') {
 			return true;
-		} else if (Notification.permission !== 'denied') {
+		} else {
 			const permission = await Notification.requestPermission();
 			return permission === 'granted';
 		}
