@@ -33,8 +33,8 @@ async function handleSyncTag(syncEvent) {
 	// TODO: this is where feathers would be updated
 	// in order to tell backend about this, need user token
 	showNotification({
-		title: 'Test Notification',
-		body: `Will feathers max notifcation work? Version: ${self._version}`
+		title: 'Periodic Background Sync',
+		body: `Date: ${new Date().toISOString()}, Version: ${self._version}`
 	});
 	return;
 }
