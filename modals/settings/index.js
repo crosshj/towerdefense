@@ -59,8 +59,7 @@ const setupPushNotifications = async (_subscription) => {
 		);
 	});
 	if (!existingSub) {
-		user.data.subscription.push(subscription);
-
+		user.data.subscriptions.push(subscription);
 		await updateUserFromAPI(user.data);
 	}
 
