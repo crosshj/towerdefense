@@ -1,12 +1,12 @@
 import { getSettings, setSettings } from '../../user/settings.js';
-import { getUser, updateUserFromAPI } from '../../user/user.js';
+import { getUser, getUserFromAPI, updateUserFromAPI } from '../../user/user.js';
 import { getVersionString } from './version.js';
 
 const notificationPermitted = async () => {
 	if ('Notification' in window && navigator.serviceWorker) {
 		if (Notification.permission === 'granted') {
 			return true;
-		} else if (Notification.permission !== 'denied') {
+		} else {
 			const permission = await Notification.requestPermission();
 			return permission === 'granted';
 		}
@@ -29,7 +29,7 @@ function urlBase64ToUint8Array(base64String) {
 	return outputArray;
 }
 
-const setupPushNotifications = async () => {
+const getSubscription = async () => {
 	const registration = await navigator.serviceWorker.ready;
 	let subscription = await registration.pushManager.getSubscription();
 
@@ -43,11 +43,27 @@ const setupPushNotifications = async () => {
 			applicationServerKey: vapidPublicKey
 		});
 	}
+	return subscription;
+};
+
+const setupPushNotifications = async (_subscription) => {
+	const subscription = _subscription || (await getSubscription());
+
+	const user = await getUserFromAPI();
+	user.data.subscriptions = user.data.subscriptions || [];
+	const existingSub = user.data.subscriptions.find((x) => {
+		return (
+			x.endpoint === subscription.endpoint &&
+			x.keys.p256h === subscription.keys.p256h &&
+			x.keys.auth === subscription.keys.auth
+		);
+	});
+	if (!existingSub) {
+		user.data.subscriptions.push(subscription);
+		await updateUserFromAPI(user.data);
+	}
 
 	console.log({ subscription });
-	// await updateUserFromAPI({
-	// 	pushSubscription: subscription
-	// });
 
 	await fetch('https://datamosh.vercel.app/api/teedee/notification/send', {
 		method: 'POST',

@@ -39,4 +39,6 @@ export const setSettings = async (newSettings) => {
 		};
 	} catch (e) {}
 	localStorage.setItem(LS_NAME, JSON.stringify(settings));
+
+	//TODO: update API with this
 };
