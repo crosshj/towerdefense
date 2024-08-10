@@ -1,5 +1,5 @@
 import { getSettings, setSettings } from '../../user/settings.js';
-import { getUser } from '../../user/user.js';
+import { getUser, updateUserFromAPI } from '../../user/user.js';
 import { getVersionString } from './version.js';
 
 const notificationPermitted = async () => {
@@ -12,6 +12,53 @@ const notificationPermitted = async () => {
 		}
 	}
 	return false;
+};
+
+function urlBase64ToUint8Array(base64String) {
+	var padding = '='.repeat((4 - (base64String.length % 4)) % 4);
+	var base64 = (base64String + padding)
+		.replace(/\-/g, '+')
+		.replace(/_/g, '/');
+
+	var rawData = window.atob(base64);
+	var outputArray = new Uint8Array(rawData.length);
+
+	for (var i = 0; i < rawData.length; ++i) {
+		outputArray[i] = rawData.charCodeAt(i);
+	}
+	return outputArray;
+}
+
+const setupPushNotifications = async () => {
+	const registration = await navigator.serviceWorker.ready;
+	let subscription = await registration.pushManager.getSubscription();
+
+	if (!subscription) {
+		//TODO: get vapidPublicKey live from server instead
+		const vapidPublicKey = urlBase64ToUint8Array(
+			'BHgYzvBsZlUdtzMjBifhO7x-IitcSlLm9sBRiwzeBntu01LT9ZJjAoc832naveLT9pzgBAATmEehlkKmS8VJWcw'
+		);
+		subscription = await registration.pushManager.subscribe({
+			userVisibleOnly: true,
+			applicationServerKey: vapidPublicKey
+		});
+	}
+
+	console.log({ subscription });
+	// await updateUserFromAPI({
+	// 	pushSubscription: subscription
+	// });
+
+	await fetch('https://datamosh.vercel.app/api/teedee/notification/send', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({
+			subscription,
+			payload: 'this is a test notification!'
+		})
+	});
 };
 
 const attachSettings = async () => {
@@ -70,6 +117,19 @@ const attachSettings = async () => {
 		navigator.serviceWorker.controller.postMessage({
 			type: 'testNotification'
 		});
+	});
+
+	const testPushButton = document.querySelector('.testPush');
+	testPushButton.addEventListener('pointerup', async () => {
+		if (!navigator.serviceWorker.controller) {
+			console.log('service worker not available');
+			return;
+		}
+		if (!(await notificationPermitted())) {
+			console.log('You must enable notifications.');
+			return;
+		}
+		await setupPushNotifications();
 	});
 };
 
