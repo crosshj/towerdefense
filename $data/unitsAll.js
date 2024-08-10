@@ -561,7 +561,7 @@ export const unitsAll = {
 	},
 
 	// https://rangers.lerico.net/en/ranger/u056e-ham
-	'u0001-3-Poki': {
+	'u0001-3-poki': {
 		displayName: 'Poki',
 		element: 'Normal',
 		type: 'Strength',
@@ -571,5 +571,18 @@ export const unitsAll = {
 		hp: '3,211 - 18,889 - 48,472',
 		defense: '654 - 3,852 - 9,886',
 		range: 60 * 10
+	},
+
+	// https://rangers.lerico.net/en/ranger/u11-pico
+	'u0001-1-skye': {
+		displayName: 'Skye',
+		element: 'Normal',
+		type: 'Agility',
+		rank: 1,
+		mineralCost: 220,
+		attack: '257 - 1,214 - 3,373',
+		hp: '583 - 2,700 - 7,488',
+		defense: '24 - 111 - 308',
+		range: 80 * 10
 	}
 };
