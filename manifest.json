@@ -1,8 +1,8 @@
 {
+	"id": "tower.defense.game",
 	"name": "Tee Dee",
 	"short_name": "TeeDee",
 	"description": "Tower Defense for all!",
-	"id": "tower.defense.game",
 	"theme_color": "#080b17",
 	"background_color": "#080b17",
 	"display_override": ["fullscreen", "minimal-ui"],
@@ -32,7 +32,6 @@
 			"url": "https://teedee.us/manifest.json"
 		}
 	],
-
 	"prefer_related_applications": false,
 	"shortcuts": [
 		{
