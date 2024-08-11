@@ -39,11 +39,12 @@ const updateCache = async ({ onProgress }) => {
 	const { promise, resolve, reject } = getPromise();
 
 	const triggerUpdate = (worker) => {
-		if (!worker.controller) {
+		if (!worker?.controller) {
 			console.log('service worker not available');
 			setTimeout(() => {
 				document.location.reload();
-			}, 1000);
+				``;
+			}, 5000);
 			return;
 		}
 		worker.controller.postMessage({
@@ -119,7 +120,7 @@ const onLoaded = async () => {
 		return;
 	}
 	try {
-		//await registerServiceWorker(); //(might not be needed since done in main frame)
+		await registerServiceWorker(); //(might not be needed since done in main frame)
 		await updateCache({
 			onProgress: progressListener
 		});
