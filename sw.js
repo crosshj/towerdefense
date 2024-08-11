@@ -72,6 +72,16 @@ self.addEventListener('fetch', (event) => {
 		return;
 	}
 
+	if (requestURL.pathname.endsWith('.html')) {
+		const cacheRequest = new Request(requestURL.pathname);
+		event.respondWith(
+			caches.match(cacheRequest).then((response) => {
+				return response || fetch(event.request);
+			})
+		);
+		return;
+	}
+
 	event.respondWith(
 		caches.match(event.request).then((response) => {
 			return response || fetch(event.request);

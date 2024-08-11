@@ -46,8 +46,13 @@ export const installable = async (args) => {
 		return 'fullscreen';
 	}
 
-	const relatedApps = await navigator.getInstalledRelatedApps();
-	console.log({ relatedApps: Array.from(relatedApps) });
+	try {
+		//TODO: do something with this?
+		const relatedApps = await navigator.getInstalledRelatedApps();
+		//console.log({ relatedApps: Array.from(relatedApps) });
+	} catch (e) {
+		//console.log(e);
+	}
 
 	window.addEventListener('beforeinstallprompt', beforeInstallHandler(args));
 

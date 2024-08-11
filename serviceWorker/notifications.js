@@ -1,3 +1,9 @@
+import {
+	feathersModifier,
+	getCachedUser,
+	updateCachedUser
+} from './userHandler.js';
+
 export const showNotification = (data) => {
 	self.registration.showNotification(data.title, {
 		body: data.body,
@@ -28,6 +34,31 @@ export const handleNotificationClick = (event) => {
 	);
 };
 
+const handleFeathersMoxPush = async (data) => {
+	const isFeatherPush = JSON.stringify(data)
+		.toLowerCase()
+		.includes('feather');
+	if (!isFeatherPush) return;
+
+	const cachedUser = await getCachedUser();
+	if (!cachedUser) return;
+	console.log(cachedUser);
+
+	if (cachedUser.data.feathers === cachedUser.data.feathersMax) return;
+	const modifiedUser = feathersModifier(cachedUser);
+	await updateCachedUser(modifiedUser);
+	console.log(modifiedUser);
+
+	if (modifiedUser.data.feathers !== modifiedUser.data.feathersMax) return;
+	const feathersNotification = {
+		title: 'Feathers Maxed',
+		body: "Let's go!"
+	};
+	console.log(feathersNotification);
+
+	return feathersNotification;
+};
+
 const _handlePush = async (event) => {
 	try {
 		let data;
@@ -37,13 +68,15 @@ const _handlePush = async (event) => {
 			data = { title: 'Notification', body: event.data.text() };
 		}
 
+		const feathersPush = await handleFeathersMoxPush(data);
+
 		const clientList = await clients.matchAll({
 			type: 'window',
 			includeUncontrolled: true
 		});
 
 		if (clientList.length <= 0) {
-			showNotification(data);
+			showNotification(feathersPush || data);
 			return;
 		}
 

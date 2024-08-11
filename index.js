@@ -74,13 +74,13 @@ function closeModal() {
 	setTimeout(() => {
 		const mainIframe = document.querySelector('body > iframe');
 		if (!mainIframe) return;
-		console.log('Before focus:', document.activeElement);
+		//console.log('Before focus:', document.activeElement);
 		mainIframe.contentWindow.focus();
 		mainIframe.contentWindow.dispatchEvent(new Event('focus'));
 		const iframeDocument =
 			mainIframe.contentDocument || mainIframe.contentWindow.document;
 		iframeDocument.body.focus();
-		console.log('After focus:', document.activeElement);
+		//console.log('After focus:', document.activeElement);
 	}, 300);
 	return true;
 }

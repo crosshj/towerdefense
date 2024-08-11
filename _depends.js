@@ -25,13 +25,18 @@ const assets = [
 	'/user/getCollection.js',
 	'/user/getFriends.js',
 	'/user/settings.js',
-	'/user/user.js',
+	'/user/stats.js',
 	'/user/teams.js',
+	'/user/tower.js',
+	'/user/user.js',
 
 	//utils
 	'/utils/compress.js',
 	'/utils/utils.js',
 	'/utils/experience.js',
+	'/utils/debounce.js',
+	'/utils/scrollable.js',
+	'/utils/session.js',
 
 	// $data
 	'$data/unitsAll.js',
@@ -41,8 +46,11 @@ const assets = [
 	'/visuals/assets/assets.js',
 	'/visuals/components.css',
 	'/visuals/assets/character.js',
+	'/visuals/stats/components.js',
 	'/visuals/stats/stats.css',
 	'/visuals/stats/stats.js',
+	'/visuals/canvas.css',
+	'/visuals/canvas.js',
 
 	// backgrounds
 	'/assets/background/forest1.png',
@@ -55,6 +63,7 @@ const assets = [
 
 	//pages
 	'/pages/_utils/getCharacter.js',
+	'/pages/_utils/getTeam.js',
 	'/pages/collect/bg.png',
 	'/pages/friends/bg.png',
 	'/pages/game/results/bg.png',
@@ -63,8 +72,12 @@ const assets = [
 	'/pages/home/background.png',
 	'/pages/home/background_clicks.png',
 	'/pages/lab/background.png',
+
+	'/pages/mainStage/index.html',
+	'/pages/mainStage/index.js',
 	'/pages/mainStage/background.png',
 	'/pages/mainStage/background_clicks.png',
+
 	'/pages/my-team/bg.png',
 	'/pages/pass/bg.png',
 	'/pages/pvp/bg.png',
@@ -124,6 +137,7 @@ const assets = [
 	'/assets/character/FighterBase/skins/1-benny_tex.png',
 	'/assets/character/FighterBase/skins/1-macho_tex.png',
 	'/assets/character/FighterBase/skins/1-pete_tex.png',
+	'/assets/character/FighterBase/skins/1-skye_tex.png',
 	'/assets/character/FighterBase/skins/1-zoe_tex.png',
 
 	'/assets/character/FighterBase/skins/2-coco_tex.png',
@@ -137,6 +151,7 @@ const assets = [
 
 	'/assets/character/FighterBase/skins/3-arcus_tex.png',
 	'/assets/character/FighterBase/skins/3-corpus_tex.png',
+	'/assets/character/FighterBase/skins/3-poki_tex.png',
 	'/assets/character/FighterBase/skins/3-pismud_tex.png',
 	'/assets/character/FighterBase/skins/3-rose_tex.png',
 	'/assets/character/FighterBase/skins/3-timmy_tex.png',
@@ -166,6 +181,7 @@ const assets = [
 	'/assets/character/FighterBase/skins/5-kelvin_tex.png',
 	'/assets/character/FighterBase/skins/5-liz_tex.png',
 	'/assets/character/FighterBase/skins/5-multo_tex.png',
+	'/assets/character/FighterBase/skins/5-popo_tex.png',
 	'/assets/character/FighterBase/skins/5-prickles_tex.png',
 	'/assets/character/FighterBase/skins/5-robia_tex.png',
 	'/assets/character/FighterBase/skins/5-santelmo_tex.png',

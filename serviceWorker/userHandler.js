@@ -217,47 +217,43 @@ export async function invalidateUserCache() {
 	// }
 }
 
-export async function handleGetByToken(request) {
-	const requestBody = await request.clone().json();
-	const token = requestBody.token;
+export const getCachedUserResponse = async (_token) => {
+	const token = _token || (await getToken());
+	if (!token) return undefined;
 
-	// Create a custom cache key
 	const cacheKey = `getByToken-${token}`;
-
-	// Check if we already have the response cached
 	const cachedResponse = await caches.match(cacheKey);
-	if (cachedResponse) {
-		console.log('handleGetByToken: Cache hit for key:', cacheKey);
-		const cachedBody = await cachedResponse.json();
-		const modifiedBody = feathersModifier(cachedBody);
+	return cachedResponse;
+};
 
-		// Check if feathersUpdate was initialized and needs to be updated in the cache
-		if (
-			modifiedBody.data.feathersUpdate &&
-			cachedBody.data.feathersUpdate !== modifiedBody.data.feathersUpdate
-		) {
-			// Create a new response with the modified body
-			const newResponse = new Response(JSON.stringify(modifiedBody), {
-				status: cachedResponse.status,
-				statusText: cachedResponse.statusText,
-				headers: cachedResponse.headers
-			});
+export const getCachedUser = async () => {
+	const cachedResponse = await getCachedUserResponse();
+	if (!cachedResponse) return undefined;
 
-			// Update the cache with the new response
-			const cache = await caches.open('teedee-api-cache'); // Replace with your actual cache name
-			cache.put(cacheKey, newResponse);
-			console.log(
-				'handleGetByToken: Cache updated with new feathersUpdate'
-			);
-		}
+	const cachedBody = await cachedResponse.json();
+	return cachedBody;
+};
 
-		return new Response(JSON.stringify(modifiedBody), {
-			status: cachedResponse.status,
-			statusText: cachedResponse.statusText,
-			headers: cachedResponse.headers
-		});
-	}
+export const updateCachedUser = async (user, _response) => {
+	const response = _response || (await getCachedUserResponse());
+	if (!response) return undefined;
 
+	// Create a new response with the modified body
+	const newResponse = new Response(JSON.stringify(user), {
+		status: response.status,
+		statusText: response.statusText,
+		headers: response.headers
+	});
+
+	// Update the cache with the new response
+	const token = await getToken();
+	const cacheKey = `getByToken-${token}`;
+	const cache = await caches.open('teedee-api-cache'); // Replace with your actual cache name
+	cache.put(cacheKey, newResponse);
+	console.log('updateCachedUser: updated user');
+};
+
+export const updateCachedUserFromNetwork = async (request) => {
 	// Fetch from the network and validate
 	let networkResponse;
 	try {
@@ -276,15 +272,32 @@ export async function handleGetByToken(request) {
 		headers: networkResponse.headers
 	});
 
-	// Cache the response
-	const cache = await caches.open('teedee-api-cache');
-	await cache.put(cacheKey, modifiedResponse.clone());
-	console.log('handleGetByToken: Cached new response with key:', cacheKey);
+	// Cache the response (if needed)
+	const cachedUser = await getCachedUser();
+	const userChanged = !(
+		JSON.stringify(cachedUser) === JSON.stringify(modifiedBody)
+	);
 
-	// Store the token for future use
-	await storeToken(token);
+	if (userChanged) {
+		await updateCachedUser(modifiedBody, modifiedResponse);
+	}
 
 	return modifiedResponse;
+};
+
+export async function handleGetByToken(request) {
+	const requestBody = await request.clone().json();
+	requestBody?.token && (await storeToken(requestBody.token));
+
+	const cachedResponse = await getCachedUserResponse(requestBody.token);
+	if (cachedResponse) {
+		// this is probably not needed(?) because setByToken forces update
+		// and app reload does the same
+		//updateCachedUserFromNetwork(request);
+		return cachedResponse;
+	}
+
+	return await updateCachedUserFromNetwork(request);
 }
 
 export async function handleSetByToken(request) {
