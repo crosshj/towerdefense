@@ -1,4 +1,4 @@
-import { showNotification } from './showNotifcation.js';
+import { showNotification } from './notifications.js';
 
 const ONE_DAY = 24 * 60 * 60 * 1000;
 const TEN_MINUTES = 10 * 60 * 1000;
@@ -43,5 +43,18 @@ export const periodicSyncHandler = (event) => {
 	console.log('periodic sync happened');
 	if (event.tag === 'periodic-sync-tag') {
 		event.waitUntil(handleSyncTag(event));
+	}
+};
+
+function syncData() {
+	return new Promise((resolve) => {
+		console.log('Background sync triggered!');
+		resolve();
+	});
+}
+
+export const backgroundSyncHandler = (event) => {
+	if (event.tag === 'sync-tag') {
+		event.waitUntil(syncData());
 	}
 };

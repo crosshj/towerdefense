@@ -120,7 +120,7 @@ const onLoaded = async () => {
 		return;
 	}
 	try {
-		await registerServiceWorker(); //(might not be needed since done in main frame)
+		//await registerServiceWorker(); //(might not be needed since done in main frame)
 		await updateCache({
 			onProgress: progressListener
 		});

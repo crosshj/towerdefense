@@ -11,10 +11,15 @@ console.log(`TD: ${self._version}`);
 
 import { cacheFiles } from './serviceWorker/cacheFiles.js';
 import {
+	handleNotificationClick,
+	handlePush,
+	showNotification
+} from './serviceWorker/notifications.js';
+import {
+	backgroundSyncHandler,
 	periodicSyncHandler,
 	registerPeriodicSync
-} from './serviceWorker/periodicSync.js';
-import { showNotification } from './serviceWorker/showNotifcation.js';
+} from './serviceWorker/sync.js';
 import {
 	handleGetByToken,
 	handleSetByToken,
@@ -28,6 +33,11 @@ self.addEventListener('install', (event) => {
 self.addEventListener('activate', (event) => {
 	event.waitUntil(self.clients.claim());
 });
+
+self.addEventListener('push', handlePush);
+self.addEventListener('notificationclick', handleNotificationClick);
+self.addEventListener('periodicsync', periodicSyncHandler);
+self.addEventListener('sync', backgroundSyncHandler);
 
 self.addEventListener('message', async (event) => {
 	if (event?.data?.type === 'updateCache') {
@@ -85,49 +95,3 @@ self.addEventListener('fetch', (event) => {
 	// 	})
 	// );
 });
-
-self.addEventListener('push', (event) => {
-	let data;
-	try {
-		data = event.data.json();
-	} catch (e) {
-		data = { title: 'Notification', body: event.data.text() };
-	}
-	showNotification(data);
-});
-
-self.addEventListener('notificationclick', function (event) {
-	event.notification.close();
-	const { url = 'https://teedee.us' } = event?.notification?.data || {};
-	event.waitUntil(
-		clients.matchAll({ type: 'window' }).then((windowClients) => {
-			// Check if there is already a window/tab open with the target URL
-			for (let i = 0; i < windowClients.length; i++) {
-				const client = windowClients[i];
-				if (client.url === url && 'focus' in client) {
-					return client.focus();
-				}
-			}
-			// If not, open a new window/tab
-			if (clients.openWindow) {
-				return clients.openWindow(url);
-			}
-		})
-	);
-});
-
-// background sync
-self.addEventListener('sync', (event) => {
-	if (event.tag === 'sync-tag') {
-		event.waitUntil(syncData());
-	}
-});
-function syncData() {
-	return new Promise((resolve) => {
-		console.log('Background sync triggered!');
-		resolve();
-	});
-}
-
-// periodic sync
-self.addEventListener('periodicsync', periodicSyncHandler);

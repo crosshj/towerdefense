@@ -218,6 +218,7 @@ const onLoaded = async () => {
 	});
 	const isLocal = document.location.host.startsWith('127.0.0.1');
 	if (['fullscreen', 'standalone'].includes(install) || isLocal) {
+		await registerServiceWorker();
 		if (!bgMusic) {
 			bgMusic = await loadSounds('march');
 			bgMusic.start(4000);
@@ -226,7 +227,6 @@ const onLoaded = async () => {
 		return;
 	}
 	setupSplash(install);
-	await registerServiceWorker();
 };
 document.addEventListener('DOMContentLoaded', onLoaded);
 
