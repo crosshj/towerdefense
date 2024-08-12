@@ -64,8 +64,8 @@ body {
 
 canvas {
 	height: 100%;
-	image-rendering: pixelated;
-	transform: translateX(0px);
+	/* image-rendering: pixelated; */
+	/* transform: translateX(0px); */
 	/* 	filter: contrast(1.05); */
 }
 
