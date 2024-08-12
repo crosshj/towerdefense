@@ -447,10 +447,11 @@ export const handleFeathersMoxPush = async (data) => {
 	const currentAPIUser = await getAPIUser();
 	const modifiedAPIUser = feathersModifier(currentAPIUser);
 
-	const apiNeedsUpdate = !objectsEqual(modifiedAPIUser, currentAPIUser, [
-		'feathers',
-		'feathersUpdate'
-	]);
+	const apiNeedsUpdate = !objectsEqual(
+		modifiedAPIUser?.data,
+		currentAPIUser?.data,
+		['feathers', 'feathersUpdate']
+	);
 
 	const cachedUser = (await updateCachedUser(modifiedAPIUser)) || 'unchanged';
 
