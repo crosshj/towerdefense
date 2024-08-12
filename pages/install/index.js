@@ -1,4 +1,4 @@
-import { depends } from '../../_depends.js';
+import { depends, nonLocal } from '../../_depends.js';
 import { isSessionActive } from '../../utils/session.js';
 
 const ONE_DAY = 24 * 60 * 60 * 1000;
@@ -49,7 +49,8 @@ const updateCache = async ({ onProgress }) => {
 		}
 		worker.controller.postMessage({
 			type: 'updateCache',
-			files: depends
+			files:
+				document.location.hostname === '127.0.0.1' ? nonLocal : depends
 		});
 		worker.addEventListener('message', (event) => {
 			onProgress(event);

@@ -254,6 +254,12 @@ const external = [
 	'https://cdn.skypack.dev/-/gif.js@v0.2.0-e7wk4xRP763nJNI3SHHF/dist=es2019,mode=imports/optimized/gifjs.js'
 ];
 
+export const nonLocal = [
+	...vendor,
+	...external
+	//
+];
+
 export const depends = [
 	...assets,
 	...vendor,
