@@ -39,19 +39,18 @@ export const getTeam = async (teamName = 'Team 1', flipBTeam = true) => {
 		if (!raidTeam.a[k]) {
 			raidTeam.a[k] = { ...v };
 		}
-		raidTeam.a[k].image = await loadImage(
-			await characterImageFromDef(raidTeam.a[k])
-		);
+		const imageUri = await characterImageFromDef(raidTeam.a[k]);
+		raidTeam.a[k].image = await loadImage(imageUri);
+		raidTeam.a[k].imageUri = imageUri;
 	}
 	for (const [k, v] of Object.entries(raidTeam.b)) {
 		raidTeam.b[k] = characters.find((c) => c.id === v.id);
 		if (!raidTeam.b[k]) {
 			raidTeam.b[k] = { ...v };
 		}
-		raidTeam.b[k].image = await loadImage(
-			await characterImageFromDef(raidTeam.b[k]),
-			flipBTeam
-		);
+		const imageUri = await characterImageFromDef(raidTeam.b[k]);
+		raidTeam.b[k].image = await loadImage(imageUri, flipBTeam);
+		raidTeam.b[k].imageUri = imageUri;
 	}
 	return raidTeam;
 };

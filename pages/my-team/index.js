@@ -1,6 +1,7 @@
 import { getCharacters } from '../../user/characters.js';
 import { getTeams, setTeams } from '../../user/teams.js';
 import { characterImageGetter } from '../../visuals/assets/character.js';
+import { setCurrentCharCache } from '../_utils/cache.js';
 import { characterDiv } from './components.js';
 import { slotDiv } from './components.js';
 import { handlePointerEvents } from './handlePointerEvents.js';
@@ -135,6 +136,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 			element: charIcon,
 			onTap: () => {
 				const src = `/modals/character/detail.html?id=${character.id}`;
+				setCurrentCharCache({
+					...character,
+					imageUri: getCharImage(character)
+				});
 				window.parent.postMessage({
 					_: 'navigate',
 					src
@@ -176,6 +181,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 			if (draggingEl) return;
 			if (!slot.dataset.id) return;
 			const src = `/modals/character/detail.html?id=${slot.dataset.id}`;
+			const character = characters.find((x) => x.id === slot.dataset.id);
+			setCurrentCharCache({
+				...character,
+				imageUri: getCharImage(character)
+			});
 			window.parent.postMessage({
 				_: 'navigate',
 				src

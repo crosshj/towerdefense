@@ -1,6 +1,7 @@
 import { getUser } from '../../user/user.js';
 import { canvasHorizontal } from '../../visuals/canvas.js';
 import { statsRequest } from '../../visuals/stats/stats.js';
+import { setCurrentCharCache } from '../_utils/cache.js';
 import { getTeam } from '../_utils/getTeam.js';
 
 const pageTitle = 'HOME';
@@ -261,6 +262,20 @@ const drawTeam = ({ ctx, width, height, raidTeam }) => {
 	);
 };
 
+function getCharacter(which, raidTeam) {
+	if (!which.includes('modals/character/detail')) {
+		return undefined;
+	}
+	const urlParams = new URLSearchParams(which.split('?')[1]);
+	const sub = urlParams.get('sub');
+	const slot = parseInt(urlParams.get('slot'), 10);
+	const raidArray = raidTeam[sub];
+	if (!raidArray || slot < 1 || slot > 5) {
+		return undefined;
+	}
+	return raidArray[slot - 1];
+}
+
 const setup = async () => {
 	document.title += `: ${pageTitle}`;
 	window.parent.postMessage({
@@ -283,6 +298,10 @@ const setup = async () => {
 				color !== '#000000' && console.log(color);
 				return;
 			}
+
+			const currentCharacter = getCharacter(which, raidTeam);
+			setCurrentCharCache(currentCharacter);
+
 			window.parent.postMessage({
 				_: 'navigate',
 				src: which

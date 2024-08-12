@@ -1,4 +1,4 @@
-import { getCharacterFromTeam } from '../../pages/_utils/getCharacter.js';
+import { getCurrentCharCache } from '../../pages/_utils/cache.js';
 import { nodeTree, populateNodeTree } from './detailDom.js';
 
 const getElementColor = (element) => {
@@ -17,7 +17,10 @@ const getElementColor = (element) => {
 };
 
 const updateValues = async ({ params, nodeTree }) => {
-	const character = await getCharacterFromTeam(params);
+	const cachedChar = getCurrentCharCache();
+	// const character = cachedChar || (await getCharacterFromTeam(params));
+
+	const character = cachedChar;
 
 	window.character = character;
 	window.nodeTree = nodeTree;

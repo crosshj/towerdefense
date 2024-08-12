@@ -131,13 +131,15 @@ const handleClickable = async (e) => {
 
 const handleAction = async (args) => {
 	if (args.minusFeathers) {
-		const stats = await addStats({ feathers: -1 * args.minusFeathers });
 		const featherStatEl = document.querySelector(
 			'.container .stats .feathers .amount'
 		);
 		if (featherStatEl) {
-			featherStatEl.innerText = stats.feathers;
+			featherStatEl.innerText =
+				Number(featherStatEl.innerText) - args.minusFeathers;
+			//TODO: should also start timer if dropping under feathersMax
 		}
+		await addStats({ feathers: -1 * args.minusFeathers });
 	}
 };
 
@@ -152,10 +154,11 @@ document.body.addEventListener('pointerup', async (event) => {
 });
 
 window.addEventListener('message', async function (event) {
-	const titleContainer = document.querySelector('.title-container');
-	const titleEl = document.querySelector('.title');
-
 	const { _, ...args } = event.data;
+	if (_ === 'action') {
+		await handleAction(args);
+		return;
+	}
 	if (_ === 'stats') {
 		const statsContainer = document.querySelector('.container .stats');
 		statsElement({
@@ -180,13 +183,11 @@ window.addEventListener('message', async function (event) {
 		return;
 	}
 	if (_ === 'title') {
+		const titleContainer = document.querySelector('.title-container');
+		const titleEl = document.querySelector('.title');
 		titleContainer.style.visibility = args.visibility;
 		titleEl.innerHTML = args.title;
 		whereIsBack = args?.back ? args.back : undefined;
-		return;
-	}
-	if (_ === 'action') {
-		await handleAction(args);
 		return;
 	}
 });
