@@ -1,14 +1,10 @@
-import {
-	feathersModifier,
-	getCachedUser,
-	updateCachedUser
-} from './userHandler.js';
+import { handleFeathersMoxPush } from './userHandler.js';
 
 export const showNotification = (data) => {
 	self.registration.showNotification(data.title, {
 		body: data.body,
 		badge: 'assets/favicon.png',
-		icon: 'assets/towerDefenseIconTransparent.png',
+		icon: data?.icon || 'assets/towerDefenseIconTransparent.png',
 		tag: data.tag || 'teedee', //will replace other notifications with this tag
 		data: { url: data.url || 'https://teedee.us' }
 	});
@@ -32,31 +28,6 @@ export const handleNotificationClick = (event) => {
 			}
 		})
 	);
-};
-
-const handleFeathersMoxPush = async (data) => {
-	const isFeatherPush = JSON.stringify(data)
-		.toLowerCase()
-		.includes('feather');
-	if (!isFeatherPush) return;
-
-	const cachedUser = await getCachedUser();
-	if (!cachedUser) return;
-	console.log(cachedUser);
-
-	if (cachedUser.data.feathers === cachedUser.data.feathersMax) return;
-	const modifiedUser = feathersModifier(cachedUser);
-	await updateCachedUser(modifiedUser);
-	console.log(modifiedUser);
-
-	if (modifiedUser.data.feathers !== modifiedUser.data.feathersMax) return;
-	const feathersNotification = {
-		title: 'Feathers Maxed',
-		body: "Let's go!"
-	};
-	console.log(feathersNotification);
-
-	return feathersNotification;
 };
 
 const _handlePush = async (event) => {

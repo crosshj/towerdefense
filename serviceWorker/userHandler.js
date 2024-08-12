@@ -6,6 +6,27 @@ const clone = (obj) => {
 	}
 };
 
+const objectsEqual = (obj1 = {}, obj2 = {}, keys) => {
+	const allKeys =
+		keys ||
+		Array.from(new Set([...Object.keys(obj1), ...Object.keys(obj2)]));
+	return allKeys.every(
+		(key) => JSON.stringify(obj1[key]) === JSON.stringify(obj2[key])
+	);
+};
+
+const objectsDiff = (obj1 = {}, obj2 = {}, keys) => {
+	// Set `allKeys` to either `keys` or an array of all unique keys from both objects
+	const allKeys =
+		keys ||
+		Array.from(new Set([...Object.keys(obj1), ...Object.keys(obj2)]));
+
+	// Filter keys where the values are different
+	return allKeys.filter(
+		(key) => JSON.stringify(obj1[key]) !== JSON.stringify(obj2[key])
+	);
+};
+
 function openDB(name, version, { upgrade }) {
 	return new Promise((resolve, reject) => {
 		const request = indexedDB.open(name, version);
@@ -56,6 +77,68 @@ async function getToken() {
 		};
 	});
 }
+
+const updateAPIUser = async (updatedUser) => {
+	if (typeof updatedUser?.data !== 'object') {
+		return {
+			error: 'unable to update user user.data'
+		};
+	}
+
+	const token = await getToken();
+	if (!token) {
+		return {
+			error: 'unable to update user without token stored'
+		};
+	}
+
+	const apiUrl = 'https://datamosh.vercel.app/api/teedee/players/setByToken';
+	const opts = {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({
+			...(updatedUser?.data || {}),
+			token
+		})
+	};
+	let error;
+	const apiUser = await fetch(apiUrl, opts).catch((e) => {
+		error = e;
+	});
+	if (error) {
+		return { error };
+	}
+	return apiUser;
+};
+
+const getAPIUser = async () => {
+	const token = await getToken();
+	if (!token) {
+		return {
+			error: 'unable to get user without token stored'
+		};
+	}
+	const apiUrl = 'https://datamosh.vercel.app/api/teedee/players/getByToken';
+	const opts = {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({ token })
+	};
+	let error;
+	const apiUser = await fetch(apiUrl, opts)
+		.then((x) => x.json())
+		.catch((e) => {
+			error = e;
+		});
+	if (error) {
+		return { error };
+	}
+	return apiUser;
+};
 
 async function validateResponse(response) {
 	if (!response.ok) {
@@ -235,8 +318,13 @@ export const getCachedUser = async () => {
 };
 
 export const updateCachedUser = async (user, _response) => {
+	const cachedUser = await getCachedUser();
+	const cacheIsCurrent = objectsEqual(user?.data, cachedUser?.data);
+	if (cacheIsCurrent) return;
+	console.log(objectsDiff(user?.data, cachedUser?.data));
+
 	const response = _response || (await getCachedUserResponse());
-	if (!response) return undefined;
+	if (!response) return;
 
 	// Create a new response with the modified body
 	const newResponse = new Response(JSON.stringify(user), {
@@ -251,6 +339,7 @@ export const updateCachedUser = async (user, _response) => {
 	const cache = await caches.open('teedee-api-cache'); // Replace with your actual cache name
 	cache.put(cacheKey, newResponse);
 	console.log('updateCachedUser: updated user');
+	return user;
 };
 
 export const updateCachedUserFromNetwork = async (request) => {
@@ -346,3 +435,33 @@ export async function handleSetByToken(request) {
 
 	return modifiedResponse;
 }
+
+export const handleFeathersMoxPush = async (data) => {
+	const isFeatherPush = JSON.stringify(data)
+		.toLowerCase()
+		.includes('feather');
+	if (!isFeatherPush) return;
+
+	const currentAPIUser = await getAPIUser();
+	const modifiedAPIUser = feathersModifier(currentAPIUser);
+
+	const apiNeedsUpdate = !objectsEqual(modifiedAPIUser, currentAPIUser, [
+		'feathers',
+		'feathersUpdate'
+	]);
+
+	const cachedUser = (await updateCachedUser(modifiedAPIUser)) || 'unchanged';
+
+	const newApiUser = apiNeedsUpdate
+		? await updateAPIUser(modifiedAPIUser)
+		: 'unchanged';
+	console.log({ currentAPIUser, newApiUser, cachedUser });
+
+	const feathersNotification = {
+		title: 'Feathers Maxed',
+		body: "Let's go!",
+		tag: 'teedee-feathers-max'
+		//icon: 'assets/feathersMaxedIcon.png' //TODO: make this icon and use it?
+	};
+	return feathersNotification;
+};
