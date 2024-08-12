@@ -131,3 +131,6 @@ dist
 .yarn/install-state.gz
 .pnp.*
 .DS_Store
+
+# image backups
+*autosave.kra
