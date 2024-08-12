@@ -1,0 +1,26 @@
+body {
+	font-family: sans-serif;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	.container {
+		width: 80%;
+		max-width: 500px;
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+		& > * {
+			width: 100%;
+			box-sizing: border-box;
+		}
+		.usersList {
+			display: grid;
+			grid-template-columns: 1fr auto;
+			.nameSelectContainer {
+				display: flex;
+				gap: 0.5em;
+			}
+		}
+	}
+}

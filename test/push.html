@@ -5,9 +5,25 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="color-scheme" content="dark light" />
 		<title>Push Helper</title>
-		<!-- <link href="/test/.test.css" rel="stylesheet" /> -->
+		<link href="push.css" rel="stylesheet" />
 	</head>
 	<body>
+		<div class="container">
+			<label for="messageReceiver">Receiver</label>
+			<div id="messageReceiver" class="usersList"></div>
+
+			<label for="messageTitle">Title</label>
+			<input id="messageTitle" type="text" />
+
+			<label for="messageText">Content</label>
+			<textarea id="messageText" cols="30" rows="10"></textarea>
+
+			<br />
+			<button class="sendButton">Send Notification</button>
+
+			<pre class="results"></pre>
+		</div>
+
 		<script type="module" src="./push.js"></script>
 	</body>
 </html>
