@@ -13,7 +13,34 @@ function minutesAndSeconds(seconds) {
 	return `${(minutes + '').padStart(2, ' ')}:${(secs + '').padStart(2, '0')}`;
 }
 
+const modifyUserStats = (userStats) => {
+	const now = new Date();
+
+	let {
+		feathers = 0,
+		feathersMax = 0,
+		feathersUpdate = -1
+	} = userStats || {};
+
+	if (feathersUpdate === -1 || feathers >= feathersMax) return userStats;
+
+	feathersUpdate = new Date(feathersUpdate);
+
+	while (feathers < feathersMax && feathersUpdate <= now) {
+		if (feathersUpdate > now) break;
+		feathers++;
+		feathersUpdate.setMinutes(feathersUpdate.getMinutes() + 10);
+	}
+	return {
+		...userStats,
+		feathers,
+		feathersMax,
+		feathersUpdate: feathersUpdate.toISOString()
+	};
+};
+
 const attachFeatherUpdater = (userStats) => {
+	const moddedUserStats = modifyUserStats(userStats);
 	const feathersAmountEl = document.querySelector('.feathers .amount');
 	const updateFeathers = (stats) => {
 		if (!feathersAmountEl) return;
@@ -39,7 +66,8 @@ const attachFeatherUpdater = (userStats) => {
 		const feathersUpdateDate = new Date(userStats.feathersUpdate);
 		let apiTimeLeft;
 		try {
-			apiTimeLeft = Math.floor((feathersUpdateDate - new Date()) / 1000);
+			const now = new Date();
+			apiTimeLeft = Math.floor((feathersUpdateDate - now) / 1000);
 			apiTimeLeft = apiTimeLeft > 0 ? apiTimeLeft : 10 * 60 + apiTimeLeft;
 			apiTimeLeft =
 				Math.abs(apiTimeLeft) <= 10 * 60
@@ -48,29 +76,49 @@ const attachFeatherUpdater = (userStats) => {
 		} catch (e) {}
 		if (!apiTimeLeft || apiTimeLeft === -1) return -1;
 
-		//console.log({ apiTimeLeft, userStats, feathersUpdateDate });
+		console.log({ apiTimeLeft, userStats, feathersUpdateDate });
 		const maxedOut = userStats.feathers >= userStats.feathersMax;
 		timeLeft = maxedOut ? -1 : apiTimeLeft;
 	};
 
-	updateFeathers(userStats);
-	resetTime(userStats);
+	updateFeathers(moddedUserStats);
+	resetTime(moddedUserStats);
 	refreshUpdate(timeLeft);
 
+	let updateInterval;
+	const drawStats = () => {
+		timeLeft--;
+		if (timeLeft === 0) {
+			moddedUserStats.feathers++;
+			updateFeathers(moddedUserStats);
+			resetTime(moddedUserStats);
+		}
+		refreshUpdate(timeLeft);
+		if (timeLeft === -1) {
+			clearInterval(updateInterval);
+		}
+	};
+
 	if (timeLeft !== -1) {
-		const updateInterval = setInterval(() => {
-			timeLeft--;
-			if (timeLeft === 0) {
-				userStats.feathers++;
-				updateFeathers(userStats);
-				resetTime(userStats);
-			}
-			refreshUpdate(timeLeft);
-			if (timeLeft === -1) {
-				clearInterval(updateInterval);
-			}
-		}, 1000);
+		updateInterval = setInterval(drawStats, 1000);
 	}
+
+	window.minusFeathers = (feathersToSubtract) => {
+		const startsTimer =
+			moddedUserStats.feathers === moddedUserStats.feathersMax;
+		moddedUserStats.feathers -= feathersToSubtract;
+		updateFeathers(moddedUserStats);
+
+		if (startsTimer) {
+			const now = new Date();
+			moddedUserStats.feathersUpdate = new Date(
+				now.getTime() + 10 * 60000
+			).toISOString();
+			resetTime(moddedUserStats);
+			refreshUpdate(timeLeft);
+			updateInterval = setInterval(drawStats, 1000);
+		}
+	};
 };
 
 export const statsElement = async (args) => {

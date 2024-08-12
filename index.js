@@ -131,15 +131,8 @@ const handleClickable = async (e) => {
 
 const handleAction = async (args) => {
 	if (args.minusFeathers) {
-		const featherStatEl = document.querySelector(
-			'.container .stats .feathers .amount'
-		);
-		if (featherStatEl) {
-			featherStatEl.innerText =
-				Number(featherStatEl.innerText) - args.minusFeathers;
-			//TODO: should also start timer if dropping under feathersMax
-		}
 		await addStats({ feathers: -1 * args.minusFeathers });
+		window.minusFeathers && window.minusFeathers(args.minusFeathers);
 	}
 };
 
