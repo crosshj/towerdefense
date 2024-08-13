@@ -160,7 +160,7 @@ body {
 			}
 			.tab-pane {
 				width: 100%;
-				padding: 20px 42px;
+				padding: 0px 20px;
 				.switch {
 					--background: #492413;
 					--foreground: #905527;
@@ -332,11 +332,12 @@ button {
 
 .image-container {
 	display: flex;
-	justify-content: space-between;
-	margin-top: 20px;
+	flex: 1;
+	margin-top: 0px;
 }
 
 .random-image img {
+	background-color: white;
 	width: 100px; /* Adjust size as needed */
 	height: auto;
 	border: 2px solid #905527;
@@ -345,8 +346,8 @@ button {
 
 .image-slideshow {
 	position: relative;
-	width: 300px; /* Adjust width as needed */
-	height: 200px; /* Adjust height as needed */
+	width: 100%; /* Adjust width as needed */
+	height: 300px; /* Adjust height as needed */
 	overflow: hidden;
 	border: 2px solid #905527;
 	border-radius: 5px;

@@ -64,9 +64,9 @@ document.addEventListener('DOMContentLoaded', function () {
 	// Random image functionality
 	const randomImgElement = document.getElementById('random-img');
 	const randomImages = [
-		'path/to/image1.jpg',
-		'path/to/image2.jpg',
-		'path/to/image3.jpg'
+		'https://i.pinimg.com/564x/70/6e/44/706e44c917df61beec7f1f855087266a.jpg',
+		'https://i.pinimg.com/736x/dd/34/3d/dd343d45bc3a4d3633f85fa7252b6dbb.jpg',
+		'https://i.pinimg.com/originals/db/0b/99/db0b99668fd82624e8f8e88c2842ee9b.png'
 	];
 	const randomImage =
 		randomImages[Math.floor(Math.random() * randomImages.length)];
