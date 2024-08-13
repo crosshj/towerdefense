@@ -57,3 +57,30 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 	await setupNotices();
 });
+
+// delete this if it doesn't work
+
+document.addEventListener('DOMContentLoaded', function () {
+	// Random image functionality
+	const randomImgElement = document.getElementById('random-img');
+	const randomImages = [
+		'path/to/image1.jpg',
+		'path/to/image2.jpg',
+		'path/to/image3.jpg'
+	];
+	const randomImage =
+		randomImages[Math.floor(Math.random() * randomImages.length)];
+	randomImgElement.src = randomImage;
+
+	// Slideshow functionality
+	let currentSlide = 0;
+	const slides = document.querySelectorAll('.image-slideshow img');
+
+	function showNextSlide() {
+		slides[currentSlide].style.opacity = 0;
+		currentSlide = (currentSlide + 1) % slides.length;
+		slides[currentSlide].style.opacity = 1;
+	}
+
+	setInterval(showNextSlide, 3000); // Change slide every 3 seconds
+});
