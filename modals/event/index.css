@@ -216,6 +216,9 @@ body {
 					}
 					.noticeContent {
 						display: block;
+						padding-top: 5px;
+						font-family: sans-serif;
+						font-size: 14px;
 					}
 					.noticeContent.closed {
 						display: none;
@@ -231,7 +234,7 @@ body {
 								font-size: 18px;
 							}
 							.noticeDate {
-								padding-top: 5px;
+								padding-top: 3px;
 								color: grey;
 							}
 						}
