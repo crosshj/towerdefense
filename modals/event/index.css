@@ -226,9 +226,12 @@ body {
 						.noticeTitleBox {
 							flex: 1;
 							.noticeTitle {
-								font-weight: 900;
+								font-weight: 800;
+								color: #d17527;
+								font-size: 18px;
 							}
 							.noticeDate {
+								padding-top: 5px;
 								color: grey;
 							}
 						}
