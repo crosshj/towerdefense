@@ -126,7 +126,7 @@ const onLoaded = async () => {
 			onProgress: progressListener
 		});
 		// what if SW changes during one of these?
-		await backgroundSync();
+		//await backgroundSync();
 		//await periodicSync();
 
 		window.parent.postMessage({

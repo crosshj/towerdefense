@@ -20,6 +20,7 @@ async function sendNotification({ subscription, player, title, content }) {
 				subscription,
 				player,
 				title,
+				urgency: 'high', // very-low, low, normal, or high
 				payload: content
 			})
 		}
@@ -54,13 +55,13 @@ const attachUsersList = async () => {
 		// .filter((x) => typeof x.last_login === 'string')
 		.sort((a, b) => a.name.localeCompare(b.name));
 
-	console.log(users);
 	const usersListEl = document.querySelector('.usersList');
 	usersListEl.innerHTML = users.map(userRow).join('\n');
 
 	const sendButton = document.querySelector('.sendButton');
 	const messageTitleEl = document.querySelector('#messageTitle');
 	const messageTextEl = document.querySelector('#messageText');
+	const resultsEl = document.querySelector('.results');
 
 	messageTitleEl.value = 'Test Title';
 	messageTextEl.value = 'Test Body';
@@ -75,7 +76,8 @@ const attachUsersList = async () => {
 		});
 		// todo hide loading
 		// update results element
-		console.log({ result });
+		// console.log({ result });
+		resultsEl.innerText = JSON.stringify(result, null, 2);
 	});
 };
 
