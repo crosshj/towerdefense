@@ -1,0 +1,120 @@
+{
+	"name": "FighterBase",
+	"SubTexture": [
+		{
+			"name": "base_fighter_tex/Shadow",
+			"x": 129,
+			"height": 128,
+			"y": 128,
+			"width": 129
+		},
+		{
+			"name": "base_fighter_tex/ArmLeftt",
+			"x": 258,
+			"height": 128,
+			"y": 256,
+			"width": 129
+		},
+		{
+			"name": "base_fighter_tex/Torso",
+			"x": 0,
+			"height": 128,
+			"y": 256,
+			"width": 129
+		},
+		{
+			"name": "base_fighter_tex/LegLeft",
+			"x": 0,
+			"height": 128,
+			"y": 0,
+			"width": 129
+		},
+		{
+			"name": "base_fighter_tex/LegLeftSpread_",
+			"x": 258,
+			"height": 128,
+			"y": 384,
+			"width": 129
+		},
+		{
+			"name": "base_fighter_tex/LegLeftBent",
+			"x": 258,
+			"height": 128,
+			"y": 128,
+			"width": 129
+		},
+		{
+			"name": "base_fighter_tex/LegRightSpread",
+			"x": 129,
+			"height": 128,
+			"y": 384,
+			"width": 129
+		},
+		{
+			"name": "base_fighter_tex/LegRight",
+			"x": 0,
+			"height": 128,
+			"y": 384,
+			"width": 129
+		},
+		{
+			"name": "base_fighter_tex/LegRightBent",
+			"x": 0,
+			"height": 128,
+			"y": 128,
+			"width": 129
+		},
+		{
+			"name": "base_fighter_tex/ArmRight",
+			"x": 258,
+			"height": 128,
+			"y": 0,
+			"width": 129
+		},
+		{
+			"name": "base_fighter_tex/HeadUp",
+			"x": 129,
+			"height": 128,
+			"y": 0,
+			"width": 129
+		},
+		{
+			"name": "base_fighter_tex/Head",
+			"x": 129,
+			"height": 128,
+			"y": 256,
+			"width": 129
+		},
+		{
+			"name": "base_fighter_tex/Extra1",
+			"x": 387,
+			"height": 128,
+			"y": 0,
+			"width": 125
+		},
+		{
+			"name": "base_fighter_tex/Extra2",
+			"x": 387,
+			"height": 128,
+			"y": 128,
+			"width": 125
+		},
+		{
+			"name": "base_fighter_tex/Extra3",
+			"x": 387,
+			"height": 128,
+			"y": 256,
+			"width": 125
+		},
+		{
+			"name": "base_fighter_tex/Extra4",
+			"x": 387,
+			"height": 128,
+			"y": 384,
+			"width": 125
+		}
+	],
+	"imagePath": "FighterBase_tex.png",
+	"height": 512,
+	"width": 512
+}
