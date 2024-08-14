@@ -11,9 +11,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 	}
 	const loseCancel = document.querySelector('.lose-cancel');
 	loseCancel.addEventListener('mousedown', () => {
+		let src = '/pages/mainStage/index.html';
+		if (params.zone === 'friendBattle') {
+			src = '/pages/pvp/';
+		}
 		window.parent.postMessage({
 			_: 'navigate',
-			src: '/pages/mainStage/index.html'
+			src
 		});
 	});
 

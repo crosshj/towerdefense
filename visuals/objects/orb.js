@@ -15,7 +15,7 @@ function createOrb() {
 
 export async function animateOrb(fromX, fromY, toX, toY) {
 	const orb = document.getElementById('orb') || createOrb();
-	console.log({ fromX, fromX, toX, toY });
+	//console.log({ fromX, fromX, toX, toY });
 
 	// Set the initial position of the orb
 	orb.style.left = `${fromX}px`;

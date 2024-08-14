@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+		/>
+		<link rel="stylesheet" href="index.css" />
+		<link rel="stylesheet" href="/visuals/stats/stats.css" />
+		<script src="/components/custom-select.js" defer></script>
+	</head>
+	<body>
+		<div class="background"></div>
+		<div class="container">
+			<div class="main-header">
+				<div class="title-container"></div>
+
+				<div class="currency"></div>
+			</div>
+
+			<div class="sub-header">
+				<div class="total"></div>
+				<button class="settings">⚙</button>
+				<div class="chooser">
+					<div class="selected">FRIENDS</div>
+					<div>ADD</div>
+					<div>INVITE</div>
+				</div>
+				<div class="filter-dropdown">
+					<custom-select>
+						<option selected>Level</option>
+						<option>Last Login</option>
+					</custom-select>
+				</div>
+			</div>
+
+			<div class="items-list"></div>
+
+			<div class="actions">
+				<div>
+					<button class="next-button disabled">NEXT</button>
+				</div>
+			</div>
+		</div>
+
+		<script src="index.js" type="module"></script>
+	</body>
+</html>

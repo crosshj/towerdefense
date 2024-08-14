@@ -80,6 +80,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 	const locationMap = await getLocationMap();
 	const location = locationMap[params.zone];
+
 	if (params?.number) {
 		location.title = 'STAGE ' + params.number;
 	}
@@ -93,15 +94,36 @@ document.addEventListener('DOMContentLoaded', async () => {
 		coins: true,
 		friendPoints: false
 	});
-	window.parent.postMessage({
+
+	const titleConfig = {
 		_: 'title',
 		title: location?.title || 'Select Team',
 		visibility: 'visible',
 		back: '/pages/mainStage/index.html'
-	});
+	};
+	if (params?.zone === 'friendBattle') {
+		titleConfig.title = 'FRIEND BATTLE';
+		titleConfig.back = '/pages/game/friendBattle/index.html';
+	}
+	window.parent.postMessage(titleConfig);
 
-	const levelNameEl = document.querySelector('.level-name');
-	levelNameEl.innerHTML = location?.name || '';
+	const subHeader = document.querySelector('.sub-header');
+	if (params?.zone === 'friendBattle') {
+		subHeader.innerHTML = `
+			<div class="level-message">
+				Select the team and items you wish to use for the battle.
+			</div>
+		`;
+	} else {
+		subHeader.innerHTML = `
+			<div class="level-name">${location?.name || ''}</div>
+			<div class="rewards">
+				<div class="label">Possible Rewards</div>
+				<div class="reward-icon"></div>
+				<div class="reward-more">▸</div>
+			</div>
+		`;
+	}
 
 	const nextButton = document.querySelector('button.next-button');
 	nextButton.addEventListener('mousedown', () => {
@@ -113,7 +135,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 			...effects
 		};
 		const queryString = new URLSearchParams(newParams).toString();
-		const src = `/pages/game/selectHelp/index.html?${queryString}`;
+		let nextPage = '/pages/game/selectHelp/index.html';
+		if (params.zone === 'friendBattle') {
+			nextPage = '/pages/game/selectGuardian/index.html';
+		}
+		const src = `${nextPage}?${queryString}`;
 		window.parent.postMessage({ _: 'navigate', src });
 	});
 

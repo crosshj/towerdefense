@@ -1,4 +1,4 @@
-import { startGame } from '/engine/init.js';
+import { startGame } from '../../engine/init.js';
 import '/visuals/menuPause.js';
 
 const onLoaded = () => {
@@ -20,12 +20,12 @@ const onLoaded = () => {
 		const status = state.towers[1].status === 'dead' ? 'win' : 'lose';
 		window.parent.postMessage({
 			_: 'navigate',
-			src: `/modals/gameOver/index.html?status=${status}`
+			src: `/modals/gameOver/index.html?status=${status}&zone=${params.zone}`
 		});
 
 		const showGameResults = async () => {
 			const queryString = new URLSearchParams(params).toString();
-			const src = `/pages/game/results/index.html?${queryString}`;
+			const src = `/pages/game/results/index.html?${queryString}&zone=${params.zone}`;
 			window.parent.postMessage({
 				_: 'navigate',
 				src

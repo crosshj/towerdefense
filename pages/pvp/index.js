@@ -70,9 +70,20 @@ const updateUserInfo = async ({ players }) => {
 	trophiesNumberEl.innerHTML = '0';
 };
 
+const attachFriendBattle = () => {
+	const button = document.querySelector('button.friendBattle');
+	button.addEventListener('pointerup', () => {
+		const src = `/pages/game/friendBattle/index.html`;
+		window.parent.postMessage({ _: 'navigate', src });
+	});
+};
+
 const setup = async () => {
 	const players = await updatePlayersList();
 	await updateUserInfo({ players });
+
+	attachFriendBattle();
+
 	window.parent.postMessage({
 		_: 'stats',
 		feathers: true,
@@ -82,7 +93,7 @@ const setup = async () => {
 	});
 	window.parent.postMessage({
 		_: 'title',
-		title: 'PVP',
+		title: pageTitle,
 		visibility: 'visible'
 	});
 	window.parent.postMessage({ _: 'loaded' });

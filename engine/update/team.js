@@ -1,5 +1,7 @@
 import { unNest } from '../../utils/utils.js';
 import { loadSounds } from '../../visuals/assets/assets.js';
+import { enemyOneSpawnTicker } from '../ai/enemyOne.js';
+
 const coreSounds = await loadSounds('coreSounds');
 
 export const moveDeployed = (state) => {
@@ -16,6 +18,8 @@ export const moveDeployed = (state) => {
 export const spawnTeam = (state) => {
 	const { towers } = state;
 	const iterate = (char, deployed) => {
+		if (char.type === 'defender') return;
+
 		if (char.spawnTicker) return char.spawnTicker--;
 		if (char.type === 'attacker' && !state.auto) {
 			return;
@@ -24,6 +28,10 @@ export const spawnTeam = (state) => {
 		char.spawnTicker = char.respawn;
 	};
 	for (const tower of towers) {
+		if (tower?.type === 'defender') {
+			enemyOneSpawnTicker(state, tower);
+			continue;
+		}
 		for (const char of tower.team) {
 			iterate(char, tower.deployed);
 		}

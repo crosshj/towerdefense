@@ -1,3 +1,5 @@
+import { getUserLevelInfo } from '../utils/experience.js';
+
 const gradeOrder = ['N', 'M', 'S', 'U', 'L'];
 function sort(players) {
 	return players.sort((a, b) => {
@@ -9,9 +11,34 @@ function sort(players) {
 		return b.level - a.level;
 	});
 }
+const PlayerToFriend = (player) => {
+	const { data, ...playerRest } = player;
+	const { exp, rank, ...dataRest } = data;
+	const levelInfo = getUserLevelInfo(
+		player?.data?.exp || 0,
+		player?.data?.rank || 1
+	);
+	return {
+		...playerRest,
+		...dataRest,
+		displayName: player.name,
+		level: levelInfo.level,
+		grade: levelInfo.gradeFriendly[0]
+	};
+};
+
+export const getFriends = async () => {
+	// TODO: should be a call to friends endpoin not players(?)
+	let players = await fetch(
+		'https://datamosh.vercel.app/api/teedee/players'
+	).then((x) => x.json());
+	players = players.filter((x) => typeof x.last_login === 'string');
+
+	return players.map(PlayerToFriend);
+};
 
 //prettier-ignore
-export const getFriends = async () => sort([
+export const getFriendsX = async () => sort([
 	{ displayName: 'DragonKnight82', level: 45, grade: 'M' },
 	{ displayName: 'PixieDust', level: 92, grade: 'S' },
 	{ displayName: 'BlazeFury', level: 36, grade: 'U' },

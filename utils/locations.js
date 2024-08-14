@@ -29,7 +29,10 @@ export const getLocationMap = async () => {
 		},
 		pantheon: {
 			name: 'Mystical Pantheon'
-		}
+		},
+
+		//pvp
+		friendBattle: {}
 	};
 	return locationMap;
 };

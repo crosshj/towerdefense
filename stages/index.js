@@ -8,7 +8,8 @@ const stageMap = {
 	oasis1: './main/oasis1.js',
 	tundra1: './main/tundra1.js',
 	industrial1: './main/industrial1.js',
-	pantheon1: './main/pantheon1.js'
+	pantheon1: './main/pantheon1.js',
+	friendBattle1: './pvp/friendBattle1.js'
 };
 
 export const featherCost = {
@@ -21,7 +22,8 @@ export const featherCost = {
 	oasis1: 3,
 	tundra1: 3,
 	industrial1: 3,
-	pantheon1: 4
+	pantheon1: 4,
+	friendBattle: 1 //TODO: specialFeathers!
 };
 
 export const getStage = async (params) => {

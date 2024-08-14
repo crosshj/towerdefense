@@ -82,9 +82,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 	});
 
 	document.body.addEventListener('mousedown', () => {
+		let src = '/pages/mainStage/index.html';
+		if (params.zone === 'friendBattle') {
+			src = '/pages/pvp/';
+		}
 		window.parent.postMessage({
 			_: 'navigate',
-			src: '/pages/mainStage/index.html'
+			src
 		});
 	});
 
