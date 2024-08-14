@@ -18,7 +18,7 @@ export const moveDeployed = (state) => {
 export const spawnTeam = (state) => {
 	const { towers } = state;
 	const iterate = (char, deployed) => {
-		if (char.type === 'defender') return;
+		// if (char.type === 'defender') return;
 
 		if (char.spawnTicker) return char.spawnTicker--;
 		if (char.type === 'attacker' && !state.auto) {
@@ -28,7 +28,7 @@ export const spawnTeam = (state) => {
 		char.spawnTicker = char.respawn;
 	};
 	for (const tower of towers) {
-		if (tower?.type === 'defender') {
+		if (tower?.type === 'defender' && tower.team.length > 1) {
 			enemyOneSpawnTicker(state, tower);
 			continue;
 		}

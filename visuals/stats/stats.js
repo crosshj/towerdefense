@@ -76,7 +76,7 @@ const attachFeatherUpdater = (userStats) => {
 		} catch (e) {}
 		if (!apiTimeLeft || apiTimeLeft === -1) return -1;
 
-		console.log({ apiTimeLeft, userStats, feathersUpdateDate });
+		//console.log({ apiTimeLeft, userStats, feathersUpdateDate });
 		const maxedOut = userStats.feathers >= userStats.feathersMax;
 		timeLeft = maxedOut ? -1 : apiTimeLeft;
 	};
