@@ -46,6 +46,10 @@ body {
 	color: white;
 	padding-right: 20px;
 	padding-top: 50px;
+	opacity: 1;
+}
+.container.hidden {
+	opacity: 0;
 }
 
 .menuGrid {
@@ -69,11 +73,55 @@ body {
 		flex-direction: column;
 		align-items: center;
 		justify-content: end;
-		padding: 5px;
 		box-sizing: border-box;
 		text-transform: uppercase;
 		font-size: 0.7em;
 		text-align: center;
+		padding-inline: 5px;
+		&.reduceFont {
+			font-size: 0.65em;
+			.menuItemContainer {
+				.menuLabel {
+					white-space: normal;
+				}
+			}
+		}
+		.menuItemContainer {
+			.menuLabel {
+				white-space: nowrap;
+			}
+		}
+		.menuItemContainer {
+			display: flex;
+			flex-direction: column;
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+			.menuIcon {
+				height: 68%;
+				display: flex;
+				flex-direction: column;
+				justify-content: end;
+				align-items: center;
+				svg {
+					height: 90%;
+					aspect-ratio: 1 / 1;
+					path {
+						fill: currentColor;
+						opacity: 0.5;
+						stroke: none;
+						stroke-width: 3;
+					}
+				}
+			}
+			.menuLabel {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				height: 32%;
+				line-height: 0.9em;
+			}
+		}
 	}
 	.sectionLink.blank {
 		visibility: hidden;
