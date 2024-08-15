@@ -1,0 +1,32 @@
+body {
+	font-family: sans-serif;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	.container {
+		width: 100%;
+		max-width: 800px;
+		/* width: 80%; */
+		/* max-width: 500px; */
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+		gap: 10px;
+		.name {
+			font-size: 0.9em;
+		}
+		.gridItem {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			color: white;
+			.icon svg {
+				width: 64px;
+				aspect-ratio: 1/1;
+				fill: white;
+				opacity: 0.5;
+			}
+		}
+	}
+}
