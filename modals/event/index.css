@@ -250,6 +250,7 @@ body {
 						.noticeTitleBox {
 							flex: 1;
 							.noticeTitle {
+								padding-top: 10px;
 								font-weight: 800;
 								color: #d17527;
 								font-size: 16px;
@@ -263,6 +264,7 @@ body {
 							}
 						}
 						.noticeCollapser {
+							padding-top: 10px;
 							min-width: 2em;
 						}
 
