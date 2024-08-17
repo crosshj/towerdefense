@@ -61,7 +61,7 @@ function getPlayerPosition(players, playerName) {
 const updateUserInfo = async ({ players }) => {
 	const user = await getUser();
 	user.position = getPlayerPosition(players, user.name);
-	console.log({ players, user });
+	//console.log({ players, user });
 	const userNameEl = document.querySelector('.userName');
 	userNameEl.innerHTML = user.name || '---';
 	const rankingNumberEl = document.querySelector('.rankingNumber');
