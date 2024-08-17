@@ -3,6 +3,7 @@ import { canvasHorizontal } from '../../visuals/canvas.js';
 import { statsRequest } from '../../visuals/stats/stats.js';
 import { setCurrentCharCache } from '../_utils/cache.js';
 import { getTeam } from '../_utils/getTeam.js';
+import { SVGIcons } from '../../assets/icons.svg.js';
 
 const pageTitle = 'HOME';
 
@@ -46,6 +47,41 @@ const clickColorMap = {
 	'#e5541a': '/modals/character/detail.html?sub=b&slot=4',
 	'#e51a3f': '/modals/character/detail.html?sub=b&slot=5'
 };
+
+const navigation = () => `
+	<div class="navigation">
+	<div class="my-team clickable wip">
+		${SVGIcons.stars6()}
+		<span>My Team</span>
+	</div>
+	<div class="upgrade clickable wip">
+		${SVGIcons.upgrade()}
+		<span>Upgrade</span>
+	</div>
+	<div class="collect clickable wip">
+		${SVGIcons.book()}
+		<span>Collect</span>
+	</div>
+	<div class="shop clickable wip">
+		${SVGIcons.shop()}
+		<span>Shop</span>
+	</div>
+	<div class="friends clickable wip">
+		${SVGIcons.userMulti()}
+		<span>Friends</span>
+	</div>
+	<div class="pass clickable wip">
+		${SVGIcons.ticket()}
+		<span>Pass</span>
+	</div>
+	<div class="giftbox modal clickable wip">
+		${SVGIcons.giftBox()}
+		<span>GiftBox</span>
+	</div>
+	<div class="settings modal clickable wip">
+		${SVGIcons.gear()}
+	</div>
+`;
 
 const drawControls = async () => {
 	const user = await getUser();
@@ -107,41 +143,9 @@ const drawControls = async () => {
 		<div class="resources">
 			<div class="exp modal clickable wip">EXP</div>
 		</div>
-		
-		<div class="navigation">
-			<div class="my-team clickable wip">My Team</div>
-			<div class="upgrade clickable wip">Upgrade</div>
-			<div class="collect clickable wip">Collect</div>
-			<div class="shop clickable wip">Shop</div>
-			<div class="friends clickable wip">Friends</div>
-			<div class="pass clickable wip">Pass</div>
-			<div class="giftbox modal clickable wip">Giftbox</div>
-			<div class="settings modal clickable wip">
-				<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 256 256" width="256" height="256">
-					<defs>
-						<filter id="outline">
-						<feMorphology in="SourceAlpha" operator="dilate" radius="15" result="dilated"/>
-						<feFlood class="outline" result="black"/>
-						<feComposite in="black" in2="dilated" operator="in" result="outline"/>
-						<feMerge>
-							<feMergeNode in="outline"/>
-							<feMergeNode in="SourceGraphic"/>
-						</feMerge>
-						</filter>
-					</defs>
-					<path 
-						d="
-							m 107.75 22.159
-							v 21.571 c -8.835 2.117 -17.286 5.608 -25.04 10.347 l -15.234 -15.234 l -28.632 28.634 l 15.26 15.26 c -4.7448 7.7444 -8.2443 16.186 -10.371 25.016 h -21.573 v 40.493 h 21.571 c 2.1161 8.8382 5.6076 17.289 10.347 25.043 l -15.234 15.234 l 28.632 28.634 l 15.262 -15.262 c 7.7444 4.7448 16.186 8.2443 25.016 10.371 v 21.573 h 40.493 v -21.571 c 8.8375 -2.1163 17.288 -5.6078 25.041 -10.347 l 15.236 15.236 l 28.632 -28.634 l -15.26 -15.26 c 4.745 -7.745 8.2445 -16.187 10.371 -25.018 h 21.573 v -40.493 h -21.571 c -2.1163 -8.8375 -5.6078 -17.288 -10.347 -25.041 l 15.25 -15.222 l -28.64 -28.634 l -15.26 15.26 c -7.745 -4.745 -16.187 -8.2445 -25.018 -10.371 v -21.573 h -40.493 z
-							m 20.247 71.5
-							a 35 35 0 0 1 35 35 a 35 35 0 0 1 -35 35 a 35 35 0 0 1 -35 -35 a 35 35 0 0 1 35 -35 z
-						"
-						fill-rule="evenodd"
-						filter="url(#outline)"
-					/>
-				</svg>
-			</div>
-		</div>
+
+		${navigation()}
+	</div>
 	`;
 	statsRequest({
 		friendPoints: false,

@@ -258,6 +258,34 @@
 				inset 0 -11px 4px hsl(33 98% 35% / 1);
 			padding-bottom: 15px;
 			font-weight: 700;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			span {
+				/* margin-top: -1em; */
+				background: #794301;
+				line-height: 11px;
+				padding-inline: 2px;
+			}
+			svg {
+				/* width: 37px; */
+				width: 90%;
+				fill: white;
+				margin-bottom: -1.25em;
+			}
+			&.my-team svg {
+				fill: yellow;
+			}
+			&.collect svg {
+				fill: #d6acfc;
+			}
+			&.friends svg {
+				fill: tan;
+			}
+			&.pass svg {
+				fill: #55bbff;
+			}
 		}
 
 		& > div {
