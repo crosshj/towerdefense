@@ -1,3 +1,9 @@
+const _NO_ICON = () => `
+    <svg viewBox="0 0 256 256">
+    <path d="M 1.699 242.869 L 14.214 255.852 L 127.926 142.14 L 241.638 255.852 L 255.852 241.638 L 142.14 127.926 L 255.852 14.214 L 241.638 0 L 127.926 113.712 L 14.214 0 L 0 14.214 L 113.712 127.926 L 1.699 242.869 Z">
+    </path>
+`;
+
 const advent = () => `
     <svg viewBox="0 0 256 256">
         <path d="
@@ -507,8 +513,36 @@ const refresh2 = () => `
 
 const expBoost = () => `
     <svg viewBox="0 0 256 256">
-        <path d="M 1.699 242.869 L 14.214 255.852 L 127.926 142.14 L 241.638 255.852 L 255.852 241.638 L 142.14 127.926 L 255.852 14.214 L 241.638 0 L 127.926 113.712 L 14.214 0 L 0 14.214 L 113.712 127.926 L 1.699 242.869 Z">
-        </path>
+        <defs>
+        <linearGradient id="gradient-expBoost-0" gradientUnits="userSpaceOnUse" x1="131.402" y1="13.036" x2="131.402" y2="244.772" gradientTransform="matrix(0.308256, 0.951303, -0.591974, 0.191725, 166.84424, -12.641983)">
+            <stop offset="0" style="stop-color: rgb(47.451% 47.451% 47.451%)"></stop>
+            <stop offset="0.23" style="stop-color: rgb(251, 249, 198);"></stop>
+            <stop offset="0.604" style="stop-color: rgb(213, 242, 251);"></stop>
+            <stop offset="1" style="stop-color: rgb(151, 151, 151);"></stop>
+        </linearGradient>
+        <linearGradient id="gradient-expBoost-1" gradientUnits="userSpaceOnUse" x1="131.554" y1="40.164" x2="131.554" y2="235.033" gradientTransform="matrix(0.334805, 0.942288, -0.7161, 0.219148, 184.349191, -27.477663)">
+            <stop offset="0" style="stop-color: rgb(35, 74, 168);"></stop>
+            <stop offset="0.29" style="stop-color: rgb(107, 150, 238);"></stop>
+            <stop offset="0.649" style="stop-color: rgb(50, 160, 231);"></stop>
+            <stop offset="1" style="stop-color: rgb(0% 30.889% 68.196%)"></stop>
+        </linearGradient>
+        <linearGradient id="gradient-expBoost-2" gradientUnits="userSpaceOnUse" x1="143.667" y1="148.798" x2="143.667" y2="218.297" gradientTransform="matrix(0.253685, 0.967286, -1.885022, 0.613038, 458.299888, -69.14821)">
+            <stop offset="0" style="stop-color: rgb(177, 177, 177);"></stop>
+            <stop offset="0.473" style="stop-color: rgb(255, 255, 255);"></stop>
+            <stop offset="0.717" style="stop-color: rgb(255, 255, 255);"></stop>
+            <stop offset="1" style="stop-color: rgb(56.687% 56.687% 56.687%)"></stop>
+        </linearGradient>
+        <linearGradient id="gradient-expBoost-3" gradientUnits="userSpaceOnUse" x1="122.542" y1="62.424" x2="122.542" y2="184.459" gradientTransform="matrix(0.327093, 0.944992, -1.165128, 0.388109, 232.282151, -31.326444)">
+            <stop offset="0" style="stop-color: rgb(118, 102, 0);"></stop>
+            <stop offset="0.338" style="stop-color: rgb(237, 205, 0);"></stop>
+            <stop offset="0.668" style="stop-color: rgb(254, 240, 147);"></stop>
+            <stop offset="1" style="stop-color: rgb(57.798% 49.463% 0%)"></stop>
+        </linearGradient>
+        </defs>
+        <path d="M 217.472 209.376 L 100.396 244.772 C 100.396 244.772 96.612 239.112 93.487 240.362 C 89.887 241.413 86.286 239.349 84.128 231.938 L 38.862 85.734 C 35.594 74.925 40.813 61.161 49.661 56.803 L 48.806 53.955 L 45.631 53.404 C 41.506 54.583 39.747 48.395 43.403 46.946 L 155.318 13.111 C 159.164 12.291 161.128 18.417 157.041 19.721 L 154.703 21.939 L 155.569 24.783 C 165.349 23.509 177.32 32.077 180.588 42.886 L 223.904 189.679 C 226.214 197.044 224.359 200.758 220.78 201.877 C 217.486 202.568 217.472 209.376 217.472 209.376 Z" style="stroke: rgb(0, 0, 0); stroke-width: 5px; fill: url(#gradient-expBoost-0);"></path>
+        <path style="fill: url(#gradient-expBoost-1);" d="M 40.39 82.227 L 87.494 235.033 L 222.719 193.888 L 176.815 40.164 L 40.39 82.227 Z"></path>
+        <path style="fill: url(#gradient-expBoost-3);" d="M 120.628 62.445 L 84.565 146.521 L 123.031 133.147 L 125.615 184.417 L 160.526 101.318 L 121.657 113.016 L 120.628 62.445 Z"></path>
+        <path d="M 101.065 219.033 L 88.208 178.804 L 118.037 169.271 L 120.211 176.076 L 98.507 183.013 L 101.356 191.931 L 121.553 185.476 L 123.719 192.255 L 103.522 198.71 L 107.022 209.658 L 129.496 202.475 L 131.663 209.254 L 101.065 219.033 Z M 134.458 208.36 L 141.496 182.973 L 122.891 167.72 L 132.384 164.685 L 144.584 175.03 L 148.356 159.581 L 157.768 156.573 L 151.5 180.109 L 171.861 196.407 L 162.064 199.537 L 148.699 188.475 L 144.199 205.247 L 134.458 208.36 Z M 176.03 195.074 L 163.173 154.845 L 176.208 150.68 C 181.148 149.101 184.432 148.273 186.061 148.195 C 188.559 148.063 190.908 148.758 193.109 150.283 C 195.311 151.808 196.922 154.171 197.945 157.373 C 198.734 159.842 198.95 162.061 198.592 164.031 C 198.233 166.001 197.517 167.687 196.443 169.089 C 195.369 170.49 194.167 171.575 192.84 172.342 C 191.024 173.346 188.277 174.435 184.6 175.611 L 179.304 177.303 L 184.153 192.478 L 176.03 195.074 Z M 173.472 159.054 L 177.12 170.47 L 181.566 169.05 C 184.767 168.026 186.841 167.131 187.785 166.366 C 188.73 165.6 189.365 164.671 189.692 163.579 C 190.018 162.487 189.991 161.346 189.611 160.157 C 189.144 158.694 188.328 157.624 187.164 156.947 C 186.001 156.271 184.722 156.023 183.327 156.206 C 182.3 156.334 180.322 156.865 177.396 157.8 L 173.472 159.054 Z" style="fill: url(#gradient-expBoost-2);"></path>
     </svg>
 `;
 
@@ -1085,5 +1119,11 @@ export const SVGIcons = {
 	meteor,
 	iceStorm,
 	tornado,
-	invincibility
+	invincibility,
+	intelligence: _NO_ICON,
+	agility: _NO_ICON,
+	strength: _NO_ICON,
+	attack: _NO_ICON, // maybe use sword
+	health: _NO_ICON,
+	defense: _NO_ICON // maybe use shield
 };
