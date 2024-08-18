@@ -1,3 +1,4 @@
+import { SVGIcons } from '../assets/icons.svg.js';
 import { getThumbnail } from './objects/unit.js';
 import ScreenInfo from './screen.js';
 
@@ -44,11 +45,21 @@ const createTopControls = ({
 	const effects = showEffects
 		? `
 			<div data-effect="teamSwitch" class="progress p-100">A</div>
-			<div data-effect="callFriend">🙌</div>
-			<div data-effect="meteor">☄</div>
-			<div data-effect="ice">🧊</div>
-			<div data-effect="tornado">🌪</div>
-			<div data-effect="invincible">🛡</div>
+			<div data-effect="callFriend" class="callFriend">
+				${SVGIcons.userMultiGo()}
+			</div>
+			<div data-effect="meteor" class="meteor">
+				${SVGIcons.meteor()}
+			</div>
+			<div data-effect="ice" class="iceStorm">
+				${SVGIcons.iceStorm()}
+			</div>
+			<div data-effect="tornado" class="tornado">
+				${SVGIcons.tornado()}
+			</div>
+			<div data-effect="invincible" class="invincible">
+				${SVGIcons.invincibility()}
+			</div>
 		`
 		: '';
 
@@ -57,7 +68,7 @@ const createTopControls = ({
 			${effects}
 		</div>
 		<div class="mineral">
-			<span>💎</span>
+			<span class="mineralIcon">${SVGIcons.mineral()}</span>
 			<span class="currentAmount"></span>
 			/
 			<span class="maxAmount"></span>
@@ -148,9 +159,11 @@ const createBottomControls = ({ root, state }) => {
 	bottom.classList.add('controls-bottom');
 	bottom.innerHTML = `
         <div class="missile button">
-			<div class="symbol">☢</div>
+			<div class="missileIcon">
+				${SVGIcons.missile45Degrees()}
+			</div>
 			<div class="progress p-0 vertical orange"></div>
-			<div>missile</div>
+			<div class="missileLabel">missile</div>
 		</div>
         <div class="team"></div>
 		<div class="team"></div>
@@ -158,7 +171,9 @@ const createBottomControls = ({ root, state }) => {
 		<div class="team"></div>
 		<div class="team"></div>
 		<div class="mineral button">
-			<div class="symbol mineralIcon">💎</div>
+			<div class="mineralIcon">
+				${SVGIcons.mineralGroup()}
+			</div>
 			<div class="progress p-0 vertical blue"></div>
 			<div class="levelIndicator">Lv.1</div>
 		</div>
@@ -207,7 +222,7 @@ const createBottomControls = ({ root, state }) => {
 					<div class="rank"></div>
 					<div class="cost">
 						<div class="indicator">
-							<span>💎</span>
+							<span class="mineralIcon">${SVGIcons.mineral()}</span>
 							<span class="number"></span>
 						</div>
 						<div class="progress hidden">

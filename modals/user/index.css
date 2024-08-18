@@ -193,9 +193,6 @@ body {
 					align-items: center;
 					color: #4c2615;
 				}
-				button.with-icon.placeholder-icon:before {
-					content: '⁇';
-				}
 			}
 			.tab-pane.notice {
 				display: grid;

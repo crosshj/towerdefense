@@ -1036,6 +1036,7 @@ const circle = () => `
 `;
 
 export const SVGIcons = {
+	_NO_ICON,
 	advent,
 	mainStage,
 	gacha,

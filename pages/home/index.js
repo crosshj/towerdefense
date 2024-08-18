@@ -128,20 +128,26 @@ const drawControls = async () => {
 				</div>
 			</div>
 			<div class="buttons">
-				<div class="event modal clickable wip">News</div>
-				<div class="buff modal clickable wip">Buff</div>
+				<div class="event modal clickable wip">
+					${SVGIcons.announce()}
+				</div>
+				<div class="buff modal clickable wip">
+					${SVGIcons.userArrowUp()}
+				</div>
 			</div>
 			<div class="statsAndQuest">
 				<div class="stats">
 				</div>
 				<div class="quest modal clickable wip">
-					Quest
+					${SVGIcons.scroll()}
 				</div>
 			</div>
 		</div>
 		
 		<div class="resources">
-			<div class="exp modal clickable wip">EXP</div>
+			<div class="exp modal clickable wip">
+				${SVGIcons.expBoost()}
+			</div>
 		</div>
 
 		${navigation()}

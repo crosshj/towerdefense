@@ -1,3 +1,4 @@
+import { SVGIcons } from '../../assets/icons.svg.js';
 import { getSettings, setSettings } from '../../user/settings.js';
 import { getUser, getUserFromAPI, updateUserFromAPI } from '../../user/user.js';
 import { getVersionString } from './version.js';
@@ -161,10 +162,29 @@ const updateUserPane = async () => {
 	accountPane.innerHTML = JSON.stringify(user.apiUser, null, 2);
 };
 
+const attachIcons = () => {
+	const svgElements = document.querySelectorAll('[class*="svg-"]');
+
+	for (const element of svgElements) {
+		const [, svgName] = element.className.match(/(?:^|\s)svg-([^\s]+)/);
+		const svgString = (SVGIcons[svgName] || SVGIcons._NO_ICON)();
+		element.innerHTML = `
+			<div class="svgIconContainer">
+				${svgString}
+			</div>
+			<span>
+				${element.innerHTML}
+			</span>
+		`;
+	}
+};
+
 document.addEventListener('DOMContentLoaded', async () => {
 	updateVersionString();
 	await attachSettings();
 	await updateUserPane();
+
+	attachIcons();
 
 	const chooserEl = document.querySelector('.chooser');
 	const itemsListEl = document.querySelector('.items-list');

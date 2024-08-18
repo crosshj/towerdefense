@@ -182,6 +182,15 @@ body {
 					color: white;
 					box-shadow: inset 0px 2px #ffffff30;
 				}
+				button.with-svg-icon {
+					display: flex;
+					align-items: center;
+					.svgIconContainer {
+						fill: white;
+						width: 1em;
+						margin-inline: 11px;
+					}
+				}
 				button.with-icon {
 					padding-left: 54px;
 					text-align: left;
