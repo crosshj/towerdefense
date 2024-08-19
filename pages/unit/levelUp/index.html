@@ -1,12 +1,100 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 	<head>
-		<title></title>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta
+			name="viewport"
+			content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+		/>
+		<title>TD: Level Up</title>
 		<link rel="stylesheet" href="index.css" />
+		<script src="/components/custom-select.js" defer></script>
 	</head>
+	<body>
+		<div class="background"></div>
+		<div class="container">
+			<div class="main-header">
+				<div class="title-container" style="visibility: hidden">
+					<div class="back-button">&#x25C0;</div>
+					<div class="title"></div>
+				</div>
+				<div class="flex-spacer"></div>
+				<div class="currency"></div>
+			</div>
 
-	<body></body>
+			<div class="body-section flex-row justify-center">
+				<div class="unit">
+					<div class="unitDetails"></div>
+				</div>
+				<div class="plus flex-col justify-center align-center">+</div>
+				<div class="materials flex-col">
+					<div class="materialsRow flex-row justify-center">
+						<div class="materialsSlot"></div>
+						<div class="materialsSlot"></div>
+					</div>
+					<div class="materialsRow flex-row justify-center">
+						<div class="materialsSlot"></div>
+						<div class="materialsSlot"></div>
+						<div class="materialsSlot"></div>
+					</div>
+				</div>
+				<div class="result">
+					<div
+						class="resultContainer flex-col align-center space-between"
+					>
+						<div class="title">RESULT</div>
+						<div
+							class="levelChange flex-row align-center justify-center"
+						>
+							<div
+								class="levelFrom flex-col align-center justify-center"
+							>
+								<div class="levelText levelFromText">
+									Level 1
+								</div>
+								<div class="levelPercent levelFromPercent">
+									0%
+								</div>
+							</div>
+							<div>⇰</div>
+							<div
+								class="levelTo flex-col align-center justify-center"
+							>
+								<div class="levelText levelToText">Level ?</div>
+								<div class="levelPercent levelToPercent">?</div>
+							</div>
+						</div>
+						<div
+							class="tpointsChange flex-row align-center justify-center"
+						>
+							<div>(TP) Old</div>
+							<div>⇰</div>
+							<div>(TP) New</div>
+						</div>
+						<div
+							class="actionButton disabled flex-col align-center"
+						>
+							<div class="cost">
+								<div class="icon"></div>
+								<div class="amount">---</div>
+							</div>
+							<div class="actionText">LEVEL UP</div>
+						</div>
+					</div>
+				</div>
+			</div>
 
-	<script type="module" src="./index.js"></script>
+			<div class="controls">
+				<div class="flex-spacer"></div>
+				<button>Same Unit</button>
+				<button>Sort By</button>
+				<button>Filter</button>
+			</div>
+
+			<div class="all-characters" id="all-characters"></div>
+		</div>
+
+		<script src="index.js" type="module"></script>
+		<script src="/vendor/DragDropTouch.js"></script>
+	</body>
 </html>
