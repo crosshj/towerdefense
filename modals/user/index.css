@@ -272,3 +272,90 @@ button {
 .all-characters {
 	box-sizing: border-box;
 }
+
+/* this is for user content style*/
+
+.profile-settings {
+	overflow-y: auto;
+	margin-left: 20%;
+	background-color: #b76e09;
+	border-radius: 15px;
+	padding: 20px;
+	height: 260px;
+	width: 360px;
+}
+
+.header {
+	text-align: center;
+	color: #fff;
+}
+
+.header h1 {
+	font-family: system-ui;
+	text-transform: uppercase;
+	margin: 0;
+	font-size: 15px;
+	font-weight: bold;
+}
+
+.header p {
+	margin: 5px 0;
+	font-size: 14px;
+}
+
+.search-filter {
+	display: flex;
+	justify-content: space-between;
+	margin: 15px 0;
+}
+
+.search {
+	width: 70%;
+	padding: 5px;
+	border-radius: 5px;
+	border: none;
+}
+
+.filter {
+	padding: 5px 10px;
+	border-radius: 5px;
+	border: none;
+	background-color: #e5a23c;
+	color: #fff;
+}
+
+.profile-grid {
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	gap: 10px;
+}
+
+.profile-item {
+	background-color: #ffdcc5;
+	padding: 10px;
+	border-radius: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+}
+
+.profile-item.selected {
+	border: 2px solid #0cd1c2;
+}
+
+.profile-item img {
+	width: 40px;
+	height: 40px;
+}
+
+.equip-button {
+	width: 100%;
+	padding: 10px;
+	background-color: #e5a23c;
+	border-radius: 10px;
+	border: none;
+	color: #fff;
+	font-weight: bold;
+	margin-top: 15px;
+}
