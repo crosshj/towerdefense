@@ -13,12 +13,16 @@ const setup = async () => {
 
 	const currentChar = getCurrentCharCache();
 	const unitDetailsEl = document.querySelector('.unitDetails');
-	unitDetailsEl.innerHTML = currentChar
-		? `
-			<div>${currentChar.displayName}</div>
-			<div>[ ${currentChar.id} ]</div>
-		`
-		: '';
+	const unitImage = document.createElement('img');
+	unitImage.src = currentChar.imageUri;
+	unitDetailsEl.append(unitImage);
+
+	// unitDetailsEl.innerHTML = currentChar
+	// 	? `
+	// 		<div>${currentChar.displayName}</div>
+	// 		<div>[ ${currentChar.id} ]</div>
+	// 	`
+	// 	: '';
 
 	const controls = attachControls();
 
