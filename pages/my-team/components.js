@@ -1,3 +1,7 @@
+import { SVGIcons } from '../../assets/icons.svg.js';
+
+const mineralIcon = SVGIcons.mineral();
+
 export const slotDiv = (c, getCharImage) => {
 	return `
 			<div class="icon">
@@ -10,7 +14,7 @@ export const slotDiv = (c, getCharImage) => {
 				</div>
 			</div>
 			<div class="mineral flex space-between">
-				<div class="mineral-icon">▲</div>
+				<div class="mineral-icon">${mineralIcon}</div>
 				<div>${c.mineralCost}</div>
 			</div>
 		`;
@@ -34,7 +38,7 @@ export const characterDiv = (c, getCharImage) => {
 					<div>${c.level}</div>
 				</div>
 				<div class="mineral flex space-between">
-					<div class="mineral-icon">▲</div>
+					<div class="mineral-icon">${mineralIcon}</div>
 					<div>${c.mineralCost}</div>
 				</div>
 			</div>

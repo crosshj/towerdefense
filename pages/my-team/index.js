@@ -2,6 +2,7 @@ import { getCharacters } from '../../user/characters.js';
 import { getTeams, setTeams } from '../../user/teams.js';
 import { characterImageGetter } from '../../visuals/assets/character.js';
 import { setCurrentCharCache } from '../_utils/cache.js';
+import { attachAllCharacters, attachControls } from './allChars.js';
 import { characterDiv } from './components.js';
 import { slotDiv } from './components.js';
 import { handlePointerEvents } from './handlePointerEvents.js';
@@ -100,7 +101,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 	window.parent.postMessage({ _: 'stats', ...args });
 
 	const characters = await getCharacters();
-	const allCharactersDiv = document.getElementById('all-characters');
 	const teams = await getTeams();
 
 	const getCharImage = await characterImageGetter();
@@ -113,49 +113,42 @@ document.addEventListener('DOMContentLoaded', async () => {
 		switchTeam && switchTeam();
 		updateCharacters && updateCharacters();
 	});
+
 	const current = teams[selectedTeamEl.value]?.a;
 	const all = [
 		...teams[selectedTeamEl.value].a,
 		...teams[selectedTeamEl.value].b
 	];
 
-	characters.forEach((character) => {
-		const characterCard = document.createElement('div');
-		characterCard.className = 'character-card';
-		if (all.map((x) => x.id).includes(character.id)) {
-			characterCard.classList.add('used');
-		}
-		characterCard.innerHTML = characterDiv(character, getCharImage);
-		characterCard.dataset.displayName = character.displayName;
-		characterCard.dataset.mineralCost = character.mineralCost;
-		characterCard.dataset.stars = character.stars;
-		characterCard.dataset.id = character.id;
-
-		const charIcon = characterCard.querySelector('.icon');
-		handlePointerEvents({
-			element: charIcon,
-			onTap: () => {
-				const src = `/modals/character/detail.html?id=${character.id}`;
-				setCurrentCharCache({
-					...character,
-					imageUri: getCharImage(character)
-				});
-				window.parent.postMessage({
-					_: 'navigate',
-					src
-				});
-			},
-			onDragStart: dragStart,
-			onDragEnd: dragEnd
-		});
-		allCharactersDiv.appendChild(characterCard);
-	});
-
 	//total
 	const totalContainer = document.querySelector(
 		'.container .total-characters'
 	);
 	totalContainer.innerHTML = `TOTAL ${characters.length} / 700`;
+
+	// character list
+	const controls = attachControls();
+	const isUsed = (char) => {
+		return all.map((x) => x.id).includes(char.id);
+	};
+	attachAllCharacters({
+		sortBy: controls.sortBy,
+		characters,
+		isUsed,
+		getCharImage,
+		dragStart,
+		dragEnd
+	});
+	controls.onSort((sortBy) => {
+		attachAllCharacters({
+			sortBy,
+			characters,
+			isUsed,
+			getCharImage,
+			dragStart,
+			dragEnd
+		});
+	});
 
 	//subteam switch
 	const teamSwitch = document.querySelector('.team-switch');
