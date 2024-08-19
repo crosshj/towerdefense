@@ -370,9 +370,11 @@ button {
 }
 
 .random-image img {
+	display: flex;
+	flex-direction: column;
 	background-color: white;
-	width: 100px; /* Adjust size as needed */
-	height: auto;
+	width: 142px; /* Adjust size as needed */
+	height: 48%;
 	border: 2px solid #905527;
 	border-radius: 5px;
 }
