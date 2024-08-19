@@ -67,6 +67,7 @@ div#controls {
 .controls-bottom .missile {
 	margin-right: 18px;
 	.missileIcon {
+		z-index: 2;
 		width: 75px;
 		height: 70px;
 		overflow: hidden;
@@ -81,10 +82,13 @@ div#controls {
 }
 .controls-bottom .mineral {
 	margin-left: 18px;
-	svg {
-		width: 75px;
-		height: 66px;
-		margin-bottom: -6px;
+	.mineralIcon {
+		z-index: 2;
+		svg {
+			width: 75px;
+			height: 66px;
+			margin-bottom: -6px;
+		}
 	}
 }
 .controls-bottom .missile,
@@ -392,6 +396,7 @@ div#controls {
 }
 
 .controls-bottom .progress.vertical {
+	z-index: 1;
 	position: absolute;
 	left: 0;
 	right: 0;
