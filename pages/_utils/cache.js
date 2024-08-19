@@ -16,7 +16,7 @@ export function getCurrentCharCache() {
 	const storedCharacter = JSON.parse(
 		sessionStorage.getItem(CHARACTER_CACHE_KEY) || 'null'
 	);
-	if (typeof storedCharacter !== 'object') return;
+	if (typeof storedCharacter !== 'object' || storedCharacter === null) return;
 
 	storedCharacter.image = new Image();
 	storedCharacter.image.src = storedCharacter.imageUri;

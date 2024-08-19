@@ -88,7 +88,61 @@ const updateValues = async ({ params, nodeTree }) => {
 };
 
 const attachHandlers = (nodeTree) => {
-	nodeTree.container.closeButton.addEventListener('pointerup', () => {
+	const { container } = nodeTree;
+	const {
+		content: { left, right },
+		closeButton
+	} = container;
+	// console.log({ nodeTree });
+
+	left.actions.levelUp.addEventListener('pointerup', () => {
+		window.parent.postMessage({
+			_: 'navigate',
+			src: '/pages/unit/levelUp/'
+		});
+	});
+	left.actions.potentialUp.addEventListener('pointerup', () => {
+		window.parent.postMessage({
+			_: 'navigate',
+			src: '/pages/unit/potentialUp/'
+		});
+	});
+	right.actions.hyperEvolve.addEventListener('pointerup', () => {
+		window.parent.postMessage({
+			_: 'navigate',
+			src: '/pages/unit/hyperEvolve/'
+		});
+	});
+	right.actions.ultraEvolve.addEventListener('pointerup', () => {
+		window.parent.postMessage({
+			_: 'navigate',
+			src: '/pages/unit/ultraEvolve/'
+		});
+	});
+	left.gear.weapon.addEventListener('pointerup', () => {
+		window.parent.postMessage({
+			_: 'navigate',
+			src: '/pages/gear/?weapon=true'
+		});
+	});
+	left.gear.accessory.addEventListener('pointerup', () => {
+		window.parent.postMessage({
+			_: 'navigate',
+			src: '/pages/gear/?accessory=true'
+		});
+	});
+	left.gear.armor.addEventListener('pointerup', () => {
+		window.parent.postMessage({
+			_: 'navigate',
+			src: '/pages/gear/?armor=true'
+		});
+	});
+	left.gear.more.addEventListener('pointerup', () => {
+		window.parent.postMessage({
+			_: 'navigate'
+		});
+	});
+	closeButton.addEventListener('pointerup', () => {
 		window.parent.postMessage({
 			_: 'navigate'
 		});

@@ -1,4 +1,5 @@
 import { SVGIcons } from '../../assets/icons.svg.js';
+import { setCurrentCharCache } from '../../pages/_utils/cache.js';
 
 const getNavigateTo = (el) => {
 	const permitted = [
@@ -64,6 +65,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		const src = navigateTo ? `/pages/${navigateTo}/index.html` : undefined;
 		if (src) {
 			event.stopPropagation();
+			setCurrentCharCache(false);
 		}
 		window.parent.postMessage({
 			_: 'navigate',

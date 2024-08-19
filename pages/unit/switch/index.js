@@ -1,29 +1,18 @@
-import { getCurrentCharCache } from '../_utils/cache.js';
+import { getCurrentCharCache } from '../../_utils/cache.js';
 
-const pageTitle = 'GEAR';
+const pageTitle = 'SWITCH';
 
 const setup = async () => {
 	const params = Object.fromEntries(
 		new URLSearchParams(window.location.search)
 	);
 	console.log({ params });
-
 	const currentChar = getCurrentCharCache();
 	const selectedUnitName = currentChar
 		? `${currentChar.displayName} (${currentChar.id})`
 		: '';
-
-	let selectedTab = 'weapon';
-	if (params?.armor) {
-		selectedTab = 'armor';
-	}
-	if (params?.accessory) {
-		selectedTab = 'accessory';
-	}
-
 	document.body.innerHTML = `
 		<div>WIP: ${pageTitle}</div>
-		<div>Selected Tab: ${selectedTab}</div>
 		${selectedUnitName ? `<div>Unit: ${selectedUnitName}</div>` : ''}
 	`;
 	document.title = 'TD: ' + pageTitle;
