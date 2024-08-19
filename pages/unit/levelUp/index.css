@@ -228,6 +228,14 @@ body {
 			border: 1px dashed;
 			border-radius: 50%;
 			background: #0002;
+			position: relative;
+			& > img {
+				position: absolute;
+				bottom: 8px;
+				left: -3px;
+				width: 80px;
+				pointer-events: none;
+			}
 		}
 	}
 	.result {

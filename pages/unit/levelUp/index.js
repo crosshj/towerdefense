@@ -25,14 +25,43 @@ const setup = async () => {
 	const characters = await getCharacters();
 	console.log('TODO: DO NOT SHOW USED/LOCKED/CURRENT CHAR IN THIS LIST!!!');
 
+	let dragging;
+	function dragStart(e) {
+		const parent = e.target.closest('.character-card');
+		if (parent.classList.contains('used')) {
+			e.preventDefault();
+			return false;
+		}
+		dragging = parent;
+	}
+	function dragEnd(e) {
+		const [x, y] = [e.clientX, e.clientY + 50];
+		const droppedOn = document.elementFromPoint(x, y);
+		if (droppedOn.classList.contains('materialsSlot')) {
+			dragging.classList.add('used');
+			droppedOn.innerHTML = '';
+			const clone = dragging.querySelector('img').cloneNode(true);
+			droppedOn.append(clone);
+			//TODO: should also add this unit to the list of materials, etc
+		}
+	}
+
 	const getCharImage = await characterImageGetter();
 	attachAllCharacters({
 		sortBy: controls.sortBy,
 		characters,
-		getCharImage
+		getCharImage,
+		dragStart,
+		dragEnd
 	});
 	controls.onSort((sortBy) => {
-		attachAllCharacters({ sortBy, characters, getCharImage });
+		attachAllCharacters({
+			sortBy,
+			characters,
+			getCharImage,
+			dragStart,
+			dragEnd
+		});
 	});
 
 	document.title = 'TD: ' + pageTitle;
