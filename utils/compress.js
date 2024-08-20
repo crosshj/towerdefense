@@ -65,18 +65,20 @@ export const compressChars = (lsCharacters, baseLength = 36) => {
 				Object.keys(unitsAll).findIndex((key) => char.code === key)
 			);
 			const exp = encode((char.experience || 0) / 100);
-			const uncapped = char.uncapped || 0;
+			const uncapped = char.uncapped || char.uncappedLevel || 0;
 			const gear1 = encode(char.gear1);
 			const gear2 = encode(char.gear2);
 			const gear3 = encode(char.gear3);
+			const profPoints = encode(char.professorPoints || 1);
 			return [
-				encode(i),
+				char.uuid || encode(i),
 				unitsIndex,
 				exp,
 				uncapped,
 				gear1,
 				gear2,
-				gear3
+				gear3,
+				profPoints
 			].join(',');
 		})
 		.join('\n');
@@ -90,16 +92,26 @@ export const decompressChars = (compedString) => {
 
 	const lines = compressedData.trim().split('\n');
 	return lines.map((line, i) => {
-		const [index, unitsIndex, exp, uncapped, gear1, gear2, gear3] =
-			line.split(',');
+		const [
+			index,
+			unitsIndex,
+			exp,
+			uncapped,
+			gear1,
+			gear2,
+			gear3,
+			profPoints
+		] = line.split(',');
 		return {
+			index,
 			id: i + '-localid',
 			code: Object.keys(unitsAll)[decode(unitsIndex)],
 			experience: decode(exp) * 100,
-			uncapped: Number(uncapped),
+			uncappedLevel: Number(uncapped),
 			gear1: decode(gear1),
 			gear2: decode(gear2),
-			gear3: decode(gear3)
+			gear3: decode(gear3),
+			professorPoints: profPoints ? decode(profPoints) : 1
 		};
 	});
 };
@@ -130,27 +142,32 @@ export const compressTeams = (lsTeam, lsCharacters, baseLength = 36) => {
 };
 
 export const decompressTeams = (compedString, characters) => {
-	const [compressedData, charSet] = compedString.split('-----');
-	const characterSet = charSet.trim().split('');
-	const decode = (str) => decodeNumber(str, characterSet);
+	try {
+		const [compressedData, charSet] = compedString.split('-----');
+		const characterSet = charSet.trim().split('');
+		const decode = (str) => decodeNumber(str, characterSet);
 
-	const lines = compressedData.trim().split('\n');
-	let teamIndex = 0;
+		const lines = compressedData.trim().split('\n');
+		let teamIndex = 0;
 
-	const teams = {};
-	for (const teamName of allTeamNames) {
-		teams[teamName] = { a: [], b: [] };
-		const charCodes = lines[teamIndex].split(',');
-		for (const subteam of ['a', 'b']) {
-			for (let i = 0; i < 5; i++) {
-				const charIndex = decode(
-					charCodes[subteam === 'a' ? i : 5 + i]
-				);
-				const { id } = characters[charIndex];
-				teams[teamName][subteam].push({ id });
+		const teams = {};
+		for (const teamName of allTeamNames) {
+			teams[teamName] = { a: [], b: [] };
+			const charCodes = lines[teamIndex].split(',');
+			for (const subteam of ['a', 'b']) {
+				for (let i = 0; i < 5; i++) {
+					const charIndex = decode(
+						charCodes[subteam === 'a' ? i : 5 + i]
+					);
+					const { id } = characters[charIndex];
+					teams[teamName][subteam].push({ id });
+				}
 			}
+			teamIndex++;
 		}
-		teamIndex++;
+		return teams;
+	} catch (e) {
+		console.log(e);
+		return {};
 	}
-	return teams;
 };

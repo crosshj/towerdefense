@@ -13,6 +13,12 @@
 	<body>
 		<div class="background"></div>
 		<div class="container">
+			<div class="loading hidden">
+				<div class="loadingBg"></div>
+				<div class="spinner-container">
+					<div class="spinner"></div>
+				</div>
+			</div>
 			<div class="main-header">
 				<div class="title-container" style="visibility: hidden">
 					<div class="back-button">&#x25C0;</div>
@@ -49,27 +55,31 @@
 							<div
 								class="levelFrom flex-col align-center justify-center"
 							>
-								<div class="levelText levelFromText">
-									Level 1
-								</div>
-								<div class="levelPercent levelFromPercent">
-									0%
-								</div>
+								<div class="levelText levelFromText"></div>
+								<div
+									class="levelPercent levelFromPercent"
+								></div>
 							</div>
 							<div>⇰</div>
 							<div
 								class="levelTo flex-col align-center justify-center"
 							>
-								<div class="levelText levelToText">Level ?</div>
-								<div class="levelPercent levelToPercent">?</div>
+								<div class="levelText levelToText"></div>
+								<div class="levelPercent levelToPercent"></div>
 							</div>
 						</div>
 						<div
-							class="tpointsChange flex-row align-center justify-center"
+							class="profPointsChange flex-row align-center justify-center"
 						>
-							<div>(TP) Old</div>
+							<div class="profPointsFrom">
+								<div class="icon">P</div>
+								<div class="amount"></div>
+							</div>
 							<div>⇰</div>
-							<div>(TP) New</div>
+							<div class="profPointsTo">
+								<div class="icon">P</div>
+								<div class="amount"></div>
+							</div>
 						</div>
 						<div
 							class="actionButton disabled flex-col align-center"

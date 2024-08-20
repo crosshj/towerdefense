@@ -2,7 +2,11 @@
 ALL CHARACTERS THAT THE USER HAS AVAILABLE
 */
 
-import { getLevelInfo, getGrowth } from '../utils/experience.js';
+import {
+	getLevelInfo,
+	getGrowth,
+	getExpForLevel
+} from '../utils/experience.js';
 import { calculateCoefficients } from './units/calculateStats.js';
 import { unitsMapper } from './units/units.js';
 
@@ -97,13 +101,13 @@ const getMoveSpeed = (unit, currentLevel) => {
 	return 1;
 };
 
-const withLevelInfo = (unit, totalExp = 0) => {
+export const withLevelInfo = (unit, totalExp = 0) => {
 	let { currentLevel, expToNext, levelExpPercent } = getLevelInfo({
 		totalExp,
 		a: 5 * unit.rank,
 		b: 6000
 	});
-	const uncappedLevel = 0; //TODO, this should be saved when combining units
+	const uncappedLevel = Math.min(4, unit.uncappedLevel || 0); //TODO, this should be saved when combining units
 	const maxLevel = getMaxLevel(unit);
 
 	if (currentLevel > maxLevel) {
@@ -111,6 +115,13 @@ const withLevelInfo = (unit, totalExp = 0) => {
 		expToNext = 0;
 		levelExpPercent = 0;
 	}
+
+	const levelExp = getExpForLevel({
+		level: currentLevel,
+		a: 5 * unit.rank,
+		b: 6000,
+		c: 0
+	});
 
 	return {
 		...unit,
@@ -121,6 +132,7 @@ const withLevelInfo = (unit, totalExp = 0) => {
 		level: currentLevel || 1,
 		levelNext: expToNext,
 		levelNextPercent: levelExpPercent,
+		levelExp,
 
 		professorPoints: 1, //TODO, this should be saved when combining units
 
@@ -157,4 +169,68 @@ export const hydrateCharacters = async (playerCharacters) => {
 		hydrated.push(mapper(char));
 	}
 	return hydrated;
+};
+
+const getExperienceFromLevel = (unit) => {
+	return getExpForLevel({
+		level: unit.level,
+		a: 5 * unit.rank,
+		b: 6000,
+		c: 0
+	});
+};
+
+export const extractCharacter = (unit) => {
+	const levelExp = getExperienceFromLevel(unit);
+	const experience = Math.floor(0.1 * levelExp + 4000 * (unit.rank || 1));
+	return {
+		experience
+	};
+};
+
+export const calculateCombineResults = ({ currentChar, materials }) => {
+	const result = { level: '?', levelNextPercent: '?', professorPoints: '?' };
+	if (!materials.length) {
+		return result;
+	}
+	let { levelExp } = withLevelInfo(currentChar, currentChar.experience);
+	let currentProfPoints = currentChar.professorPoints || 1;
+	let currentUncapped = currentChar.uncappedLevel;
+	let currentExperience =
+		(currentChar.levelNext === 0 ? levelExp : currentChar.experience) || 0;
+
+	for (const mat of materials) {
+		if (!mat) continue;
+		if (mat.code === currentChar.code) {
+			currentProfPoints++;
+			result.professorPoints = currentProfPoints;
+			currentUncapped++;
+		}
+		const extracted = extractCharacter(mat);
+		currentExperience += extracted.experience;
+	}
+	if (currentUncapped > 4) {
+		currentUncapped = 4;
+	}
+	const isHyperUltra = false; //TODO: how to detrmine if H/U ?
+	if (currentProfPoints > 10 && !isHyperUltra) {
+		currentProfPoints = 10;
+		result.professorPoints = 10;
+	}
+	const newChar = withLevelInfo(
+		{
+			...currentChar,
+			uncappedLevel: currentUncapped
+		},
+		currentExperience
+	);
+
+	result.level = newChar.level;
+	result.levelNextPercent = newChar.levelNextPercent;
+
+	result.newExperience = currentExperience;
+	result.newProfessorPoints = currentProfPoints;
+	result.newUncapped = currentUncapped;
+
+	return result;
 };

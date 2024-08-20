@@ -25,7 +25,7 @@ export function getGrowth({ base, level, linear, quadratic }) {
 	// return Math.floor(base * Math.exp(growthRate * level));
 }
 
-export function getExpForLevel({ level, a, b, c }) {
+export function getExpForLevel({ level, a = 0, b = 0, c = 0 }) {
 	// quadratic progression common in many games
 	// Coefficients
 	// a, Quadratic coefficient (late levels)
@@ -34,7 +34,7 @@ export function getExpForLevel({ level, a, b, c }) {
 	return a * (level * level) + b * level + c;
 }
 
-export function getLevelFromTotalExperience({ totalExp, a, b, c }) {
+export function getLevelFromTotalExperience({ totalExp, a = 0, b = 0, c = 0 }) {
 	if (totalExp <= c) {
 		return 0;
 	}
@@ -69,6 +69,7 @@ export function getLevelInfo({ totalExp, maxLevel, a = 5, b = 0, c = 0 }) {
 
 	return {
 		totalExp,
+		levelExp: expForCurrentLevel,
 		level: level + 1,
 		currentLevel: level, //0 based
 		expToNext: expNeededForNextLevel - remainderExp,

@@ -9,6 +9,20 @@ export function setCurrentCharCache(character) {
 	}
 	const charClone = { ...character };
 	delete charClone.image;
+
+	if (!charClone.experience) {
+		const userChars = JSON.parse(
+			localStorage.getItem('USER_CHARACTERS') || '[]'
+		);
+		const thisUserChar = userChars.find((x) => x.id === charClone.id);
+		if (thisUserChar?.experience) {
+			charClone.experience = thisUserChar.experience;
+		}
+		if (thisUserChar?.professorPoints) {
+			charClone.professorPoints = thisUserChar.professorPoints;
+		}
+	}
+
 	localStorage.setItem(CHARACTER_CACHE_KEY, JSON.stringify(charClone));
 }
 

@@ -1,0 +1,36 @@
+/*
+
+*/
+export const sampleUnit1 = {
+	id: '174-localid',
+	code: 'u0001-2-tom',
+	uncappedLevel: 0,
+	displayName: 'Major Tom',
+	element: 'Air',
+	type: 'Strength',
+	rank: 2,
+	mineralCost: 100,
+	attack: 375,
+	hp: 1217,
+	defense: 856,
+	range: 300,
+	stars: 2,
+	maxLevel: 30,
+	level: 30,
+	levelNext: 0,
+	levelNextPercent: 0,
+	professorPoints: 1,
+	attackSpeedText: 'Normal',
+	moveSpeedText: 'Normal',
+	physicalAttack: 375,
+	physicalDefense: 856,
+	magicAttack: 375,
+	magicDefense: 856,
+	attackSpeed: 1,
+	moveSpeed: 1,
+	critChance: 0.01,
+	critMult: 2,
+	move: 60,
+	unit: '174-localid',
+	experience: 8478000 //has more experience than maxed level allows
+};

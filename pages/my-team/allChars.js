@@ -18,31 +18,51 @@ export const attachAllCharacters = (args) => {
 
 	//latest
 	if (sortBy === 'latestUp') {
-		sorted.sort((a, b) => Number(b.id[0]) - Number(a.id[0]));
+		//;
 	}
 	if (sortBy === 'latestDown') {
-		sorted.sort((a, b) => Number(a.id[0]) - Number(b.id[0]));
+		sorted.reverse();
 	}
 	//grade
 	if (sortBy === 'gradeUp') {
-		sorted.sort((a, b) => a.rank - b.rank);
+		sorted.sort((a, b) => {
+			if (a.rank === b.rank) return b.code.localeCompare(a.code);
+			return a.rank - b.rank;
+		});
 	}
 	if (sortBy === 'gradeDown') {
-		sorted.sort((a, b) => b.rank - a.rank);
+		sorted.sort((a, b) => {
+			if (a.rank === b.rank) return a.code.localeCompare(b.code);
+			return b.rank - a.rank;
+		});
 	}
 	//level
 	if (sortBy === 'levelUp') {
-		sorted.sort((a, b) => a.level - b.level);
+		sorted.sort((a, b) => {
+			if (a.level === b.level) return b.code.localeCompare(a.code);
+			return a.level - b.level;
+		});
 	}
 	if (sortBy === 'levelDown') {
-		sorted.sort((a, b) => b.level - a.level);
+		sorted.sort((a, b) => {
+			if (a.level === b.level) return a.code.localeCompare(b.code);
+			return b.level - a.level;
+		});
 	}
 	//mineral
 	if (sortBy === 'mineralUp') {
-		sorted.sort((a, b) => a.mineralCost - b.mineralCost);
+		sorted.sort((a, b) => {
+			if (a.mineralCost === b.mineralCost)
+				return b.code.localeCompare(a.code);
+			return a.mineralCost - b.mineralCost;
+		});
 	}
 	if (sortBy === 'mineralDown') {
-		sorted.sort((a, b) => b.mineralCost - a.mineralCost);
+		sorted.sort((a, b) => {
+			if (a.mineralCost === b.mineralCost)
+				return a.code.localeCompare(b.code);
+			return b.mineralCost - a.mineralCost;
+		});
 	}
 
 	sorted.forEach((character) => {

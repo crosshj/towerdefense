@@ -2,11 +2,21 @@
 ALL CHARACTERS THAT THE USER HAS AVAILABLE
 */
 import { clone, generateUUID } from '../utils/utils.js';
-import { hydrateCharacters } from '../characters/index.js';
+import {
+	calculateCombineResults,
+	hydrateCharacters
+} from '../characters/index.js';
 import { getUserFromAPI, updateUserFromAPI } from './user.js';
-import { compressChars, decompressChars } from '../utils/compress.js';
+import {
+	compressChars,
+	compressTeams,
+	decompressChars,
+	decompressTeams
+} from '../utils/compress.js';
+import { getTeams } from './teams.js';
 
 const LS_NAME = 'USER_CHARACTERS';
+const LS_NAME_TEAMS = 'USER_TEAMS';
 
 const defaultCharacterList = [
 	{
@@ -127,6 +137,7 @@ export const getCharacters = async (hydrate = true) => {
 
 // level is complete, give characters exp
 export const addCharactersEXP = async (chars, expAmount) => {
+	const prevTeams = await getTeams();
 	const hydrated = false;
 	const allChars = await getCharacters(hydrated);
 	for (const { id } of chars) {
@@ -174,8 +185,82 @@ export const addNewCharacter = async (char) => {
 // player sells characters
 export const sellCharacters = async (chars) => {};
 
+const reIndexTeams = ({ removeIds, prevTeams, prevChars }) => {
+	const prevCharsWithUUID = [...prevChars].map((x) => {
+		return { ...x, uuid: generateUUID() };
+	});
+	const newCharsWithUUID = prevCharsWithUUID.filter(
+		(char) => !removeIds.includes(char.id)
+	);
+	const newChars = decompressChars(compressChars(newCharsWithUUID));
+
+	const reIndexedTeams = {};
+	const allTeamNames = [
+		'Team 1',
+		'Team 2',
+		'Team 3',
+		'Team 4',
+		'Team 5',
+		'Defense'
+	];
+	for (const teamName of allTeamNames) {
+		reIndexedTeams[teamName] = { a: [], b: [] };
+		for (const subteam of ['a', 'b']) {
+			for (const index of [0, 1, 2, 3, 4]) {
+				const prevTeam = prevTeams[teamName][subteam][index];
+				const prevChar = prevCharsWithUUID.find(
+					(x) => x.id === prevTeam.id
+				);
+				const newChar = newChars.find((x) => x.index === prevChar.uuid);
+				reIndexedTeams[teamName][subteam][index] = { id: newChar?.id };
+			}
+		}
+	}
+	return reIndexedTeams;
+};
+
 // individual character is UPGRADED (with inputs like: other chars, materials, etc)
-export const upgradeCharacter = async (char, inputs) => {};
+export const upgradeCharacter = async (currentChar, materials) => {
+	const combineRes = await calculateCombineResults({
+		currentChar,
+		materials
+	});
+	const prevChars = await getCharacters(false /*hydrated*/);
+	const removeIds = materials.filter((x) => x).map((x) => x?.id);
+	const newChars = [...prevChars].filter(
+		(char) => !removeIds.includes(char.id)
+	);
+	const updatedChar = newChars.find((x) => x.id === currentChar.id);
+	updatedChar.experience = combineRes.newExperience;
+	updatedChar.professorPoints = combineRes.newProfessorPoints;
+	updatedChar.uncapped = combineRes.newUncapped;
+
+	//MUST re-index teams since character indexs have changed
+	const prevTeams = await getTeams();
+	const reIndexedTeams = reIndexTeams({
+		removeIds,
+		prevTeams,
+		prevChars
+	});
+
+	const newCharsCompressed = compressChars(newChars);
+	const newTeamsCompressed = compressTeams(reIndexedTeams, newChars);
+	const newTeams = decompressChars(newTeamsCompressed, newChars);
+
+	const apiUser = await getUserFromAPI();
+	await updateUserFromAPI({
+		...(apiUser.data || {}),
+		characters: newCharsCompressed,
+		teams: newTeamsCompressed
+	});
+	localStorage.setItem(LS_NAME, JSON.stringify(newChars));
+	localStorage.setItem(LS_NAME_TEAMS, JSON.stringify(newTeams));
+
+	return {
+		currentChar: updatedChar,
+		characters: newChars
+	};
+};
 
 // individual character is EVOLVED (with inputs like: materials, etc)
 export const evolveCharacter = async (char, inputs) => {};
