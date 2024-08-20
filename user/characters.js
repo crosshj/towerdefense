@@ -14,6 +14,7 @@ import {
 	decompressTeams
 } from '../utils/compress.js';
 import { getTeams } from './teams.js';
+import { flattenTeams } from '../utils/teams.js';
 
 const LS_NAME = 'USER_CHARACTERS';
 const LS_NAME_TEAMS = 'USER_TEAMS';
@@ -110,6 +111,20 @@ const defaultCharacterList = [
 		code: 'u0001-5-wap'
 	}
 ];
+
+export const getCharactersAndTeams = async (_apiUser) => {
+	const apiUser = _apiUser || (await getUserFromAPI());
+	let apiChars;
+	let apiTeams;
+	if (apiUser && apiUser.data.teams && apiUser.data.characters) {
+		apiChars = decompressChars(apiUser.data.characters);
+		apiTeams = decompressTeams(apiUser.data.teams, apiChars);
+	}
+	return {
+		characters: apiChars,
+		teams: apiTeams
+	};
+};
 
 export const getCharacters = async (hydrate = true) => {
 	const lsValue = localStorage.getItem(LS_NAME) || '';
@@ -219,14 +234,22 @@ const reIndexTeams = ({ removeIds, prevTeams, prevChars }) => {
 	return reIndexedTeams;
 };
 
-// individual character is UPGRADED (with inputs like: other chars, materials, etc)
-export const upgradeCharacter = async (currentChar, materials) => {
-	const combineRes = await calculateCombineResults({
+export const parseUpgradeChange = (args) => {
+	//console.log({ args });
+	const { currentChar, materials, prevChars, prevTeams } = args;
+	const removeIds = materials.filter((x) => x).map((x) => x?.id);
+
+	const teamsString = JSON.stringify(prevTeams);
+	const removeError = removeIds.some((x) => teamsString.includes(`"${x}"`));
+	if (removeError) {
+		return { error: 'cannot use team units for upgrade!' };
+	}
+
+	const combineRes = calculateCombineResults({
 		currentChar,
 		materials
 	});
-	const prevChars = await getCharacters(false /*hydrated*/);
-	const removeIds = materials.filter((x) => x).map((x) => x?.id);
+
 	const newChars = [...prevChars].filter(
 		(char) => !removeIds.includes(char.id)
 	);
@@ -234,20 +257,45 @@ export const upgradeCharacter = async (currentChar, materials) => {
 	updatedChar.experience = combineRes.newExperience;
 	updatedChar.professorPoints = combineRes.newProfessorPoints;
 	updatedChar.uncapped = combineRes.newUncapped;
-
 	//MUST re-index teams since character indexs have changed
-	const prevTeams = await getTeams();
 	const reIndexedTeams = reIndexTeams({
 		removeIds,
 		prevTeams,
 		prevChars
 	});
-
 	const newCharsCompressed = compressChars(newChars);
-	const newTeamsCompressed = compressTeams(reIndexedTeams, newChars);
-	const newTeams = decompressChars(newTeamsCompressed, newChars);
+	const newTeamsCompressed = compressTeams(
+		reIndexedTeams,
+		decompressChars(newCharsCompressed)
+	);
 
+	const newTeams = decompressTeams(newTeamsCompressed, newChars);
+
+	return {
+		newCharsCompressed,
+		newTeamsCompressed,
+		newChars,
+		newTeams,
+		updatedChar
+	};
+};
+
+// individual character is UPGRADED (with inputs like: other chars, materials, etc)
+export const upgradeCharacter = async (currentChar, materials) => {
 	const apiUser = await getUserFromAPI();
+	const { characters: prevChars, teams: prevTeams } =
+		await getCharactersAndTeams(apiUser);
+	// const prevChars = await getCharacters(false /*hydrated*/);
+	//const prevTeams = await getTeams();
+
+	const {
+		newCharsCompressed,
+		newTeamsCompressed,
+		newChars,
+		newTeams,
+		updatedChar
+	} = parseUpgradeChange({ currentChar, materials, prevChars, prevTeams });
+
 	await updateUserFromAPI({
 		...(apiUser.data || {}),
 		characters: newCharsCompressed,
@@ -255,7 +303,6 @@ export const upgradeCharacter = async (currentChar, materials) => {
 	});
 	localStorage.setItem(LS_NAME, JSON.stringify(newChars));
 	localStorage.setItem(LS_NAME_TEAMS, JSON.stringify(newTeams));
-
 	return {
 		currentChar: updatedChar,
 		characters: newChars

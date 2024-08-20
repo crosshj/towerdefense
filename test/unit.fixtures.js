@@ -34,3 +34,2701 @@ export const sampleUnit1 = {
 	unit: '174-localid',
 	experience: 8478000 //has more experience than maxed level allows
 };
+
+export const parseUpgradeChangeScenario1 = {
+	currentChar: {
+		id: '72-localid',
+		code: 'u0001-5-robia',
+		uncappedLevel: 0,
+		displayName: 'Robia',
+		element: 'Psychic',
+		type: 'Intelligence',
+		rank: 5,
+		mineralCost: 300,
+		attack: 11139,
+		hp: 33411,
+		defense: 2740,
+		range: 1000,
+		stars: 5,
+		maxLevel: 60,
+		level: 60,
+		levelNext: 0,
+		levelNextPercent: 0,
+		levelExp: 450000,
+		professorPoints: 1,
+		attackSpeedText: 'Normal',
+		moveSpeedText: 'Normal',
+		physicalAttack: 11139,
+		physicalDefense: 2740,
+		magicAttack: 11139,
+		magicDefense: 2740,
+		attackSpeed: 1,
+		moveSpeed: 1,
+		critChance: 0.01,
+		critMult: 2,
+		move: 60,
+		unit: '72-localid',
+		imageUri: '',
+		experience: 16122000,
+		image: {}
+	},
+	materials: [
+		{
+			id: '15-localid',
+			code: 'u0001-5-robia',
+			uncappedLevel: 0,
+			displayName: 'Robia',
+			element: 'Psychic',
+			type: 'Intelligence',
+			rank: 5,
+			mineralCost: 300,
+			attack: 1328,
+			hp: 3978,
+			defense: 317,
+			range: 1000,
+			stars: 5,
+			maxLevel: 60,
+			level: 1,
+			levelNext: 6025,
+			levelNextPercent: '0.00',
+			levelExp: 0,
+			professorPoints: 1,
+			attackSpeedText: 'Normal',
+			moveSpeedText: 'Normal',
+			physicalAttack: 1328,
+			physicalDefense: 317,
+			magicAttack: 1328,
+			magicDefense: 317,
+			attackSpeed: 1,
+			moveSpeed: 1,
+			critChance: 0.01,
+			critMult: 2,
+			move: 60,
+			unit: '15-localid'
+		},
+		{
+			id: '121-localid',
+			code: 'u0001-5-robia',
+			uncappedLevel: 0,
+			displayName: 'Robia',
+			element: 'Psychic',
+			type: 'Intelligence',
+			rank: 5,
+			mineralCost: 300,
+			attack: 1328,
+			hp: 3978,
+			defense: 317,
+			range: 1000,
+			stars: 5,
+			maxLevel: 60,
+			level: 1,
+			levelNext: 6025,
+			levelNextPercent: '0.00',
+			levelExp: 0,
+			professorPoints: 1,
+			attackSpeedText: 'Normal',
+			moveSpeedText: 'Normal',
+			physicalAttack: 1328,
+			physicalDefense: 317,
+			magicAttack: 1328,
+			magicDefense: 317,
+			attackSpeed: 1,
+			moveSpeed: 1,
+			critChance: 0.01,
+			critMult: 2,
+			move: 60,
+			unit: '121-localid'
+		},
+		{
+			id: '155-localid',
+			code: 'u0001-5-robia',
+			uncappedLevel: 0,
+			displayName: 'Robia',
+			element: 'Psychic',
+			type: 'Intelligence',
+			rank: 5,
+			mineralCost: 300,
+			attack: 1328,
+			hp: 3978,
+			defense: 317,
+			range: 1000,
+			stars: 5,
+			maxLevel: 60,
+			level: 1,
+			levelNext: 6025,
+			levelNextPercent: '0.00',
+			levelExp: 0,
+			professorPoints: 1,
+			attackSpeedText: 'Normal',
+			moveSpeedText: 'Normal',
+			physicalAttack: 1328,
+			physicalDefense: 317,
+			magicAttack: 1328,
+			magicDefense: 317,
+			attackSpeed: 1,
+			moveSpeed: 1,
+			critChance: 0.01,
+			critMult: 2,
+			move: 60,
+			unit: '155-localid'
+		},
+		{
+			id: '146-localid',
+			code: 'u0001-5-robia',
+			uncappedLevel: 0,
+			displayName: 'Robia',
+			element: 'Psychic',
+			type: 'Intelligence',
+			rank: 5,
+			mineralCost: 300,
+			attack: 1328,
+			hp: 3978,
+			defense: 317,
+			range: 1000,
+			stars: 5,
+			maxLevel: 60,
+			level: 1,
+			levelNext: 6025,
+			levelNextPercent: '0.00',
+			levelExp: 0,
+			professorPoints: 1,
+			attackSpeedText: 'Normal',
+			moveSpeedText: 'Normal',
+			physicalAttack: 1328,
+			physicalDefense: 317,
+			magicAttack: 1328,
+			magicDefense: 317,
+			attackSpeed: 1,
+			moveSpeed: 1,
+			critChance: 0.01,
+			critMult: 2,
+			move: 60,
+			unit: '146-localid'
+		},
+		{
+			id: '139-localid',
+			code: 'u0001-5-robia',
+			uncappedLevel: 0,
+			displayName: 'Robia',
+			element: 'Psychic',
+			type: 'Intelligence',
+			rank: 5,
+			mineralCost: 300,
+			attack: 1328,
+			hp: 3978,
+			defense: 317,
+			range: 1000,
+			stars: 5,
+			maxLevel: 60,
+			level: 1,
+			levelNext: 6025,
+			levelNextPercent: '0.00',
+			levelExp: 0,
+			professorPoints: 1,
+			attackSpeedText: 'Normal',
+			moveSpeedText: 'Normal',
+			physicalAttack: 1328,
+			physicalDefense: 317,
+			magicAttack: 1328,
+			magicDefense: 317,
+			attackSpeed: 1,
+			moveSpeed: 1,
+			critChance: 0.01,
+			critMult: 2,
+			move: 60,
+			unit: '139-localid'
+		}
+	],
+	prevChars: [
+		{
+			index: '0',
+			id: '0-localid',
+			code: 'u0001-1-macho',
+			experience: 1978800,
+			uncappedLevel: 0,
+			professorPoints: 10
+		},
+		{
+			index: '1',
+			id: '1-localid',
+			code: 'u0001-2-toto',
+			experience: 576000,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '2',
+			id: '2-localid',
+			code: 'u0001-3-twinkle',
+			experience: 20460000,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '3',
+			id: '3-localid',
+			code: 'u0001-4-vispi',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '4',
+			id: '4-localid',
+			code: 'u0001-5-drat',
+			experience: 2030908962063553300,
+			uncappedLevel: 4,
+			professorPoints: 10
+		},
+		{
+			index: '5',
+			id: '5-localid',
+			code: 'u0001-4-antonio',
+			experience: 288000,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '6',
+			id: '6-localid',
+			code: 'u0001-4-bumpier',
+			experience: 14790000,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '7',
+			id: '7-localid',
+			code: 'u0001-4-tabi',
+			experience: 288000,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '8',
+			id: '8-localid',
+			code: 'u0001-5-electopus',
+			experience: 288000,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '9',
+			id: '9-localid',
+			code: 'u0001-5-santelmo',
+			experience: 288000,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: 'A',
+			id: '10-localid',
+			code: 'u0001-5-multo',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: 'B',
+			id: '11-localid',
+			code: 'u0001-5-kelvin',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: 'C',
+			id: '12-localid',
+			code: 'u0001-5-blanko',
+			experience: 1817633053059879700,
+			uncappedLevel: 3,
+			professorPoints: 4
+		},
+		{
+			index: 'D',
+			id: '13-localid',
+			code: 'u0001-5-prickles',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: 'E',
+			id: '14-localid',
+			code: 'u0001-5-crack9',
+			experience: 1685605109390939000,
+			uncappedLevel: 4,
+			professorPoints: 5
+		},
+		{
+			index: 'F',
+			id: '15-localid',
+			code: 'u0001-5-robia',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: 'G',
+			id: '16-localid',
+			code: 'u0001-5-barbell',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: 'H',
+			id: '17-localid',
+			code: 'u0001-5-wap',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: 'I',
+			id: '18-localid',
+			code: 'u0001-5-crack9',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: 'J',
+			id: '19-localid',
+			code: 'u0001-5-crack9',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: 'K',
+			id: '20-localid',
+			code: 'u0001-5-crack9',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: 'L',
+			id: '21-localid',
+			code: 'u0001-1-benny',
+			experience: 2712400,
+			uncappedLevel: 4,
+			professorPoints: 10
+		},
+		{
+			index: 'M',
+			id: '22-localid',
+			code: 'u0001-3-zar',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: 'N',
+			id: '23-localid',
+			code: 'u0001-3-zar',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: 'O',
+			id: '24-localid',
+			code: 'u0001-3-zar',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: 'P',
+			id: '25-localid',
+			code: 'u0001-3-zar',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: 'Q',
+			id: '26-localid',
+			code: 'u0001-3-zar',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: 'R',
+			id: '27-localid',
+			code: 'u0001-3-zar',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: 'S',
+			id: '28-localid',
+			code: 'u0001-3-zar',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: 'T',
+			id: '29-localid',
+			code: 'u0001-3-zar',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: 'U',
+			id: '30-localid',
+			code: 'u0001-3-zar',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: 'V',
+			id: '31-localid',
+			code: 'u0001-4-slabb',
+			experience: 16746000,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: 'W',
+			id: '32-localid',
+			code: 'u0001-3-zar',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: 'X',
+			id: '33-localid',
+			code: 'u0001-3-zar',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: 'Y',
+			id: '34-localid',
+			code: 'u0001-3-zar',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: 'Z',
+			id: '35-localid',
+			code: 'u0001-3-zar',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '10',
+			id: '36-localid',
+			code: 'u0001-3-zar',
+			experience: 1309833269719623700,
+			uncappedLevel: 4,
+			professorPoints: 6
+		},
+		{
+			index: '11',
+			id: '37-localid',
+			code: 'u0001-3-zar',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '12',
+			id: '38-localid',
+			code: 'u0001-3-zar',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '13',
+			id: '39-localid',
+			code: 'u0001-3-zar',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '14',
+			id: '40-localid',
+			code: 'u0001-3-zar',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '15',
+			id: '41-localid',
+			code: 'u0001-3-zar',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '16',
+			id: '42-localid',
+			code: 'u0001-3-zar',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '17',
+			id: '43-localid',
+			code: 'u0001-3-zar',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '18',
+			id: '44-localid',
+			code: 'u0001-3-zar',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '19',
+			id: '45-localid',
+			code: 'u0001-3-rose',
+			experience: 2784000,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '1A',
+			id: '46-localid',
+			code: 'u0001-3-rose',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '1B',
+			id: '47-localid',
+			code: 'u0001-3-zar',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '1C',
+			id: '48-localid',
+			code: 'u0001-3-zar',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '1D',
+			id: '49-localid',
+			code: 'u0001-4-slabb',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '1E',
+			id: '50-localid',
+			code: 'u0001-4-violet',
+			experience: 1045777382380974000,
+			uncappedLevel: 4,
+			professorPoints: 6
+		},
+		{
+			index: '1F',
+			id: '51-localid',
+			code: 'u0001-2-ogre',
+			experience: 548133594706407500,
+			uncappedLevel: 0,
+			professorPoints: 7
+		},
+		{
+			index: '1G',
+			id: '52-localid',
+			code: 'u0001-4-crimson',
+			experience: 1045777382381838000,
+			uncappedLevel: 4,
+			professorPoints: 6
+		},
+		{
+			index: '1H',
+			id: '53-localid',
+			code: 'u0001-5-crack9',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '1I',
+			id: '54-localid',
+			code: 'u0001-3-rose',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '1J',
+			id: '55-localid',
+			code: 'u0001-4-crimson',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '1K',
+			id: '56-localid',
+			code: 'u0001-2-jet',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '1L',
+			id: '57-localid',
+			code: 'u0001-4-crimson',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '1M',
+			id: '58-localid',
+			code: 'u0001-3-rose',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '1N',
+			id: '59-localid',
+			code: 'u0001-3-rose',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '1O',
+			id: '60-localid',
+			code: 'u0001-3-rose',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '1P',
+			id: '61-localid',
+			code: 'u0001-3-rose',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '1Q',
+			id: '62-localid',
+			code: 'u0001-4-boar',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '1R',
+			id: '63-localid',
+			code: 'u0001-3-rose',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '1S',
+			id: '64-localid',
+			code: 'u0001-4-slabb',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '1T',
+			id: '65-localid',
+			code: 'u0001-5-crack9',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '1U',
+			id: '66-localid',
+			code: 'u0001-5-crack9',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '1V',
+			id: '67-localid',
+			code: 'u0001-2-toto',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '1W',
+			id: '68-localid',
+			code: 'u0001-4-bumpier',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '1X',
+			id: '69-localid',
+			code: 'u0001-3-rose',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '1Y',
+			id: '70-localid',
+			code: 'u0001-2-jet',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '1Z',
+			id: '71-localid',
+			code: 'u0001-5-drat',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '20',
+			id: '72-localid',
+			code: 'u0001-5-robia',
+			experience: 16122000,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '21',
+			id: '73-localid',
+			code: 'u0001-4-aynstine',
+			experience: 5790000,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '22',
+			id: '74-localid',
+			code: 'u0001-5-prickles',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '23',
+			id: '75-localid',
+			code: 'u0001-4-antonio',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '24',
+			id: '76-localid',
+			code: 'u0001-4-openhyman',
+			experience: 22344000,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '25',
+			id: '77-localid',
+			code: 'u0001-4-pineman',
+			experience: 6078000,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '26',
+			id: '78-localid',
+			code: 'u0001-4-boar',
+			experience: 6078000,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '27',
+			id: '79-localid',
+			code: 'u0001-4-crimson',
+			experience: 11442000,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '28',
+			id: '80-localid',
+			code: 'u0001-4-crimson',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '29',
+			id: '81-localid',
+			code: 'u0001-4-crimson',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '2A',
+			id: '82-localid',
+			code: 'u0001-4-crimson',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '2B',
+			id: '83-localid',
+			code: 'u0001-2-coco',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '2C',
+			id: '84-localid',
+			code: 'u0001-2-coco',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '2D',
+			id: '85-localid',
+			code: 'u0001-2-coco',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '2E',
+			id: '86-localid',
+			code: 'u0001-4-aynstine',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '2F',
+			id: '87-localid',
+			code: 'u0001-4-aynstine',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '2G',
+			id: '88-localid',
+			code: 'u0001-4-aynstine',
+			experience: 288000,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '2H',
+			id: '89-localid',
+			code: 'u0001-1-pete',
+			experience: 710629525376353200,
+			uncappedLevel: 4,
+			professorPoints: 5
+		},
+		{
+			index: '2I',
+			id: '90-localid',
+			code: 'u0001-3-twinkle',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '2J',
+			id: '91-localid',
+			code: 'u0001-4-crimson',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '2K',
+			id: '92-localid',
+			code: 'u0001-5-drat',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '2L',
+			id: '93-localid',
+			code: 'u0001-5-drat',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '2M',
+			id: '94-localid',
+			code: 'u0001-4-crimson',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '2N',
+			id: '95-localid',
+			code: 'u0001-4-crimson',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '2O',
+			id: '96-localid',
+			code: 'u0001-5-drat',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '2P',
+			id: '97-localid',
+			code: 'u0001-5-bibly',
+			experience: 2030908962063553300,
+			uncappedLevel: 4,
+			professorPoints: 10
+		},
+		{
+			index: '2Q',
+			id: '98-localid',
+			code: 'u0001-5-drat',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '2R',
+			id: '99-localid',
+			code: 'u0001-2-jet',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '2S',
+			id: '100-localid',
+			code: 'u0001-2-jet',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '2T',
+			id: '101-localid',
+			code: 'u0001-2-jet',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '2U',
+			id: '102-localid',
+			code: 'u0001-2-zerosix',
+			experience: 288000,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '2V',
+			id: '103-localid',
+			code: 'u0001-4-crimson',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '2W',
+			id: '104-localid',
+			code: 'u0001-5-drat',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '2X',
+			id: '105-localid',
+			code: 'u0001-4-crimson',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '2Y',
+			id: '106-localid',
+			code: 'u0001-3-twinkle',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '2Z',
+			id: '107-localid',
+			code: 'u0001-4-pineman',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '30',
+			id: '108-localid',
+			code: 'u0001-4-pineman',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '31',
+			id: '109-localid',
+			code: 'u0001-2-jet',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '32',
+			id: '110-localid',
+			code: 'u0001-4-pineman',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '33',
+			id: '111-localid',
+			code: 'u0001-4-pineman',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '34',
+			id: '112-localid',
+			code: 'u0001-2-jet',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '35',
+			id: '113-localid',
+			code: 'u0001-2-tom',
+			experience: 578601581706932400,
+			uncappedLevel: 0,
+			professorPoints: 7
+		},
+		{
+			index: '36',
+			id: '114-localid',
+			code: 'u0001-4-aynstine',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '37',
+			id: '115-localid',
+			code: 'u0001-5-drat',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '38',
+			id: '116-localid',
+			code: 'u0001-3-twinkle',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '39',
+			id: '117-localid',
+			code: 'u0001-4-crimson',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '3A',
+			id: '118-localid',
+			code: 'u0001-5-drat',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '3B',
+			id: '119-localid',
+			code: 'u0001-5-drat',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '3C',
+			id: '120-localid',
+			code: 'u0001-4-crimson',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '3D',
+			id: '121-localid',
+			code: 'u0001-5-robia',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '3E',
+			id: '122-localid',
+			code: 'u0001-4-pineman',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '3F',
+			id: '123-localid',
+			code: 'u0001-2-jet',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '3G',
+			id: '124-localid',
+			code: 'u0001-2-jet',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '3H',
+			id: '125-localid',
+			code: 'u0001-4-pineman',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '3I',
+			id: '126-localid',
+			code: 'u0001-4-pineman',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '3J',
+			id: '127-localid',
+			code: 'u0001-4-pineman',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '3K',
+			id: '128-localid',
+			code: 'u0001-5-wap',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '3L',
+			id: '129-localid',
+			code: 'u0001-5-wap',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '3M',
+			id: '130-localid',
+			code: 'u0001-4-pineman',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '3N',
+			id: '131-localid',
+			code: 'u0001-2-coco',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '3O',
+			id: '132-localid',
+			code: 'u0001-2-coco',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '3P',
+			id: '133-localid',
+			code: 'u0001-4-aynstine',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '3Q',
+			id: '134-localid',
+			code: 'u0001-2-coco',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '3R',
+			id: '135-localid',
+			code: 'u0001-1-zoe',
+			experience: 19146000,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '3S',
+			id: '136-localid',
+			code: 'u0001-5-drat',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '3T',
+			id: '137-localid',
+			code: 'u0001-5-drat',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '3U',
+			id: '138-localid',
+			code: 'u0001-4-crimson',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '3V',
+			id: '139-localid',
+			code: 'u0001-5-robia',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '3W',
+			id: '140-localid',
+			code: 'u0001-5-drat',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '3X',
+			id: '141-localid',
+			code: 'u0001-5-drat',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '3Y',
+			id: '142-localid',
+			code: 'u0001-4-crimson',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '3Z',
+			id: '143-localid',
+			code: 'u0001-5-drat',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '40',
+			id: '144-localid',
+			code: 'u0001-5-drat',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '41',
+			id: '145-localid',
+			code: 'u0001-5-drat',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '42',
+			id: '146-localid',
+			code: 'u0001-5-robia',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '43',
+			id: '147-localid',
+			code: 'u0001-4-crimson',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '44',
+			id: '148-localid',
+			code: 'u0001-5-drat',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '45',
+			id: '149-localid',
+			code: 'u0001-5-prickles',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '46',
+			id: '150-localid',
+			code: 'u0001-5-prickles',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '47',
+			id: '151-localid',
+			code: 'u0001-3-zar',
+			experience: 7302000,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '48',
+			id: '152-localid',
+			code: 'u0001-4-crimson',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '49',
+			id: '153-localid',
+			code: 'u0001-5-drat',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '4A',
+			id: '154-localid',
+			code: 'u0001-5-drat',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '4B',
+			id: '155-localid',
+			code: 'u0001-5-robia',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '4C',
+			id: '156-localid',
+			code: 'u0001-5-multo',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '4D',
+			id: '157-localid',
+			code: 'u0001-4-bumpier',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '4E',
+			id: '158-localid',
+			code: 'u0001-3-corpus',
+			experience: 28938000,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '4F',
+			id: '159-localid',
+			code: 'u0001-5-robia',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '4G',
+			id: '160-localid',
+			code: 'u0001-4-liz',
+			experience: 19578000,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '4H',
+			id: '161-localid',
+			code: 'u0001-4-crimson',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '4I',
+			id: '162-localid',
+			code: 'u0001-4-crimson',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '4J',
+			id: '163-localid',
+			code: 'u0001-5-drat',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '4K',
+			id: '164-localid',
+			code: 'u0001-2-jet',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '4L',
+			id: '165-localid',
+			code: 'u0001-3-arcus',
+			experience: 8004000,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '4M',
+			id: '166-localid',
+			code: 'u0001-4-openhyman',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '4N',
+			id: '167-localid',
+			code: 'u0001-3-zar',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '4O',
+			id: '168-localid',
+			code: 'u0001-3-zar',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '4P',
+			id: '169-localid',
+			code: 'u0001-3-zar',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '4Q',
+			id: '170-localid',
+			code: 'u0001-4-openhyman',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '4R',
+			id: '171-localid',
+			code: 'u0001-3-pismud',
+			experience: 7248000,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '4S',
+			id: '172-localid',
+			code: 'u0001-3-pismud',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '4T',
+			id: '173-localid',
+			code: 'u0001-4-crimson',
+			experience: 288000,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '4U',
+			id: '174-localid',
+			code: 'u0001-5-drat',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '4V',
+			id: '175-localid',
+			code: 'u0001-3-twinkle',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '4W',
+			id: '176-localid',
+			code: 'u0001-4-crimson',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '4X',
+			id: '177-localid',
+			code: 'u0001-4-crimson',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '4Y',
+			id: '178-localid',
+			code: 'u0001-4-crimson',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '4Z',
+			id: '179-localid',
+			code: 'u0001-4-crimson',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '50',
+			id: '180-localid',
+			code: 'u0001-4-crimson',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '51',
+			id: '181-localid',
+			code: 'u0001-4-crimson',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '52',
+			id: '182-localid',
+			code: 'u0001-4-antonio',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '53',
+			id: '183-localid',
+			code: 'u0001-4-ruby',
+			experience: 1502797187387886000,
+			uncappedLevel: 3,
+			professorPoints: 4
+		},
+		{
+			index: '54',
+			id: '184-localid',
+			code: 'u0001-3-timmy',
+			experience: 7716000,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '55',
+			id: '185-localid',
+			code: 'u0001-5-drat',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '56',
+			id: '186-localid',
+			code: 'u0001-5-bibly',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '57',
+			id: '187-localid',
+			code: 'u0001-5-drat',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '58',
+			id: '188-localid',
+			code: 'u0001-5-drat',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '59',
+			id: '189-localid',
+			code: 'u0001-5-drat',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '5A',
+			id: '190-localid',
+			code: 'u0001-4-crimson',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '5B',
+			id: '191-localid',
+			code: 'u0001-3-twinkle',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '5C',
+			id: '192-localid',
+			code: 'u0001-5-bibly',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '5D',
+			id: '193-localid',
+			code: 'u0001-4-boar',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '5E',
+			id: '194-localid',
+			code: 'u0001-4-boar',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '5F',
+			id: '195-localid',
+			code: 'u0001-4-boar',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '5G',
+			id: '196-localid',
+			code: 'u0001-5-drat',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '5H',
+			id: '197-localid',
+			code: 'u0001-3-twinkle',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '5I',
+			id: '198-localid',
+			code: 'u0001-5-drat',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '5J',
+			id: '199-localid',
+			code: 'u0001-4-vispi',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '5K',
+			id: '200-localid',
+			code: 'u0001-1-zoe',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '5L',
+			id: '201-localid',
+			code: 'u0001-1-pete',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '5M',
+			id: '202-localid',
+			code: 'u0001-2-coco',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '5N',
+			id: '203-localid',
+			code: 'u0001-1-pete',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '5O',
+			id: '204-localid',
+			code: 'u0001-4-vispi',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '5P',
+			id: '205-localid',
+			code: 'u0001-2-coco',
+			experience: 2076000,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '5Q',
+			id: '206-localid',
+			code: 'u0001-4-aynstine',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '5R',
+			id: '207-localid',
+			code: 'u0001-4-aynstine',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '5S',
+			id: '208-localid',
+			code: 'u0001-1-zoe',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '5T',
+			id: '209-localid',
+			code: 'u0001-1-pete',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '5U',
+			id: '210-localid',
+			code: 'u0001-3-poki',
+			experience: 5004000,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '5V',
+			id: '211-localid',
+			code: 'u0001-3-zar',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '5W',
+			id: '212-localid',
+			code: 'u0001-1-skye',
+			experience: 5328000,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '5X',
+			id: '213-localid',
+			code: 'u0001-5-robia',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '5Y',
+			id: '214-localid',
+			code: 'u0001-5-robia',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '5Z',
+			id: '215-localid',
+			code: 'u0001-3-poki',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '60',
+			id: '216-localid',
+			code: 'u0001-5-bibly',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '61',
+			id: '217-localid',
+			code: 'u0001-4-aynstine',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '62',
+			id: '218-localid',
+			code: 'u0001-3-poki',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '63',
+			id: '219-localid',
+			code: 'u0001-4-crimson',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '64',
+			id: '220-localid',
+			code: 'u0001-4-crimson',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '65',
+			id: '221-localid',
+			code: 'u0001-5-robia',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '66',
+			id: '222-localid',
+			code: 'u0001-5-bibly',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '67',
+			id: '223-localid',
+			code: 'u0001-4-vispi',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '68',
+			id: '224-localid',
+			code: 'u0001-3-arcus',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '69',
+			id: '225-localid',
+			code: 'u0001-1-zoe',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '6A',
+			id: '226-localid',
+			code: 'u0001-3-poki',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '6B',
+			id: '227-localid',
+			code: 'u0001-3-poki',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '6C',
+			id: '228-localid',
+			code: 'u0001-3-poki',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '6D',
+			id: '229-localid',
+			code: 'u0001-3-poki',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '6E',
+			id: '230-localid',
+			code: 'u0001-3-poki',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '6F',
+			id: '231-localid',
+			code: 'u0001-2-coco',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '6G',
+			id: '232-localid',
+			code: 'u0001-5-wap',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '6H',
+			id: '233-localid',
+			code: 'u0001-5-drat',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '6I',
+			id: '234-localid',
+			code: 'u0001-3-arcus',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '6J',
+			id: '235-localid',
+			code: 'u0001-3-twinkle',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '6K',
+			id: '236-localid',
+			code: 'u0001-5-robia',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '6L',
+			id: '237-localid',
+			code: 'u0001-4-crimson',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '6M',
+			id: '238-localid',
+			code: 'u0001-5-robia',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '6N',
+			id: '239-localid',
+			code: 'u0001-3-twinkle',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '6O',
+			id: '240-localid',
+			code: 'u0001-5-drat',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '6P',
+			id: '241-localid',
+			code: 'u0001-5-drat',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '6Q',
+			id: '242-localid',
+			code: 'u0001-5-drat',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '6R',
+			id: '243-localid',
+			code: 'u0001-4-crimson',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '6S',
+			id: '244-localid',
+			code: 'u0001-5-drat',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '6T',
+			id: '245-localid',
+			code: 'u0001-4-crimson',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '6U',
+			id: '246-localid',
+			code: 'u0001-4-crimson',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '6V',
+			id: '247-localid',
+			code: 'u0001-4-crimson',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '6W',
+			id: '248-localid',
+			code: 'u0001-3-twinkle',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '6X',
+			id: '249-localid',
+			code: 'u0001-5-drat',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '6Y',
+			id: '250-localid',
+			code: 'u0001-5-drat',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '6Z',
+			id: '251-localid',
+			code: 'u0001-4-boar',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '70',
+			id: '252-localid',
+			code: 'u0001-5-popo',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '71',
+			id: '253-localid',
+			code: 'u0001-4-violet',
+			experience: 1728000,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '72',
+			id: '254-localid',
+			code: 'u0001-5-robia',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '73',
+			id: '255-localid',
+			code: 'u0001-4-crimson',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '74',
+			id: '256-localid',
+			code: 'u0001-4-crimson',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '75',
+			id: '257-localid',
+			code: 'u0001-5-drat',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '76',
+			id: '258-localid',
+			code: 'u0001-5-drat',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '77',
+			id: '259-localid',
+			code: 'u0001-5-drat',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '78',
+			id: '260-localid',
+			code: 'u0001-5-drat',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '79',
+			id: '261-localid',
+			code: 'u0001-5-robia',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '7A',
+			id: '262-localid',
+			code: 'u0001-5-drat',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '7B',
+			id: '263-localid',
+			code: 'u0001-5-drat',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '7C',
+			id: '264-localid',
+			code: 'u0001-3-twinkle',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '7D',
+			id: '265-localid',
+			code: 'u0001-5-robia',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '7E',
+			id: '266-localid',
+			code: 'u0001-5-robia',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '7F',
+			id: '267-localid',
+			code: 'u0001-5-robia',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '7G',
+			id: '268-localid',
+			code: 'u0001-5-robia',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '7H',
+			id: '269-localid',
+			code: 'u0001-5-robia',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '7I',
+			id: '270-localid',
+			code: 'u0001-3-twinkle',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '7J',
+			id: '271-localid',
+			code: 'u0001-5-robia',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '7K',
+			id: '272-localid',
+			code: 'u0001-4-crimson',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '7L',
+			id: '273-localid',
+			code: 'u0001-4-crimson',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '7M',
+			id: '274-localid',
+			code: 'u0001-3-twinkle',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '7N',
+			id: '275-localid',
+			code: 'u0001-4-crimson',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '7O',
+			id: '276-localid',
+			code: 'u0001-5-drat',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '7P',
+			id: '277-localid',
+			code: 'u0001-5-drat',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '7Q',
+			id: '278-localid',
+			code: 'u0001-5-bibly',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '7R',
+			id: '279-localid',
+			code: 'u0001-5-bibly',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '7S',
+			id: '280-localid',
+			code: 'u0001-5-drat',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '7T',
+			id: '281-localid',
+			code: 'u0001-5-drat',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '7U',
+			id: '282-localid',
+			code: 'u0001-5-drat',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		},
+		{
+			index: '7V',
+			id: '283-localid',
+			code: 'u0001-4-crimson',
+			experience: 0,
+			uncappedLevel: 0,
+			professorPoints: 1
+		}
+	],
+	prevTeams: {
+		'Team 1': {
+			a: [
+				{
+					id: '113-localid'
+				},
+				{
+					id: '51-localid'
+				},
+				{
+					id: '0-localid'
+				},
+				{
+					id: '21-localid'
+				},
+				{
+					id: '89-localid'
+				}
+			],
+			b: [
+				{
+					id: '253-localid'
+				},
+				{
+					id: '76-localid'
+				},
+				{
+					id: '160-localid'
+				},
+				{
+					id: '52-localid'
+				},
+				{
+					id: '36-localid'
+				}
+			]
+		},
+		'Team 2': {
+			a: [
+				{
+					id: '164-localid'
+				},
+				{
+					id: '1-localid'
+				},
+				{
+					id: '98-localid'
+				},
+				{
+					id: '32-localid'
+				},
+				{
+					id: '160-localid'
+				}
+			],
+			b: [
+				{
+					id: '5-localid'
+				},
+				{
+					id: '6-localid'
+				},
+				{
+					id: '7-localid'
+				},
+				{
+					id: '8-localid'
+				},
+				{
+					id: '48-localid'
+				}
+			]
+		},
+		'Team 3': {
+			a: [
+				{
+					id: '0-localid'
+				},
+				{
+					id: '15-localid'
+				},
+				{
+					id: '46-localid'
+				},
+				{
+					id: '41-localid'
+				},
+				{
+					id: '52-localid'
+				}
+			],
+			b: [
+				{
+					id: '3-localid'
+				},
+				{
+					id: '6-localid'
+				},
+				{
+					id: '7-localid'
+				},
+				{
+					id: '8-localid'
+				},
+				{
+					id: '4-localid'
+				}
+			]
+		},
+		'Team 4': {
+			a: [
+				{
+					id: '4-localid'
+				},
+				{
+					id: '0-localid'
+				},
+				{
+					id: '2-localid'
+				},
+				{
+					id: '14-localid'
+				},
+				{
+					id: '47-localid'
+				}
+			],
+			b: [
+				{
+					id: '5-localid'
+				},
+				{
+					id: '6-localid'
+				},
+				{
+					id: '46-localid'
+				},
+				{
+					id: '68-localid'
+				},
+				{
+					id: '13-localid'
+				}
+			]
+		},
+		'Team 5': {
+			a: [
+				{
+					id: '154-localid'
+				},
+				{
+					id: '72-localid'
+				},
+				{
+					id: '73-localid'
+				},
+				{
+					id: '74-localid'
+				},
+				{
+					id: '84-localid'
+				}
+			],
+			b: [
+				{
+					id: '9-localid'
+				},
+				{
+					id: '0-localid'
+				},
+				{
+					id: '46-localid'
+				},
+				{
+					id: '47-localid'
+				},
+				{
+					id: '48-localid'
+				}
+			]
+		},
+		Defense: {
+			a: [
+				{
+					id: '2-localid'
+				},
+				{
+					id: '0-localid'
+				},
+				{
+					id: '27-localid'
+				},
+				{
+					id: '46-localid'
+				},
+				{
+					id: '154-localid'
+				}
+			],
+			b: [
+				{
+					id: '48-localid'
+				},
+				{
+					id: '85-localid'
+				},
+				{
+					id: '68-localid'
+				},
+				{
+					id: '131-localid'
+				},
+				{
+					id: '0-localid'
+				}
+			]
+		}
+	}
+};
