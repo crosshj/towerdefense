@@ -2,6 +2,7 @@ import { SVGIcons } from '../../../assets/icons.svg.js';
 import { getStageInfo } from '../../../stages/index.js';
 import { getLocationMap } from '../../../utils/locations.js';
 import { getFriends } from '/user/getFriends.js';
+import { animateOrb } from '/visuals/objects/orb.js';
 
 const versusGraphic = SVGIcons.stars6();
 
