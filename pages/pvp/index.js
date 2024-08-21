@@ -1,5 +1,6 @@
 import { getUserLevelInfo } from '../../utils/experience.js';
 import { getUser } from '../../user/user.js';
+import { SVGIcons } from '../../assets/icons.svg.js';
 
 const pageTitle = 'PVP';
 
@@ -64,16 +65,43 @@ const updateUserInfo = async ({ players }) => {
 	//console.log({ players, user });
 	const userNameEl = document.querySelector('.userName');
 	userNameEl.innerHTML = user.name || '---';
+
+	const rankingIconEl = document.querySelector('.rankingIcon');
+	rankingIconEl.innerHTML = SVGIcons.ranking();
 	const rankingNumberEl = document.querySelector('.rankingNumber');
 	rankingNumberEl.innerHTML = user.position;
+
+	const trophiesIconEl = document.querySelector('.trophiesIcon');
+	trophiesIconEl.innerHTML = SVGIcons.trophy();
 	const trophiesNumberEl = document.querySelector('.trophiesNumber');
 	trophiesNumberEl.innerHTML = '0';
 };
 
-const attachFriendBattle = () => {
-	const button = document.querySelector('button.friendBattle');
-	button.addEventListener('pointerup', () => {
-		const src = `/pages/game/friendBattle/index.html`;
+const attachActions = () => {
+	const back = '/pages/pvp/';
+	const friendBattle = document.querySelector('button.friendBattle');
+	friendBattle.addEventListener('pointerup', () => {
+		const src = `/pages/game/friendBattle/`;
+		window.parent.postMessage({ _: 'navigate', src });
+	});
+	const record = document.querySelector('button.record');
+	record.addEventListener('pointerup', () => {
+		const src = `/pages/_wip/index.html?which=pvpRecord&back=${back}`;
+		window.parent.postMessage({ _: 'navigate', src });
+	});
+	const defenders = document.querySelector('button.defenders');
+	defenders.addEventListener('pointerup', () => {
+		const src = `/pages/_wip/index.html?which=defenders&back=${back}`;
+		window.parent.postMessage({ _: 'navigate', src });
+	});
+	const swapShop = document.querySelector('button.swapShop');
+	swapShop.addEventListener('pointerup', () => {
+		const src = `/pages/_wip/index.html?which=swapShop&back=${back}`;
+		window.parent.postMessage({ _: 'navigate', src });
+	});
+	const battle = document.querySelector('button.battle');
+	battle.addEventListener('pointerup', () => {
+		const src = `/pages/_wip/index.html?which=battle&back=${back}`;
 		window.parent.postMessage({ _: 'navigate', src });
 	});
 };
@@ -82,7 +110,7 @@ const setup = async () => {
 	const players = await updatePlayersList();
 	await updateUserInfo({ players });
 
-	attachFriendBattle();
+	attachActions();
 
 	window.parent.postMessage({
 		_: 'stats',
