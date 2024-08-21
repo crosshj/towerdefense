@@ -1,6 +1,84 @@
-import { animateOrb } from '/visuals/objects/orb.js';
-import { getLocationMap } from '../../../utils/locations.js';
+import { SVGIcons } from '../../../assets/icons.svg.js';
 import { getStageInfo } from '../../../stages/index.js';
+import { getLocationMap } from '../../../utils/locations.js';
+import { getFriends } from '/user/getFriends.js';
+
+const versusGraphic = SVGIcons.stars6();
+
+const messageCardComponent = () => `
+<div class="item friend">
+	<div class="card message">
+		<div class="versusGraphic">
+			${versusGraphic}
+		</div>
+		<span>Select a friend to help you. (1 friend)</span>
+	</div>
+</div>
+`;
+const friendCardComponent = (friend) => `
+<div class="item friend">
+	<div class="card">
+		<div class="flag grade-${friend.grade}">${friend.grade}</div>
+		<div class="level">
+			Lv. ${friend.level}
+		</div>
+		<div class="icon"></div>
+		<div class="name">
+			${friend.displayName}
+		</div>
+		<div class="radio">
+		</div>
+	</div>
+	<div class="time"></div>
+</div>
+`;
+
+const attachFriendsList = async ({ friends }) => {
+	const friendsList = document.querySelector('.items-list');
+	const friendsListSort = document.querySelector(
+		'.filter-dropdown custom-select'
+	);
+
+	const updateFriendsList = () => {
+		const sortBy = friendsListSort.value || 'Level';
+		friendsList.innerHTML = '';
+		const messageCard = document.createElement('div');
+		friendsList.append(messageCard);
+		messageCard.outerHTML = messageCardComponent();
+		const sortedFriends = [...friends].sort((a, b) => {
+			if (sortBy === 'Level') {
+				return b.level - a.level;
+			}
+			if (sortBy === 'Last Login') {
+				const dateA = new Date(a.last_login);
+				const dateB = new Date(b.last_login);
+				if (isNaN(dateA)) return 1; // Invalid date in 'a' goes to the end
+				if (isNaN(dateB)) return -1; // Invalid date in 'b' goes to the end
+				return dateB - dateA;
+			}
+		});
+		for (const friend of sortedFriends) {
+			const friendCard = document.createElement('div');
+			friendsList.append(friendCard);
+			friendCard.outerHTML = friendCardComponent(friend);
+		}
+	};
+	updateFriendsList();
+	friendsListSort.addEventListener('change', updateFriendsList);
+
+	const handleFriendSelect = (event) => {
+		const { target: card } = event;
+		const radioEl = card.querySelector('.radio');
+		if (radioEl.classList.contains('selected')) {
+			radioEl.classList.remove('selected');
+			return;
+		}
+		const allRadios = Array.from(friendsList.querySelectorAll('.radio'));
+		allRadios.forEach((x) => x.classList.remove('selected'));
+		radioEl.classList.add('selected');
+	};
+	friendsList.addEventListener('pointerup', handleFriendSelect);
+};
 
 const attachNextButton = async ({ location, params }) => {
 	const stage = await getStageInfo(params);
@@ -16,6 +94,16 @@ const attachNextButton = async ({ location, params }) => {
 	`;
 	nextButton.addEventListener('pointerup', async () => {
 		if (nextButton.classList.contains('clicked')) return;
+
+		// selected friend
+		const selectedCard = document.querySelector(
+			'.card:has(.radio.selected)'
+		);
+		const friendName = selectedCard
+			.querySelector('.name')
+			?.innerText?.trim();
+		console.log({ _: 'TODO: add friend to game', friendName });
+
 		nextButton.classList.add('clicked');
 		window.parent.postMessage({
 			_: 'action',
@@ -55,7 +143,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 	if (params?.number) {
 		location.title = 'STAGE ' + params.number;
 	}
+
 	await attachNextButton({ location, params });
+
+	const friends = await getFriends();
+	await attachFriendsList({ friends });
 
 	window.parent.postMessage({
 		_: 'stats',
