@@ -364,10 +364,12 @@ button {
 					box-sizing: border-box;
 					border: 1px solid #083f56;
 					border-radius: 2px;
+					color: black;
 					&:checked {
 						appearance: auto;
 						accent-color: yellow;
 						color: black;
+						color-scheme: only dark;
 					}
 				}
 			}
