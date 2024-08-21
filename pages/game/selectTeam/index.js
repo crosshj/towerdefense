@@ -1,6 +1,7 @@
 import { getLocationMap } from '../../../utils/locations.js';
 import { getTeam } from '../../_utils/getTeam.js';
 import { getEffects } from '../../../user/effects.js';
+import { SVGIcons } from '../../../assets/icons.svg.js';
 
 const updateTeamIcons = async () => {
 	const teamIcons = Array.from(
@@ -30,6 +31,13 @@ const updateTeamIcons = async () => {
 	}
 };
 
+const effectsIcons = {
+	meteor: SVGIcons.meteor(),
+	ice: SVGIcons.iceStorm(),
+	tornado: SVGIcons.tornado(),
+	invincible: SVGIcons.invincibility()
+};
+
 const updateEffects = async () => {
 	const effects = await getEffects();
 	for (const [k, v] of Object.entries(effects)) {
@@ -39,6 +47,9 @@ const updateEffects = async () => {
 			`.effects .${k} input[type=checkbox]`
 		);
 		checkBox.checked = selected;
+
+		const icon = document.querySelector(`.effects .${k} .icon`);
+		icon.innerHTML = effectsIcons[k];
 
 		const costEl = document.querySelector(`.effects .${k} .cost`);
 		costEl.innerHTML = count > 0 ? 'Free' : 'cost?';

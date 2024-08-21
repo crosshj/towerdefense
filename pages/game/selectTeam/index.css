@@ -323,16 +323,17 @@ button {
 			.iconContainer {
 				position: relative;
 				.icon {
-					font-size: 40px;
-					background: grey;
+					/* font-size: 40px; */
+					background: #266884;
 					display: flex;
 					justify-content: center;
 					align-items: center;
 					width: 55px;
 					aspect-ratio: 1 / 1;
 					border-radius: 50%;
-					color: white;
+					/* color: white; */
 					margin-top: 5px;
+					fill: #7fc4e2;
 				}
 				.countBadge {
 					position: absolute;
