@@ -98,3 +98,28 @@ export const domLoaded = async () => {
 		}
 	});
 };
+
+export const generateTableHTML = (data) => {
+	if (!data || data.length === 0) return '<table></table>';
+
+	const headers = Object.keys(data[0]);
+	let table = '<table><thead><tr>';
+
+	headers.forEach((header) => {
+		table += `<th>${header}</th>`;
+	});
+
+	table += '</tr></thead><tbody>';
+
+	data.forEach((row) => {
+		table += '<tr>';
+		headers.forEach((header) => {
+			table += `<td>${row[header] !== undefined ? row[header] : ''}</td>`;
+		});
+		table += '</tr>';
+	});
+
+	table += '</tbody></table>';
+
+	return table;
+};

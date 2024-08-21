@@ -1,0 +1,30 @@
+@import url(/visuals/_utility.css);
+
+body {
+	margin: 0;
+	background-color: black;
+	color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	font-size: 12px;
+	font-family: monospace;
+
+	.json {
+		white-space: pre-line;
+	}
+	th,
+	td {
+		text-align: left;
+		padding-inline: 8px;
+	}
+	tr:nth-child(even) {
+		background-color: #8884;
+	}
+}

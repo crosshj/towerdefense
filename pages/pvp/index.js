@@ -1,6 +1,8 @@
 import { getUserLevelInfo } from '../../utils/experience.js';
 import { getUser } from '../../user/user.js';
 import { SVGIcons } from '../../assets/icons.svg.js';
+import { getDefenseTeam } from '../../user/pvp.js';
+import { setOpponentTeamCache } from '../_utils/cache.js';
 
 const pageTitle = 'PVP';
 
@@ -9,9 +11,9 @@ const PlayerRow = (player) => {
 		player.data.exp || 0,
 		player.data.rank || 1
 	);
-	console.log(player);
 	const div = document.createElement('div');
 	div.classList.add('player');
+	div.dataset.index = player.i;
 	div.innerHTML = `
 		<div class="rank">${player.i}</div>
 		<div class="icon"></div>
@@ -32,6 +34,7 @@ const PlayerRow = (player) => {
 };
 
 const updatePlayersList = async () => {
+	//NOTE: click handler is in "attachActions: tierPlayers"
 	const tierPlayers = document.querySelector('.tierPlayers');
 	// const players = new Array(30).fill();
 	let players = await fetch(
@@ -77,7 +80,7 @@ const updateUserInfo = async ({ players }) => {
 	trophiesNumberEl.innerHTML = '0';
 };
 
-const attachActions = () => {
+const attachActions = ({ players }) => {
 	const back = '/pages/pvp/';
 	const friendBattle = document.querySelector('button.friendBattle');
 	friendBattle.addEventListener('pointerup', () => {
@@ -104,13 +107,23 @@ const attachActions = () => {
 		const src = `/pages/_wip/index.html?which=battle&back=${back}`;
 		window.parent.postMessage({ _: 'navigate', src });
 	});
+
+	const tierPlayers = document.querySelector('.tierPlayers');
+	tierPlayers.addEventListener('pointerup', async (e) => {
+		const { index } = e.target.dataset;
+		const player = players[index - 1];
+		const selectedOpponent = await getDefenseTeam({ player: player.name });
+		setOpponentTeamCache(selectedOpponent);
+		const src = `/pages/defenseTeam/?back=${back}`;
+		window.parent.postMessage({ _: 'navigate', src });
+	});
 };
 
 const setup = async () => {
 	const players = await updatePlayersList();
 	await updateUserInfo({ players });
 
-	attachActions();
+	attachActions({ players });
 
 	window.parent.postMessage({
 		_: 'stats',

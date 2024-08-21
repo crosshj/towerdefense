@@ -102,6 +102,7 @@ body {
 			padding-block: 10px;
 			box-sizing: border-box;
 			scrollbar-width: none;
+			pointer-events: none;
 
 			.player {
 				display: flex;
@@ -109,6 +110,10 @@ body {
 				align-items: center;
 				padding: 5px;
 				gap: 10px;
+				pointer-events: all;
+				& > div {
+					pointer-events: none;
+				}
 				& > .rank {
 					width: 17px;
 					text-align: center;

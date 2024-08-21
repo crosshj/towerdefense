@@ -18,6 +18,8 @@
 		margin-right: -13px;
 		width: var(--button-width);
 		position: relative;
+		height: 50px;
+		margin-top: -8px;
 
 		&.open {
 			.menuContainer {
@@ -36,7 +38,7 @@
 		.menuContainer {
 			position: absolute;
 			left: 0;
-			top: -8px;
+			top: 0;
 			svg {
 				width: var(--button-width);
 				height: var(--button-height);
@@ -63,6 +65,7 @@
 	}
 
 	& > div:not(.menu) {
+		height: 18px;
 		display: flex;
 		align-items: center;
 		background: rgb(18 33 50);
