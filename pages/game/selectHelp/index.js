@@ -101,8 +101,8 @@ const attachNextButton = async ({ location, params }) => {
 			'.card:has(.radio.selected)'
 		);
 		const friendName = selectedCard
-			.querySelector('.name')
-			?.innerText?.trim();
+			? selectedCard.querySelector('.name')?.innerText?.trim()
+			: undefined;
 		console.log({ _: 'TODO: add friend to game', friendName });
 
 		nextButton.classList.add('clicked');
