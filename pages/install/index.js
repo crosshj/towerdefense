@@ -105,7 +105,9 @@ const periodicSync = async () => {
 const progressListener = (event) => {
 	if (event.data.type !== 'progress') return;
 	const progressBar = document.getElementById('progress-bar');
-	progressBar.classList.remove('hidden');
+	if (event.data.progress < 100) {
+		progressBar.classList.remove('hidden');
+	}
 	if (event.data.progress > progressBar.value) {
 		progressBar.value = event.data.progress;
 	}
