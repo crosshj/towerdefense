@@ -584,5 +584,18 @@ export const unitsAll = {
 		hp: '583 - 2,700 - 7,488',
 		defense: '24 - 111 - 308',
 		range: 80 * 10
+	},
+
+	// https://rangers.lerico.net/en/ranger/u11-pico
+	'u0001-2-momoka': {
+		displayName: 'Momoka',
+		element: 'Fairy',
+		type: 'Agility',
+		rank: 2,
+		mineralCost: 220,
+		attack: '257 - 1,214 - 3,373',
+		hp: '583 - 2,700 - 7,488',
+		defense: '24 - 111 - 308',
+		range: 80 * 10
 	}
 };

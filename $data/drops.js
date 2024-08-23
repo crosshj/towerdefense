@@ -69,6 +69,7 @@ export const stageCharacterDrops = {
 	},
 	// dragon, fairy, psychic,
 	pantheon1: {
+		'u0001-2-momoka': { type: 'char', probability: 0.1 },
 		'u0001-5-robia': { type: 'char', probability: 0.1 },
 		'u0001-3-twinkle': { type: 'char', probability: 0.1 },
 		'u0001-5-bibly': { type: 'char', probability: 0.3 },
