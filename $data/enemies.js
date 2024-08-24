@@ -111,7 +111,7 @@ export const stageEnemies = {
 		{
 			type: 'defender',
 			hp: 3000,
-			respawn: 70,
+			respawn: 90,
 			range: 560,
 			attack: 25,
 			move: 20,
@@ -139,7 +139,7 @@ export const stageEnemies = {
 		{
 			type: 'defender',
 			hp: 3000,
-			respawn: 40,
+			respawn: 70,
 			range: 560,
 			attack: 95,
 			move: 40,
@@ -153,7 +153,7 @@ export const stageEnemies = {
 		{
 			type: 'defender',
 			hp: 3000,
-			respawn: 40,
+			respawn: 60,
 			range: 560,
 			attack: 95,
 			move: 40,
@@ -167,7 +167,7 @@ export const stageEnemies = {
 		{
 			type: 'defender',
 			hp: 3000,
-			respawn: 118,
+			respawn: 50,
 			range: 560,
 			attack: 87,
 			move: 60,
@@ -209,7 +209,7 @@ export const stageEnemies = {
 		{
 			type: 'defender',
 			hp: 6000,
-			respawn: 40,
+			respawn: 30,
 			range: 560,
 			attack: 95,
 			move: 40,
@@ -223,7 +223,7 @@ export const stageEnemies = {
 		{
 			type: 'defender',
 			hp: 7000,
-			respawn: 40,
+			respawn: 20,
 			range: 560,
 			attack: 100,
 			move: 40,
