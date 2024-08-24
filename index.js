@@ -207,11 +207,15 @@ const registerServiceWorker = async () => {
 };
 
 const onLoaded = async () => {
+	const params = Object.fromEntries(
+		new URLSearchParams(window.location.search)
+	);
+	const isWeb = params?.webOnly + '' === 'true';
+	const isLocal = document.location.host.startsWith('127.0.0.1');
 	const install = await installable({
 		onInstall: () => document.location.reload()
 	});
-	const isLocal = document.location.host.startsWith('127.0.0.1');
-	if (['fullscreen', 'standalone'].includes(install) || isLocal) {
+	if (['fullscreen', 'standalone'].includes(install) || isLocal || isWeb) {
 		await registerServiceWorker();
 		if (!bgMusic) {
 			bgMusic = await loadSounds('march');
