@@ -83,7 +83,7 @@ export const stageTowers = {
 	// dragon, fairy, psychic,
 	pantheon1: () => {
 		return {
-			hp: 60000,
+			hp: 120000,
 			color: '#8b008b',
 			music: 'slowedSurf',
 			background: 'backgroundGhost1'
@@ -222,13 +222,13 @@ export const stageEnemies = {
 	pantheon1: ({ towerX }) => [
 		{
 			type: 'defender',
-			hp: 7000,
-			respawn: 20,
-			range: 560,
-			attack: 100,
-			move: 40,
+			hp: 20000,
+			respawn: 22,
+			range: 500,
+			attack: 430,
+			move: 75,
 			x: towerX + 140,
-			critChance: 0.1,
+			critChance: 0.2,
 			critMult: 5
 		}
 	]
