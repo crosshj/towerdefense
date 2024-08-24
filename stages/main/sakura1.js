@@ -1,12 +1,10 @@
-import { stageCharacterDrops } from '/$data/drops.js';
+import { stageCharacterDrops, stageExperience } from '../../$data/drops.js';
+import { stageEnemies, stageTowers } from '../../$data/enemies.js';
 
 export const getRewards = async () => {
 	return {
 		coins: 4000,
-		exp: {
-			player: 48000,
-			unit: 48000
-		},
+		exp: stageExperience.sakura1(),
 		bonus: {
 			coin: { type: 'coin', probability: 1, amount: 5000 },
 			meteor: { type: 'effect', probability: 0.5 },
@@ -19,20 +17,9 @@ export const getRewards = async () => {
 };
 
 export default async () => {
+	const towerData = stageTowers.sakura1();
 	const towerX = 200;
-	const towerColor2 = '#934';
-
-	const basicOppChar = {
-		type: 'defender',
-		hp: 6000,
-		respawn: 40,
-		range: 560,
-		attack: 95,
-		move: 40,
-		x: towerX + 140,
-		critChance: 0.1,
-		critMult: 5
-	};
+	const enemyTeam = stageEnemies.sakura1({ towerX });
 
 	return {
 		state: {
@@ -44,10 +31,10 @@ export default async () => {
 				width: 4000
 			},
 			sounds: {
-				background: 'asianSceneBackground'
+				background: towerData.music
 			},
 			stage: {
-				background: 'backgroundSakura1'
+				background: towerData.background
 			},
 			towers: [
 				undefined,
@@ -55,10 +42,10 @@ export default async () => {
 					type: 'defender',
 					dims: [200, 343],
 					x: towerX,
-					color: towerColor2,
-					hp: 50000,
+					color: towerData.color,
+					hp: towerData.hp,
 					deployed: [],
-					team: [basicOppChar]
+					team: enemyTeam
 				}
 			],
 			tick: 0,

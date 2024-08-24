@@ -1,12 +1,10 @@
-import { stageCharacterDrops } from '/$data/drops.js';
+import { stageCharacterDrops, stageExperience } from '../../$data/drops.js';
+import { stageEnemies, stageTowers } from '../../$data/enemies.js';
 
 export const getRewards = async () => {
 	return {
 		coins: 4000,
-		exp: {
-			player: 12000,
-			unit: 12000
-		},
+		exp: stageExperience.tundra1(),
 		bonus: {
 			coin: { type: 'coin', probability: 1, amount: 5000 },
 			meteor: { type: 'effect', probability: 0.5 },
@@ -20,19 +18,8 @@ export const getRewards = async () => {
 
 export default async () => {
 	const towerX = 200;
-	const towerColor2 = '#934';
-
-	const basicOppChar = {
-		type: 'defender',
-		hp: 3000,
-		respawn: 40,
-		range: 560,
-		attack: 95,
-		move: 40,
-		x: towerX + 140,
-		critChance: 0.1,
-		critMult: 5
-	};
+	const towerData = stageTowers.tundra1();
+	const enemyTeam = stageEnemies.tundra1({ towerX });
 
 	return {
 		state: {
@@ -44,10 +31,10 @@ export default async () => {
 				width: 4000
 			},
 			sounds: {
-				background: 'sunnyFieldBackground'
+				background: towerData.music
 			},
 			stage: {
-				background: 'backgroundTundra1'
+				background: towerData.background
 			},
 			towers: [
 				undefined,
@@ -55,10 +42,10 @@ export default async () => {
 					type: 'defender',
 					dims: [200, 343],
 					x: towerX,
-					color: towerColor2,
-					hp: 30000,
+					color: towerData.color,
+					hp: towerData.hp,
 					deployed: [],
-					team: [basicOppChar]
+					team: enemyTeam
 				}
 			],
 			tick: 0,

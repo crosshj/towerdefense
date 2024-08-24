@@ -14,98 +14,99 @@ const LS_NAME = 'USER_TEAMS';
 const defaultValue = {
 	'Team 1': {
 		a: [
-			{ id: '019079cf-cb56-7f47-f03-7ef27d' },
-			{ id: '019079cf-cb56-7f2b-f72-56f0fd' },
-			{ id: '019079cf-cb56-74e4-310-d79f9e' },
-			{ id: '019079cf-cb56-7d7b-469-3b4bb5' },
-			{ id: '019079cf-cb56-7211-2f3-2bc714' },
+			{ id: '0-localid' },
+			{ id: '1-localid' },
+			{ id: '2-localid' },
+			{ id: '3-localid' },
+			{ id: '4-localid' },
 		],
 		b: [
-			{ id: '019079cf-cb56-76cd-ff8-6d0542' },
-			{ id: '019079cf-cb56-76c6-e56-7459e0' },
-			{ id: '019079cf-cb56-7b0b-ad4-36b3eb' },
-			{ id: '019079cf-cb56-7020-725-206b2f' },
-			{ id: '019079cf-cb56-7ea0-337-0ad0de' },
+			{ id: '5-localid' },
+			{ id: '6-localid' },
+			{ id: '7-localid' },
+			{ id: '8-localid' },
+			{ id: '9-localid' },
 		]
 	},
 	'Team 2': {
 		a: [
-			{ id: '019079cf-cb56-7f47-f03-7ef27d' },
-			{ id: '019079cf-cb56-7f2b-f72-56f0fd' },
-			{ id: '019079cf-cb56-74e4-310-d79f9e' },
-			{ id: '019079cf-cb56-7d7b-469-3b4bb5' },
-			{ id: '019079cf-cb56-7211-2f3-2bc714' },
+			{ id: '10-localid' },
+			{ id: '11-localid' },
+			{ id: '12-localid' },
+			{ id: '13-localid' },
+			{ id: '14-localid' },
 		],
 		b: [
-			{ id: '019079cf-cb56-76cd-ff8-6d0542' },
-			{ id: '019079cf-cb56-76c6-e56-7459e0' },
-			{ id: '019079cf-cb56-7b0b-ad4-36b3eb' },
-			{ id: '019079cf-cb56-7020-725-206b2f' },
-			{ id: '019079cf-cb56-7ea0-337-0ad0de' },
+			{ id: '15-localid' },
+			{ id: '16-localid' },
+			{ id: '17-localid' },
+			{ id: '0-localid' },
+			{ id: '1-localid' },
 		]
 	},
 	'Team 3': {
 		a: [
-			{ id: '019079cf-cb56-7f47-f03-7ef27d' },
-			{ id: '019079cf-cb56-7f2b-f72-56f0fd' },
-			{ id: '019079cf-cb56-74e4-310-d79f9e' },
-			{ id: '019079cf-cb56-7d7b-469-3b4bb5' },
-			{ id: '019079cf-cb56-7211-2f3-2bc714' },
+			{ id: '2-localid' },
+			{ id: '3-localid' },
+			{ id: '4-localid' },
+			{ id: '5-localid' },
+			{ id: '6-localid' },
 		],
 		b: [
-			{ id: '019079cf-cb56-76cd-ff8-6d0542' },
-			{ id: '019079cf-cb56-76c6-e56-7459e0' },
-			{ id: '019079cf-cb56-7b0b-ad4-36b3eb' },
-			{ id: '019079cf-cb56-7020-725-206b2f' },
-			{ id: '019079cf-cb56-7ea0-337-0ad0de' },
+			{ id: '7-localid' },
+			{ id: '8-localid' },
+			{ id: '9-localid' },
+			{ id: '10-localid' },
+			{ id: '11-localid' },
 		]
 	},
 	'Team 4': {
 		a: [
-			{ id: '019079cf-cb56-7f47-f03-7ef27d' },
-			{ id: '019079cf-cb56-7f2b-f72-56f0fd' },
-			{ id: '019079cf-cb56-74e4-310-d79f9e' },
-			{ id: '019079cf-cb56-7d7b-469-3b4bb5' },
-			{ id: '019079cf-cb56-7211-2f3-2bc714' },
+			{ id: '12-localid' },
+			{ id: '13-localid' },
+			{ id: '14-localid' },
+			{ id: '15-localid' },
+			{ id: '16-localid' },
 		],
 		b: [
-			{ id: '019079cf-cb56-76cd-ff8-6d0542' },
-			{ id: '019079cf-cb56-76c6-e56-7459e0' },
-			{ id: '019079cf-cb56-7b0b-ad4-36b3eb' },
-			{ id: '019079cf-cb56-7020-725-206b2f' },
-			{ id: '019079cf-cb56-7ea0-337-0ad0de' },
+			{ id: '17-localid' },
+			{ id: '0-localid' },
+			{ id: '1-localid' },
+			{ id: '2-localid' },
+			{ id: '3-localid' },
 		]
 	},
 	'Team 5': {
 		a: [
-			{ id: '019079cf-cb56-7f47-f03-7ef27d' },
-			{ id: '019079cf-cb56-7f2b-f72-56f0fd' },
-			{ id: '019079cf-cb56-74e4-310-d79f9e' },
-			{ id: '019079cf-cb56-7d7b-469-3b4bb5' },
-			{ id: '019079cf-cb56-7211-2f3-2bc714' },
+			{ id: '4-localid' },
+			{ id: '5-localid' },
+			{ id: '6-localid' },
+			{ id: '7-localid' },
+			{ id: '8-localid' },
 		],
 		b: [
-			{ id: '019079cf-cb56-76cd-ff8-6d0542' },
-			{ id: '019079cf-cb56-76c6-e56-7459e0' },
-			{ id: '019079cf-cb56-7b0b-ad4-36b3eb' },
-			{ id: '019079cf-cb56-7020-725-206b2f' },
-			{ id: '019079cf-cb56-7ea0-337-0ad0de' },
+			{ id: '9-localid' },
+			{ id: '10-localid' },
+			{ id: '11-localid' },
+			{ id: '12-localid' },
+			{ id: '13-localid' },
 		]
 	},
 	Defense: {
 		a: [
-			{ id: '019079cf-cb56-7f47-f03-7ef27d' },
-			{ id: '019079cf-cb56-7f2b-f72-56f0fd' },
-			{ id: '019079cf-cb56-74e4-310-d79f9e' },
-			{ id: '019079cf-cb56-7d7b-469-3b4bb5' },
-			{ id: '019079cf-cb56-7211-2f3-2bc714' },
+			{ id: '0-localid' },
+			{ id: '1-localid' },
+			{ id: '2-localid' },
+			{ id: '3-localid' },
+			{ id: '4-localid' },
 		],
 		b: [
-			{ id: '019079cf-cb56-76cd-ff8-6d0542' },
-			{ id: '019079cf-cb56-76c6-e56-7459e0' },
-			{ id: '019079cf-cb56-7b0b-ad4-36b3eb' },
-			{ id: '019079cf-cb56-7020-725-206b2f' },
-			{ id: '019079cf-cb56-7ea0-337-0ad0de' },
+			{ id: '13-localid' },
+			{ id: '14-localid' },
+			{ id: '15-localid' },
+			{ id: '16-localid' },
+			{ id: '17-localid' },
+
 		]
 	}
 };
@@ -152,7 +153,7 @@ export const setTeams = async (newValue) => {
 	const apiUser = await getUserFromAPI();
 	const characters = await getCharacters();
 	await updateUserFromAPI({
-		...(apiUser.data || {}),
+		...(apiUser?.data || {}),
 		teams: compressTeams(value, characters)
 		//characters: compressChars(characters)
 	});

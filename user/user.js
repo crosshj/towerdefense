@@ -124,7 +124,7 @@ export const addUserExperience = async (expAmount) => {
 	value.exp += expAmount;
 
 	await updateUserFromAPI({
-		...(apiUser.data || {}),
+		...(apiUser?.data || {}),
 		rank: value.rank,
 		exp: value.exp,
 		expModifiedDate: new Date()

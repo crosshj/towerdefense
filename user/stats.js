@@ -52,7 +52,7 @@ export const addStats = async (newValue) => {
 	}
 
 	await updateUserFromAPI({
-		...(apiUser.data || {}),
+		...(apiUser?.data || {}),
 		feathers: stats.feathers,
 		feathersMax: stats.feathersMax,
 		gems: stats.gems,

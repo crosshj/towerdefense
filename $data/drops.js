@@ -1,3 +1,16 @@
+export const stageExperience = {
+	field1: () => ({ player: 12000, unit: 12000 }),
+	forest1: () => ({ player: 20000, unit: 20000 }),
+	water1: () => ({ player: 25000, unit: 25000 }),
+	sakura1: () => ({ player: 30000, unit: 30000 }),
+	highlands1: () => ({ player: 35000, unit: 35000 }),
+	tropical1: () => ({ player: 45000, unit: 45000 }),
+	oasis1: () => ({ player: 50000, unit: 50000 }),
+	tundra1: () => ({ player: 70000, unit: 70000 }),
+	industrial1: () => ({ player: 85000, unit: 85000 }),
+	pantheon1: () => ({ player: 96000, unit: 96000 })
+};
+
 export const stageCharacterDrops = {
 	// meadow: normal, bug, flying(air)
 	field1: {

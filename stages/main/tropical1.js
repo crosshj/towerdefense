@@ -1,12 +1,10 @@
-import { stageCharacterDrops } from '/$data/drops.js';
+import { stageCharacterDrops, stageExperience } from '../../$data/drops.js';
+import { stageEnemies, stageTowers } from '../../$data/enemies.js';
 
 export const getRewards = async () => {
 	return {
 		coins: 4000,
-		exp: {
-			player: 6000,
-			unit: 6000
-		},
+		exp: stageExperience.tropical1(),
 		bonus: {
 			coin: { type: 'coin', probability: 1, amount: 5000 },
 			meteor: { type: 'effect', probability: 0.5 },
@@ -20,19 +18,8 @@ export const getRewards = async () => {
 
 export default async () => {
 	const towerX = 200;
-	const towerColor2 = '#604050';
-
-	const basicOppChar = {
-		type: 'defender',
-		hp: 3000,
-		respawn: 118,
-		range: 560,
-		attack: 87,
-		move: 60,
-		x: towerX + 140,
-		critChance: 0.01,
-		critMult: 2
-	};
+	const towerData = stageTowers.tropical1();
+	const enemyTeam = stageEnemies.tropical1({ towerX });
 
 	return {
 		state: {
@@ -44,10 +31,10 @@ export default async () => {
 				width: 4000
 			},
 			sounds: {
-				background: 'tropicalShadowsBackground'
+				background: towerData.music
 			},
 			stage: {
-				background: 'backgroundTropicalGraveyard1'
+				background: towerData.background
 			},
 			towers: [
 				undefined,
@@ -55,10 +42,10 @@ export default async () => {
 					type: 'defender',
 					dims: [200, 343],
 					x: towerX,
-					color: towerColor2,
-					hp: 30000,
+					color: towerData.color,
+					hp: towerData.hp,
 					deployed: [],
-					team: [basicOppChar]
+					team: enemyTeam
 				}
 			],
 			tick: 0,

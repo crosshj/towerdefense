@@ -1,50 +1,66 @@
-document.addEventListener('DOMContentLoaded', async () => {
+const submitLogin = async ({ name, password }) => {
+	const url = 'https://datamosh.vercel.app/api/teedee/login';
+	const opts = {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({ name, password })
+	};
+	const response = await fetch(url, opts)
+		.then((x) => x.json())
+		.catch((fetchError) => ({ error: { fetchError } }));
+	return response;
+};
+
+const attachLogin = ({ loginForm, errorMessage, contentDiv }) => {
+	const nameField = document.getElementById('name');
+	const passwordfield = document.getElementById('password');
+
+	loginForm.addEventListener('submit', async function (event) {
+		event.preventDefault();
+		const response = await submitLogin({
+			name: nameField.value,
+			password: passwordfield.value
+		});
+
+		if (response.error) {
+			console.log(response.error);
+			errorMessage.style.display = 'block';
+			contentDiv.style.display = 'none';
+			return;
+		}
+
+		localStorage.setItem('GAME_STARTED', new Date().toISOString());
+		localStorage.setItem('USER_TOKEN', response.token);
+		localStorage.setItem(
+			'USER_INFO',
+			JSON.stringify({
+				exp: response.exp || 0,
+				rank: response.rank || 1
+			})
+		);
+		document.location = '/';
+	});
+};
+
+const onLoaded = async () => {
+	const loginForm = document.getElementById('loginForm');
 	const errorMessage = document.getElementById('errorMessage');
 	const contentDiv = document.getElementById('content');
 	const retryButton = document.getElementById('retry');
+
+	attachLogin({
+		contentDiv,
+		loginForm,
+		errorMessage
+	});
 
 	retryButton.addEventListener('pointerup', () => {
 		errorMessage.style.display = 'none';
 		contentDiv.style.display = 'block';
 	});
 
-	document
-		.getElementById('loginForm')
-		.addEventListener('submit', async function (event) {
-			event.preventDefault();
-
-			const name = document.getElementById('name').value;
-			const password = document.getElementById('password').value;
-
-			await fetch('https://datamosh.vercel.app/api/teedee/login', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify({ name, password })
-			})
-				.then((response) => response.json())
-				.then((data) => {
-					localStorage.setItem(
-						'GAME_STARTED',
-						new Date().toISOString()
-					);
-					localStorage.setItem('USER_TOKEN', data.token);
-					localStorage.setItem(
-						'USER_INFO',
-						JSON.stringify({
-							exp: data.exp || 0,
-							rank: data.rank || 1
-						})
-					);
-					document.location = '/';
-				})
-				.catch((error) => {
-					console.log(error);
-					errorMessage.style.display = 'block';
-					contentDiv.style.display = 'none';
-				});
-		});
 	if (window.parent) {
 		window.parent.postMessage({
 			_: 'stats',
@@ -57,4 +73,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 		});
 		window.parent.postMessage({ _: 'loaded' });
 	}
-});
+};
+
+document.addEventListener('DOMContentLoaded', onLoaded);
