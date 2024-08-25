@@ -1142,6 +1142,17 @@ const circle = () => `
 </svg>
 `;
 
+const notEqual = () => `
+<svg viewBox="0 0 256 256">
+  <path d="
+    M 78.265 179.605 L 173.92 62.036 L 189.282 75.179 L 93.627 192.748 L 78.265 179.605 Z 
+    M 63.301 90.564 L 198.508 90.564 L 198.508 118.601 L 63.301 118.601 L 63.301 90.564 Z 
+    M 63.301 138.299 L 198.508 138.299 L 198.508 166.336 L 63.301 166.336 L 63.301 138.299 Z
+  "></path>
+</svg>
+`;
+
+//
 export const SVGIcons = {
 	_NO_ICON,
 	advent,
@@ -1214,5 +1225,6 @@ export const SVGIcons = {
 	attack: _NO_ICON, // maybe use sword
 	health: _NO_ICON,
 	defense: _NO_ICON, // maybe use shield
-	versusGraphic
+	versusGraphic,
+	notEqual
 };

@@ -170,10 +170,12 @@ const setup = async () => {
 		dragStart,
 		dragEnd
 	});
-	controls.onSort((sortBy) => {
+	controls.onSort((sortBy, { sameUnit = false } = {}) => {
 		attachAllCharacters({
 			sortBy,
-			characters,
+			characters: sameUnit
+				? characters.filter((x) => x.code === currentChar.code)
+				: characters,
 			getCharImage,
 			dragStart,
 			dragEnd

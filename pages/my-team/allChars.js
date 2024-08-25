@@ -1,3 +1,4 @@
+import { SVGIcons } from '../../assets/icons.svg.js';
 import { setCurrentCharCache } from '../_utils/cache.js';
 import { characterDiv } from './components.js';
 import { handlePointerEvents } from './handlePointerEvents.js';
@@ -7,12 +8,21 @@ const useSavedSort = () => {
 	return sortBy;
 };
 
+const notEqualIcon = SVGIcons.notEqual();
+
 export const attachAllCharacters = (args) => {
 	const { characters, sortBy, getCharImage, dragStart, dragEnd, isUsed } =
 		args;
 
 	const allCharactersDiv = document.getElementById('all-characters');
 	allCharactersDiv.innerHTML = '';
+
+	if (characters.length < 1) {
+		allCharactersDiv.innerHTML = `
+			<div class="emptyList">${notEqualIcon}</div>
+		`;
+		return;
+	}
 
 	let sorted = [...characters];
 
@@ -104,6 +114,7 @@ export const attachAllCharacters = (args) => {
 
 export const attachControls = () => {
 	const sortBy = useSavedSort();
+	let sameUnit = false;
 
 	let onSortHandler = () => {
 		console.log('no onSortHandler set');
@@ -165,7 +176,16 @@ export const attachControls = () => {
 
 			sortByButton.classList.toggle('selected');
 			sortByDiv.classList.toggle('hidden');
-			onSortHandler(key);
+			onSortHandler(key, { sameUnit });
+		});
+	}
+
+	const sameUnitButton = document.querySelector('.sameUnit');
+	if (sameUnitButton) {
+		sameUnitButton.addEventListener('pointerdown', (e) => {
+			e.target.classList.toggle('selected');
+			sameUnit = !sameUnit;
+			onSortHandler(sortBy, { sameUnit });
 		});
 	}
 	return {
