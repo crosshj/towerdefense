@@ -243,6 +243,10 @@ body {
 		padding-block: 10px;
 		box-sizing: border-box;
 		.unitDetails {
+			pointer-events: all;
+			& > * {
+				pointer-events: none;
+			}
 			justify-content: center;
 			width: 100%;
 			height: 100%;

@@ -18,8 +18,10 @@ export const listAvailableAnimations = () => {
 export const unitsMapper = ({ withLevelInfo }) => {
 	const mapped = {};
 	for (const [key, value] of Object.entries(unitsAll)) {
-		mapped[key] = ({ experience, uncappedLevel = 0, id }) => {
+		mapped[key] = (thisUnit) => {
+			const { experience, uncappedLevel = 0, id } = thisUnit;
 			const withId = {
+				...thisUnit,
 				id,
 				code: key,
 				uncappedLevel,

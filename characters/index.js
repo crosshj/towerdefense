@@ -123,7 +123,7 @@ export const withLevelInfo = (unit, totalExp = 0) => {
 		c: 0
 	});
 
-	return {
+	const _withLevel = {
 		...unit,
 		stars: unit.rank,
 
@@ -134,7 +134,7 @@ export const withLevelInfo = (unit, totalExp = 0) => {
 		levelNextPercent: levelExpPercent,
 		levelExp,
 
-		professorPoints: 1, //TODO, this should be saved when combining units
+		professorPoints: Math.max(unit.professorPoints || 0, 1),
 
 		hp: getHealth(unit, currentLevel),
 		attack: getAttack(unit, currentLevel),
@@ -157,6 +157,13 @@ export const withLevelInfo = (unit, totalExp = 0) => {
 		move: 60,
 		unit: unit.id
 	};
+	const somethingNotRight = ['hp', 'attack', 'defense'].some(
+		(prop) => _withLevel[prop] < 0
+	);
+	if (somethingNotRight) {
+		console.warn({ _: 'somethingNotRight', _withLevel });
+	}
+	return _withLevel;
 };
 
 const charMapper = unitsMapper({ withLevelInfo });
@@ -202,7 +209,7 @@ export const calculateCombineResults = ({ currentChar, materials }) => {
 	for (const mat of materials) {
 		if (!mat) continue;
 		if (mat.code === currentChar.code) {
-			currentProfPoints++;
+			currentProfPoints += mat?.professorPoints || 1;
 			result.professorPoints = currentProfPoints;
 			currentUncapped++;
 		}

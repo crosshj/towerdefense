@@ -8,11 +8,14 @@ const pageTitle = 'LEVEL UP';
 
 const getMaterials = async ({ currentChar }) => {
 	// TODO: DO NOT INCLUDE USED/LOCKED CHAR IN THIS LIST!!!';
-	const _characters = await getCharacters();
+	const _characters = await getCharacters(true /* hydrate */);
 	const characters = _characters.filter((x) => {
 		return x.id !== currentChar.id;
 	});
-	return characters;
+	return {
+		all: _characters,
+		filtered: characters
+	};
 };
 
 const updateUsed = () => {
@@ -55,7 +58,7 @@ const updateResults = ({ characters, actionButton, currentChar }) => {
 	levelFromText.innerText = `Level ${currentChar.level}`;
 	levelFromPercent.innerText = isMaxed
 		? 'MAX'
-		: `${Number(currentChar.levelNextPercent).toFixed(0)}%`;
+		: `${Math.floor(Number(currentChar.levelNextPercent))}%`;
 	profPointsFrom.innerText = currentChar.professorPoints;
 
 	const resultsChar = calculateCombineResults({ currentChar, materials });
@@ -70,7 +73,7 @@ const updateResults = ({ characters, actionButton, currentChar }) => {
 		? 'MAX'
 		: resultsChar.levelNextPercent === `?`
 		? '?'
-		: `${Number(resultsChar.levelNextPercent).toFixed(0)}%`;
+		: `${Math.floor(Number(resultsChar.levelNextPercent))}%`;
 	profPointsTo.innerText = resultsChar.professorPoints;
 
 	if (!materials.length) {
@@ -97,8 +100,8 @@ const submitResults = async ({
 	loadingEl.classList.remove('hidden');
 	const newState = await upgradeCharacter(currentChar, inputs);
 	clearSlots(materialSlots);
-	updateChar(newState.currentChar);
-	updateAllChars(newState.characters);
+	await updateChar(newState.currentChar);
+	await updateAllChars(newState.characters);
 	//TODO: show error
 	//TODO: show success
 	loadingEl.classList.add('hidden');
@@ -117,39 +120,20 @@ const setup = async () => {
 	const unitImage = document.createElement('img');
 	unitImage.src = currentChar.imageUri;
 	unitDetailsEl.append(unitImage);
+	unitDetailsEl.addEventListener('pointerup', (e) => {
+		console.log('TODO: pop up a details modal!');
+	});
 
 	let characters = [];
 	const actionButton = document.querySelector(
 		'.resultContainer .actionButton'
 	);
-	actionButton.addEventListener('pointerdown', (e) => {
-		const clearSlots = (materialSlots) => {
-			for (const slot of materialSlots) {
-				slot.dataset.id = undefined;
-				slot.innerHTML = '';
-			}
-			//updateUsed();
-		};
-		const updateChar = (newChar) => {
-			console.log('update character/results', newChar);
-		};
-		const updateAllChars = (newChars) => {
-			console.log('update characters', newChars);
-		};
-		submitResults({
-			clearSlots,
-			updateChar,
-			updateAllChars,
-			loadingEl,
-			currentChar,
-			characters
-		});
-	});
 	updateResults({ characters, currentChar, actionButton });
 
 	const controls = attachControls();
 
-	characters = await getMaterials({ currentChar });
+	const charactersInfo = await getMaterials({ currentChar });
+	characters = charactersInfo.filtered;
 
 	let dragging;
 	function dragStart(e) {
@@ -193,6 +177,46 @@ const setup = async () => {
 			getCharImage,
 			dragStart,
 			dragEnd
+		});
+	});
+
+	actionButton.addEventListener('pointerdown', (e) => {
+		const clearSlots = (materialSlots) => {
+			for (const slot of materialSlots) {
+				slot.dataset.id = undefined;
+				slot.innerHTML = '';
+			}
+			//updateUsed();
+		};
+		const updateChar = async (newChar) => {
+			currentChar.id = newChar.id;
+		};
+		const updateAllChars = async () => {
+			const charactersInfo = await getMaterials({ currentChar });
+			characters = charactersInfo.filtered;
+			const newChar = charactersInfo.all.find(
+				(x) => x.id === currentChar.id
+			);
+			for (const key of Object.keys(currentChar)) {
+				if (typeof newChar[key] === 'undefined') continue;
+				currentChar[key] = newChar[key];
+			}
+			updateResults({ characters, currentChar, actionButton });
+			attachAllCharacters({
+				sortBy: controls.sortBy,
+				characters,
+				getCharImage,
+				dragStart,
+				dragEnd
+			});
+		};
+		submitResults({
+			clearSlots,
+			updateChar,
+			updateAllChars,
+			loadingEl,
+			currentChar,
+			characters
 		});
 	});
 

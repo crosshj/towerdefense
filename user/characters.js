@@ -140,7 +140,7 @@ export const getCharacters = async (hydrate = true) => {
 		const decomp = decompressChars(apiUser.data.characters);
 		localStorage.setItem(LS_NAME, JSON.stringify(decomp));
 		characters = decomp;
-		//console.log({ apiUser, charactersFromApi: decomp });
+		// console.log({ apiUser, charactersFromApi: decomp });
 	}
 
 	if (!hydrate) {
@@ -200,6 +200,18 @@ export const addNewCharacter = async (char) => {
 // player sells characters
 export const sellCharacters = async (chars) => {};
 
+const getUpdatedCharIndex = ({ removeIds, updatedChar, prevChars }) => {
+	let _chars = JSON.parse(JSON.stringify(prevChars));
+	const _updatedChar = _chars.find((x) => x.id === updatedChar.id);
+	_updatedChar.isBeingUpdated = true;
+	_chars = _chars.filter((char) => !removeIds.includes(char.id));
+	for (const key of Object.keys(_chars)) {
+		_chars[key].id = `${key}-localid`;
+	}
+	const newId = _chars.find((x) => x.isBeingUpdated).id;
+	return newId;
+};
+
 const reIndexTeams = ({ removeIds, prevTeams, prevChars }) => {
 	const prevCharsWithUUID = [...prevChars].map((x) => {
 		return { ...x, uuid: generateUUID() };
@@ -257,6 +269,7 @@ export const parseUpgradeChange = (args) => {
 	updatedChar.experience = combineRes.newExperience;
 	updatedChar.professorPoints = combineRes.newProfessorPoints;
 	updatedChar.uncapped = combineRes.newUncapped;
+
 	//MUST re-index teams since character indexs have changed
 	const reIndexedTeams = reIndexTeams({
 		removeIds,
@@ -270,6 +283,12 @@ export const parseUpgradeChange = (args) => {
 	);
 
 	const newTeams = decompressTeams(newTeamsCompressed, newChars);
+
+	updatedChar.id = getUpdatedCharIndex({
+		removeIds,
+		updatedChar,
+		prevChars
+	});
 
 	return {
 		newCharsCompressed,

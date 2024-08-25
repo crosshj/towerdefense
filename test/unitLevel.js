@@ -38,6 +38,7 @@ describe('Unit Level', (it) => {
 			JSON.stringify(parseUpgradeChangeScenario1)
 		);
 		fixedScenario1.prevTeams['Team 3'].a[1].id = '16-localid';
+		const { currentChar } = fixedScenario1;
 
 		const result = parseUpgradeChange(fixedScenario1);
 		const { newTeams, prevTeams, prevChars, newChars } = {
@@ -69,6 +70,10 @@ describe('Unit Level', (it) => {
 		}
 		misses.length && console.log({ misses });
 
-		return expect(misses.length).toBe(0);
+		const currentCharIdUpdated = result.updatedChar.id !== currentChar.id;
+		return (
+			expect(misses.length).toBe(0) &&
+			expect(currentCharIdUpdated).toBe(true)
+		);
 	});
 });
