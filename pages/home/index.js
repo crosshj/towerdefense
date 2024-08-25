@@ -51,31 +51,45 @@ const clickColorMap = {
 const navigation = () => `
 	<div class="navigation">
 	<div class="my-team clickable wip">
-		${SVGIcons.stars6()}
+		<div class="iconContainer">
+			${SVGIcons.stars6()}
+		</div>
 		<span>My Team</span>
 	</div>
 	<div class="upgrade clickable wip">
-		${SVGIcons.upgrade()}
+		<div class="iconContainer">
+			${SVGIcons.upgrade()}
+		</div>
 		<span>Upgrade</span>
 	</div>
 	<div class="collect clickable wip">
-		${SVGIcons.book()}
+		<div class="iconContainer">
+			${SVGIcons.book()}
+		</div>
 		<span>Collect</span>
 	</div>
 	<div class="shop clickable wip">
-		${SVGIcons.shop()}
+		<div class="iconContainer">
+			${SVGIcons.shop()}
+		</div>
 		<span>Shop</span>
 	</div>
 	<div class="friends clickable wip">
-		${SVGIcons.userMulti()}
+		<div class="iconContainer">
+			${SVGIcons.userMulti()}
+		</div>
 		<span>Friends</span>
 	</div>
 	<div class="pass clickable wip">
-		${SVGIcons.ticket()}
+		<div class="iconContainer">
+			${SVGIcons.ticket()}
+		</div>
 		<span>Pass</span>
 	</div>
 	<div class="giftbox modal clickable wip">
-		${SVGIcons.giftBox()}
+		<div class="iconContainer">
+			${SVGIcons.giftBox()}
+		</div>
 		<span>GiftBox</span>
 	</div>
 	<div class="settings modal clickable wip">
@@ -134,6 +148,9 @@ const drawControls = async () => {
 				<div class="buff modal clickable wip">
 					${SVGIcons.userArrowUp()}
 				</div>
+				<div class="exp modal clickable wip">
+					${SVGIcons.expBoost()}
+				</div>
 			</div>
 			<div class="statsAndQuest">
 				<div class="stats">
@@ -145,9 +162,7 @@ const drawControls = async () => {
 		</div>
 		
 		<div class="resources">
-			<div class="exp modal clickable wip">
-				${SVGIcons.expBoost()}
-			</div>
+
 		</div>
 
 		${navigation()}
