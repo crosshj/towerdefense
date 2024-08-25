@@ -64,7 +64,7 @@ export const compressChars = (lsCharacters, baseLength = 36) => {
 			const unitsIndex = encode(
 				Object.keys(unitsAll).findIndex((key) => char.code === key)
 			);
-			const exp = encode((char.experience || 0) / 100);
+			const exp = encode(Math.floor((char.experience || 0) / 100));
 			const uncapped = char.uncapped || char.uncappedLevel || 0;
 			const gear1 = encode(char.gear1);
 			const gear2 = encode(char.gear2);
