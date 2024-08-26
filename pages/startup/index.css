@@ -7,7 +7,7 @@ body {
 	overscroll-behavior: none;
 }
 
-.background {
+/* .background {
 	background: url(./bg.png);
 	background-size: 100% 100%;
 	position: absolute;
@@ -23,6 +23,19 @@ body {
 		width: 100%;
 		background: #202944;
 	}
+} */
+
+.background {
+	background: url(/assets/loadingScreen1.png);
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	z-index: -1;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
 }
 
 button {
@@ -47,6 +60,13 @@ button {
 		border: 0;
 		color: #aaa;
 	}
+}
+
+.container.game {
+	top: 280px;
+}
+.container.account {
+	top: 280px;
 }
 
 .container {
