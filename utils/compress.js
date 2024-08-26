@@ -70,6 +70,7 @@ export const compressChars = (lsCharacters, baseLength = 36) => {
 			const gear2 = encode(char.gear2);
 			const gear3 = encode(char.gear3);
 			const profPoints = encode(char.professorPoints || 1);
+			const locked = char.locked === true ? 1 : 0;
 			return [
 				char.uuid || encode(i),
 				unitsIndex,
@@ -78,7 +79,8 @@ export const compressChars = (lsCharacters, baseLength = 36) => {
 				gear1,
 				gear2,
 				gear3,
-				profPoints
+				profPoints,
+				locked
 			].join(',');
 		})
 		.join('\n');
@@ -100,7 +102,8 @@ export const decompressChars = (compedString) => {
 			gear1,
 			gear2,
 			gear3,
-			profPoints
+			profPoints,
+			locked = 0
 		] = line.split(',');
 		return {
 			index,
@@ -111,7 +114,8 @@ export const decompressChars = (compedString) => {
 			gear1: decode(gear1),
 			gear2: decode(gear2),
 			gear3: decode(gear3),
-			professorPoints: profPoints ? decode(profPoints) : 1
+			professorPoints: profPoints ? decode(profPoints) : 1,
+			locked: locked + '' === '1' ? true : false
 		};
 	});
 };

@@ -7,10 +7,9 @@ import { attachAllCharacters, attachControls } from '../../my-team/allChars.js';
 const pageTitle = 'LEVEL UP';
 
 const getMaterials = async ({ currentChar }) => {
-	// TODO: DO NOT INCLUDE USED/LOCKED CHAR IN THIS LIST!!!';
 	const _characters = await getCharacters(true /* hydrate */);
 	const characters = _characters.filter((x) => {
-		return x.id !== currentChar.id;
+		return x.id !== currentChar.id && !x.locked;
 	});
 	return {
 		all: _characters,

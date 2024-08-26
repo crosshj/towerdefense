@@ -1,5 +1,10 @@
-import { getCurrentCharCache } from '../../pages/_utils/cache.js';
+import {
+	getCurrentCharCache,
+	setCurrentCharCache
+} from '../../pages/_utils/cache.js';
 import { nodeTree, populateNodeTree } from './detailDom.js';
+import { SVGIcons } from '../../assets/icons.svg.js';
+import { toggleCharacterLock } from '../../user/characters.js';
 
 const getElementColor = (element) => {
 	if (element === 'Fighting') return 'red';
@@ -16,15 +21,7 @@ const getElementColor = (element) => {
 	return color;
 };
 
-const updateValues = async ({ params, nodeTree }) => {
-	const cachedChar = getCurrentCharCache();
-	// const character = cachedChar || (await getCharacterFromTeam(params));
-
-	const character = cachedChar;
-
-	window.character = character;
-	window.nodeTree = nodeTree;
-
+const updateValues = async ({ params, character, nodeTree }) => {
 	//left
 	const { left, right } = nodeTree.container.content;
 	left.stars.innerText = '★'.repeat(character.stars);
@@ -149,13 +146,47 @@ const attachHandlers = (nodeTree) => {
 	});
 };
 
+const attachLock = ({ element, character }) => {
+	if (character.locked) {
+		element.classList.add('locked');
+	}
+	element.innerHTML = `
+		<div class="icon">
+			${SVGIcons.lockCircle()}
+		</div>
+	`;
+	element.addEventListener('pointerup', async () => {
+		element.classList.toggle('locked');
+		character.locked =
+			typeof character?.locked !== 'undefined' ? !character.locked : true;
+		await toggleCharacterLock({ id: character?.id });
+		setCurrentCharCache(character);
+		window.parent.postMessage({
+			_: 'broadcastCharactersUpdate'
+		});
+	});
+};
+
 document.addEventListener('DOMContentLoaded', async () => {
 	const params = Object.fromEntries(
 		new URLSearchParams(window.location.search)
 	);
+	const cachedChar = getCurrentCharCache();
+	// const character = cachedChar || (await getCharacterFromTeam(params));
+	// window.character = character;
+	// window.nodeTree = nodeTree;
+
 	const container = document.querySelector('.container ');
 	populateNodeTree(nodeTree);
 	attachHandlers(nodeTree);
-	await updateValues({ nodeTree, params });
+	attachLock({
+		character: cachedChar,
+		element: nodeTree.container.content.right.actions.lock
+	});
+	await updateValues({
+		character: cachedChar,
+		nodeTree,
+		params
+	});
 	container.classList.remove('loading');
 });

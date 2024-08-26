@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 	};
 	window.parent.postMessage({ _: 'stats', ...args });
 
-	const characters = await getCharacters();
+	let characters = await getCharacters();
 	const teams = await getTeams();
 
 	const getCharImage = await characterImageGetter();
@@ -148,6 +148,22 @@ document.addEventListener('DOMContentLoaded', async () => {
 			dragStart,
 			dragEnd
 		});
+	});
+	// listens for changes to characters and updates raidTeam
+	window.addEventListener('message', async function (event) {
+		const { _, ...args } = event.data;
+		if (_ === 'broadcastCharactersUpdate') {
+			characters = await getCharacters();
+			attachAllCharacters({
+				sortBy: controls.sortBy,
+				characters,
+				isUsed,
+				getCharImage,
+				dragStart,
+				dragEnd
+			});
+			return;
+		}
 	});
 
 	//subteam switch

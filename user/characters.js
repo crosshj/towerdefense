@@ -330,3 +330,17 @@ export const upgradeCharacter = async (currentChar, materials) => {
 
 // individual character is EVOLVED (with inputs like: materials, etc)
 export const evolveCharacter = async (char, inputs) => {};
+
+export const toggleCharacterLock = async (char) => {
+	const hydrated = false;
+	const allChars = await getCharacters(hydrated);
+	const thisChar = allChars.find((x) => x.id === char.id);
+	thisChar.locked =
+		typeof thisChar?.locked !== 'undefined' ? !thisChar.locked : true;
+	const apiUser = await getUserFromAPI();
+	await updateUserFromAPI({
+		...(apiUser?.data || {}),
+		characters: compressChars(allChars)
+	});
+	localStorage.setItem(LS_NAME, JSON.stringify(allChars));
+};

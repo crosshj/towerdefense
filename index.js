@@ -146,8 +146,21 @@ document.body.addEventListener('pointerup', async (event) => {
 	}
 });
 
+const broadcastCharactersUpdate = () => {
+	const childIframeList = Array.from(document.querySelectorAll('iframe'));
+	for (const childIframe of childIframeList) {
+		childIframe.contentWindow.postMessage({
+			_: 'broadcastCharactersUpdate'
+		});
+	}
+};
+
 window.addEventListener('message', async function (event) {
 	const { _, ...args } = event.data;
+	if (_ === 'broadcastCharactersUpdate') {
+		await broadcastCharactersUpdate(args);
+		return;
+	}
 	if (_ === 'action') {
 		await handleAction(args);
 		return;

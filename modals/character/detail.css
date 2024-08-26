@@ -499,18 +499,20 @@ body {
 					display: flex;
 					justify-content: center;
 					align-items: center;
-					width: 30px;
-					height: 30px;
-					border-radius: 50%;
+					/* width: 30px;
+					height: 30px; */
 					margin-block: auto;
-					border: 2px solid grey;
-					opacity: 0.5;
 					.icon {
-						filter: grayscale(1) contrast(0);
+						width: 32px;
+						fill: grey;
 					}
 					&.locked {
-						background-color: yellow;
-						opacity: 1;
+						svg {
+							fill: brown;
+							path:first-child {
+								fill: yellow !important;
+							}
+						}
 					}
 				}
 			}

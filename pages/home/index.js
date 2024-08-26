@@ -309,7 +309,7 @@ const setup = async () => {
 		visibility: 'hidden'
 	});
 
-	const raidTeam = await getTeam('Team 1');
+	let raidTeam = await getTeam('Team 1');
 
 	const bg = await canvasHorizontal({
 		parent: document.body,
@@ -340,6 +340,16 @@ const setup = async () => {
 	await drawControls();
 
 	window.parent.postMessage({ _: 'loaded' });
+
+	// listens for changes to characters and updates raidTeam
+	window.addEventListener('message', async function (event) {
+		const { _, ...args } = event.data;
+		if (_ === 'broadcastCharactersUpdate') {
+			// console.log('home knows characters are updated');
+			raidTeam = await getTeam('Team 1');
+			return;
+		}
+	});
 };
 
 document.addEventListener('DOMContentLoaded', setup);
