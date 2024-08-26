@@ -82,7 +82,7 @@ const setupActionLogin = ({ gameStarted }) => {
 		button.classList.add('secondary');
 	}
 	button.addEventListener('pointerup', () => {
-		//ssetSessionActive();
+		//setSessionActive();
 		window.parent.postMessage({
 			_: 'navigate',
 			src: '/account/login/index.html'

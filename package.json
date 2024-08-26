@@ -8,11 +8,11 @@
 	},
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"watch": "ws"
+		"watch": "ws -c .server/lws.config.mjs"
 	},
 	"author": "",
 	"license": "ISC",
-	"dependencies": {
-		"local-web-server": "^5.3.3"
+	"devDependencies": {
+		"local-web-server": "5.3.3"
 	}
 }

@@ -2,7 +2,7 @@
 
 const stack = [
 	// this only logs the request, here for future ref
-	'lws.plugin.mjs',
+	'.server/lws.plugin.mjs',
 
 	// DEFAULT STACK
 	// 'lws-basic-auth',

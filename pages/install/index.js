@@ -1,4 +1,4 @@
-import { depends, nonLocal } from '../../_depends.js';
+import { depends, nonLocal } from '../../$data/_depends.js';
 import { isSessionActive } from '../../utils/session.js';
 
 const ONE_DAY = 24 * 60 * 60 * 1000;
