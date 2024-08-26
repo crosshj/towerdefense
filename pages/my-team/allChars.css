@@ -180,6 +180,7 @@
 			.character-card {
 				.selectorInfo {
 					z-index: 9;
+					touch-action: pan-x;
 					&.locked svg {
 						fill: #31ff31;
 					}
