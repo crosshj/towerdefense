@@ -1,5 +1,5 @@
-import { unNest } from '../../utils/utils.js';
-import { loadSounds } from '../../visuals/assets/assets.js';
+import { unNest } from '/utils/utils.js';
+import { loadSounds } from '/visuals/assets/assets.js';
 import { enemyOneSpawnTicker } from '../ai/enemyOne.js';
 
 const coreSounds = await loadSounds('coreSounds');

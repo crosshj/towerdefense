@@ -8,33 +8,6 @@ const rankToGrade = {
 	5: 'Legend'
 };
 
-document.addEventListener('DOMContentLoaded', () => {
-	const ranks = [1, 2, 3, 4, 5];
-	const cachedData = getCachedData();
-
-	const datasets = ranks.map((rank) => {
-		let expData;
-
-		if (cachedData[rank]) {
-			expData = cachedData[rank];
-		} else {
-			expData = generateExpDataForRank(rank);
-			cachedData[rank] = expData;
-			setCachedData(cachedData);
-		}
-
-		return {
-			label: rankToGrade[rank],
-			data: expData,
-			borderColor: getRandomColor(),
-			borderWidth: 1,
-			fill: false
-		};
-	});
-
-	createChart(datasets);
-});
-
 function generateExpDataForRank(rank) {
 	const expData = [];
 	let totalExp = 0;
@@ -93,3 +66,34 @@ function getRandomColor() {
 	}
 	return color;
 }
+
+const domLoaded = () => {
+	const ranks = [1, 2, 3, 4, 5];
+	const cachedData = getCachedData();
+
+	console.log(cachedData);
+
+	const datasets = ranks.map((rank) => {
+		let expData;
+
+		if (cachedData[rank]) {
+			expData = cachedData[rank];
+		} else {
+			expData = generateExpDataForRank(rank);
+			cachedData[rank] = expData;
+			setCachedData(cachedData);
+		}
+
+		return {
+			label: rankToGrade[rank],
+			data: expData,
+			borderColor: getRandomColor(),
+			borderWidth: 1,
+			fill: false
+		};
+	});
+
+	createChart(datasets);
+};
+
+document.addEventListener('DOMContentLoaded', domLoaded);

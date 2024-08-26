@@ -1,4 +1,4 @@
-import { hydrateCharacters } from '../../characters/index.js';
+import { hydrateCharacters } from '../../utils/units.js';
 import { getOpponentTeamCache } from '../../pages/_utils/cache.js';
 
 // TODO: no rewards for friend battle?

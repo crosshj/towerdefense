@@ -31,7 +31,9 @@ const assets = [
 	'/user/user.js',
 
 	//utils
+	'/utils/calculateStats.js',
 	'/utils/compress.js',
+	'/utils/units.js',
 	'/utils/utils.js',
 	'/utils/experience.js',
 	'/utils/debounce.js',
@@ -53,15 +55,6 @@ const assets = [
 	'/visuals/canvas.css',
 	'/visuals/canvas.js',
 	'/visuals/components/custom-select.js',
-
-	// backgrounds
-	'/assets/background/forest1.png',
-	'/assets/background/highlands1.png',
-	'/assets/background/forest1.png',
-	'/assets/background/oasis1.png',
-	'/assets/background/industrial1.png',
-	'/assets/background/tundra1.png',
-	'/assets/bg-ghost1.png',
 
 	//pages
 	'/pages/_utils/getCharacter.js',
@@ -125,11 +118,16 @@ const assets = [
 	'/modals/user/index.css',
 	'/modals/user/index.js',
 
-	// characters
-	'/characters/index.js',
-	'/characters/units/calculateStats.js',
-	'/characters/units/units.js',
+	// backgrounds
+	'/assets/background/forest1.png',
+	'/assets/background/highlands1.png',
+	'/assets/background/forest1.png',
+	'/assets/background/oasis1.png',
+	'/assets/background/industrial1.png',
+	'/assets/background/tundra1.png',
+	'/assets/bg-ghost1.png',
 
+	// characters
 	'/assets/character/FighterBase/FighterBase_ske.json',
 	'/assets/character/FighterBase/FighterBase_tex.json',
 	'/assets/character/FighterBase/FighterBase_tex.png',

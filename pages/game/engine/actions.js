@@ -1,4 +1,4 @@
-import { clone } from '../utils/utils.js';
+import { clone } from '/utils/utils.js';
 import { getMineralMap } from './mineral.js';
 import { spawnMissile } from './update/missile.js';
 

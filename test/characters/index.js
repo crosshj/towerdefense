@@ -1,6 +1,9 @@
 import { getAnimateable } from '/vendor/DragonBones/Animateable.js';
-import { listAvailableAnimations, listAvailableUnits } from '../units/units.js';
-import { hydrateCharacters } from '../index.js';
+import {
+	hydrateCharacters,
+	listAvailableAnimations,
+	listAvailableUnits
+} from '../../utils/units.js';
 
 const animationControls = {};
 

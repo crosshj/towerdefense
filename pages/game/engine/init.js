@@ -1,19 +1,17 @@
-import Engine from './engine.js';
-import Render from '../visuals/render.js';
-import State from './state.js';
-import { loadAssets, loadSounds } from '../visuals/assets/assets.js';
-import { getActions } from './actions.js';
+import { getStage } from '/stages/index.js';
+import { characterAnimationGetter } from '/visuals/assets/character.js';
+import { getTeamFromNumber } from '/pages/_utils/getTeam.js';
+import { getTower } from '/user/tower.js';
+import Render from '/visuals/render.js';
+import { loadAssets, loadSounds } from '/visuals/assets/assets.js';
 
+import Engine from './engine.js';
+import State from './state.js';
+import { getActions } from './actions.js';
 import { updateGameStatus } from './update/game.js';
 import TeamUpdates from './update/team.js';
 import PlayerUpdates from './update/player.js';
 import MissileUpdates from './update/missile.js';
-
-import { getStage } from '../stages/index.js';
-
-import { characterAnimationGetter } from '../visuals/assets/character.js';
-import { getTeamFromNumber } from '../pages/_utils/getTeam.js';
-import { getTower } from '../user/tower.js';
 
 const adjustGame = async (game, params) => {
 	const attackerTower = await getTower();

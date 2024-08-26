@@ -1,14 +1,6 @@
-/*
-ALL CHARACTERS THAT THE USER HAS AVAILABLE
-*/
-
-import {
-	getLevelInfo,
-	getGrowth,
-	getExpForLevel
-} from '../utils/experience.js';
-import { calculateCoefficients } from './units/calculateStats.js';
-import { unitsMapper } from './units/units.js';
+import { calculateCoefficients } from './calculateStats.js';
+import { getExpForLevel, getGrowth, getLevelInfo } from './experience.js';
+import { unitsAll } from '/$data/unitsAll.js';
 
 const getMaxLevel = (unit) => {
 	if (unit.rank === 1) {
@@ -166,7 +158,25 @@ export const withLevelInfo = (unit, totalExp = 0) => {
 	return _withLevel;
 };
 
-const charMapper = unitsMapper({ withLevelInfo });
+export const unitsMapper = () => {
+	const mapped = {};
+	for (const [key, value] of Object.entries(unitsAll)) {
+		mapped[key] = (thisUnit) => {
+			const { experience, uncappedLevel = 0, id } = thisUnit;
+			const withId = {
+				...thisUnit,
+				id,
+				code: key,
+				uncappedLevel,
+				...value
+			};
+			return withLevelInfo(withId, experience);
+		};
+	}
+	return mapped;
+};
+
+const charMapper = unitsMapper();
 
 export const hydrateCharacters = async (playerCharacters) => {
 	const hydrated = [];
@@ -240,4 +250,18 @@ export const calculateCombineResults = ({ currentChar, materials }) => {
 	result.newUncapped = currentUncapped;
 
 	return result;
+};
+const animations = [
+	{ code: 'idle', displayName: 'Idle' },
+	{ code: 'jumping', displayName: 'Jumping' },
+	{ code: 'sprite_swap', displayName: 'Swapping 1' },
+	{ code: 'sprite_swap2', displayName: 'Swapping 2' }
+];
+
+export const listAvailableUnits = () => {
+	return Object.entries(unitsAll).map(([code, v]) => ({ code, ...v }));
+};
+
+export const listAvailableAnimations = () => {
+	return animations;
 };

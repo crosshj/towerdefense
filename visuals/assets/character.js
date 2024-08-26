@@ -1,4 +1,4 @@
-import { listAvailableUnits } from '../../characters/units/units.js';
+import { listAvailableUnits } from '../../utils/units.js';
 import { getAnimateable } from '/vendor/DragonBones/Animateable.js';
 
 export const characterAnimationGetter = async (

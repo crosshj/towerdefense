@@ -2,10 +2,6 @@
 ALL CHARACTERS THAT THE USER HAS AVAILABLE
 */
 import { clone, generateUUID } from '../utils/utils.js';
-import {
-	calculateCombineResults,
-	hydrateCharacters
-} from '../characters/index.js';
 import { getUserFromAPI, updateUserFromAPI } from './user.js';
 import {
 	compressChars,
@@ -14,7 +10,7 @@ import {
 	decompressTeams
 } from '../utils/compress.js';
 import { getTeams } from './teams.js';
-import { flattenTeams } from '../utils/teams.js';
+import { calculateCombineResults, hydrateCharacters } from '../utils/units.js';
 
 const LS_NAME = 'USER_CHARACTERS';
 const LS_NAME_TEAMS = 'USER_TEAMS';

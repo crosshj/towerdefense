@@ -1,4 +1,4 @@
-const { getDefenseTeam } = require('../user/pvp.js');
+import { getDefenseTeam } from '../user/pvp.js';
 
 function getSelectedValue() {
 	const selectedRadio = document.querySelector('input[name="user"]:checked');
