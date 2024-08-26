@@ -610,5 +610,18 @@ export const unitsAll = {
 		hp: '2,318 - 13,628 - 34,970',
 		defense: '703 - 4,174 - 10,717',
 		range: 40 * 10
+	},
+
+	// https://rangers.lerico.net/en/ranger/u43-jessica
+	'u0001-4-sylvia': {
+		displayName: 'Sylvia',
+		element: 'Normal',
+		type: 'Agility',
+		rank: 4,
+		mineralCost: 380,
+		attack: '245 - 1,764 - 4,291',
+		hp: '3,938 - 28,095 - 68,319',
+		defense: '79 - 569 - 1,384',
+		range: 60 * 10
 	}
 };
