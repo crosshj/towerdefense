@@ -41,6 +41,7 @@ const assets = [
 	// $data
 	'$data/unitsAll.js',
 	'$data/drops.js',
+	'$data/enemies.js',
 
 	// visuals
 	'/visuals/assets/assets.js',
@@ -51,6 +52,7 @@ const assets = [
 	'/visuals/stats/stats.js',
 	'/visuals/canvas.css',
 	'/visuals/canvas.js',
+	'/visuals/components/custom-select.js',
 
 	// backgrounds
 	'/assets/background/forest1.png',

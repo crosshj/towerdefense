@@ -1,5 +1,5 @@
 import { cleanError, colorShade } from '../utils/utils.js';
-import { toggleCoords } from '../engine/state.js';
+import { toggleCoords } from '../pages/game/engine/state.js';
 import GifMaker from '../vendor/gif-js/gif.js';
 import { renderMissile } from './objects/missile.js';
 import Controls from './controls.js';

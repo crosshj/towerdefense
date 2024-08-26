@@ -1,4 +1,4 @@
-import { startGame } from '../../engine/init.js';
+import { startGame } from './engine/init.js';
 import '/visuals/menuPause.js';
 
 const onLoaded = () => {

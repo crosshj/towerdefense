@@ -1,4 +1,4 @@
-import { startGame } from '../engine/init.js';
+import { startGame } from '../pages/game/engine/init.js';
 import { loadSounds } from './assets.js';
 import './menuPause.js';
 
