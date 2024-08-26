@@ -119,6 +119,7 @@ export const attachControls = () => {
 	let onSortHandler = () => {
 		console.log('no onSortHandler set');
 	};
+	const allCharactersDiv = document.getElementById('all-characters');
 	const controlsDiv = document.querySelector('.container > .controls');
 	const sortByButton = controlsDiv.querySelector('.sortBy');
 
@@ -186,6 +187,75 @@ export const attachControls = () => {
 			e.target.classList.toggle('selected');
 			sameUnit = !sameUnit;
 			onSortHandler(sortBy, { sameUnit });
+		});
+	}
+
+	const sellingListAdd = ({ card, sellingList }) => {
+		console.log('TODO: ADD', card, sellingList);
+	};
+	const sellingListRemove = ({ card, sellingList }) => {
+		console.log('TODO: REMOVE', card, sellingList);
+	};
+	const sellingListGetIds = () => {
+		const sellingList = document.querySelector('.sellingList');
+		console.log('TODO: GET IDs', sellingList);
+		return [];
+	};
+
+	const sellButton = document.querySelector('.sell');
+	const sellingContainer = document.querySelector('.sellingContainer');
+	if (sellButton) {
+		sellButton.addEventListener('pointerdown', (e) => {
+			if (sellButton.classList.contains('selected')) {
+				const sell = sellingListGetIds();
+				console.log('TODO: sell some units!', sell);
+				return;
+			}
+			sellButton.classList.add('selected');
+			sellingContainer.classList.toggle('hidden');
+			sellingContainer.innerHTML = `
+				<div class="closeButton">X</div>
+				<div class="sellingCount">
+					<div class="sellingCountLabel">SELECT:</div>
+					<div class="sellingCountAmount">0</div>
+				</div>
+				<div class="sellingList"></div>
+			`;
+			const sellingList = sellingContainer.querySelector('.sellingList');
+			const closeButton = sellingContainer.querySelector('.closeButton');
+			closeButton.addEventListener('pointerdown', () => {
+				sellButton.classList.remove('selected');
+				sellingContainer.classList.add('hidden');
+				allCharactersDiv.classList.remove('sellMode');
+				allCharactersDiv.removeEventListener(
+					'pointerdown',
+					selectForSellHandler
+				);
+			});
+			const selectForSellHandler = (e) => {
+				e.preventDefault();
+				e.stopPropagation();
+				const card = e.target.classList.contains('character-card')
+					? e.target
+					: e.target.closest('.character-card');
+				if (card.classList.contains('used')) {
+					return;
+				}
+				if (card.querySelector('.selectorInfo.locked')) {
+					return;
+				}
+				if (card.classList.contains('selectedForSell')) {
+					sellingListRemove({ card, sellingList });
+				} else {
+					sellingListAdd({ card, sellingList });
+				}
+				card.classList.toggle('selectedForSell');
+			};
+			allCharactersDiv.classList.add('sellMode');
+			allCharactersDiv.addEventListener(
+				'pointerdown',
+				selectForSellHandler
+			);
 		});
 	}
 	return {

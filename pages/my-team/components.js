@@ -1,6 +1,8 @@
 import { SVGIcons } from '../../assets/icons.svg.js';
 
 const mineralIcon = SVGIcons.mineral();
+const circleInfoIcon = SVGIcons.infoCircle();
+const circleLockedIcon = SVGIcons.lockCircle();
 
 export const slotDiv = (c, getCharImage) => {
 	return `
@@ -21,7 +23,19 @@ export const slotDiv = (c, getCharImage) => {
 };
 
 export const characterDiv = (c, getCharImage) => {
+	let selectorInfoContents = circleInfoIcon;
+	const circleInfoClass = ['selectorInfo'];
+	if (c.locked) {
+		selectorInfoContents = circleLockedIcon;
+		circleInfoClass.push('locked');
+	}
+	if (circleInfoClass.length === 1) {
+		circleInfoClass.push('info');
+	}
 	return `
+		<div class="${circleInfoClass.join(' ')}">
+			${selectorInfoContents}
+		</div>
 		<div class="stars">
 			${'★'.repeat(c.stars)}
 		</div>

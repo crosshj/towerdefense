@@ -1,12 +1,15 @@
 .container {
 	& > .controls {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		max-width: var(--inner-max-width);
-		margin-inline: auto;
-		width: 100%;
 		position: relative;
+
+		.controlsContainer {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			max-width: var(--inner-max-width);
+			margin-inline: auto;
+			width: 100%;
+		}
 
 		.total-characters {
 			font-size: 14px;
@@ -38,7 +41,12 @@
 		button.sortBy.selected {
 			background: #8b4e1c;
 			color: yellow;
-			border: 1px solid black;
+			border: 2px solid black;
+		}
+		button.sell.selected {
+			background: red;
+			color: white;
+			border: 2px solid #800;
 		}
 
 		.sortBySelector {
@@ -91,6 +99,60 @@
 				}
 			}
 		}
+
+		.sellingContainer {
+			--sellingHeight: 90px;
+			position: absolute;
+			top: calc(-1 * var(--sellingHeight) - 5px);
+			left: 0;
+			right: 0;
+			height: var(--sellingHeight);
+			background: #0006;
+			display: flex;
+			flex-direction: column;
+			border-top: 2px solid black;
+			&.hidden {
+				display: none;
+			}
+			.closeButton {
+				position: absolute;
+				right: 7px;
+				top: -46px;
+				width: 37px;
+				height: 37px;
+				background: #0009;
+				color: white;
+				font-size: 25px;
+				font-family: sans-serif;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				border-radius: 50%;
+				line-height: 20px;
+				border: 2px solid black;
+				box-sizing: border-box;
+			}
+			.sellingCount {
+				display: flex;
+				background: black;
+				margin: auto;
+				margin-left: 5px;
+				margin-top: 5px;
+				padding: 2px 6px;
+				gap: 7px;
+				border-radius: 7px;
+				.sellingCountLabel {
+					color: yellow;
+				}
+				.sellingCountAmount {
+					color: white;
+				}
+			}
+			.sellingList {
+				width: 100%;
+				overflow-y: auto;
+			}
+		}
 	}
 
 	& > .all-characters {
@@ -114,7 +176,61 @@
 			}
 		}
 
+		&.sellMode {
+			.character-card {
+				.selectorInfo {
+					z-index: 9;
+					&.locked svg {
+						fill: #31ff31;
+					}
+					&.info {
+						border: 2px solid #31ff31;
+						aspect-ratio: 1/1;
+						border-radius: 50%;
+						box-sizing: border-box;
+						svg {
+							display: none;
+						}
+					}
+				}
+				&.selectedForSell {
+					&:after {
+						border: 3px solid #32ff32;
+					}
+					.selectorInfo.info:after {
+						content: '✔';
+						color: #31ff31;
+						width: 100%;
+						font-size: 0.8em;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						background: #8a0404;
+						border-radius: 50%;
+					}
+				}
+				&:after {
+					content: '';
+					background: #0008;
+					position: absolute;
+					left: -3px;
+					right: -3px;
+					top: -3px;
+					bottom: -3px;
+					border-radius: 9px;
+				}
+				&.used {
+					overflow: visible;
+					filter: unset;
+					&:before {
+						display: none;
+					}
+				}
+			}
+		}
+
 		.character-card {
+			position: relative;
 			display: inline-flex;
 			flex-direction: column;
 			align-items: center;
@@ -137,6 +253,22 @@
 			&:not(.used) {
 				.icon img {
 					touch-action: pan-x;
+				}
+			}
+
+			.selectorInfo {
+				position: absolute;
+				right: 7px;
+				top: 6px;
+				width: 20px;
+				&.info svg {
+					fill: #9759df;
+					path:first-child {
+						fill: #572477 !important;
+					}
+				}
+				&.locked svg {
+					fill: #a268e5;
 				}
 			}
 

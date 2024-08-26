@@ -1171,12 +1171,20 @@ const lockCircle = () => `
 </svg>
 `;
 
+const infoCircle = () => `
+<svg viewBox="0 0 256 256">
+  <path d="M 127.333 9.738 C 198.789 9.267 247.772 69.983 247.332 131.018 C 246.893 191.803 189.367 246.506 125.904 246.264 C 55.674 245.996 8.958 184.378 8.666 128.153 C 8.376 72.33 55.928 10.208 127.333 9.738 Z" style="fill: none;"/>
+  <path d="M 127.309 5.349 C 201.416 4.861 252.217 67.83 251.76 131.129 C 251.305 194.17 191.644 250.903 125.826 250.652 C 52.99 250.374 4.541 186.47 4.238 128.158 C 3.9370000000000003 70.264 53.254 5.837 127.309 5.349 Z M 127.406 22.608 C 191.085 22.188 234.738 76.296 234.345 130.688 C 233.954 184.859 182.688 233.608 126.131 233.393 C 63.544 233.155 21.913 178.242 21.653 128.136 C 21.393 78.388 63.771 23.027 127.406 22.608 Z" fill-rule="evenodd"/>
+  <path d="M 108.656 104.594 L 147.343 104.594 L 147.343 208.746 L 108.656 208.746 L 108.656 104.594 Z M 147.613001 68.147003 C 147.613001 78.9789643507161 138.83196135071609 87.760004 128 87.760004 C 117.16803864928391 87.760004 108.386999 78.9789643507161 108.386999 68.147003 C 108.386999 57.3150416492839 117.1680386492839 48.534002 128 48.534002 C 138.83196135071609 48.534002 147.613001 57.3150416492839 147.613001 68.147003 Z"/>
+</svg>
+`;
+
 const animatedSpinner = () => `
 <svg viewBox="0 0 60 60">
     <!-- Background -->
     <rect width="60" height="60" rx="7" ry="7" fill="#313131"></rect>
     <!-- Spinner -->
-    <circle cx="30" cy="30" r="17" stroke="white" stroke-width="3" fill="none" stroke-dasharray="40" stroke-dashoffset="0">
+    <circle cx="30" cy="30" r="17" stroke="white" stroke-width="4s" fill="none" stroke-dasharray="40" stroke-dashoffset="0">
         <animateTransform attributeName="transform" type="rotate" from="0 30 30" to="360 30 30" dur="1s" repeatCount="indefinite"></animateTransform>
     </circle>
 </svg>
@@ -1258,5 +1266,6 @@ export const SVGIcons = {
 	versusGraphic,
 	notEqual,
 	lockCircle,
-	animatedSpinner
+	animatedSpinner,
+	infoCircle
 };
