@@ -597,5 +597,18 @@ export const unitsAll = {
 		hp: '583 - 2,700 - 7,488',
 		defense: '24 - 111 - 308',
 		range: 80 * 10
+	},
+
+	// https://rangers.lerico.net/en/ranger/u050e-sisi
+	'u0001-3-redford': {
+		displayName: 'Redford',
+		element: 'Normal',
+		type: 'Strength',
+		rank: 3,
+		mineralCost: 380,
+		attack: '205 - 1,219 - 3,130',
+		hp: '2,318 - 13,628 - 34,970',
+		defense: '703 - 4,174 - 10,717',
+		range: 40 * 10
 	}
 };
