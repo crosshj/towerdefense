@@ -1,6 +1,6 @@
 import { getStage } from '/stages/index.js';
 import { characterAnimationGetter } from '/visuals/assets/character.js';
-import { getTeamFromNumber } from '/pages/_utils/getTeam.js';
+import { getTeamFromNumber } from '/utils/getTeam.js';
 import { getTower } from '/user/tower.js';
 import Render from '/visuals/render.js';
 import { loadAssets, loadSounds } from '/visuals/assets/assets.js';

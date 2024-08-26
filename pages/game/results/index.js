@@ -3,7 +3,7 @@ import { addCharactersEXP, addNewCharacter } from '../../../user/characters.js';
 import { updateEffectsCount } from '../../../user/effects.js';
 import { addStats } from '../../../user/stats.js';
 import { addUserExperience } from '../../../user/user.js';
-import { getTeamFromNumber } from '../../_utils/getTeam.js';
+import { getTeamFromNumber } from '/utils/getTeam.js';
 
 const updateRewards = async (rewards) => {
 	const params = Object.fromEntries(

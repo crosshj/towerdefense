@@ -2,7 +2,7 @@ import { getUserLevelInfo } from '../../utils/experience.js';
 import { getUser } from '../../user/user.js';
 import { SVGIcons } from '../../assets/icons.svg.js';
 import { getDefenseTeam } from '../../user/pvp.js';
-import { setOpponentTeamCache } from '../_utils/cache.js';
+import { setOpponentTeamCache } from '/utils/cache.js';
 
 const pageTitle = 'PVP';
 

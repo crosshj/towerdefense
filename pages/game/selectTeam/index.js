@@ -1,5 +1,5 @@
 import { getLocationMap } from '../../../utils/locations.js';
-import { getTeam } from '../../_utils/getTeam.js';
+import { getTeam } from '/utils/getTeam.js';
 import { getEffects } from '../../../user/effects.js';
 import { SVGIcons } from '../../../assets/icons.svg.js';
 

@@ -7,6 +7,30 @@
 		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 		<script type="module" src="experience.js" defer></script>
 	</head>
+	<style>
+		body {
+			font-family: sans-serif;
+		}
+		.loading {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100vw;
+			height: 100vh;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			gap: 10px;
+
+			&.hidden {
+				display: none;
+			}
+			svg {
+				width: 60px;
+			}
+		}
+	</style>
 	<body>
 		<h1>User Level Info Charts</h1>
 		<div class="loading hidden"></div>

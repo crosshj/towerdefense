@@ -1171,6 +1171,17 @@ const lockCircle = () => `
 </svg>
 `;
 
+const animatedSpinner = () => `
+<svg viewBox="0 0 60 60">
+    <!-- Background -->
+    <rect width="60" height="60" rx="7" ry="7" fill="#313131"></rect>
+    <!-- Spinner -->
+    <circle cx="30" cy="30" r="17" stroke="white" stroke-width="3" fill="none" stroke-dasharray="40" stroke-dashoffset="0">
+        <animateTransform attributeName="transform" type="rotate" from="0 30 30" to="360 30 30" dur="1s" repeatCount="indefinite"></animateTransform>
+    </circle>
+</svg>
+`;
+
 //
 export const SVGIcons = {
 	_NO_ICON,
@@ -1246,5 +1257,6 @@ export const SVGIcons = {
 	defense: _NO_ICON, // maybe use shield
 	versusGraphic,
 	notEqual,
-	lockCircle
+	lockCircle,
+	animatedSpinner
 };

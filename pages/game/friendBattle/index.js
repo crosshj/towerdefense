@@ -1,6 +1,6 @@
 import { SVGIcons } from '../../../assets/icons.svg.js';
 import { getDefenseTeam } from '../../../user/pvp.js';
-import { setOpponentTeamCache } from '../../_utils/cache.js';
+import { setOpponentTeamCache } from '/utils/cache.js';
 import { getFriends } from '/user/getFriends.js';
 
 const versusGraphic = SVGIcons.versusGraphic();

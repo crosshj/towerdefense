@@ -1,4 +1,4 @@
-import { getOpponentTeamCache } from '../_utils/cache.js';
+import { getOpponentTeamCache } from '/utils/cache.js';
 import { generateTableHTML } from '/utils/utils.js';
 
 const pageTitle = 'DEFENSE TEAM';

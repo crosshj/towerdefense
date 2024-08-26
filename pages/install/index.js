@@ -47,10 +47,11 @@ const updateCache = async ({ onProgress }) => {
 			}, 5000);
 			return;
 		}
+		const filesToCache =
+			document.location.hostname === '127.0.0.1' ? nonLocal : depends;
 		worker.controller.postMessage({
 			type: 'updateCache',
-			files:
-				document.location.hostname === '127.0.0.1' ? nonLocal : depends
+			files: filesToCache
 		});
 		worker.addEventListener('message', (event) => {
 			onProgress(event);

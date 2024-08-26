@@ -1,3 +1,4 @@
+import { SVGIcons } from '../assets/icons.svg.js';
 import { getUserLevelInfo } from '../utils/experience.js';
 
 const rankToGrade = {
@@ -7,19 +8,6 @@ const rankToGrade = {
 	4: 'Ultra Master',
 	5: 'Legend'
 };
-
-function generateExpDataForRank(rank) {
-	const expData = [];
-	let totalExp = 0;
-	while (expData.length < 99) {
-		const { level } = getUserLevelInfo(totalExp, rank);
-		if (!expData[level - 1]) {
-			expData[level - 1] = totalExp;
-		}
-		totalExp += 100;
-	}
-	return expData;
-}
 
 function createChart(datasets) {
 	const ctx = document.getElementById('chart').getContext('2d');
@@ -67,33 +55,55 @@ function getRandomColor() {
 	return color;
 }
 
-const domLoaded = () => {
+const domLoaded = async () => {
 	const ranks = [1, 2, 3, 4, 5];
 	const cachedData = getCachedData();
 
-	console.log(cachedData);
+	const loadingEl = document.querySelector('.loading');
+	loadingEl.innerHTML = `
+		<div>generating</div>
+		${SVGIcons.animatedSpinner()}
+	`;
 
-	const datasets = ranks.map((rank) => {
-		let expData;
+	if (Object.keys(cachedData).length !== 5) {
+		loadingEl.classList.remove('hidden');
+	}
 
+	const datasets = [];
+	const workerPromises = ranks.map((rank) => {
 		if (cachedData[rank]) {
-			expData = cachedData[rank];
+			return Promise.resolve({ rank, expData: cachedData[rank] });
 		} else {
-			expData = generateExpDataForRank(rank);
-			cachedData[rank] = expData;
-			setCachedData(cachedData);
+			return new Promise((resolve) => {
+				const worker = new Worker('experience.worker.js', {
+					type: 'module'
+				});
+				worker.postMessage({ rank });
+				worker.onmessage = function (e) {
+					const { rank, expData } = e.data;
+					cachedData[rank] = expData;
+					worker.terminate();
+					resolve({ rank, expData });
+				};
+			});
 		}
+	});
 
-		return {
+	const results = await Promise.all(workerPromises);
+
+	results.forEach(({ rank, expData }) => {
+		datasets.push({
 			label: rankToGrade[rank],
 			data: expData,
 			borderColor: getRandomColor(),
 			borderWidth: 1,
 			fill: false
-		};
+		});
 	});
 
+	setCachedData(cachedData);
 	createChart(datasets);
+	loadingEl.classList.add('hidden');
 };
 
 document.addEventListener('DOMContentLoaded', domLoaded);

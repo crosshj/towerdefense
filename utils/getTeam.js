@@ -1,9 +1,9 @@
-import { getCharacters } from '../../user/characters.js';
-import { getTeams } from '../../user/teams.js';
+import { getCharacters } from '../user/characters.js';
+import { getTeams } from '../user/teams.js';
 import {
 	characterImageFromDef,
 	characterImageGetter
-} from '../../visuals/assets/character.js';
+} from '../visuals/assets/character.js';
 
 const loadImage = async (url, flipHorizontal) => {
 	let img = new Image();

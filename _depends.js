@@ -9,77 +9,10 @@ is:service-worker-intercepted
 */
 
 const assets = [
-	// audio
-	'/assets/audio/AsianScene.wav',
-	'/assets/audio/coreSounds.wav',
-	'/assets/audio/EtherealTraverse.wav',
-	'/assets/audio/explosion1.wav',
-	'/assets/audio/march.wav',
-	'/assets/audio/slowedSurf.wav',
-	'/assets/audio/SunnyField.wav',
-	'/assets/audio/TropicalShadows.wav',
-
-	// user
-	'/user/characters.js',
-	'/user/effects.js',
-	'/user/getCollection.js',
-	'/user/getFriends.js',
-	'/user/settings.js',
-	'/user/stats.js',
-	'/user/teams.js',
-	'/user/tower.js',
-	'/user/user.js',
-
-	//utils
-	'/utils/calculateStats.js',
-	'/utils/compress.js',
-	'/utils/units.js',
-	'/utils/utils.js',
-	'/utils/experience.js',
-	'/utils/debounce.js',
-	'/utils/scrollable.js',
-	'/utils/session.js',
-
 	// $data
-	'$data/unitsAll.js',
-	'$data/drops.js',
-	'$data/enemies.js',
-
-	// visuals
-	'/visuals/assets/assets.js',
-	'/visuals/components.css',
-	'/visuals/assets/character.js',
-	'/visuals/stats/components.js',
-	'/visuals/stats/stats.css',
-	'/visuals/stats/stats.js',
-	'/visuals/canvas.css',
-	'/visuals/canvas.js',
-	'/visuals/components/custom-select.js',
-
-	//pages
-	'/pages/_utils/getCharacter.js',
-	'/pages/_utils/getTeam.js',
-	'/pages/collect/bg.png',
-	'/pages/friends/bg.png',
-	'/pages/game/results/bg.png',
-	'/pages/game/selectHelp/bg.png',
-	'/pages/game/selectTeam/bg.png',
-	'/pages/home/background.png',
-	'/pages/home/background_clicks.png',
-	'/pages/lab/background.png',
-
-	'/pages/mainStage/index.html',
-	'/pages/mainStage/index.js',
-	'/pages/mainStage/background.png',
-	'/pages/mainStage/background_clicks.png',
-
-	'/pages/my-team/bg.png',
-	'/pages/pass/bg.png',
-	'/pages/pvp/bg.png',
-	'/pages/shop/bg.png',
-	'/pages/specialStage/background.png',
-	'/pages/startup/bg.png',
-	'/pages/upgrade/bg.png',
+	'/$data/unitsAll.js',
+	'/$data/drops.js',
+	'/$data/enemies.js',
 
 	//modals
 	'/modals/banner/index.html',
@@ -118,6 +51,108 @@ const assets = [
 	'/modals/user/index.css',
 	'/modals/user/index.js',
 
+	//pages
+	'/pages/collect/bg.png',
+	'/pages/friends/bg.png',
+	'/pages/game/results/bg.png',
+	'/pages/game/selectHelp/bg.png',
+	'/pages/game/selectTeam/bg.png',
+	'/pages/home/background.png',
+	'/pages/home/background_clicks.png',
+	'/pages/lab/background.png',
+	'/pages/my-team/bg.png',
+	'/pages/pass/bg.png',
+	'/pages/pvp/bg.png',
+	'/pages/shop/bg.png',
+	'/pages/specialStage/background.png',
+	'/pages/startup/bg.png',
+	'/pages/upgrade/bg.png',
+
+	'/pages/home/index.html',
+	'/pages/home/index.css',
+	'/pages/home/index.js',
+
+	'/pages/mainStage/index.html',
+	'/pages/mainStage/index.js',
+	'/pages/mainStage/background.png',
+	'/pages/mainStage/background_clicks.png',
+
+	'/pages/my-team/index.html',
+	'/pages/my-team/index.css',
+	'/pages/my-team/index.js',
+	'/pages/my-team/allChars.css',
+	'/pages/my-team/allChars.js',
+	'/pages/my-team/components.js',
+	'/pages/my-team/handlePointerEvents.js',
+
+	'/pages/pvp/',
+	'/pages/pvp/index.html',
+	'/pages/pvp/index.css',
+	'/pages/pvp/index.js',
+
+	'/pages/unit/levelUp/',
+	'/pages/unit/levelUp/index.html',
+	'/pages/unit/levelUp/index.css',
+	'/pages/unit/levelUp/index.js',
+
+	// user
+	'/user/characters.js',
+	'/user/effects.js',
+	'/user/getCollection.js',
+	'/user/getFriends.js',
+	'/user/pvp.js',
+	'/user/settings.js',
+	'/user/stats.js',
+	'/user/teams.js',
+	'/user/tower.js',
+	'/user/user.js',
+
+	//utils
+	'/utils/cache.js',
+	'/utils/calculateStats.js',
+	'/utils/compress.js',
+	'/utils/debounce.js',
+	'/utils/disableSwipe.js',
+	'/utils/experience.js',
+	'/utils/flipCanvasHorizontal.js',
+	'/utils/getCharacter.js',
+	'/utils/getTeam.js',
+	'/utils/getViewportDimensions.js',
+	'/utils/htmlToElement.js',
+	'/utils/installable.js',
+	'/utils/locations.js',
+	'/utils/scrollable.js',
+	'/utils/session.js',
+	'/utils/teams.js',
+	'/utils/units.js',
+	'/utils/utils.js',
+
+	// visuals
+	'/visuals/assets/assets.js',
+	'/visuals/components.css',
+	'/visuals/assets/character.js',
+	'/visuals/stats/components.js',
+	'/visuals/stats/stats.css',
+	'/visuals/stats/stats.js',
+	'/visuals/canvas.css',
+	'/visuals/canvas.js',
+	'/visuals/components/custom-select.js',
+	'/visuals/fading.css',
+
+	// assets
+	'/assets/favicon.png',
+	'/assets/icons.svg.js',
+
+	// audio
+	'/assets/audio/AsianScene.wav',
+	'/assets/audio/coreSounds.wav',
+	'/assets/audio/EtherealTraverse.wav',
+	'/assets/audio/explosion1.wav',
+	'/assets/audio/march.wav',
+	'/assets/audio/slowedSurf.wav',
+	'/assets/audio/SunnyField.wav',
+	'/assets/audio/TropicalShadows.wav',
+
 	// backgrounds
 	'/assets/background/forest1.png',
 	'/assets/background/highlands1.png',
@@ -134,6 +169,8 @@ const assets = [
 	'/assets/character/FighterBase/Elements/Poison_tex.png',
 	'/assets/teamDragImage.png',
 
+	'/assets/character/FighterBase/skins/0-guide_tex.png',
+
 	'/assets/character/FighterBase/skins/1-benny_tex.png',
 	'/assets/character/FighterBase/skins/1-macho_tex.png',
 	'/assets/character/FighterBase/skins/1-pete_tex.png',
@@ -143,6 +180,7 @@ const assets = [
 	'/assets/character/FighterBase/skins/2-coco_tex.png',
 	'/assets/character/FighterBase/skins/2-foxie_tex.png',
 	'/assets/character/FighterBase/skins/2-jet_tex.png',
+	'/assets/character/FighterBase/skins/2-momoka_tex.png',
 	'/assets/character/FighterBase/skins/2-ogre_tex.png',
 	'/assets/character/FighterBase/skins/2-pande_tex.png',
 	'/assets/character/FighterBase/skins/2-tom_tex.png',

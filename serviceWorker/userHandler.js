@@ -338,8 +338,8 @@ export const updateCachedUser = async (user, _response) => {
 	const cache = await caches.open('teedee-api-cache'); // Replace with your actual cache name
 	cache.put(cacheKey, newResponse);
 
-	console.log('updateCachedUser: updated user');
-	console.log(objectsDiff(user?.data, cachedUser?.data));
+	// console.log('updateCachedUser: updated user');
+	// console.log(objectsDiff(user?.data, cachedUser?.data));
 
 	return user;
 };
