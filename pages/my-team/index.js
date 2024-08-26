@@ -1,11 +1,9 @@
 import { getCharacters } from '../../user/characters.js';
 import { getTeams, setTeams } from '../../user/teams.js';
+import { setCurrentCharCache } from '../../utils/cache.js';
 import { characterImageGetter } from '../../visuals/assets/character.js';
-import { setCurrentCharCache } from '../_utils/cache.js';
 import { attachAllCharacters, attachControls } from './allChars.js';
-import { characterDiv } from './components.js';
 import { slotDiv } from './components.js';
-import { handlePointerEvents } from './handlePointerEvents.js';
 
 const saveTeam = async ({ teams }) => {
 	const teamSlots = Array.from(document.querySelectorAll('.team-slot')).map(

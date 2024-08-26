@@ -1,5 +1,5 @@
 import { SVGIcons } from '../../assets/icons.svg.js';
-import { setCurrentCharCache } from '../../pages/_utils/cache.js';
+import { setCurrentCharCache } from '../../utils/cache.js';
 
 const getNavigateTo = (el) => {
 	const permitted = [

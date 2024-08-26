@@ -1,7 +1,4 @@
-import {
-	getCurrentCharCache,
-	setCurrentCharCache
-} from '../../pages/_utils/cache.js';
+import { getCurrentCharCache, setCurrentCharCache } from '../../utils/cache.js';
 import { nodeTree, populateNodeTree } from './detailDom.js';
 import { SVGIcons } from '../../assets/icons.svg.js';
 import { toggleCharacterLock } from '../../user/characters.js';

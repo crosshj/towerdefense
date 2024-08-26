@@ -1,4 +1,4 @@
-import { getCurrentCharCache } from '../_utils/cache.js';
+import { getCurrentCharCache } from '../../utils/cache.js';
 
 const pageTitle = 'GEAR';
 

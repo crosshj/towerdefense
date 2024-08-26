@@ -1,9 +1,11 @@
 import { getUser } from '../../user/user.js';
 import { canvasHorizontal } from '../../visuals/canvas.js';
 import { statsRequest } from '../../visuals/stats/stats.js';
-import { setCurrentCharCache } from '../_utils/cache.js';
+import { setCurrentCharCache } from '../../utils/cache.js';
 import { getTeam } from '../_utils/getTeam.js';
 import { SVGIcons } from '../../assets/icons.svg.js';
+
+setOpponentTeamCache;
 
 const pageTitle = 'HOME';
 
