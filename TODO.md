@@ -8,24 +8,18 @@
 
 (resource-related / rewards-related)
 
--   [ ] feathers are used when starting level
 -   [ ] level cannot be started without feathers
--   [ ] feathers increase over time
--   [ ] notification when feathers are full
 
--   [ ] player levels up based on experience
--   [ ] character levels affect stats
--   [ ] character detail screen
 -   [ ] rewards screen shows player/character level up events
 
 -   [ ] sell characters
+
 -   [ ] upgrade/combine characters
--   [ ] remove charcter from team
+-   [ ] remove character from team
 -   [ ] re-order team
 
 (in-game)
 
--   [ ] switch team
 -   [ ] retarget based on new character spawned
 -   [ ] auto/X2 from params
 -   [ ] effects buttons do something (and reduce count when used)
@@ -54,6 +48,13 @@
 
 (done)
 
+-   [x] feathers increase over time
+-   [x] notification when feathers are full
+-   [x] player levels up based on experience
+-   [x] character levels affect stats
+-   [x] character detail screen
+-   [x] switch team
+-   [x] feathers are used when starting level
 -   [x] level caps (so char doesn't level up over a certain point)
 -   [x] Develop rewards system and implement reward screens
 -   [x] Enable player progression and unit collection updates
