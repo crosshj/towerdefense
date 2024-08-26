@@ -1,7 +1,7 @@
 import { getCharacters, upgradeCharacter } from '../../../user/characters.js';
 import { calculateCombineResults } from '../../../utils/units.js';
 import { characterImageGetter } from '../../../visuals/assets/character.js';
-import { getCurrentCharCache } from '../../_utils/cache.js';
+import { getCurrentCharCache } from '../../../utils/cache.js';
 import { attachAllCharacters, attachControls } from '../../my-team/allChars.js';
 
 const pageTitle = 'LEVEL UP';

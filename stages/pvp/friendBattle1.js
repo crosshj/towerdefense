@@ -1,5 +1,5 @@
 import { hydrateCharacters } from '../../utils/units.js';
-import { getOpponentTeamCache } from '../../pages/_utils/cache.js';
+import { getOpponentTeamCache } from '../../utils/cache.js';
 
 // TODO: no rewards for friend battle?
 export const getRewards = async () => {
