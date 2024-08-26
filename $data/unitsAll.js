@@ -623,5 +623,19 @@ export const unitsAll = {
 		hp: '3,938 - 28,095 - 68,319',
 		defense: '79 - 569 - 1,384',
 		range: 60 * 10
+	},
+
+	// https://rangers.lerico.net/en/ranger/u39-cony
+	'u0001-4-ginger': {
+		displayName: 'Ginger',
+		element: 'Normal',
+		type: 'Intelligence',
+		rank: 4,
+		mineralCost: 390,
+		attack: '1,171 - 8,374 - 20,365',
+		hp: '2,048 - 14,592 - 35,482',
+		defense: '79 - 569 - 1,384',
+		// orig 0 - 0 - 0
+		range: 40 * 10
 	}
 };

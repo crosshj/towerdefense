@@ -31,7 +31,8 @@ export const stageCharacterDrops = {
 		'u0001-3-zar': { type: 'char', probability: 0.2 },
 		'u0001-3-pismud': { type: 'char', probability: 0.2 },
 		'u0001-4-openhyman': { type: 'char', probability: 0.2 },
-		'u0001-1-skye': { type: 'char', probability: 0.4 }
+		'u0001-1-skye': { type: 'char', probability: 0.4 },
+		'u0001-4-ginger': { type: 'char', probability: 0.4 }
 	},
 	// coastal: water, normal, flying(air)
 	water1: {
