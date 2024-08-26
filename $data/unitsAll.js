@@ -637,5 +637,18 @@ export const unitsAll = {
 		defense: '79 - 569 - 1,384',
 		// orig 0 - 0 - 0
 		range: 40 * 10
+	},
+
+	// https://rangers.lerico.net/en/ranger/u057e-ham
+	'u0001-4-lily': {
+		displayName: 'Lily',
+		element: 'Normal',
+		type: 'Strength',
+		rank: 4,
+		mineralCost: 475,
+		attack: '166 - 1,195 - 2,907',
+		hp: '6,816 - 48,564 - 118,087',
+		defense: '892 - 6,380 - 15,516',
+		range: 20 * 10
 	}
 };

@@ -41,7 +41,8 @@ export const stageCharacterDrops = {
 		'u0001-2-jet': { type: 'char', probability: 0.1 },
 		'u0001-3-arcus': { type: 'char', probability: 0.3 },
 		'u0001-4-pineman': { type: 'char', probability: 0.4 },
-		'u0001-2-tom': { type: 'char', probability: 0.4 }
+		'u0001-2-tom': { type: 'char', probability: 0.4 },
+		'u0001-4-lily': { type: 'char', probability: 0.4 }
 	},
 	// grass, fighting, dragon
 	sakura1: {
