@@ -11,6 +11,7 @@ is:service-worker-intercepted
 const assets = [
 	// $data
 	'/$data/unitsAll.js',
+	'/$data/defaultCharacters.js',
 	'/$data/drops.js',
 	'/$data/enemies.js',
 
