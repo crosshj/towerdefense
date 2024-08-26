@@ -211,6 +211,9 @@ export const attachControls = () => {
 				console.log('TODO: sell some units!', sell);
 				return;
 			}
+
+			console.log('TODO: show "select all" button!');
+
 			sellButton.classList.add('selected');
 			sellingContainer.classList.toggle('hidden');
 			sellingContainer.innerHTML = `
@@ -226,6 +229,9 @@ export const attachControls = () => {
 			closeButton.addEventListener('pointerdown', () => {
 				sellButton.classList.remove('selected');
 				sellingContainer.classList.add('hidden');
+
+				console.log('TODO: remove selectedForSell class!');
+
 				allCharactersDiv.classList.remove('sellMode');
 				allCharactersDiv.removeEventListener(
 					'pointerdown',

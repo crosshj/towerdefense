@@ -3,7 +3,7 @@ import { installable } from './utils/installable.js';
 import { loadSounds } from '/visuals/assets/assets.js';
 import { statsElement } from '/visuals/stats/stats.js';
 
-const FADE_MS = 350;
+const FADE_MS = 200;
 let whereIsBack;
 let bgMusic;
 
@@ -90,8 +90,12 @@ document.addEventListener('focusin', (ev) => {
 });
 
 function navigate(args = {}) {
-	document.body.classList.remove('fade-in');
-	document.body.classList.add('fade-out');
+	const fadeTime =
+		typeof args?.FADE_MS === 'undefined' ? FADE_MS : args.FADE_MS;
+	if (fadeTime > 0) {
+		document.body.classList.remove('fade-in');
+		document.body.classList.add('fade-out');
+	}
 	setTimeout(async () => {
 		document.querySelector('iframe').remove();
 		const mainIframe = document.createElement('iframe');
@@ -110,7 +114,7 @@ function navigate(args = {}) {
 			bgMusic = await loadSounds('march');
 			bgMusic.start(4000);
 		}
-	}, FADE_MS);
+	}, fadeTime);
 	//TODO: all bg music should be handled heres
 }
 

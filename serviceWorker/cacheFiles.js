@@ -15,8 +15,8 @@ const isCacheUpdateNeeded = async ({ filesToCache, CACHE_KEY }) => {
 	const cachedVersion =
 		cachedVersionResponse && (await cachedVersionResponse.text());
 	console.log(`
-		Cache version: ${cachedVersion}
-		SW version: ${self._version}
+		Cache version: ${cachedVersion || '[ none ]'}
+		SW version: ${self._version || '[ none ]'}
 	`);
 	if (!cachedVersion || cachedVersion !== self._version) return true;
 

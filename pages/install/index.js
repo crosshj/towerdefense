@@ -103,11 +103,18 @@ const periodicSync = async () => {
 	}
 };
 
+const showProgress = (progressBar) => {
+	const background = document.querySelector('.background');
+	background.classList.remove('hidden');
+	progressBar.classList.remove('hidden');
+};
+
 const progressListener = (event) => {
 	if (event.data.type !== 'progress') return;
+
 	const progressBar = document.getElementById('progress-bar');
 	if (event.data.progress > 0 && event.data.progress < 100) {
-		progressBar.classList.remove('hidden');
+		showProgress(progressBar);
 	}
 	if (event.data.progress > progressBar.value) {
 		progressBar.value = event.data.progress;
@@ -134,7 +141,8 @@ const onLoaded = async () => {
 
 		window.parent.postMessage({
 			_: 'navigate',
-			src: '/pages/startup/index.html'
+			src: '/pages/startup/index.html',
+			FADE_MS: 0
 		});
 	} catch (e) {
 		console.log(e);
