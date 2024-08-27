@@ -9,6 +9,10 @@ is:service-worker-intercepted
 */
 
 const assets = [
+	'/index.html',
+	'/index.js',
+	'/index.css',
+
 	// $data
 	'/$data/unitsAll.js',
 	'/$data/defaultCharacters.js',
@@ -224,7 +228,7 @@ const assets = [
 	'/assets/character/FighterBase/skins/5-prickles_tex.png',
 	'/assets/character/FighterBase/skins/5-robia_tex.png',
 	'/assets/character/FighterBase/skins/5-santelmo_tex.png',
-	'/assets/character/FighterBase/skins/5-wap_tex.png'
+	'/assets/character/FighterBase/skins/5-wap_tex.png',
 ];
 
 const vendor = [
@@ -234,7 +238,7 @@ const vendor = [
 	'/vendor/DragonBones/Animateable.js',
 	'/vendor/gif-js/gif.js',
 	'/vendor/gif-js/gif.worker.js',
-	'/vendor/DragDropTouch.js'
+	'/vendor/DragDropTouch.js',
 ];
 
 const external = [
@@ -290,19 +294,19 @@ const external = [
 	'https://cdn.skypack.dev/-/tslib@v2.5.0-Q2Yl7gdP11l6eAyFnQRG/dist=es2019,mode=imports/optimized/common/tslib-93083d2c.js',
 	//gifjs
 	'https://cdn.skypack.dev/gif.js',
-	'https://cdn.skypack.dev/-/gif.js@v0.2.0-e7wk4xRP763nJNI3SHHF/dist=es2019,mode=imports/optimized/gifjs.js'
+	'https://cdn.skypack.dev/-/gif.js@v0.2.0-e7wk4xRP763nJNI3SHHF/dist=es2019,mode=imports/optimized/gifjs.js',
 ];
 
 export const nonLocal = [
 	...vendor,
-	...external
+	...external,
 	//
 ];
 
 export const depends = [
 	...assets,
 	...vendor,
-	...external
+	...external,
 	//
 ];
 
