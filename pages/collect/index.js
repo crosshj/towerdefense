@@ -1,5 +1,7 @@
 import { getCollection } from '../../user/getCollection.js';
 
+const pageTitle = 'COLLECTION';
+
 const buildCollectionList = async (collected) => {
 	const listEl = document.querySelector('.collection-list');
 	const mapItem = (i) => {
@@ -21,7 +23,7 @@ const domLoaded = async () => {
 
 	window.parent.postMessage({
 		_: 'title',
-		title: 'UPGRADE',
+		title: pageTitle,
 		visibility: 'visible',
 	});
 	const args = {

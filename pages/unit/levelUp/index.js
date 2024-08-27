@@ -13,7 +13,7 @@ const getMaterials = async ({ currentChar }) => {
 	});
 	return {
 		all: _characters,
-		filtered: characters
+		filtered: characters,
 	};
 };
 
@@ -88,7 +88,7 @@ const submitResults = async ({
 	clearSlots,
 	loadingEl,
 	currentChar,
-	characters
+	characters,
 }) => {
 	const materialSlots = Array.from(
 		document.querySelectorAll('.materialsSlot')
@@ -98,11 +98,20 @@ const submitResults = async ({
 	});
 	loadingEl.classList.remove('hidden');
 	const newState = await upgradeCharacter(currentChar, inputs);
+
+	if (newState.error) {
+		//can't use characters that are on a team (should hide these)
+		console.log('TODO: handle error - ', error);
+		loadingEl.classList.add('hidden');
+	}
+
+	//TODO: show error
+	//TODO: show success
+
 	clearSlots(materialSlots);
 	await updateChar(newState.currentChar);
 	await updateAllChars(newState.characters);
-	//TODO: show error
-	//TODO: show success
+
 	loadingEl.classList.add('hidden');
 };
 
@@ -167,7 +176,7 @@ const setup = async () => {
 		characters,
 		getCharImage,
 		dragStart,
-		dragEnd
+		dragEnd,
 	});
 	controls.onSort((sortBy, { sameUnit = false } = {}) => {
 		attachAllCharacters({
@@ -177,7 +186,7 @@ const setup = async () => {
 				: characters,
 			getCharImage,
 			dragStart,
-			dragEnd
+			dragEnd,
 		});
 	});
 
@@ -190,6 +199,9 @@ const setup = async () => {
 			//updateUsed();
 		};
 		const updateChar = async (newChar) => {
+			if (!newChar?.id) {
+				console.log('ERROR OMG!');
+			}
 			currentChar.id = newChar.id;
 		};
 		const updateAllChars = async () => {
@@ -208,7 +220,7 @@ const setup = async () => {
 				characters,
 				getCharImage,
 				dragStart,
-				dragEnd
+				dragEnd,
 			});
 		};
 		submitResults({
@@ -217,7 +229,7 @@ const setup = async () => {
 			updateAllChars,
 			loadingEl,
 			currentChar,
-			characters
+			characters,
 		});
 	});
 
@@ -228,12 +240,12 @@ const setup = async () => {
 		feathers: false,
 		gems: true,
 		coins: false,
-		friendPoints: false
+		friendPoints: false,
 	});
 	window.parent.postMessage({
 		_: 'title',
 		title: pageTitle,
-		visibility: 'visible'
+		visibility: 'visible',
 	});
 
 	window.parent.postMessage({ _: 'loaded' });
