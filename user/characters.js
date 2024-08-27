@@ -11,10 +11,16 @@ import {
 	decompressTeams
 } from '../utils/compress.js';
 import { getTeams } from './teams.js';
-import { calculateCombineResults, hydrateCharacters } from '../utils/units.js';
+import {
+	calculateCombineResults,
+	calculateSellValue,
+	hydrateCharacters
+} from '../utils/units.js';
+import { getStats } from './stats.js';
 
 const LS_NAME = 'USER_CHARACTERS';
 const LS_NAME_TEAMS = 'USER_TEAMS';
+const LS_NAME_STATS = 'USER_STATS';
 
 export const getCharactersAndTeams = async (_apiUser) => {
 	const apiUser = _apiUser || (await getUserFromAPI());
@@ -102,9 +108,6 @@ export const addNewCharacter = async (char) => {
 	localStorage.setItem(LS_NAME, JSON.stringify(newChars));
 };
 
-// player sells characters
-export const sellCharacters = async (chars) => {};
-
 const getUpdatedCharIndex = ({ removeIds, updatedChar, prevChars }) => {
 	let _chars = JSON.parse(JSON.stringify(prevChars));
 	const _updatedChar = _chars.find((x) => x.id === updatedChar.id);
@@ -159,21 +162,24 @@ export const parseUpgradeChange = (args) => {
 	const teamsString = JSON.stringify(prevTeams);
 	const removeError = removeIds.some((x) => teamsString.includes(`"${x}"`));
 	if (removeError) {
-		return { error: 'cannot use team units for upgrade!' };
+		return { error: 'cannot consume team units!' };
 	}
-
-	const combineRes = calculateCombineResults({
-		currentChar,
-		materials
-	});
 
 	const newChars = [...prevChars].filter(
 		(char) => !removeIds.includes(char.id)
 	);
-	const updatedChar = newChars.find((x) => x.id === currentChar.id);
-	updatedChar.experience = combineRes.newExperience;
-	updatedChar.professorPoints = combineRes.newProfessorPoints;
-	updatedChar.uncapped = combineRes.newUncapped;
+
+	let updatedChar;
+	if (currentChar) {
+		const combineRes = calculateCombineResults({
+			currentChar,
+			materials
+		});
+		updatedChar = newChars.find((x) => x.id === currentChar.id);
+		updatedChar.experience = combineRes.newExperience;
+		updatedChar.professorPoints = combineRes.newProfessorPoints;
+		updatedChar.uncapped = combineRes.newUncapped;
+	}
 
 	//MUST re-index teams since character indexs have changed
 	const reIndexedTeams = reIndexTeams({
@@ -189,11 +195,13 @@ export const parseUpgradeChange = (args) => {
 
 	const newTeams = decompressTeams(newTeamsCompressed, newChars);
 
-	updatedChar.id = getUpdatedCharIndex({
-		removeIds,
-		updatedChar,
-		prevChars
-	});
+	if (currentChar) {
+		updatedChar.id = getUpdatedCharIndex({
+			removeIds,
+			updatedChar,
+			prevChars
+		});
+	}
 
 	return {
 		newCharsCompressed,
@@ -248,4 +256,38 @@ export const toggleCharacterLock = async (char) => {
 		characters: compressChars(allChars)
 	});
 	localStorage.setItem(LS_NAME, JSON.stringify(allChars));
+};
+
+// player sells characters
+export const sellCharacters = async (units) => {
+	const materials = units.map((id) => ({ id }));
+	const apiUser = await getUserFromAPI();
+	const { characters: prevChars, teams: prevTeams } =
+		await getCharactersAndTeams(apiUser);
+
+	const sellValue = await calculateSellValue(units);
+	console.log(
+		'TODO: credit the user with sell value',
+		apiUser.data,
+		sellValue
+	);
+
+	const { newCharsCompressed, newTeamsCompressed, newChars, newTeams } =
+		parseUpgradeChange({ materials, prevChars, prevTeams });
+
+	await updateUserFromAPI({
+		...(apiUser?.data || {}),
+		characters: newCharsCompressed,
+		teams: newTeamsCompressed,
+		coins: (apiUser?.data?.coins || 0) + sellValue
+	});
+	localStorage.setItem(LS_NAME, JSON.stringify(newChars));
+	localStorage.setItem(LS_NAME_TEAMS, JSON.stringify(newTeams));
+
+	const newStats = await getStats();
+	newStats.coins += sellValue;
+	localStorage.setItem(LS_NAME_STATS, JSON.stringify(newStats));
+	return {
+		characters: newChars
+	};
 };

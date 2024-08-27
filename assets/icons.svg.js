@@ -1180,9 +1180,9 @@ const infoCircle = () => `
 `;
 
 const animatedSpinner = () => `
-<svg viewBox="0 0 60 60">
+<svg viewBox="0 0 60 60" style="min-width: 60px;">
     <!-- Background -->
-    <rect width="60" height="60" rx="7" ry="7" fill="#313131"></rect>
+    <rect width="60" height="60" rx="7" ry="7" fill="#222" stroke-width="2" stroke="#666"></rect>
     <!-- Spinner -->
     <circle cx="30" cy="30" r="17" stroke="white" stroke-width="4s" fill="none" stroke-dasharray="40" stroke-dashoffset="0">
         <animateTransform attributeName="transform" type="rotate" from="0 30 30" to="360 30 30" dur="1s" repeatCount="indefinite"></animateTransform>

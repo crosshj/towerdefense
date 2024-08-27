@@ -251,6 +251,12 @@ export const calculateCombineResults = ({ currentChar, materials }) => {
 
 	return result;
 };
+
+export const calculateSellValue = async (unitIds) => {
+	//TODO: this calculation is a basic and wrong placeholder!
+	return unitIds.length * 200;
+};
+
 const animations = [
 	{ code: 'idle', displayName: 'Idle' },
 	{ code: 'jumping', displayName: 'Jumping' },

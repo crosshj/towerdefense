@@ -112,6 +112,44 @@ export const handlePointerEvents = (args) => {
 	});
 };
 
+const TAP_THRESHOLD = 10;
+
+export const attachTap = (target, handler) => {
+	let startX, startY;
+	const onPointerDown = (event) => {
+		startX = event.clientX;
+		startY = event.clientY;
+		console.log('pointer down', startX, startY);
+	};
+	const onPointerUp = (event) => {
+		const endX = event.clientX;
+		const endY = event.clientY;
+		const distanceX = Math.abs(endX - startX);
+		const distanceY = Math.abs(endY - startY);
+		const dragThreshold = TAP_THRESHOLD;
+		console.log('pointer down', startX, startY);
+
+		if (distanceX < dragThreshold && distanceY < dragThreshold) {
+			handler(event);
+		}
+	};
+	target.addEventListener('pointerdown', onPointerDown);
+	target.addEventListener('pointerup', onPointerUp);
+	target._onPointerDown = onPointerDown;
+	target._onPointerUp = onPointerUp;
+};
+
+export const removeTap = (target) => {
+	if (target._onPointerDown && target._onPointerUp) {
+		target.removeEventListener('pointerdown', target._onPointerDown);
+		target.removeEventListener('pointerup', target._onPointerUp);
+		delete target._onPointerDown;
+		delete target._onPointerUp;
+	}
+};
+
+//---- DELETE BELOW?
+
 export const handlePointerEventsOLD = (args) => {
 	const { element, onTap, onDragStart, onDragEnd } = args;
 	let startX,
