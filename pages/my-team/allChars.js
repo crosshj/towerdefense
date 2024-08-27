@@ -1,7 +1,11 @@
 import { SVGIcons } from '../../assets/icons.svg.js';
 import { setCurrentCharCache } from '../../utils/cache.js';
 import { characterDiv } from './components.js';
-import { handlePointerEvents } from './handlePointerEvents.js';
+import {
+	attachTap,
+	handlePointerEvents,
+	removeTap,
+} from './handlePointerEvents.js';
 
 const useSavedSort = () => {
 	const sortBy = localStorage.getItem('ALL_CHARS_SORT_BY') || 'latestDown';
@@ -97,15 +101,15 @@ export const attachAllCharacters = (args) => {
 					const src = `/modals/character/detail.html?id=${character.id}`;
 					setCurrentCharCache({
 						...character,
-						imageUri: getCharImage(character)
+						imageUri: getCharImage(character),
 					});
 					window.parent.postMessage({
 						_: 'navigate',
-						src
+						src,
 					});
 				},
 				onDragStart: dragStart,
-				onDragEnd: dragEnd
+				onDragEnd: dragEnd,
 			});
 		}
 		allCharactersDiv.appendChild(characterCard);
@@ -144,7 +148,7 @@ export const attachControls = () => {
 			'Latest ▲',
 			'Grade ▲',
 			'Level ▲',
-			'Mineral ▲'
+			'Mineral ▲',
 			// 'Tower P ▲',
 			// 'Potential ▲'
 		];
@@ -190,30 +194,82 @@ export const attachControls = () => {
 		});
 	}
 
-	const sellingListAdd = ({ card, sellingList }) => {
-		console.log('TODO: ADD', card, sellingList);
+	const sellingListAdd = ({ card, sellingList, sellingCountAmount }) => {
+		const { id } = card.dataset;
+		const matchingEl = sellingList.querySelector(`[data-id='${id}']`);
+		if (matchingEl) {
+			return;
+		}
+
+		sellingCountAmount.innerText = Number(sellingCountAmount.innerText) + 1;
+
+		const level = card.querySelector(
+			'.details .level div:last-child'
+		).innerText;
+		const stars = card.querySelector('.stars').innerText;
+		const image = card.querySelector('.info .icon img').src;
+
+		const el = document.createElement('div');
+		el.classList.add('sellingListCard');
+		el.dataset.id = id;
+		el.innerHTML = `
+			<div class="sellingListLevel">Lv. ${level}</div>
+			<div class="sellingListContainer">
+				<div class="sellingListStars">${stars}</div>
+				<div class="sellingListThumbnail">
+					<img src="${image}"></img>
+				</div>
+			</div>
+		`;
+		sellingList.append(el);
 	};
-	const sellingListRemove = ({ card, sellingList }) => {
-		console.log('TODO: REMOVE', card, sellingList);
+	const sellingListRemove = ({ card, sellingList, sellingCountAmount }) => {
+		const { id } = card.dataset;
+		const matchingEl = sellingList.querySelector(`[data-id='${id}']`);
+		if (!matchingEl) {
+			return;
+		}
+		sellingCountAmount.innerText = Number(sellingCountAmount.innerText) - 1;
+		matchingEl.remove();
 	};
 	const sellingListGetIds = () => {
-		const sellingList = document.querySelector('.sellingList');
-		console.log('TODO: GET IDs', sellingList);
-		return [];
+		const selectedToSell = Array.from(
+			document.querySelectorAll('.sellingListCard')
+		).map((x) => x.dataset.id);
+		return selectedToSell;
 	};
 
 	const sellButton = document.querySelector('.sell');
+	const selectAllButton = document.querySelector('.selectAll');
 	const sellingContainer = document.querySelector('.sellingContainer');
+
+	const sellUnits = async ({ clearAllCharsSellMode }) => {
+		const sell = sellingListGetIds();
+		const unitsString = JSON.stringify(sell);
+		const src = `/modals/sellUnits/index.html?units=${unitsString}`;
+		window.parent.postMessage({ _: 'navigate', src });
+
+		const saleCompleteHandler = function (event) {
+			const saleComplete = 'broadcastSaleComplete' === event?.data?._;
+			const saleCanceled = 'broadcastSaleCanceled' === event?.data?._;
+			if (!saleCanceled && !saleComplete) return;
+			window.removeEventListener('message', saleCompleteHandler);
+			if (saleCanceled) return;
+			clearAllCharsSellMode && clearAllCharsSellMode();
+		};
+		window.addEventListener('message', saleCompleteHandler);
+	};
+
 	if (sellButton) {
+		let clearAllCharsSellMode;
 		sellButton.addEventListener('pointerdown', (e) => {
 			if (sellButton.classList.contains('selected')) {
-				const sell = sellingListGetIds();
-				console.log('TODO: sell some units!', sell);
+				sellUnits({ clearAllCharsSellMode });
 				return;
 			}
-
-			console.log('TODO: show "select all" button!');
-
+			if (selectAllButton) {
+				selectAllButton.classList.remove('hidden');
+			}
 			sellButton.classList.add('selected');
 			sellingContainer.classList.toggle('hidden');
 			sellingContainer.innerHTML = `
@@ -225,19 +281,9 @@ export const attachControls = () => {
 				<div class="sellingList"></div>
 			`;
 			const sellingList = sellingContainer.querySelector('.sellingList');
-			const closeButton = sellingContainer.querySelector('.closeButton');
-			closeButton.addEventListener('pointerdown', () => {
-				sellButton.classList.remove('selected');
-				sellingContainer.classList.add('hidden');
-
-				console.log('TODO: remove selectedForSell class!');
-
-				allCharactersDiv.classList.remove('sellMode');
-				allCharactersDiv.removeEventListener(
-					'pointerdown',
-					selectForSellHandler
-				);
-			});
+			const sellingCountAmount = sellingContainer.querySelector(
+				'.sellingCountAmount'
+			);
 			const selectForSellHandler = (e) => {
 				e.preventDefault();
 				e.stopPropagation();
@@ -251,23 +297,68 @@ export const attachControls = () => {
 					return;
 				}
 				if (card.classList.contains('selectedForSell')) {
-					sellingListRemove({ card, sellingList });
+					sellingListRemove({
+						card,
+						sellingList,
+						sellingCountAmount,
+					});
 				} else {
-					sellingListAdd({ card, sellingList });
+					sellingListAdd({ card, sellingList, sellingCountAmount });
 				}
 				card.classList.toggle('selectedForSell');
 			};
+
+			if (selectAllButton) {
+				selectAllButton.addEventListener('pointerdown', () => {
+					const unused = Array.from(
+						document.querySelectorAll('.character-card:not(.used)')
+					);
+					const selectable = unused.filter(
+						(x) => !x.querySelector('.selectorInfo.locked')
+					);
+					for (const card of selectable) {
+						card.classList.add('selectedForSell');
+						sellingListAdd({
+							card,
+							sellingList,
+							sellingCountAmount,
+						});
+					}
+				});
+			}
+
+			clearAllCharsSellMode = () => {
+				if (selectAllButton) {
+					selectAllButton.classList.add('hidden');
+				}
+				sellingContainer.innerHTML = '';
+				sellButton.classList.remove('selected');
+				sellingContainer.classList.add('hidden');
+
+				const allChars = Array.from(
+					document.querySelectorAll('.character-card')
+				);
+				for (const card of allChars) {
+					card.classList.remove('selectedForSell');
+				}
+
+				allCharactersDiv.classList.remove('sellMode');
+				removeTap(allCharactersDiv);
+			};
+
+			const closeButton = sellingContainer.querySelector('.closeButton');
+			closeButton.addEventListener('pointerdown', () => {
+				clearAllCharsSellMode && clearAllCharsSellMode();
+			});
+
 			allCharactersDiv.classList.add('sellMode');
-			allCharactersDiv.addEventListener(
-				'pointerdown',
-				selectForSellHandler
-			);
+			attachTap(allCharactersDiv, selectForSellHandler);
 		});
 	}
 	return {
 		sortBy,
 		onSort: (fn) => {
 			onSortHandler = fn;
-		}
+		},
 	};
 };

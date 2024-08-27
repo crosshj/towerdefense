@@ -1,4 +1,5 @@
 import { getStats } from '../../user/stats.js';
+import { clone } from '../../utils/utils.js';
 import { menuButton } from './components.js';
 
 const withCommas = (x) => {
@@ -19,7 +20,7 @@ const modifyUserStats = (userStats) => {
 	let {
 		feathers = 0,
 		feathersMax = 0,
-		feathersUpdate = -1
+		feathersUpdate = -1,
 	} = userStats || {};
 
 	if (feathersUpdate === -1 || feathers >= feathersMax) return userStats;
@@ -35,7 +36,7 @@ const modifyUserStats = (userStats) => {
 		...userStats,
 		feathers,
 		feathersMax,
-		feathersUpdate: feathersUpdate.toISOString()
+		feathersUpdate: feathersUpdate.toISOString(),
 	};
 };
 
@@ -121,7 +122,17 @@ const attachFeatherUpdater = (userStats) => {
 	};
 };
 
+let prevArgs;
+export const refreshStats = async ({ container }) => {
+	if (!prevArgs) return;
+	return statsElement({
+		...prevArgs,
+		container,
+	});
+};
+
 export const statsElement = async (args) => {
+	prevArgs = clone(args);
 	const isHidden = args?.visibility === 'hidden';
 	const {
 		container,
@@ -129,7 +140,7 @@ export const statsElement = async (args) => {
 		gems = !isHidden,
 		coins = !isHidden,
 		friendPoints = !isHidden,
-		menu = !isHidden
+		menu = !isHidden,
 	} = args;
 
 	container.classList.add('stats');
@@ -195,7 +206,7 @@ export const statsElement = async (args) => {
 			}
 			menuButtonEl.classList.remove('open');
 			window.parent.postMessage({
-				_: 'navigate'
+				_: 'navigate',
 			});
 		});
 		const removeOpenClass = () => {

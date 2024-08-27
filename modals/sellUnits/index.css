@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Passion+One:wght@400;700;900&display=swap');
+
+html,
+body {
+	background-color: transparent;
+}
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	overscroll-behavior: none;
+	width: 100vw;
+	height: 100vh;
+}
+
+.hidden {
+	display: none !important;
+}
+
+.sellConfirmOverlay {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	background: #000b;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	.dialogBox {
+		background: #905527;
+		padding: 2em;
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+		color: white;
+		border-radius: 10px;
+		box-sizing: border-box;
+		border: 2px solid black;
+		button {
+			background: #00c031;
+			padding: 0.2em;
+			border-radius: 0.5em;
+			color: white;
+			text-transform: uppercase;
+			font-family: 'Passion One', sans-serif;
+			font-weight: 400;
+			font-size: 19px;
+			letter-spacing: 1px;
+			min-width: 130px;
+			border: 0;
+		}
+	}
+
+	.confirmContainer {
+		.confirmActions {
+			margin-top: 2em;
+			display: flex;
+			gap: 10px;
+			button.cancelSell {
+				background: #05bbd0;
+			}
+		}
+	}
+}

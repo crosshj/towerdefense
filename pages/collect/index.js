@@ -1,29 +1,36 @@
 import { getCollection } from '../../user/getCollection.js';
 
+const pageTitle = 'COLLECTION';
+
 const buildCollectionList = async (collected) => {
 	const listEl = document.querySelector('.collection-list');
 	const mapItem = (i) => {
 		const className = ['unit', i.collected ? 'collected' : '']
 			.filter((x) => !!x)
 			.join(' ');
-		return `<div class="${className}"></div>`;
+		return `
+			<div class="${className}">
+				<img src="${i.image}" />	
+			</div>
+		`;
 	};
-	listEl.innerHTML = collected.map(mapItem).join('\n');
+	listEl.innerHTML = collected.reverse().map(mapItem).join('\n');
 };
 
-document.addEventListener('DOMContentLoaded', async () => {
+const domLoaded = async () => {
 	const collected = await getCollection();
+	console.log(collected);
 
 	window.parent.postMessage({
 		_: 'title',
-		title: 'UPGRADE',
-		visibility: 'visible'
+		title: pageTitle,
+		visibility: 'visible',
 	});
 	const args = {
 		feathers: false,
 		gems: true,
 		coins: false,
-		friendPoints: false
+		friendPoints: false,
 	};
 	window.parent.postMessage({ _: 'stats', ...args });
 
@@ -42,4 +49,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 	await buildCollectionList(collected);
 
 	window.parent.postMessage({ _: 'loaded' });
-});
+};
+
+document.addEventListener('DOMContentLoaded', domLoaded);

@@ -1,7 +1,7 @@
 import { addStats } from './user/stats.js';
 import { installable } from './utils/installable.js';
+import { statsElement, refreshStats } from './visuals/stats/stats.js';
 import { loadSounds } from '/visuals/assets/assets.js';
-import { statsElement } from '/visuals/stats/stats.js';
 
 const FADE_MS = 200;
 let whereIsBack;
@@ -150,19 +150,17 @@ document.body.addEventListener('pointerup', async (event) => {
 	}
 });
 
-const broadcastCharactersUpdate = () => {
+const broadcastUpdate = (args) => {
 	const childIframeList = Array.from(document.querySelectorAll('iframe'));
 	for (const childIframe of childIframeList) {
-		childIframe.contentWindow.postMessage({
-			_: 'broadcastCharactersUpdate'
-		});
+		childIframe.contentWindow.postMessage(args);
 	}
 };
 
 window.addEventListener('message', async function (event) {
 	const { _, ...args } = event.data;
-	if (_ === 'broadcastCharactersUpdate') {
-		await broadcastCharactersUpdate(args);
+	if (_.startsWith('broadcast')) {
+		await broadcastUpdate(event.data);
 		return;
 	}
 	if (_ === 'action') {
@@ -174,6 +172,13 @@ window.addEventListener('message', async function (event) {
 		statsElement({
 			container: statsContainer,
 			...args
+		});
+		return;
+	}
+	if (_ === 'statsRefresh') {
+		const statsContainer = document.querySelector('.container .stats');
+		refreshStats({
+			container: statsContainer
 		});
 		return;
 	}

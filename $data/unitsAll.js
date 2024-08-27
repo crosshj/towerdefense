@@ -9,7 +9,7 @@ export const unitsAll = {
 		attack: '72 - 243 - 761',
 		hp: '413 - 1,401 - 4,394',
 		defense: '14 - 52 - 166',
-		range: 1000
+		range: 1000,
 	},
 	// like https://rangers.lerico.net/en/ranger/u030e-ron
 	'u0001-2-toto': {
@@ -21,7 +21,7 @@ export const unitsAll = {
 		attack: '139 - 661 - 1,838',
 		hp: '998 - 4,623 - 12,821',
 		defense: '22 - 109 - 304',
-		range: 350
+		range: 350,
 	},
 	// like https://rangers.lerico.net/en/ranger/u031e-ron
 	'u0001-3-twinkle': {
@@ -33,7 +33,7 @@ export const unitsAll = {
 		attack: '246 - 1,455 - 3,735',
 		hp: '2,128 - 12,502 - 32,080',
 		defense: '32 - 188 - 482',
-		range: 800
+		range: 800,
 	},
 	// like https://rangers.lerico.net/en/ranger/u032e-ron
 	'u0001-4-vispi': {
@@ -45,7 +45,7 @@ export const unitsAll = {
 		attack: '411 - 2,959 - 7,198',
 		hp: '4,270 - 30,436 - 74,009',
 		defense: '43 - 337 - 823',
-		range: 500
+		range: 500,
 	},
 	// like https://rangers.lerico.net/en/ranger/u13-lia
 	'u0001-5-drat': {
@@ -57,7 +57,7 @@ export const unitsAll = {
 		attack: '1,328 - 11,122 - 25,996',
 		hp: '3,978 - 33,360 - 77,976',
 		defense: '317 - 2,736 - 6,401',
-		range: 1000
+		range: 1000,
 	},
 	// like https://rangers.lerico.net/en/ranger/u032e-ron
 	'u0001-4-antonio': {
@@ -69,7 +69,7 @@ export const unitsAll = {
 		attack: '411 - 2,959 - 7,198',
 		hp: '4,270 - 30,436 - 74,009',
 		defense: '43 - 337 - 823',
-		range: 600
+		range: 600,
 	},
 	// like https://rangers.lerico.net/en/ranger/u032e-ron
 	'u0001-4-bumpier': {
@@ -81,7 +81,7 @@ export const unitsAll = {
 		attack: '411 - 2,959 - 7,198',
 		hp: '4,270 - 30,436 - 74,009',
 		defense: '43 - 337 - 823',
-		range: 600
+		range: 600,
 	},
 	// like https://rangers.lerico.net/en/ranger/u032e-ron
 	'u0001-4-tabi': {
@@ -93,7 +93,7 @@ export const unitsAll = {
 		attack: '411 - 2,959 - 7,198',
 		hp: '4,270 - 30,436 - 74,009',
 		defense: '43 - 337 - 823',
-		range: 600
+		range: 600,
 	},
 	// like https://rangers.lerico.net/en/ranger/u13-lia
 	'u0001-5-electopus': {
@@ -106,7 +106,7 @@ export const unitsAll = {
 		attack: '1,328 - 11,122 - 25,996',
 		hp: '3,978 - 33,360 - 77,976',
 		defense: '317 - 2,736 - 6,401',
-		range: 1000
+		range: 1000,
 	},
 	// like https://rangers.lerico.net/en/ranger/u13-lia
 	'u0001-5-santelmo': {
@@ -118,7 +118,7 @@ export const unitsAll = {
 		attack: '1,328 - 11,122 - 25,996',
 		hp: '3,978 - 33,360 - 77,976',
 		defense: '317 - 2,736 - 6,401',
-		range: 1000
+		range: 1000,
 	},
 	// like https://rangers.lerico.net/en/ranger/u13-lia
 	'u0001-5-multo': {
@@ -130,7 +130,7 @@ export const unitsAll = {
 		attack: '1,328 - 11,122 - 25,996',
 		hp: '3,978 - 33,360 - 77,976',
 		defense: '317 - 2,736 - 6,401',
-		range: 1000
+		range: 1000,
 	},
 	// like https://rangers.lerico.net/en/ranger/u13-lia
 	'u0001-5-kelvin': {
@@ -142,7 +142,7 @@ export const unitsAll = {
 		attack: '1,328 - 11,122 - 25,996',
 		hp: '3,978 - 33,360 - 77,976',
 		defense: '317 - 2,736 - 6,401',
-		range: 1000
+		range: 1000,
 	},
 	// like https://rangers.lerico.net/en/ranger/u13-lia
 	'u0001-5-blanko': {
@@ -154,7 +154,7 @@ export const unitsAll = {
 		attack: '1,328 - 11,122 - 25,996',
 		hp: '3,978 - 33,360 - 77,976',
 		defense: '317 - 2,736 - 6,401',
-		range: 1000
+		range: 1000,
 	},
 	// like https://rangers.lerico.net/en/ranger/u13-lia
 	'u0001-5-prickles': {
@@ -166,7 +166,7 @@ export const unitsAll = {
 		attack: '1,328 - 11,122 - 25,996',
 		hp: '3,978 - 33,360 - 77,976',
 		defense: '317 - 2,736 - 6,401',
-		range: 1000
+		range: 1000,
 	},
 	// like https://rangers.lerico.net/en/ranger/u13-lia
 	'u0001-5-crack9': {
@@ -178,7 +178,7 @@ export const unitsAll = {
 		attack: '1,328 - 11,122 - 25,996',
 		hp: '3,978 - 33,360 - 77,976',
 		defense: '317 - 2,736 - 6,401',
-		range: 1000
+		range: 1000,
 	},
 	// like https://rangers.lerico.net/en/ranger/u13-lia
 	'u0001-5-robia': {
@@ -191,7 +191,7 @@ export const unitsAll = {
 		attack: '1,328 - 11,122 - 25,996',
 		hp: '3,978 - 33,360 - 77,976',
 		defense: '317 - 2,736 - 6,401',
-		range: 1000
+		range: 1000,
 	},
 	// like https://rangers.lerico.net/en/ranger/u13-lia
 	'u0001-5-barbell': {
@@ -203,7 +203,7 @@ export const unitsAll = {
 		attack: '1,328 - 11,122 - 25,996',
 		hp: '3,978 - 33,360 - 77,976',
 		defense: '317 - 2,736 - 6,401',
-		range: 1000
+		range: 1000,
 	},
 	// like https://rangers.lerico.net/en/ranger/u13-lia
 	'u0001-5-wap': {
@@ -215,7 +215,7 @@ export const unitsAll = {
 		attack: '1,328 - 11,122 - 25,996',
 		hp: '3,978 - 33,360 - 77,976',
 		defense: '317 - 2,736 - 6,401',
-		range: 1000
+		range: 1000,
 	},
 	'u0001-1-benny': {
 		displayName: 'Benny Lava',
@@ -226,7 +226,7 @@ export const unitsAll = {
 		attack: 100,
 		hp: 20000,
 		defense: 0,
-		range: 700
+		range: 700,
 	},
 	'u0001-4-slabb': {
 		displayName: 'Slabb',
@@ -237,7 +237,7 @@ export const unitsAll = {
 		attack: 100,
 		hp: 30000,
 		defense: 0,
-		range: 625
+		range: 625,
 	},
 	'u0001-4-crimson': {
 		displayName: 'Crimson',
@@ -248,7 +248,7 @@ export const unitsAll = {
 		attack: 300,
 		hp: 40000,
 		defense: 0,
-		range: 425
+		range: 425,
 	},
 	'u0001-4-violet': {
 		displayName: 'Violet',
@@ -259,7 +259,7 @@ export const unitsAll = {
 		attack: 200,
 		hp: 20000,
 		defense: 0,
-		range: 1000
+		range: 1000,
 	},
 	'u0001-3-rose': {
 		displayName: 'Rose',
@@ -270,7 +270,7 @@ export const unitsAll = {
 		attack: 250,
 		hp: 25000,
 		defense: 0,
-		range: 800
+		range: 800,
 	},
 	'u0001-2-ogre': {
 		displayName: 'Ogre',
@@ -281,7 +281,7 @@ export const unitsAll = {
 		attack: 200,
 		hp: 15000,
 		defense: 0,
-		range: 200
+		range: 200,
 	},
 	'u0001-2-jet': {
 		displayName: 'Jet',
@@ -292,7 +292,7 @@ export const unitsAll = {
 		attack: 300,
 		hp: 20000,
 		defense: 0,
-		range: 300
+		range: 300,
 	},
 	// Openhyman - like https://rangers.lerico.net/en/ranger/u064e-lucas
 	'u0001-4-openhyman': {
@@ -305,7 +305,7 @@ export const unitsAll = {
 		attack: '340 - 2,447 - 5,953',
 		hp: '3,132 - 22,340 - 54,324',
 		defense: '33 - 278 - 680',
-		range: 486
+		range: 486,
 	},
 	'u0001-4-boar': {
 		displayName: 'Boar',
@@ -316,7 +316,7 @@ export const unitsAll = {
 		attack: 200,
 		hp: 20000,
 		defense: 0,
-		range: 300
+		range: 300,
 	},
 	'u0001-4-pineman': {
 		displayName: 'Pineman',
@@ -327,7 +327,7 @@ export const unitsAll = {
 		attack: 200,
 		hp: 20000,
 		defense: 0,
-		range: 680
+		range: 680,
 	},
 	'u0001-4-aynstine': {
 		displayName: 'Aynstine',
@@ -338,7 +338,7 @@ export const unitsAll = {
 		attack: 200,
 		hp: 20000,
 		defense: 0,
-		range: 520
+		range: 520,
 	},
 
 	// link https://rangers.lerico.net/en/ranger/u18-ben
@@ -354,7 +354,7 @@ export const unitsAll = {
 		hp: '1,500 - 6,000 - 15,000',
 		//original hp: '530 - 1,803 - 5,657',
 		defense: '65-236-749',
-		range: 300
+		range: 300,
 	},
 
 	// https://rangers.lerico.net/en/ranger/u205e-zac
@@ -367,7 +367,7 @@ export const unitsAll = {
 		attack: '49-252-706',
 		hp: '1,104 - 5,106 - 14,159',
 		defense: '235 - 1,105 - 3,069',
-		range: 150
+		range: 150,
 	},
 	// https://rangers.lerico.net/en/ranger/u73-xan
 	'u0001-5-bibly': {
@@ -379,7 +379,7 @@ export const unitsAll = {
 		attack: '603 - 5,087 - 11,893',
 		hp: '2,241 - 18,820 - 43,992',
 		defense: '499 - 4,216 - 9,857',
-		range: 500
+		range: 500,
 	},
 	// https://rangers.lerico.net/en/ranger/u62-rei
 	'u0001-2-zerosix': {
@@ -391,11 +391,12 @@ export const unitsAll = {
 		attack: '62 - 294 - 817',
 		hp: '639 - 2,959 - 8,206',
 		defense: '75 - 365 - 1,017',
-		range: 500
+		range: 500,
 	},
 
 	// this character is a base for other characters
 	'u0001-0-guide': {
+		isInGame: false,
 		displayName: 'DO_NOT_USE',
 		element: 'Steel',
 		type: 'Intelligence',
@@ -404,7 +405,7 @@ export const unitsAll = {
 		attack: 0,
 		hp: 0,
 		defense: 0,
-		range: 1
+		range: 1,
 	},
 
 	// https://rangers.lerico.net/en/ranger/u76-brownie
@@ -417,7 +418,7 @@ export const unitsAll = {
 		attack: '109 - 375 - 1,179',
 		hp: '360 - 1,215 - 3,807',
 		defense: '247 - 855 - 2,691',
-		range: 30 * 10
+		range: 30 * 10,
 	},
 
 	// https://rangers.lerico.net/en/ranger/u001e-bella
@@ -431,7 +432,7 @@ export const unitsAll = {
 		attack: '240 - 1,110 - 3,078',
 		hp: '1,776 - 8,214 - 22,777',
 		defense: '259 - 1,216 - 3,377',
-		range: 70 * 10
+		range: 70 * 10,
 	},
 
 	// https://rangers.lerico.net/en/ranger/u56-frankie
@@ -445,7 +446,7 @@ export const unitsAll = {
 		attack: '188 - 1,124 - 2,887',
 		hp: '2,397 - 14,097 - 36,175',
 		defense: '28 - 184 - 475',
-		range: 70 * 10
+		range: 70 * 10,
 	},
 
 	// https://rangers.lerico.net/en/ranger/u041e-jill
@@ -459,7 +460,7 @@ export const unitsAll = {
 		attack: '148 - 1,079 - 2,626',
 		hp: '6,275 - 44,740 - 108,792',
 		defense: '391 - 2,841 - 6,914',
-		range: 114 * 4
+		range: 114 * 4,
 	},
 
 	// https://rangers.lerico.net/en/ranger/u039e-jill
@@ -474,7 +475,7 @@ export const unitsAll = {
 		attack: '59 - 291 - 812',
 		hp: '1,230 - 5,696 - 15,797',
 		defense: '203 - 957 - 2,659',
-		range: 114 * 4
+		range: 114 * 4,
 	},
 
 	// https://rangers.lerico.net/en/ranger/u56-frankie (with reduce mineral cost)
@@ -487,7 +488,7 @@ export const unitsAll = {
 		attack: '188 - 1,124 - 2,887',
 		hp: '2,397 - 14,097 - 36,175',
 		defense: '28 - 184 - 475',
-		range: 70 * 10
+		range: 70 * 10,
 	},
 
 	// https://rangers.lerico.net/en/ranger/u56-frankie
@@ -501,7 +502,7 @@ export const unitsAll = {
 		attack: '188 - 1,124 - 2,887',
 		hp: '2,397 - 14,097 - 36,175',
 		defense: '28 - 184 - 475',
-		range: 50 * 10
+		range: 50 * 10,
 	},
 
 	// https://rangers.lerico.net/en/ranger/u71-cook
@@ -514,7 +515,7 @@ export const unitsAll = {
 		attack: '174 - 1,032 - 2,650',
 		hp: '2,205 - 12,969 - 33,280',
 		defense: '30 - 186 - 479',
-		range: 60 * 10
+		range: 60 * 10,
 	},
 
 	// https://rangers.lerico.net/en/ranger/u041e-jill
@@ -528,7 +529,7 @@ export const unitsAll = {
 		attack: '148 - 1,079 - 2,626',
 		hp: '6,275 - 44,740 - 108,792',
 		defense: '391 - 2,841 - 6,914',
-		range: 50 * 10
+		range: 50 * 10,
 	},
 
 	// https://rangers.lerico.net/en/ranger/u106-cony
@@ -542,7 +543,7 @@ export const unitsAll = {
 		hp: '1,117 - 6,577 - 16,879',
 		defense: '391 - 2,841 - 6,914',
 		// orig 0 - 0 - 0
-		range: 80 * 10
+		range: 80 * 10,
 	},
 
 	// https://rangers.lerico.net/en/ranger/u72-sol
@@ -557,7 +558,7 @@ export const unitsAll = {
 		hp: '3,121 - 26,190 - 61,218',
 		defense: '391 - 2,841 - 6,914',
 		// orig 0 - 0 - 0
-		range: 70 * 10
+		range: 70 * 10,
 	},
 
 	// https://rangers.lerico.net/en/ranger/u056e-ham
@@ -570,7 +571,7 @@ export const unitsAll = {
 		attack: '67 - 418 - 1,076',
 		hp: '3,211 - 18,889 - 48,472',
 		defense: '654 - 3,852 - 9,886',
-		range: 60 * 10
+		range: 60 * 10,
 	},
 
 	// https://rangers.lerico.net/en/ranger/u11-pico
@@ -583,7 +584,7 @@ export const unitsAll = {
 		attack: '257 - 1,214 - 3,373',
 		hp: '583 - 2,700 - 7,488',
 		defense: '24 - 111 - 308',
-		range: 80 * 10
+		range: 80 * 10,
 	},
 
 	// https://rangers.lerico.net/en/ranger/u11-pico
@@ -596,7 +597,7 @@ export const unitsAll = {
 		attack: '257 - 1,214 - 3,373',
 		hp: '583 - 2,700 - 7,488',
 		defense: '24 - 111 - 308',
-		range: 80 * 10
+		range: 80 * 10,
 	},
 
 	// https://rangers.lerico.net/en/ranger/u050e-sisi
@@ -609,7 +610,7 @@ export const unitsAll = {
 		attack: '205 - 1,219 - 3,130',
 		hp: '2,318 - 13,628 - 34,970',
 		defense: '703 - 4,174 - 10,717',
-		range: 40 * 10
+		range: 40 * 10,
 	},
 
 	// https://rangers.lerico.net/en/ranger/u43-jessica
@@ -622,7 +623,7 @@ export const unitsAll = {
 		attack: '245 - 1,764 - 4,291',
 		hp: '3,938 - 28,095 - 68,319',
 		defense: '79 - 569 - 1,384',
-		range: 60 * 10
+		range: 60 * 10,
 	},
 
 	// https://rangers.lerico.net/en/ranger/u39-cony
@@ -636,7 +637,7 @@ export const unitsAll = {
 		hp: '2,048 - 14,592 - 35,482',
 		defense: '79 - 569 - 1,384',
 		// orig 0 - 0 - 0
-		range: 40 * 10
+		range: 40 * 10,
 	},
 
 	// https://rangers.lerico.net/en/ranger/u057e-ham
@@ -649,6 +650,6 @@ export const unitsAll = {
 		attack: '166 - 1,195 - 2,907',
 		hp: '6,816 - 48,564 - 118,087',
 		defense: '892 - 6,380 - 15,516',
-		range: 20 * 10
-	}
+		range: 20 * 10,
+	},
 };
