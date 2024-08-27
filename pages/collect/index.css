@@ -170,14 +170,23 @@ button {
 	box-sizing: border-box;
 
 	.unit {
-		width: 100%;
-		aspect-ratio: 1 / 1;
+		position: relative;
+		width: 60px;
+		height: 60px;
 		background-color: #323c51;
 		border-radius: 7px;
 		box-sizing: border-box;
+		overflow: hidden;
 		&.collected {
 			background: #46526c;
 			box-shadow: inset 0 0 0px 2px #727f9b;
+		}
+		img {
+			position: absolute;
+			top: 10px;
+			left: -5px;
+			width: 75px;
+			aspect-ratio: 1 / 1;
 		}
 	}
 }

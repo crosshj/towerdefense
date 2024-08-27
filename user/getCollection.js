@@ -1,5 +1,8 @@
+import { listAvailableUnits } from '../utils/units.js';
+import { getAllThumbnails } from '../visuals/assets/character.js';
+
 //prettier-ignore
-export const getCollection = async () => [
+export const getCollectionOLD = async () => [
 	{ displayName: 'Raze', level: 145, mineralCost: 1000, stars: 3, collected: true },
 	{ displayName: 'Inferno', level: 150, mineralCost: 1200, stars: 4, collected: true },
 	{ displayName: 'Steve', level: 140, mineralCost: 800, stars: 2, collected: true },
@@ -101,3 +104,14 @@ export const getCollection = async () => [
 	{ displayName: 'Eos', level: 115, mineralCost: 800, stars: 2, collected: false },
 	{ displayName: 'Iris', level: 160, mineralCost: 600, stars: 1, collected: false }
 ];
+
+export const getCollection = async () => {
+	const collection = listAvailableUnits();
+	const thumbnails = await getAllThumbnails();
+	for (const unit of collection) {
+		//TODO: mark whether or not user has this
+		unit.image = thumbnails[unit.code];
+		unit.collected = false;
+	}
+	return collection;
+};

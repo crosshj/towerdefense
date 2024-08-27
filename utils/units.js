@@ -39,7 +39,7 @@ const getHealth = (unit, currentLevel) => {
 	const rankGrowth = calculateCoefficients(unit.rank, unit.hp);
 	const val = getGrowth({
 		...rankGrowth,
-		level: currentLevel
+		level: currentLevel,
 	});
 	return val;
 };
@@ -51,7 +51,7 @@ const getDefense = (unit, currentLevel) => {
 	const rankGrowth = calculateCoefficients(unit.rank, unit.defense);
 	const val = getGrowth({
 		...rankGrowth,
-		level: currentLevel
+		level: currentLevel,
 	});
 	return val;
 };
@@ -68,7 +68,7 @@ const getAttack = (unit, currentLevel) => {
 	const rankGrowth = calculateCoefficients(unit.rank, unit.attack);
 	const val = getGrowth({
 		...rankGrowth,
-		level: currentLevel
+		level: currentLevel,
 	});
 	return val;
 };
@@ -97,7 +97,7 @@ export const withLevelInfo = (unit, totalExp = 0) => {
 	let { currentLevel, expToNext, levelExpPercent } = getLevelInfo({
 		totalExp,
 		a: 5 * unit.rank,
-		b: 6000
+		b: 6000,
 	});
 	const uncappedLevel = Math.min(4, unit.uncappedLevel || 0); //TODO, this should be saved when combining units
 	const maxLevel = getMaxLevel(unit);
@@ -112,7 +112,7 @@ export const withLevelInfo = (unit, totalExp = 0) => {
 		level: currentLevel,
 		a: 5 * unit.rank,
 		b: 6000,
-		c: 0
+		c: 0,
 	});
 
 	const _withLevel = {
@@ -147,7 +147,7 @@ export const withLevelInfo = (unit, totalExp = 0) => {
 		critChance: 0.01,
 		critMult: 2,
 		move: 60,
-		unit: unit.id
+		unit: unit.id,
 	};
 	const somethingNotRight = ['hp', 'attack', 'defense'].some(
 		(prop) => _withLevel[prop] < 0
@@ -168,7 +168,7 @@ export const unitsMapper = () => {
 				id,
 				code: key,
 				uncappedLevel,
-				...value
+				...value,
 			};
 			return withLevelInfo(withId, experience);
 		};
@@ -193,7 +193,7 @@ const getExperienceFromLevel = (unit) => {
 		level: unit.level,
 		a: 5 * unit.rank,
 		b: 6000,
-		c: 0
+		c: 0,
 	});
 };
 
@@ -201,7 +201,7 @@ export const extractCharacter = (unit) => {
 	const levelExp = getExperienceFromLevel(unit);
 	const experience = Math.floor(0.1 * levelExp + 4000 * (unit.rank || 1));
 	return {
-		experience
+		experience,
 	};
 };
 
@@ -237,7 +237,7 @@ export const calculateCombineResults = ({ currentChar, materials }) => {
 	const newChar = withLevelInfo(
 		{
 			...currentChar,
-			uncappedLevel: currentUncapped
+			uncappedLevel: currentUncapped,
 		},
 		currentExperience
 	);
@@ -261,11 +261,13 @@ const animations = [
 	{ code: 'idle', displayName: 'Idle' },
 	{ code: 'jumping', displayName: 'Jumping' },
 	{ code: 'sprite_swap', displayName: 'Swapping 1' },
-	{ code: 'sprite_swap2', displayName: 'Swapping 2' }
+	{ code: 'sprite_swap2', displayName: 'Swapping 2' },
 ];
 
 export const listAvailableUnits = () => {
-	return Object.entries(unitsAll).map(([code, v]) => ({ code, ...v }));
+	return Object.entries(unitsAll)
+		.map(([code, v]) => ({ code, ...v }))
+		.filter((x) => x.isInGame !== false);
 };
 
 export const listAvailableAnimations = () => {

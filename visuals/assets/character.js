@@ -27,7 +27,7 @@ export const characterAnimationGetter = async (
 		framerate,
 		skeleton,
 		atlas,
-		texture
+		texture,
 	});
 	animation.setAnimation('jumping');
 	// TODO: should get thumbnails and animateable character here
@@ -60,7 +60,7 @@ function getColorForLetter(letter) {
 		{ r: 0, g: 255, b: 0 },
 		{ r: 0, g: 0, b: 255 },
 		{ r: 75, g: 0, b: 130 },
-		{ r: 148, g: 0, b: 211 }
+		{ r: 148, g: 0, b: 211 },
 	];
 	const colorRange = (colors.length - 1) * 25;
 	const stepSize = colorRange / (letters.length - 1);
@@ -109,10 +109,16 @@ const addBoned = async (allImages) => {
 	for (const unit of allUnits) {
 		const animation = await characterAnimationGetter(unit, {
 			width,
-			height
+			height,
 		});
 		allImages[unit.code] = animation.canvas.toDataURL();
 	}
+};
+
+export const getAllThumbnails = async () => {
+	const allImages = {};
+	await addBoned(allImages);
+	return allImages;
 };
 
 export const characterImageGetter = async () => {
@@ -146,7 +152,7 @@ export const characterImageFromDef = async (character) => {
 	const height = 128;
 	const animation = await characterAnimationGetter(character, {
 		width,
-		height
+		height,
 	});
 	return animation.canvas.toDataURL();
 };
