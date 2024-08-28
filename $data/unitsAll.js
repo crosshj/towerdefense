@@ -652,4 +652,17 @@ export const unitsAll = {
 		defense: '892 - 6,380 - 15,516',
 		range: 20 * 10,
 	},
+
+	//
+	'u0001-4-chizu': {
+		displayName: 'Chizu',
+		element: 'Normal',
+		type: 'Intellegence',
+		rank: 4,
+		mineralCost: 475,
+		attack: '166 - 1,195 - 2,907',
+		hp: '6,816 - 48,564 - 118,087',
+		defense: '892 - 6,380 - 15,516',
+		range: 20 * 10,
+	},
 };
