@@ -653,16 +653,16 @@ export const unitsAll = {
 		range: 20 * 10,
 	},
 
-	//
+	// https://rangers.lerico.net/en/ranger/u96-cony
 	'u0001-4-chizu': {
 		displayName: 'Chizu',
 		element: 'Normal',
 		type: 'Intellegence',
 		rank: 4,
 		mineralCost: 475,
-		attack: '166 - 1,195 - 2,907',
-		hp: '6,816 - 48,564 - 118,087',
+		attack: '616 - 4,438 - 10,796',
+		hp: '3,393 - 24,218 - 58,892',
 		defense: '892 - 6,380 - 15,516',
-		range: 20 * 10,
+		range: 50 * 10,
 	},
 };
