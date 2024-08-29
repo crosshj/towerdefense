@@ -179,16 +179,46 @@ button {
 		display: flex;
 		align-items: center;
 		gap: 10px;
+		flex: 1 1 100px;
 		.label {
 			color: #4c4b4b;
 			max-width: 77px;
 			text-align: end;
 		}
-		.reward-icon {
-			width: 60px;
-			aspect-ratio: 1 / 1;
-			background: grey;
-			border-radius: 7px;
+		.reward-container {
+			width: 190px;
+			min-width: 190px;
+			height: 60px;
+			display: flex;
+			flex-wrap: wrap;
+			/* container-type: inline-size; */
+			gap: 3px; /* Optional: adds space between items */
+			overflow: hidden;
+
+			& > div {
+				display: flex;
+				justify-content: center;
+				align-items: start;
+				width: 60px;
+				height: 60px;
+				background: grey;
+				border-radius: 7px;
+				overflow: hidden;
+				img {
+					width: 136%;
+					margin-top: 3px;
+					margin-left: 14%;
+				}
+			}
+			&.doubleRow {
+				gap: 2px;
+				width: 150px;
+				min-width: 150px;
+				& > div {
+					width: 28px;
+					height: 28px;
+				}
+			}
 		}
 		.reward-more {
 			color: #7d8f94;

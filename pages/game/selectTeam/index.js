@@ -2,6 +2,8 @@ import { getLocationMap } from '../../../utils/locations.js';
 import { getTeam } from '/utils/getTeam.js';
 import { getEffects } from '../../../user/effects.js';
 import { SVGIcons } from '../../../assets/icons.svg.js';
+import { getPotentialStageRewards } from '../../../stages/index.js';
+import { getCollection } from '../../../user/getCollection.js';
 
 const updateTeamIcons = async () => {
 	const teamIcons = Array.from(
@@ -35,7 +37,7 @@ const effectsIcons = {
 	meteor: SVGIcons.meteor(),
 	ice: SVGIcons.iceStorm(),
 	tornado: SVGIcons.tornado(),
-	invincible: SVGIcons.invincibility()
+	invincible: SVGIcons.invincibility(),
 };
 
 const updateEffects = async () => {
@@ -73,8 +75,39 @@ const getEffectsValues = () => {
 		).checked,
 		fxInvincible: document.querySelector(
 			`.effects .invincible input[type=checkbox]`
-		).checked
+		).checked,
 	};
+};
+
+const levelAndRewards = async ({ params, location, collection }) => {
+	const rewards = await getPotentialStageRewards({ ...params, location });
+	const rewardUnits = [];
+	for (const [code, value] of Object.entries(rewards.bonus)) {
+		if (value.type !== 'char') continue;
+		const character = collection.find((x) => x.code === code);
+		rewardUnits.push({ ...value, code, character });
+	}
+	console.log({ rewardUnits, collection });
+	const isDoubleRow = rewardUnits.length > 3;
+	return `
+		<div class="level-name">${location?.name || ''}</div>
+		<div class="flex-spacer"></div>
+		<div class="rewards">
+			<div class="label">Possible Rewards</div>
+			<div class="reward-container${isDoubleRow ? ' doubleRow' : ''}">
+				${rewardUnits
+					.map(
+						(x) => `
+					<div data-code="${x.code}">
+						<img src="${x.character.image}" />
+					</div>	
+				`
+					)
+					.join('\n')}
+			</div>
+			<div class="reward-more">▸</div>
+		</div>
+	`;
 };
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -82,6 +115,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 		new URLSearchParams(window.location.search)
 	);
 	console.log({ params });
+	const collection = await getCollection();
 
 	//TODO: handle params when navigating back from next screen (or store game state & use)
 
@@ -103,14 +137,14 @@ document.addEventListener('DOMContentLoaded', async () => {
 		feathers: true,
 		gems: true,
 		coins: true,
-		friendPoints: false
+		friendPoints: false,
 	});
 
 	const titleConfig = {
 		_: 'title',
 		title: location?.title || 'Select Team',
 		visibility: 'visible',
-		back: '/pages/mainStage/index.html'
+		back: '/pages/mainStage/index.html',
 	};
 	if (params?.zone === 'friendBattle') {
 		titleConfig.title = 'FRIEND BATTLE';
@@ -126,14 +160,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 			</div>
 		`;
 	} else {
-		subHeader.innerHTML = `
-			<div class="level-name">${location?.name || ''}</div>
-			<div class="rewards">
-				<div class="label">Possible Rewards</div>
-				<div class="reward-icon"></div>
-				<div class="reward-more">▸</div>
-			</div>
-		`;
+		subHeader.innerHTML = await levelAndRewards({
+			params,
+			location,
+			collection,
+		});
 	}
 
 	const nextButton = document.querySelector('button.next-button');
@@ -143,7 +174,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 		const newParams = {
 			...params,
 			team,
-			...effects
+			...effects,
 		};
 		const queryString = new URLSearchParams(newParams).toString();
 		let nextPage = '/pages/game/selectHelp/index.html';

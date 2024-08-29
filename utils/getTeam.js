@@ -2,7 +2,7 @@ import { getCharacters } from '../user/characters.js';
 import { getTeams } from '../user/teams.js';
 import {
 	characterImageFromDef,
-	characterImageGetter
+	characterImageGetter,
 } from '../visuals/assets/character.js';
 
 const loadImage = async (url, flipHorizontal) => {

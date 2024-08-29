@@ -9,7 +9,7 @@ const stageMap = {
 	tundra1: './main/tundra1.js',
 	industrial1: './main/industrial1.js',
 	pantheon1: './main/pantheon1.js',
-	friendBattle1: './pvp/friendBattle1.js'
+	friendBattle1: './pvp/friendBattle1.js',
 };
 
 export const featherCost = {
@@ -23,7 +23,7 @@ export const featherCost = {
 	tundra1: 3,
 	industrial1: 3,
 	pantheon1: 4,
-	friendBattle: 1 //TODO: specialFeathers!
+	friendBattle: 1, //TODO: specialFeathers!
 };
 
 export const getStage = async (params) => {
@@ -46,7 +46,7 @@ export const getStageInfo = async (params) => {
 	const { state } = await stage.default();
 	return {
 		featherCost: featherCost[name] || featherCost[name + '1'],
-		...state
+		...state,
 	};
 };
 
@@ -73,16 +73,21 @@ function pickRandom(items = {}) {
 	return;
 }
 
-export const getStageRewards = async (params) => {
+export const getPotentialStageRewards = async (params) => {
 	const { zone, name: paramsName } = params;
 	const name = zone || paramsName;
 	const stagePath = stageMap[name] || stageMap[name + '1'];
 	if (!stagePath) return;
 
 	const stage = await import(stagePath);
-
 	const rewards = await stage.getRewards();
-	rewards.bonus = pickRandom(rewards.bonus);
 
+	return rewards;
+};
+
+export const getStageRewards = async (params) => {
+	const rewards = await getPotentialStageRewards(params);
+	if (!rewards) return;
+	rewards.bonus = pickRandom(rewards.bonus);
 	return rewards;
 };

@@ -19,7 +19,7 @@ const buildCollectionList = async (collected) => {
 
 const domLoaded = async () => {
 	const collected = await getCollection();
-	console.log(collected);
+	// console.log(collected);
 
 	window.parent.postMessage({
 		_: 'title',
