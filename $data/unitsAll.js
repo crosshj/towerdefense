@@ -665,4 +665,18 @@ export const unitsAll = {
 		defense: '892 - 6,380 - 15,516',
 		range: 50 * 10,
 	},
+
+	// https://rangers.lerico.net/en/ranger/u154e-manager
+	'u0001-5-rook': {
+		displayName: 'Master Rook',
+		element: 'Normal',
+		type: 'Intellegence',
+		rank: 5,
+		mineralCost: 900,
+		attack: '1,110 - 9,370 - 21,906',
+		hp: '10,710 - 89,711 - 209,684',
+		defense: '892 - 6,380 - 15,516',
+		// orig 0 - 0 - 0
+		range: 80 * 10,
+	},
 };
