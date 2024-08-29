@@ -11,7 +11,7 @@ body {
 }
 
 .background {
-	background: url(./bg.png);
+	background: url(./bg.svg);
 	background-size: 100% 100%;
 	position: absolute;
 	left: 0;
@@ -26,6 +26,14 @@ body {
 		width: 100%;
 		background: #202944;
 	}
+}
+
+.wipContainer {
+	width: 322px;
+	height: 89px;
+	font-size: 13px;
+	margin-top: -105px;
+	color: white;
 }
 
 .container {
@@ -43,6 +51,7 @@ body {
 	align-items: center;
 
 	.title {
+		display: none;
 		font-size: 32px;
 		margin-bottom: 1em;
 		color: yellow;
@@ -51,20 +60,21 @@ body {
 	}
 
 	.result {
-		margin-left: 35%;
+		margin-left: 88px;
 		margin-right: auto;
 
 		p {
 			margin: 0;
 		}
-		&.bonus {
+		/* &.bonus {
 			margin-top: 1em;
-		}
+		} */
 	}
 
 	.message {
 		margin-top: 28px;
 		opacity: 0.5;
+		color: white;
 	}
 }
 

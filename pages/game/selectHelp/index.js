@@ -52,7 +52,7 @@ const friendCardComponent = (friend) => `
 </div>
 `;
 
-const attachFriendsList = async ({ friends }) => {
+const attachFriendsList = async ({ friends, params }) => {
 	const friendsList = document.querySelector('.items-list');
 	const friendsListSort = document.querySelector(
 		'.filter-dropdown custom-select'
@@ -87,17 +87,23 @@ const attachFriendsList = async ({ friends }) => {
 
 	const handleFriendSelect = (event) => {
 		const { target: card } = event;
-		const friendOption = document.querySelector('.options .help .icon div');
 		const radioEl = card.querySelector('.radio');
 		if (radioEl.classList.contains('selected')) {
 			radioEl.classList.remove('selected');
 			friendOption.innerHTML = '';
+			params.friend = undefined;
 			return;
 		}
 		const allRadios = Array.from(friendsList.querySelectorAll('.radio'));
 		allRadios.forEach((x) => x.classList.remove('selected'));
 		radioEl.classList.add('selected');
-		friendOption.innerHTML = 'X';
+
+		const friendName = (
+			card.querySelector('.name')?.innerText || ''
+		).trim();
+		const friendOption = document.querySelector('.options .help .icon div');
+		friendOption.innerHTML = friendName[0];
+		params.friend = friendName;
 	};
 	friendsList.addEventListener('pointerup', handleFriendSelect);
 };
@@ -171,7 +177,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 	await attachNextButton({ location, params });
 
 	const friends = await getFriends();
-	await attachFriendsList({ friends });
+	await attachFriendsList({ params, friends });
 
 	window.parent.postMessage({
 		_: 'stats',
