@@ -87,7 +87,6 @@ const levelAndRewards = async ({ params, location, collection }) => {
 		const character = collection.find((x) => x.code === code);
 		rewardUnits.push({ ...value, code, character });
 	}
-	console.log({ rewardUnits, collection });
 	const isDoubleRow = rewardUnits.length > 3;
 	return `
 		<div class="level-name">${location?.name || ''}</div>
@@ -110,6 +109,25 @@ const levelAndRewards = async ({ params, location, collection }) => {
 	`;
 };
 
+const attachOptions = (options) => {
+	const auto = document.querySelector('.options .auto');
+	if (options.auto) {
+		auto.classList.add('selected');
+	}
+	auto.addEventListener('pointerup', () => {
+		auto.classList.toggle('selected');
+		options.auto = !options.auto;
+	});
+	const speedDouble = document.querySelector('.options .speedDouble');
+	if (options.speedDouble) {
+		speedDouble.classList.add('selected');
+	}
+	speedDouble.addEventListener('pointerup', () => {
+		speedDouble.classList.toggle('selected');
+		options.speedDouble = !options.speedDouble;
+	});
+};
+
 document.addEventListener('DOMContentLoaded', async () => {
 	const params = Object.fromEntries(
 		new URLSearchParams(window.location.search)
@@ -117,7 +135,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 	console.log({ params });
 	const collection = await getCollection();
 
-	//TODO: handle params when navigating back from next screen (or store game state & use)
+	const options = {};
+	attachOptions(options);
 
 	const selector = document.querySelector('.team-selector custom-select');
 	selector.addEventListener('change', updateTeamIcons);
@@ -173,6 +192,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 		const effects = getEffectsValues();
 		const newParams = {
 			...params,
+			...options,
 			team,
 			...effects,
 		};

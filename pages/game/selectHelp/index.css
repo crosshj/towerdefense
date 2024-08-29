@@ -374,7 +374,8 @@ button {
 	grid-row: 4;
 	grid-column: 1 / -1;
 	display: flex;
-	justify-content: space-around;
+	justify-content: center;
+	gap: 10px;
 	button {
 		background-color: #45ba45;
 		font-family: 'Passion One', sans-serif;
@@ -401,6 +402,45 @@ button {
 			margin-right: 15px;
 			color: yellow;
 			text-transform: none;
+		}
+	}
+	.options {
+		display: flex;
+		height: 45px;
+		background: #8facbd;
+		border: 1px solid;
+		border-radius: 10px;
+		box-sizing: border-box;
+		& > .disabled .icon svg {
+			fill: #5e8398;
+		}
+		.spacer {
+			width: 1px;
+			height: 100%;
+			background: black;
+		}
+		.help .icon {
+			padding: 7px;
+			& > div {
+				background: #5e8398;
+				height: 100%;
+				width: 100%;
+				border-radius: 50%;
+			}
+		}
+		.icon {
+			display: flex;
+			margin: auto;
+			height: 100%;
+			aspect-ratio: 1/1;
+			padding-block: 5px;
+			box-sizing: border-box;
+			border-radius: 50%;
+
+			svg {
+				fill: black;
+				margin-left: 5px;
+			}
 		}
 	}
 }

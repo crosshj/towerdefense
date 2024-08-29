@@ -6,6 +6,24 @@ import { animateOrb } from '/visuals/objects/orb.js';
 
 const versusGraphic = SVGIcons.stars6();
 
+const effectsIcons = {
+	fxMeteor: SVGIcons.meteor(),
+	fxIce: SVGIcons.iceStorm(),
+	fxTornado: SVGIcons.tornado(),
+	fxInvincible: SVGIcons.invincibility(),
+};
+
+const updateOptions = async (params) => {
+	for (const [k, v] of Object.entries(effectsIcons)) {
+		const container = document.querySelector(`.options .${k}`);
+		const icon = document.querySelector(`.options .${k} .icon`);
+		icon.innerHTML = v;
+		if (params[k] + '' === 'true') {
+			container.classList.remove('disabled');
+		}
+	}
+};
+
 const messageCardComponent = () => `
 <div class="item friend">
 	<div class="card message">
@@ -108,7 +126,7 @@ const attachNextButton = async ({ location, params }) => {
 		nextButton.classList.add('clicked');
 		window.parent.postMessage({
 			_: 'action',
-			minusFeathers: featherCost
+			minusFeathers: featherCost,
 		});
 		await animateOrb(
 			window.innerWidth / 2 + 60,
@@ -118,7 +136,7 @@ const attachNextButton = async ({ location, params }) => {
 		);
 
 		const newParams = {
-			...params
+			...params,
 			//TODO: friend
 		};
 		const queryString = new URLSearchParams(newParams).toString();
@@ -128,7 +146,7 @@ const attachNextButton = async ({ location, params }) => {
 		//TODO: not sure if this is entirely necessary, was seeing issues with stats flashin, though
 		window.parent.postMessage({
 			_: 'stats',
-			visibility: 'hidden'
+			visibility: 'hidden',
 		});
 	});
 };
@@ -138,6 +156,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 		new URLSearchParams(window.location.search)
 	);
 	console.log({ params });
+
+	updateOptions(params);
 
 	const locationMap = await getLocationMap();
 	const location = locationMap[params.zone];
@@ -155,7 +175,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 		feathers: true,
 		gems: true,
 		coins: true,
-		friendPoints: false
+		friendPoints: false,
 	});
 	window.parent.postMessage({
 		_: 'title',
@@ -163,7 +183,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 		visibility: 'visible',
 		back: `/pages/game/selectTeam/index.html?${new URLSearchParams(
 			params
-		).toString()}`
+		).toString()}`,
 	});
 
 	window.parent.postMessage({ _: 'loaded' });
