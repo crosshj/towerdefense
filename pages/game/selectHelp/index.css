@@ -409,7 +409,7 @@ button {
 		height: 45px;
 		background: #8facbd;
 		border: 1px solid;
-		border-radius: 10px;
+		border-radius: 12.5px;
 		box-sizing: border-box;
 		& > .disabled .icon svg {
 			fill: #5e8398;
@@ -426,6 +426,9 @@ button {
 				height: 100%;
 				width: 100%;
 				border-radius: 50%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
 			}
 		}
 		.icon {
@@ -436,6 +439,7 @@ button {
 			padding-block: 5px;
 			box-sizing: border-box;
 			border-radius: 50%;
+			/* background-color: yellow; */
 
 			svg {
 				fill: black;

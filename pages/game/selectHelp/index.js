@@ -87,14 +87,17 @@ const attachFriendsList = async ({ friends }) => {
 
 	const handleFriendSelect = (event) => {
 		const { target: card } = event;
+		const friendOption = document.querySelector('.options .help .icon div');
 		const radioEl = card.querySelector('.radio');
 		if (radioEl.classList.contains('selected')) {
 			radioEl.classList.remove('selected');
+			friendOption.innerHTML = '';
 			return;
 		}
 		const allRadios = Array.from(friendsList.querySelectorAll('.radio'));
 		allRadios.forEach((x) => x.classList.remove('selected'));
 		radioEl.classList.add('selected');
+		friendOption.innerHTML = 'X';
 	};
 	friendsList.addEventListener('pointerup', handleFriendSelect);
 };
