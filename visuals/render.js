@@ -16,14 +16,26 @@ const initDom = (state) => {
 	const ctx = canvas.getContext('2d', {
 		antialias: false,
 		depth: false,
-		desynchronized: true
+		desynchronized: true,
 	});
 	const gif =
 		state.record &&
 		new GifMaker({
-			...state.field
+			...state.field,
 		});
 	ctx.imageSmoothingEnabled = true;
+
+	let isDragging = false;
+	dom.addEventListener('pointerdown', () => {
+		isDragging = true;
+	});
+	dom.addEventListener('pointermove', () => {
+		console.log('dragging');
+	});
+	dom.addEventListener('pointerup', () => {
+		isDragging = false;
+	});
+
 	return { ctx, gif };
 };
 
@@ -165,7 +177,7 @@ const render = (state, ctx, gif, controls) => {
 		status,
 		hp,
 		hpMax,
-		type
+		type,
 	}) => {
 		const [width, height] = dims;
 		const [x, y] = [center(centerX, width), bottom(height)];
@@ -175,7 +187,7 @@ const render = (state, ctx, gif, controls) => {
 			y: y - 20,
 			width: width / SCALAR(1),
 			hp,
-			hpMax
+			hpMax,
 		});
 		shadow({ x: x - 40, y: y + 8, width: width + 80, height });
 
@@ -233,7 +245,7 @@ const render = (state, ctx, gif, controls) => {
 			bottom,
 			shadow,
 			ctx,
-			healthBar
+			healthBar,
 		});
 
 	ctx.clearRect(0, 0, fieldWidth, fieldHeight);
@@ -299,7 +311,7 @@ export default class Render {
 			pauseScreen,
 			showTicker: false, // for debugging
 			showScreenInfo: false, // for debugging
-			showEffects: true //TODO: this depends on statee, ie. what effects are used in game setup
+			showEffects: true, //TODO: this depends on statee, ie. what effects are used in game setup
 		});
 		return () => tryRender(state, ctx, gif, controls);
 	}
