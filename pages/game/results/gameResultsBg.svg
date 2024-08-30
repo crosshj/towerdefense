@@ -5,9 +5,9 @@
       <stop offset="1" style="stop-color: rgb(84, 174, 245);"></stop>
     </radialGradient>
     <radialGradient gradientUnits="userSpaceOnUse" cx="457.112" cy="335.865" r="460" id="gradient-0" gradientTransform="matrix(0.995711, 0, 0, 0.21304, 3.731837, 272.395255)">
-      <stop offset="0" style="stop-color: rgb(144, 121, 84);"></stop>
-      <stop offset="0.427" style="stop-color: rgb(105, 83, 47);"></stop>
-      <stop offset="1" style="stop-color: rgb(33, 13, 13);"></stop>
+      <stop offset="0" style="stop-color: hsl(35 41% 51% / 1);"/>
+      <stop offset="0.8" style="stop-color: hsl(35 39% 9% / 1);"/>
+      <stop offset="1" style="stop-color: hsl(35 41% 6% / 1);"/>
     </radialGradient>
     <linearGradient gradientUnits="userSpaceOnUse" x1="454.849" y1="161.424" x2="454.849" y2="330.829" id="gradient-2" gradientTransform="matrix(0.999725, -0.023465, 0.012065, 0.514057, -3.866374, 171.436848)">
       <stop offset="0" style="stop-color: rgb(27.059% 54.902% 14.51%)"></stop>
