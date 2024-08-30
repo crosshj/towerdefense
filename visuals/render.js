@@ -26,11 +26,18 @@ const initDom = (state) => {
 	ctx.imageSmoothingEnabled = true;
 
 	let isDragging = false;
-	dom.addEventListener('pointerdown', () => {
+	let startX = 0;
+	let scrollStart = 0;
+	dom.addEventListener('pointerdown', (e) => {
 		isDragging = true;
+		startX = e.pageX - dom.offsetLeft;
+		scrollStart = dom.scrollLeft;
 	});
-	dom.addEventListener('pointermove', () => {
-		console.log('dragging');
+	dom.addEventListener('pointermove', (e) => {
+		if (!isDragging) return;
+		const x = e.pageX - dom.offsetLeft;
+		const scrollAmount = x - startX;
+		dom.scrollLeft = scrollStart - scrollAmount;
 	});
 	dom.addEventListener('pointerup', () => {
 		isDragging = false;
