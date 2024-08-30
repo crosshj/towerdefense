@@ -679,4 +679,18 @@ export const unitsAll = {
 		// orig 0 - 0 - 0
 		range: 80 * 10,
 	},
+
+	// https://rangers.lerico.net/en/ranger/u123-cony
+	'u0001-5-rookia': {
+		displayName: 'Rookia',
+		element: 'Normal',
+		type: 'Intellegence',
+		rank: 4,
+		mineralCost: 900,
+		attack: '647 - 4,665 - 11,349',
+		hp: '1,131 - 8,089 - 19,672',
+		defense: '892 - 6,380 - 15,516',
+		// orig 0 - 0 - 0
+		range: 60 * 10,
+	},
 };
