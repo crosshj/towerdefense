@@ -22,7 +22,7 @@ const isWIP = [
 	'friends',
 	'pass',
 	'giftbox',
-	'settings'
+	'settings',
 ];
 
 const clickColorMap = {
@@ -45,7 +45,7 @@ const clickColorMap = {
 	'#b2e51a': '/modals/character/detail.html?sub=b&slot=2',
 	'#e59b1a': '/modals/character/detail.html?sub=b&slot=3',
 	'#e5541a': '/modals/character/detail.html?sub=b&slot=4',
-	'#e51a3f': '/modals/character/detail.html?sub=b&slot=5'
+	'#e51a3f': '/modals/character/detail.html?sub=b&slot=5',
 };
 
 const navigation = () => `
@@ -170,7 +170,7 @@ const drawControls = async () => {
 	`;
 	statsRequest({
 		friendPoints: false,
-		menu: true
+		menu: true,
 	});
 
 	const setUserImage = () => {
@@ -188,7 +188,7 @@ const drawControls = async () => {
 						'master',
 						'smaster',
 						'umaster',
-						'legend'
+						'legend',
 					].includes(x)
 			)
 			.filter((x) => x !== 'clickable')
@@ -205,7 +205,7 @@ const drawControls = async () => {
 		}
 		window.parent.postMessage({
 			_: 'navigate',
-			src: url
+			src: url,
 		});
 	});
 
@@ -306,7 +306,7 @@ const setup = async () => {
 	window.parent.postMessage({
 		_: 'title',
 		title: '',
-		visibility: 'hidden'
+		visibility: 'hidden',
 	});
 
 	let raidTeam = await getTeam('Team 1');
@@ -329,12 +329,12 @@ const setup = async () => {
 
 			window.parent.postMessage({
 				_: 'navigate',
-				src: which
+				src: which,
 			});
 		},
 		onDraw: ({ ctx, width, height }) => {
 			drawTeam({ ctx, width, height, raidTeam });
-		}
+		},
 	});
 
 	await drawControls();
@@ -357,6 +357,7 @@ document.addEventListener('DOMContentLoaded', setup);
 const windowFocused = (e) => {
 	// console.log(`this iframe just got focus: ${e.clientX} - ${e.clientY}`);
 	const canvasEl = document.body.querySelector('canvas');
+	if (!canvasEl) return;
 	canvasEl.focus();
 	canvasEl.dispatchEvent(
 		new MouseEvent('click', { bubbles: true, cancelable: true })
