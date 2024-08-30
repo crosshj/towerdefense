@@ -59,7 +59,7 @@ const assets = [
 	//pages
 	'/pages/collect/bg.png',
 	'/pages/friends/bg.png',
-	'/pages/game/results/bg.svg',
+	'/pages/game/results/gameResultsBg.svg',
 	'/pages/game/selectHelp/bg.png',
 	'/pages/game/selectTeam/bg.png',
 	'/pages/home/background.png',
