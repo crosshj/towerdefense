@@ -3,13 +3,17 @@ import { calculateCombineResults } from '../../../utils/units.js';
 import { characterImageGetter } from '../../../visuals/assets/character.js';
 import { getCurrentCharCache } from '../../../utils/cache.js';
 import { attachAllCharacters, attachControls } from '../../my-team/allChars.js';
+import { getTeams } from '../../../user/teams.js';
 
 const pageTitle = 'LEVEL UP';
 
-const getMaterials = async ({ currentChar }) => {
+const getMaterials = async ({ currentChar, teams = {} }) => {
+	const teamsString = JSON.stringify(teams);
 	const _characters = await getCharacters(true /* hydrate */);
 	const characters = _characters.filter((x) => {
-		return x.id !== currentChar.id && !x.locked;
+		return (
+			x.id !== currentChar.id && !x.locked && !teamsString.includes(x.id)
+		);
 	});
 	return {
 		all: _characters,
@@ -140,7 +144,8 @@ const setup = async () => {
 
 	const controls = attachControls();
 
-	const charactersInfo = await getMaterials({ currentChar });
+	const teams = await getTeams();
+	const charactersInfo = await getMaterials({ teams, currentChar });
 	characters = charactersInfo.filtered;
 
 	let dragging;
