@@ -356,7 +356,6 @@ const setup = async () => {
 			return;
 		}
 		if (_ === 'broadcastUserIconUpdate') {
-			console.log('home knows user icon updated');
 			await updateUserImage();
 			return;
 		}
