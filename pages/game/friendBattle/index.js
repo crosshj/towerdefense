@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 		_: 'title',
 		title: 'FRIEND BATTLE',
 		visibility: 'visible',
-		back: '/pages/pvp/'
+		back: '/pages/pvp/',
 	});
 	const args = {
 		feathersSpecial: true,
@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 		gems: true,
 		coins: true,
 		friendPoints: false,
-		purpleGems: true
+		purpleGems: true,
 	};
 	window.parent.postMessage({ _: 'stats', ...args });
 

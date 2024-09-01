@@ -8,7 +8,7 @@ const stageDetails = [
 	{ name: 'Sakura', color: '#FFB6C1' }, // LightPink
 	{ name: 'Coastal', color: '#00BFFF' }, // DeepSkyBlue
 	{ name: 'Forest Path', color: '#228B22' }, // ForestGreen
-	{ name: 'Meadow', color: '#98FB98' } // PaleGreen
+	{ name: 'Meadow', color: '#98FB98' }, // PaleGreen
 ];
 
 // String representation of path with reduced points
@@ -260,7 +260,7 @@ function parseStagesString(str) {
 				x: parseFloat(x),
 				y: parseFloat(y),
 				stageNumber: parseInt(stageNumber),
-				isBoss: parseInt(stageNumber) % 10 === 0
+				isBoss: parseInt(stageNumber) % 10 === 0,
 			};
 		});
 	const cloneStages = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -273,7 +273,7 @@ function parseStagesString(str) {
 				x: j % 2 ? 2 * axis - stage.x : stage.x,
 				y: stage.y - 425.5 * j,
 				stageNumber: stage.stageNumber + 10 * j,
-				bossStage: false
+				bossStage: false,
 			});
 		}
 	}

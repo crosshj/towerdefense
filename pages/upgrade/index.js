@@ -2,13 +2,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 	window.parent.postMessage({
 		_: 'title',
 		title: 'UPGRADE',
-		visibility: 'visible'
+		visibility: 'visible',
 	});
 	const args = {
 		feathers: false,
 		gems: true,
 		coins: true,
-		friendPoints: false
+		friendPoints: false,
 	};
 	window.parent.postMessage({ _: 'stats', ...args });
 

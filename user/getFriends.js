@@ -23,7 +23,7 @@ const PlayerToFriend = (player) => {
 		...dataRest,
 		displayName: player.name,
 		level: levelInfo.level,
-		grade: levelInfo.gradeFriendly[0]
+		grade: levelInfo.gradeFriendly[0],
 	};
 };
 

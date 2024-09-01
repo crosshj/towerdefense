@@ -18,7 +18,7 @@ const attachNextButton = async ({ location, params }) => {
 		nextButton.classList.add('clicked');
 		window.parent.postMessage({
 			_: 'action',
-			minusFeathers: featherCost
+			minusFeathers: featherCost,
 		});
 		await animateOrb(
 			window.innerWidth / 2 + 60,
@@ -28,7 +28,7 @@ const attachNextButton = async ({ location, params }) => {
 		);
 
 		const newParams = {
-			...params
+			...params,
 			//TODO: friend
 		};
 		const queryString = new URLSearchParams(newParams).toString();
@@ -38,7 +38,7 @@ const attachNextButton = async ({ location, params }) => {
 		//TODO: not sure if this is entirely necessary, was seeing issues with stats flashin, though
 		window.parent.postMessage({
 			_: 'stats',
-			visibility: 'hidden'
+			visibility: 'hidden',
 		});
 	});
 };
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 	}
 	await attachNextButton({
 		location,
-		params
+		params,
 	});
 
 	window.parent.postMessage({
@@ -64,14 +64,14 @@ document.addEventListener('DOMContentLoaded', async () => {
 		feathers: true,
 		gems: true,
 		coins: true,
-		friendPoints: false
+		friendPoints: false,
 	});
 	const queryString = new URLSearchParams(params).toString();
 	window.parent.postMessage({
 		_: 'title',
 		title: 'FRIEND BATTLE',
 		visibility: 'visible',
-		back: `/pages/game/selectTeam/index.html?${queryString}`
+		back: `/pages/game/selectTeam/index.html?${queryString}`,
 	});
 
 	window.parent.postMessage({ _: 'loaded' });

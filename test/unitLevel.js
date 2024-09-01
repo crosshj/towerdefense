@@ -43,7 +43,7 @@ describe('Unit Level', (it) => {
 		const result = parseUpgradeChange(fixedScenario1);
 		const { newTeams, prevTeams, prevChars, newChars } = {
 			...result,
-			...fixedScenario1
+			...fixedScenario1,
 		};
 		const arrToObj = (a, o) => ({ ...a, [o.id]: o });
 		const newCharsMap = newChars.reduce(arrToObj, {});
@@ -65,7 +65,7 @@ describe('Unit Level', (it) => {
 			misses.push({
 				i,
 				prev: flatMappedPrevTeams[i],
-				new: flatMappedNewTeams[i]
+				new: flatMappedNewTeams[i],
 			});
 		}
 		misses.length && console.log({ misses });

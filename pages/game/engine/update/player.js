@@ -28,5 +28,5 @@ const updateMineral = (state) => {
 export default {
 	chargeMineral,
 	chargeMissile,
-	updateMineral
+	updateMineral,
 };

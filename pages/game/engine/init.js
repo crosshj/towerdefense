@@ -61,7 +61,7 @@ export const startGame = async ({ menu, params, gameOver }) => {
 
 	let bgMusic = {
 		start: () => {},
-		stop: () => {}
+		stop: () => {},
 	};
 	if (state?.sounds?.background) {
 		const { background: bgMusicName } = state.sounds;
@@ -116,7 +116,7 @@ export const startGame = async ({ menu, params, gameOver }) => {
 		highPriority,
 		gameLoop,
 		render,
-		onGameOver
+		onGameOver,
 	});
 	engine.start();
 };

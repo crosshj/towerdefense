@@ -2,7 +2,7 @@ import { getAnimateable } from '/vendor/DragonBones/Animateable.js';
 import {
 	hydrateCharacters,
 	listAvailableAnimations,
-	listAvailableUnits
+	listAvailableUnits,
 } from '../../utils/units.js';
 
 const animationControls = {};
@@ -21,19 +21,19 @@ const characterStats = async (character) => {
 		{
 			id: 'test-test-test',
 			experience: 0,
-			code: character
-		},
-		{
-			id: 'test-test-test',
-			experience: 99999999999999999,
-			code: character
+			code: character,
 		},
 		{
 			id: 'test-test-test',
 			experience: 99999999999999999,
 			code: character,
-			uncappedLevel: 4
-		}
+		},
+		{
+			id: 'test-test-test',
+			experience: 99999999999999999,
+			code: character,
+			uncappedLevel: 4,
+		},
 	]);
 	console.log({ minHydrated, maxHydrated, uncappedMax });
 
@@ -77,7 +77,7 @@ const characterStats = async (character) => {
 				'professorPoints',
 				'levelNextPercent',
 				'type',
-				'uncappedLevel'
+				'uncappedLevel',
 			].includes(x[0]);
 		})
 		.sort((a, b) => {
@@ -100,7 +100,7 @@ const characterStats = async (character) => {
 		levelHTML,
 		attackHTML,
 		hpHTML,
-		defenseHTML
+		defenseHTML,
 		//minHydratedHTML
 	].join('');
 };
@@ -122,7 +122,7 @@ const switchCharacter = async ({ character, animation: animName }) => {
 		canvas,
 		skeleton,
 		atlas,
-		texture
+		texture,
 	});
 	updateThumbnail({ animation });
 
@@ -172,8 +172,8 @@ const updateCharactersList = async ({ selected = 0, units } = {}) => {
 		.map(
 			(x, i) => `
         <option ${i === selected ? 'selected' : ''} value=${x.code}>${
-				i + ' - ' + x.displayName
-			}</option>
+			i + ' - ' + x.displayName
+		}</option>
     `
 		)
 		.reverse();

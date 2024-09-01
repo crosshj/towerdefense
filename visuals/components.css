@@ -60,7 +60,9 @@ input:checked + .slider:before {
 	background-color: var(--checked-fg);
 }
 input:focus + .slider {
-	box-shadow: 0 0 1px var(--focus), inset 0 5px 5px 0px #0008;
+	box-shadow:
+		0 0 1px var(--focus),
+		inset 0 5px 5px 0px #0008;
 }
 
 input:checked + .slider:before {

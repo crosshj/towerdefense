@@ -6,8 +6,8 @@ export function expect(actual) {
 		not: {
 			toBe(expected) {
 				return actual !== expected;
-			}
-		}
+			},
+		},
 	};
 }
 
@@ -18,7 +18,7 @@ export function it(description, testFunction) {
 		result,
 		skip: false,
 		todo: false,
-		only: false
+		only: false,
 	};
 }
 
@@ -28,7 +28,7 @@ it.todo = function (description) {
 		result: false,
 		todo: true,
 		skip: false,
-		only: false
+		only: false,
 	};
 };
 
@@ -38,7 +38,7 @@ it.skip = function (description, testFunction) {
 		result: undefined,
 		skip: true,
 		todo: false,
-		only: false
+		only: false,
 	};
 };
 
@@ -48,7 +48,7 @@ it.only = function (description, testFunction) {
 		testFunction,
 		only: true,
 		skip: false,
-		todo: false
+		todo: false,
 	};
 };
 

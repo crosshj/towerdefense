@@ -28,7 +28,7 @@ const saveTeam = async ({ teams }) => {
 			b: teamSlots
 		};
 	await setTeams({
-		[selected]: newTeam
+		[selected]: newTeam,
 	});
 	teams[selected] = newTeam;
 };
@@ -88,13 +88,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 	window.parent.postMessage({
 		_: 'title',
 		title: 'TEAM',
-		visibility: 'visible'
+		visibility: 'visible',
 	});
 	const args = {
 		feathers: false,
 		gems: true,
 		coins: true,
-		friendPoints: false
+		friendPoints: false,
 	};
 	window.parent.postMessage({ _: 'stats', ...args });
 
@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 	const current = teams[selectedTeamEl.value]?.a;
 	const all = [
 		...teams[selectedTeamEl.value].a,
-		...teams[selectedTeamEl.value].b
+		...teams[selectedTeamEl.value].b,
 	];
 
 	//total
@@ -135,7 +135,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 		isUsed,
 		getCharImage,
 		dragStart,
-		dragEnd
+		dragEnd,
 	});
 	controls.onSort((sortBy) => {
 		attachAllCharacters({
@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 			isUsed,
 			getCharImage,
 			dragStart,
-			dragEnd
+			dragEnd,
 		});
 	});
 	// listens for changes to characters and updates raidTeam
@@ -158,7 +158,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 				isUsed,
 				getCharImage,
 				dragStart,
-				dragEnd
+				dragEnd,
 			});
 			return;
 		}
@@ -191,11 +191,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 			const character = characters.find((x) => x.id === slot.dataset.id);
 			setCurrentCharCache({
 				...character,
-				imageUri: getCharImage(character)
+				imageUri: getCharImage(character),
 			});
 			window.parent.postMessage({
 				_: 'navigate',
-				src
+				src,
 			});
 		});
 	});
@@ -218,7 +218,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 		const droppedOn = document.elementFromPoint(e.clientX, e.clientY);
 		drop({
 			preventDefault: () => {},
-			target: droppedOn
+			target: droppedOn,
 		});
 	}
 	function dragOver(e) {
@@ -248,12 +248,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 		slots,
 		teams,
 		characters,
-		getCharImage
+		getCharImage,
 	});
 
 	updateCharacters = characterUpdater({
 		teams,
-		characters
+		characters,
 	});
 
 	document.body.addEventListener('pointerup', (event) => {
@@ -263,7 +263,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 			// window.history.back();
 			window.parent.postMessage({
 				_: 'navigate',
-				src: params.back
+				src: params.back,
 			});
 		}
 	});

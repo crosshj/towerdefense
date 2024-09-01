@@ -48,7 +48,7 @@ async function storeToken(token) {
 			if (!db.objectStoreNames.contains('tokens')) {
 				db.createObjectStore('tokens');
 			}
-		}
+		},
 	});
 	const tx = db.transaction('tokens', 'readwrite');
 	const store = tx.objectStore('tokens');
@@ -62,7 +62,7 @@ async function getToken() {
 			if (!db.objectStoreNames.contains('tokens')) {
 				db.createObjectStore('tokens');
 			}
-		}
+		},
 	});
 	const tx = db.transaction('tokens', 'readonly');
 	const store = tx.objectStore('tokens');
@@ -81,14 +81,14 @@ async function getToken() {
 const updateAPIUser = async (updatedUser) => {
 	if (typeof updatedUser?.data !== 'object') {
 		return {
-			error: 'unable to update user user.data'
+			error: 'unable to update user user.data',
 		};
 	}
 
 	const token = await getToken();
 	if (!token) {
 		return {
-			error: 'unable to update user without token stored'
+			error: 'unable to update user without token stored',
 		};
 	}
 
@@ -96,12 +96,12 @@ const updateAPIUser = async (updatedUser) => {
 	const opts = {
 		method: 'POST',
 		headers: {
-			'Content-Type': 'application/json'
+			'Content-Type': 'application/json',
 		},
 		body: JSON.stringify({
 			...(updatedUser?.data || {}),
-			token
-		})
+			token,
+		}),
 	};
 	let error;
 	const apiUser = await fetch(apiUrl, opts).catch((e) => {
@@ -117,16 +117,16 @@ const getAPIUser = async () => {
 	const token = await getToken();
 	if (!token) {
 		return {
-			error: 'unable to get user without token stored'
+			error: 'unable to get user without token stored',
 		};
 	}
 	const apiUrl = 'https://datamosh.vercel.app/api/teedee/players/getByToken';
 	const opts = {
 		method: 'POST',
 		headers: {
-			'Content-Type': 'application/json'
+			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify({ token })
+		body: JSON.stringify({ token }),
 	};
 	let error;
 	const apiUser = await fetch(apiUrl, opts)
@@ -329,7 +329,7 @@ export const updateCachedUser = async (user, _response) => {
 	const newResponse = new Response(JSON.stringify(user), {
 		status: response.status,
 		statusText: response.statusText,
-		headers: response.headers
+		headers: response.headers,
 	});
 
 	// Update the cache with the new response
@@ -360,7 +360,7 @@ export const updateCachedUserFromNetwork = async (request) => {
 	const modifiedResponse = new Response(JSON.stringify(modifiedBody), {
 		status: networkResponse.status,
 		statusText: networkResponse.statusText,
-		headers: networkResponse.headers
+		headers: networkResponse.headers,
 	});
 
 	// Cache the response (if needed)
@@ -404,10 +404,10 @@ export async function handleSetByToken(request) {
 			new Request(request, {
 				body: JSON.stringify({
 					...(modifiedBody?.data || {}),
-					token
+					token,
 				}),
 				method: request.method,
-				headers: request.headers
+				headers: request.headers,
 			})
 		);
 		await validateResponse(networkResponse);
@@ -426,7 +426,7 @@ export async function handleSetByToken(request) {
 	const modifiedResponse = new Response(JSON.stringify(responseClone), {
 		status: networkResponse.status,
 		statusText: networkResponse.statusText,
-		headers: networkResponse.headers
+		headers: networkResponse.headers,
 	});
 
 	// Invalidate the cache for the `getByToken` endpoint
@@ -463,7 +463,7 @@ export const handleFeathersMoxPush = async (data) => {
 	const feathersNotification = {
 		title: 'Feathers Maxed',
 		body: "Let's go!",
-		tag: 'teedee-feathers-max'
+		tag: 'teedee-feathers-max',
 		//icon: 'assets/feathersMaxedIcon.png' //TODO: make this icon and use it?
 	};
 	return feathersNotification;

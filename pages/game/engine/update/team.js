@@ -131,5 +131,5 @@ export default {
 	spawnTeam,
 	targetOpponents,
 	attackOpponents,
-	updateDeployedTicks
+	updateDeployedTicks,
 };

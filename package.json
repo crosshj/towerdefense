@@ -8,11 +8,13 @@
 	},
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"watch": "ws -c .server/lws.config.mjs"
+		"watch": "ws -c .server/lws.config.mjs",
+		"pretty": "prettier --write \"./**/*.{js,mjs,json,html,css,svg}\""
 	},
 	"author": "",
 	"license": "ISC",
 	"devDependencies": {
-		"local-web-server": "5.3.3"
+		"local-web-server": "5.3.3",
+		"prettier": "^3.3.3"
 	}
 }

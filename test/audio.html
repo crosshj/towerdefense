@@ -23,7 +23,7 @@
 	<script type="module">
 		import {
 			Howler,
-			Howl
+			Howl,
 		} from 'https://cdn.jsdelivr.net/npm/howler@2.2.4/+esm';
 
 		var sound = new Howl({
@@ -33,7 +33,7 @@
 			preload: true,
 			autoplay: true,
 			loop: true,
-			paused: true
+			paused: true,
 		});
 		sound.play();
 		sound.fade(0, 1, 4000);
@@ -61,8 +61,8 @@
 				one: [8298, 450, false],
 				two: [10087, 350, false],
 				three: [16169, 210, false],
-				click: [31331, 20, false]
-			}
+				click: [31331, 20, false],
+			},
 		});
 		window.punch = (which) => punches.play(which);
 	</script>

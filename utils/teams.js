@@ -4,7 +4,7 @@ const allTeamNames = [
 	'Team 3',
 	'Team 4',
 	'Team 5',
-	'Defense'
+	'Defense',
 ];
 
 export const flattenTeams = (teams) => {

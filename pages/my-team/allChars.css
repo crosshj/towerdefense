@@ -358,7 +358,9 @@
 					.level {
 						padding-bottom: 3px;
 						margin-bottom: 4px;
-						box-shadow: 0 1px #0006, 0 2px #fff2;
+						box-shadow:
+							0 1px #0006,
+							0 2px #fff2;
 					}
 					.mineral-icon {
 						/* overflow: hidden; */

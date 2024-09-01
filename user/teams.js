@@ -3,7 +3,7 @@ import {
 	decompressTeams,
 	decompressChars,
 	compressTeams,
-	compressChars
+	compressChars,
 } from '../utils/compress.js';
 import { getUserFromAPI, updateUserFromAPI } from './user.js';
 import { getCharacters } from './characters.js';
@@ -119,7 +119,7 @@ const getValue = () => {
 	try {
 		return {
 			...clone(defaultValue),
-			...JSON.parse(lsValue)
+			...JSON.parse(lsValue),
 		};
 	} catch (e) {
 		return clone(defaultValue);
@@ -146,7 +146,7 @@ export const setTeams = async (newValue) => {
 		value = {
 			...clone(defaultValue),
 			...JSON.parse(lsValue),
-			...newValue
+			...newValue,
 		};
 	} catch (e) {}
 
@@ -154,7 +154,7 @@ export const setTeams = async (newValue) => {
 	const characters = await getCharacters();
 	await updateUserFromAPI({
 		...(apiUser?.data || {}),
-		teams: compressTeams(value, characters)
+		teams: compressTeams(value, characters),
 		//characters: compressChars(characters)
 	});
 

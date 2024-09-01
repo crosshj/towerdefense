@@ -3,7 +3,7 @@ import { sellCharacters } from '../../user/characters.js';
 import { calculateSellValue } from '../../utils/units.js';
 
 const icons = {
-	loading: SVGIcons.animatedSpinner()
+	loading: SVGIcons.animatedSpinner(),
 };
 
 const sellUnits = async ({ units, elements }) => {
@@ -12,13 +12,13 @@ const sellUnits = async ({ units, elements }) => {
 
 	await sellCharacters(units);
 	window.parent.postMessage({
-		_: 'broadcastCharactersUpdate'
+		_: 'broadcastCharactersUpdate',
 	});
 	window.parent.postMessage({
-		_: 'statsRefresh'
+		_: 'statsRefresh',
 	});
 	window.parent.postMessage({
-		_: 'broadcastSaleComplete'
+		_: 'broadcastSaleComplete',
 	});
 
 	elements.loading.classList.add('hidden');
@@ -33,7 +33,7 @@ const getElements = () => ({
 	cancelSellButton: document.querySelector('button.cancelSell'),
 	confirmContainer: document.querySelector('.confirmContainer'),
 	success: document.querySelector('.success'),
-	successButton: document.querySelector('.success button')
+	successButton: document.querySelector('.success button'),
 });
 
 const domLoaded = async () => {
@@ -51,10 +51,10 @@ const domLoaded = async () => {
 	elements.confirmAmount.innerHTML = amount;
 	elements.cancelSellButton.addEventListener('pointerup', () => {
 		window.parent.postMessage({
-			_: 'broadcastSaleCanceled'
+			_: 'broadcastSaleCanceled',
 		});
 		window.parent.postMessage({
-			_: 'navigate'
+			_: 'navigate',
 		});
 	});
 	elements.confirmSellButton.addEventListener('pointerup', () => {
@@ -62,7 +62,7 @@ const domLoaded = async () => {
 	});
 	elements.successButton.addEventListener('pointerup', () => {
 		window.parent.postMessage({
-			_: 'navigate'
+			_: 'navigate',
 		});
 	});
 

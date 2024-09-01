@@ -4,13 +4,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 	window.parent.postMessage({
 		_: 'title',
 		title: 'MISSION & PASS',
-		visibility: 'visible'
+		visibility: 'visible',
 	});
 	const args = {
 		feathers: false,
 		gems: true,
 		coins: false,
-		friendPoints: false
+		friendPoints: false,
 	};
 	window.parent.postMessage({ _: 'stats', ...args });
 

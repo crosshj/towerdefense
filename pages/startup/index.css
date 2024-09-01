@@ -54,7 +54,9 @@ button {
 		color: white;
 		border: 0;
 		font-weight: 700;
-		box-shadow: 0 6px 0px 0px #087019, inset 0 3px #fff4;
+		box-shadow:
+			0 6px 0px 0px #087019,
+			inset 0 3px #fff4;
 	}
 	&.secondary {
 		border: 0;

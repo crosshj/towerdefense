@@ -15,12 +15,12 @@ const setup = async () => {
 		feathers: false,
 		gems: true,
 		coins: false,
-		friendPoints: false
+		friendPoints: false,
 	});
 	window.parent.postMessage({
 		_: 'title',
 		title: pageTitle,
-		visibility: 'visible'
+		visibility: 'visible',
 	});
 
 	window.parent.postMessage({ _: 'loaded' });

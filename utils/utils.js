@@ -35,7 +35,7 @@ export const unNest = (root, path, ancestors = {}) => {
 			for (var i = 0, len = thisParent.length; i < len; i++) {
 				results.push({
 					...ancestors,
-					[singular || _path[0]]: thisParent[i]
+					[singular || _path[0]]: thisParent[i],
 				});
 			}
 			return results;
@@ -45,7 +45,7 @@ export const unNest = (root, path, ancestors = {}) => {
 			results.push(
 				unNest(thisParent[i], _path.slice(1).join('/'), {
 					...ancestors,
-					[singular || _path[0]]: thisParent[i]
+					[singular || _path[0]]: thisParent[i],
 				})
 			);
 		}
@@ -65,7 +65,7 @@ export const colorShade = (col, amt) => {
 	[r, g, b] = [
 		parseInt(r, 16) + amt,
 		parseInt(g, 16) + amt,
-		parseInt(b, 16) + amt
+		parseInt(b, 16) + amt,
 	];
 
 	r = Math.max(Math.min(255, r), 0).toString(16);

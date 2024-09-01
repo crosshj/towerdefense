@@ -8,7 +8,7 @@ export async function registerPeriodicSync(registration) {
 		// periodic sync supported?
 		if ('periodicSync' in registration) {
 			const status = await navigator.permissions.query({
-				name: 'periodic-background-sync'
+				name: 'periodic-background-sync',
 			});
 
 			if (status.state !== 'granted') {
@@ -18,7 +18,7 @@ export async function registerPeriodicSync(registration) {
 			const tags = await registration.periodicSync.getTags();
 			if (!tags.includes('periodic-sync-tag')) {
 				await registration.periodicSync.register('periodic-sync-tag', {
-					minInterval: TEN_MINUTES
+					minInterval: TEN_MINUTES,
 				});
 			}
 			console.log('Periodic sync enabled!');
@@ -34,7 +34,7 @@ async function handleSyncTag(syncEvent) {
 	// in order to tell backend about this, need user token
 	showNotification({
 		title: 'Periodic Background Sync',
-		body: `Date: ${new Date().toISOString()}, Version: ${self._version}`
+		body: `Date: ${new Date().toISOString()}, Version: ${self._version}`,
 	});
 	return;
 }

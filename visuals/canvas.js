@@ -12,7 +12,7 @@ export const canvasHorizontal = async (args) => {
 	const ctx = canvas.getContext('2d', {
 		antialias: true,
 		depth: false,
-		desynchronized: true
+		desynchronized: true,
 	});
 	ctx.imageSmoothingEnabled = true;
 	ctx.imageSmoothingQuality = 'high';
@@ -27,7 +27,7 @@ export const canvasHorizontal = async (args) => {
 			clickMap,
 			clickHandle,
 			onDraw,
-			onScroll: args.onScroll
+			onScroll: args.onScroll,
 		});
 	}
 	return { canvas, ctx };
@@ -44,7 +44,7 @@ export const canvasVertical = async (args) => {
 		scrollBottom,
 		clickMap,
 		clickHandle,
-		onDraw
+		onDraw,
 	} = args;
 	const canvas = document.createElement('canvas');
 	canvas.width = width;
@@ -52,7 +52,7 @@ export const canvasVertical = async (args) => {
 	const ctx = canvas.getContext('2d', {
 		antialias: true,
 		depth: false,
-		desynchronized: true
+		desynchronized: true,
 	});
 	ctx.imageSmoothingEnabled = true;
 	ctx.imageSmoothingQuality = 'high';
@@ -68,7 +68,7 @@ export const canvasVertical = async (args) => {
 			clickHandle,
 			onDraw,
 			offsetY,
-			onScroll: args.onScroll
+			onScroll: args.onScroll,
 		});
 	}
 	return { canvas, ctx };

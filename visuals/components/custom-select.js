@@ -3,7 +3,7 @@ const $style = {
 	selectedBg: 'Canvas',
 	borderRadius: '0px',
 	hoverBgColor: 'ButtonFace',
-	disabledColor: '#ccc'
+	disabledColor: '#ccc',
 };
 
 const style = `

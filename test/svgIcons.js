@@ -11,7 +11,7 @@ const onLoaded = async () => {
 	const container = document.querySelector('.container');
 	const icons = Object.entries(SVGIcons).map(([name, getIcon]) => ({
 		name,
-		getIcon
+		getIcon,
 	}));
 	container.innerHTML = icons.map(IconGridItem).join('\n');
 };

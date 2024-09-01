@@ -41,13 +41,13 @@
 
 		window.parent.postMessage({
 			_: 'stats',
-			visibility: 'hidden'
+			visibility: 'hidden',
 		});
 		window.parent.postMessage({
 			_: 'title',
 			title: params.which,
 			back: params.back,
-			visibility: 'visible'
+			visibility: 'visible',
 		});
 
 		document.body.innerHTML = `

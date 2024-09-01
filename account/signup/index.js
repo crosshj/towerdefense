@@ -13,13 +13,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 				{
 					method: 'POST',
 					headers: {
-						'Content-Type': 'application/json'
+						'Content-Type': 'application/json',
 					},
 					body: JSON.stringify({
 						name: name,
 						email: email,
-						password: password
-					})
+						password: password,
+					}),
 				}
 			);
 
@@ -34,12 +34,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 	if (window.parent) {
 		window.parent.postMessage({
 			_: 'stats',
-			visibility: 'hidden'
+			visibility: 'hidden',
 		});
 		window.parent.postMessage({
 			_: 'title',
 			title: '',
-			visibility: 'hidden'
+			visibility: 'hidden',
 		});
 		window.parent.postMessage({ _: 'loaded' });
 	}

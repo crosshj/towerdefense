@@ -8,17 +8,17 @@ const TEN_MINUTES = 10 * 60 * 1000;
 const logJSONString = (obj) => console.log(JSON.stringify(obj, null, 2));
 const logTest = (user, modified) => {
 	const {
-		data: { feathersUpdate: modUpdate }
+		data: { feathersUpdate: modUpdate },
 	} = modified;
 	const {
-		data: { feathersUpdate: currUpdate }
+		data: { feathersUpdate: currUpdate },
 	} = user;
 	return logJSONString({
 		currDate: new Date().toISOString(),
 		currUpda: currUpdate,
 		currFeat: user.data.feathers,
 		modUpdat: modUpdate,
-		modFeath: modified.data.feathers
+		modFeath: modified.data.feathers,
 	});
 };
 
@@ -28,7 +28,7 @@ describe('SW: Feathers Modifier', (it) => {
 	// brings negative feathers to almost update, ie 99
 	it('should handle sampleUser1: near future', ({ expect }) => {
 		timemachine.config({
-			dateString: '2024-08-10T11:30Z'
+			dateString: '2024-08-10T11:30Z',
 		});
 		const user = sampleUser1;
 		const modified = feathersModifier(user);
@@ -40,7 +40,7 @@ describe('SW: Feathers Modifier', (it) => {
 	// brings negative feathers to almost update, ie 99
 	it('should handle sampleUser1: far future', ({ expect }) => {
 		timemachine.config({
-			dateString: '2025-01-01T01:00Z'
+			dateString: '2025-01-01T01:00Z',
 		});
 		const user = sampleUser1;
 		const modified = feathersModifier(user);
@@ -52,7 +52,7 @@ describe('SW: Feathers Modifier', (it) => {
 	// was maxed previously, now needs accumulate
 	it('should handle sampleUser2', ({ expect }) => {
 		timemachine.config({
-			dateString: '2024-08-09T02:00Z'
+			dateString: '2024-08-09T02:00Z',
 		});
 		const user = sampleUser2;
 		const modified = feathersModifier(user);
@@ -69,7 +69,7 @@ describe('SW: Feathers Modifier', (it) => {
 	// updateFeathers too far in the future, correct this
 	it('should handle sampleUser3', ({ expect }) => {
 		timemachine.config({
-			dateString: '2024-08-09T22:35:47.789Z'
+			dateString: '2024-08-09T22:35:47.789Z',
 		});
 		const user = sampleUser3;
 		const modified = feathersModifier(user);
@@ -90,8 +90,8 @@ describe('SW: Feathers Modifier', (it) => {
 			data: {
 				feathers: 40,
 				feathersMax: 45,
-				feathersUpdate: null
-			}
+				feathersUpdate: null,
+			},
 		};
 		const user = feathersModifier(initialUser);
 		return expect(user.data.feathersUpdate !== null).toBe(true);
@@ -104,8 +104,8 @@ describe('SW: Feathers Modifier', (it) => {
 				feathersMax: 45,
 				feathersUpdate: new Date(
 					Date.now() - 30 * 60 * 1000
-				).toISOString() // 30 minutes ago
-			}
+				).toISOString(), // 30 minutes ago
+			},
 		};
 		const modified = feathersModifier(user);
 		return expect(modified.data.feathers).toBe(44);
@@ -118,8 +118,8 @@ describe('SW: Feathers Modifier', (it) => {
 				feathersMax: 45,
 				feathersUpdate: new Date(
 					Date.now() - 30 * 60 * 1000
-				).toISOString() // 30 minutes ago
-			}
+				).toISOString(), // 30 minutes ago
+			},
 		};
 		const user = feathersModifier(initialUser);
 		return expect(user.data.feathers).toBe(45);
@@ -132,8 +132,8 @@ describe('SW: Feathers Modifier', (it) => {
 				feathersMax: 45,
 				feathersUpdate: new Date(
 					Date.now() - 30 * 60 * 1000
-				).toISOString() // 30 minutes ago
-			}
+				).toISOString(), // 30 minutes ago
+			},
 		};
 		const modified = feathersModifier(user);
 		return (
@@ -149,29 +149,29 @@ describe('SW: Feathers Modifier', (it) => {
 				feathersMax: 45,
 				feathersUpdate: new Date(
 					Date.now() - 30 * 60 * 1000
-				).toISOString() // 30 minutes ago
-			}
+				).toISOString(), // 30 minutes ago
+			},
 		};
 		const user = feathersModifier(initialUser);
 		return expect(user.data.feathers).toBe(45);
 	});
 
 	it('should initialize feathersUpdate to DO_NOT_UPDATE if already at max', ({
-		expect
+		expect,
 	}) => {
 		const initialUser = {
 			data: {
 				feathers: 45,
 				feathersMax: 45,
-				feathersUpdate: null
-			}
+				feathersUpdate: null,
+			},
 		};
 		const user = feathersModifier(initialUser);
 		return expect(user.data.feathersUpdate).toBe(-1);
 	});
 
 	it('should add no feathers if feathersUpdate is in the future', ({
-		expect
+		expect,
 	}) => {
 		const initialUser = {
 			data: {
@@ -179,29 +179,29 @@ describe('SW: Feathers Modifier', (it) => {
 				feathersMax: 45,
 				feathersUpdate: new Date(
 					Date.now() + 10 * 60 * 1000
-				).toISOString() // 10 minutes in the future
-			}
+				).toISOString(), // 10 minutes in the future
+			},
 		};
 		const user = feathersModifier(initialUser);
 		return expect(user.data.feathers).toBe(40);
 	});
 
 	it('should not change feathersUpdate if feathers are at max and already DO_NOT_UPDATE', ({
-		expect
+		expect,
 	}) => {
 		const initialUser = {
 			data: {
 				feathers: 45,
 				feathersMax: 45,
-				feathersUpdate: -1
-			}
+				feathersUpdate: -1,
+			},
 		};
 		const user = feathersModifier(initialUser);
 		return expect(user.data.feathersUpdate).toBe(-1);
 	});
 
 	it('should add correct number of feathers when multiple intervals have passed', ({
-		expect
+		expect,
 	}) => {
 		const user = {
 			data: {
@@ -209,8 +209,8 @@ describe('SW: Feathers Modifier', (it) => {
 				feathersMax: 45,
 				feathersUpdate: new Date(
 					Date.now() - 120 * 60 * 1000
-				).toISOString() // 120 minutes ago
-			}
+				).toISOString(), // 120 minutes ago
+			},
 		};
 		const modified = feathersModifier(user);
 		return expect(modified.data.feathers).toBe(43); // 12 feathers added, but should not exceed max
@@ -219,14 +219,14 @@ describe('SW: Feathers Modifier', (it) => {
 	it.todo('Error Handling Use Cases');
 
 	it('should handle cases with invalid feathersUpdate format gracefully', ({
-		expect
+		expect,
 	}) => {
 		const initialUser = {
 			data: {
 				feathers: 40,
 				feathersMax: 45,
-				feathersUpdate: 'invalid-date-format'
-			}
+				feathersUpdate: 'invalid-date-format',
+			},
 		};
 		const user = feathersModifier(initialUser);
 		return expect(user.data.feathersUpdate).not.toBe('invalid-date-format'); // feathersUpdate should be reset
@@ -239,8 +239,8 @@ describe('SW: Feathers Modifier', (it) => {
 				feathersMax: 45,
 				feathersUpdate: new Date(
 					Date.now() - 30 * 60 * 1000
-				).toISOString() // 30 minutes ago
-			}
+				).toISOString(), // 30 minutes ago
+			},
 		};
 		try {
 			feathersModifier(initialUser);
@@ -257,8 +257,8 @@ describe('SW: Feathers Modifier', (it) => {
 				feathersMax: 'invalid',
 				feathersUpdate: new Date(
 					Date.now() - 30 * 60 * 1000
-				).toISOString() // 30 minutes ago
-			}
+				).toISOString(), // 30 minutes ago
+			},
 		};
 		try {
 			feathersModifier(initialUser);
@@ -274,8 +274,8 @@ describe('SW: Feathers Modifier', (it) => {
 				feathersMax: 45,
 				feathersUpdate: new Date(
 					Date.now() - 30 * 60 * 1000
-				).toISOString() // 30 minutes ago
-			}
+				).toISOString(), // 30 minutes ago
+			},
 		};
 		try {
 			feathersModifier(initialUser);
@@ -291,8 +291,8 @@ describe('SW: Feathers Modifier', (it) => {
 				feathers: 40,
 				feathersUpdate: new Date(
 					Date.now() - 30 * 60 * 1000
-				).toISOString() // 30 minutes ago
-			}
+				).toISOString(), // 30 minutes ago
+			},
 		};
 		try {
 			feathersModifier(initialUser);
@@ -306,8 +306,8 @@ describe('SW: Feathers Modifier', (it) => {
 		const initialUser = {
 			data: {
 				feathers: 40,
-				feathersMax: 45
-			}
+				feathersMax: 45,
+			},
 		};
 		const user = feathersModifier(initialUser);
 		return expect(user.data.feathersUpdate !== null).toBe(true);
@@ -319,8 +319,8 @@ describe('SW: Feathers Modifier', (it) => {
 			data: {
 				feathers: 0,
 				feathersMax: 45,
-				feathersUpdate: new Date(NOW - 30 * 60 * 1000).toISOString() // 30 minutes ago
-			}
+				feathersUpdate: new Date(NOW - 30 * 60 * 1000).toISOString(), // 30 minutes ago
+			},
 		};
 		const modified = feathersModifier(user);
 		const updateNext =
@@ -333,7 +333,7 @@ describe('SW: Feathers Modifier', (it) => {
 	});
 
 	it('should handle feathers being one less than feathersMax', ({
-		expect
+		expect,
 	}) => {
 		const initialUser = {
 			data: {
@@ -341,8 +341,8 @@ describe('SW: Feathers Modifier', (it) => {
 				feathersMax: 45,
 				feathersUpdate: new Date(
 					Date.now() - 10 * 60 * 1000
-				).toISOString() // 10 minutes ago
-			}
+				).toISOString(), // 10 minutes ago
+			},
 		};
 		const user = feathersModifier(initialUser);
 		return expect(user.data.feathers).toBe(45); // 1 feather should be added
@@ -355,8 +355,8 @@ describe('SW: Feathers Modifier', (it) => {
 				feathersMax: 45,
 				feathersUpdate: new Date(
 					Date.now() - 30 * 60 * 1000
-				).toISOString() // 30 minutes ago
-			}
+				).toISOString(), // 30 minutes ago
+			},
 		};
 		try {
 			feathersModifier(initialUser);
@@ -373,8 +373,8 @@ describe('SW: Feathers Modifier', (it) => {
 				feathersMax: undefined,
 				feathersUpdate: new Date(
 					Date.now() - 30 * 60 * 1000
-				).toISOString() // 30 minutes ago
-			}
+				).toISOString(), // 30 minutes ago
+			},
 		};
 		try {
 			feathersModifier(initialUser);
@@ -391,8 +391,8 @@ describe('SW: Feathers Modifier', (it) => {
 				feathersMax: 1e12 + 100,
 				feathersUpdate: new Date(
 					Date.now() - 30 * 60 * 1000
-				).toISOString() // 30 minutes ago
-			}
+				).toISOString(), // 30 minutes ago
+			},
 		};
 		const modified = feathersModifier(user);
 		return expect(modified.data.feathers).toBe(1e12 + 4); // 3 feathers should be added

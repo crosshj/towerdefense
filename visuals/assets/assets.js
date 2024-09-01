@@ -149,7 +149,7 @@ const images = {
 			Tile((c, ct) => {
 				transparent(c, ct);
 			})(img, 15 + i * (w + 1), 285 + 602, w, 58)
-		)
+		),
 };
 
 const loadImage = (src, root) =>
@@ -219,7 +219,7 @@ export const loadAssets = async ({ root = './' } = {}) => {
 const nullSound = {
 	start: () => {},
 	stop: () => {},
-	play: () => {}
+	play: () => {},
 };
 
 const sounds = {};
@@ -236,7 +236,7 @@ export const loadSounds = async (key) => {
 			preload: true,
 			autoplay: true,
 			loop: true,
-			paused: true
+			paused: true,
 		});
 		sounds.menuBackground = {
 			stop: () => {
@@ -247,7 +247,7 @@ export const loadSounds = async (key) => {
 			start: (fadeTime) => {
 				bg.play();
 				bg.fade(0, MAXVOL, fadeTime || 1000);
-			}
+			},
 		};
 		return sounds.menuBackground;
 	}
@@ -260,7 +260,7 @@ export const loadSounds = async (key) => {
 			preload: true,
 			autoplay: true,
 			loop: true,
-			paused: true
+			paused: true,
 		});
 		sounds.menuBackground = {
 			stop: () => {
@@ -271,7 +271,7 @@ export const loadSounds = async (key) => {
 			start: (fadeTime) => {
 				bg.play();
 				bg.fade(0, MAXVOL, fadeTime || 1000);
-			}
+			},
 		};
 		return sounds.menuBackground;
 	}
@@ -284,7 +284,7 @@ export const loadSounds = async (key) => {
 			preload: true,
 			autoplay: true,
 			loop: true,
-			paused: true
+			paused: true,
 		});
 		sounds.menuBackground = {
 			stop: () => {
@@ -295,7 +295,7 @@ export const loadSounds = async (key) => {
 			start: (fadeTime) => {
 				bg.play();
 				bg.fade(0, MAXVOL, fadeTime || 1000);
-			}
+			},
 		};
 		return sounds.menuBackground;
 	}
@@ -308,7 +308,7 @@ export const loadSounds = async (key) => {
 			preload: true,
 			autoplay: true,
 			loop: true,
-			paused: true
+			paused: true,
 		});
 		sounds.tropicalShadowsBackground = {
 			stop: () => {
@@ -319,7 +319,7 @@ export const loadSounds = async (key) => {
 			start: () => {
 				bg.play();
 				bg.fade(0, MAXVOL, 1000);
-			}
+			},
 		};
 		return sounds.tropicalShadowsBackground;
 	}
@@ -332,7 +332,7 @@ export const loadSounds = async (key) => {
 			preload: true,
 			autoplay: true,
 			loop: true,
-			paused: true
+			paused: true,
 		});
 		sounds.sunnyFieldBackground = {
 			stop: () => {
@@ -343,7 +343,7 @@ export const loadSounds = async (key) => {
 			start: () => {
 				bg.play();
 				bg.fade(0, MAXVOL, 1000);
-			}
+			},
 		};
 		return sounds.sunnyFieldBackground;
 	}
@@ -356,7 +356,7 @@ export const loadSounds = async (key) => {
 			preload: true,
 			autoplay: true,
 			loop: true,
-			paused: true
+			paused: true,
 		});
 		sounds.asianSceneBackground = {
 			stop: () => {
@@ -367,7 +367,7 @@ export const loadSounds = async (key) => {
 			start: () => {
 				bg.play();
 				bg.fade(0, MAXVOL, 1000);
-			}
+			},
 		};
 		return sounds.asianSceneBackground;
 	}
@@ -384,14 +384,14 @@ export const loadSounds = async (key) => {
 				punch2: [10087, 350, false],
 				swipe1: [16169, 210, false],
 				click: [31331, 20, false],
-				explode1: [31651, 1582, false]
-			}
+				explode1: [31651, 1582, false],
+			},
 		});
 		sounds.coreSounds = {
 			play: (which, vol = MAXVOL) => {
 				const id = sprites.play(which);
 				sprites.volume(vol, id);
-			}
+			},
 		};
 		return sounds.coreSounds;
 	}

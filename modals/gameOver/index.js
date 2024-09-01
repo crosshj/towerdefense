@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 		}
 		window.parent.postMessage({
 			_: 'navigate',
-			src
+			src,
 		});
 	});
 

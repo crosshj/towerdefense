@@ -26,7 +26,7 @@ export const getActions = (state) => {
 		mainMenu: () => {
 			window.parent.postMessage({
 				_: 'navigate',
-				src: '/pages/mainStage/index.html'
+				src: '/pages/mainStage/index.html',
 			});
 		},
 		pauseToggle: () => {
@@ -71,6 +71,6 @@ export const getActions = (state) => {
 			unit.type = 'attacker';
 			unit.x = unit.x || tower.x + 100;
 			spawnCharInstance(state)(unit, tower.deployed);
-		}
+		},
 	};
 };

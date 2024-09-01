@@ -1267,5 +1267,5 @@ export const SVGIcons = {
 	notEqual,
 	lockCircle,
 	animatedSpinner,
-	infoCircle
+	infoCircle,
 };

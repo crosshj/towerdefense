@@ -11,7 +11,7 @@ const defaultValue = {
 	dims: [200, 343],
 	x: 200,
 	color: '#00e5e6',
-	hp: 30000
+	hp: 30000,
 };
 
 export const getTower = async () => {
@@ -22,7 +22,7 @@ export const getTower = async () => {
 	try {
 		return {
 			...clone(defaultValue),
-			...JSON.parse(lsValue)
+			...JSON.parse(lsValue),
 		};
 	} catch (e) {
 		return clone(defaultValue);

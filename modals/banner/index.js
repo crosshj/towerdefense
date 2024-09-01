@@ -9,7 +9,7 @@ const friendlyGradName = {
 	master: 'Master',
 	smaster: 'Super Master',
 	umaster: 'Ultra Master',
-	legend: 'Legend'
+	legend: 'Legend',
 };
 
 const updateUserInfo = async () => {
@@ -34,12 +34,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 		e.preventDefault();
 		e.stopPropagation();
 		window.parent.postMessage({
-			_: 'navigate'
+			_: 'navigate',
 		});
 	});
 	document.body.addEventListener('mousedown', () => {
 		window.parent.postMessage({
-			_: 'navigate'
+			_: 'navigate',
 		});
 	});
 });

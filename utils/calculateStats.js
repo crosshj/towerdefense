@@ -9,7 +9,7 @@ const rankToLevels = {
 	6: [],
 	7: [],
 	8: [],
-	9: []
+	9: [],
 };
 
 const valuesFormat = (v) => {
@@ -47,18 +47,18 @@ function inverseMatrix3x3(matrix) {
 		[
 			(m[1][1] * m[2][2] - m[1][2] * m[2][1]) * invDet,
 			(m[0][2] * m[2][1] - m[0][1] * m[2][2]) * invDet,
-			(m[0][1] * m[1][2] - m[0][2] * m[1][1]) * invDet
+			(m[0][1] * m[1][2] - m[0][2] * m[1][1]) * invDet,
 		],
 		[
 			(m[1][2] * m[2][0] - m[1][0] * m[2][2]) * invDet,
 			(m[0][0] * m[2][2] - m[0][2] * m[2][0]) * invDet,
-			(m[0][2] * m[1][0] - m[0][0] * m[1][2]) * invDet
+			(m[0][2] * m[1][0] - m[0][0] * m[1][2]) * invDet,
 		],
 		[
 			(m[1][0] * m[2][1] - m[1][1] * m[2][0]) * invDet,
 			(m[0][1] * m[2][0] - m[0][0] * m[2][1]) * invDet,
-			(m[0][0] * m[1][1] - m[0][1] * m[1][0]) * invDet
-		]
+			(m[0][0] * m[1][1] - m[0][1] * m[1][0]) * invDet,
+		],
 	];
 
 	return inv;
@@ -75,7 +75,7 @@ export function calculateCoefficients(rank, values) {
 	const A = [
 		[x1, x1 * x1],
 		[x2, x2 * x2],
-		[x3, x3 * x3]
+		[x3, x3 * x3],
 	];
 
 	// Convert A and B to mathjs.js matrices
@@ -90,7 +90,7 @@ export function calculateCoefficients(rank, values) {
 	return {
 		base: base,
 		linear: coefficients.get([0]),
-		quadratic: coefficients.get([1])
+		quadratic: coefficients.get([1]),
 	};
 
 	// const A_inv = inverseMatrix3x3(A);

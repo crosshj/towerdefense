@@ -47,7 +47,7 @@ const updatePlayersList = async () => {
 		tierPlayers.append(
 			PlayerRow({
 				i: Number(i) + 1,
-				...player
+				...player,
 			})
 		);
 	}
@@ -130,12 +130,12 @@ const setup = async () => {
 		feathers: true,
 		gems: true,
 		coins: true,
-		friendPoints: false
+		friendPoints: false,
 	});
 	window.parent.postMessage({
 		_: 'title',
 		title: pageTitle,
-		visibility: 'visible'
+		visibility: 'visible',
 	});
 	window.parent.postMessage({ _: 'loaded' });
 };

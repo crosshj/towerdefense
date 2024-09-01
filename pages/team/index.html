@@ -47,12 +47,12 @@
 			feathers: false,
 			gems: false,
 			coins: false,
-			friendPoints: false
+			friendPoints: false,
 		});
 		window.parent.postMessage({
 			_: 'title',
 			title: `Team ${params.sub.toUpperCase()}:${params.slot}`,
-			visibility: 'visible'
+			visibility: 'visible',
 		});
 		window.parent.postMessage({ _: 'loaded' });
 	</script>

@@ -19,7 +19,7 @@ const stack = [
 	// 'lws-mime',
 	// 'lws-range',
 	// 'lws-spa',
-	'lws-static'
+	'lws-static',
 	// 'lws-index',
 ];
 
@@ -27,5 +27,5 @@ export default {
 	hostname: '127.0.0.1',
 	port: 8000,
 	rewrite: [{ from: '^/(.*)/$', to: '/$1/index.html' }],
-	stack
+	stack,
 };

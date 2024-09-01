@@ -5,20 +5,20 @@ const LS_NAME = 'USER_EFFECTS';
 const defaultEffects = {
 	meteor: {
 		selected: true,
-		count: 5
+		count: 5,
 	},
 	ice: {
 		selected: true,
-		count: 5
+		count: 5,
 	},
 	tornado: {
 		selected: true,
-		count: 5
+		count: 5,
 	},
 	invincible: {
 		selected: true,
-		count: 5
-	}
+		count: 5,
+	},
 };
 
 export const getEffects = async () => {

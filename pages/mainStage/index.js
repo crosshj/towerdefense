@@ -104,7 +104,7 @@ const clickColorMap = {
 	'#c2d926': 'pantheon-97',
 	'#c0d926': 'pantheon-98',
 	'#bed926': 'pantheon-99',
-	'#bcd926': 'pantheon-100'
+	'#bcd926': 'pantheon-100',
 };
 
 const onScroll = (args) => {
@@ -120,13 +120,13 @@ const setup = async () => {
 	window.parent.postMessage({
 		_: 'title',
 		title: pageTitle,
-		visibility: 'visible'
+		visibility: 'visible',
 	});
 	const args = {
 		feathers: true,
 		gems: true,
 		coins: true,
-		friendPoints: false
+		friendPoints: false,
 	};
 	window.parent.postMessage({ _: 'stats', ...args });
 	document.title += `: ${pageTitle}`;
@@ -144,7 +144,7 @@ const setup = async () => {
 			window.parent.postMessage({ _: 'navigate', src });
 		},
 		offsetY: offsetY ? JSON.parse(offsetY) : undefined,
-		onScroll: debounce(onScroll)
+		onScroll: debounce(onScroll),
 	});
 	window.parent.postMessage({ _: 'loaded' });
 };

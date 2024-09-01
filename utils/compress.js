@@ -7,7 +7,7 @@ const allTeamNames = [
 	'Team 3',
 	'Team 4',
 	'Team 5',
-	'Defense'
+	'Defense',
 ];
 
 const getCharacterSet = (asciiOnly = false) => {
@@ -80,7 +80,7 @@ export const compressChars = (lsCharacters, baseLength = 36) => {
 				gear2,
 				gear3,
 				profPoints,
-				locked
+				locked,
 			].join(',');
 		})
 		.join('\n');
@@ -103,7 +103,7 @@ export const decompressChars = (compedString) => {
 			gear2,
 			gear3,
 			profPoints,
-			locked = 0
+			locked = 0,
 		] = line.split(',');
 		return {
 			index,
@@ -115,7 +115,7 @@ export const decompressChars = (compedString) => {
 			gear2: decode(gear2),
 			gear3: decode(gear3),
 			professorPoints: profPoints ? decode(profPoints) : 1,
-			locked: locked + '' === '1' ? true : false
+			locked: locked + '' === '1' ? true : false,
 		};
 	});
 };

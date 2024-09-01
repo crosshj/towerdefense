@@ -3,9 +3,9 @@ const submitLogin = async ({ name, password }) => {
 	const opts = {
 		method: 'POST',
 		headers: {
-			'Content-Type': 'application/json'
+			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify({ name, password })
+		body: JSON.stringify({ name, password }),
 	};
 	const response = await fetch(url, opts)
 		.then((x) => x.json())
@@ -21,7 +21,7 @@ const attachLogin = ({ loginForm, errorMessage, contentDiv }) => {
 		event.preventDefault();
 		const response = await submitLogin({
 			name: nameField.value,
-			password: passwordfield.value
+			password: passwordfield.value,
 		});
 
 		if (response.error) {
@@ -37,7 +37,7 @@ const attachLogin = ({ loginForm, errorMessage, contentDiv }) => {
 			'USER_INFO',
 			JSON.stringify({
 				exp: response.exp || 0,
-				rank: response.rank || 1
+				rank: response.rank || 1,
 			})
 		);
 		document.location = '/';
@@ -53,7 +53,7 @@ const onLoaded = async () => {
 	attachLogin({
 		contentDiv,
 		loginForm,
-		errorMessage
+		errorMessage,
 	});
 
 	retryButton.addEventListener('pointerup', () => {
@@ -64,12 +64,12 @@ const onLoaded = async () => {
 	if (window.parent) {
 		window.parent.postMessage({
 			_: 'stats',
-			visibility: 'hidden'
+			visibility: 'hidden',
 		});
 		window.parent.postMessage({
 			_: 'title',
 			title: '',
-			visibility: 'hidden'
+			visibility: 'hidden',
 		});
 		window.parent.postMessage({ _: 'loaded' });
 	}

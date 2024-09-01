@@ -12,7 +12,7 @@ const initDom = async (state) => {
 	const ctx = canvas.getContext('2d', {
 		antialias: false,
 		depth: false,
-		desynchronized: true
+		desynchronized: true,
 	});
 	ctx.imageSmoothingEnabled = false;
 	return { canvas, ctx };
@@ -33,12 +33,12 @@ const setup = async () => {
 		feathers: true,
 		gems: true,
 		coins: true,
-		friendPoints: false
+		friendPoints: false,
 	});
 	window.parent.postMessage({
 		_: 'title',
 		title: 'TOWER',
-		visibility: 'visible'
+		visibility: 'visible',
 	});
 	window.parent.postMessage({ _: 'loaded' });
 };

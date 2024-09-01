@@ -85,60 +85,60 @@ const attachHandlers = (nodeTree) => {
 	const { container } = nodeTree;
 	const {
 		content: { left, right },
-		closeButton
+		closeButton,
 	} = container;
 	// console.log({ nodeTree });
 
 	left.actions.levelUp.addEventListener('pointerup', () => {
 		window.parent.postMessage({
 			_: 'navigate',
-			src: '/pages/unit/levelUp/'
+			src: '/pages/unit/levelUp/',
 		});
 	});
 	left.actions.potentialUp.addEventListener('pointerup', () => {
 		window.parent.postMessage({
 			_: 'navigate',
-			src: '/pages/unit/potentialUp/'
+			src: '/pages/unit/potentialUp/',
 		});
 	});
 	right.actions.hyperEvolve.addEventListener('pointerup', () => {
 		window.parent.postMessage({
 			_: 'navigate',
-			src: '/pages/unit/hyperEvolve/'
+			src: '/pages/unit/hyperEvolve/',
 		});
 	});
 	right.actions.ultraEvolve.addEventListener('pointerup', () => {
 		window.parent.postMessage({
 			_: 'navigate',
-			src: '/pages/unit/ultraEvolve/'
+			src: '/pages/unit/ultraEvolve/',
 		});
 	});
 	left.gear.weapon.addEventListener('pointerup', () => {
 		window.parent.postMessage({
 			_: 'navigate',
-			src: '/pages/gear/?weapon=true'
+			src: '/pages/gear/?weapon=true',
 		});
 	});
 	left.gear.accessory.addEventListener('pointerup', () => {
 		window.parent.postMessage({
 			_: 'navigate',
-			src: '/pages/gear/?accessory=true'
+			src: '/pages/gear/?accessory=true',
 		});
 	});
 	left.gear.armor.addEventListener('pointerup', () => {
 		window.parent.postMessage({
 			_: 'navigate',
-			src: '/pages/gear/?armor=true'
+			src: '/pages/gear/?armor=true',
 		});
 	});
 	left.gear.more.addEventListener('pointerup', () => {
 		window.parent.postMessage({
-			_: 'navigate'
+			_: 'navigate',
 		});
 	});
 	closeButton.addEventListener('pointerup', () => {
 		window.parent.postMessage({
-			_: 'navigate'
+			_: 'navigate',
 		});
 	});
 };
@@ -159,7 +159,7 @@ const attachLock = ({ element, character }) => {
 		await toggleCharacterLock({ id: character?.id });
 		setCurrentCharCache(character);
 		window.parent.postMessage({
-			_: 'broadcastCharactersUpdate'
+			_: 'broadcastCharactersUpdate',
 		});
 	});
 };
@@ -178,12 +178,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 	attachHandlers(nodeTree);
 	attachLock({
 		character: cachedChar,
-		element: nodeTree.container.content.right.actions.lock
+		element: nodeTree.container.content.right.actions.lock,
 	});
 	await updateValues({
 		character: cachedChar,
 		nodeTree,
-		params
+		params,
 	});
 	container.classList.remove('loading');
 });

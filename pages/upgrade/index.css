@@ -41,9 +41,9 @@ button {
 	color: white;
 	text-transform: uppercase;
 	border-color: #098404;
-	font-family: "Passion One", sans-serif;
-    font-weight: 400;
-    font-size: 17px;
+	font-family: 'Passion One', sans-serif;
+	font-weight: 400;
+	font-size: 17px;
 	letter-spacing: 1px;
 }
 
@@ -82,9 +82,9 @@ button {
 			-webkit-text-stroke: 1.5px black;
 			-webkit-text-fill-color: #00c7ff;
 			font-size: 35px;
-            letter-spacing: -1.5px;
-            font-family: "Passion One", sans-serif;
-            font-weight: 400;
+			letter-spacing: -1.5px;
+			font-family: 'Passion One', sans-serif;
+			font-weight: 400;
 		}
 	}
 	.currency {
@@ -159,16 +159,16 @@ button {
 			flex-direction: column;
 			justify-content: space-between;
 			align-items: center;
-			font-family: "Passion One", sans-serif;
+			font-family: 'Passion One', sans-serif;
 			font-weight: 400;
 
 			.title {
 				margin-top: 10px;
-                font-size: 32px;
-                letter-spacing: -1px;
-                font-family: "Passion One", sans-serif;
-                -webkit-text-stroke: 1.5px black;
-                color: yellow;
+				font-size: 32px;
+				letter-spacing: -1px;
+				font-family: 'Passion One', sans-serif;
+				-webkit-text-stroke: 1.5px black;
+				color: yellow;
 				font-weight: 500;
 			}
 			.level {

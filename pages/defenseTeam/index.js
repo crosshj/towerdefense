@@ -33,13 +33,13 @@ const setup = async () => {
 		feathers: false,
 		gems: false,
 		coins: false,
-		friendPoints: false
+		friendPoints: false,
 	});
 	window.parent.postMessage({
 		_: 'title',
 		title: pageTitle,
 		visibility: 'visible',
-		back: params.back
+		back: params.back,
 	});
 
 	window.parent.postMessage({ _: 'loaded' });

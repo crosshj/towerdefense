@@ -11,9 +11,9 @@ document.addEventListener('DOMContentLoaded', function () {
 	fetch('https://datamosh.vercel.app/api/teedee/verify', {
 		method: 'POST',
 		headers: {
-			'Content-Type': 'application/json'
+			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify({ code: code })
+		body: JSON.stringify({ code: code }),
 	})
 		.then((response) => response.json())
 		.then((data) => {
@@ -36,12 +36,12 @@ document.addEventListener('DOMContentLoaded', function () {
 	if (window.parent) {
 		window.parent.postMessage({
 			_: 'stats',
-			visibility: 'hidden'
+			visibility: 'hidden',
 		});
 		window.parent.postMessage({
 			_: 'title',
 			title: '',
-			visibility: 'hidden'
+			visibility: 'hidden',
 		});
 		window.parent.postMessage({ _: 'loaded' });
 	}

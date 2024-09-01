@@ -4,13 +4,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 	window.parent.postMessage({
 		_: 'title',
 		title: 'FRIENDS',
-		visibility: 'visible'
+		visibility: 'visible',
 	});
 	const args = {
 		feathers: false,
 		gems: false,
 		coins: false,
-		friendPoints: true
+		friendPoints: true,
 	};
 	window.parent.postMessage({ _: 'stats', ...args });
 

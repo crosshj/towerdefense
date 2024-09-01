@@ -163,7 +163,7 @@
 			const psd = {
 				width: squareSize,
 				height: squareSize,
-				children: []
+				children: [],
 			};
 
 			for (const [index, img] of Object.entries(
@@ -188,13 +188,13 @@
 					left: 0,
 					right: squareSize,
 					bottom: squareSize,
-					imageData: imageData
+					imageData: imageData,
 				});
 			}
 
 			const buffer = agPsd.writePsd(psd);
 			const blob = new Blob([buffer], {
-				type: 'application/octet-stream'
+				type: 'application/octet-stream',
 			});
 			const link = document.createElement('a');
 			link.textContent = 'sprites.psd';

@@ -32,7 +32,7 @@ const attachUsersList = async () => {
 		//TODO: show loading
 		const selected = getSelectedValue();
 		const result = await getDefenseTeam({
-			player: selected
+			player: selected,
 		});
 		// todo hide loading
 		// update results element

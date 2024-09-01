@@ -75,8 +75,8 @@ const updateResults = ({ characters, actionButton, currentChar }) => {
 	levelToPercent.innerText = isMaxedNext
 		? 'MAX'
 		: resultsChar.levelNextPercent === `?`
-		? '?'
-		: `${Math.floor(Number(resultsChar.levelNextPercent))}%`;
+			? '?'
+			: `${Math.floor(Number(resultsChar.levelNextPercent))}%`;
 	profPointsTo.innerText = resultsChar.professorPoints;
 
 	if (!materials.length) {

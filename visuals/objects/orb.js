@@ -48,7 +48,7 @@ export async function animateOrb(fromX, fromY, toX, toY) {
 	const timing = {
 		duration: 800,
 		easing: 'linear',
-		fill: 'forwards'
+		fill: 'forwards',
 	};
 
 	// Animate the orb

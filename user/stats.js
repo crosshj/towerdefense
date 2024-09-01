@@ -9,7 +9,7 @@ const defaultValue = {
 	gems: 999,
 	coins: 1000,
 	friendPoints: 3000,
-	exp: 0 // this is directly on user?
+	exp: 0, // this is directly on user?
 };
 
 export const getStats = async () => {
@@ -35,7 +35,7 @@ export const getStats = async () => {
 				feathersUpdate: value.feathersUpdate,
 				gems: value.gems,
 				coins: value.coins,
-				friendPoints: value.friendPoints
+				friendPoints: value.friendPoints,
 			})
 		);
 	}
@@ -57,7 +57,7 @@ export const addStats = async (newValue) => {
 		feathersMax: stats.feathersMax,
 		gems: stats.gems,
 		coins: stats.coins,
-		friendPoints: stats.friendPoints
+		friendPoints: stats.friendPoints,
 	});
 
 	localStorage.setItem(LS_NAME, JSON.stringify(stats));

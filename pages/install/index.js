@@ -22,7 +22,7 @@ const registerServiceWorker = async () => {
 		.register('/sw.js', {
 			scope: '/',
 			type: 'module',
-			updateViaCache: 'none'
+			updateViaCache: 'none',
 		})
 		.catch((error) => {
 			console.log('Service Worker registration failed:', error);
@@ -51,7 +51,7 @@ const updateCache = async ({ onProgress }) => {
 			document.location.hostname === '127.0.0.1' ? nonLocal : depends;
 		worker.controller.postMessage({
 			type: 'updateCache',
-			files: filesToCache
+			files: filesToCache,
 		});
 		worker.addEventListener('message', (event) => {
 			onProgress(event);
@@ -87,7 +87,7 @@ const periodicSync = async () => {
 			console.log(JSON.stringify({ periodicSyncTags }));
 		}
 		const status = await navigator.permissions.query({
-			name: 'periodic-background-sync'
+			name: 'periodic-background-sync',
 		});
 		if (status.state !== 'granted') {
 			console.log('Periodic background sync not permitted');
@@ -96,7 +96,7 @@ const periodicSync = async () => {
 			console.log('Periodic background sync permission granted.');
 		}
 		await registration.periodicSync.register('periodic-sync-tag', {
-			minInterval: TEN_MINUTES
+			minInterval: TEN_MINUTES,
 		});
 	} catch (e) {
 		console.log(e);
@@ -126,14 +126,14 @@ const onLoaded = async () => {
 	if (sessionActive) {
 		window.parent.postMessage({
 			_: 'navigate',
-			src: '/pages/home/index.html'
+			src: '/pages/home/index.html',
 		});
 		return;
 	}
 	try {
 		//await registerServiceWorker(); //(might not be needed since done in main frame)
 		await updateCache({
-			onProgress: progressListener
+			onProgress: progressListener,
 		});
 		// what if SW changes during one of these?
 		//await backgroundSync();
@@ -142,7 +142,7 @@ const onLoaded = async () => {
 		window.parent.postMessage({
 			_: 'navigate',
 			src: '/pages/startup/index.html',
-			FADE_MS: 0
+			FADE_MS: 0,
 		});
 	} catch (e) {
 		console.log(e);

@@ -6,7 +6,7 @@ const mineralMap = [
 	{ level: 5, cost: 100, amount: 600 },
 	{ level: 6, cost: 100, amount: 780 },
 	{ level: 7, cost: 100, amount: 1000 },
-	{ level: 8, cost: 100, amount: 1300 }
+	{ level: 8, cost: 100, amount: 1300 },
 ];
 
 export const getMineralMap = () => mineralMap;

@@ -18,8 +18,8 @@ export const sampleUser1 = {
 		feathersMax: 100,
 		friendPoints: 3000,
 		feathersUpdate: '2024-08-09T13:35:00.000Z',
-		expModifiedDate: '2024-08-09T05:30:00.000Z'
-	}
+		expModifiedDate: '2024-08-09T05:30:00.000Z',
+	},
 };
 
 export const sampleUser2 = {
@@ -38,8 +38,8 @@ export const sampleUser2 = {
 		feathersMax: 100,
 		friendPoints: 3000,
 		feathersUpdate: -1,
-		expModifiedDate: '2024-08-09T05:30:00.000Z'
-	}
+		expModifiedDate: '2024-08-09T05:30:00.000Z',
+	},
 };
 
 export const sampleUser3 = {
@@ -58,6 +58,6 @@ export const sampleUser3 = {
 		feathersMax: 100,
 		friendPoints: 3000,
 		feathersUpdate: '2024-08-10T06:55:42.485Z',
-		expModifiedDate: '2024-08-09T05:29:27.289Z'
-	}
+		expModifiedDate: '2024-08-09T05:29:27.289Z',
+	},
 };

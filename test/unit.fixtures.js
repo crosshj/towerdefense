@@ -32,7 +32,7 @@ export const sampleUnit1 = {
 	critMult: 2,
 	move: 60,
 	unit: '174-localid',
-	experience: 8478000 //has more experience than maxed level allows
+	experience: 8478000, //has more experience than maxed level allows
 };
 
 export const parseUpgradeChangeScenario1 = {
@@ -70,7 +70,7 @@ export const parseUpgradeChangeScenario1 = {
 		unit: '72-localid',
 		imageUri: '',
 		experience: 16122000,
-		image: {}
+		image: {},
 	},
 	materials: [
 		{
@@ -104,7 +104,7 @@ export const parseUpgradeChangeScenario1 = {
 			critChance: 0.01,
 			critMult: 2,
 			move: 60,
-			unit: '15-localid'
+			unit: '15-localid',
 		},
 		{
 			id: '121-localid',
@@ -137,7 +137,7 @@ export const parseUpgradeChangeScenario1 = {
 			critChance: 0.01,
 			critMult: 2,
 			move: 60,
-			unit: '121-localid'
+			unit: '121-localid',
 		},
 		{
 			id: '155-localid',
@@ -170,7 +170,7 @@ export const parseUpgradeChangeScenario1 = {
 			critChance: 0.01,
 			critMult: 2,
 			move: 60,
-			unit: '155-localid'
+			unit: '155-localid',
 		},
 		{
 			id: '146-localid',
@@ -203,7 +203,7 @@ export const parseUpgradeChangeScenario1 = {
 			critChance: 0.01,
 			critMult: 2,
 			move: 60,
-			unit: '146-localid'
+			unit: '146-localid',
 		},
 		{
 			id: '139-localid',
@@ -236,8 +236,8 @@ export const parseUpgradeChangeScenario1 = {
 			critChance: 0.01,
 			critMult: 2,
 			move: 60,
-			unit: '139-localid'
-		}
+			unit: '139-localid',
+		},
 	],
 	prevChars: [
 		{
@@ -246,7 +246,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-1-macho',
 			experience: 1978800,
 			uncappedLevel: 0,
-			professorPoints: 10
+			professorPoints: 10,
 		},
 		{
 			index: '1',
@@ -254,7 +254,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-2-toto',
 			experience: 576000,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '2',
@@ -262,7 +262,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-twinkle',
 			experience: 20460000,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '3',
@@ -270,7 +270,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-vispi',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '4',
@@ -278,7 +278,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-drat',
 			experience: 2030908962063553300,
 			uncappedLevel: 4,
-			professorPoints: 10
+			professorPoints: 10,
 		},
 		{
 			index: '5',
@@ -286,7 +286,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-antonio',
 			experience: 288000,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '6',
@@ -294,7 +294,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-bumpier',
 			experience: 14790000,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '7',
@@ -302,7 +302,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-tabi',
 			experience: 288000,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '8',
@@ -310,7 +310,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-electopus',
 			experience: 288000,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '9',
@@ -318,7 +318,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-santelmo',
 			experience: 288000,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: 'A',
@@ -326,7 +326,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-multo',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: 'B',
@@ -334,7 +334,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-kelvin',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: 'C',
@@ -342,7 +342,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-blanko',
 			experience: 1817633053059879700,
 			uncappedLevel: 3,
-			professorPoints: 4
+			professorPoints: 4,
 		},
 		{
 			index: 'D',
@@ -350,7 +350,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-prickles',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: 'E',
@@ -358,7 +358,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-crack9',
 			experience: 1685605109390939000,
 			uncappedLevel: 4,
-			professorPoints: 5
+			professorPoints: 5,
 		},
 		{
 			index: 'F',
@@ -366,7 +366,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-robia',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: 'G',
@@ -374,7 +374,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-barbell',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: 'H',
@@ -382,7 +382,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-wap',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: 'I',
@@ -390,7 +390,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-crack9',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: 'J',
@@ -398,7 +398,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-crack9',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: 'K',
@@ -406,7 +406,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-crack9',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: 'L',
@@ -414,7 +414,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-1-benny',
 			experience: 2712400,
 			uncappedLevel: 4,
-			professorPoints: 10
+			professorPoints: 10,
 		},
 		{
 			index: 'M',
@@ -422,7 +422,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-zar',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: 'N',
@@ -430,7 +430,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-zar',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: 'O',
@@ -438,7 +438,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-zar',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: 'P',
@@ -446,7 +446,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-zar',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: 'Q',
@@ -454,7 +454,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-zar',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: 'R',
@@ -462,7 +462,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-zar',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: 'S',
@@ -470,7 +470,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-zar',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: 'T',
@@ -478,7 +478,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-zar',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: 'U',
@@ -486,7 +486,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-zar',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: 'V',
@@ -494,7 +494,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-slabb',
 			experience: 16746000,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: 'W',
@@ -502,7 +502,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-zar',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: 'X',
@@ -510,7 +510,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-zar',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: 'Y',
@@ -518,7 +518,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-zar',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: 'Z',
@@ -526,7 +526,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-zar',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '10',
@@ -534,7 +534,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-zar',
 			experience: 1309833269719623700,
 			uncappedLevel: 4,
-			professorPoints: 6
+			professorPoints: 6,
 		},
 		{
 			index: '11',
@@ -542,7 +542,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-zar',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '12',
@@ -550,7 +550,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-zar',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '13',
@@ -558,7 +558,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-zar',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '14',
@@ -566,7 +566,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-zar',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '15',
@@ -574,7 +574,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-zar',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '16',
@@ -582,7 +582,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-zar',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '17',
@@ -590,7 +590,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-zar',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '18',
@@ -598,7 +598,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-zar',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '19',
@@ -606,7 +606,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-rose',
 			experience: 2784000,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '1A',
@@ -614,7 +614,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-rose',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '1B',
@@ -622,7 +622,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-zar',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '1C',
@@ -630,7 +630,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-zar',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '1D',
@@ -638,7 +638,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-slabb',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '1E',
@@ -646,7 +646,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-violet',
 			experience: 1045777382380974000,
 			uncappedLevel: 4,
-			professorPoints: 6
+			professorPoints: 6,
 		},
 		{
 			index: '1F',
@@ -654,7 +654,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-2-ogre',
 			experience: 548133594706407500,
 			uncappedLevel: 0,
-			professorPoints: 7
+			professorPoints: 7,
 		},
 		{
 			index: '1G',
@@ -662,7 +662,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-crimson',
 			experience: 1045777382381838000,
 			uncappedLevel: 4,
-			professorPoints: 6
+			professorPoints: 6,
 		},
 		{
 			index: '1H',
@@ -670,7 +670,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-crack9',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '1I',
@@ -678,7 +678,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-rose',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '1J',
@@ -686,7 +686,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-crimson',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '1K',
@@ -694,7 +694,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-2-jet',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '1L',
@@ -702,7 +702,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-crimson',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '1M',
@@ -710,7 +710,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-rose',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '1N',
@@ -718,7 +718,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-rose',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '1O',
@@ -726,7 +726,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-rose',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '1P',
@@ -734,7 +734,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-rose',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '1Q',
@@ -742,7 +742,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-boar',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '1R',
@@ -750,7 +750,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-rose',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '1S',
@@ -758,7 +758,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-slabb',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '1T',
@@ -766,7 +766,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-crack9',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '1U',
@@ -774,7 +774,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-crack9',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '1V',
@@ -782,7 +782,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-2-toto',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '1W',
@@ -790,7 +790,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-bumpier',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '1X',
@@ -798,7 +798,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-rose',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '1Y',
@@ -806,7 +806,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-2-jet',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '1Z',
@@ -814,7 +814,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-drat',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '20',
@@ -822,7 +822,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-robia',
 			experience: 16122000,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '21',
@@ -830,7 +830,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-aynstine',
 			experience: 5790000,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '22',
@@ -838,7 +838,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-prickles',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '23',
@@ -846,7 +846,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-antonio',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '24',
@@ -854,7 +854,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-openhyman',
 			experience: 22344000,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '25',
@@ -862,7 +862,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-pineman',
 			experience: 6078000,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '26',
@@ -870,7 +870,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-boar',
 			experience: 6078000,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '27',
@@ -878,7 +878,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-crimson',
 			experience: 11442000,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '28',
@@ -886,7 +886,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-crimson',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '29',
@@ -894,7 +894,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-crimson',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '2A',
@@ -902,7 +902,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-crimson',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '2B',
@@ -910,7 +910,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-2-coco',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '2C',
@@ -918,7 +918,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-2-coco',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '2D',
@@ -926,7 +926,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-2-coco',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '2E',
@@ -934,7 +934,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-aynstine',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '2F',
@@ -942,7 +942,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-aynstine',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '2G',
@@ -950,7 +950,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-aynstine',
 			experience: 288000,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '2H',
@@ -958,7 +958,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-1-pete',
 			experience: 710629525376353200,
 			uncappedLevel: 4,
-			professorPoints: 5
+			professorPoints: 5,
 		},
 		{
 			index: '2I',
@@ -966,7 +966,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-twinkle',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '2J',
@@ -974,7 +974,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-crimson',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '2K',
@@ -982,7 +982,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-drat',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '2L',
@@ -990,7 +990,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-drat',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '2M',
@@ -998,7 +998,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-crimson',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '2N',
@@ -1006,7 +1006,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-crimson',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '2O',
@@ -1014,7 +1014,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-drat',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '2P',
@@ -1022,7 +1022,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-bibly',
 			experience: 2030908962063553300,
 			uncappedLevel: 4,
-			professorPoints: 10
+			professorPoints: 10,
 		},
 		{
 			index: '2Q',
@@ -1030,7 +1030,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-drat',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '2R',
@@ -1038,7 +1038,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-2-jet',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '2S',
@@ -1046,7 +1046,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-2-jet',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '2T',
@@ -1054,7 +1054,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-2-jet',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '2U',
@@ -1062,7 +1062,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-2-zerosix',
 			experience: 288000,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '2V',
@@ -1070,7 +1070,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-crimson',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '2W',
@@ -1078,7 +1078,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-drat',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '2X',
@@ -1086,7 +1086,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-crimson',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '2Y',
@@ -1094,7 +1094,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-twinkle',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '2Z',
@@ -1102,7 +1102,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-pineman',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '30',
@@ -1110,7 +1110,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-pineman',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '31',
@@ -1118,7 +1118,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-2-jet',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '32',
@@ -1126,7 +1126,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-pineman',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '33',
@@ -1134,7 +1134,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-pineman',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '34',
@@ -1142,7 +1142,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-2-jet',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '35',
@@ -1150,7 +1150,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-2-tom',
 			experience: 578601581706932400,
 			uncappedLevel: 0,
-			professorPoints: 7
+			professorPoints: 7,
 		},
 		{
 			index: '36',
@@ -1158,7 +1158,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-aynstine',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '37',
@@ -1166,7 +1166,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-drat',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '38',
@@ -1174,7 +1174,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-twinkle',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '39',
@@ -1182,7 +1182,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-crimson',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '3A',
@@ -1190,7 +1190,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-drat',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '3B',
@@ -1198,7 +1198,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-drat',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '3C',
@@ -1206,7 +1206,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-crimson',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '3D',
@@ -1214,7 +1214,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-robia',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '3E',
@@ -1222,7 +1222,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-pineman',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '3F',
@@ -1230,7 +1230,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-2-jet',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '3G',
@@ -1238,7 +1238,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-2-jet',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '3H',
@@ -1246,7 +1246,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-pineman',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '3I',
@@ -1254,7 +1254,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-pineman',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '3J',
@@ -1262,7 +1262,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-pineman',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '3K',
@@ -1270,7 +1270,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-wap',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '3L',
@@ -1278,7 +1278,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-wap',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '3M',
@@ -1286,7 +1286,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-pineman',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '3N',
@@ -1294,7 +1294,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-2-coco',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '3O',
@@ -1302,7 +1302,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-2-coco',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '3P',
@@ -1310,7 +1310,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-aynstine',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '3Q',
@@ -1318,7 +1318,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-2-coco',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '3R',
@@ -1326,7 +1326,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-1-zoe',
 			experience: 19146000,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '3S',
@@ -1334,7 +1334,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-drat',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '3T',
@@ -1342,7 +1342,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-drat',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '3U',
@@ -1350,7 +1350,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-crimson',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '3V',
@@ -1358,7 +1358,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-robia',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '3W',
@@ -1366,7 +1366,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-drat',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '3X',
@@ -1374,7 +1374,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-drat',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '3Y',
@@ -1382,7 +1382,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-crimson',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '3Z',
@@ -1390,7 +1390,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-drat',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '40',
@@ -1398,7 +1398,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-drat',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '41',
@@ -1406,7 +1406,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-drat',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '42',
@@ -1414,7 +1414,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-robia',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '43',
@@ -1422,7 +1422,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-crimson',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '44',
@@ -1430,7 +1430,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-drat',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '45',
@@ -1438,7 +1438,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-prickles',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '46',
@@ -1446,7 +1446,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-prickles',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '47',
@@ -1454,7 +1454,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-zar',
 			experience: 7302000,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '48',
@@ -1462,7 +1462,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-crimson',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '49',
@@ -1470,7 +1470,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-drat',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '4A',
@@ -1478,7 +1478,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-drat',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '4B',
@@ -1486,7 +1486,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-robia',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '4C',
@@ -1494,7 +1494,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-multo',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '4D',
@@ -1502,7 +1502,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-bumpier',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '4E',
@@ -1510,7 +1510,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-corpus',
 			experience: 28938000,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '4F',
@@ -1518,7 +1518,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-robia',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '4G',
@@ -1526,7 +1526,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-liz',
 			experience: 19578000,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '4H',
@@ -1534,7 +1534,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-crimson',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '4I',
@@ -1542,7 +1542,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-crimson',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '4J',
@@ -1550,7 +1550,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-drat',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '4K',
@@ -1558,7 +1558,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-2-jet',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '4L',
@@ -1566,7 +1566,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-arcus',
 			experience: 8004000,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '4M',
@@ -1574,7 +1574,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-openhyman',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '4N',
@@ -1582,7 +1582,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-zar',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '4O',
@@ -1590,7 +1590,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-zar',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '4P',
@@ -1598,7 +1598,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-zar',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '4Q',
@@ -1606,7 +1606,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-openhyman',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '4R',
@@ -1614,7 +1614,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-pismud',
 			experience: 7248000,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '4S',
@@ -1622,7 +1622,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-pismud',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '4T',
@@ -1630,7 +1630,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-crimson',
 			experience: 288000,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '4U',
@@ -1638,7 +1638,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-drat',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '4V',
@@ -1646,7 +1646,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-twinkle',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '4W',
@@ -1654,7 +1654,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-crimson',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '4X',
@@ -1662,7 +1662,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-crimson',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '4Y',
@@ -1670,7 +1670,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-crimson',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '4Z',
@@ -1678,7 +1678,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-crimson',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '50',
@@ -1686,7 +1686,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-crimson',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '51',
@@ -1694,7 +1694,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-crimson',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '52',
@@ -1702,7 +1702,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-antonio',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '53',
@@ -1710,7 +1710,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-ruby',
 			experience: 1502797187387886000,
 			uncappedLevel: 3,
-			professorPoints: 4
+			professorPoints: 4,
 		},
 		{
 			index: '54',
@@ -1718,7 +1718,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-timmy',
 			experience: 7716000,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '55',
@@ -1726,7 +1726,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-drat',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '56',
@@ -1734,7 +1734,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-bibly',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '57',
@@ -1742,7 +1742,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-drat',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '58',
@@ -1750,7 +1750,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-drat',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '59',
@@ -1758,7 +1758,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-drat',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '5A',
@@ -1766,7 +1766,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-crimson',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '5B',
@@ -1774,7 +1774,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-twinkle',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '5C',
@@ -1782,7 +1782,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-bibly',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '5D',
@@ -1790,7 +1790,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-boar',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '5E',
@@ -1798,7 +1798,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-boar',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '5F',
@@ -1806,7 +1806,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-boar',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '5G',
@@ -1814,7 +1814,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-drat',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '5H',
@@ -1822,7 +1822,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-twinkle',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '5I',
@@ -1830,7 +1830,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-drat',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '5J',
@@ -1838,7 +1838,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-vispi',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '5K',
@@ -1846,7 +1846,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-1-zoe',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '5L',
@@ -1854,7 +1854,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-1-pete',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '5M',
@@ -1862,7 +1862,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-2-coco',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '5N',
@@ -1870,7 +1870,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-1-pete',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '5O',
@@ -1878,7 +1878,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-vispi',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '5P',
@@ -1886,7 +1886,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-2-coco',
 			experience: 2076000,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '5Q',
@@ -1894,7 +1894,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-aynstine',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '5R',
@@ -1902,7 +1902,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-aynstine',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '5S',
@@ -1910,7 +1910,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-1-zoe',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '5T',
@@ -1918,7 +1918,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-1-pete',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '5U',
@@ -1926,7 +1926,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-poki',
 			experience: 5004000,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '5V',
@@ -1934,7 +1934,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-zar',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '5W',
@@ -1942,7 +1942,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-1-skye',
 			experience: 5328000,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '5X',
@@ -1950,7 +1950,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-robia',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '5Y',
@@ -1958,7 +1958,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-robia',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '5Z',
@@ -1966,7 +1966,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-poki',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '60',
@@ -1974,7 +1974,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-bibly',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '61',
@@ -1982,7 +1982,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-aynstine',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '62',
@@ -1990,7 +1990,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-poki',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '63',
@@ -1998,7 +1998,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-crimson',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '64',
@@ -2006,7 +2006,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-crimson',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '65',
@@ -2014,7 +2014,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-robia',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '66',
@@ -2022,7 +2022,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-bibly',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '67',
@@ -2030,7 +2030,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-vispi',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '68',
@@ -2038,7 +2038,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-arcus',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '69',
@@ -2046,7 +2046,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-1-zoe',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '6A',
@@ -2054,7 +2054,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-poki',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '6B',
@@ -2062,7 +2062,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-poki',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '6C',
@@ -2070,7 +2070,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-poki',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '6D',
@@ -2078,7 +2078,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-poki',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '6E',
@@ -2086,7 +2086,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-poki',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '6F',
@@ -2094,7 +2094,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-2-coco',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '6G',
@@ -2102,7 +2102,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-wap',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '6H',
@@ -2110,7 +2110,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-drat',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '6I',
@@ -2118,7 +2118,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-arcus',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '6J',
@@ -2126,7 +2126,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-twinkle',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '6K',
@@ -2134,7 +2134,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-robia',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '6L',
@@ -2142,7 +2142,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-crimson',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '6M',
@@ -2150,7 +2150,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-robia',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '6N',
@@ -2158,7 +2158,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-twinkle',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '6O',
@@ -2166,7 +2166,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-drat',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '6P',
@@ -2174,7 +2174,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-drat',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '6Q',
@@ -2182,7 +2182,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-drat',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '6R',
@@ -2190,7 +2190,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-crimson',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '6S',
@@ -2198,7 +2198,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-drat',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '6T',
@@ -2206,7 +2206,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-crimson',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '6U',
@@ -2214,7 +2214,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-crimson',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '6V',
@@ -2222,7 +2222,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-crimson',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '6W',
@@ -2230,7 +2230,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-twinkle',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '6X',
@@ -2238,7 +2238,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-drat',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '6Y',
@@ -2246,7 +2246,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-drat',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '6Z',
@@ -2254,7 +2254,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-boar',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '70',
@@ -2262,7 +2262,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-popo',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '71',
@@ -2270,7 +2270,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-violet',
 			experience: 1728000,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '72',
@@ -2278,7 +2278,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-robia',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '73',
@@ -2286,7 +2286,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-crimson',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '74',
@@ -2294,7 +2294,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-crimson',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '75',
@@ -2302,7 +2302,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-drat',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '76',
@@ -2310,7 +2310,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-drat',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '77',
@@ -2318,7 +2318,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-drat',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '78',
@@ -2326,7 +2326,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-drat',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '79',
@@ -2334,7 +2334,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-robia',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '7A',
@@ -2342,7 +2342,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-drat',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '7B',
@@ -2350,7 +2350,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-drat',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '7C',
@@ -2358,7 +2358,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-twinkle',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '7D',
@@ -2366,7 +2366,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-robia',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '7E',
@@ -2374,7 +2374,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-robia',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '7F',
@@ -2382,7 +2382,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-robia',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '7G',
@@ -2390,7 +2390,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-robia',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '7H',
@@ -2398,7 +2398,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-robia',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '7I',
@@ -2406,7 +2406,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-twinkle',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '7J',
@@ -2414,7 +2414,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-robia',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '7K',
@@ -2422,7 +2422,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-crimson',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '7L',
@@ -2430,7 +2430,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-crimson',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '7M',
@@ -2438,7 +2438,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-3-twinkle',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '7N',
@@ -2446,7 +2446,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-crimson',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '7O',
@@ -2454,7 +2454,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-drat',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '7P',
@@ -2462,7 +2462,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-drat',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '7Q',
@@ -2470,7 +2470,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-bibly',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '7R',
@@ -2478,7 +2478,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-bibly',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '7S',
@@ -2486,7 +2486,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-drat',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '7T',
@@ -2494,7 +2494,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-drat',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '7U',
@@ -2502,7 +2502,7 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-5-drat',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
+			professorPoints: 1,
 		},
 		{
 			index: '7V',
@@ -2510,225 +2510,225 @@ export const parseUpgradeChangeScenario1 = {
 			code: 'u0001-4-crimson',
 			experience: 0,
 			uncappedLevel: 0,
-			professorPoints: 1
-		}
+			professorPoints: 1,
+		},
 	],
 	prevTeams: {
 		'Team 1': {
 			a: [
 				{
-					id: '113-localid'
+					id: '113-localid',
 				},
 				{
-					id: '51-localid'
+					id: '51-localid',
 				},
 				{
-					id: '0-localid'
+					id: '0-localid',
 				},
 				{
-					id: '21-localid'
+					id: '21-localid',
 				},
 				{
-					id: '89-localid'
-				}
+					id: '89-localid',
+				},
 			],
 			b: [
 				{
-					id: '253-localid'
+					id: '253-localid',
 				},
 				{
-					id: '76-localid'
+					id: '76-localid',
 				},
 				{
-					id: '160-localid'
+					id: '160-localid',
 				},
 				{
-					id: '52-localid'
+					id: '52-localid',
 				},
 				{
-					id: '36-localid'
-				}
-			]
+					id: '36-localid',
+				},
+			],
 		},
 		'Team 2': {
 			a: [
 				{
-					id: '164-localid'
+					id: '164-localid',
 				},
 				{
-					id: '1-localid'
+					id: '1-localid',
 				},
 				{
-					id: '98-localid'
+					id: '98-localid',
 				},
 				{
-					id: '32-localid'
+					id: '32-localid',
 				},
 				{
-					id: '160-localid'
-				}
+					id: '160-localid',
+				},
 			],
 			b: [
 				{
-					id: '5-localid'
+					id: '5-localid',
 				},
 				{
-					id: '6-localid'
+					id: '6-localid',
 				},
 				{
-					id: '7-localid'
+					id: '7-localid',
 				},
 				{
-					id: '8-localid'
+					id: '8-localid',
 				},
 				{
-					id: '48-localid'
-				}
-			]
+					id: '48-localid',
+				},
+			],
 		},
 		'Team 3': {
 			a: [
 				{
-					id: '0-localid'
+					id: '0-localid',
 				},
 				{
-					id: '15-localid'
+					id: '15-localid',
 				},
 				{
-					id: '46-localid'
+					id: '46-localid',
 				},
 				{
-					id: '41-localid'
+					id: '41-localid',
 				},
 				{
-					id: '52-localid'
-				}
+					id: '52-localid',
+				},
 			],
 			b: [
 				{
-					id: '3-localid'
+					id: '3-localid',
 				},
 				{
-					id: '6-localid'
+					id: '6-localid',
 				},
 				{
-					id: '7-localid'
+					id: '7-localid',
 				},
 				{
-					id: '8-localid'
+					id: '8-localid',
 				},
 				{
-					id: '4-localid'
-				}
-			]
+					id: '4-localid',
+				},
+			],
 		},
 		'Team 4': {
 			a: [
 				{
-					id: '4-localid'
+					id: '4-localid',
 				},
 				{
-					id: '0-localid'
+					id: '0-localid',
 				},
 				{
-					id: '2-localid'
+					id: '2-localid',
 				},
 				{
-					id: '14-localid'
+					id: '14-localid',
 				},
 				{
-					id: '47-localid'
-				}
+					id: '47-localid',
+				},
 			],
 			b: [
 				{
-					id: '5-localid'
+					id: '5-localid',
 				},
 				{
-					id: '6-localid'
+					id: '6-localid',
 				},
 				{
-					id: '46-localid'
+					id: '46-localid',
 				},
 				{
-					id: '68-localid'
+					id: '68-localid',
 				},
 				{
-					id: '13-localid'
-				}
-			]
+					id: '13-localid',
+				},
+			],
 		},
 		'Team 5': {
 			a: [
 				{
-					id: '154-localid'
+					id: '154-localid',
 				},
 				{
-					id: '72-localid'
+					id: '72-localid',
 				},
 				{
-					id: '73-localid'
+					id: '73-localid',
 				},
 				{
-					id: '74-localid'
+					id: '74-localid',
 				},
 				{
-					id: '84-localid'
-				}
+					id: '84-localid',
+				},
 			],
 			b: [
 				{
-					id: '9-localid'
+					id: '9-localid',
 				},
 				{
-					id: '0-localid'
+					id: '0-localid',
 				},
 				{
-					id: '46-localid'
+					id: '46-localid',
 				},
 				{
-					id: '47-localid'
+					id: '47-localid',
 				},
 				{
-					id: '48-localid'
-				}
-			]
+					id: '48-localid',
+				},
+			],
 		},
 		Defense: {
 			a: [
 				{
-					id: '2-localid'
+					id: '2-localid',
 				},
 				{
-					id: '0-localid'
+					id: '0-localid',
 				},
 				{
-					id: '27-localid'
+					id: '27-localid',
 				},
 				{
-					id: '46-localid'
+					id: '46-localid',
 				},
 				{
-					id: '154-localid'
-				}
+					id: '154-localid',
+				},
 			],
 			b: [
 				{
-					id: '48-localid'
+					id: '48-localid',
 				},
 				{
-					id: '85-localid'
+					id: '85-localid',
 				},
 				{
-					id: '68-localid'
+					id: '68-localid',
 				},
 				{
-					id: '131-localid'
+					id: '131-localid',
 				},
 				{
-					id: '0-localid'
-				}
-			]
-		}
-	}
+					id: '0-localid',
+				},
+			],
+		},
+	},
 };

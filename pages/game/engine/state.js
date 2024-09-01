@@ -8,8 +8,8 @@ export const toggleCoords = (state, coordMode) => {
 			isAttack
 				? x
 				: coordMode === 'global'
-				? state.field.width - x
-				: Math.abs(x - state.field.width);
+					? state.field.width - x
+					: Math.abs(x - state.field.width);
 		tower.x = flipX(tower.x);
 		tower.coordMode = coordMode;
 		tower.deployed.forEach((char) => {
@@ -26,7 +26,7 @@ const getById = (state, id) =>
 	[
 		...state.towers,
 		...state.towers[0].deployed,
-		...state.towers[1].deployed
+		...state.towers[1].deployed,
 	].find((x) => x.id === id);
 
 export default class State {
@@ -35,7 +35,7 @@ export default class State {
 		[
 			...state.towers,
 			...state.towers[0].deployed,
-			...state.towers[1].deployed
+			...state.towers[1].deployed,
 		].forEach((x) => {
 			assignId(x);
 			setHpMax(x);

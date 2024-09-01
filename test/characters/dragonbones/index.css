@@ -25,7 +25,12 @@ html {
 	overflow: hidden;
 	color: #fff;
 	font-weight: 100;
-	font: 80%/1.65 Verdana, 'Geneva CE', lucida, 'Microsoft YaHei', sans-serif;
+	font:
+		80%/1.65 Verdana,
+		'Geneva CE',
+		lucida,
+		'Microsoft YaHei',
+		sans-serif;
 }
 
 body {
@@ -57,7 +62,9 @@ canvas {
 	grid-template: 1fr / 1fr;
 	place-items: center;
 	overflow: hidden;
-	box-shadow: inset 0px 0px 7px black, 0 0 0px 1.5px black;
+	box-shadow:
+		inset 0px 0px 7px black,
+		0 0 0px 1.5px black;
 
 	& > * {
 		grid-column: 1 / 1;
@@ -70,7 +77,10 @@ canvas {
 		justify-content: center;
 		margin-bottom: auto;
 		letter-spacing: 2px;
-		text-shadow: 1px 0px black, -1px 0px black, 0px 1px black,
+		text-shadow:
+			1px 0px black,
+			-1px 0px black,
+			0px 1px black,
 			0px -1px black;
 		font-size: 13px;
 		line-height: 18px;

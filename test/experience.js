@@ -6,7 +6,7 @@ const rankToGrade = {
 	2: 'Master',
 	3: 'Super Master',
 	4: 'Ultra Master',
-	5: 'Legend'
+	5: 'Legend',
 };
 
 function createChart(datasets) {
@@ -15,7 +15,7 @@ function createChart(datasets) {
 		type: 'line',
 		data: {
 			labels: Array.from({ length: 99 }, (_, i) => i + 1),
-			datasets: datasets
+			datasets: datasets,
 		},
 		options: {
 			responsive: true,
@@ -23,17 +23,17 @@ function createChart(datasets) {
 				x: {
 					title: {
 						display: true,
-						text: 'Level'
-					}
+						text: 'Level',
+					},
 				},
 				y: {
 					title: {
 						display: true,
-						text: 'Experience Required'
-					}
-				}
-			}
-		}
+						text: 'Experience Required',
+					},
+				},
+			},
+		},
 	});
 }
 
@@ -76,7 +76,7 @@ const domLoaded = async () => {
 		} else {
 			return new Promise((resolve) => {
 				const worker = new Worker('experience.worker.js', {
-					type: 'module'
+					type: 'module',
 				});
 				worker.postMessage({ rank });
 				worker.onmessage = function (e) {
@@ -97,7 +97,7 @@ const domLoaded = async () => {
 			data: expData,
 			borderColor: getRandomColor(),
 			borderWidth: 1,
-			fill: false
+			fill: false,
 		});
 	});
 

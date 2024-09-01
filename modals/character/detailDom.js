@@ -9,27 +9,27 @@ export const nodeTree = {
 				stars: undefined,
 				name: {
 					first: undefined,
-					second: undefined
+					second: undefined,
 				},
 				element: {
 					icon: undefined,
 					name: undefined,
-					help: undefined
+					help: undefined,
 				},
 				character: {
 					background: undefined,
-					image: undefined
+					image: undefined,
 				},
 				gear: {
 					weapon: undefined,
 					armor: undefined,
 					accessory: undefined,
-					more: undefined
+					more: undefined,
 				},
 				actions: {
 					levelUp: undefined,
-					potentialUp: undefined
-				}
+					potentialUp: undefined,
+				},
 			},
 			right: {
 				loading: undefined,
@@ -37,29 +37,29 @@ export const nodeTree = {
 					level: {
 						current: undefined,
 						slash: undefined,
-						max: undefined
+						max: undefined,
 					},
 					cap: undefined,
 					percent: {
 						bar: undefined,
-						number: undefined
+						number: undefined,
 					},
 					professorPoints: {
 						icon: undefined,
-						amount: undefined
-					}
+						amount: undefined,
+					},
 				},
 				rowTwo: {
 					type: {
 						icon: undefined,
 						name: undefined,
-						help: undefined
+						help: undefined,
 					},
 					mineral: {
 						icon: undefined,
-						amount: undefined
+						amount: undefined,
 					},
-					details: undefined
+					details: undefined,
 				},
 				separator: undefined,
 				details: {
@@ -67,41 +67,41 @@ export const nodeTree = {
 						metrics: {
 							attack: {
 								icon: undefined,
-								value: undefined
+								value: undefined,
 							},
 							health: {
 								icon: undefined,
-								value: undefined
+								value: undefined,
 							},
 							defense: {
 								icon: undefined,
-								value: undefined
-							}
+								value: undefined,
+							},
 						},
 						speed: {
 							attackSpeed: { value: undefined },
-							moveSpeed: { value: undefined }
+							moveSpeed: { value: undefined },
 						},
 						skill: {
 							skillOne: undefined,
 							skillTwo: undefined,
-							skillThree: undefined
+							skillThree: undefined,
 						},
 						ability: {
 							abilityOne: undefined,
-							abilityTwo: undefined
-						}
+							abilityTwo: undefined,
+						},
 					},
-					advanced: undefined
+					advanced: undefined,
 				},
 				actions: {
 					ultraEvolve: undefined,
 					hyperEvolve: undefined,
-					lock: undefined
-				}
-			}
-		}
-	}
+					lock: undefined,
+				},
+			},
+		},
+	},
 };
 
 export function populateNodeTree(obj, path = '') {

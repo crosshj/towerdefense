@@ -11,7 +11,7 @@ const defaultSettings = {
 	'alert-maxFeather': false,
 	'alert-guildRaid': false,
 	'alert-guild': false,
-	'alert-pvp': false
+	'alert-pvp': false,
 };
 export const getSettings = async () => {
 	const userSettingsSrc = localStorage.getItem(LS_NAME);
@@ -21,7 +21,7 @@ export const getSettings = async () => {
 	try {
 		return {
 			...clone(defaultSettings),
-			...JSON.parse(userSettingsSrc)
+			...JSON.parse(userSettingsSrc),
 		};
 	} catch (e) {
 		return clone(defaultSettings);
@@ -35,7 +35,7 @@ export const setSettings = async (newSettings) => {
 		settings = JSON.parse(userSettingsSrc);
 		settings = {
 			...settings,
-			...newSettings
+			...newSettings,
 		};
 	} catch (e) {}
 	localStorage.setItem(LS_NAME, JSON.stringify(settings));

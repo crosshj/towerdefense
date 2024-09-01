@@ -13,17 +13,17 @@ import { cacheFiles } from './serviceWorker/cacheFiles.js';
 import {
 	handleNotificationClick,
 	handlePush,
-	showNotification
+	showNotification,
 } from './serviceWorker/notifications.js';
 import {
 	backgroundSyncHandler,
 	periodicSyncHandler,
-	registerPeriodicSync
+	registerPeriodicSync,
 } from './serviceWorker/sync.js';
 import {
 	handleGetByToken,
 	handleSetByToken,
-	invalidateUserCache
+	invalidateUserCache,
 } from './serviceWorker/userHandler.js';
 
 self.addEventListener('install', (event) => {
@@ -48,7 +48,7 @@ self.addEventListener('message', async (event) => {
 	if (event?.data?.type === 'testNotification') {
 		showNotification({
 			title: 'Test Notification',
-			body: 'This is a test notification from TD!'
+			body: 'This is a test notification from TD!',
 		});
 	}
 });

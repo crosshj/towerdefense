@@ -6,7 +6,7 @@ export const showNotification = (data) => {
 		badge: 'assets/favicon.png',
 		icon: data?.icon || 'assets/towerDefenseIconTransparent.png',
 		tag: data.tag || 'teedee', //will replace other notifications with this tag
-		data: { url: data.url || 'https://teedee.us' }
+		data: { url: data.url || 'https://teedee.us' },
 	});
 };
 
@@ -43,7 +43,7 @@ const _handlePush = async (event) => {
 
 		const clientList = await clients.matchAll({
 			type: 'window',
-			includeUncontrolled: true
+			includeUncontrolled: true,
 		});
 
 		if (clientList.length <= 0) {
@@ -56,7 +56,7 @@ const _handlePush = async (event) => {
 		for (const client of clientList) {
 			client.postMessage({
 				type: 'PUSH_NOTIFICATION',
-				payload: data
+				payload: data,
 			});
 		}
 	} catch (error) {

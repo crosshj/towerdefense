@@ -41,7 +41,7 @@ const getSubscription = async () => {
 		);
 		subscription = await registration.pushManager.subscribe({
 			userVisibleOnly: true,
-			applicationServerKey: vapidPublicKey
+			applicationServerKey: vapidPublicKey,
 		});
 	}
 	return subscription;
@@ -69,12 +69,12 @@ const setupPushNotifications = async (_subscription) => {
 	await fetch('https://datamosh.vercel.app/api/teedee/notification/send', {
 		method: 'POST',
 		headers: {
-			'Content-Type': 'application/json'
+			'Content-Type': 'application/json',
 		},
 		body: JSON.stringify({
 			subscription,
-			payload: 'this is a test notification!'
-		})
+			payload: 'this is a test notification!',
+		}),
 	});
 };
 
@@ -107,7 +107,7 @@ const attachSettings = async () => {
 		'alert-maxFeather',
 		'alert-guildRaid',
 		'alert-guild',
-		'alert-pvp'
+		'alert-pvp',
 	];
 	for (const alert of alerts) {
 		const el = document.getElementById(`setting-${alert}`);
@@ -132,7 +132,7 @@ const attachSettings = async () => {
 			return;
 		}
 		navigator.serviceWorker.controller.postMessage({
-			type: 'testNotification'
+			type: 'testNotification',
 		});
 	});
 
@@ -205,7 +205,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 	const closeButton = document.querySelector('.close-button');
 	closeButton.addEventListener('mousedown', () => {
 		window.parent.postMessage({
-			_: 'navigate'
+			_: 'navigate',
 		});
 	});
 });

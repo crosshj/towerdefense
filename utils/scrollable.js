@@ -35,7 +35,7 @@ function drawBGClickCanvas({
 	canvas,
 	bgClickMap,
 	offsetX,
-	offsetY
+	offsetY,
 }) {
 	bgClickCanvas.width = canvas.clientWidth;
 	bgClickCanvas.height = canvas.clientHeight;
@@ -80,7 +80,7 @@ function getClick({
 	x: relativeX,
 	y: relativeY,
 	bgClickCanvas,
-	drawClickCanvas
+	drawClickCanvas,
 }) {
 	const c2h = (c) => {
 		const hex = c.toString(16);
@@ -141,7 +141,7 @@ const vertical = async (args) => {
 		scrollBottom,
 		clickMap,
 		clickHandle,
-		onScroll
+		onScroll,
 	} = args;
 
 	const background = await loadImage(image);
@@ -163,7 +163,7 @@ const vertical = async (args) => {
 				bgClickCanvas: target,
 				canvas,
 				bgClickMap,
-				offsetY
+				offsetY,
 			});
 		handleTap = (event) => {
 			const rect = canvas.getBoundingClientRect();
@@ -173,7 +173,7 @@ const vertical = async (args) => {
 				x,
 				y,
 				bgClickCanvas,
-				drawClickCanvas: () => drawClickCanvas(bgClickCanvas)
+				drawClickCanvas: () => drawClickCanvas(bgClickCanvas),
 			});
 			clickHandle(whichItem);
 		};
@@ -301,7 +301,7 @@ const horizontal = async (args) => {
 				bgClickCanvas: target,
 				canvas,
 				bgClickMap,
-				offsetX
+				offsetX,
 			});
 		handleTap = (event) => {
 			const rect = canvas.getBoundingClientRect();
@@ -311,7 +311,7 @@ const horizontal = async (args) => {
 				x,
 				y,
 				bgClickCanvas,
-				drawClickCanvas: () => drawClickCanvas(bgClickCanvas)
+				drawClickCanvas: () => drawClickCanvas(bgClickCanvas),
 			});
 			clickHandle(whichItem);
 		};
@@ -333,7 +333,7 @@ const horizontal = async (args) => {
 			onDraw({
 				ctx: bgCtx,
 				width: background.width,
-				height: background.height
+				height: background.height,
 			});
 		}
 		ctx.drawImage(

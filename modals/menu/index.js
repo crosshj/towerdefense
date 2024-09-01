@@ -15,7 +15,7 @@ const getNavigateTo = (el) => {
 		'my-team',
 		'tower',
 		'guild',
-		'lab'
+		'lab',
 	];
 	return permitted.find((x) => el.classList.contains(x));
 };
@@ -33,7 +33,7 @@ const icons = {
 	GACHA: SVGIcons.gacha,
 	TOWER: SVGIcons.tower,
 	GUILD: SVGIcons.guild,
-	LAB: SVGIcons.lab
+	LAB: SVGIcons.lab,
 };
 
 const setupMenuGrid = () => {
@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		}
 		window.parent.postMessage({
 			_: 'navigate',
-			src
+			src,
 		});
 	});
 });

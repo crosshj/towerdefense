@@ -3,7 +3,7 @@ const sendClientsProgress = async (progress) => {
 	clients.forEach((client) => {
 		client.postMessage({
 			type: 'progress',
-			progress
+			progress,
 		});
 	});
 };
@@ -59,7 +59,7 @@ export const cacheFiles = async (event) => {
 	for (let i = 0; i < filesToCache.length; i++) {
 		try {
 			const response = await fetch(filesToCache[i], {
-				cache: 'no-store'
+				cache: 'no-store',
 			});
 			if (!response.ok) {
 				throw new Error(

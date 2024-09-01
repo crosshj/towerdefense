@@ -7,15 +7,15 @@ export const getRewards = async () => {
 		coins: 4000,
 		exp: {
 			player: 12000,
-			unit: 12000
+			unit: 12000,
 		},
 		bonus: {
 			coin: { type: 'coin', probability: 1, amount: 5000 },
 			meteor: { type: 'effect', probability: 0.5 },
 			ice: { type: 'effect', probability: 0.5 },
 			tornado: { type: 'effect', probability: 0.5 },
-			invincible: { type: 'effect', probability: 0.5 }
-		}
+			invincible: { type: 'effect', probability: 0.5 },
+		},
 	};
 };
 
@@ -42,7 +42,7 @@ export default async () => {
 		color: towerColor2,
 		hp: 120000,
 		deployed: [],
-		team: hydrated
+		team: hydrated,
 	};
 
 	return {
@@ -52,19 +52,19 @@ export default async () => {
 			record: false,
 			field: {
 				height: 800,
-				width: 4000
+				width: 4000,
 			},
 			sounds: {
-				background: 'sunnyFieldBackground'
+				background: 'sunnyFieldBackground',
 			},
 			stage: {
-				background: 'backgroundIndustrial1'
+				background: 'backgroundIndustrial1',
 			},
 			towers: [undefined, opponentTower],
 			tick: 0,
 			missile: {
 				charge: 100,
-				chargeRate: 3
+				chargeRate: 3,
 			},
 			mineral: {
 				charge: 0, // level charge
@@ -72,8 +72,8 @@ export default async () => {
 				level: 1,
 
 				capacity: 170,
-				amount: 77
-			}
-		}
+				amount: 77,
+			},
+		},
 	};
 };

@@ -22,7 +22,7 @@ export default class Engine {
 			filter(throttle(throttleAmount, state)),
 			takeWhile(gameLoop),
 			takeWhile(render),
-			finalize(onGameOver)
+			finalize(onGameOver),
 		];
 
 		const loop = of(null, animationFrameScheduler).pipe(...gameSteps);

@@ -15,9 +15,9 @@ const updateLogin = async () => {
 		const opts = {
 			method: 'POST',
 			headers: {
-				'Content-Type': 'application/json'
+				'Content-Type': 'application/json',
 			},
-			body: JSON.stringify({ token: userToken })
+			body: JSON.stringify({ token: userToken }),
 		};
 		const update = await fetch(
 			'https://datamosh.vercel.app/api/teedee/loginUpdate',
@@ -52,7 +52,7 @@ const setupActionsNew = ({ gameStarted }) => {
 		}
 		window.parent.postMessage({
 			_: 'navigate',
-			src: '/pages/home/index.html'
+			src: '/pages/home/index.html',
 		});
 	});
 };
@@ -69,7 +69,7 @@ const setupActionsContinue = ({ gameStarted }) => {
 		setSessionActive();
 		window.parent.postMessage({
 			_: 'navigate',
-			src: '/pages/home/index.html'
+			src: '/pages/home/index.html',
 		});
 	});
 };
@@ -85,7 +85,7 @@ const setupActionLogin = ({ gameStarted }) => {
 		//setSessionActive();
 		window.parent.postMessage({
 			_: 'navigate',
-			src: '/account/login/index.html'
+			src: '/account/login/index.html',
 		});
 	});
 };
@@ -99,7 +99,7 @@ const setupActionSignUp = ({ gameStarted }) => {
 	button.addEventListener('pointerup', () => {
 		window.parent.postMessage({
 			_: 'navigate',
-			src: '/account/signup/index.html'
+			src: '/account/signup/index.html',
 		});
 	});
 };
@@ -109,19 +109,19 @@ document.addEventListener('DOMContentLoaded', async () => {
 	if (sessionActive) {
 		window.parent.postMessage({
 			_: 'navigate',
-			src: '/pages/home/index.html'
+			src: '/pages/home/index.html',
 		});
 		return;
 	}
 
 	window.parent.postMessage({
 		_: 'stats',
-		visibility: 'hidden'
+		visibility: 'hidden',
 	});
 	window.parent.postMessage({
 		_: 'title',
 		title: '',
-		visibility: 'hidden'
+		visibility: 'hidden',
 	});
 
 	const user = await getUser();

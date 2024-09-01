@@ -14,15 +14,15 @@ async function sendNotification({ subscription, player, title, content }) {
 		{
 			method: 'POST',
 			headers: {
-				'Content-Type': 'application/json'
+				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({
 				subscription,
 				player,
 				title,
 				urgency: 'high', // very-low, low, normal, or high
-				payload: content
-			})
+				payload: content,
+			}),
 		}
 	)
 		.then((x) => x.json())
@@ -72,7 +72,7 @@ const attachUsersList = async () => {
 		const result = await sendNotification({
 			player: selected,
 			title: messageTitleEl.value,
-			content: messageTextEl.value
+			content: messageTextEl.value,
 		});
 		// todo hide loading
 		// update results element

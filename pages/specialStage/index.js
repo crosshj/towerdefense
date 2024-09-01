@@ -7,7 +7,7 @@ const setup = async () => {
 	const bg = await canvasHorizontal({
 		parent: document.body,
 		image: '/pages/specialStage/background.png',
-		height: 500
+		height: 500,
 	});
 
 	window.parent.postMessage({
@@ -15,12 +15,12 @@ const setup = async () => {
 		feathers: true,
 		gems: true,
 		coins: true,
-		friendPoints: false
+		friendPoints: false,
 	});
 	window.parent.postMessage({
 		_: 'title',
 		title: pageTitle,
-		visibility: 'visible'
+		visibility: 'visible',
 	});
 	window.parent.postMessage({ _: 'loaded' });
 };

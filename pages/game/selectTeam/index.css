@@ -295,7 +295,9 @@ button {
 			border: 1px solid;
 			border-radius: 7px;
 			background: #283252;
-			box-shadow: inset 0 -3px #0000004f, inset 0 1px #fff2;
+			box-shadow:
+				inset 0 -3px #0000004f,
+				inset 0 1px #fff2;
 			overflow: hidden;
 			display: flex;
 			justify-content: center;
@@ -310,7 +312,9 @@ button {
 		.filled {
 			position: relative;
 			background: #202944;
-			box-shadow: 0 0 black, inset 0 0 8px #000000ba;
+			box-shadow:
+				0 0 black,
+				inset 0 0 8px #000000ba;
 			.stars {
 				color: yellow;
 				font-size: 10px;
@@ -423,7 +427,9 @@ button {
 			min-width: 200px;
 			padding-block: 7px;
 			border: 0;
-			box-shadow: inset 0 -5px #1496bd, inset 0 3px #fff3;
+			box-shadow:
+				inset 0 -5px #1496bd,
+				inset 0 3px #fff3;
 			border: 1px solid black;
 		}
 		.options {
@@ -445,7 +451,9 @@ button {
 				}
 				&.selected {
 					background: #b3c4cf;
-					box-shadow: 0 0 17px white, 0 0 11px orange;
+					box-shadow:
+						0 0 17px white,
+						0 0 11px orange;
 				}
 			}
 			.speedDouble {

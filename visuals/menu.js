@@ -84,7 +84,7 @@ const createMenu = async () => {
 		coreSounds.play('click', 1);
 		startGame({
 			which: demoChoiceSelect.value,
-			menu
+			menu,
 		});
 	});
 };

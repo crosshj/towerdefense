@@ -15,12 +15,12 @@ const getMissileTarget = (opponent) => {
 	if (!nearest) {
 		return {
 			x: opponent.x,
-			y: MISSILE_START_HEIGHT
+			y: MISSILE_START_HEIGHT,
 		};
 	}
 	return {
 		x: nearest.x,
-		y: MISSILE_START_HEIGHT
+		y: MISSILE_START_HEIGHT,
 	};
 };
 
@@ -44,12 +44,12 @@ export const spawnMissile = (state, source = 'attacker') => {
 	const thisMissile = {
 		start: {
 			x: self.x + self.dims[0] / 2,
-			y: MISSILE_START_HEIGHT
+			y: MISSILE_START_HEIGHT,
 		},
 		x: self.x + self.dims[0] / 2,
 		y: MISSILE_START_HEIGHT,
 		target: getMissileTarget(opponent),
-		source
+		source,
 	};
 	thisMissile.angle = getMissileAngle(thisMissile);
 	state.missile.instances.push(thisMissile);
@@ -119,5 +119,5 @@ export const updateMissileDamage = (state) => {
 export default {
 	spawnMissile,
 	updateMissiles,
-	updateMissileDamage
+	updateMissileDamage,
 };

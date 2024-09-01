@@ -124,7 +124,7 @@ const handleClickable = async (e) => {
 	);
 	if (classList.includes('menu')) {
 		showModal({
-			src: `/modals/menu/index.html`
+			src: `/modals/menu/index.html`,
 		});
 		return;
 	}
@@ -171,14 +171,14 @@ window.addEventListener('message', async function (event) {
 		const statsContainer = document.querySelector('.container .stats');
 		statsElement({
 			container: statsContainer,
-			...args
+			...args,
 		});
 		return;
 	}
 	if (_ === 'statsRefresh') {
 		const statsContainer = document.querySelector('.container .stats');
 		refreshStats({
-			container: statsContainer
+			container: statsContainer,
 		});
 		return;
 	}
@@ -216,7 +216,7 @@ const registerServiceWorker = async () => {
 		.register('/sw.js', {
 			scope: '/',
 			type: 'module',
-			updateViaCache: 'none'
+			updateViaCache: 'none',
 		})
 		.catch((error) => {
 			console.log('Service Worker registration failed:', error);
@@ -235,7 +235,7 @@ const onLoaded = async () => {
 	const isWeb = params?.webOnly + '' === 'true';
 	const isLocal = document.location.host.startsWith('127.0.0.1');
 	const install = await installable({
-		onInstall: () => document.location.reload()
+		onInstall: () => document.location.reload(),
 	});
 	if (['fullscreen', 'standalone'].includes(install) || isLocal || isWeb) {
 		await registerServiceWorker();

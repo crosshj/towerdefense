@@ -44,8 +44,8 @@ const enemyState = {
 		chargeRate: 20, //cooldown rate
 		amount: 0,
 		level: 1,
-		capacity: mineralMap[0].amount
-	}
+		capacity: mineralMap[0].amount,
+	},
 };
 
 export const enemyOneSpawnTicker = (state, tower) => {

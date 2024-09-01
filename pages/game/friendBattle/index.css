@@ -44,7 +44,9 @@ custom-select {
 	aspect-ratio: 1 / 1;
 	border-radius: 50%;
 	background: #0003;
-	box-shadow: inset 1px 1px 3px black, 1px 1px 3px white;
+	box-shadow:
+		inset 1px 1px 3px black,
+		1px 1px 3px white;
 	&.selected {
 		background: yellow;
 		display: flex;
@@ -58,7 +60,8 @@ custom-select {
 			background: #d7d7d7;
 			border-radius: 50%;
 			box-shadow:
-			 /* creates highlight */ inset 5px -4px 5px 0px black,
+			 /* creates highlight */
+				inset 5px -4px 5px 0px black,
 				/*    dark border */ inset -1px 1px 0px black;
 		}
 	}
@@ -265,7 +268,9 @@ button {
 			margin-top: 20px;
 			height: 75%;
 			border-radius: 10px;
-			box-shadow: 2px 2px 5px black, inset 0 2px #ffffff80;
+			box-shadow:
+				2px 2px 5px black,
+				inset 0 2px #ffffff80;
 
 			pointer-events: all;
 			& > * {
@@ -377,7 +382,9 @@ button {
 		min-width: 200px;
 		padding-block: 7px;
 		border: 0;
-		box-shadow: inset 0 -5px #1496bd, inset 0 3px #fff3;
+		box-shadow:
+			inset 0 -5px #1496bd,
+			inset 0 3px #fff3;
 		border: 1px solid black;
 		&.disabled {
 			filter: grayscale() brightness(0.8);

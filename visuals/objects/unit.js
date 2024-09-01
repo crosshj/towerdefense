@@ -39,7 +39,7 @@ export const getCharRenderer = ({
 	state,
 	ctx,
 	SCALAR,
-	healthBar
+	healthBar,
 }) => {
 	const bonedVisual = ({ state, ctx, unit }) => {
 		const { id, x: centerX, hp, hpMax, type, target } = unit;
@@ -52,7 +52,7 @@ export const getCharRenderer = ({
 			y: bottom(SCALAR(frame.height * scale)) + SCALAR(10),
 			width: SCALAR(frame.width * scale),
 			height: SCALAR(frame.height * scale),
-			img: frame
+			img: frame,
 		};
 		if (type === 'defender') {
 			sprite.img = flipCanvasHorizontal(sprite.img);
@@ -70,7 +70,7 @@ export const getCharRenderer = ({
 				hp,
 				hpMax,
 				x: centerX,
-				width: 20
+				width: 20,
 			});
 		if (!state.paused) {
 			animation.advanceTime();

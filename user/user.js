@@ -8,13 +8,13 @@ const rankToGrade = {
 	2: 'master',
 	3: 'smaster',
 	4: 'umaster',
-	5: 'legend'
+	5: 'legend',
 };
 
 const defaultValue = {
 	name: 'Anonymous',
 	rank: 1,
-	exp: 0
+	exp: 0,
 };
 
 export const getUserFromAPI = async () => {
@@ -25,9 +25,9 @@ export const getUserFromAPI = async () => {
 		const opts = {
 			method: 'POST',
 			headers: {
-				'Content-Type': 'application/json'
+				'Content-Type': 'application/json',
 			},
-			body: JSON.stringify({ token: userToken })
+			body: JSON.stringify({ token: userToken }),
 		};
 		const user = await fetch(
 			'https://datamosh.vercel.app/api/teedee/players/getByToken',
@@ -49,12 +49,12 @@ export const updateUserFromAPI = async (data) => {
 		const opts = {
 			method: 'POST',
 			headers: {
-				'Content-Type': 'application/json'
+				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({
 				token: userToken,
-				...data
-			})
+				...data,
+			}),
 		};
 		const user = await fetch(
 			'https://datamosh.vercel.app/api/teedee/players/setByToken',
@@ -81,7 +81,7 @@ export const getUser = async () => {
 	try {
 		user = {
 			...clone(defaultValue),
-			...JSON.parse(lsValue)
+			...JSON.parse(lsValue),
 		};
 	} catch (e) {
 		user = clone(defaultValue);
@@ -97,7 +97,7 @@ export const getUser = async () => {
 			JSON.stringify({
 				name: user.name,
 				rank: user.rank,
-				exp: user.exp
+				exp: user.exp,
 			})
 		);
 	}
@@ -109,7 +109,7 @@ export const getUser = async () => {
 		grade: rankToGrade[user.rank],
 		levelInfo: getUserLevelInfo(user.exp, user.rank),
 		image,
-		apiUser
+		apiUser,
 	};
 	return thisUser;
 };
@@ -127,7 +127,7 @@ export const addUserExperience = async (expAmount) => {
 		...(apiUser?.data || {}),
 		rank: value.rank,
 		exp: value.exp,
-		expModifiedDate: new Date()
+		expModifiedDate: new Date(),
 	});
 	//TODO: when exp causes rank to bump
 

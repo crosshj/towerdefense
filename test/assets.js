@@ -32,7 +32,7 @@ const testSlices = async () => {
 
 const testTeeRun = async () => {
 	const {
-		images: { teeRunBlue: teeRun }
+		images: { teeRunBlue: teeRun },
 	} = await loadAssets({ root: '../' });
 	let { width, height } = teeRun[0];
 	[width, height] = [width, height].map((x) => x * 0.5);
@@ -59,7 +59,7 @@ const testTeeRun = async () => {
 
 const testTeeAttack = async () => {
 	const {
-		images: { teeAttackBlue: teeAttack }
+		images: { teeAttackBlue: teeAttack },
 	} = await loadAssets({ root: '../' });
 	let { width, height } = teeAttack[0];
 	[width, height] = [width, height].map((x) => x * 0.5);

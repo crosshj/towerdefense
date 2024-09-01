@@ -13,7 +13,7 @@ const progressClasses = [
 	'p-70',
 	'p-80',
 	'p-90',
-	'p-100'
+	'p-100',
 ];
 
 const updateProgress = (el, amount) => {
@@ -37,7 +37,7 @@ const createTopControls = ({
 	controls,
 	pauseScreen,
 	showEffects,
-	state
+	state,
 } = {}) => {
 	const top = document.createElement('div');
 	top.classList.add('controls-top');
@@ -133,7 +133,7 @@ const createTopControls = ({
 					}
 					updateProgress(e.target, currentProgress);
 				}, 1000);
-			}
+			},
 		});
 	});
 
@@ -204,7 +204,7 @@ const createBottomControls = ({ root, state }) => {
 					mineralButtonProgress.style.display = 'none';
 				}
 				mineralButtonLevelIndicator.innerText = levelText;
-			}
+			},
 		});
 	});
 
@@ -238,7 +238,7 @@ const createBottomControls = ({ root, state }) => {
 				cost: el.querySelector('.cost .indicator'),
 				costAmount: el.querySelector('.cost .indicator .number'),
 				progress: el.querySelector('.cost .progress'),
-				progressBar: el.querySelector('.cost .progress-bar')
+				progressBar: el.querySelector('.cost .progress-bar'),
 			};
 			return element;
 		}
@@ -316,7 +316,7 @@ const createBottomControls = ({ root, state }) => {
 			const id = target.dataset.id;
 			state.actions.deployUnit({
 				unitId: id,
-				tower: attackerTower
+				tower: attackerTower,
 			});
 		}
 	});
@@ -338,7 +338,7 @@ export default class Controls {
 		pauseScreen,
 		showTicker,
 		showScreenInfo,
-		showEffects
+		showEffects,
 	} = {}) {
 		const root = getDomRoot();
 
@@ -354,7 +354,7 @@ export default class Controls {
 			state,
 			controls: this,
 			pauseScreen,
-			showEffects
+			showEffects,
 		});
 		this.bottom = createBottomControls({ root, state });
 
@@ -380,7 +380,7 @@ export default class Controls {
 			this.bottom.updateUnitCanDeploy(
 				{
 					...unit,
-					index: unitIndex
+					index: unitIndex,
 				},
 				state
 			);
@@ -389,7 +389,7 @@ export default class Controls {
 			}
 			this.bottom.updateUnitCooldown({
 				...unit,
-				index: unitIndex
+				index: unitIndex,
 			});
 		}
 	}

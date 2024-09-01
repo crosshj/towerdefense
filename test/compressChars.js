@@ -4,7 +4,7 @@ import {
 	compressChars,
 	compressTeams,
 	decompressChars,
-	decompressTeams
+	decompressTeams,
 } from '../utils/compress.js';
 
 const byteSize = (input) => {
@@ -32,12 +32,12 @@ const onLoaded = async () => {
 	const size = {
 		characters: {
 			compressed: byteSize(characters),
-			decompressed: byteSize(decomChars)
+			decompressed: byteSize(decomChars),
 		},
 		teams: {
 			compressed: byteSize(teams),
-			decompressed: byteSize(decomTeams)
-		}
+			decompressed: byteSize(decomTeams),
+		},
 	};
 	size.characters.savings = (
 		((size.characters.decompressed - size.characters.compressed) /

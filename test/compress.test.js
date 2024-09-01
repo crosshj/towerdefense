@@ -4,7 +4,7 @@ import {
 	compressChars,
 	compressTeams,
 	decompressChars,
-	decompressTeams
+	decompressTeams,
 } from '../utils/compress.js';
 
 //setAutoRefresh(5000);

@@ -9,18 +9,18 @@ const onLoaded = () => {
 
 	window.parent.postMessage({
 		_: 'stats',
-		visibility: 'hidden'
+		visibility: 'hidden',
 	});
 	window.parent.postMessage({
 		_: 'title',
-		visibility: 'hidden'
+		visibility: 'hidden',
 	});
 
 	const gameOver = async ({ state }) => {
 		const status = state.towers[1].status === 'dead' ? 'win' : 'lose';
 		window.parent.postMessage({
 			_: 'navigate',
-			src: `/modals/gameOver/index.html?status=${status}&zone=${params.zone}`
+			src: `/modals/gameOver/index.html?status=${status}&zone=${params.zone}`,
 		});
 
 		const showGameResults = async () => {
@@ -28,7 +28,7 @@ const onLoaded = () => {
 			const src = `/pages/game/results/index.html?${queryString}&zone=${params.zone}`;
 			window.parent.postMessage({
 				_: 'navigate',
-				src
+				src,
 			});
 		};
 		if (status === 'win') {
@@ -43,13 +43,13 @@ const onLoaded = () => {
 			// 	_: 'navigate',
 			// 	src: '/pages/mainStage/index.html'
 			// });
-		}
+		},
 	};
 	startGame({
 		zone: params.zone,
 		params,
 		menu,
-		gameOver
+		gameOver,
 	});
 	window.parent.postMessage({ _: 'loaded' });
 };

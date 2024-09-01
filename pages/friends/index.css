@@ -204,7 +204,9 @@ button {
 			margin-top: 20px;
 			height: 75%;
 			border-radius: 10px;
-			box-shadow: 2px 2px 5px black, inset 0 2px #ffffff80;
+			box-shadow:
+				2px 2px 5px black,
+				inset 0 2px #ffffff80;
 			&.message {
 				background: #9b7a52;
 				color: #ded4d4;
