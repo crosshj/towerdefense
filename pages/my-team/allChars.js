@@ -15,8 +15,15 @@ const useSavedSort = () => {
 const notEqualIcon = SVGIcons.notEqual();
 
 export const attachAllCharacters = (args) => {
-	const { characters, sortBy, getCharImage, dragStart, dragEnd, isUsed } =
-		args;
+	const {
+		characters,
+		sortBy,
+		getCharImage,
+		dragStart,
+		dragEnd,
+		isUsed,
+		params,
+	} = args;
 
 	const allCharactersDiv = document.getElementById('all-characters');
 	allCharactersDiv.innerHTML = '';
@@ -98,7 +105,7 @@ export const attachAllCharacters = (args) => {
 			handlePointerEvents({
 				element: charIcon,
 				onTap: () => {
-					const src = `/modals/character/detail.html?id=${character.id}`;
+					const src = `/modals/character/detail.html?id=${character.id}&back=${params?.back || ''}`;
 					setCurrentCharCache({
 						...character,
 						imageUri: getCharImage(character),

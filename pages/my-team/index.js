@@ -82,6 +82,10 @@ const characterUpdater =
 	};
 
 document.addEventListener('DOMContentLoaded', async () => {
+	const params = Object.fromEntries(
+		new URLSearchParams(window.location.search)
+	);
+
 	let switchTeam, updateCharacters;
 	let draggingEl;
 
@@ -136,6 +140,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 		getCharImage,
 		dragStart,
 		dragEnd,
+		params: {
+			...params,
+			back: '/pages/my-team/index.html',
+		},
 	});
 	controls.onSort((sortBy) => {
 		attachAllCharacters({
@@ -145,6 +153,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 			getCharImage,
 			dragStart,
 			dragEnd,
+			params: {
+				...params,
+				back: '/pages/my-team/index.html',
+			},
 		});
 	});
 	// listens for changes to characters and updates raidTeam
@@ -159,6 +171,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 				getCharImage,
 				dragStart,
 				dragEnd,
+				params: {
+					...params,
+					back: '/pages/my-team/index.html',
+				},
 			});
 			return;
 		}
@@ -187,7 +203,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 		slot.addEventListener('pointerup', () => {
 			if (draggingEl) return;
 			if (!slot.dataset.id) return;
-			const src = `/modals/character/detail.html?id=${slot.dataset.id}`;
+			const src = `/modals/character/detail.html?id=${slot.dataset.id}&back=/pages/my-team/index.html`;
 			const character = characters.find((x) => x.id === slot.dataset.id);
 			setCurrentCharCache({
 				...character,
@@ -239,10 +255,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 		await saveTeam({ teams });
 		updateCharacters && updateCharacters();
 	}
-
-	const params = Object.fromEntries(
-		new URLSearchParams(window.location.search)
-	);
 
 	switchTeam = teamSwitcher({
 		slots,

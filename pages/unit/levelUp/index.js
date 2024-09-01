@@ -1,7 +1,10 @@
 import { getCharacters, upgradeCharacter } from '../../../user/characters.js';
 import { calculateCombineResults } from '../../../utils/units.js';
 import { characterImageGetter } from '../../../visuals/assets/character.js';
-import { getCurrentCharCache } from '../../../utils/cache.js';
+import {
+	getCurrentCharCache,
+	setCurrentCharCache,
+} from '../../../utils/cache.js';
 import { attachAllCharacters, attachControls } from '../../my-team/allChars.js';
 import { getTeams } from '../../../user/teams.js';
 
@@ -133,7 +136,12 @@ const setup = async () => {
 	unitImage.src = currentChar.imageUri;
 	unitDetailsEl.append(unitImage);
 	unitDetailsEl.addEventListener('pointerup', (e) => {
-		console.log('TODO: pop up a details modal!');
+		const src = `/modals/character/detail.html?id=${currentChar.id}&back=${params?.back || ''}`;
+		setCurrentCharCache(currentChar);
+		window.parent.postMessage({
+			_: 'navigate',
+			src,
+		});
 	});
 
 	let characters = [];
@@ -182,6 +190,7 @@ const setup = async () => {
 		getCharImage,
 		dragStart,
 		dragEnd,
+		params,
 	});
 	controls.onSort((sortBy, { sameUnit = false } = {}) => {
 		attachAllCharacters({
@@ -192,6 +201,7 @@ const setup = async () => {
 			getCharImage,
 			dragStart,
 			dragEnd,
+			params,
 		});
 	});
 
@@ -251,6 +261,7 @@ const setup = async () => {
 		_: 'title',
 		title: pageTitle,
 		visibility: 'visible',
+		back: params.back,
 	});
 
 	window.parent.postMessage({ _: 'loaded' });

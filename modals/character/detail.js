@@ -81,7 +81,7 @@ const updateValues = async ({ params, character, nodeTree }) => {
 	right.loading.style.display = 'none';
 };
 
-const attachHandlers = (nodeTree) => {
+const attachHandlers = (nodeTree, params) => {
 	const { container } = nodeTree;
 	const {
 		content: { left, right },
@@ -92,48 +92,49 @@ const attachHandlers = (nodeTree) => {
 	left.actions.levelUp.addEventListener('pointerup', () => {
 		window.parent.postMessage({
 			_: 'navigate',
-			src: '/pages/unit/levelUp/',
+			src: `/pages/unit/levelUp/index.html?back=${params.back || ''}`,
 		});
 	});
 	left.actions.potentialUp.addEventListener('pointerup', () => {
 		window.parent.postMessage({
 			_: 'navigate',
-			src: '/pages/unit/potentialUp/',
+			src: `/pages/unit/potentialUp/?back=${params.back || ''}`,
 		});
 	});
 	right.actions.hyperEvolve.addEventListener('pointerup', () => {
 		window.parent.postMessage({
 			_: 'navigate',
-			src: '/pages/unit/hyperEvolve/',
+			src: `/pages/unit/hyperEvolve/?back=${params.back || ''}`,
 		});
 	});
 	right.actions.ultraEvolve.addEventListener('pointerup', () => {
 		window.parent.postMessage({
 			_: 'navigate',
-			src: '/pages/unit/ultraEvolve/',
+			src: `/pages/unit/ultraEvolve/?back=${params.back || ''}`,
 		});
 	});
 	left.gear.weapon.addEventListener('pointerup', () => {
 		window.parent.postMessage({
 			_: 'navigate',
-			src: '/pages/gear/?weapon=true',
+			src: `/pages/gear/?weapon=true&back=${params.back || ''}`,
 		});
 	});
 	left.gear.accessory.addEventListener('pointerup', () => {
 		window.parent.postMessage({
 			_: 'navigate',
-			src: '/pages/gear/?accessory=true',
+			src: `/pages/gear/?accessory=true&back=${params.back || ''}`,
 		});
 	});
 	left.gear.armor.addEventListener('pointerup', () => {
 		window.parent.postMessage({
 			_: 'navigate',
-			src: '/pages/gear/?armor=true',
+			src: `/pages/gear/?armor=true&back=${params.back || ''}`,
 		});
 	});
 	left.gear.more.addEventListener('pointerup', () => {
 		window.parent.postMessage({
 			_: 'navigate',
+			src: `/pages/gear/?back=${params.back || ''}`,
 		});
 	});
 	closeButton.addEventListener('pointerup', () => {
@@ -168,6 +169,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 	const params = Object.fromEntries(
 		new URLSearchParams(window.location.search)
 	);
+	console.log({ params });
 	const cachedChar = getCurrentCharCache();
 	// const character = cachedChar || (await getCharacterFromTeam(params));
 	// window.character = character;
@@ -175,7 +177,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 	const container = document.querySelector('.container ');
 	populateNodeTree(nodeTree);
-	attachHandlers(nodeTree);
+	attachHandlers(nodeTree, params);
 	attachLock({
 		character: cachedChar,
 		element: nodeTree.container.content.right.actions.lock,
