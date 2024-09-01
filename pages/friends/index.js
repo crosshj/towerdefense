@@ -1,6 +1,6 @@
 import { getFriends } from '../../user/getFriends.js';
 
-document.addEventListener('DOMContentLoaded', async () => {
+const domLoaded = async () => {
 	window.parent.postMessage({
 		_: 'title',
 		title: 'FRIENDS',
@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 	const friendsList = document.querySelector('.items-list');
 	const friends = await getFriends();
+	console.log({ friends });
 
 	const friendsTotal = document.querySelector('.sub-header .total');
 	friendsTotal.innerHTML = `TOTAL: ${friends.length}`;
@@ -37,7 +38,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 			<div class="item friend">
 				<div class="card">
 					<div class="flag grade-${friend.grade}">${friend.grade}</div>
-					<div class="icon"></div>
+					<div class="icon">
+						<img src="${friend.image}" />
+					</div>
 					<div class="level">
 						Lv. ${friend.level}
 					</div>
@@ -63,4 +66,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 	});
 
 	window.parent.postMessage({ _: 'loaded' });
-});
+};
+
+document.addEventListener('DOMContentLoaded', domLoaded);

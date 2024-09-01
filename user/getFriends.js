@@ -1,4 +1,5 @@
 import { getUserLevelInfo } from '../utils/experience.js';
+import { getUserImage } from './user.js';
 
 const gradeOrder = ['N', 'M', 'S', 'U', 'L'];
 function sort(players) {
@@ -24,6 +25,7 @@ const PlayerToFriend = (player) => {
 		displayName: player.name,
 		level: levelInfo.level,
 		grade: levelInfo.gradeFriendly[0],
+		image: player.image,
 	};
 };
 
@@ -33,6 +35,11 @@ export const getFriends = async () => {
 		'https://datamosh.vercel.app/api/teedee/players'
 	).then((x) => x.json());
 	players = players.filter((x) => typeof x.last_login === 'string');
+
+	for (const player of players) {
+		console.log(player);
+		player.image = await getUserImage(player);
+	}
 
 	return players.map(PlayerToFriend);
 };

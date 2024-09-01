@@ -97,6 +97,12 @@ const navigation = () => `
 	</div>
 `;
 
+const updateUserImage = async () => {
+	const user = await getUser();
+	const userImageEl = document.querySelector('.controls .user .image');
+	userImageEl.style.backgroundImage = `url("${user.image}")`;
+};
+
 const drawControls = async () => {
 	const user = await getUser();
 	const container = document.createElement('div');
@@ -347,6 +353,11 @@ const setup = async () => {
 		if (_ === 'broadcastCharactersUpdate') {
 			// console.log('home knows characters are updated');
 			raidTeam = await getTeam('Team 1');
+			return;
+		}
+		if (_ === 'broadcastUserIconUpdate') {
+			console.log('home knows user icon updated');
+			await updateUserImage();
 			return;
 		}
 	});
