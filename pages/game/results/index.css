@@ -5,10 +5,23 @@ body {
 	margin: 0;
 	padding: 0;
 	overscroll-behavior: none;
+	cursor: pointer;
 
 	--rows: 10% 27% 1fr;
 	--dark-bar-top: 37%;
 	--modal-bg-color: #ae6333;
+}
+
+.tapToContinue {
+	color: #aaa;
+	position: absolute;
+	bottom: 12px;
+	width: 100%;
+	text-align: center;
+	font-size: 18px;
+	&.hidden {
+		display: none;
+	}
 }
 
 .background {
@@ -140,9 +153,10 @@ body {
 		height: 200px;
 		color: white;
 		background: var(--modal-bg-color);
-		display: flex;
-		justify-content: center;
 		padding: 15px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
 	}
 }
 

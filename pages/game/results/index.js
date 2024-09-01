@@ -176,6 +176,42 @@ const showClearBonus = async (rewards) => {
 	});
 };
 
+const goBack = ({ params }) => {
+	let src = '/pages/mainStage/index.html';
+	if (params.zone === 'friendBattle') {
+		src = '/pages/pvp/';
+	}
+	window.parent.postMessage({
+		_: 'navigate',
+		src,
+	});
+};
+
+const url = '/pages/game/selectTeam/index.html?number=';
+const goNext = ({ params }) => {
+	if (params.number + '' === '100') {
+		return goBack({ params });
+	}
+	let number = Number(params.number) + 1;
+	if (params.zone === 'friendBattle') {
+		src = '/pages/pvp/';
+	}
+	window.parent.postMessage({
+		_: 'navigate',
+		src: url + number,
+	});
+};
+const goRetry = ({ params }) => {
+	let number = Number(params.number);
+	if (params.zone === 'friendBattle') {
+		src = '/pages/pvp/';
+	}
+	window.parent.postMessage({
+		_: 'navigate',
+		src: url + number,
+	});
+};
+
 document.addEventListener('DOMContentLoaded', async () => {
 	const params = Object.fromEntries(
 		new URLSearchParams(window.location.search)
@@ -206,17 +242,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 	});
 	window.parent.postMessage({ _: 'loaded' });
 
-	document.body.addEventListener('mousedown', () => {
-		let src = '/pages/mainStage/index.html';
-		if (params.zone === 'friendBattle') {
-			src = '/pages/pvp/';
-		}
-		window.parent.postMessage({
-			_: 'navigate',
-			src,
-		});
-	});
-
 	await animateProgressBar(
 		Math.max(0, expStartPercent),
 		Math.min(expEndPercent, 100)
@@ -229,12 +254,17 @@ document.addEventListener('DOMContentLoaded', async () => {
 	const nextStep = await showClearBonus(rewards);
 
 	if (nextStep === 'retry') {
-		console.log('TODO: play again!');
+		goRetry({ params });
 		return;
 	}
 	if (nextStep === 'next') {
-		console.log('TODO: go to next level!');
+		goNext({ params });
 		return;
 	}
-	console.log('what happens when okay is clicked?');
+
+	document.querySelector('.tapToContinue').classList.remove('hidden');
+
+	document.body.addEventListener('mousedown', () => {
+		goBack({ params });
+	});
 });

@@ -1,4 +1,4 @@
-import { getLocationMap } from '../../../utils/locations.js';
+import { getLocationMap, getZoneFromNumber } from '../../../utils/locations.js';
 import { getTeam } from '/utils/getTeam.js';
 import { getEffects } from '../../../user/effects.js';
 import { SVGIcons } from '../../../assets/icons.svg.js';
@@ -133,6 +133,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 		new URLSearchParams(window.location.search)
 	);
 	console.log({ params });
+
+	if (!params.zone && typeof params.number !== 'undefined') {
+		params.zone = getZoneFromNumber(params.number);
+	}
+
 	const collection = await getCollection();
 
 	const options = {};
