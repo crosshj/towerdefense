@@ -8,6 +8,7 @@ body {
 
 	--rows: 10% 27% 1fr;
 	--dark-bar-top: 37%;
+	--modal-bg-color: #ae6333;
 }
 
 .background {
@@ -51,6 +52,7 @@ body {
 	font-size: 13px;
 	margin-top: -112px;
 	color: white;
+	display: none;
 }
 
 .container {
@@ -92,6 +94,7 @@ body {
 		margin-top: 28px;
 		opacity: 0.5;
 		color: white;
+		display: none;
 	}
 
 	.team {
@@ -111,6 +114,88 @@ body {
 				text-wrap: nowrap;
 				&.hidden {
 					display: none;
+				}
+			}
+		}
+	}
+}
+
+.userLevelUp {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100vw;
+	height: 100vh;
+	background: #0006;
+	z-index: 2;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	&.hidden {
+		display: none;
+	}
+	.userLevelUpMessage {
+		width: 200px;
+		height: 200px;
+		color: white;
+		background: var(--modal-bg-color);
+		display: flex;
+		justify-content: center;
+		padding: 15px;
+	}
+}
+
+.rewardsPopover {
+	--retryButtonColor: #7323b5;
+	--okayButtonColor: #00a330;
+	--nextButtonColor: #009ba9;
+
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100vw;
+	height: 100vh;
+	background: #0006;
+	z-index: 2;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	&.hidden {
+		display: none;
+	}
+	.rewardsPopoverMessage {
+		width: 200px;
+		height: 200px;
+		color: white;
+		background: var(--modal-bg-color);
+		display: flex;
+		justify-content: center;
+		padding: 15px;
+		flex-direction: column;
+		justify-content: space-between;
+		.rewardsPopoverContent {
+			display: flex;
+			flex-direction: column;
+		}
+		.actions {
+			display: flex;
+			gap: 5px;
+			button {
+				flex: 1;
+				height: 31px;
+				border: 1px solid black;
+				border-radius: 7px;
+				color: white;
+				&.retryButton {
+					background: var(--retryButtonColor);
+				}
+				&.okayButton {
+					background: var(--okayButtonColor);
+				}
+				&.nextButton {
+					background: var(--nextButtonColor);
 				}
 			}
 		}

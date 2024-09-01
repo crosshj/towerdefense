@@ -1,4 +1,9 @@
-import { decompressChars, decompressTeams } from '../utils/compress.js';
+import {
+	compressChars,
+	decompressChars,
+	decompressTeams,
+} from '../utils/compress.js';
+import { defaultCharacters } from '../$data/defaultCharacters.js';
 
 export async function getDefenseTeam({ player }) {
 	let error;
@@ -7,11 +12,11 @@ export async function getDefenseTeam({ player }) {
 		{
 			method: 'POST',
 			headers: {
-				'Content-Type': 'application/json'
+				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({
-				player
-			})
+				player,
+			}),
 		}
 	)
 		.then((x) => x.json())
@@ -20,13 +25,18 @@ export async function getDefenseTeam({ player }) {
 		});
 	if (error) return { error };
 
-	if (!result.characters || !result.teams) {
+	// if (!result.characters) {
+	// 	result.characters = compressChars(defaultCharacters());
+	// }
+
+	if (!result.teams) {
 		return {
 			name: result.name,
 			exp: result.exp,
 			rank: result.rank,
 			defense: undefined,
-			error: 'error getting defense team from DB'
+			result,
+			error: 'error getting defense team from DB',
 		};
 	}
 
@@ -38,7 +48,7 @@ export async function getDefenseTeam({ player }) {
 		for (const i of Object.keys(Defense[subTeam])) {
 			Defense[subTeam][i] = {
 				...characters.find((x) => x.id === Defense[subTeam][i]?.id),
-				id: `defense-${subTeam}-${i}`
+				id: `defense-${subTeam}-${i}`,
 			};
 		}
 	}
@@ -47,6 +57,6 @@ export async function getDefenseTeam({ player }) {
 		name: result.name,
 		exp: result.exp,
 		rank: result.rank,
-		defense: Defense
+		defense: Defense,
 	};
 }

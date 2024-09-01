@@ -2,7 +2,7 @@ import { getStageRewards } from '../../../stages/index.js';
 import { addCharactersEXP, addNewCharacter } from '../../../user/characters.js';
 import { updateEffectsCount } from '../../../user/effects.js';
 import { addStats } from '../../../user/stats.js';
-import { addUserExperience } from '../../../user/user.js';
+import { addUserExperience, getUser } from '../../../user/user.js';
 import { getTeamFromNumber } from '/utils/getTeam.js';
 import { getTeam } from '/utils/getTeam.js';
 
@@ -11,6 +11,11 @@ const updateRewards = async (rewards) => {
 		new URLSearchParams(window.location.search)
 	);
 	const { bonus, exp, coins } = rewards;
+
+	const svgObject = document.getElementById('backgroundSVG');
+	const svgDoc = svgObject.contentDocument;
+	const coinAmount = svgDoc.getElementById('coinAmount');
+	coinAmount.textContent = `+${coins}`;
 
 	// update coins
 	const totalCoins =
@@ -42,23 +47,6 @@ const updateRewards = async (rewards) => {
 
 	// update player EXP
 	await addUserExperience(rewards.exp.player);
-
-	const userCoinDom = document.querySelector('.userCoin');
-	const bonusDom = document.querySelector('.bonus');
-
-	userCoinDom.innerHTML = `<p>
-		COIN: ${coins}, EXP: ${exp.player}/${exp.unit}</p>
-	`;
-
-	/* prettier-ignore */
-	bonusDom.innerHTML = `
-		<p>BONUS type: ${bonus.type}</p>
-		<p>BONUS name: ${bonus.key}</p>
-		${bonus.amount
-			? `<p>BONUS amount: ${bonus.amount}</p>`
-			: ``
-		}
-	`;
 };
 
 const updateTeamIcons = async ({ teamName }) => {
@@ -81,15 +69,18 @@ const updateTeamIcons = async ({ teamName }) => {
 			<div class="levelUp hidden">LEVEL UP!</div>
 		`;
 		const levelUpEl = element.querySelector('.levelUp');
-		const didLevelUp = 'TODO: determine if level up';
+		const didLevelUp = false;
 		if (didLevelUp) {
 			levelUpEl.classList.remove('hidden');
 		}
 		element.insertAdjacentElement('beforeend', image);
 	}
+	console.log(
+		'TODO: determine if each unit did level up + animate experience recieved (if needed)'
+	);
 };
 
-function animateProgressBar(fromPercent, toPercent, duration) {
+function animateProgressBar(fromPercent, toPercent, duration = 1000) {
 	const svgObject = document.getElementById('backgroundSVG');
 	const svgDoc = svgObject.contentDocument;
 	const progressBar = svgDoc.getElementById('progressBar');
@@ -97,36 +88,92 @@ function animateProgressBar(fromPercent, toPercent, duration) {
 	if (!progressBar) return;
 
 	const startWidth = Math.max(30, (fromPercent * 287.828) / 100);
+	if (!toPercent) {
+		progressBar.setAttribute('width', startWidth);
+		progressText.textContent = `${fromPercent}%`;
+		return;
+	}
 	const endWidth = Math.max(30, (toPercent * 287.828) / 100);
 
 	const startTime = performance.now();
 
-	function animate(time) {
-		const elapsedTime = time - startTime;
-		const progress = Math.min(elapsedTime / duration, 1);
-		const currentWidth = startWidth + (endWidth - startWidth) * progress;
-		progressBar.setAttribute('width', currentWidth);
-		progressText.textContent =
-			Math.round(toPercent * progress + fromPercent * (1 - progress)) +
-			'%';
-		if (progress < 1) {
-			setTimeout(() => requestAnimationFrame(animate), 15);
+	return new Promise((resolve) => {
+		function animate(time) {
+			const elapsedTime = time - startTime;
+			const progress = Math.min(elapsedTime / duration, 1);
+			const currentWidth =
+				startWidth + (endWidth - startWidth) * progress;
+			progressBar.setAttribute('width', currentWidth);
+			progressText.textContent =
+				Math.round(
+					toPercent * progress + fromPercent * (1 - progress)
+				) + '%';
+			if (progress < 1) {
+				setTimeout(() => requestAnimationFrame(animate), 15);
+			} else {
+				resolve();
+			}
 		}
-	}
-	requestAnimationFrame(animate);
+		requestAnimationFrame(animate);
+	});
 }
 
-const attachBackground = () => {
+const updateUserLevelInfo = ({ user }) => {
+	console.log({ userLevel: user.levelInfo });
 	const svgObject = document.getElementById('backgroundSVG');
-
 	const svgDoc = svgObject.contentDocument;
-	// const progressBar = svgDoc.getElementById('progressBar');
-	const progressText = svgDoc.getElementById('progressText');
+	const userIcon = svgDoc.getElementById('userIcon');
+	userIcon.setAttribute('xlink:href', user.image);
 
-	animateProgressBar(30, 60, 400);
-	if (progressText) {
-		progressText.textContent = '50%'; // Example text update
+	const userLevelAmount = svgDoc.getElementById('userLevelAmount');
+	userLevelAmount.textContent = user.levelInfo.level;
+
+	if (user.grade === 'normal') {
+		const userGrade = svgDoc.getElementById('userGrade');
+		const userGradeText = userGrade.querySelector('text');
+		userGradeText.textContent = '';
+		const userGradePath = userGrade.querySelector('path');
+		userGradePath.style.fill = 'yellow';
 	}
+};
+
+const showUserLevelUp = async ({ user }) => {
+	const levelUpEl = document.querySelector('.userLevelUp');
+	levelUpEl.classList.remove('hidden');
+	return new Promise((resolve) => {
+		levelUpEl.querySelector('button').addEventListener('pointerup', () => {
+			levelUpEl.classList.add('hidden');
+			resolve();
+		});
+	});
+};
+
+const showClearBonus = async (rewards) => {
+	const contentEl = document.querySelector(
+		'.rewardsPopover .rewardsPopoverMessage .rewardsPopoverContent'
+	);
+	contentEl.innerHTML = `
+		<div style="color:yellow;font-size:20px;">CLEAR BONUS</div>
+		<div>type: ${rewards.bonus.type}</div>
+		<div>key: ${rewards.bonus.key}</div>
+		<div>amount: ${rewards.bonus.amount || '--'}</div>
+	`;
+	const el = document.querySelector('.rewardsPopover ');
+	el.classList.remove('hidden');
+	return new Promise((resolve) => {
+		el.querySelector('.retryButton').addEventListener('pointerup', () => {
+			el.classList.add('hidden');
+			resolve('retry');
+		});
+		el.querySelector('.okayButton').addEventListener('pointerup', () => {
+			el.classList.add('hidden');
+			resolve('okay');
+		});
+		el.querySelector('.nextButton').addEventListener('pointerup', () => {
+			el.classList.add('hidden');
+			resolve('next');
+		});
+	});
 };
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -135,11 +182,18 @@ document.addEventListener('DOMContentLoaded', async () => {
 	);
 	console.log({ params });
 
-	attachBackground();
-	await updateTeamIcons({ team: params.team });
+	const user = await getUser();
+	updateUserLevelInfo({ user });
+	const expStartPercent = Math.floor(Number(user.levelInfo.levelExpPercent));
+	animateProgressBar(expStartPercent);
 
 	const rewards = await getStageRewards(params);
 	await updateRewards(rewards);
+	const expEndPercent =
+		(100 * (rewards.exp.player + user.levelInfo.remainderExp)) /
+		user.levelInfo.expNeededForNextLevel;
+
+	await updateTeamIcons({ team: params.team, rewards });
 
 	window.parent.postMessage({
 		_: 'stats',
@@ -150,6 +204,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 		title: '',
 		visibility: 'hidden',
 	});
+	window.parent.postMessage({ _: 'loaded' });
 
 	document.body.addEventListener('mousedown', () => {
 		let src = '/pages/mainStage/index.html';
@@ -162,5 +217,24 @@ document.addEventListener('DOMContentLoaded', async () => {
 		});
 	});
 
-	window.parent.postMessage({ _: 'loaded' });
+	await animateProgressBar(
+		Math.max(0, expStartPercent),
+		Math.min(expEndPercent, 100)
+	);
+	const didLevelUp = expEndPercent >= 100;
+	if (didLevelUp) {
+		await showUserLevelUp({ user });
+	}
+
+	const nextStep = await showClearBonus(rewards);
+
+	if (nextStep === 'retry') {
+		console.log('TODO: play again!');
+		return;
+	}
+	if (nextStep === 'next') {
+		console.log('TODO: go to next level!');
+		return;
+	}
+	console.log('what happens when okay is clicked?');
 });

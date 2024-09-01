@@ -3,14 +3,14 @@ const rankToGrade = {
 	2: 'master',
 	3: 'smaster',
 	4: 'umaster',
-	5: 'legend'
+	5: 'legend',
 };
 const friendlyGradName = {
 	normal: 'Normal',
 	master: 'Master',
 	smaster: 'Super Master',
 	umaster: 'Ultra Master',
-	legend: 'Legend'
+	legend: 'Legend',
 };
 
 export function getGrowth({ base, level, linear, quadratic }) {
@@ -55,7 +55,9 @@ export function getLevelInfo({ totalExp, maxLevel, a = 5, b = 0, c = 0 }) {
 
 	const remainderExp = totalExp - expForCurrentLevel;
 	const expNeededForNextLevel = expForNextLevel - expForCurrentLevel;
-	const percentageToNextLevel = (remainderExp / expNeededForNextLevel) * 100;
+	const percentageToNextLevel = Math.floor(
+		(remainderExp / expNeededForNextLevel) * 100
+	);
 
 	if (maxLevel && level + 1 >= maxLevel) {
 		return {
@@ -63,7 +65,7 @@ export function getLevelInfo({ totalExp, maxLevel, a = 5, b = 0, c = 0 }) {
 			expToNext: 0,
 			expForNextLevel: getExpForLevel({ level: maxLevel - 1, a, b, c }),
 			levelExpPercent: '0.00',
-			levelExpPercent10: '0'
+			levelExpPercent10: '0',
 		};
 	}
 
@@ -73,9 +75,11 @@ export function getLevelInfo({ totalExp, maxLevel, a = 5, b = 0, c = 0 }) {
 		level: level + 1,
 		currentLevel: level, //0 based
 		expToNext: expNeededForNextLevel - remainderExp,
+		remainderExp,
 		expForNextLevel,
 		levelExpPercent: percentageToNextLevel.toFixed(2),
-		levelExpPercent10: Math.floor(percentageToNextLevel / 10) * 10
+		levelExpPercent10: Math.floor(percentageToNextLevel / 10) * 10,
+		expNeededForNextLevel,
 	};
 }
 
@@ -100,12 +104,12 @@ export function getUserLevelInfo(totalExp, rank) {
 		maxLevel: 99,
 		a: 52111 * rank,
 		b: 54321 * rank,
-		c: 54321 * rank
+		c: 54321 * rank,
 	});
 	const grade = rankToGrade[rank];
 	return {
 		grade,
 		gradeFriendly: friendlyGradName[grade],
-		...levelInfo
+		...levelInfo,
 	};
 }
