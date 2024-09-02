@@ -14,8 +14,85 @@ body {
 	left: 0;
 	font-size: 2em;
 	font-family: monospace;
+}
 
-	& > div {
-		margin-bottom: 20px;
+.background-container {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	overflow: hidden;
+	z-index: -1;
+	margin: 0;
+	pointer-events: none;
+	#backgroundSVG {
+		position: absolute;
+		top: 0;
+		left: 50%;
+		transform: translateX(-50%);
+		height: 100vh;
+		width: calc(100vh * (16 / 9));
+		min-width: 100%;
+		max-width: none;
 	}
+}
+
+.listSelector,
+.list,
+.unitInfo,
+.unitGear,
+.unitThumbnail {
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	color: white;
+	opacity: 0.5;
+	font-size: 16px;
+	justify-content: center;
+	align-items: center;
+	padding: 7px;
+	box-sizing: border-box;
+}
+
+.listSelector {
+	opacity: 1;
+	/* background: #6b6449; */
+	top: 8.35vh;
+	right: 21.7vw;
+	width: 23.8vw;
+	height: 18vh;
+	justify-content: end;
+	color: #1d160f;
+}
+.list {
+	background: rgb(1, 87, 173);
+	top: 27.35vh;
+	right: 13.75vw;
+	width: 38vw;
+	height: 61vh;
+}
+.unitInfo {
+	opacity: 1;
+	/* background: #8c2457; */
+	left: 28.35vh;
+	top: 5vw;
+	width: 27.5vw;
+	height: 27.5vh;
+	justify-content: end;
+	color: white;
+}
+.unitGear {
+	background: #780c8a;
+	left: 28.35vh;
+	top: 17.75vw;
+	width: 27.5vw;
+	height: 19.5vh;
+}
+.unitThumbnail {
+	background: #994b03;
+	left: 28.35vh;
+	top: 29.75vw;
+	width: 27.5vw;
+	height: 29.5vh;
 }

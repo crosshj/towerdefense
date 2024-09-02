@@ -1,0 +1,70 @@
+<svg viewBox="0 0 915 412" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <path id="path-0" d="M 345.754 72.91 C 345.754 72.91 378.535 60.834 458.269 60.834 C 533.657 60.834 574.459 70.742 574.459 70.742" style="fill: none;"></path>
+    <linearGradient gradientUnits="userSpaceOnUse" x1="457.5" y1="362.768" x2="457.5" y2="412" id="gradient-0">
+      <stop offset="0" style="stop-color: rgb(36, 25, 12);"></stop>
+      <stop offset="1" style="stop-color: rgb(68, 63, 51);"></stop>
+    </linearGradient>
+    <radialGradient gradientUnits="userSpaceOnUse" cx="236.861" cy="213.814" r="137.581" id="gradient-1">
+      <stop offset="0" style="stop-color: rgb(27, 58, 82);"></stop>
+      <stop offset="1" style="stop-color: rgb(19, 23, 26);"></stop>
+    </radialGradient>
+    <radialGradient gradientUnits="userSpaceOnUse" cx="460.371" cy="146.95" r="457.5" id="gradient-2" gradientTransform="matrix(0.983513, -0.000577, 0.000587, 1, 2.490357, -0.329513)">
+      <stop offset="0" style="stop-color: rgb(15, 113, 139);"></stop>
+      <stop offset="1" style="stop-color: rgb(42, 42, 43);"></stop>
+    </radialGradient>
+    <linearGradient gradientUnits="userSpaceOnUse" x1="614.526" y1="92.399" x2="614.526" y2="366.415" id="gradient-3" gradientTransform="matrix(0.997721, -0.067479, 0.068282, 1.009602, -23.61903, 37.949166)">
+      <stop offset="0" style="stop-color: rgb(46, 53, 68);"></stop>
+      <stop offset="0.526" style="stop-color: rgb(86, 87, 96);"></stop>
+      <stop offset="0.779" style="stop-color: rgb(110, 110, 114);"></stop>
+      <stop offset="1" style="stop-color: rgb(41, 36, 30);"></stop>
+    </linearGradient>
+    <linearGradient gradientUnits="userSpaceOnUse" x1="607.762" y1="34.797" x2="607.762" y2="107.475" id="gradient-4" gradientTransform="matrix(-0.335118, -0.942178, 2.488458, -0.885111, 626.529653, 710.312918)">
+      <stop offset="0" style="stop-color: rgb(74, 51, 36);"></stop>
+      <stop offset="0.36" style="stop-color: rgb(117, 85, 60);"></stop>
+      <stop offset="0.493" style="stop-color: rgb(109, 79, 56);"></stop>
+      <stop offset="1" style="stop-color: rgb(52, 38, 24);"></stop>
+    </linearGradient>
+    <radialGradient gradientUnits="userSpaceOnUse" cx="616.962" cy="237.769" r="181.369" id="gradient-5">
+      <stop offset="0" style="stop-color: rgb(40, 41, 48);"></stop>
+      <stop offset="1" style="stop-color: rgb(11, 11, 11);"></stop>
+    </radialGradient>
+  </defs>
+  <g style="">
+    <title>floor</title>
+    <rect y="362.768" width="915" height="49.232" style="fill: url(#gradient-0);">
+      <title>floor</title>
+    </rect>
+    <g>
+      <path d="M 149.556 362.768 L 155.812 362.768 L 87.152 412 L 57.538 412 L 149.556 362.768 Z" style="fill-opacity: 0.16; fill: rgb(255, 255, 255);"></path>
+      <path d="M 336.6 362.768 L 342.216 362.768 L 376.198 412 L 354.294 412 L 336.6 362.768 Z" style="fill-opacity: 0.16; fill: rgb(255, 255, 255);"></path>
+      <path d="M 263.484 374.62 L 266.144 375.122 L 202.238 390.981 L 199.754 389.192 L 263.484 374.62 Z" style="fill: rgb(90, 82, 70);"></path>
+      <path d="M 285.987 390.981 L 288.647 390.479 L 224.741 374.62 L 222.257 376.409 L 285.987 390.981 Z" style="fill: rgb(90, 82, 70); transform-box: fill-box; transform-origin: 50% 50%;" transform="matrix(-1, 0, 0, -1, 0.000043, 0.000053)"></path>
+    </g>
+  </g>
+  <g style="">
+    <title>background</title>
+    <rect width="915" height="362.768" style="fill: url(#gradient-2); stroke: rgb(11, 17, 29);">
+      <title>bg</title>
+    </rect>
+    <path d="M 376.198 362.768 M 101.133 362.768 M 101.133 362.768 L 101.036 142.843 C 101.036 142.843 102.328 45.63 239.9 45.63 C 376.464 45.63 376.198 142.843 376.198 142.843 L 376.198 362.768" style="fill: url(#gradient-1); stroke-width: 3px; stroke: rgb(11, 22, 37);"></path>
+  </g>
+  <g>
+    <title>List</title>
+    <rect x="435.593" y="110.122" width="362.738" height="255.293" style="fill: url(#gradient-5);">
+      <title>background</title>
+    </rect>
+    <path d="M 429.92 92.399 L 798.959 92.766 L 810.898 102.064 L 810.898 366.415 L 791.59 366.303 L 791.109 126.968 L 774.804 111.381 L 457.228 111.129 L 439.17 126.841 L 438.864 366.415 L 418.153 366.415 L 418.153 102.929 L 429.92 92.399 Z" style="fill: url(#gradient-3); stroke-width: 2px; stroke: rgb(12, 18, 31);">
+      <title>Border</title>
+    </path>
+    <path d="M 509.589 51.042 C 509.589 51.042 546.293 34.797 607.385 34.797 C 667.574 34.797 708.034 50.161 708.034 50.161 L 717.953 65.44 L 705.858 107.475 L 509.183 107.475 L 497.571 65.44 L 509.589 51.042 Z" style="fill: url(#gradient-4); stroke-width: 2px; stroke: rgb(29, 22, 15);">
+      <title>Tabs</title>
+    </path>
+  </g>
+  <g style="">
+    <title>slots</title>
+    <rect x="116.754" y="161.606" width="80.479" height="81.875" style="stroke-width: 2px; stroke: rgb(12, 20, 24); fill: rgb(46, 48, 55);"></rect>
+    <rect x="201.772" y="161.606" width="80.479" height="81.875" style="stroke-width: 2px; stroke: rgb(12, 20, 24); fill: rgb(46, 48, 55);"></rect>
+    <rect x="287.592" y="161.606" width="80.479" height="81.875" style="stroke-width: 2px; stroke: rgb(12, 20, 24); fill: rgb(46, 48, 55);"></rect>
+  </g>
+</svg>

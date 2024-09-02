@@ -25,8 +25,7 @@ body {
 }
 
 .background {
-	background: url(../../../assets/pages/gameResultsBg.svg) no-repeat center
-		center;
+	background: url(gameResultsBg.svg) no-repeat center center;
 	background-size: cover;
 	position: absolute;
 	top: 0;
