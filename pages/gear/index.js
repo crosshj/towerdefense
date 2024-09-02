@@ -91,6 +91,10 @@ const attachList = async () => {
 };
 
 const attachUnitDetails = async ({ unit }) => {
+	if (!unit) {
+		console.log('TODO: allow unit selection');
+		return;
+	}
 	const el = document.querySelector('.unitInfo');
 	const thumbEl = document.querySelector('.unitThumbnail');
 	el.innerHTML = `
