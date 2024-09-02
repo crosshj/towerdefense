@@ -3,6 +3,7 @@ import { getUser } from '../../user/user.js';
 import { SVGIcons } from '../../assets/icons.svg.js';
 import { getDefenseTeam } from '../../user/pvp.js';
 import { setOpponentTeamCache } from '/utils/cache.js';
+import { userIconsMap } from '../../assets/userIcons/$map.js';
 
 const pageTitle = 'PVP';
 
@@ -16,7 +17,9 @@ const PlayerRow = (player) => {
 	div.dataset.index = player.i;
 	div.innerHTML = `
 		<div class="rank">${player.i}</div>
-		<div class="icon"></div>
+		<div class="icon">
+			<img src="${player.image}" >
+		</div>
 		<div class="details">
 			<div class="level">
                 <div class="gradeIcon ${player.levelInfo.grade}"></div>
@@ -43,10 +46,12 @@ const updatePlayersList = async () => {
 	players = players
 		.filter((x) => typeof x.last_login === 'string')
 		.sort((a, b) => new Date(b.last_login) - new Date(a.last_login));
+	const imageMap = userIconsMap();
 	for (const [i, player] of Object.entries(players)) {
 		tierPlayers.append(
 			PlayerRow({
 				i: Number(i) + 1,
+				image: imageMap[player?.data?.image || 0],
 				...player,
 			})
 		);
