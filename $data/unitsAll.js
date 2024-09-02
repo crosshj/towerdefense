@@ -693,4 +693,17 @@ export const unitsAll = {
 		// orig 0 - 0 - 0
 		range: 60 * 10,
 	},
+
+	'u0001-4-ebony': {
+		displayName: 'Ebony',
+		element: 'Normal',
+		type: 'Intellegence',
+		rank: 4,
+		mineralCost: 900,
+		attack: '647 - 4,665 - 11,349',
+		hp: '1,131 - 8,089 - 19,672',
+		defense: '892 - 6,380 - 15,516',
+		// orig 0 - 0 - 0
+		range: 60 * 10,
+	},
 };
