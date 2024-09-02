@@ -56,6 +56,7 @@ export const stageCharacterDrops = {
 	highlands1: {
 		'u0001-4-tabi': { type: 'char', probability: 0.1 },
 		'u0001-2-toto': { type: 'char', probability: 0.1 },
+		'u0001-4-ebony': { type: 'char', probability: 0.1 },
 		'u0001-4-liz': { type: 'char', probability: 0.4 },
 	},
 	// tropical graveyard: ghost, dark, grass
@@ -82,8 +83,9 @@ export const stageCharacterDrops = {
 	industrial1: {
 		'u0001-5-barbell': { type: 'char', probability: 0.1 },
 		'u0001-5-crack9': { type: 'char', probability: 0.1 },
-		'u0001-2-zerosix': { type: 'char', probability: 0.2 },
-		'u0001-2-jet': { type: 'char', probability: 0.4 },
+		'u0001-2-zerosix': { type: 'char', probability: 0.1 },
+		'u0001-2-jet': { type: 'char', probability: 0.1 },
+		'u0001-3-soda': { type: 'char', probability: 0.4 },
 	},
 	// dragon, fairy, psychic,
 	pantheon1: {
