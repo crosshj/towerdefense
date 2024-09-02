@@ -20,7 +20,7 @@ export const userIconsMap = () => {
 		'/assets/userIcons/blackCAT.png',
 		'/assets/userIcons/hamtaro.png',
 		'/assets/userIcons/mirmo.png',
-		'/assets/userIcons/mirmoPINK.png',
+		'/assets/userIcons/mirmoPINK.jpg',
 		'/assets/userIcons/mirmoPinkHeart.jpg',
 		'/assets/userIcons/mirmoGreen.jpg',
 		'/assets/userIcons/cutePuppyEyes.png',
