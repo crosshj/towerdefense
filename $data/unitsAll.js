@@ -694,16 +694,16 @@ export const unitsAll = {
 		range: 60 * 10,
 	},
 
+	// https://rangers.lerico.net/en/ranger/u128-chuck
 	'u0001-4-ebony': {
 		displayName: 'Ebony',
 		element: 'Normal',
-		type: 'Intellegence',
+		type: 'Agility',
 		rank: 4,
-		mineralCost: 900,
-		attack: '647 - 4,665 - 11,349',
-		hp: '1,131 - 8,089 - 19,672',
-		defense: '892 - 6,380 - 15,516',
-		// orig 0 - 0 - 0
-		range: 60 * 10,
+		mineralCost: 350,
+		attack: '349 - 2,505 - 6,093',
+		hp: '805 - 5,754 - 13,993',
+		defense: '69 - 510 - 1,242',
+		range: 40 * 10,
 	},
 };
