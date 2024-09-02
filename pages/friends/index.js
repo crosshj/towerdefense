@@ -1,4 +1,79 @@
 import { getFriends } from '../../user/getFriends.js';
+import { SVGIcons } from '../../assets/icons.svg.js';
+
+const gearIcon = SVGIcons.gear();
+
+const attachSettings = async () => {
+	const settingsButton = document.querySelector('button.settings');
+	settingsButton.innerHTML = gearIcon;
+};
+
+const messageCardComponent = () => `
+	<div class="item friend">
+		<div class="card message">
+			<span>You can send HELP 50 times per day.</span>
+			<div>0/50</div>
+		</div>
+	</div>
+`;
+const friendCardComponent = (friend) => `
+	<div class="item friend">
+		<div class="card">
+			<div class="flag grade-${friend.grade}">${friend.grade}</div>
+			<div class="icon">
+				<img src="${friend.image}" />
+			</div>
+			<div class="level">
+				Lv. ${friend.level}
+			</div>
+			<div class="name">
+				${friend.displayName}
+			</div>
+			<div class="help">
+				<span>HELP</span>
+				<div class="marker">F</div>
+			</div>
+		</div>
+		<div class="time">🕓 Within 1 days</div>
+	</div>
+`;
+const attachFriendsList = async () => {
+	const friendsList = document.querySelector('.items-list');
+	const friends = await getFriends();
+	const friendsListSort = document.querySelector(
+		'.filter-dropdown custom-select'
+	);
+
+	const friendsTotal = document.querySelector('.sub-header .total');
+	friendsTotal.innerHTML = `TOTAL: ${friends.length}`;
+
+	const updateFriendsList = () => {
+		const sortBy = friendsListSort.value || 'Last Login';
+		friendsList.innerHTML = '';
+		const messageCard = document.createElement('div');
+		friendsList.append(messageCard);
+		messageCard.outerHTML = messageCardComponent();
+		const sortedFriends = [...friends].sort((a, b) => {
+			if (sortBy === 'Level') {
+				return b.level - a.level;
+			}
+			if (sortBy === 'Last Login') {
+				const dateA = new Date(a.last_login);
+				const dateB = new Date(b.last_login);
+				if (isNaN(dateA)) return 1; // Invalid date in 'a' goes to the end
+				if (isNaN(dateB)) return -1; // Invalid date in 'b' goes to the end
+				return dateB - dateA;
+			}
+		});
+		for (const friend of sortedFriends) {
+			const friendCard = document.createElement('div');
+			friendsList.append(friendCard);
+			friendCard.outerHTML = friendCardComponent(friend);
+		}
+	};
+	updateFriendsList();
+	friendsListSort.addEventListener('change', updateFriendsList);
+};
 
 const domLoaded = async () => {
 	window.parent.postMessage({
@@ -14,48 +89,9 @@ const domLoaded = async () => {
 	};
 	window.parent.postMessage({ _: 'stats', ...args });
 
-	const friendsList = document.querySelector('.items-list');
-	const friends = await getFriends();
-	console.log({ friends });
+	await attachSettings();
 
-	const friendsTotal = document.querySelector('.sub-header .total');
-	friendsTotal.innerHTML = `TOTAL: ${friends.length}`;
-
-	const messageCard = document.createElement('div');
-	friendsList.append(messageCard);
-	messageCard.outerHTML = `
-		<div class="item friend">
-			<div class="card message">
-				<span>You can send HELP 50 times per day.</span>
-				<div>0/50</div>
-			</div>
-		</div>
-	`;
-	for (const friend of friends) {
-		const friendCard = document.createElement('div');
-		friendsList.append(friendCard);
-		friendCard.outerHTML = `
-			<div class="item friend">
-				<div class="card">
-					<div class="flag grade-${friend.grade}">${friend.grade}</div>
-					<div class="icon">
-						<img src="${friend.image}" />
-					</div>
-					<div class="level">
-						Lv. ${friend.level}
-					</div>
-					<div class="name">
-						${friend.displayName}
-					</div>
-					<div class="help">
-						<span>HELP</span>
-						<div class="marker">F</div>
-					</div>
-				</div>
-				<div class="time">🕓 Within 1 days</div>
-			</div>
-		`;
-	}
+	await attachFriendsList();
 
 	const chooserEl = document.querySelector('.chooser');
 	chooserEl.addEventListener('mousedown', (e) => {

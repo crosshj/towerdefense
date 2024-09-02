@@ -52,6 +52,16 @@ button {
 	font-size: 38px;
 	letter-spacing: 1px;
 	line-height: 34px;
+
+	&.settings {
+		width: 40px;
+		fill: hsl(39 41% 60% / 1);
+		display: flex;
+		height: 40px;
+		align-items: center;
+		justify-content: center;
+		border: 2px solid currentColor;
+	}
 }
 
 .main-header,
@@ -60,6 +70,28 @@ button {
 .team-slots,
 .all-characters {
 	box-sizing: border-box;
+}
+
+/*
+		border: 2px solid #674928;
+		background: #ccb489;
+		padding: 5px;
+		border-radius: 10px;
+		min-width: 125px;
+		color: #674928;
+		font-weight: 700;
+*/
+
+custom-select {
+	--select-bg-color: #ccb489;
+	--select-border-color: #674928;
+	--select-border-radius: 7px;
+	--select-text-color: #674928;
+	--select-hover-bg-color: #a87d48;
+	--select-width: 125px;
+	--select-active-bg-color: #a87d48;
+	--select-active-color: white;
+	--select-items-color: #30200e;
 }
 
 .main-header {
@@ -114,7 +146,7 @@ button {
 	color: #674928;
 	.total {
 		font-size: 20px;
-		color: #674928;
+		color: hsl(31 44% 20% / 1);
 		font-weight: 600;
 		width: 115px;
 	}
@@ -191,6 +223,8 @@ button {
 			justify-content: center;
 			border-radius: 14px;
 			padding-block: 2px;
+
+			display: none;
 		}
 		.card {
 			box-sizing: border-box;

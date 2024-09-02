@@ -8,6 +8,7 @@
 		/>
 		<link rel="stylesheet" href="index.css" />
 		<link rel="stylesheet" href="/visuals/stats/stats.css" />
+		<script src="/visuals/components/custom-select.js" defer></script>
 	</head>
 	<body>
 		<div class="background"></div>
@@ -20,17 +21,17 @@
 
 			<div class="sub-header">
 				<div class="total"></div>
-				<button class="settings">⚙</button>
+				<button class="settings"></button>
 				<div class="chooser">
 					<div class="selected">FRIENDS</div>
 					<div>ADD</div>
 					<div>INVITE</div>
 				</div>
 				<div class="filter-dropdown">
-					<select>
+					<custom-select>
 						<option>Level</option>
-						<option>???</option>
-					</select>
+						<option selected>Last Login</option>
+					</custom-select>
 				</div>
 			</div>
 
