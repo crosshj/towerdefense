@@ -9,7 +9,7 @@ export const userIconsMap = () => {
 		'/assets/userIcons/whiteWithRainbowBg.png',
 		'/assets/userIcons/catSip.jpg',
 		'/assets/userIcons/cuteRabbit.png',
-		'https://i.pinimg.com/564x/01/83/ce/0183ce46c1e0a556a39075a53abdec4c.jpg',
+		'/assets/userIcons/bearEggFace.jpg',
 		'https://ih1.redbubble.net/image.4957503155.2631/bg,f8f8f8-flat,750x,075,f-pad,750x1000,f8f8f8.jpg',
 		'https://momoandsasa.com/cdn/shop/files/75B7B136-3AC1-4FB4-A751-AFA463C5C0D3.jpg?v=1719804521',
 		'https://external-preview.redd.it/panda-bear-we-baby-bears-someone-like-you-ai-cover-of-song-v0-kWShZJ4lFKGak1xuk9O0w8m4touu-H1nU_LDvXquvWI.png?format=pjpg&auto=webp&s=7fe1b6c9b63d9e4159ad6031439f7a32691bcb09',
