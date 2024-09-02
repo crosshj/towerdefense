@@ -1,8 +1,15 @@
+import { SVGIcons } from '../../assets/icons.svg.js';
 import { getCurrentCharCache } from '../../utils/cache.js';
 
 const pageTitle = 'GEAR';
 
-const attachListSelector = async ({ params }) => {
+const icons = {
+	weapon: SVGIcons.sword(),
+	armor: SVGIcons.shield(),
+	accessory: SVGIcons.ring(),
+};
+
+const attachListSelector = async ({ params, list }) => {
 	const el = document.querySelector('.listSelector');
 	let selectedTab = 'weapon';
 	if (params?.armor) {
@@ -11,13 +18,87 @@ const attachListSelector = async ({ params }) => {
 	if (params?.accessory) {
 		selectedTab = 'accessory';
 	}
-	el.innerHTML = `${selectedTab}`;
-	return {};
+	el.innerHTML = `
+		<div class="tabContainer">
+			<div data-type="weapon" class="tab weapon">
+				${icons.weapon}
+			</div>
+			<div data-type="armor" class="tab armor" >
+				${icons.armor}
+			</div>
+			<div data-type="accessory"	class="tab accessory">
+				${icons.accessory}
+			</div>
+		</div>
+		<div class="selectedText">
+			${selectedTab}
+		</div>
+	`;
+
+	const selectedText = el.querySelector('.selectedText');
+	const selectTab = (type) => {
+		const newTab = el.querySelector(`.tab.${type}`);
+		if (!newTab) {
+			console.log(`Error selecting tab: ${type}`);
+			return;
+		}
+		const currentTab = el.querySelector('.tab.selected');
+		currentTab && currentTab.classList.remove('selected');
+
+		newTab.classList.add('selected');
+		selectedText.textContent = type;
+		list.update(type);
+	};
+	selectTab(selectedTab);
+
+	el.addEventListener('pointerdown', (e) => {
+		const { target } = e;
+		const { type } = target.dataset;
+		if (target.classList.contains('selected')) return;
+		selectTab(type);
+	});
+
+	return {
+		getSelected: () => selectedTab,
+		selectTab,
+	};
 };
 
-const attachUnitInfo = async ({ unit }) => {
+const ListItemComponent = (item) => `
+	<div class="listItem">
+		<div class="icon"></div>
+		<div class="details">
+			<div class="grade">${'★'.repeat(item.grade)}</div>
+			<div class="name">${item.name}</div>
+		</div>
+	</div>
+`;
+
+const attachList = async () => {
+	const el = document.querySelector('.list');
+	const update = async (type) => {
+		const items = new Array(100).fill().map((x) => {
+			return {
+				name: type,
+				grade: 3,
+			};
+		});
+		el.innerHTML = items.map(ListItemComponent).join('\n');
+	};
+	return {
+		update,
+	};
+};
+
+const attachUnitDetails = async ({ unit }) => {
 	const el = document.querySelector('.unitInfo');
-	el.innerHTML = `${unit?.displayName || ''}`;
+	const thumbEl = document.querySelector('.unitThumbnail');
+	el.innerHTML = `
+		${unit?.displayName || ''}
+	`;
+	thumbEl.innerHTML = `
+		<img src="${unit.imageUri}" >
+	`;
 	return {};
 };
 
@@ -28,10 +109,11 @@ const setup = async () => {
 	);
 	console.log({ params });
 
-	const selector = await attachListSelector({ params });
+	const list = await attachList();
+	const selector = await attachListSelector({ params, list });
 
 	const unit = getCurrentCharCache();
-	const unitInfo = await attachUnitInfo({ unit });
+	const unitDetails = await attachUnitDetails({ unit });
 
 	window.parent.postMessage({
 		_: 'stats',
