@@ -27,13 +27,17 @@ const isWIP = [
 
 const clickColorMap = {
 	'#00ffdd': '/pages/mainStage/index.html',
-	'#000cff': '/pages/lab/index.html',
-	'#0088ff': '/pages/guild/index.html',
-	'#00d0ff': '/pages/guildRaid/index.html',
 	'#00ff7b': '/pages/specialStage/index.html',
 	'#88ff00': '/pages/arena/index.html',
 	'#f6ff00': '/pages/pvp/index.html',
 	'#ffbf00': '/pages/tower/index.html',
+
+	// '#000cff': '/pages/lab/index.html',
+	// '#0088ff': '/pages/guild/index.html',
+	// '#00d0ff': '/pages/guildRaid/index.html',
+
+	'#0088ff': '/pages/lab/index.html',
+	'#00d0ff': '/pages/guild/index.html',
 
 	'#e51a1d': '/modals/character/detail.html?sub=a&slot=1',
 	'#e51a7c': '/modals/character/detail.html?sub=a&slot=2',
@@ -319,10 +323,10 @@ const setup = async () => {
 
 	const bg = await canvasHorizontal({
 		parent: document.body,
-		image: '/pages/home/background.png',
+		image: '/assets/home/background.png',
 		offsetX: 1200 - document.body.clientWidth / 2,
 		height: 500,
-		clickMap: '/pages/home/background_clicks.png',
+		clickMap: '/assets/home/background_clicks.png',
 		clickHandle: (color) => {
 			const which = clickColorMap[color];
 			if (!which) {
