@@ -1,7 +1,7 @@
 export const userIconsMap = () => {
 	return [
-		'/assets/userIcons/orangeWithTongue.png',
-		'/assets/userIcons/grinPurple.svg',
+		'/assets/userIcons/orangeRobotGirl.jpg',
+		'/assets/userIcons/grinPurple.jpg',
 		'/assets/userIcons/grinBlue.svg',
 		'/assets/userIcons/grinRed.svg',
 		'/assets/userIcons/grinYellow.svg',
