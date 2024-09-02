@@ -1,0 +1,9 @@
+.floorDetail {
+	background: #dcd;
+	position: absolute;
+	right: 11vw;
+	top: 6vw;
+	width: 39vw;
+	height: 74vh;
+	border-radius: 15px;
+}

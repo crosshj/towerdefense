@@ -95,6 +95,12 @@ const assets = [
 	'/pages/pvp/index.css',
 	'/pages/pvp/index.js',
 
+	'/pages/tower/',
+	'/pages/tower/index.css',
+	'/pages/tower/index.html',
+	'/pages/tower/index.js',
+	'/pages/tower/towerBackground.png',
+
 	'/pages/unit/levelUp/',
 	'/pages/unit/levelUp/index.html',
 	'/pages/unit/levelUp/index.css',

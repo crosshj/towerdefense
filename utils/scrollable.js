@@ -149,7 +149,10 @@ const vertical = async (args) => {
 	const originalWidth = background.width;
 	const newWidth = canvas.width;
 	let offsetY = args.offsetY || 0;
-	if (typeof offsetY === 'undefined' && typeof scrollBottom !== 'undefined') {
+	if (
+		typeof args.offsetY === 'undefined' &&
+		typeof scrollBottom !== 'undefined'
+	) {
 		offsetY = scrollBottom + (background.height - canvas.height);
 	}
 
