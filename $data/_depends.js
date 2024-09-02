@@ -6,6 +6,7 @@ is:service-worker-initiated
 is:service-worker-intercepted
 -is:service-worker-initiated
 -is:service-worker-intercepted (don't show files cached by SW)
+
 */
 
 const assets = [
@@ -62,8 +63,8 @@ const assets = [
 	'/pages/game/results/gameResultsBg.svg',
 	'/pages/game/selectHelp/bg.png',
 	'/pages/game/selectTeam/bg.png',
-	'/pages/home/background.png',
-	'/pages/home/background_clicks.png',
+	'/assets/home/background.png',
+	'/assets/home/background_clicks.png',
 	'/pages/lab/background.png',
 	'/pages/my-team/bg.png',
 	'/pages/pass/bg.png',
