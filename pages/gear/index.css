@@ -143,7 +143,7 @@ body {
 	opacity: 1;
 	/* background: #8c2457; */
 	right: 59.75vw;
-	top: 5vw;
+	top: 11vh;
 	width: 27.5vw;
 	height: 27.5vh;
 	justify-content: end;
@@ -152,7 +152,7 @@ body {
 .unitGear {
 	background: #780c8a;
 	right: 59.75vw;
-	top: 17.75vw;
+	top: 39.5vh;
 	width: 27.5vw;
 	height: 19.5vh;
 }
@@ -160,7 +160,7 @@ body {
 	opacity: 1;
 	/* background: #994b03; */
 	right: 59.75vw;
-	top: 29.75vw;
+	top: 64vh;
 	width: 27.5vw;
 	height: 29.5vh;
 	justify-content: end;
