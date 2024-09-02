@@ -333,6 +333,10 @@ button {
 				background: #3333;
 				margin-top: 5px;
 				border-radius: 10px;
+				overflow: hidden;
+				img {
+					width: 100%;
+				}
 			}
 			.level {
 				font-size: 18px;

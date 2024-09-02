@@ -41,7 +41,9 @@ const friendCardComponent = (friend) => `
 		<div class="level">
 			Lv. ${friend.level}
 		</div>
-		<div class="icon"></div>
+		<div class="icon">
+			<img src="${friend.image}" >
+		</div>
 		<div class="name">
 			${friend.displayName}
 		</div>
