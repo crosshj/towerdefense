@@ -11,3 +11,9 @@ export const append = (html) => {
 	document.body.append(el);
 	return el;
 };
+
+export const withCommas = (x) => {
+	return x
+		.toLocaleString('en', { useGrouping: true })
+		.replaceAll(/,/g, '<span class="comma-span">,</span>');
+};

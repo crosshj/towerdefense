@@ -1,0 +1,269 @@
+body {
+	margin: 0;
+	background-color: black;
+	overflow: hidden;
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+	top: 0;
+	left: 0;
+	font-family: sans-serif;
+}
+
+.levels {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 40px;
+	overflow-y: scroll;
+	scrollbar-width: none;
+	pointer-events: none;
+	& > div {
+		padding-top: 50px;
+		padding-bottom: 40px;
+		--background-dark: #050505;
+		box-shadow: inset 0 0 52px 54px black;
+		background: linear-gradient(
+			90deg,
+			var(--background-dark),
+			#062b29 20%,
+			#1c3a42,
+			#062b29 80%,
+			var(--background-dark)
+		);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0px;
+	}
+
+	.container {
+		width: 600px;
+		height: 100px;
+		min-height: 100px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 10px;
+		box-sizing: border-box;
+		position: relative;
+
+		pointer-events: all;
+		& > * {
+			pointer-events: none;
+		}
+
+		background: var(--primary-color, white);
+		box-shadow:
+			inset 0 0 21px #011210,
+			inset 0 9px 28px 31px #102428;
+		/* border-radius: 10px; */
+		color: white;
+		&.crystal {
+			--primary-color: rgb(13, 155, 187);
+		}
+		&.material {
+			--primary-color: #14a414;
+		}
+		&.training {
+			--primary-color: orange;
+		}
+		&.secret {
+			--primary-color: rgb(178 38 178);
+		}
+		&.fusion {
+			--primary-color: #5ba4d2;
+		}
+
+		&:first-child {
+			&:before,
+			&:after {
+				border-top-left-radius: 10px;
+				border-top-right-radius: 10px;
+				/* margin-top: -10px; */
+				height: calc(100% + 20px);
+			}
+		}
+		&:last-child:before,
+		&:last-child:after {
+			border-bottom-left-radius: 10px;
+			border-bottom-right-radius: 10px;
+			height: calc(100% + 20px);
+		}
+
+		&:before,
+		&:after {
+			content: '';
+			display: block;
+			height: 100%;
+			width: 30px;
+			position: absolute;
+			--elevator-dark: #1d2a2f;
+			--elevator-light: #47555a;
+			background: linear-gradient(
+				90deg,
+				var(--elevator-dark),
+				var(--elevator-light),
+				var(--elevator-dark)
+			);
+		}
+		&:before {
+			left: -30px;
+		}
+		&:after {
+			right: -30px;
+		}
+
+		.header {
+			width: 33.33%;
+			margin-top: 0;
+			margin-bottom: auto;
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			font-size: 15px;
+			.level {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				height: 35px;
+				width: 50px;
+				border: 1px solid #15444b;
+				border-radius: 7px;
+				background: #0d2528;
+				box-shadow: inset 0 0 10px var(--primary-color);
+			}
+			.title {
+				color: var(--primary-color);
+				filter: brightness(3) opacity(0.9) blur(0.3px);
+			}
+		}
+		.action {
+			font-weight: 900;
+			font-size: 19px;
+			margin-right: 30px;
+			color: lightgrey;
+			color: var(--primary-color);
+			filter: brightness(3) opacity(0.7);
+		}
+	}
+}
+
+.bottomBar {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: grey;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	height: 40px;
+	box-shadow:
+		inset 0 1px grey,
+		inset 0 2px #c0bfbf;
+
+	& > div:not(.upgradeAction) {
+		position: relative;
+		background: black;
+		color: white;
+		display: flex;
+		align-items: center;
+		height: 20px;
+		justify-content: flex-end;
+		padding-left: 40px;
+		padding-right: 12px;
+		border-radius: 15px;
+		font-size: 12px;
+
+		&.whiteGem:before {
+			background: linear-gradient(0deg, grey, grey, white, white);
+		}
+		&.tealGem:before {
+			background: linear-gradient(0deg, teal, teal, white, #4ee9e9);
+		}
+		&.purpleGem:before {
+			background: linear-gradient(0deg, purple, purple, white, purple);
+		}
+		&.scrolls:before {
+			background: pink;
+		}
+		&.fangs:before {
+			background: pink;
+		}
+		&.mystic:before {
+			background: linear-gradient(0deg, teal, teal, purple, pink, white);
+		}
+
+		&:before {
+			position: absolute;
+			left: 0px;
+			content: '';
+			display: block;
+			width: 28px;
+			height: 28px;
+			background: #505050;
+			border: 2px solid black;
+			border-radius: 50%;
+			box-sizing: border-box;
+		}
+	}
+
+	.upgradeAction {
+		--button-secondary: #d78301;
+		--button-primary: #893f00;
+		--button-bg-dark: #febf05;
+		--button-bg-light: #fde608;
+
+		position: relative;
+		width: 130px;
+
+		.container {
+			background: grey;
+			box-shadow:
+				inset 0 1px grey,
+				inset 0 2px #c0bfbf;
+			position: absolute;
+			bottom: -20px;
+			height: 80px;
+			width: 100%;
+			padding: 10px;
+			box-sizing: border-box;
+			border-radius: 10px;
+			.button {
+				box-sizing: border-box;
+				border: 3px solid black;
+				background: linear-gradient(
+					0deg,
+					var(--button-bg-dark),
+					var(--button-bg-light)
+				);
+				display: flex;
+				flex-direction: column;
+				white-space: nowrap;
+				justify-content: center;
+				align-items: center;
+				height: 55px;
+				border-radius: 7px;
+				pointer-events: all;
+				box-shadow:
+					inset 0 -4px 0px var(--button-secondary),
+					inset 0 2px white;
+
+				& > div {
+					pointer-events: none;
+				}
+				div:first-child {
+					font-size: 12px;
+					color: var(--button-secondary);
+				}
+				div:last-child {
+					font-weight: 900;
+					color: var(--button-primary);
+				}
+			}
+		}
+	}
+}
