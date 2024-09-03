@@ -10,12 +10,12 @@ body {
 	-webkit-tap-highlight-color: transparent;
 }
 
-/* *:focus {
+*:focus {
 	outline: none !important;
 }
 *:active {
 	outline: none !important;
-} */
+}
 
 .upgradeLevels {
 	position: absolute;
