@@ -65,7 +65,7 @@ const assets = [
 	'/pages/game/selectTeam/bg.png',
 	'/assets/home/background.png',
 	'/assets/home/background_clicks.png',
-	'/pages/lab/background.png',
+	// '/pages/lab/background.png',
 	'/pages/my-team/bg.png',
 	'/pages/pass/bg.png',
 	'/pages/pvp/bg.png',
