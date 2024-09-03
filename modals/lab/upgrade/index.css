@@ -6,12 +6,16 @@ body {
 	user-select: none;
 }
 
-*:focus {
-	outline: none;
+* {
+	-webkit-tap-highlight-color: transparent;
+}
+
+/* *:focus {
+	outline: none !important;
 }
 *:active {
-	outline: none;
-}
+	outline: none !important;
+} */
 
 .upgradeLevels {
 	position: absolute;
