@@ -3,6 +3,14 @@ body {
 	margin: 0;
 	padding: 0;
 	overscroll-behavior: none;
+	user-select: none;
+}
+
+*:focus {
+	outline: none;
+}
+*:active {
+	outline: none;
 }
 
 .upgradeLevels {
