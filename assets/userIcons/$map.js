@@ -27,5 +27,6 @@ export const userIconsMap = () => {
 		'/assets/userIcons/orangeBear.jpg',
 		'/assets/userIcons/pandaHat.png',
 		'/assets/userIcons/bigCheeks.jpg',
+		'/assets/userIcons/animeBoy1.jpg',
 	];
 };
