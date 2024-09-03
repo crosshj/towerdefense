@@ -270,8 +270,8 @@ const external = [
 	'https://cdn.jsdelivr.net/npm/escape-latex@1.2.0/+esm',
 	'https://cdn.jsdelivr.net/npm/seedrandom@3.0.5/+esm',
 	//rxjs
-	'https://cdn.skypack.dev/rxjs',
-	'https://cdn.skypack.dev/rxjs/operators',
+	'/vendor/rxjs/index.js',
+	'/vendor/rxjs/operators.js',
 	'https://cdn.skypack.dev/-/rxjs@v7.8.1-gMYNr0D48Ik3Uz0dDbiK/dist=es2019,mode=imports/optimized/rxjs.js',
 	'https://cdn.skypack.dev/-/rxjs@v7.8.1-gMYNr0D48Ik3Uz0dDbiK/dist=es2019,mode=imports/optimized/rxjs/operators.js',
 	'https://cdn.skypack.dev/-/rxjs@v7.8.1-gMYNr0D48Ik3Uz0dDbiK/dist=es2019,mode=imports/optimized/common/Observable-d1433fce.js',
@@ -281,7 +281,6 @@ const external = [
 	'https://cdn.skypack.dev/-/rxjs@v7.8.1-gMYNr0D48Ik3Uz0dDbiK/dist=es2019,mode=imports/optimized/rxjs/internal/BehaviorSubject.js',
 	'https://cdn.skypack.dev/-/rxjs@v7.8.1-gMYNr0D48Ik3Uz0dDbiK/dist=es2019,mode=imports/optimized/rxjs/internal/ReplaySubject.js',
 	'https://cdn.skypack.dev/-/rxjs@v7.8.1-gMYNr0D48Ik3Uz0dDbiK/dist=es2019,mode=imports/optimized/rxjs/internal/AsyncSubject.js',
-	'https://cdn.skypack.dev/-/tslib@v2.5.0-Q2Yl7gdP11l6eAyFnQRG/dist=es2019,mode=imports/optimized/tslib.js',
 	'https://cdn.skypack.dev/-/rxjs@v7.8.1-gMYNr0D48Ik3Uz0dDbiK/dist=es2019,mode=imports/optimized/common/AsyncScheduler-f316237e.js',
 	'https://cdn.skypack.dev/-/rxjs@v7.8.1-gMYNr0D48Ik3Uz0dDbiK/dist=es2019,mode=imports/optimized/rxjs/internal/Scheduler.js',
 	'https://cdn.skypack.dev/-/rxjs@v7.8.1-gMYNr0D48Ik3Uz0dDbiK/dist=es2019,mode=imports/optimized/common/Subscription-226cce4f.js',
@@ -298,9 +297,10 @@ const external = [
 	'https://cdn.skypack.dev/-/rxjs@v7.8.1-gMYNr0D48Ik3Uz0dDbiK/dist=es2019,mode=imports/optimized/common/createErrorClass-8a0126da.js',
 	'https://cdn.skypack.dev/-/rxjs@v7.8.1-gMYNr0D48Ik3Uz0dDbiK/dist=es2019,mode=imports/optimized/common/dateTimestampProvider-e3eee0f2.js',
 	'https://cdn.skypack.dev/-/rxjs@v7.8.1-gMYNr0D48Ik3Uz0dDbiK/dist=es2019,mode=imports/optimized/rxjs/internal/NotificationFactories.js',
+	'https://cdn.skypack.dev/-/tslib@v2.5.0-Q2Yl7gdP11l6eAyFnQRG/dist=es2019,mode=imports/optimized/tslib.js',
 	'https://cdn.skypack.dev/-/tslib@v2.5.0-Q2Yl7gdP11l6eAyFnQRG/dist=es2019,mode=imports/optimized/common/tslib-93083d2c.js',
 	//gifjs
-	'https://cdn.skypack.dev/gif.js',
+	'/vendor/gif-js/index.js',
 	'https://cdn.skypack.dev/-/gif.js@v0.2.0-e7wk4xRP763nJNI3SHHF/dist=es2019,mode=imports/optimized/gifjs.js',
 ];
 

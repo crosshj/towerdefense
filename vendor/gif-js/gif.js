@@ -1,4 +1,4 @@
-import GIF from 'https://cdn.skypack.dev/gif.js';
+import GIF from '/vendor/gif-js/index.js';
 
 export default class GifMaker {
 	constructor(opts = {}) {
@@ -7,7 +7,7 @@ export default class GifMaker {
 			quality: 10,
 			workerScript: 'gif.worker.js',
 			//transparent: 0x111100,
-			...opts
+			...opts,
 		});
 	}
 	addFrame(ctx) {

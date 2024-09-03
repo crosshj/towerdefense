@@ -1,5 +1,5 @@
-import * as rxjs from 'https://cdn.skypack.dev/rxjs';
-import * as operators from 'https://cdn.skypack.dev/rxjs/operators';
+import * as rxjs from '/vendor/rxjs/index.js';
+import * as operators from '/vendor/rxjs/operators.js';
 const { animationFrameScheduler, of } = rxjs;
 const { takeWhile, filter, tap, repeat, finalize } = operators;
 
