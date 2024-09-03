@@ -1,3 +1,28 @@
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+const fetchWithRetry = async (
+	url,
+	options = {},
+	retries = 3,
+	backoff = 500
+) => {
+	try {
+		const response = await fetch(url, options);
+		if (!response.ok)
+			throw new Error(`Request failed with status ${response.status}`);
+		return response;
+	} catch (error) {
+		if (retries > 0) {
+			console.warn(`Retrying fetch for ${url}. Retries left: ${retries}`);
+			await delay(backoff);
+			return fetchWithRetry(url, options, retries - 1, backoff * 2); // Exponential backoff
+		} else {
+			console.error(`Failed to fetch ${url} after multiple retries.`);
+			throw error;
+		}
+	}
+};
+
 const sendClientsProgress = async (progress) => {
 	const clients = await self.clients.matchAll();
 	clients.forEach((client) => {
@@ -56,9 +81,14 @@ export const cacheFiles = async (event) => {
 	const cache = await caches.open(CACHE_KEY);
 	let cachedCount = 0;
 
+	const failedToCache = [];
+
+	const timestamp = new Date().getTime();
 	for (let i = 0; i < filesToCache.length; i++) {
 		try {
-			const response = await fetch(filesToCache[i], {
+			const separator = filesToCache[i].includes('?') ? '&' : '?';
+			const urlWithCacheBusting = `${filesToCache[i]}${separator}v=${timestamp}`;
+			const response = await fetchWithRetry(urlWithCacheBusting, {
 				cache: 'no-store',
 			});
 			if (!response.ok) {
@@ -71,10 +101,16 @@ export const cacheFiles = async (event) => {
 			const progress = (cachedCount / filesToCache.length) * 100;
 			sendClientsProgress(progress);
 		} catch (error) {
+			failedToCache.push(`${filesToCache[i]}: ${error.message}`);
 			console.error(
 				`Failed to cache ${filesToCache[i]}: ${error.message}`
 			);
 		}
 	}
+	// unstuck yourself, but WARNING some files were not cached!
+	if (failedToCache.length) {
+		console.log(failedToCache);
+	}
+	await sendClientsProgress(100);
 	await cache.put('version', new Response(self._version));
 };
