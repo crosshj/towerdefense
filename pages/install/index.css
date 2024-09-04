@@ -23,6 +23,7 @@ body {
 	}
 
 	details {
+		-webkit-tap-highlight-color: transparent;
 		position: absolute;
 		bottom: 80px;
 		cursor: pointer;
