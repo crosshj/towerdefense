@@ -273,7 +273,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 	document.querySelector('.tapToContinue').classList.remove('hidden');
 
-	document.body.addEventListener('mousedown', () => {
-		goBack({ params });
+	requestAnimationFrame(() => {
+		document.body.addEventListener('pointerdown', () => {
+			goBack({ params });
+		});
 	});
 });
