@@ -32,7 +32,7 @@ const onLoaded = () => {
 			});
 		};
 		if (status === 'win') {
-			setTimeout(showGameResults, 2000);
+			setTimeout(showGameResults, 3000);
 		}
 	};
 
