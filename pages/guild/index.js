@@ -1,19 +1,10 @@
 const pageTitle = 'GUILD';
-
-const setup = async () => {
-	const params = Object.fromEntries(
-		new URLSearchParams(window.location.search)
-	);
-
-	document.body.innerHTML = `
-		<div>WIP: ${pageTitle}</div>
-	`;
-	document.title = 'TD: ' + pageTitle;
-
+const pageDone = () => {
+	document.title = `TD: ${pageTitle}`;
 	window.parent.postMessage({
 		_: 'stats',
 		feathers: false,
-		gems: false,
+		gems: true,
 		coins: false,
 		friendPoints: false,
 	});
@@ -22,8 +13,15 @@ const setup = async () => {
 		title: pageTitle,
 		visibility: 'visible',
 	});
-
 	window.parent.postMessage({ _: 'loaded' });
+};
+
+const setup = async () => {
+	const params = Object.fromEntries(
+		new URLSearchParams(window.location.search)
+	);
+	console.log({ params });
+	pageDone();
 };
 
 document.addEventListener('DOMContentLoaded', setup);
