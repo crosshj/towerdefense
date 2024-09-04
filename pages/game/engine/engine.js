@@ -1,7 +1,14 @@
-import * as rxjs from '/vendor/rxjs/index.js';
-import * as operators from '/vendor/rxjs/operators.js';
-const { animationFrameScheduler, of } = rxjs;
-const { takeWhile, filter, tap, repeat, finalize } = operators;
+import {
+	animationFrameScheduler,
+	of,
+	takeWhile,
+	filter,
+	tap,
+	repeat,
+	finalize,
+} from '/vendor/rxjs.bundle.7.8.1.js';
+
+debugger;
 
 const throttle = (MIN_TIME, state) => () => {
 	const curr = performance.now();
