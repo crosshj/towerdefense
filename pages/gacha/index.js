@@ -1,3 +1,5 @@
+import { attachTap } from '../../utils/pointerEvents.js';
+
 const pageTitle = 'GACHA';
 
 const attachSelectedDetails = async (selected) => {
@@ -47,7 +49,7 @@ const attachList = async ({ selectedDetails }) => {
 		};
 		selectListItem(0);
 
-		el.addEventListener('pointerdown', (e) => {
+		attachTap(el, (e) => {
 			selectListItem(Number(e.target.dataset.index));
 		});
 	};
@@ -70,7 +72,7 @@ const attachListSelector = async ({ list, params }) => {
 		newTab.classList.add('selected');
 		list.update(type);
 	};
-	el.addEventListener('pointerdown', (e) => {
+	attachTap(el, (e) => {
 		const { target } = e;
 		const { type } = target.dataset;
 		if (target.classList.contains('selected')) return;
