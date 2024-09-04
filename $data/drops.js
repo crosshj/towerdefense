@@ -78,6 +78,7 @@ export const stageCharacterDrops = {
 		'u0001-5-kelvin': { type: 'char', probability: 0.1 },
 		'u0001-4-slabb': { type: 'char', probability: 0.2 },
 		'u0001-4-violet': { type: 'char', probability: 0.4 },
+		'u0001-4-chrono': { type: 'char', probability: 0.4 },
 	},
 	// steel, poison, electric
 	industrial1: {

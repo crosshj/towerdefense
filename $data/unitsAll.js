@@ -719,4 +719,18 @@ export const unitsAll = {
 		defense: '340 - 2,017 - 5,179',
 		range: 30 * 10,
 	},
+
+	// https://rangers.lerico.net/en/ranger/u005e-clark
+	'u0001-4-chrono': {
+		displayName: 'Chrono',
+		element: 'Normal',
+		type: 'Strength',
+		rank: 4,
+		mineralCost: 150,
+		//orig cost 560
+		attack: '650 - 4,668 - 11,354',
+		hp: '4,928 - 35,112 - 85,378',
+		defense: '465 - 3,356 - 8,165',
+		range: 60 * 10,
+	},
 };
