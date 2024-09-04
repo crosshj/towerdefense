@@ -27,6 +27,7 @@ body {
 	}
 
 	button {
+		-webkit-tap-highlight-color: transparent;
 		background-color: #4caf50; /* Green background */
 		border: none; /* No border */
 		color: white; /* White text */
@@ -78,6 +79,7 @@ iframe {
 		display: flex;
 		align-items: center;
 		.back-button {
+			-webkit-tap-highlight-color: transparent;
 			width: 30px;
 			height: 30px;
 			background-color: yellow;
