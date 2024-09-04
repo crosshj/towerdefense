@@ -22,6 +22,39 @@ body {
 		background-position: center;
 	}
 
+	details {
+		position: absolute;
+		bottom: 80px;
+		cursor: pointer;
+		font-size: 1.5em;
+		font-family: sans-serif;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+
+		summary {
+			flex: 1;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			list-style: none;
+			svg {
+				width: 20px;
+				fill: #fff3;
+			}
+		}
+		.progressDetail {
+			margin-top: 1em;
+			font-size: 10px;
+			font-family: monospace;
+			overflow-wrap: break-word;
+			word-break: break-all;
+			max-width: 400px;
+			display: flex;
+			align-items: flex-end;
+		}
+	}
+
 	#progress-bar {
 		position: absolute;
 		bottom: 47px;

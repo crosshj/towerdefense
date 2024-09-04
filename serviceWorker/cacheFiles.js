@@ -33,6 +33,16 @@ const sendClientsProgress = async (progress) => {
 	});
 };
 
+const sendClientsProgressDetail = async (file) => {
+	const clients = await self.clients.matchAll();
+	clients.forEach((client) => {
+		client.postMessage({
+			type: 'progress',
+			progressDetail: file,
+		});
+	});
+};
+
 const isCacheUpdateNeeded = async ({ filesToCache, CACHE_KEY }) => {
 	const cache = await caches.open(CACHE_KEY);
 
@@ -86,6 +96,7 @@ export const cacheFiles = async (event) => {
 	const timestamp = new Date().getTime();
 	for (let i = 0; i < filesToCache.length; i++) {
 		try {
+			await sendClientsProgressDetail(filesToCache[i]);
 			const separator = filesToCache[i].includes('?') ? '&' : '?';
 			const urlWithCacheBusting = `${filesToCache[i]}${separator}v=${timestamp}`;
 			const response = await fetchWithRetry(urlWithCacheBusting, {

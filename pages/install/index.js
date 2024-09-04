@@ -103,21 +103,27 @@ const periodicSync = async () => {
 	}
 };
 
-const showProgress = (progressBar) => {
+const showProgress = (progressBar, progressDetail) => {
 	const background = document.querySelector('.background');
 	background.classList.remove('hidden');
 	progressBar.classList.remove('hidden');
+	progressDetail && progressDetail.classList.remove('hidden');
 };
 
 const progressListener = (event) => {
-	if (event.data.type !== 'progress') return;
+	if (!['progress', 'progressDetail'].includes(event.data.type)) return;
 
 	const progressBar = document.getElementById('progress-bar');
+	const progressDetail = document.querySelector('.progressDetail');
+
 	if (event.data.progress > 0 && event.data.progress < 100) {
-		showProgress(progressBar);
+		showProgress(progressBar, progressDetail);
 	}
 	if (event.data.progress > progressBar.value) {
 		progressBar.value = event.data.progress;
+	}
+	if (event.data.progressDetail && progressDetail) {
+		progressDetail.textContent = event.data.progressDetail;
 	}
 };
 
