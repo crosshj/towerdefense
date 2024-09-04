@@ -1,4 +1,4 @@
-import GIF from '/vendor/gif-js/index.js';
+import GIF from '/vendor/gif-js/gifjs.0.2.0.js';
 
 export default class GifMaker {
 	constructor(opts = {}) {

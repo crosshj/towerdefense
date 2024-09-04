@@ -246,6 +246,10 @@ const vendor = [
 	'/vendor/gif-js/gif.js',
 	'/vendor/gif-js/gif.worker.js',
 	'/vendor/DragDropTouch.js',
+	'/vendor/rxjs.bundle.7.8.1.js',
+	'/vendor/gif-js/gif.js',
+	'/vendor/gif-js/gif.worker.js',
+	'/vendor/gif-js/gifjs.0.2.0.js',
 ];
 
 const external = [
@@ -269,11 +273,6 @@ const external = [
 	'https://cdn.jsdelivr.net/npm/javascript-natural-sort@0.7.1/+esm',
 	'https://cdn.jsdelivr.net/npm/escape-latex@1.2.0/+esm',
 	'https://cdn.jsdelivr.net/npm/seedrandom@3.0.5/+esm',
-	//rxjs
-	'/vendor/rxjs.bundle.7.8.1.js',
-	//gifjs
-	'/vendor/gif-js/index.js',
-	'https://cdn.skypack.dev/-/gif.js@v0.2.0-e7wk4xRP763nJNI3SHHF/dist=es2019,mode=imports/optimized/gifjs.js',
 ];
 
 export const nonLocal = [
