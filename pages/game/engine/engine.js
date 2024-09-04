@@ -8,8 +8,6 @@ import {
 	finalize,
 } from '/vendor/rxjs.bundle.7.8.1.js';
 
-debugger;
-
 const throttle = (MIN_TIME, state) => () => {
 	const curr = performance.now();
 	if (state.time && curr - state.time < MIN_TIME) return false;
