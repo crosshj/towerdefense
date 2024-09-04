@@ -114,10 +114,11 @@ const progressListener = (event) => {
 	if (!['progress', 'progressDetail'].includes(event.data.type)) return;
 
 	const progressBar = document.getElementById('progress-bar');
+	const progressDetailContainer = document.querySelector('details');
 	const progressDetail = document.querySelector('.progressDetail');
 
 	if (event.data.progress > 0 && event.data.progress < 100) {
-		showProgress(progressBar, progressDetail);
+		showProgress(progressBar, progressDetailContainer);
 	}
 	if (event.data.progress > progressBar.value) {
 		progressBar.value = event.data.progress;
