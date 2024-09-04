@@ -1,3 +1,7 @@
+import { startAnimation } from './stars.js';
+
+const canvas = document.querySelector('.starfield');
+
 document.addEventListener('DOMContentLoaded', async () => {
 	const winSplash = document.querySelector('.win-splash');
 	const loseSplash = document.querySelector('.lose-splash');
@@ -6,6 +10,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 	);
 	if (params.status === 'win') {
 		winSplash.classList.remove('hidden');
+		startAnimation(canvas);
 	} else {
 		loseSplash.classList.remove('hidden');
 	}
