@@ -161,15 +161,24 @@ const showClearBonus = async (rewards) => {
 	const el = document.querySelector('.rewardsPopover ');
 	el.classList.remove('hidden');
 	return new Promise((resolve) => {
-		el.querySelector('.retryButton').addEventListener('pointerup', () => {
-			el.classList.add('hidden');
-			resolve('retry');
-		});
-		el.querySelector('.okayButton').addEventListener('pointerup', () => {
+		el.querySelector('.retryButton').addEventListener(
+			'pointerdown',
+			(e) => {
+				e.stopPropagation();
+				e.preventDefault();
+				el.classList.add('hidden');
+				resolve('retry');
+			}
+		);
+		el.querySelector('.okayButton').addEventListener('pointerdown', (e) => {
+			e.stopPropagation();
+			e.preventDefault();
 			el.classList.add('hidden');
 			resolve('okay');
 		});
-		el.querySelector('.nextButton').addEventListener('pointerup', () => {
+		el.querySelector('.nextButton').addEventListener('pointerdown', (e) => {
+			e.stopPropagation();
+			e.preventDefault();
 			el.classList.add('hidden');
 			resolve('next');
 		});
