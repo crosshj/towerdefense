@@ -1,11 +1,10 @@
 const starSVG = `
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
-    <polygon
-        fill="yellow"
-        stroke="gold"
-        stroke-width="0"
-        points="50,15 61,39 88,39 66,57 75,84 50,68 25,84 34,57 12,39 39,39"
-    />
+<svg viewBox="0 0 100 100" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+  <defs></defs>
+  <path
+    fill="black"
+    d="M 94.473 50 C 94.473 61.742 89.083 73.811 81.447 81.447 C 73.811 89.083 61.742 94.473 50 94.473 C 38.258 94.473 26.189 89.083 18.553 81.447 C 10.917 73.811 5.527 61.742 5.527 50 C 5.527 38.258 10.917 26.189 18.553 18.553 C 26.189 10.917 38.258 5.527 50 5.527 C 61.742 5.527 73.811 10.917 81.447 18.553 C 89.083 26.189 94.473 38.258 94.473 50 Z M 70.841 29.159 C 65.095 23.414 58.677 20.527 50 20.527 C 41.323 20.527 34.905 23.414 29.159 29.159 C 23.414 34.905 20.527 41.323 20.527 50 C 20.527 58.677 23.414 65.095 29.159 70.841 C 34.905 76.586 41.323 79.473 50 79.473 C 58.677 79.473 65.095 76.586 70.841 70.841 C 76.586 65.095 79.473 58.677 79.473 50 C 79.473 41.323 76.586 34.905 70.841 29.159 Z"
+  ></path>
 </svg>
 `;
 
@@ -72,13 +71,18 @@ export function startAnimation(canvas) {
 	let angleStep = (2 * Math.PI) / 6; // Uniform step for 6 stars
 	let currentAngle = 180; // Start at angle 0
 	const starColors = [
-		'white',
-		'gold',
-		'yellow',
-		'#F9D71C',
-		'#FFF9E3',
-		'#FFD700',
-		'#FFEC8B',
+		'#FF6347', // Tomato (red)
+		'#FF69B4', // Hot Pink
+		'#8A2BE2', // Blue Violet
+		'#32CD32', // Lime Green
+		'#FFD700', // Gold
+		'#00BFFF', // Deep Sky Blue
+		'#FF4500', // Orange Red
+		'#FF1493', // Deep Pink
+		'#1E90FF', // Dodger Blue
+		'#ADFF2F', // Green Yellow
+		'#FFA500', // Orange
+		'#FF00FF', // Magenta
 	];
 
 	// Define a cooldown (in milliseconds) to control the spawning rate
