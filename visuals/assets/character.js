@@ -1,10 +1,19 @@
+import { IDBStorage } from '../../utils/IDBStorage.js';
 import { listAvailableUnits } from '../../utils/units.js';
 import { getAnimateable } from '/vendor/DragonBones/Animateable.js';
 
+const unitImageStore = new IDBStorage('ImageDB', 'UnitStore');
+
 export const characterAnimationGetter = async (
 	character,
-	{ width = 128, height = 140 } = {}
+	{ width = 128, height = 140, still } = {}
 ) => {
+	if (still === true) {
+		try {
+			const image = await unitImageStore.get(character.code);
+			if (image) return { image };
+		} catch (e) {}
+	}
 	const skeleton = '/assets/character/FighterBase/FighterBase_ske.json';
 	const atlas = '/assets/character/FighterBase/FighterBase_tex.json';
 	let texture = '/assets/character/FighterBase/Elements/Normal_tex.png';
@@ -37,6 +46,11 @@ export const characterAnimationGetter = async (
 		animation.setAnimation("run");
 		animation.advanceTime();
 	*/
+
+	try {
+		await unitImageStore.set(character.code, animation.canvas.toDataURL());
+	} catch (e) {}
+
 	return animation;
 };
 
@@ -110,8 +124,9 @@ const addBoned = async (allImages) => {
 		const animation = await characterAnimationGetter(unit, {
 			width,
 			height,
+			still: true,
 		});
-		allImages[unit.code] = animation.canvas.toDataURL();
+		allImages[unit.code] = animation?.image || animation.canvas.toDataURL();
 	}
 };
 
@@ -124,15 +139,16 @@ export const getAllThumbnails = async () => {
 export const characterImageGetter = async () => {
 	//const allImages = await getAllImages();
 	const allImages = {};
-	for (const letter of 'abcdefghijklmnopqrstuvwxyz'.split('')) {
-		allImages[letter] = await new Promise((resolve) => {
-			const img = new Image();
-			img.src = '/assets/teamDragImage.png';
-			img.onload = () => {
-				resolve(getLetterDataURI(img, letter));
-			};
-		});
-	}
+	// const teamDragImage = await new Promise((resolve) => {
+	// 	const img = new Image();
+	// 	img.src = '/assets/teamDragImage.png';
+	// 	img.onload = () => {
+	// 		resolve(img);
+	// 	};
+	// });
+	// for (const letter of 'abcdefghijklmnopqrstuvwxyz'.split('')) {
+	// 	allImages[letter] = getLetterDataURI(teamDragImage, letter);
+	// }
 	await addBoned(allImages);
 
 	return (character) => {
@@ -153,6 +169,7 @@ export const characterImageFromDef = async (character) => {
 	const animation = await characterAnimationGetter(character, {
 		width,
 		height,
+		still: true,
 	});
-	return animation.canvas.toDataURL();
+	return animation?.image || animation.canvas.toDataURL();
 };
