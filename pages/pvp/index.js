@@ -99,7 +99,7 @@ const attachActions = ({ players }) => {
 	});
 	const defenders = document.querySelector('button.defenders');
 	defenders.addEventListener('pointerup', () => {
-		const src = `/pages/_wip/index.html?which=defenders&back=${back}`;
+		const src = `/pages/my-team/index.html?team=Defense&back=${back}`;
 		window.parent.postMessage({ _: 'navigate', src });
 	});
 	const swapShop = document.querySelector('button.swapShop');

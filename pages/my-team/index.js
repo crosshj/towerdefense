@@ -85,6 +85,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 	const params = Object.fromEntries(
 		new URLSearchParams(window.location.search)
 	);
+	console.log({ params });
+
+	console.warn(
+		'TODO: handle params.back and params.team! (needed by PvP page)'
+	);
 
 	let switchTeam, updateCharacters;
 	let draggingEl;
