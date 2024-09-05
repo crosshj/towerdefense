@@ -1,29 +1,39 @@
 ### Current
 
--   [ ] competition system and notifications for competition events
--   [ ] Add levels to the main stage
--   [ ] Develop characters, enemies, and bosses
+-   [ ] implement unit thumbnails cache
+-   [ ] effects show up (or not) if selected (or not) in game setup
+-   [ ] settings/game/resource check - manual resource cache update
+-   [ ] fix issues with unit leveling on some units
+-   [ ] make unit stats mean something in-game
+-   [ ] remove character from team
+-   [ ] re-order team
+-   [ ] implement gear + basic gacha
+-   [ ] evolve some character (Liz)
 
 ### Backlog
+
+(unsorted)
+
+-   [ ] better home screen for lab,guild,special,pvp,tower,gacha
+-   [ ] lab and guild secondary pages
+-   [ ] make tower and special work
+-   [ ] connect news/notice/schedule/attend + boosts + buff events +
+        mission/pass
+-   [ ] add graphics to level info
+-   [ ] connect upgrade
+-   [ ] connect collection
+-   [ ] connect friends/points + giftbox
+-   [ ] treasure!
 
 (resource-related / rewards-related)
 
 -   [ ] level cannot be started without feathers
-
--   [ ] rewards screen shows player/character level up events
-
--   [ ] sell characters
-
--   [ ] upgrade/combine characters
--   [ ] remove character from team
--   [ ] re-order team
 
 (in-game)
 
 -   [ ] retarget based on new character spawned
 -   [ ] auto/X2 from params
 -   [ ] effects buttons do something (and reduce count when used)
--   [ ] effects show up (or not) if selected (or not) in game setup
 -   [ ] towers and characters are "real" looking
 -   [ ] zoom
 -   [ ] critical hits (visual indicator)
@@ -31,6 +41,8 @@
 
 (social)
 
+-   [ ] competition system and notifications for competition events (partly
+        done)
 -   [ ] Enable adding, inviting, and helping friends.
 -   [ ] Develop the shop for purchasing resources.
 -   [ ] Implement transaction processes.
@@ -43,11 +55,16 @@
 
 (misc)
 
+-   [ ] Add levels to the main stage
+-   [ ] Develop characters, enemies, and bosses
 -   [ ] stop screen going to sleep automatically (prevent)
 -   [ ] github pages 404 customize
 
 (done)
 
+-   [x] sell characters
+-   [x] upgrade/combine characters
+-   [x] rewards screen shows player/character level up events
 -   [x] feathers increase over time
 -   [x] notification when feathers are full
 -   [x] player levels up based on experience
