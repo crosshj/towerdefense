@@ -31,8 +31,7 @@ https://trello.com/b/iiaMfR68/teedee
 
 farming - https://www.youtube.com/watch?v=ymFPPRrahUA  
 shows team building - https://youtu.be/9sv721j4jsQ?t=372  
-https://www.youtube.com/watch?v=g2dhxDY8f7U
-https://developer.chrome.com/docs/web-platform/declarative-link-capturing
+https://www.youtube.com/watch?v=g2dhxDY8f7U https://developer.chrome.com/docs/web-platform/declarative-link-capturing
 https://stackoverflow.com/questions/58633304/pwa-home-screen-uninstall-dom-event
 
 convert image to data uri: https://ezgif.com/image-to-datauri
@@ -40,6 +39,7 @@ convert image to data uri: https://ezgif.com/image-to-datauri
 ### notes
 
 https://web.dev/articles/pwas-in-app-stores
+https://engineering.linecorp.com/en/blog/a-rookie-engineer-s-analysis-on-the-server-of-line-rangers
 
 ---
 
