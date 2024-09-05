@@ -104,7 +104,7 @@ const attachActions = ({ players }) => {
 	});
 	const swapShop = document.querySelector('button.swapShop');
 	swapShop.addEventListener('pointerup', () => {
-		const src = `/pages/_wip/index.html?which=swapShop&back=${back}`;
+		const src = `/pages/swapShop/index.html?selectedTab=gem&back=${back}`;
 		window.parent.postMessage({ _: 'navigate', src });
 	});
 	const battle = document.querySelector('button.battle');
