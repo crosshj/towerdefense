@@ -5,7 +5,6 @@ export class IDBStorage {
 		this.db = null;
 	}
 
-	// Initialize IndexedDB
 	async initDB() {
 		if (this.db) return this.db;
 
@@ -30,9 +29,8 @@ export class IDBStorage {
 		});
 	}
 
-	// Set an item in IndexedDB
 	async set(key, value) {
-		await this.initDB(); // Ensure DB is initialized
+		await this.initDB();
 		return new Promise((resolve, reject) => {
 			const transaction = this.db.transaction(
 				[this.storeName],
@@ -51,9 +49,8 @@ export class IDBStorage {
 		});
 	}
 
-	// Get an item from IndexedDB
 	async get(key) {
-		await this.initDB(); // Ensure DB is initialized
+		await this.initDB();
 		return new Promise((resolve, reject) => {
 			const transaction = this.db.transaction(
 				[this.storeName],
@@ -72,9 +69,8 @@ export class IDBStorage {
 		});
 	}
 
-	// Remove an item from IndexedDB
 	async remove(key) {
-		await this.initDB(); // Ensure DB is initialized
+		await this.initDB();
 		return new Promise((resolve, reject) => {
 			const transaction = this.db.transaction(
 				[this.storeName],
@@ -89,6 +85,26 @@ export class IDBStorage {
 
 			request.onerror = () => {
 				reject('Failed to remove item');
+			};
+		});
+	}
+
+	async clear() {
+		await this.initDB();
+		return new Promise((resolve, reject) => {
+			const transaction = this.db.transaction(
+				[this.storeName],
+				'readwrite'
+			);
+			const store = transaction.objectStore(this.storeName);
+			const request = store.clear();
+
+			request.onsuccess = () => {
+				resolve('Store cleared');
+			};
+
+			request.onerror = () => {
+				reject('Failed to clear the store');
 			};
 		});
 	}

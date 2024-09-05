@@ -1,4 +1,5 @@
 import { depends, nonLocal } from '../../$data/_depends.js';
+import { IDBStorage } from '../../utils/IDBStorage.js';
 import { isSessionActive } from '../../utils/session.js';
 
 const ONE_DAY = 24 * 60 * 60 * 1000;
@@ -128,6 +129,13 @@ const progressListener = (event) => {
 	}
 };
 
+const cleanPrevious = async () => {
+	try {
+		const unitImageStore = new IDBStorage('ImageDB', 'UnitStore');
+		await unitImageStore.clear();
+	} catch (e) {}
+};
+
 const onLoaded = async () => {
 	const sessionActive = isSessionActive();
 	if (sessionActive) {
@@ -138,6 +146,7 @@ const onLoaded = async () => {
 		return;
 	}
 	try {
+		await cleanPrevious();
 		//await registerServiceWorker(); //(might not be needed since done in main frame)
 		await updateCache({
 			onProgress: progressListener,
