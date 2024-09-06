@@ -197,7 +197,7 @@ const updateUserPane = async () => {
 		<button class="logout">LOG OUT</button>
 	`;
 	const logoutButton = accountPane.querySelector('.logout');
-	logoutButton.addEventListener('pointerdown', logout);
+	logoutButton.addEventListener('pointerup', logout);
 };
 
 const attachIcons = () => {
