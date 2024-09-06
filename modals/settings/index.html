@@ -19,24 +19,14 @@
 			<div class="content">
 				<div class="header">
 					<div class="chooser">
-						<div data-tab="notice" class="selected">NOTICE</div>
-						<div data-tab="game">GAME</div>
+						<div data-tab="game" class="selected">GAME</div>
 						<div data-tab="alert">ALERT</div>
 						<div data-tab="account">ACCOUNT</div>
+						<div data-tab="notice">NOTICE</div>
 					</div>
 				</div>
 				<div class="items-list">
-					<div class="tab-pane notice selected">
-						<button class="with-svg-icon svg-announce">
-							NOTICE
-						</button>
-						<button class="with-svg-icon svg-help">HELP</button>
-						<button class="with-svg-icon svg-movie">MOVIE</button>
-						<button class="with-svg-icon svg-moreGames">
-							MORE GAMES
-						</button>
-					</div>
-					<div class="tab-pane game">
+					<div class="tab-pane game selected">
 						<div class="toggleContainer">
 							<div class="labeledToggle">
 								<div class="label">BGM</div>
@@ -67,10 +57,14 @@
 						</div>
 						<div class="flex-spacer"></div>
 						<div class="flex-spacer"></div>
-						<button>LANGUAGES</button>
-						<button>PURCHASE INFO</button>
-						<button>SEND GAME LOG</button>
-						<button>RESOURCE CHECK</button>
+						<button class="languagesButton">LANGUAGES</button>
+						<button class="purchaseInfoButton">
+							PURCHASE INFO
+						</button>
+						<button class="sendGameLogButton">SEND GAME LOG</button>
+						<button class="resourceCheckButton">
+							RESOURCE CHECK
+						</button>
 					</div>
 					<div class="tab-pane alert">
 						<div class="toggleContainer">
@@ -152,6 +146,16 @@
 						</div>
 					</div>
 					<div class="tab-pane account"></div>
+					<div class="tab-pane notice">
+						<button class="with-svg-icon svg-announce">
+							NOTICE
+						</button>
+						<button class="with-svg-icon svg-help">HELP</button>
+						<button class="with-svg-icon svg-movie">MOVIE</button>
+						<button class="with-svg-icon svg-moreGames">
+							MORE GAMES
+						</button>
+					</div>
 				</div>
 			</div>
 			<div class="info">

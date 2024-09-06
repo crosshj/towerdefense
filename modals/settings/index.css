@@ -246,10 +246,15 @@ body {
 			}
 			.tab-pane.account {
 				display: flex;
-				justify-content: center;
-				align-items: center;
+				justify-content: start;
+				flex-direction: column;
+				align-items: start;
 				color: #e9bf8f;
 				white-space: pre;
+				button.logout {
+					margin-top: auto;
+					margin-left: auto;
+				}
 			}
 		}
 		.footer {

@@ -1,6 +1,7 @@
 import { SVGIcons } from '../../assets/icons.svg.js';
 import { getSettings, setSettings } from '../../user/settings.js';
 import { getUser, getUserFromAPI, updateUserFromAPI } from '../../user/user.js';
+import { IDBStorage } from '../../utils/IDBStorage.js';
 import { getVersionString } from './version.js';
 
 const notificationPermitted = async () => {
@@ -78,6 +79,32 @@ const setupPushNotifications = async (_subscription) => {
 	});
 };
 
+const resourcesCheck = async ({ reload = true } = {}) => {
+	try {
+		sessionStorage.removeItem('SESSION_ACTIVE');
+		const worker = navigator?.serviceWorker;
+		if (worker?.controller) {
+			worker.controller.postMessage({
+				type: 'clearDynamicCache',
+			});
+		}
+		const unitImageStore = new IDBStorage('ImageDB', 'UnitStore');
+		await unitImageStore.clear();
+		if (!reload) return;
+		window.parent.postMessage({
+			_: 'reload',
+		});
+	} catch (e) {
+		console.log(e);
+	}
+};
+
+const logout = async () => {
+	localStorage.clear();
+	localStorage.setItem('GAME_STARTED', new Date().toISOString());
+	await resourcesCheck();
+};
+
 const attachSettings = async () => {
 	const settings = await getSettings();
 
@@ -148,18 +175,29 @@ const attachSettings = async () => {
 		}
 		await setupPushNotifications();
 	});
+
+	const resourcesCheckButton = document.querySelector('.resourceCheckButton');
+	resourcesCheckButton.addEventListener('pointerdown', resourcesCheck);
 };
 
-const updateVersionString = () => {
+const updateVersionString = async () => {
 	const versionSpan = document.querySelector('.versionString');
-	const versionString = getVersionString();
+	const versionString = await getVersionString();
 	versionSpan.innerText = versionString;
 };
 
 const updateUserPane = async () => {
 	const user = await getUser();
 	const accountPane = document.querySelector('.tab-pane.account');
-	accountPane.innerHTML = JSON.stringify(user.apiUser, null, 2);
+	accountPane.innerHTML = `
+		<div class="username">NAME: ${user?.apiUser?.name}</div>
+		<div class="userCreatedDate">CREATED: ${user?.apiUser?.date_created}</div>
+		<div class="userLastLogin">LAST LOGIN: ${user?.apiUser?.last_login}</div>
+		<div class="userPushSubs">Push Subscriptions: ${(user?.apiUser?.data?.subscriptions || []).length}</div>
+		<button class="logout">LOG OUT</button>
+	`;
+	const logoutButton = accountPane.querySelector('.logout');
+	logoutButton.addEventListener('pointerdown', logout);
 };
 
 const attachIcons = () => {
@@ -180,7 +218,7 @@ const attachIcons = () => {
 };
 
 document.addEventListener('DOMContentLoaded', async () => {
-	updateVersionString();
+	await updateVersionString();
 	await attachSettings();
 	await updateUserPane();
 

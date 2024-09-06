@@ -9,7 +9,7 @@ self._version = currentHash.includes('_HASH')
 	: currentVersion + '-' + currentHash.slice(0, 7);
 console.log(`TD: ${self._version}`);
 
-import { cacheFiles } from './serviceWorker/cacheFiles.js';
+import { cacheFiles, clearCache } from './serviceWorker/cacheFiles.js';
 import {
 	handleNotificationClick,
 	handlePush,
@@ -40,6 +40,9 @@ self.addEventListener('periodicsync', periodicSyncHandler);
 self.addEventListener('sync', backgroundSyncHandler);
 
 self.addEventListener('message', async (event) => {
+	if (event?.data?.type === 'clearDynamicCache') {
+		await clearCache();
+	}
 	if (event?.data?.type === 'updateCache') {
 		await registerPeriodicSync(self.registration);
 		await cacheFiles(event);
@@ -55,6 +58,17 @@ self.addEventListener('message', async (event) => {
 
 self.addEventListener('fetch', (event) => {
 	const requestURL = new URL(event.request.url);
+
+	if (requestURL.pathname === '/version') {
+		const versionInfo = {
+			version: self._version,
+		};
+		const versionResponse = new Response(JSON.stringify(versionInfo), {
+			headers: { 'Content-Type': 'application/json' },
+		});
+		event.respondWith(versionResponse);
+		return;
+	}
 
 	if (requestURL.pathname === '/api/teedee/players/getByToken') {
 		event.respondWith(handleGetByToken(event.request));

@@ -75,6 +75,17 @@ const isCacheUpdateNeeded = async ({ filesToCache, CACHE_KEY }) => {
 	return false;
 };
 
+export const clearCache = async () => {
+	// delete entire cache
+	const CACHE_KEY = 'dynamic-cache-v1';
+	const cacheNames = await caches.keys();
+	for (const name of cacheNames) {
+		if (name !== CACHE_KEY) continue;
+		await caches.delete(name);
+		break;
+	}
+};
+
 export const cacheFiles = async (event) => {
 	// maybe get this from the event?`
 	const CACHE_KEY = 'dynamic-cache-v1';

@@ -79,6 +79,10 @@ function closeModal() {
 		mainIframe.contentWindow.dispatchEvent(new Event('focus'));
 		const iframeDocument =
 			mainIframe.contentDocument || mainIframe.contentWindow.document;
+		if (iframeDocument?.body) {
+			console.log('cannot focus iframe');
+			return;
+		}
 		iframeDocument.body.focus();
 		//console.log('After focus:', document.activeElement);
 	}, 300);
@@ -161,6 +165,10 @@ window.addEventListener('message', async function (event) {
 	const { _, ...args } = event.data;
 	if (_.startsWith('broadcast')) {
 		await broadcastUpdate(event.data);
+		return;
+	}
+	if (_ === 'reload') {
+		document.location.reload();
 		return;
 	}
 	if (_ === 'action') {
