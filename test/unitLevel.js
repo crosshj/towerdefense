@@ -3,6 +3,8 @@ import { parseUpgradeChangeScenario1, sampleUnit1 } from './unit.fixtures.js';
 import { parseUpgradeChange } from '../user/characters.js';
 import { flattenTeams } from '../utils/teams.js';
 import { withLevelInfo } from '../utils/units.js';
+import { unitsAll } from '../$data/unitsAll.js';
+import { testExpAmounts } from './user.fixtures.js';
 
 //setAutoRefresh(5000);
 
@@ -28,9 +30,41 @@ describe('Unit Level', (it) => {
 		return expect(uncapped.level).toBe(capped.level);
 	});
 
+	it('should not give negative stats', ({ expect }) => {
+		// const brokenUnit = {
+		// 	rank: 4,
+		// 	attack: '148 - 1,079 - 2,626',
+		// 	hp: '6,275 - 44,740 - 108,792',
+		// 	defense: '391 - 2,841 - 6,914',
+		// 	uncappedLevel: 4,
+		// };
+		const progress = [];
+		for (const [code, anyUnit] of Object.entries(unitsAll)) {
+			for (const exp of Object.values(testExpAmounts)) {
+				const hydrated = withLevelInfo(
+					{
+						...anyUnit,
+						uncappedLevel: 4,
+					},
+					Math.floor(exp)
+				);
+				progress.push({
+					unit: code.replaceAll(/-/g, '_'),
+					exp: Math.floor(exp),
+					level: hydrated.level,
+					attack: hydrated.attack,
+					hp: hydrated.hp,
+					defense: hydrated.defense,
+				});
+			}
+		}
+		// console.table(progress);
+		return expect(JSON.stringify(progress).indexOf('-')).toBe(-1);
+	});
+
 	it('parseUpgradeChange: scenario1 (has error)', ({ expect }) => {
 		const result = parseUpgradeChange(parseUpgradeChangeScenario1);
-		return expect(result.error).toBe('cannot use team units for upgrade!');
+		return expect(result.error).toBe('cannot consume team units!');
 	});
 
 	it('parseUpgradeChange: scenario1 (fixed)', ({ expect }) => {

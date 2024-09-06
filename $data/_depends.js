@@ -277,18 +277,6 @@ const external = [
 	'https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap',
 	//misc
 	'https://cdn.jsdelivr.net/npm/howler@2.2.4/+esm',
-	//mathjs
-	'https://cdn.jsdelivr.net/npm/mathjs@13.0.3/+esm',
-	'https://cdn.jsdelivr.net/npm/@babel/runtime@7.24.8/helpers/extends/+esm',
-	'https://cdn.jsdelivr.net/npm/typed-function@4.2.1/+esm',
-	'https://cdn.jsdelivr.net/npm/tiny-emitter@2.1.0/+esm',
-	'https://cdn.jsdelivr.net/npm/complex.js@2.1.1/+esm',
-	'https://cdn.jsdelivr.net/npm/fraction.js@4.3.7/+esm',
-	'https://cdn.jsdelivr.net/npm/decimal.js@10.4.3/+esm',
-	'https://cdn.jsdelivr.net/npm/@babel/runtime@7.24.8/helpers/defineProperty/+esm',
-	'https://cdn.jsdelivr.net/npm/javascript-natural-sort@0.7.1/+esm',
-	'https://cdn.jsdelivr.net/npm/escape-latex@1.2.0/+esm',
-	'https://cdn.jsdelivr.net/npm/seedrandom@3.0.5/+esm',
 ];
 
 export const nonLocal = [

@@ -1,4 +1,4 @@
-import { calculateCoefficients } from './calculateStats.js';
+import { getStatAtLevel } from './calculateStats.js';
 import { getExpForLevel, getGrowth, getLevelInfo } from './experience.js';
 import { unitsAll } from '/$data/unitsAll.js';
 
@@ -36,11 +36,7 @@ const getMaxLevel = (unit) => {
 // health
 const getHealth = (unit, currentLevel) => {
 	if (typeof unit.hp === 'number') return unit.hp;
-	const rankGrowth = calculateCoefficients(unit.rank, unit.hp);
-	const val = getGrowth({
-		...rankGrowth,
-		level: currentLevel,
-	});
+	const val = getStatAtLevel(unit.hp, unit.rank, currentLevel);
 	return val;
 };
 
@@ -48,11 +44,7 @@ const getHealth = (unit, currentLevel) => {
 const getDefense = (unit, currentLevel) => {
 	if (!unit.defense) return 0;
 	if (typeof unit.defense === 'number') return unit.defense;
-	const rankGrowth = calculateCoefficients(unit.rank, unit.defense);
-	const val = getGrowth({
-		...rankGrowth,
-		level: currentLevel,
-	});
+	const val = getStatAtLevel(unit.defense, unit.rank, currentLevel);
 	return val;
 };
 const getPhysicalDefense = (unit, currentLevel) => {
@@ -65,11 +57,7 @@ const getMagicDefense = (unit, currentLevel) => {
 // attack
 const getAttack = (unit, currentLevel) => {
 	if (typeof unit.attack === 'number') return unit.attack;
-	const rankGrowth = calculateCoefficients(unit.rank, unit.attack);
-	const val = getGrowth({
-		...rankGrowth,
-		level: currentLevel,
-	});
+	const val = getStatAtLevel(unit.attack, unit.rank, currentLevel);
 	return val;
 };
 const getPhysicalAttack = (unit, currentLevel) => {
@@ -99,7 +87,7 @@ export const withLevelInfo = (unit, totalExp = 0) => {
 		a: 5 * unit.rank,
 		b: 6000,
 	});
-	const uncappedLevel = Math.min(4, unit.uncappedLevel || 0); //TODO, this should be saved when combining units
+	const uncappedLevel = Math.min(4, unit.uncappedLevel || 0);
 	const maxLevel = getMaxLevel(unit);
 
 	if (currentLevel > maxLevel) {
