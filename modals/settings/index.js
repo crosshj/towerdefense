@@ -177,7 +177,7 @@ const attachSettings = async () => {
 	});
 
 	const resourcesCheckButton = document.querySelector('.resourceCheckButton');
-	resourcesCheckButton.addEventListener('pointerdown', resourcesCheck);
+	resourcesCheckButton.addEventListener('pointerup', resourcesCheck);
 };
 
 const updateVersionString = async () => {
