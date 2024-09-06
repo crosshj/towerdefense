@@ -1,6 +1,6 @@
-import { SVGIcons } from '../assets/icons.svg.js';
-import { getThumbnail } from './objects/unit.js';
-import ScreenInfo from './screen.js';
+import { SVGIcons } from '../../../assets/icons.svg.js';
+import { getThumbnail } from '../../../visuals/objects/unit.js';
+import ScreenInfo from '../../../visuals/screen.js';
 
 const progressClasses = [
 	'p-0',
@@ -32,36 +32,61 @@ const getDomRoot = () => {
 	return root;
 };
 
+const EffectsComponent = ({ state }) => {
+	const effectsClasses = {
+		friend: ['callFriend'],
+		meteor: ['meteor'],
+		ice: ['iceStorm'],
+		tornado: ['tornado'],
+		invincible: ['ivincibile'],
+	};
+	if (!state?.effects?.friend) {
+		effectsClasses.friend.push('hidden');
+	}
+	if (state?.effects?.meteor !== 'true') {
+		effectsClasses.meteor.push('hidden');
+	}
+	if (state?.effects?.ice !== 'true') {
+		effectsClasses.ice.push('hidden');
+	}
+	if (state?.effects?.tornado !== 'true') {
+		effectsClasses.tornado.push('hidden');
+	}
+	if (state?.effects?.invincible !== 'true') {
+		effectsClasses.invincible.push('hidden');
+	}
+	const effects = `
+		<div data-effect="teamSwitch" class="progress p-100">A</div>
+		<div data-effect="callFriend" class="${effectsClasses.friend.join(' ')}">
+			${SVGIcons.userMultiGo()}
+		</div>
+		<div data-effect="meteor" class="${effectsClasses.meteor.join(' ')}">
+			${SVGIcons.meteor()}
+		</div>
+		<div data-effect="ice" class="${effectsClasses.ice.join(' ')}">
+			${SVGIcons.iceStorm()}
+		</div>
+		<div data-effect="tornado" class="${effectsClasses.tornado.join(' ')}">
+			${SVGIcons.tornado()}
+		</div>
+		<div data-effect="invincible" class="${effectsClasses.invincible.join(' ')}">
+			${SVGIcons.invincibility()}
+		</div>
+	`;
+	return effects;
+};
+
 const createTopControls = ({
 	root,
 	controls,
 	pauseScreen,
-	showEffects,
 	state,
+	//
 } = {}) => {
 	const top = document.createElement('div');
 	top.classList.add('controls-top');
 
-	const effects = showEffects
-		? `
-			<div data-effect="teamSwitch" class="progress p-100">A</div>
-			<div data-effect="callFriend" class="callFriend">
-				${SVGIcons.userMultiGo()}
-			</div>
-			<div data-effect="meteor" class="meteor">
-				${SVGIcons.meteor()}
-			</div>
-			<div data-effect="ice" class="iceStorm">
-				${SVGIcons.iceStorm()}
-			</div>
-			<div data-effect="tornado" class="tornado">
-				${SVGIcons.tornado()}
-			</div>
-			<div data-effect="invincible" class="invincible">
-				${SVGIcons.invincibility()}
-			</div>
-		`
-		: '';
+	const effects = EffectsComponent({ state });
 
 	top.innerHTML = `
 		<div class="effects">
@@ -338,7 +363,7 @@ export default class Controls {
 		pauseScreen,
 		showTicker,
 		showScreenInfo,
-		showEffects,
+		//
 	} = {}) {
 		const root = getDomRoot();
 
@@ -354,7 +379,6 @@ export default class Controls {
 			state,
 			controls: this,
 			pauseScreen,
-			showEffects,
 		});
 		this.bottom = createBottomControls({ root, state });
 

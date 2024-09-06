@@ -1,10 +1,10 @@
-import { cleanError, colorShade } from '../utils/utils.js';
-import { toggleCoords } from '../pages/game/engine/state.js';
-import GifMaker from '../vendor/gif-js/gif.js';
-import { renderMissile } from './objects/missile.js';
+import { cleanError, colorShade } from '../../../utils/utils.js';
+import { toggleCoords } from './state.js';
 import Controls from './controls.js';
 import { createPauseScreen } from './menuPause.js';
-import { getCharRenderer } from './objects/unit.js';
+import GifMaker from '../../../vendor/gif-js/gif.js';
+import { renderMissile } from '../../../visuals/objects/missile.js';
+import { getCharRenderer } from '../../../visuals/objects/unit.js';
 
 const BOTTOM_OFFSET = 60;
 
@@ -313,12 +313,12 @@ export default class Render {
 	constructor({ state }) {
 		const { ctx, gif } = initDom(state);
 		const pauseScreen = createPauseScreen(document.body, state);
+		console.log({ state });
 		const controls = new Controls({
 			state,
 			pauseScreen,
 			showTicker: false, // for debugging
 			showScreenInfo: false, // for debugging
-			showEffects: true, //TODO: this depends on statee, ie. what effects are used in game setup
 		});
 		return () => tryRender(state, ctx, gif, controls);
 	}

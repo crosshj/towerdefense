@@ -347,7 +347,12 @@ button {
 		gap: 5px;
 		margin-top: 6px;
 		padding-block: 6px;
+		pointer-events: none;
 		& > div {
+			pointer-events: all;
+			& > * {
+				pointer-events: none;
+			}
 			flex: 1;
 			background-color: #00c7ff6b;
 			border-radius: 7px;

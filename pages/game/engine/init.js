@@ -2,7 +2,7 @@ import { getStage } from '/stages/index.js';
 import { characterAnimationGetter } from '/visuals/assets/character.js';
 import { getTeamFromNumber } from '/utils/getTeam.js';
 import { getTower } from '/user/tower.js';
-import Render from '/visuals/render.js';
+import Render from './render.js';
 import { loadAssets, loadSounds } from '/visuals/assets/assets.js';
 
 import Engine from './engine.js';
@@ -24,6 +24,14 @@ const adjustGame = async (game, params) => {
 	attackerTower.team = []; //TODO: really need this? yes, unfortunately for now
 
 	game.state.towers[0] = attackerTower;
+
+	game.state.effects = {
+		friend: params?.friend,
+		ice: params?.fxIce,
+		invincible: params?.fxInvincible,
+		meteor: params?.fxMeteor,
+		tornado: params?.fxTornado,
+	};
 };
 
 export const startGame = async ({ menu, params, gameOver }) => {

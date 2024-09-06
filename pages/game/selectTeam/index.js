@@ -1,6 +1,6 @@
 import { getLocationMap, getZoneFromNumber } from '../../../utils/locations.js';
 import { getTeam } from '/utils/getTeam.js';
-import { getEffects } from '../../../user/effects.js';
+import { getEffects, updateEffectsSelect } from '../../../user/effects.js';
 import { SVGIcons } from '../../../assets/icons.svg.js';
 import { getPotentialStageRewards } from '../../../stages/index.js';
 import { getCollection } from '../../../user/getCollection.js';
@@ -40,26 +40,30 @@ const effectsIcons = {
 	invincible: SVGIcons.invincibility(),
 };
 
-const updateEffects = async () => {
+const attachEffects = async () => {
 	const effects = await getEffects();
 	for (const [k, v] of Object.entries(effects)) {
 		const { selected, count } = v;
+		const el = document.querySelector(`.effects .${k}`);
 
-		const checkBox = document.querySelector(
-			`.effects .${k} input[type=checkbox]`
-		);
+		const checkBox = el.querySelector(`input[type=checkbox]`);
 		checkBox.checked = selected;
 
-		const icon = document.querySelector(`.effects .${k} .icon`);
+		const icon = el.querySelector(`.icon`);
 		icon.innerHTML = effectsIcons[k];
 
-		const costEl = document.querySelector(`.effects .${k} .cost`);
+		const costEl = el.querySelector(`.cost`);
 		costEl.innerHTML = count > 0 ? 'Free' : 'cost?';
 
-		const countBadgeEl = document.querySelector(
-			`.effects .${k} .countBadge`
-		);
+		const countBadgeEl = el.querySelector(`.countBadge`);
 		countBadgeEl.innerHTML = count;
+
+		el.addEventListener('pointerdown', () => {
+			const newValue = !checkBox.checked;
+			checkBox.checked = newValue;
+			console.log({ newValue });
+			updateEffectsSelect({ [k]: newValue });
+		});
 	}
 };
 
@@ -154,7 +158,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 		location.title = 'STAGE ' + params.number;
 	}
 
-	await updateEffects();
+	await attachEffects();
 
 	window.parent.postMessage({
 		_: 'stats',

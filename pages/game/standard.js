@@ -1,5 +1,4 @@
 import { startGame } from './engine/init.js';
-import '/visuals/menuPause.js';
 
 const onLoaded = () => {
 	const params = Object.fromEntries(
@@ -38,12 +37,7 @@ const onLoaded = () => {
 
 	const menu = {
 		hide: () => {},
-		show: () => {
-			// window.parent.postMessage({
-			// 	_: 'navigate',
-			// 	src: '/pages/mainStage/index.html'
-			// });
-		},
+		show: () => {},
 	};
 	startGame({
 		zone: params.zone,
