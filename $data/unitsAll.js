@@ -733,4 +733,18 @@ export const unitsAll = {
 		defense: '465 - 3,356 - 8,165',
 		range: 60 * 10,
 	},
+
+	// https://rangers.lerico.net/en/ranger/u057e-ham
+	'u0001-4-aries': {
+		displayName: 'Aries',
+		element: 'Normal',
+		type: 'Strength',
+		rank: 4,
+		mineralCost: 150,
+		//orig cost 475
+		attack: '166 - 1,195 - 2,907',
+		hp: '6,816 - 48,564 - 118,087',
+		defense: '892 - 6,380 - 15,516',
+		range: 60 * 10,
+	},
 };

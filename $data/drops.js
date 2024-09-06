@@ -58,6 +58,7 @@ export const stageCharacterDrops = {
 		'u0001-2-toto': { type: 'char', probability: 0.1 },
 		'u0001-4-ebony': { type: 'char', probability: 0.1 },
 		'u0001-4-liz': { type: 'char', probability: 0.4 },
+		'u0001-4-aries': { type: 'char', probability: 0.4 },
 	},
 	// tropical graveyard: ghost, dark, grass
 	tropical1: {
