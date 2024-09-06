@@ -3,6 +3,7 @@ import { addCharactersEXP, addNewCharacter } from '../../../user/characters.js';
 import { updateEffectsCount } from '../../../user/effects.js';
 import { addStats } from '../../../user/stats.js';
 import { addUserExperience, getUser } from '../../../user/user.js';
+import { getSVGDocument } from '../../../utils/htmlToElement.js';
 import { getTeamFromNumber } from '/utils/getTeam.js';
 import { getTeam } from '/utils/getTeam.js';
 
@@ -12,8 +13,7 @@ const updateRewards = async (rewards) => {
 	);
 	const { bonus, exp, coins } = rewards;
 
-	const svgObject = document.getElementById('backgroundSVG');
-	const svgDoc = svgObject.contentDocument;
+	const svgDoc = await getSVGDocument('backgroundSVG');
 	const coinAmount = svgDoc.getElementById('coinAmount');
 	coinAmount.textContent = `+${coins}`;
 

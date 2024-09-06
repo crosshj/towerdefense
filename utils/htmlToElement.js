@@ -17,3 +17,15 @@ export const withCommas = (x) => {
 		.toLocaleString('en', { useGrouping: true })
 		.replaceAll(/,/g, '<span class="comma-span">,</span>');
 };
+
+export async function getSVGDocument(id) {
+	const backgroundSVG = document.getElementById(id);
+	if (backgroundSVG.contentDocument) {
+		return backgroundSVG.contentDocument;
+	}
+	return new Promise((resolve) => {
+		backgroundSVG.addEventListener('load', function () {
+			resolve(backgroundSVG.contentDocument);
+		});
+	});
+}
