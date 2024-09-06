@@ -131,6 +131,7 @@ const progressListener = (event) => {
 
 const cleanPrevious = async () => {
 	try {
+		//TODO: only clean up if version is different
 		const unitImageStore = new IDBStorage('ImageDB', 'UnitStore');
 		await unitImageStore.clear();
 	} catch (e) {}
