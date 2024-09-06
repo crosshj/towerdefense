@@ -38,7 +38,7 @@ const EffectsComponent = ({ state }) => {
 		meteor: ['meteor'],
 		ice: ['iceStorm'],
 		tornado: ['tornado'],
-		invincible: ['ivincibile'],
+		invincible: ['invincibile'],
 	};
 	if (!state?.effects?.friend) {
 		effectsClasses.friend.push('hidden');
