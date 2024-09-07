@@ -3,18 +3,17 @@ import { addCharactersEXP, addNewCharacter } from '../../../user/characters.js';
 import { updateEffectsCount } from '../../../user/effects.js';
 import { addStats } from '../../../user/stats.js';
 import { addUserExperience, getUser } from '../../../user/user.js';
-import { getSVGDocument } from '../../../utils/htmlToElement.js';
+import { waitForElementById } from '../../../utils/htmlToElement.js';
 import { getTeamFromNumber } from '/utils/getTeam.js';
 import { getTeam } from '/utils/getTeam.js';
 
-const updateRewards = async (rewards) => {
+const updateRewards = async ({ svgDoc, rewards }) => {
 	const params = Object.fromEntries(
 		new URLSearchParams(window.location.search)
 	);
 	const { bonus, exp, coins } = rewards;
 
-	const svgDoc = await getSVGDocument('backgroundSVG');
-	const coinAmount = svgDoc.getElementById('coinAmount');
+	const coinAmount = await waitForElementById(svgDoc, 'coinAmount');
 	coinAmount.textContent = `+${coins}`;
 
 	// update coins
@@ -80,11 +79,14 @@ const updateTeamIcons = async ({ teamName }) => {
 	);
 };
 
-function animateProgressBar(fromPercent, toPercent, duration = 1000) {
-	const svgObject = document.getElementById('backgroundSVG');
-	const svgDoc = svgObject.contentDocument;
-	const progressBar = svgDoc.getElementById('progressBar');
-	const progressText = svgDoc.getElementById('progressText');
+async function animateProgressBar(
+	svgDoc,
+	fromPercent,
+	toPercent,
+	duration = 1000
+) {
+	const progressBar = await waitForElementById(svgDoc, 'progressBar');
+	const progressText = await waitForElementById(svgDoc, 'progressText');
 	if (!progressBar) return;
 
 	const startWidth = Math.max(30, (fromPercent * 287.828) / 100);
@@ -118,18 +120,15 @@ function animateProgressBar(fromPercent, toPercent, duration = 1000) {
 	});
 }
 
-const updateUserLevelInfo = ({ user }) => {
-	console.log({ userLevel: user.levelInfo });
-	const svgObject = document.getElementById('backgroundSVG');
-	const svgDoc = svgObject.contentDocument;
-	const userIcon = svgDoc.getElementById('userIcon');
+const updateUserLevelInfo = async ({ svgDoc, user }) => {
+	const userIcon = await waitForElementById(svgDoc, 'userIcon');
 	userIcon.setAttribute('xlink:href', user.image);
 
-	const userLevelAmount = svgDoc.getElementById('userLevelAmount');
+	const userLevelAmount = await waitForElementById(svgDoc, 'userLevelAmount');
 	userLevelAmount.textContent = user.levelInfo.level;
 
 	if (user.grade === 'normal') {
-		const userGrade = svgDoc.getElementById('userGrade');
+		const userGrade = await waitForElementById(svgDoc, 'userGrade');
 		const userGradeText = userGrade.querySelector('text');
 		userGradeText.textContent = '';
 		const userGradePath = userGrade.querySelector('path');
@@ -229,12 +228,17 @@ document.addEventListener('DOMContentLoaded', async () => {
 	console.log({ params });
 
 	const user = await getUser();
-	updateUserLevelInfo({ user });
+	const svgDoc = () => {
+		const objectEl = document.getElementById('backgroundSVG');
+		return objectEl?.contentDocument;
+	};
+
+	await updateUserLevelInfo({ svgDoc, user });
 	const expStartPercent = Math.floor(Number(user.levelInfo.levelExpPercent));
-	animateProgressBar(expStartPercent);
+	await animateProgressBar(svgDoc, expStartPercent);
 
 	const rewards = await getStageRewards(params);
-	await updateRewards(rewards);
+	await updateRewards({ svgDoc, rewards });
 	const expEndPercent =
 		(100 * (rewards.exp.player + user.levelInfo.remainderExp)) /
 		user.levelInfo.expNeededForNextLevel;
@@ -253,6 +257,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 	window.parent.postMessage({ _: 'loaded' });
 
 	await animateProgressBar(
+		svgDoc,
 		Math.max(0, expStartPercent),
 		Math.min(expEndPercent, 100)
 	);

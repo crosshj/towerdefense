@@ -6,6 +6,7 @@ import { loadSounds } from '/visuals/assets/assets.js';
 const FADE_MS = 200;
 let whereIsBack;
 let bgMusic;
+let navigating = false;
 
 const setupPlayable = () => {
 	const iframe = `
@@ -190,17 +191,30 @@ window.addEventListener('message', async function (event) {
 		});
 		return;
 	}
+	if (_ === 'navigate' && navigating) {
+		// console.log(
+		// 	'cannot navigate while in progress navigating',
+		// 	args,
+		// 	navigating
+		// );
+		return;
+	}
 	if (_ === 'navigate' && (args?.src || '').includes('/modals/')) {
 		closeModal();
 		return showModal(args);
 	}
 	if (_ === 'navigate') {
+		navigating = args;
 		const modalClosed = closeModal();
-		if (modalClosed && !args?.src) return;
+		if (modalClosed && !args?.src) {
+			navigating = false;
+			return;
+		}
 		navigate(args);
 		return;
 	}
 	if (_ === 'loaded') {
+		navigating = false;
 		document.body.classList.add('fade-in');
 		document.body.classList.remove('fade-out');
 		return;
