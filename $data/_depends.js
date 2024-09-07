@@ -94,10 +94,10 @@ const assets = [
 	'/pages/home/index.css',
 	'/pages/home/index.js',
 
-	'/pages/mainStage/index.html',
-	'/pages/mainStage/index.js',
-	'/pages/mainStage/background.png',
-	'/pages/mainStage/background_clicks.png',
+	'/pages/stage/main/index.html',
+	'/pages/stage/main/index.js',
+	'/pages/stage/main/background.png',
+	'/pages/stage/main/background_clicks.png',
 
 	'/pages/my-team/index.html',
 	'/pages/my-team/index.css',

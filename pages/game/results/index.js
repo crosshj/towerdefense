@@ -186,7 +186,8 @@ const showClearBonus = async (rewards) => {
 };
 
 const goBack = ({ params }) => {
-	let src = '/pages/mainStage/index.html';
+	const stage = params?.stage || 'main';
+	let src = `/pages/stage/${stage}/index.html`;
 	if (params.zone === 'friendBattle') {
 		src = '/pages/pvp/';
 	}

@@ -107,7 +107,7 @@ function navigate(args = {}) {
 		mainIframe.height = '100%';
 		mainIframe.src = args.src || '/pages/home/index.html';
 		document.body.insertAdjacentElement('afterBegin', mainIframe);
-		if (args?.src === '/pages/mainStage/index.html' && bgMusic) {
+		if (args?.src === '/pages/stage/main/index.html' && bgMusic) {
 			bgMusic.stop();
 			bgMusic = undefined;
 		}

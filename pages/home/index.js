@@ -26,7 +26,7 @@ const isWIP = [
 ];
 
 const clickColorMap = {
-	'#00ffdd': '/pages/mainStage/index.html',
+	'#00ffdd': '/pages/stage/main/index.html',
 	'#00ff7b': '/pages/specialStage/index.html',
 	'#88ff00': '/pages/arena/index.html',
 	'#f6ff00': '/pages/pvp/index.html',

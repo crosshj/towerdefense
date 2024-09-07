@@ -5,7 +5,7 @@ https://trello.com/b/iiaMfR68/teedee
 ### Development Tools
 
 -   characters: http://127.0.0.1:8000/characters/test/index.html
--   main stage map: http://127.0.0.1:8000/pages/mainStage/backgroundTool.html
+-   main stage map: http://127.0.0.1:8000/pages/stage/main/backgroundTool.html
 -   audio: http://127.0.0.1:8000/test/audio.html
 -   experience: http://127.0.0.1:8000/test/experience.html
 -   render: http://127.0.0.1:8000/test/render.html

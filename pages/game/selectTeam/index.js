@@ -168,11 +168,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 		friendPoints: false,
 	});
 
+	const stage = params?.stage || 'main';
 	const titleConfig = {
 		_: 'title',
 		title: location?.title || 'Select Team',
 		visibility: 'visible',
-		back: '/pages/mainStage/index.html',
+		back: `/pages/stage/${stage}/index.html`,
 	};
 	if (params?.zone === 'friendBattle') {
 		titleConfig.title = 'FRIEND BATTLE';

@@ -1,6 +1,6 @@
-import { debounce } from '../../utils/debounce.js';
-import { loadSounds } from '../../visuals/assets/assets.js';
-import { canvasVertical } from '../../visuals/canvas.js';
+import { debounce } from '../../../utils/debounce.js';
+import { loadSounds } from '../../../visuals/assets/assets.js';
+import { canvasVertical } from '../../../visuals/canvas.js';
 
 const pageTitle = 'MAIN STAGE';
 
@@ -111,12 +111,7 @@ const onScroll = (args) => {
 	localStorage.setItem('MAIN_SCROLL', args.offsetY);
 };
 
-const setup = async () => {
-	const bgMusic = await loadSounds('menuBackground');
-	bgMusic.start(2000);
-
-	const offsetY = localStorage.getItem('MAIN_SCROLL') || undefined;
-
+const pageDone = () => {
 	window.parent.postMessage({
 		_: 'title',
 		title: pageTitle,
@@ -129,13 +124,36 @@ const setup = async () => {
 		friendPoints: false,
 	};
 	window.parent.postMessage({ _: 'stats', ...args });
-	document.title += `: ${pageTitle}`;
+	document.title = `TD: ${pageTitle}`;
+	window.parent.postMessage({ _: 'loaded' });
+};
+
+const attachCandy = () => {
+	const link = document.querySelector('.candyLink');
+	link.addEventListener('pointerdown', (e) => {
+		e.preventDefault();
+		e.stopPropagation();
+		window.parent.postMessage({
+			_: 'navigate',
+			src: '/pages/stage/candy/index.html',
+		});
+	});
+};
+
+const setup = async () => {
+	attachCandy();
+
+	const bgMusic = await loadSounds('menuBackground');
+	bgMusic.start(2000);
+
+	const offsetY = localStorage.getItem('MAIN_SCROLL') || undefined;
+
 	const bg = await canvasVertical({
 		parent: document.body,
-		image: '/pages/mainStage/background.png',
+		image: '/pages/stage/main/background.png',
 		width: 950,
 		scrollBottom: 0,
-		clickMap: '/pages/mainStage/background_clicks.png',
+		clickMap: '/pages/stage/main/background_clicks.png',
 		clickHandle: (color) => {
 			const [which, number] = (clickColorMap[color] || '').split('-');
 			if (!which) return;
@@ -146,7 +164,8 @@ const setup = async () => {
 		offsetY: offsetY ? JSON.parse(offsetY) : undefined,
 		onScroll: debounce(onScroll),
 	});
-	window.parent.postMessage({ _: 'loaded' });
+
+	pageDone();
 };
 
 document.addEventListener('DOMContentLoaded', setup);

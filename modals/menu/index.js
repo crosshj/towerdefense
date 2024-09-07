@@ -17,7 +17,11 @@ const getNavigateTo = (el) => {
 		'guild',
 		'lab',
 	];
-	return permitted.find((x) => el.classList.contains(x));
+	const target = permitted.find((x) => el.classList.contains(x));
+	if (target === 'mainStage') {
+		return 'stage/main';
+	}
+	return target;
 };
 
 const icons = {

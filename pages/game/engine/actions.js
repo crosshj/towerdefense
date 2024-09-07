@@ -26,7 +26,7 @@ export const getActions = (state) => {
 		mainMenu: () => {
 			window.parent.postMessage({
 				_: 'navigate',
-				src: '/pages/mainStage/index.html',
+				src: '/pages/stage/main/index.html',
 			});
 		},
 		pauseToggle: () => {
