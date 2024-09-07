@@ -37,7 +37,6 @@ export const getFriends = async () => {
 	players = players.filter((x) => typeof x.last_login === 'string');
 
 	for (const player of players) {
-		console.log(player);
 		player.image = await getUserImage(player);
 	}
 

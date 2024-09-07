@@ -41,11 +41,14 @@ export const unitsAll = {
 		element: 'Air',
 		type: 'Agility',
 		rank: 4,
-		mineralCost: 350,
+		mineralCost: 150, //original 350
 		attack: '411 - 2,959 - 7,198',
 		hp: '4,270 - 30,436 - 74,009',
 		defense: '43 - 337 - 823',
-		range: 500,
+		range: 282,
+		critChance: 0.21,
+		critMult: 53,
+		evadeChance: 0.18,
 	},
 	// like https://rangers.lerico.net/en/ranger/u13-lia
 	'u0001-5-drat': {

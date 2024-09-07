@@ -56,19 +56,24 @@ export const spawnTeam = (state) => {
 };
 */
 
+const withinRange = (isAttack, char, opp) => {
+	// make sure units don't overlap
+	const variableSpace = Math.floor(Math.random() * 200);
+	return isAttack
+		? char.x + (char.range + variableSpace) >= opp.x
+		: char.x - (char.range + variableSpace) <= opp.x;
+};
+
 export const targetOpponents = (state) => {
 	const { towers } = state.global();
 	towers.forEach((tower, i) => {
 		const isAttack = tower.type === 'attacker';
 		const opponent = towers[isAttack ? 1 : 0];
-		const withinRange = (char, opp) =>
-			isAttack
-				? char.x + char.range >= opp.x
-				: char.x - char.range <= opp.x;
+
 		tower.deployed.forEach((char, j) => {
-			if (char.target) return;
+			//if (char.target) return;
 			const nearby = [opponent, ...opponent.deployed].filter((opp) =>
-				withinRange(char, opp)
+				withinRange(isAttack, char, opp)
 			);
 			if (!nearby.length) return;
 			state.towers[i].deployed[j].target = isAttack
@@ -78,40 +83,70 @@ export const targetOpponents = (state) => {
 	});
 };
 
+const calculateDamage = ({ attacker, defender }) => {
+	const defenderEvades = typeof defender?.evadeChance === 'number';
+	const evaded = defenderEvades && Math.random() < defender.evadeChance;
+	if (evaded) {
+		return { damage: 0, isCriticalHit: false, evaded: true };
+	}
+
+	// effective attack power
+	const canCrit =
+		typeof attacker.critChance === 'number' &&
+		typeof attacker.critMult === 'number';
+	const isCriticalHit = canCrit && Math.random() <= attacker.critChance;
+	const effectiveAttackPower = isCriticalHit
+		? attacker.attack * attacker.critMult
+		: attacker.attack;
+
+	// defense
+	const defense =
+		typeof defender.defense === 'number'
+			? defender.defense //
+			: 0;
+
+	// calculate damage
+	const damage = effectiveAttackPower * (100 / (100 + defense));
+
+	return { damage, isCriticalHit, evaded: false };
+};
+
+const doAttack = (state) => (attacker) => {
+	const defender = state.getById(attacker.target);
+	if (!defender) {
+		attacker.target = undefined;
+		return;
+	}
+
+	const { damage, isCriticalHit, evaded } = calculateDamage({
+		attacker,
+		defender,
+	});
+	// isCriticalHit && console.log('CRITICAL!');
+	// evaded && console.log('EVADED!');
+
+	// apply damage
+	if (damage <= 0) {
+		return;
+	}
+	if (Math.random() > 0.85 || isCriticalHit) {
+		isCriticalHit && coreSounds.play('swipe1');
+		!isCriticalHit && coreSounds.play('punch1');
+	}
+
+	defender.hp -= damage;
+	if (defender.hp <= 0) {
+		defender.status = 'dead';
+		attacker.defender = undefined;
+	}
+};
+
 export const attackOpponents = (state) => {
 	const { towers } = state;
 	const attacking = [...towers[0].deployed, ...towers[1].deployed].filter(
 		(x) => x.target
 	);
-	attacking.forEach((attacker) => {
-		const target = state.getById(attacker.target);
-		if (!target) {
-			attacker.target = undefined;
-			return;
-		}
-		let damage = attacker.attack;
-		const canCrit =
-			typeof attacker.critChance === 'number' &&
-			typeof attacker.critMult === 'number';
-		let didCrit = false;
-		if (canCrit && Math.random() <= attacker.critChance) {
-			damage = attacker.attack * attacker.critMult;
-			console.log('critical attack');
-			didCrit = true;
-		}
-		if (damage <= 0) {
-			return;
-		}
-		if (Math.random() > 0.85 || didCrit) {
-			didCrit && coreSounds.play('swipe1');
-			!didCrit && coreSounds.play('punch1');
-		}
-		target.hp -= damage;
-		if (target.hp <= 0) {
-			target.status = 'dead';
-			attacker.target = undefined;
-		}
-	});
+	attacking.forEach(doAttack(state));
 	towers.forEach((tower) => {
 		if (tower.hp <= 0) tower.status = 'dead';
 		tower.deployed = tower.deployed.filter((x) => x.status !== 'dead');

@@ -115,7 +115,6 @@ const attachNextButton = async ({ location, params }) => {
 	const nextButton = document.querySelector('button.next-button');
 
 	const featherCost = stage.featherCost || 1;
-	console.log({ location, stage });
 
 	nextButton.innerHTML = `
 		<div class="featherIcon"></div>
