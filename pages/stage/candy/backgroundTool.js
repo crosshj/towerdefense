@@ -1,14 +1,14 @@
 const stageDetails = [
-	{ name: 'Mythical Pantheon', color: '#8B008B' }, // DarkMagenta
-	{ name: 'Industrial Complex', color: '#556B2F' }, // Dark Olive Green
-	{ name: 'Frozen Tundra', color: '#B0C4DE' }, // Light Steel Blue (lighter and greyer)
-	{ name: 'Thunder Oasis', color: '#FFD700' }, // Gold (less saturated)
-	{ name: 'Tropical Graveyard', color: '#9370DB' }, // Medium Purple (less saturated)
-	{ name: 'Rocky Highlands', color: '#A9A9A9' }, // DarkGray
-	{ name: 'Sakura', color: '#FFB6C1' }, // LightPink
-	{ name: 'Coastal', color: '#00BFFF' }, // DeepSkyBlue
-	{ name: 'Forest Path', color: '#228B22' }, // ForestGreen
-	{ name: 'Meadow', color: '#98FB98' }, // PaleGreen
+	{ name: '', color: 'transparent' },
+	{ name: '', color: 'transparent' },
+	{ name: '', color: 'transparent' },
+	{ name: '', color: 'transparent' },
+	{ name: '', color: '#FF4C4C' },
+	{ name: 'Big Rock Candy Mountains', color: '#FF4C4C' }, //
+	{ name: 'Strawberry Fields', color: '#FF7373' },
+	{ name: 'Soda Stream', color: '#FF9999' },
+	{ name: 'Chocolate Hills', color: '#FFB6C1' },
+	{ name: 'Cotton Candy Castle', color: '#FFC0CB' },
 ];
 
 // String representation of path with reduced points
@@ -306,13 +306,10 @@ function numberToColor(num) {
 	return hslToHex(hue, saturation, lightness);
 }
 
-const onLoaded = () => {
-	const params = Object.fromEntries(
-		new URLSearchParams(window.location.search)
-	);
+function createBigCanvas({ params }) {
+	const canvas = document.createElement('canvas');
 	const clickMap = params.clickMap === 'true';
 
-	const canvas = document.getElementById('stageCanvas');
 	const context = canvas.getContext('2d');
 	const canvasWidth = 891;
 	const padding = 100;
@@ -338,7 +335,9 @@ const onLoaded = () => {
 		context.beginPath();
 		context.moveTo(stages[0].x, stages[0].y - minY + padding); // Adjust for minY and padding
 		for (let i = 1; i < stages.length; i++) {
-			context.lineTo(stages[i].x, stages[i].y - minY + padding); // Adjust for minY and padding
+			const y = stages[i].y - minY + padding;
+			if (y < 2220) continue;
+			context.lineTo(stages[i].x, y); // Adjust for minY and padding
 		}
 		context.strokeStyle = color;
 		context.lineWidth = width;
@@ -413,25 +412,21 @@ const onLoaded = () => {
 	!clickMap && drawBackgrounds();
 
 	// Draw the path
-	const pathColor = '#5d482d';
+	const pathColor = 'hsl(-147 35% 27% / 1)';
 	!clickMap && drawPath(path, pathColor, 25);
 
 	// Draw stages
 	const bossRadius = 25;
-	const bossColor = '#ff6666';
+	const bossColor = '#14ffa6';
 	const subRadius = 23;
-	const subColor = '#e5cdae';
+	const subColor = '#e0cfaf';
 
 	stages.forEach((stage) => {
 		const radius = stage.isBoss ? bossRadius : subRadius;
 		const color = stage.isBoss ? bossColor : subColor;
-		drawCircle(
-			stage.x,
-			stage.y - minY + padding,
-			radius,
-			color,
-			stage.stageNumber
-		);
+		const y = stage.y - minY + padding;
+		if (y < 2200) return;
+		drawCircle(stage.x, y, radius, color, stage.stageNumber);
 	});
 
 	if (clickMap) {
@@ -453,5 +448,23 @@ const onLoaded = () => {
 		}
 		window.clicks = clicks;
 	}
+
+	return canvas;
+}
+
+const onLoaded = () => {
+	const params = Object.fromEntries(
+		new URLSearchParams(window.location.search)
+	);
+	const bigCanvas = createBigCanvas({ params });
+	const canvas = document.getElementById('stageCanvas');
+	const context = canvas.getContext('2d');
+
+	canvas.width = 891;
+	canvas.height = 2420;
+
+	const cropHeight = bigCanvas.height - canvas.height;
+	//prettier-ignore
+	context.drawImage(bigCanvas, 0, cropHeight, canvas.width, canvas.height, 0, 0, canvas.width, canvas.height);
 };
 document.addEventListener('DOMContentLoaded', onLoaded);
