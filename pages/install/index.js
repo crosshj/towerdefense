@@ -149,12 +149,21 @@ const attachAdvancedView = () => {
 	const advancedView = document.querySelector('.advanced');
 	advancedView.innerHTML = `
 <pre>
-	TODO:
-	1) dump the application state
-	2) manually retry the failed files
-	3) bypass cache
+TODO:
+1) dump the application state
+2) manually retry the failed files
+3) bypass cache
 </pre>
+<button class="bypassCache">Bypass Cache</button>
 	`;
+	const bypassCachButton = advancedView.querySelector('.bypassCache');
+	bypassCachButton.addEventListener('pointerup', () => {
+		window.parent.postMessage({
+			_: 'navigate',
+			src: '/pages/startup/index.html',
+			FADE_MS: 0,
+		});
+	});
 };
 
 const onLoaded = async () => {

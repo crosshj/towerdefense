@@ -82,5 +82,7 @@ body {
 		background: #333;
 		border: 1px solid white;
 		border-radius: 7px;
+		box-sizing: border-box;
+		padding: 15px;
 	}
 }
