@@ -246,7 +246,7 @@ export const unitsAll = {
 		// orig attack: 19 - 76 - 245
 		hp: 20000,
 		// orig hp: 350 - 1,186 - 3,719
-		defense: 23 - 80 - 252,
+		defense: '23 - 80 - 252',
 		range: 60 * 10,
 	},
 	'u0001-4-slabb': {
