@@ -152,9 +152,10 @@ export const setTeams = async (newValue) => {
 
 	const apiUser = await getUserFromAPI();
 	const characters = await getCharacters();
+	const compressed = compressTeams(value, characters);
 	await updateUserFromAPI({
 		...(apiUser?.data || {}),
-		teams: compressTeams(value, characters),
+		teams: compressed,
 		//characters: compressChars(characters)
 	});
 

@@ -194,6 +194,8 @@ const assets = [
 	'/assets/character/FighterBase/FighterBase_ske.json',
 	'/assets/character/FighterBase/FighterBase_tex.json',
 	'/assets/character/FighterBase/FighterBase_tex.png',
+	'/assets/character/FighterBase/_transparent_tex.png',
+
 	'/assets/character/FighterBase/Elements/Poison_tex.png',
 	'/assets/teamDragImage.png',
 

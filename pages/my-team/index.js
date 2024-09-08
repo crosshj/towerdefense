@@ -3,7 +3,8 @@ import { getTeams, setTeams } from '../../user/teams.js';
 import { setCurrentCharCache } from '../../utils/cache.js';
 import { characterImageGetter } from '../../visuals/assets/character.js';
 import { attachAllCharacters, attachControls } from './allChars.js';
-import { slotDiv } from './components.js';
+import { blankSlot, slotDiv } from './components.js';
+import { handlePointerEvents, slotDragAndDrop } from './handlePointerEvents.js';
 
 const saveTeam = async ({ teams }) => {
 	const teamSlots = Array.from(document.querySelectorAll('.team-slot')).map(
@@ -33,6 +34,57 @@ const saveTeam = async ({ teams }) => {
 	teams[selected] = newTeam;
 };
 
+const attachSlotEvents = ({ slot, update, characters, getCharImage }) => {
+	const onTap = (e) => {
+		if (!slot.dataset.id) return;
+		const src = `/modals/character/detail.html?id=${slot.dataset.id}&back=/pages/my-team/index.html`;
+		const character = characters.find((x) => x.id === slot.dataset.id);
+		setCurrentCharCache({
+			...character,
+			imageUri: getCharImage(character),
+		});
+		window.parent.postMessage({
+			_: 'navigate',
+			src,
+		});
+	};
+	const onDragStart = (e) => {
+		console.log(e.target);
+		console.log('dragStart', e);
+	};
+	const onDragEnd = async (e) => {
+		const droppedOn = document.elementFromPoint(e.clientX, e.clientY);
+		const allCharactersDiv = droppedOn.closest('.all-characters');
+		const droppedSlot = droppedOn.closest('.team-slot');
+		if (allCharactersDiv) {
+			slot.classList.add('blank');
+			slot.innerHTML = blankSlot();
+			delete slot.dataset.id;
+		}
+		if (droppedSlot) {
+			const parent = slot.parentNode;
+
+			// Clone the items to avoid mutation issues
+			const slotClone = slot.cloneNode(true);
+			const droppedSlotClone = droppedSlot.cloneNode(true);
+
+			// Replace slot with droppedSlot and droppedSlot with slot
+			parent.replaceChild(slotClone, droppedSlot);
+			parent.replaceChild(droppedSlotClone, slot);
+
+			attachSlotEvents({ slot: slotClone, characters, getCharImage });
+			attachSlotEvents({
+				slot: droppedSlotClone,
+				update,
+				characters,
+				getCharImage,
+			});
+		}
+		update();
+	};
+	slotDragAndDrop({ slot, onTap, onDragStart, onDragEnd });
+};
+
 const teamSwitcher =
 	({ slots, teams, characters, getCharImage }) =>
 	() => {
@@ -50,8 +102,9 @@ const teamSwitcher =
 				slot.classList.remove('blank');
 				slot.dataset.id = char.id;
 			} else {
+				slot.innerHTML = blankSlot();
 				slot.classList.add('blank');
-				slot.dataset.id = undefined;
+				delete slot.dataset.id;
 			}
 		});
 		const raidIndicator = document.querySelector('.raid-indicator');
@@ -197,27 +250,25 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 	const slots = document.querySelectorAll('.team-slot');
 	slots.forEach((slot, i) => {
-		slot.addEventListener('dragover', dragOver);
-		slot.addEventListener('drop', drop);
 		const char = characters.find((x) => x.id === current[i]?.id);
 		if (char) {
 			slot.innerHTML = slotDiv(char, getCharImage);
 			slot.classList.remove('blank');
 			slot.dataset.id = char.id;
+		} else {
+			slot.classList.add('blank');
+			slot.innerHTML = blankSlot();
+			delete slot.dataset.id;
 		}
-		slot.addEventListener('pointerup', () => {
-			if (draggingEl) return;
-			if (!slot.dataset.id) return;
-			const src = `/modals/character/detail.html?id=${slot.dataset.id}&back=/pages/my-team/index.html`;
-			const character = characters.find((x) => x.id === slot.dataset.id);
-			setCurrentCharCache({
-				...character,
-				imageUri: getCharImage(character),
-			});
-			window.parent.postMessage({
-				_: 'navigate',
-				src,
-			});
+		const updateFromSlots = async () => {
+			await saveTeam({ teams });
+			updateCharacters && updateCharacters();
+		};
+		attachSlotEvents({
+			slot,
+			update: updateFromSlots,
+			characters,
+			getCharImage,
 		});
 	});
 

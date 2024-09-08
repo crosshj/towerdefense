@@ -148,6 +148,71 @@ export const removeTap = (target) => {
 	}
 };
 
+export const slotDragAndDrop = (args) => {
+	const {
+		slot,
+		onTap = () => {},
+		onDragStart = () => {},
+		onDragEnd = () => {},
+	} = args;
+
+	let startX;
+	let startY;
+	let isDragging = false;
+	let dragImage;
+	let dragThreshold = 5;
+
+	const pointerMove = (e) => {
+		e.preventDefault();
+		const outsideThreshold =
+			isDragging ||
+			Math.abs(e.clientX - startX) > dragThreshold ||
+			Math.abs(e.clientY - startY) > dragThreshold;
+		if (!isDragging && outsideThreshold) {
+			onDragStart(e);
+			isDragging = true;
+		}
+		if (isDragging && !dragImage) {
+			dragImage = slot.querySelector('.icon img').cloneNode(true);
+			dragImage.style.zoom = 1;
+			dragImage.style.position = 'absolute';
+			dragImage.style.pointerEvents = 'none';
+			dragImage.style.top = '-9999px';
+			document.body.appendChild(dragImage);
+		}
+		if (isDragging && dragImage) {
+			dragImage.style.top = `${e.clientY}px`;
+			dragImage.style.left = `${e.clientX}px`;
+			dragImage.style.transform = 'translate(-50%, -50%)';
+			dragImage.style.visibility = 'visible';
+		}
+	};
+	const pointerUp = (e) => {
+		if (isDragging) {
+			isDragging = false;
+			onDragEnd(e);
+		} else {
+			onTap(e);
+		}
+		if (dragImage) {
+			document.body.removeChild(dragImage);
+			dragImage = undefined;
+		}
+		slot.releasePointerCapture(e.pointerId);
+		slot.removeEventListener('pointermove', pointerMove);
+		slot.removeEventListener('pointerup', pointerUp);
+	};
+	slot.addEventListener('pointerdown', (e) => {
+		e.preventDefault();
+		slot.setPointerCapture(e.pointerId);
+		startX = e.clientX;
+		startY = e.clientY;
+		isDragging = false;
+		slot.addEventListener('pointermove', pointerMove);
+		slot.addEventListener('pointerup', pointerUp);
+	});
+};
+
 //---- DELETE BELOW?
 
 export const handlePointerEventsOLD = (args) => {

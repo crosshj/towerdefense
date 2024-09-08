@@ -102,7 +102,7 @@ export const domLoaded = async () => {
 export const generateTableHTML = (data) => {
 	if (!data || data.length === 0) return '<table></table>';
 
-	const headers = Object.keys(data[0]);
+	const headers = Array.from(new Set(data.flatMap(Object.keys)));
 	let table = '<table><thead><tr>';
 
 	headers.forEach((header) => {

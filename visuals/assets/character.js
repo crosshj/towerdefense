@@ -29,6 +29,12 @@ export const characterAnimationGetter = async (
 			''
 		)}_tex.png`;
 	}
+	if (character?.id + '' === 'undefined') {
+		texture = '/assets/character/FighterBase/_transparent_tex.png';
+	}
+	if (texture === '/assets/character/FighterBase/Elements/Normal_tex.png') {
+		debugger;
+	}
 	const framerate = 8;
 	const animation = await getAnimateable({
 		width,

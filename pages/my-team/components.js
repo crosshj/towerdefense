@@ -22,6 +22,20 @@ export const slotDiv = (c, getCharImage) => {
 		`;
 };
 
+export const blankSlot = () => {
+	return `
+		<div class="icon"></div>
+		<div class="base">
+			<div class="cylinder"></div>
+			<div class="stars"></div>
+		</div>
+		<div class="mineral flex space-between">
+			<div class="mineral-icon"></div>
+			<div></div>
+		</div>
+	`;
+};
+
 export const characterDiv = (c, getCharImage) => {
 	let selectorInfoContents = circleInfoIcon;
 	const circleInfoClass = ['selectorInfo'];

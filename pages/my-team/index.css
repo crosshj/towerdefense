@@ -175,6 +175,7 @@ body {
 	align-items: center;
 	gap: 20px;
 	.team-slot {
+		touch-action: none; /* GAH! Wihout this dragging messes up badly! */
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -182,20 +183,24 @@ body {
 		width: 100px;
 		height: 130px;
 		text-align: center;
-		&.blank {
+		/* &.blank {
 			background: #d8cba675;
 			border: 1px dashed;
-		}
+		} */
 		.icon {
-			zoom: 0.85;
+			height: 82px;
+			width: 100%;
 			img {
+				zoom: 0.85;
 				max-width: 91px;
 			}
 		}
 		.base {
 			position: relative;
+			height: 20px;
 			width: 100%;
 			margin-top: -17px;
+			margin-bottom: 17px;
 			z-index: -1;
 			.stars {
 				color: yellow;
@@ -207,7 +212,7 @@ body {
 				--shadow-color: #9b886b;
 				position: relative;
 				width: 100%;
-				height: 20px;
+				height: 100%;
 				background: #dfd6b6;
 				border-radius: 50%;
 				/* margin: 50px auto; */
@@ -235,6 +240,7 @@ body {
 			}
 		}
 		.mineral {
+			height: 20px;
 			margin-top: 5px;
 			.mineral-icon {
 				color: #00f8f8;

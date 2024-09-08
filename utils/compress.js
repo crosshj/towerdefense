@@ -88,6 +88,9 @@ export const compressChars = (lsCharacters, baseLength = 36) => {
 };
 
 export const decompressChars = (compedString) => {
+	if (!compedString || typeof compedString !== 'string') {
+		return [];
+	}
 	const [compressedData, charSet] = compedString.split('-----');
 	const characterSet = charSet.trim().split('');
 	const decode = (str) => decodeNumber(str, characterSet);
@@ -130,7 +133,11 @@ export const compressTeams = (lsTeam, lsCharacters, baseLength = 36) => {
 			for (const index of [0, 1, 2, 3, 4]) {
 				const thisChar = lsTeam[teamName][subteam][index];
 				if (!thisChar) {
-					compressed.push('-');
+					team.push(encode(false));
+					continue;
+				}
+				if (thisChar.id + '' === 'undefined') {
+					team.push(encode(false));
 					continue;
 				}
 				const charIndex = lsCharacters.findIndex(
@@ -163,7 +170,7 @@ export const decompressTeams = (compedString, characters) => {
 					const charIndex = decode(
 						charCodes[subteam === 'a' ? i : 5 + i]
 					);
-					const { id } = characters[charIndex];
+					const { id } = characters[charIndex] || {};
 					teams[teamName][subteam].push({ id });
 				}
 			}
