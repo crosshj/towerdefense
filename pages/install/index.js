@@ -117,6 +117,11 @@ const progressListener = (event) => {
 	const progressBar = document.getElementById('progress-bar');
 	const progressDetailContainer = document.querySelector('details');
 	const progressDetail = document.querySelector('.progressDetail');
+	progressDetail.addEventListener('pointerup', (e) => {
+		if (!e.target.classList.contains('showAdvanced')) return;
+		const advancedView = document.querySelector('.advanced');
+		advancedView.classList.remove('hidden');
+	});
 
 	if (event.data.progress > 0 && event.data.progress < 100) {
 		showProgress(progressBar, progressDetailContainer);
@@ -125,7 +130,10 @@ const progressListener = (event) => {
 		progressBar.value = event.data.progress;
 	}
 	if (event.data.progressDetail && progressDetail) {
-		progressDetail.textContent = event.data.progressDetail;
+		progressDetail.innerHTML = `
+			<div>${event.data.progressDetail}</div>
+			<button class="showAdvanced">ADVANCED</div>
+		`;
 	}
 };
 
@@ -137,6 +145,18 @@ const cleanPrevious = async () => {
 	} catch (e) {}
 };
 
+const attachAdvancedView = () => {
+	const advancedView = document.querySelector('.advanced');
+	advancedView.innerHTML = `
+<pre>
+	TODO:
+	1) dump the application state
+	2) manually retry the failed files
+	3) bypass cache
+</pre>
+	`;
+};
+
 const onLoaded = async () => {
 	const sessionActive = isSessionActive();
 	if (sessionActive) {
@@ -146,6 +166,7 @@ const onLoaded = async () => {
 		});
 		return;
 	}
+	attachAdvancedView();
 	try {
 		await cleanPrevious();
 		//await registerServiceWorker(); //(might not be needed since done in main frame)

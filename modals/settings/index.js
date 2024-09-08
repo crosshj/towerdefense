@@ -100,9 +100,16 @@ const resourcesCheck = async ({ reload = true } = {}) => {
 };
 
 const logout = async () => {
+	const settings = await getSettings();
+	const gameStarted = localStorage.getItem('GAME_STARTED');
 	localStorage.clear();
-	localStorage.setItem('GAME_STARTED', new Date().toISOString());
-	await resourcesCheck();
+	localStorage.setItem('GAME_STARTED', gameStarted);
+	await setSettings(settings);
+
+	sessionStorage.removeItem('SESSION_ACTIVE');
+	window.parent.postMessage({
+		_: 'reload',
+	});
 };
 
 const attachSettings = async () => {

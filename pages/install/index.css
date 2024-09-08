@@ -52,7 +52,17 @@ body {
 			word-break: break-all;
 			max-width: 400px;
 			display: flex;
-			align-items: flex-end;
+			align-items: center;
+			flex-direction: column;
+			justify-content: space-around;
+			gap: 10px;
+			pointer-events: none;
+			button {
+				cursor: pointer;
+				pointer-events: all;
+				background: transparent;
+				border: 1px solid currentColor;
+			}
 		}
 	}
 
@@ -60,5 +70,17 @@ body {
 		position: absolute;
 		bottom: 47px;
 		height: 30px;
+	}
+
+	.advanced {
+		position: absolute;
+		left: 10vw;
+		top: 10vh;
+		width: 80vw;
+		height: 80vh;
+		overflow-y: auto;
+		background: #333;
+		border: 1px solid white;
+		border-radius: 7px;
 	}
 }
