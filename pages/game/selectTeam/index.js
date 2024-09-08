@@ -27,7 +27,7 @@ const updateTeamIcons = async () => {
 		element.classList.add('filled');
 		element.innerHTML = `
 			<div class="stars">${'★'.repeat(stars)}</div>
-			<div class="level">Lv.${level}</div>
+			<div class="level">${level ? `Lv.${level}` : ''}</div>
 		`;
 		element.insertAdjacentElement('beforeend', image);
 	}

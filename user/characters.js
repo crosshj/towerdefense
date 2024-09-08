@@ -69,7 +69,7 @@ export const addCharactersEXP = async (chars, expAmount) => {
 	for (const { id } of chars) {
 		const thisChar = allChars.find((x) => x.id === id);
 		if (!thisChar) {
-			debugger;
+			continue;
 		}
 		thisChar.experience = thisChar.experience || 0;
 		thisChar.experience += expAmount;
