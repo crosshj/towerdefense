@@ -146,7 +146,9 @@ const reIndexTeams = ({ removeIds, prevTeams, prevChars }) => {
 				const prevChar = prevCharsWithUUID.find(
 					(x) => x.id === prevTeam.id
 				);
-				const newChar = newChars.find((x) => x.index === prevChar.uuid);
+				const newChar = newChars.find(
+					(x) => x.index === prevChar?.uuid
+				);
 				reIndexedTeams[teamName][subteam][index] = { id: newChar?.id };
 			}
 		}

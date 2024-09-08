@@ -23,14 +23,14 @@ export const characterAnimationGetter = async (
 	if (character?.element && !character?.code) {
 		texture = `/assets/character/FighterBase/Elements/${character.element}_tex.png`;
 	}
+	if (!character?.code && character?.id + '' === 'undefined') {
+		texture = '/assets/character/FighterBase/_transparent_tex.png';
+	}
 	if (character?.code) {
 		texture = `/assets/character/FighterBase/skins/${character.code.replace(
 			'u0001-',
 			''
 		)}_tex.png`;
-	}
-	if (character?.id + '' === 'undefined') {
-		texture = '/assets/character/FighterBase/_transparent_tex.png';
 	}
 	if (texture === '/assets/character/FighterBase/Elements/Normal_tex.png') {
 		debugger;

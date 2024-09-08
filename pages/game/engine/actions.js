@@ -68,6 +68,7 @@ export const getActions = (state) => {
 			const unit = tower.teams[0][tower.selectedTeam].find(
 				(x) => x.unit === unitId
 			);
+			if (!unit) return;
 			unit.type = 'attacker';
 			unit.x = unit.x || tower.x + 100;
 			spawnCharInstance(state)(unit, tower.deployed);
