@@ -89,6 +89,7 @@ const attachFriendsList = async ({ friends, params }) => {
 
 	const handleFriendSelect = (event) => {
 		const { target: card } = event;
+		const friendOption = document.querySelector('.options .help .icon div');
 		const radioEl = card.querySelector('.radio');
 		if (radioEl.classList.contains('selected')) {
 			radioEl.classList.remove('selected');
@@ -103,7 +104,6 @@ const attachFriendsList = async ({ friends, params }) => {
 		const friendName = (
 			card.querySelector('.name')?.innerText || ''
 		).trim();
-		const friendOption = document.querySelector('.options .help .icon div');
 		friendOption.innerHTML = friendName[0];
 		params.friend = friendName;
 	};

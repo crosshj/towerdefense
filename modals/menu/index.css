@@ -91,6 +91,11 @@ body {
 				white-space: nowrap;
 			}
 		}
+		&.upgrade .menuItemContainer .menuIcon svg,
+		&.mainStage .menuItemContainer .menuIcon svg,
+		&.my-team .menuItemContainer .menuIcon svg {
+			height: auto;
+		}
 		.menuItemContainer {
 			display: flex;
 			flex-direction: column;
