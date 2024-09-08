@@ -220,6 +220,7 @@ export const unitsAll = {
 		defense: '317 - 2,736 - 6,401',
 		range: 1000,
 	},
+	// https://rangers.lerico.net/en/ranger/u22-glenn
 	'u0001-1-benny': {
 		displayName: 'Benny Lava',
 		element: 'Fire',
@@ -227,9 +228,11 @@ export const unitsAll = {
 		rank: 1,
 		mineralCost: 100,
 		attack: 100,
+		// orig attack: 19 - 76 - 245
 		hp: 20000,
-		defense: 0,
-		range: 700,
+		// orig hp: 350 - 1,186 - 3,719
+		defense: 23 - 80 - 252,
+		range: 60 * 10,
 	},
 	'u0001-4-slabb': {
 		displayName: 'Slabb',
