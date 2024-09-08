@@ -49,6 +49,21 @@ export const unitsAll = {
 		critChance: 0.21,
 		critMult: 53,
 		evadeChance: 0.18,
+
+		//not (yet) used by game
+		dexNumber: 4, // will be used to order units in the future (for now it's implied)
+		attackSpeed: 1.47, //(1.47s + 0.00s)
+		moveSpeed: 101, //pt/s (Fast)
+		cooldown: 15, //seconds
+		physicalAttack: '411 - 2,959 - 7,198',
+		physicalDefense: '43 - 337 - 823',
+		extractMaterial: '180-15-0',
+		hitRate: 0.0,
+		splashRadius: 0,
+		skillUseRate: '',
+		skillEvadeRate: 0.14,
+		skillHitRate: 0,
+		skillResistance: 0,
 	},
 	// like https://rangers.lerico.net/en/ranger/u13-lia
 	'u0001-5-drat': {

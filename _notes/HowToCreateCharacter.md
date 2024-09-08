@@ -50,4 +50,6 @@ changes with level:
 HP, Attack Speed, Attack, Defense
 ```
 
+Physical versus Magical Attack + Explains difference between Strength, Agility,
+and Intelligence units
 https://www.reddit.com/r/LineRangers/comments/3wslpz/the_diference_between_physical_and_magical_attack/
