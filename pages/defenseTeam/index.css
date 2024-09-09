@@ -1,5 +1,16 @@
 @import url(/visuals/_utility.css);
 
+:root {
+	--background-light: hsl(225 26% 61% / 1);
+	--background-dark: #f9bcd1;
+	--platform-light: #89b817;
+	--platform-dark: #54931c;
+	--platform-shadow: #254f27;
+	--platform-base-light: #745e56;
+	--platform-base-dark: #402d2b;
+	--platform-base-more-dark: hsl(6 20% 15% / 1);
+}
+
 body {
 	margin: 0;
 	background-color: black;
@@ -26,5 +37,154 @@ body {
 	}
 	tr:nth-child(even) {
 		background-color: #8884;
+	}
+
+	.background,
+	.top,
+	.middle,
+	.bottom {
+		position: fixed;
+		left: 0;
+		top: 0;
+		width: 100vw;
+		height: 100vh;
+	}
+	.background {
+		background: radial-gradient(
+			ellipse 150vw 100vh at 50% 0%,
+			var(--background-light) 20%,
+			var(--background-dark)
+		);
+		.platform {
+			position: relative;
+			top: 28vh;
+			width: 760px;
+			height: 68vh;
+			margin: auto;
+			border-radius: 42%;
+			background: radial-gradient(
+				ellipse 49vw 60vh at 50% 0%,
+				var(--platform-light) 91%,
+				var(--platform-dark) 97%,
+				var(--platform-shadow) 106%
+			);
+			box-shadow: 0 13px 20px -12px black;
+			&:before {
+				content: '';
+				position: absolute;
+				left: 10px;
+				right: 10px;
+				bottom: -20vh;
+				height: 50vh;
+				z-index: -1;
+				background: linear-gradient(
+					90deg,
+					var(--platform-base-light) 3%,
+					var(--platform-base-dark) 10%,
+					var(--platform-base-more-dark),
+					var(--platform-base-dark) 90%,
+					var(--platform-base-light) 97%
+				);
+			}
+		}
+	}
+	.top {
+		background: #0005;
+		height: 60px;
+		display: flex;
+		padding-inline: 70px;
+		align-items: center;
+		font-size: 15px;
+	}
+	.middle {
+		& > div {
+			position: relative;
+			display: flex;
+			gap: 1px;
+			top: 60px;
+			height: calc(100vh - 60px - 90px);
+			width: calc(760px - 45px);
+			margin: auto;
+			justify-content: center;
+			.slot {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				height: 100%;
+				width: 16%;
+				/* background: #f005; */
+				position: relative;
+				.unitImage {
+					position: absolute;
+					margin-top: -61px;
+					display: flex;
+					justify-content: center;
+					img {
+						width: 95px;
+						z-index: 1;
+					}
+				}
+				.platform {
+					margin-top: 70px;
+					width: 85%;
+					height: 50px;
+					background: #adbf7e;
+					border-radius: 50%;
+				}
+				.gear {
+					margin-top: 8px;
+					width: 100%;
+					display: flex;
+					justify-content: space-around;
+					border-radius: 5px;
+					.gearSlot {
+						width: 30%;
+						aspect-ratio: 1/1;
+						background: #0007;
+					}
+				}
+			}
+			.team-switch {
+				user-select: none;
+				cursor: pointer;
+				position: relative;
+				width: 35px;
+				height: 35px;
+				zoom: 1.5;
+				& > div {
+					position: absolute;
+					width: 20px;
+					height: 20px;
+					border: 1px solid black;
+					background-color: #a07b55;
+					color: yellow;
+					font-weight: 900;
+					border-radius: 50%;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+				}
+				& > div.selected {
+					bottom: 0;
+					right: 0;
+					z-index: 1;
+					width: 25px;
+					height: 25px;
+					/* box-shadow: 0 0 5px 2px white; */
+				}
+				& > div:not(.selected) {
+					top: -3px;
+					left: -3px;
+					opacity: 0.6;
+				}
+			}
+		}
+	}
+	.bottom {
+		top: unset;
+		bottom: 0;
+		height: 90px;
+		background: #0001;
 	}
 }
