@@ -4,6 +4,7 @@ import { statsRequest } from '../../visuals/stats/stats.js';
 import { setCurrentCharCache } from '../../utils/cache.js';
 import { getTeam } from '/utils/getTeam.js';
 import { SVGIcons } from '../../assets/icons.svg.js';
+import { getUnitDetails } from '../../utils/units.js';
 
 const pageTitle = 'HOME';
 
@@ -334,7 +335,10 @@ const setup = async () => {
 				return;
 			}
 
-			const currentCharacter = getCharacter(which, raidTeam);
+			const currentCharacter = getUnitDetails(
+				getCharacter(which, raidTeam),
+				true /*debug*/
+			);
 			setCurrentCharCache(currentCharacter);
 
 			window.parent.postMessage({

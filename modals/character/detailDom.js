@@ -95,8 +95,10 @@ export const nodeTree = {
 					advanced: undefined,
 				},
 				actions: {
+					evolve: undefined,
 					ultraEvolve: undefined,
 					hyperEvolve: undefined,
+					switchEvolve: undefined,
 					lock: undefined,
 				},
 			},

@@ -81,7 +81,17 @@ const getMoveSpeed = (unit, currentLevel) => {
 	return 1;
 };
 
-export const withLevelInfo = (unit, totalExp = 0) => {
+//evolution
+const getEvolution = (unit, debug) => {
+	debug && console.log(unit);
+	const canEvolve = false;
+	const canHyper = false;
+	const canUltra = false;
+	const canSwitch = false;
+	return { canEvolve, canHyper, canUltra, canSwitch };
+};
+
+export const withLevelInfo = (unit, totalExp = 0, debug) => {
 	let { currentLevel, expToNext, levelExpPercent } = getLevelInfo({
 		totalExp,
 		a: 5 * unit.rank,
@@ -137,13 +147,26 @@ export const withLevelInfo = (unit, totalExp = 0) => {
 		move: 60,
 		unit: unit.id,
 	};
+
+	_withLevel.evolution = getEvolution(_withLevel, debug);
+
+	_withLevel.potential = false;
+
 	const somethingNotRight = ['hp', 'attack', 'defense'].some(
 		(prop) => _withLevel[prop] < 0
 	);
 	if (somethingNotRight) {
 		console.warn({ _: 'somethingNotRight', _withLevel });
 	}
+
 	return _withLevel;
+};
+
+export const getUnitDetails = (unit, debug) => {
+	return {
+		...unit,
+		...withLevelInfo(unit, unit.experience, debug),
+	};
 };
 
 export const unitsMapper = () => {

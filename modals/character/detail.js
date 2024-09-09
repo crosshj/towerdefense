@@ -29,7 +29,12 @@ const updateValues = async ({ params, character, nodeTree }) => {
 	left.character.background.style.background = getElementColor(
 		character.element
 	);
-
+	if (character.potential) {
+		left.actions.potentialUp.classList.remove('hidden');
+	}
+	if (character.maxLevel > character.level) {
+		left.actions.levelUp.classList.remove('hidden');
+	}
 	//right
 	right.rowOne.level.current.innerText = character.level;
 	right.rowOne.level.max.innerText = character.maxLevel;
@@ -75,6 +80,18 @@ const updateValues = async ({ params, character, nodeTree }) => {
 		character.attackSpeedText;
 	right.details.basic.speed.moveSpeed.value.innerText =
 		character.moveSpeedText;
+	if (character?.evolution?.canEvolve) {
+		right.actions.evolve.classList.remove('hidden');
+	}
+	if (character?.evolution?.canHyper) {
+		right.actions.hyperEvolve.classList.remove('hidden');
+	}
+	if (character?.evolution?.canUltra) {
+		right.actions.ultraEvolve.classList.remove('hidden');
+	}
+	if (character?.evolution?.canSwitch) {
+		right.actions.switchEvolve.classList.remove('hidden');
+	}
 
 	// finished loading
 	left.loading.style.display = 'none';
@@ -171,8 +188,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 	);
 	console.log({ params });
 	const cachedChar = getCurrentCharCache();
-	// const character = cachedChar || (await getCharacterFromTeam(params));
-	// window.character = character;
+
 	// window.nodeTree = nodeTree;
 
 	const container = document.querySelector('.container ');
