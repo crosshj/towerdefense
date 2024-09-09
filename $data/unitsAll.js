@@ -473,6 +473,7 @@ export const unitsAll = {
 	// https://rangers.lerico.net/en/ranger/u041e-jill
 	'u0001-4-liz': {
 		displayName: 'Liz',
+		displayName2: 'Landlady',
 		element: 'Normal',
 		type: 'Strength',
 		rank: 4,
@@ -729,7 +730,8 @@ export const unitsAll = {
 	},
 	// https://rangers.lerico.net/en/ranger/u004e-clark
 	'u0001-3-soda': {
-		displayName: 'PoppyDaSoda',
+		displayName: 'Poppy',
+		displayName2: 'da Soda',
 		element: 'Normal',
 		type: 'Strength',
 		rank: 3,
@@ -769,7 +771,7 @@ export const unitsAll = {
 		range: 60 * 10,
 	},
 
-	// 
+	//
 	'u0001-4-commando1': {
 		displayName: 'Commando1',
 		element: 'Normal',
@@ -783,7 +785,7 @@ export const unitsAll = {
 		range: 60 * 10,
 	},
 
-	// 
+	//
 	'u0001-4-commando2': {
 		displayName: 'Commando2',
 		element: 'Normal',
@@ -797,7 +799,7 @@ export const unitsAll = {
 		range: 60 * 10,
 	},
 
-	// 
+	//
 	'u0001-4-commando3': {
 		displayName: 'Commando3',
 		element: 'Normal',

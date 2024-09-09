@@ -2,19 +2,54 @@ import { getCurrentCharCache, setCurrentCharCache } from '../../utils/cache.js';
 import { nodeTree, populateNodeTree } from './detailDom.js';
 import { SVGIcons } from '../../assets/icons.svg.js';
 import { toggleCharacterLock } from '../../user/characters.js';
+import { withCommas } from '../../utils/htmlToElement.js';
 
+const icons = {
+	lockCircle: SVGIcons.lockCircle(),
+	mineral: SVGIcons.mineralMulti(),
+	sword: SVGIcons.sword(),
+	shield: SVGIcons.shield(),
+	heart: SVGIcons.heart(),
+	//elements
+	typeBug: SVGIcons.typeBug(),
+	typeDark: SVGIcons.typeDark(),
+	typeDragon: SVGIcons.typeDragon(),
+	typeElectric: SVGIcons.typeElectric(),
+	typeFairy: SVGIcons.typeFairy(),
+	typeFighting: SVGIcons.typeFighting(),
+	typeFire: SVGIcons.typeFire(),
+	typeAir: SVGIcons.typeFlying(),
+	typeGhost: SVGIcons.typeGhost(),
+	typeGrass: SVGIcons.typeGrass(),
+	typeEarth: SVGIcons.typeGround(),
+	typeIce: SVGIcons.typeIce(),
+	typeNormal: SVGIcons.typeNormal(),
+	typePoison: SVGIcons.typePoison(),
+	typePsychic: SVGIcons.typePsychic(),
+	typeRock: SVGIcons.typeRock(),
+	typeSteel: SVGIcons.typeSteel(),
+	typeWater: SVGIcons.typeWater(),
+};
 const getElementColor = (element) => {
-	if (element === 'Fighting') return 'red';
-	if (element === 'Rock') return 'grey';
-	if (element === 'Fairy') return 'pink';
-	if (element === 'Air') return '#82cceb';
-	if (element === 'Dragon') return '#6320ff';
-	if (element === 'Fire') return 'orange';
-	if (element === 'Electric') return 'yellow';
-	if (element === 'Earth') return '#9c6943';
-	if (element === 'Dark') return '#6e62c8';
-	if (element === 'Bug') return '#a3b721';
-	const color = 'grey';
+	if (element === 'Bug') return '#9cc31f';
+	if (element === 'Dark') return '#494949';
+	if (element === 'Dragon') return '#6723ee';
+	if (element === 'Electric') return '#e7c013';
+	if (element === 'Fairy') return '#ec7fb7';
+	if (element === 'Fighting') return '#c80000';
+	if (element === 'Fire') return '#ff7111';
+	if (element === 'Air') return '#a991fe'; //flying
+	if (element === 'Ghost') return '#673993';
+	if (element === 'Grass') return '#3ccb04';
+	if (element === 'Earth') return '#c49103';
+	if (element === 'Ice') return '#89dbec';
+	if (element === 'Normal') return '#adab8d';
+	if (element === 'Poison') return '#ae01cb';
+	if (element === 'Psychic') return '#fe509b';
+	if (element === 'Rock') return '#e5bc61';
+	if (element === 'Steel') return '#a6a9c6';
+	if (element === 'Water') return '#717fff';
+	const color = '#f0f';
 	return color;
 };
 
@@ -23,12 +58,16 @@ const updateValues = async ({ params, character, nodeTree }) => {
 	const { left, right } = nodeTree.container.content;
 	left.stars.innerText = '★'.repeat(character.stars);
 	left.character.image.append(character.image);
+
+	left.name.first.innerText = character.displayName2 || '';
 	left.name.second.innerText = character.displayName;
 	left.element.name.innerText = character.element;
-	left.element.icon.style.background = getElementColor(character.element);
-	left.character.background.style.background = getElementColor(
-		character.element
-	);
+
+	const elementColor = getElementColor(character.element);
+	left.element.icon.style.fill = elementColor;
+	left.element.icon.innerHTML = icons['type' + character.element] || '';
+	left.character.background.style.background = elementColor;
+
 	if (character.potential) {
 		left.actions.potentialUp.classList.remove('hidden');
 	}
@@ -70,11 +109,21 @@ const updateValues = async ({ params, character, nodeTree }) => {
 		right.rowTwo.type.icon.innerText = '⍦';
 	}
 	right.rowTwo.type.name.innerText = character.type;
+	right.rowTwo.mineral.icon.innerHTML = icons.mineral;
 	right.rowTwo.mineral.amount.innerText = character.mineralCost + '';
-	right.details.basic.metrics.attack.value.innerText = character.attack + '';
-	right.details.basic.metrics.health.value.innerText = character.hp + '';
-	right.details.basic.metrics.defense.value.innerText =
-		character.defense + '';
+
+	right.details.basic.metrics.attack.icon.innerHTML = icons.sword;
+	right.details.basic.metrics.attack.value.innerHTML = withCommas(
+		character.attack
+	);
+	right.details.basic.metrics.health.icon.innerHTML = icons.heart;
+	right.details.basic.metrics.health.value.innerHTML = withCommas(
+		character.hp
+	);
+	right.details.basic.metrics.defense.icon.innerHTML = icons.shield;
+	right.details.basic.metrics.defense.value.innerHTML = withCommas(
+		character.defense
+	);
 
 	right.details.basic.speed.attackSpeed.value.innerText =
 		character.attackSpeedText;
@@ -167,7 +216,7 @@ const attachLock = ({ element, character }) => {
 	}
 	element.innerHTML = `
 		<div class="icon">
-			${SVGIcons.lockCircle()}
+			${icons.lockCircle}
 		</div>
 	`;
 	element.addEventListener('pointerup', async () => {
