@@ -796,4 +796,18 @@ export const unitsAll = {
 		defense: '892 - 6,380 - 15,516',
 		range: 60 * 10,
 	},
+
+	// 
+	'u0001-4-commando3': {
+		displayName: 'Commando3',
+		element: 'Normal',
+		type: 'Strength',
+		rank: 4,
+		mineralCost: 150,
+		//orig cost 475
+		attack: '166 - 1,195 - 2,907',
+		hp: '6,816 - 48,564 - 118,087',
+		defense: '892 - 6,380 - 15,516',
+		range: 60 * 10,
+	},
 };
