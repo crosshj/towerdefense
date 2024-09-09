@@ -21,6 +21,10 @@ const updateMineral = (state) => {
 };
 
 const upgradeMineralLevel = (state) => {
+	if (enemyState?.mineral?.level === 8) {
+		enemyState.awaitLevel = false;
+		return;
+	}
 	console.log('leveling mineral');
 	enemyState.mineral.amount -= mineralMap[enemyState.mineral.level].cost;
 	enemyState.mineral.level += 1;
@@ -104,7 +108,10 @@ export const enemyOneSpawnTicker = (state, tower) => {
 		}
 	}
 
-	if (Math.random() < enemyState.awaitLevelChance) {
+	if (
+		enemyState.mineral.level <= 8 &&
+		Math.random() < enemyState.awaitLevelChance
+	) {
 		console.log('waiting for mineral level');
 		enemyState.awaitLevel = true;
 		enemyState.awaitLevelChance -= 0.05;
