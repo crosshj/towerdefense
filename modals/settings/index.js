@@ -62,7 +62,10 @@ const setupPushNotifications = async (_subscription) => {
 	});
 	if (!existingSub) {
 		user.data.subscriptions.push(subscription);
-		await updateUserFromAPI(user.data);
+		await updateUserFromAPI({
+			...user.data,
+			forced: true,
+		});
 	}
 
 	console.log({ subscription });

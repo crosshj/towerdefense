@@ -16,16 +16,72 @@ const objectsEqual = (obj1 = {}, obj2 = {}, keys) => {
 };
 
 const objectsDiff = (obj1 = {}, obj2 = {}, keys) => {
-	// Set `allKeys` to either `keys` or an array of all unique keys from both objects
-	const allKeys =
-		keys ||
-		Array.from(new Set([...Object.keys(obj1), ...Object.keys(obj2)]));
+	try {
+		// Set `allKeys` to either `keys` or an array of all unique keys from both objects
+		const allKeys =
+			keys ||
+			Array.from(new Set([...Object.keys(obj1), ...Object.keys(obj2)]));
 
-	// Filter keys where the values are different
-	return allKeys.filter(
-		(key) => JSON.stringify(obj1[key]) !== JSON.stringify(obj2[key])
-	);
+		// Filter keys where the values are different
+		return allKeys.filter(
+			(key) => JSON.stringify(obj1[key]) !== JSON.stringify(obj2[key])
+		);
+	} catch (e) {}
 };
+
+async function fetchWrapper(input, options = {}) {
+	try {
+		const isRequest = input instanceof Request;
+		const requestUrl = isRequest ? input.url : input;
+		const requestMethod = isRequest ? input.method : options.method;
+		const requestHeaders = isRequest ? input.headers : options.headers;
+		let requestBody = isRequest ? input.body : options.body;
+		if (
+			isRequest &&
+			input.bodyUsed === false &&
+			input.headers.get('Content-Type')?.includes('application/json')
+		) {
+			const clonedRequest = input.clone();
+			requestBody = await clonedRequest.json();
+		}
+		const updateForced = requestBody?.forced;
+		if (requestUrl.includes('setByToken') && !updateForced) {
+			const { token, ...data } = requestBody;
+			const mockedResponse = new Response(JSON.stringify({ data }), {
+				status: 200,
+				statusText: '',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			});
+			return mockedResponse;
+		}
+
+		const { forced, ...modifiedRequestBody } = requestBody;
+
+		const response = await fetch(requestUrl, {
+			...options,
+			method: requestMethod,
+			headers: requestHeaders,
+			body: JSON.stringify(modifiedRequestBody),
+		});
+		const responseClone = response.clone();
+		const responseBody = await response.json();
+		console.log({
+			_: 'API called',
+			requestUrl,
+			requestMethod,
+			//diff: objectsDiff(requestBody, responseBody?.data) || 'none',
+			requestBody,
+			modifiedRequestBody,
+			responseBody,
+		});
+		return responseClone;
+	} catch (error) {
+		console.error('Error in fetchWrapper:', error);
+		throw error;
+	}
+}
 
 function openDB(name, version, { upgrade }) {
 	return new Promise((resolve, reject) => {
@@ -104,7 +160,7 @@ const updateAPIUser = async (updatedUser) => {
 		}),
 	};
 	let error;
-	const apiUser = await fetch(apiUrl, opts).catch((e) => {
+	const apiUser = await fetchWrapper(apiUrl, opts).catch((e) => {
 		error = e;
 	});
 	if (error) {
@@ -129,7 +185,7 @@ const getAPIUser = async () => {
 		body: JSON.stringify({ token }),
 	};
 	let error;
-	const apiUser = await fetch(apiUrl, opts)
+	const apiUser = await fetchWrapper(apiUrl, opts)
 		.then((x) => x.json())
 		.catch((e) => {
 			error = e;
@@ -285,9 +341,7 @@ export async function invalidateUserCache() {
 	const cache = await caches.open('teedee-api-cache');
 	const token = await getToken();
 	const cacheKey = `getByToken-${token}`;
-	console.log('invalidateUserCache: with key:', cacheKey);
 	const deleted = await cache.delete(cacheKey);
-	console.log('invalidateUserCache: key deleted:', deleted);
 
 	// delete entire cache
 	// const cacheName = 'teedee-api-cache';
@@ -335,20 +389,17 @@ export const updateCachedUser = async (user, _response) => {
 	// Update the cache with the new response
 	const token = await getToken();
 	const cacheKey = `getByToken-${token}`;
-	const cache = await caches.open('teedee-api-cache'); // Replace with your actual cache name
+	const cache = await caches.open('teedee-api-cache');
 	cache.put(cacheKey, newResponse);
-
-	// console.log('updateCachedUser: updated user');
-	// console.log(objectsDiff(user?.data, cachedUser?.data));
 
 	return user;
 };
 
 export const updateCachedUserFromNetwork = async (request) => {
-	// Fetch from the network and validate
+	// get from the network and validate
 	let networkResponse;
 	try {
-		networkResponse = await fetch(request);
+		networkResponse = await fetchWrapper(request);
 		await validateResponse(networkResponse);
 	} catch (error) {
 		await invalidateUserCache();
@@ -392,15 +443,16 @@ export async function handleGetByToken(request) {
 }
 
 export async function handleSetByToken(request) {
+	const cachedUser = await getCachedUser();
+
 	let requestBody = await request.clone().json();
 	const { token, ...data } = requestBody;
 	const user = { token, data };
 	const modifiedBody = feathersModifier(user, true /*isUpdating*/);
-	console.log({ modifiedBody });
 
 	let networkResponse;
 	try {
-		networkResponse = await fetch(
+		networkResponse = await fetchWrapper(
 			new Request(request, {
 				body: JSON.stringify({
 					...(modifiedBody?.data || {}),
@@ -423,6 +475,12 @@ export async function handleSetByToken(request) {
 	responseClone.source = 'setByToken';
 	responseClone.sourceDate = new Date().toISOString();
 
+	responseClone.name = responseClone.name || cachedUser?.name;
+	responseClone.date_created =
+		responseClone.date_created || cachedUser?.date_created;
+	responseClone.last_login =
+		responseClone.last_login || cachedUser?.last_login;
+
 	const modifiedResponse = new Response(JSON.stringify(responseClone), {
 		status: networkResponse.status,
 		statusText: networkResponse.statusText,
@@ -433,7 +491,6 @@ export async function handleSetByToken(request) {
 	const cache = await caches.open('teedee-api-cache');
 	const cacheKey = `getByToken-${token}`;
 	await cache.put(cacheKey, modifiedResponse.clone());
-	console.log('handleSetByToken: Updating cache with key:', cacheKey);
 
 	return modifiedResponse;
 }
@@ -458,7 +515,6 @@ export const handleFeathersMoxPush = async (data) => {
 	const newApiUser = apiNeedsUpdate
 		? await updateAPIUser(modifiedAPIUser)
 		: 'unchanged';
-	console.log({ currentAPIUser, newApiUser, cachedUser });
 
 	const feathersNotification = {
 		title: 'Feathers Maxed',

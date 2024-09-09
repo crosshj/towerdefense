@@ -236,6 +236,7 @@ export const upgradeCharacter = async (currentChar, materials) => {
 
 	await updateUserFromAPI({
 		...(apiUser?.data || {}),
+		forced: true,
 		characters: newCharsCompressed,
 		teams: newTeamsCompressed,
 	});

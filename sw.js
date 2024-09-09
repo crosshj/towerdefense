@@ -9,6 +9,7 @@ self._version = currentHash.includes('_HASH')
 	: currentVersion + '-' + currentHash.slice(0, 7);
 console.log(`TD: ${self._version}`);
 
+import { fetchAndCache } from './serviceWorker/cacheAPI.js';
 import { cacheFiles, clearCache } from './serviceWorker/cacheFiles.js';
 import {
 	handleNotificationClick,
@@ -82,6 +83,14 @@ self.addEventListener('fetch', (event) => {
 
 	if (requestURL.pathname.includes('/api/')) {
 		// If the request contains '/api/', just fetch it from the network
+		if (event.request.method === 'GET') {
+			event.respondWith(fetchAndCache(event.request));
+			return;
+		}
+		console.log({
+			_: 'API called',
+			url: requestURL.href,
+		});
 		event.respondWith(fetch(event.request));
 		return;
 	}

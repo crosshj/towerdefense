@@ -35,6 +35,7 @@ const attachActions = async ({ user }) => {
 		await updateUserFromAPI({
 			...user.data,
 			image: Number(image),
+			forced: true,
 		});
 		window.parent.postMessage({
 			_: 'broadcastUserIconUpdate',

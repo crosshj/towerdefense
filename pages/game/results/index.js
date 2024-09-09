@@ -2,7 +2,7 @@ import { getStageRewards } from '../../../stages/index.js';
 import { addCharactersEXP, addNewCharacter } from '../../../user/characters.js';
 import { updateEffectsCount } from '../../../user/effects.js';
 import { addStats } from '../../../user/stats.js';
-import { addUserExperience, getUser } from '../../../user/user.js';
+import { addUserExperience, forceUpdate, getUser } from '../../../user/user.js';
 import { waitForElementById } from '../../../utils/htmlToElement.js';
 import { getTeamFromNumber } from '/utils/getTeam.js';
 import { getTeam } from '/utils/getTeam.js';
@@ -46,6 +46,9 @@ const updateRewards = async ({ svgDoc, rewards }) => {
 
 	// update player EXP
 	await addUserExperience(rewards.exp.player);
+
+	//finalize by pushing to DB
+	await forceUpdate();
 };
 
 const updateTeamIcons = async ({ teamName }) => {

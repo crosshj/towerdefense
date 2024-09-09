@@ -131,3 +131,11 @@ export const addUserExperience = async (expAmount) => {
 
 	localStorage.setItem(LS_NAME, JSON.stringify(value));
 };
+
+export const forceUpdate = async () => {
+	const apiUser = await getUserFromAPI();
+	await updateUserFromAPI({
+		...(apiUser?.data || {}),
+		forced: true,
+	});
+};
