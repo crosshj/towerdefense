@@ -214,6 +214,7 @@ export const unitsAll = {
 	// like https://rangers.lerico.net/en/ranger/u13-lia
 	'u0001-5-barbell': {
 		displayName: 'Barbell',
+		displayName2: 'Captain',
 		element: 'Steel',
 		type: 'Strength',
 		rank: 5,
@@ -237,7 +238,8 @@ export const unitsAll = {
 	},
 	// https://rangers.lerico.net/en/ranger/u22-glenn
 	'u0001-1-benny': {
-		displayName: 'Benny Lava',
+		displayName: 'Lava',
+		displayName2: 'Benny',
 		element: 'Fire',
 		type: 'Agility',
 		rank: 1,
@@ -295,6 +297,7 @@ export const unitsAll = {
 	},
 	'u0001-2-ogre': {
 		displayName: 'Ogre',
+		displayName2: 'Pre-K',
 		element: 'Dark',
 		type: 'Strength',
 		rank: 2,
@@ -393,6 +396,7 @@ export const unitsAll = {
 	// https://rangers.lerico.net/en/ranger/u73-xan
 	'u0001-5-bibly': {
 		displayName: 'Bibly',
+		displayName2: 'Seraphim',
 		element: 'Fairy',
 		type: 'Agility',
 		rank: 5,
@@ -405,6 +409,7 @@ export const unitsAll = {
 	// https://rangers.lerico.net/en/ranger/u62-rei
 	'u0001-2-zerosix': {
 		displayName: 'Zerosix',
+		displayName2: 'OneOneFiveTwo',
 		element: 'Steel',
 		type: 'Intelligence',
 		rank: 2,
@@ -431,7 +436,8 @@ export const unitsAll = {
 
 	// https://rangers.lerico.net/en/ranger/u76-brownie
 	'u0001-2-tom': {
-		displayName: 'Major Tom',
+		displayName: 'Tom',
+		displayName2: 'Major',
 		element: 'Air',
 		type: 'Strength',
 		rank: 2,
@@ -488,7 +494,8 @@ export const unitsAll = {
 	// https://rangers.lerico.net/en/ranger/u039e-jill
 	// evo for liz
 	'u0001-5-liz': {
-		displayName: 'Hassle Liz',
+		displayName: 'Liz',
+		displayName2: 'Hassle',
 		element: 'Normal',
 		type: 'Strength',
 		rank: 4,
@@ -690,7 +697,8 @@ export const unitsAll = {
 
 	// https://rangers.lerico.net/en/ranger/u154e-manager
 	'u0001-5-rook': {
-		displayName: 'Master Rook',
+		displayName: 'Rook',
+		displayName2: 'Master',
 		element: 'Normal',
 		type: 'Intellegence',
 		rank: 5,

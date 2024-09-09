@@ -163,6 +163,7 @@ export const withLevelInfo = (unit, totalExp = 0, debug) => {
 };
 
 export const getUnitDetails = (unit, debug) => {
+	if (!unit?.id) return;
 	return {
 		...unit,
 		...withLevelInfo(unit, unit.experience, debug),

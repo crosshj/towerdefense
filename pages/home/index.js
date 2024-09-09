@@ -339,6 +339,10 @@ const setup = async () => {
 				getCharacter(which, raidTeam),
 				true /*debug*/
 			);
+			if (!currentCharacter) {
+				console.warn('no unit selected');
+				return;
+			}
 			setCurrentCharCache(currentCharacter);
 
 			window.parent.postMessage({
