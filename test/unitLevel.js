@@ -1,10 +1,14 @@
 import { describe, setAutoRefresh } from '/test/.test.js';
-import { parseUpgradeChangeScenario1, sampleUnit1 } from './unit.fixtures.js';
+import {
+	parseUpgradeChangeScenario1,
+	sampleUnit1,
+	testExpAmounts,
+} from './unitLevel.fixtures.js';
+
 import { parseUpgradeChange } from '../user/characters.js';
 import { flattenTeams } from '../utils/teams.js';
 import { withLevelInfo } from '../utils/units.js';
 import { unitsAll } from '../$data/unitsAll.js';
-import { testExpAmounts } from './user.fixtures.js';
 
 //setAutoRefresh(5000);
 

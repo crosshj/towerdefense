@@ -1,23 +1,3 @@
-export const testExpAmounts = [
-	// 1e3,
-	1e4,
-	1e5 / 6,
-	1e5 / 5,
-	1e5 / 4,
-	1e5 / 3,
-	1e5 / 2,
-	1e5 / 1.5,
-	1e5,
-	1e6 / 8,
-	1e6 / 7,
-	1e6 / 6,
-	1e6 / 5,
-	1e6 / 4,
-	1e6 / 3,
-	1e6 / 2,
-	1e6,
-];
-
 /*
 has negative feathers
 

@@ -1,6 +1,10 @@
 import { describe, setAutoRefresh } from '/test/.test.js';
 import { feathersModifier } from '../serviceWorker/userHandler.js';
-import { sampleUser1, sampleUser2, sampleUser3 } from './user.fixtures.js';
+import {
+	sampleUser1,
+	sampleUser2,
+	sampleUser3,
+} from './userHandler.fixtures.js';
 
 //setAutoRefresh(5000);
 

@@ -2,7 +2,7 @@
 	<head>
 		<title>TD: Render Test</title>
 		<meta charset="utf-8" />
-		<base href="../" target="_blank" />
+		<!-- <base href="../" target="_blank" /> -->
 		<meta name="description" content="" />
 		<meta name="author" content="" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -20,14 +20,5 @@
 		></canvas>
 	</body>
 
-	<script type="module">
-		import { renderMissile } from '/visuals/objects/missile.js';
-		const missileCanvas = document.getElementById('missileCanvas');
-		const missileCanvasCtx = missileCanvas.getContext('2d');
-		renderMissile(missileCanvasCtx)({
-			x: 200,
-			y: 200,
-			angle: -45,
-		});
-	</script>
+	<script type="module" src="./render.js"></script>
 </html>
