@@ -9,7 +9,7 @@
         "tsconfig.json": "tsconfig.*.json",
         "README.md": "package.json, .npmrc, .prettier*, .git*, LICENSE, CNAME",
         "sw.js": "manifest.json",
-        "*.js": "${capture}.css,${capture}.html,${capture}.fixtures.js,${capture}.md,${capture}.worker.js"
+        "*.js": "${capture}.css,${capture}.html,${capture}.fixtures.js,${capture}.md,${capture}.worker.js,${capture}.components.js"
     },
     "files.exclude": {
         "**/.git": true,

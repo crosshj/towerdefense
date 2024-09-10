@@ -3,8 +3,8 @@ import { getTeams, setTeams } from '../../user/teams.js';
 import { setCurrentCharCache } from '../../utils/cache.js';
 import { characterImageGetter } from '../../visuals/assets/character.js';
 import { attachAllCharacters, attachControls } from './allChars.js';
-import { blankSlot, slotDiv } from './components.js';
-import { handlePointerEvents, slotDragAndDrop } from './handlePointerEvents.js';
+import { blankSlot, slotDiv } from './index.components.js';
+import { slotDragAndDrop } from './handlePointerEvents.js';
 
 const saveTeam = async ({ teams }) => {
 	const teamSlots = Array.from(document.querySelectorAll('.team-slot')).map(
@@ -95,6 +95,10 @@ const teamSwitcher =
 			'.team-dropdown custom-select'
 		).value;
 		const current = teams[selected][subTeam];
+		const hydrated = current.map((c) =>
+			characters.find((x) => x.id === c?.id)
+		);
+
 		slots.forEach((slot, i) => {
 			const char = characters.find((x) => x.id === current[i]?.id);
 			if (char) {
@@ -107,6 +111,23 @@ const teamSwitcher =
 				delete slot.dataset.id;
 			}
 		});
+
+		const teamNameEl = document.querySelector('.team-info .name');
+		teamNameEl.innerHTML = `Team (${subTeam.toUpperCase()})`;
+
+		const profPointsAmount = document.querySelector(
+			'.team-info .professorPoints .amount'
+		);
+		const profPointsTotal = hydrated.reduce(
+			(a, o) => a + (o?.professorPoints || 0),
+			0
+		);
+		profPointsAmount.innerHTML = profPointsTotal;
+		const profPointsPercent = document.querySelector(
+			'.team-info .professorPoints .percent'
+		);
+		profPointsPercent.innerHTML = `(${Math.floor((100 * profPointsTotal) / 500)}%)`;
+
 		const raidIndicator = document.querySelector('.raid-indicator');
 		if (selected === 'Team 1') {
 			raidIndicator.classList.remove('hidden');
@@ -318,6 +339,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 		characters,
 		getCharImage,
 	});
+	switchTeam && switchTeam();
 
 	updateCharacters = characterUpdater({
 		teams,

@@ -1,6 +1,6 @@
 import { SVGIcons } from '../../assets/icons.svg.js';
 import { setCurrentCharCache } from '../../utils/cache.js';
-import { characterDiv } from './components.js';
+import { characterDiv } from './index.components.js';
 import {
 	attachTap,
 	handlePointerEvents,

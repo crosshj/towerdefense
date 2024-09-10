@@ -1,6 +1,6 @@
 import { getStats } from '../../user/stats.js';
 import { clone } from '../../utils/utils.js';
-import { menuButton } from './components.js';
+import { menuButton } from './stats.components.js';
 
 const withCommas = (x) => {
 	return x

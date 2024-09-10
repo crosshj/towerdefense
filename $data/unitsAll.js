@@ -177,7 +177,7 @@ export const unitsAll = {
 	// like https://rangers.lerico.net/en/ranger/u13-lia
 	'u0001-5-prickles': {
 		displayName: 'Prickles',
-		element: 'Plant',
+		element: 'Grass',
 		type: 'Agility',
 		rank: 5,
 		mineralCost: 450,
@@ -286,7 +286,7 @@ export const unitsAll = {
 	},
 	'u0001-3-rose': {
 		displayName: 'Rose',
-		element: 'Plant',
+		element: 'Grass',
 		type: 'Agility',
 		rank: 3,
 		mineralCost: 150,
