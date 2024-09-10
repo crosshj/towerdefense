@@ -25,5 +25,26 @@
         "web": true,
         "vendor": true,
         "serviceWorker": false
-    }
+    },
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.ts": "explicit",
+      "source.fixAll": "explicit"
+    },
+    "editor.tabSize": 2,
+    "editor.wordWrap": "on",
+    "git.confirmSync": false,
+    "git.enableSmartCommit": true,
+    "extensions.autoUpdate": true,
+    "extensions.recommendations": [
+      "eslint",
+      "prettier"
+    ],
+    "eslint.validate": [
+      "javascript",
+      "typescript"
+    ],
+    "prettier.requireConfig": true,
+    "debug.console.closeOnEnd": true,
+    "workbench.panel.defaultLocation": "right"
 }
