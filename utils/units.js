@@ -91,6 +91,16 @@ const getEvolution = (unit, debug) => {
 	return { canEvolve, canHyper, canUltra, canSwitch };
 };
 
+//professorPoints
+const getProfessorPointsMax = (unit) => {
+	return 10; // TODO: hyper/ultra units can go higher than 10
+};
+const getProfessorPoints = (unit) => {
+	const professorPoints = Math.max(unit.professorPoints || 0, 1);
+	const maxPoints = getProfessorPointsMax(unit);
+	return Math.min(professorPoints, maxPoints);
+};
+
 export const withLevelInfo = (unit, totalExp = 0, debug) => {
 	let { currentLevel, expToNext, levelExpPercent } = getLevelInfo({
 		totalExp,
@@ -124,8 +134,6 @@ export const withLevelInfo = (unit, totalExp = 0, debug) => {
 		levelNextPercent: levelExpPercent,
 		levelExp,
 
-		professorPoints: Math.max(unit.professorPoints || 0, 1),
-
 		hp: getHealth(unit, currentLevel),
 		attack: getAttack(unit, currentLevel),
 		defense: getDefense(unit, currentLevel),
@@ -149,8 +157,10 @@ export const withLevelInfo = (unit, totalExp = 0, debug) => {
 	};
 
 	_withLevel.evolution = getEvolution(_withLevel, debug);
-
 	_withLevel.potential = false;
+
+	_withLevel.professorPoints = getProfessorPoints(unit);
+	_withLevel.professorPointsMax = getProfessorPointsMax(unit);
 
 	const somethingNotRight = ['hp', 'attack', 'defense'].some(
 		(prop) => _withLevel[prop] < 0

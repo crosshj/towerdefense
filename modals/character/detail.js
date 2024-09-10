@@ -71,7 +71,11 @@ const updateValues = async ({ params, character, nodeTree }) => {
 	if (character.potential) {
 		left.actions.potentialUp.classList.remove('hidden');
 	}
-	if (character.maxLevel > character.level || character.uncappedLevel < 4) {
+	if (
+		character.maxLevel > character.level ||
+		character.uncappedLevel < 4 ||
+		character.professorPoints < character.professorPointsMax
+	) {
 		left.actions.levelUp.classList.remove('hidden');
 	}
 	//right

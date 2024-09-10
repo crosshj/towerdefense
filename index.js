@@ -81,7 +81,7 @@ function closeModal() {
 		const iframeDocument =
 			mainIframe.contentDocument || mainIframe.contentWindow.document;
 		if (iframeDocument?.body) {
-			console.log('cannot focus iframe');
+			//console.log('cannot focus iframe');
 			return;
 		}
 		iframeDocument.body.focus();
