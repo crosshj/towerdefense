@@ -8,110 +8,109 @@
 		/>
 		<title></title>
 		<link rel="stylesheet" href="index.css" />
-		<link rel="stylesheet" href="/visuals/stats/stats.css" />
 	</head>
 	<body>
 		<div class="overlay">
 			<div class="dialog">
+				<!-- GRADE -->
 				<div class="label">GRADE</div>
-				<div class="option"><div class="stars">★</div></div>
-				<div class="option"><div class="stars">★★</div></div>
-				<div class="option"><div class="stars">★★★</div></div>
-				<div class="option"><div class="stars">★★★★</div></div>
+				<div class="option" data-id="grade-1">
+					<div class="stars">★</div>
+				</div>
+				<div class="option" data-id="grade-2">
+					<div class="stars">★★</div>
+				</div>
+				<div class="option" data-id="grade-3">
+					<div class="stars">★★★</div>
+				</div>
+				<div class="option" data-id="grade-4">
+					<div class="stars">★★★★</div>
+				</div>
 				<div class="label"></div>
-				<div class="option"><div class="stars">★★★★★</div></div>
-
+				<div class="option" data-id="grade-5">
+					<div class="stars">★★★★★</div>
+				</div>
+				<div class="option hidden" data-id="grade-6">
+					<div class="stars">^★^</div>
+				</div>
+				<div class="option hidden" data-id="grade-7">
+					<div class="stars">^★★^</div>
+				</div>
+				<div class="option hidden" data-id="grade-8">
+					<div class="stars">^★★★^</div>
+				</div>
+				<div class="label hidden"></div>
+				<div class="option hidden" data-id="grade-9">
+					<div class="stars">^★★★★^</div>
+				</div>
 				<div class="row-spacer"></div>
 
+				<!-- EVOLUTION -->
+				<div class="label hidden">EVOLUTION</div>
+				<div class="option hidden" data-id="evolution-normal">
+					Normal
+				</div>
+				<div class="option hidden" data-id="evolution-ultra">Ultra</div>
+				<div class="option hidden" data-id="evolution-hyper">Hyper</div>
+				<div class="row-spacer hidden"></div>
+
+				<!-- MATERIAL TYPE -->
+				<div class="label hidden">UNIT</div>
+				<div class="option hidden" data-id="unit-regular">Regular</div>
+				<div class="option hidden" data-id="unit-material">
+					Material
+				</div>
+				<div class="row-spacer hidden"></div>
+
+				<!-- TYPE -->
 				<div class="label">TYPE</div>
-				<div class="option">Agility</div>
-				<div class="option">Strength</div>
-				<div class="option">Intelligent</div>
-				<div class="option">No Type</div>
-
+				<div class="option" data-id="type-agility">Agility</div>
+				<div class="option" data-id="type-strength">Strength</div>
+				<div class="option" data-id="type-intelligence">
+					Intelligence
+				</div>
+				<div class="option hidden" data-id="type-none">No Type</div>
 				<div class="row-spacer"></div>
 
-				<div class="label">ELEMENT</div>
-				<div class="option">Bug</div>
-				<div class="option">Dark</div>
-				<div class="option">Dragon</div>
-				<div class="option">Electric</div>
-				<div class="label"></div>
-				<div class="option">Fairy</div>
-				<div class="option">Fighting</div>
-				<div class="option">Fire</div>
-				<div class="option">Air</div>
-				<div class="label"></div>
-				<div class="option">Ghost</div>
-				<div class="option">Grass</div>
-				<div class="option">Earth</div>
-				<div class="option">Ice</div>
-				<div class="label"></div>
-				<div class="option">Normal</div>
-				<div class="option">Poison</div>
-				<div class="option">Psychic</div>
-				<div class="option">Rock</div>
-				<div class="label"></div>
-				<div class="option">Steel</div>
-				<div class="option">Water</div>
-
+				<!-- LOCKED -->
+				<div class="label">LOCK</div>
+				<div class="option" data-id="lock-locked">Locked</div>
+				<div class="option" data-id="lock-unlocked">Unlocked</div>
 				<div class="row-spacer"></div>
 
+				<!-- ELEMENT -->
 				<div class="label">ELEMENT</div>
-				<div class="option">Bug</div>
-				<div class="option">Dark</div>
-				<div class="option">Dragon</div>
-				<div class="option">Electric</div>
+				<div class="option" data-id="element-bug">Bug</div>
+				<div class="option" data-id="element-dark">Dark</div>
+				<div class="option" data-id="element-dragon">Dragon</div>
+				<div class="option" data-id="element-electric">Electric</div>
 				<div class="label"></div>
-				<div class="option">Fairy</div>
-				<div class="option">Fighting</div>
-				<div class="option">Fire</div>
-				<div class="option">Air</div>
+				<div class="option" data-id="element-fairy">Fairy</div>
+				<div class="option" data-id="element-fighting">Fighting</div>
+				<div class="option" data-id="element-fire">Fire</div>
+				<div class="option" data-id="element-air">Air</div>
 				<div class="label"></div>
-				<div class="option">Ghost</div>
-				<div class="option">Grass</div>
-				<div class="option">Earth</div>
-				<div class="option">Ice</div>
+				<div class="option" data-id="element-ghost">Ghost</div>
+				<div class="option" data-id="element-grass">Grass</div>
+				<div class="option" data-id="element-earth">Earth</div>
+				<div class="option" data-id="element-ice">Ice</div>
 				<div class="label"></div>
-				<div class="option">Normal</div>
-				<div class="option">Poison</div>
-				<div class="option">Psychic</div>
-				<div class="option">Rock</div>
+				<div class="option" data-id="element-normal">Normal</div>
+				<div class="option" data-id="element-poison">Poison</div>
+				<div class="option" data-id="element-psychic">Psychic</div>
+				<div class="option" data-id="element-rock">Rock</div>
 				<div class="label"></div>
-				<div class="option">Steel</div>
-				<div class="option">Water</div>
-
+				<div class="option" data-id="element-steel">Steel</div>
+				<div class="option" data-id="element-water">Water</div>
 				<div class="row-spacer"></div>
-
-				<div class="label">ELEMENT</div>
-				<div class="option">Bug</div>
-				<div class="option">Dark</div>
-				<div class="option">Dragon</div>
-				<div class="option">Electric</div>
-				<div class="label"></div>
-				<div class="option">Fairy</div>
-				<div class="option">Fighting</div>
-				<div class="option">Fire</div>
-				<div class="option">Air</div>
-				<div class="label"></div>
-				<div class="option">Ghost</div>
-				<div class="option">Grass</div>
-				<div class="option">Earth</div>
-				<div class="option">Ice</div>
-				<div class="label"></div>
-				<div class="option">Normal</div>
-				<div class="option">Poison</div>
-				<div class="option">Psychic</div>
-				<div class="option">Rock</div>
-				<div class="label"></div>
-				<div class="option">Steel</div>
-				<div class="option">Water</div>
 			</div>
+
 			<div class="actions">
 				<button class="reset">RESET</button>
 				<button class="okay">OK</button>
 			</div>
 		</div>
+
 		<script src="index.js" type="module"></script>
 	</body>
 </html>

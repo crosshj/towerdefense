@@ -63,7 +63,10 @@ body {
 		max-height: 80vh;
 		overflow-y: scroll;
 		scrollbar-width: none;
-
+		user-select: none;
+		& > * {
+			pointer-events: none;
+		}
 		.row-spacer {
 			grid-column: 1 / -1;
 			height: 2px;
@@ -79,17 +82,28 @@ body {
 		}
 
 		.label {
+			grid-column: 1;
 			font-weight: 900;
 			color: var(--label-text);
 			justify-content: start;
 		}
 		.option {
-			background: var(--option-bg);
+			cursor: pointer;
 			border-radius: 7px;
-			color: var(--option-text);
 			font-weight: 600;
-		}
-		.spacer {
+			font-size: 0.85em;
+
+			pointer-events: all;
+			& > * {
+				pointer-events: none;
+			}
+
+			background: var(--option-bg);
+			color: var(--option-text);
+			&.selected {
+				color: var(--option-bg);
+				background: var(--option-text);
+			}
 		}
 	}
 	button {

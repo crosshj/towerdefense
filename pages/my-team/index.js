@@ -213,7 +213,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 		return all.map((x) => x.id).includes(char.id);
 	};
 	attachAllCharacters({
-		sortBy: controls.sortBy,
+		controlsState: controls.state,
 		characters,
 		isUsed,
 		getCharImage,
@@ -224,9 +224,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 			back: '/pages/my-team/index.html',
 		},
 	});
-	controls.onSort((sortBy) => {
+	controls.onSort(() => {
 		attachAllCharacters({
-			sortBy,
+			controlsState: controls.state,
 			characters,
 			isUsed,
 			getCharImage,
@@ -238,13 +238,28 @@ document.addEventListener('DOMContentLoaded', async () => {
 			},
 		});
 	});
+	controls.onFilter(() => {
+		attachAllCharacters({
+			controlsState: controls.state,
+			characters,
+			isUsed,
+			getCharImage,
+			dragStart,
+			dragEnd,
+			params: {
+				...params,
+				back: '/pages/my-team/index.html',
+			},
+		});
+	});
+
 	// listens for changes to characters and updates raidTeam
 	window.addEventListener('message', async function (event) {
 		const { _, ...args } = event.data;
 		if (_ === 'broadcastCharactersUpdate') {
 			characters = await getCharacters();
 			attachAllCharacters({
-				sortBy: controls.sortBy,
+				controlsState: controls.state,
 				characters,
 				isUsed,
 				getCharImage,

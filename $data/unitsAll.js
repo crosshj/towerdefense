@@ -686,7 +686,7 @@ export const unitsAll = {
 	'u0001-4-chizu': {
 		displayName: 'Chizu',
 		element: 'Normal',
-		type: 'Intellegence',
+		type: 'Intelligence',
 		rank: 4,
 		mineralCost: 475,
 		attack: '616 - 4,438 - 10,796',
@@ -700,7 +700,7 @@ export const unitsAll = {
 		displayName: 'Rook',
 		displayName2: 'Master',
 		element: 'Normal',
-		type: 'Intellegence',
+		type: 'Intelligence',
 		rank: 5,
 		mineralCost: 900,
 		attack: '1,110 - 9,370 - 21,906',
@@ -714,7 +714,7 @@ export const unitsAll = {
 	'u0001-5-rookia': {
 		displayName: 'Rookia',
 		element: 'Normal',
-		type: 'Intellegence',
+		type: 'Intelligence',
 		rank: 4,
 		mineralCost: 900,
 		attack: '647 - 4,665 - 11,349',

@@ -185,17 +185,31 @@ const setup = async () => {
 
 	const getCharImage = await characterImageGetter();
 	attachAllCharacters({
-		sortBy: controls.sortBy,
-		characters,
+		controlsState: controls.state,
+		characters: controls.state.sameUnit
+			? characters.filter((x) => x.code === currentChar.code)
+			: characters,
 		getCharImage,
 		dragStart,
 		dragEnd,
 		params,
 	});
-	controls.onSort((sortBy, { sameUnit = false } = {}) => {
+	controls.onSort(() => {
 		attachAllCharacters({
-			sortBy,
-			characters: sameUnit
+			controlsState: controls.state,
+			characters: controls.state.sameUnit
+				? characters.filter((x) => x.code === currentChar.code)
+				: characters,
+			getCharImage,
+			dragStart,
+			dragEnd,
+			params,
+		});
+	});
+	controls.onFilter(() => {
+		attachAllCharacters({
+			controlsState: controls.state,
+			characters: controls.state.sameUnit
 				? characters.filter((x) => x.code === currentChar.code)
 				: characters,
 			getCharImage,
@@ -231,8 +245,10 @@ const setup = async () => {
 			}
 			updateResults({ characters, currentChar, actionButton });
 			attachAllCharacters({
-				sortBy: controls.sortBy,
-				characters,
+				controlsState: controls.state,
+				characters: controls.state.sameUnit
+					? characters.filter((x) => x.code === currentChar.code)
+					: characters,
 				getCharImage,
 				dragStart,
 				dragEnd,

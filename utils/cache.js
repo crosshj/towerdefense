@@ -1,6 +1,7 @@
 // character cache used across iframes (esp. detail page)
 const CHARACTER_CACHE_KEY = 'CURRENT_CHAR_DETAIL';
 const OPPONENT_TEAM_CACHE_KEY = 'CURRENT_OPPONENT_TEAM';
+const UNITS_FILTER_CACHE_KEY = 'UNITS_FILTER';
 
 export function setCurrentCharCache(character) {
 	if (typeof character !== 'object') {
@@ -52,4 +53,20 @@ export function getOpponentTeamCache() {
 	);
 	if (typeof storedTeam !== 'object') return;
 	return storedTeam;
+}
+
+export function setUnitsFilterCache(filter) {
+	if (!Array.isArray(filter)) {
+		localStorage.removeItem(UNITS_FILTER_CACHE_KEY);
+		return;
+	}
+	localStorage.setItem(UNITS_FILTER_CACHE_KEY, JSON.stringify(filter));
+}
+
+export function getUnitsFilterCache() {
+	const filter = JSON.parse(
+		localStorage.getItem(UNITS_FILTER_CACHE_KEY) || 'null'
+	);
+	if (!Array.isArray(filter)) return;
+	return filter;
 }

@@ -1,23 +1,43 @@
 import { SVGIcons } from '../../assets/icons.svg.js';
-import { setCurrentCharCache } from '../../utils/cache.js';
+import {
+	getUnitsFilterCache,
+	setCurrentCharCache,
+	setUnitsFilterCache,
+} from '../../utils/cache.js';
 import { characterDiv } from './index.components.js';
 import {
 	attachTap,
 	handlePointerEvents,
 	removeTap,
 } from './handlePointerEvents.js';
+import { EmptyList } from './allChars.components.js';
 
 const useSavedSort = () => {
 	const sortBy = localStorage.getItem('ALL_CHARS_SORT_BY') || 'latestDown';
 	return sortBy;
 };
 
-const notEqualIcon = SVGIcons.notEqual();
+const icons = {
+	notEqual: SVGIcons.notEqual(),
+	refresh: SVGIcons.refresh(),
+};
+
+const attachFilterUpdateListener = ({ state }) => {
+	// listens for changes to filter
+	window.addEventListener('message', async function (event) {
+		const { _, ...args } = event.data;
+		if (_ === 'broadcastUnitFilterUpdate') {
+			state.filter = getUnitsFilterCache();
+			await state.onFilterHandler(state);
+			return;
+		}
+	});
+};
 
 export const attachAllCharacters = (args) => {
 	const {
 		characters,
-		sortBy,
+		controlsState,
 		getCharImage,
 		dragStart,
 		dragEnd,
@@ -25,17 +45,40 @@ export const attachAllCharacters = (args) => {
 		params,
 	} = args;
 
+	const { filter = [], sortBy } = controlsState;
+
 	const allCharactersDiv = document.getElementById('all-characters');
 	allCharactersDiv.innerHTML = '';
 
-	if (characters.length < 1) {
-		allCharactersDiv.innerHTML = `
-			<div class="emptyList">${notEqualIcon}</div>
-		`;
-		return;
+	let sorted = [];
+
+	// FILTER
+	const $f = filter.join(',');
+	const filters = {};
+	if ($f.includes('element-')) {
+		filters.element = (char) =>
+			$f.includes(`element-${char.element.toLowerCase()}`);
+	}
+	if ($f.includes('lock-')) {
+		filters.lock = (char) =>
+			$f.includes(`lock-${char.locked ? 'locked' : 'unlocked'}`);
+	}
+	if ($f.includes('type-')) {
+		filters.type = (char) => $f.includes(`type-${char.type.toLowerCase()}`);
+	}
+	if ($f.includes('grade-')) {
+		filters.grade = (char) => $f.includes(`grade-${char.rank}`);
 	}
 
-	let sorted = [...characters];
+	for (const [i, char] of Object.entries(characters)) {
+		const matches = Object.values(filters).every((filterFunc) =>
+			filterFunc(char)
+		);
+		if (!matches) continue;
+		sorted.push(char);
+	}
+
+	// SORT
 
 	//latest
 	if (sortBy === 'latestUp') {
@@ -86,6 +129,15 @@ export const attachAllCharacters = (args) => {
 		});
 	}
 
+	const listIsEmpty = EmptyList({
+		filter,
+		sorted,
+		icons,
+		allCharactersDiv,
+		setUnitsFilterCache,
+	});
+	if (listIsEmpty) return;
+
 	sorted.forEach((character) => {
 		const characterCard = document.createElement('div');
 		characterCard.className = 'character-card';
@@ -124,15 +176,32 @@ export const attachAllCharacters = (args) => {
 };
 
 export const attachControls = () => {
-	const sortBy = useSavedSort();
-	let sameUnit = false;
+	const state = {
+		sameUnit: false,
+		filter: getUnitsFilterCache(),
+		sortBy: useSavedSort(),
+	};
 
-	let onSortHandler = () => {
+	state.onSortHandler = () => {
 		console.log('no onSortHandler set');
+	};
+	state.onFilterHandler = () => {
+		console.log('no onFilterHandler set');
 	};
 	const allCharactersDiv = document.getElementById('all-characters');
 	const controlsDiv = document.querySelector('.container > .controls');
+	const filterButton = controlsDiv.querySelector('.filter');
 	const sortByButton = controlsDiv.querySelector('.sortBy');
+
+	if (filterButton) {
+		attachFilterUpdateListener({ state });
+		filterButton.addEventListener('pointerdown', () => {
+			window.parent.postMessage({
+				_: 'navigate',
+				src: '/modals/unitsFilter/index.html',
+			});
+		});
+	}
 
 	const innerTextToKey = (innerText = '') => {
 		return innerText
@@ -163,7 +232,7 @@ export const attachControls = () => {
 			<div class="sortByContainer">
 				${sortOptions
 					.map((x, i) =>
-						innerTextToKey(x) === sortBy
+						innerTextToKey(x) === state.sortBy
 							? `<div class="active">${x}</div>`
 							: `<div>${x}</div>`
 					)
@@ -188,7 +257,8 @@ export const attachControls = () => {
 
 			sortByButton.classList.toggle('selected');
 			sortByDiv.classList.toggle('hidden');
-			onSortHandler(key, { sameUnit });
+			state.sortBy = key;
+			state.onSortHandler(state);
 		});
 	}
 
@@ -196,8 +266,8 @@ export const attachControls = () => {
 	if (sameUnitButton) {
 		sameUnitButton.addEventListener('pointerdown', (e) => {
 			e.target.classList.toggle('selected');
-			sameUnit = !sameUnit;
-			onSortHandler(sortBy, { sameUnit });
+			state.sameUnit = !state.sameUnit;
+			state.onSortHandler(state);
 		});
 	}
 
@@ -363,9 +433,12 @@ export const attachControls = () => {
 		});
 	}
 	return {
-		sortBy,
+		state,
 		onSort: (fn) => {
-			onSortHandler = fn;
+			state.onSortHandler = fn;
+		},
+		onFilter: (fn) => {
+			state.onFilterHandler = fn;
 		},
 	};
 };
