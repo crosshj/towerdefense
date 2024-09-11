@@ -848,4 +848,18 @@ export const unitsAll = {
 		defense: '892 - 6,380 - 15,516',
 		range: 60 * 10,
 	},
+
+	//https://rangers.lerico.net/en/ranger/u227e-cook
+	'u0001-4-cupcake': {
+		displayName: 'Cupcake',
+		element: 'Dessert',
+		type: 'Agility',
+		rank: 4,
+		mineralCost: 150,
+		//orig cost 475
+		attack: '392 - 2,793 - 6,791',
+		hp: '4,860 - 34,652 - 84,262',
+		defense: '41 - 335 - 819',
+		range: 321,
+	},
 };
