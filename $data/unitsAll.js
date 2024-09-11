@@ -862,4 +862,18 @@ export const unitsAll = {
 		defense: '41 - 335 - 819',
 		range: 321,
 	},
+
+	//https://rangers.lerico.net/en/ranger/u024e-yang https://rangers.lerico.net/en/ranger/u1001e-brown
+	'u0001-5-dukecane': {
+		displayName: 'Duke Cane',
+		element: 'Candy',
+		type: 'Strength',
+		rank: 5,
+		mineralCost: 850,
+		//orig cost 475
+		attack: '1,115 - 12,175 - 26,955',
+		hp: '6,691 - 72,735 - 161,019',
+		defense: '60 - 692 - 1,534',
+		range: 60,
+	},
 };
