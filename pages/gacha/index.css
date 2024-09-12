@@ -59,6 +59,7 @@ body {
 		gap: 10px;
 
 		& > .selected {
+			--actions-height: 50px;
 			/* opacity: 0.5;
 			background: green; */
 			height: 100%;
@@ -69,7 +70,7 @@ body {
 				align-items: center;
 				justify-content: center;
 				position: relative;
-				height: 85%;
+				height: calc(100% - var(--actions-height));
 
 				.background {
 					position: absolute;
@@ -82,6 +83,12 @@ body {
 					align-items: center;
 					justify-content: center;
 					color: white;
+					img {
+						/* object-fit: cover; */
+						border-radius: 10px;
+						width: 100%;
+						height: 100%;
+					}
 				}
 				.expires {
 					position: absolute;
@@ -109,24 +116,60 @@ body {
 			}
 			.actions {
 				display: flex;
-				height: 15%;
+				height: var(--actions-height);
 				justify-content: center;
 				gap: 10px;
-				padding: 10px;
+				padding: 7px;
+				padding-bottom: 0;
 				box-sizing: border-box;
+				pointer-events: none;
 				button {
-					flex: 1;
+					/* flex: 1; */
+					width: 35%;
 					background: yellow;
 					color: #4d3213;
 					border: 2px solid currentColor;
-					font-size: 20px;
-					min-height: 40px;
-					max-height: 40px;
-					padding: unset;
+					font-size: 15px;
+					font-weight: 600;
+					min-height: 100%;
+					max-height: 100%;
 					display: flex;
 					justify-content: center;
 					align-items: center;
-					border-radius: 0.5em;
+					border-radius: 10px;
+					box-sizing: border-box;
+					pointer-events: all;
+					& > * {
+						pointer-events: none;
+					}
+					.pulls {
+						flex: 1;
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						flex-direction: column;
+					}
+					.cost {
+						border-radius: 7px;
+						background: #e8ce24;
+						padding: 5px 7px;
+						display: flex;
+						align-items: center;
+						gap: 5px;
+						font-size: 1.3em;
+						.icon {
+							width: 20px;
+							height: 20px;
+							&.ruby {
+								background: red;
+							}
+							&.ticket {
+								background: #558be6;
+							}
+						}
+						.amount {
+						}
+					}
 				}
 			}
 		}
@@ -146,6 +189,8 @@ body {
 				box-sizing: border-box;
 				font-weight: 900;
 				pointer-events: none;
+				user-select: none;
+				cursor: pointer;
 
 				& > div {
 					flex: 1;
@@ -170,23 +215,29 @@ body {
 				scrollbar-width: none;
 				gap: 5px;
 				pointer-events: none;
+				padding-bottom: 30px;
 				.listItem {
 					width: 100%;
-					height: 80px;
-					min-height: 80px;
+					height: min-content;
 					background: #c35dc3;
-					border-radius: 7px;
+					border-radius: 10px;
 					display: flex;
 					justify-content: center;
 					align-items: center;
 					color: white;
 					box-sizing: border-box;
 					pointer-events: all;
+					border: 2px solid #0007;
+
 					& > * {
 						pointer-events: none;
 					}
 					&.selected {
-						border: 2px solid black;
+						border: 2px solid orange;
+					}
+					img {
+						border-radius: 10px;
+						width: 100%;
 					}
 				}
 			}
