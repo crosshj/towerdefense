@@ -367,6 +367,7 @@ export const attachControls = () => {
 				const card = e.target.classList.contains('character-card')
 					? e.target
 					: e.target.closest('.character-card');
+				if (!card) return;
 				if (card.classList.contains('used')) {
 					return;
 				}
