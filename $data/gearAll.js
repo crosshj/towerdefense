@@ -1,5 +1,6 @@
 export const gearAll = {
 	eq_amr_0061: {
+		type: 'armor',
 		name: 'Basic Shield',
 		grade: 1,
 		image: '/assets/gear/eq_amr_0061_icon.png',
@@ -10,6 +11,7 @@ export const gearAll = {
 		evolution: '',
 	},
 	eq_acc_0101: {
+		type: 'accessory',
 		name: 'Basic Belt',
 		grade: 1,
 		image: '/assets/gear/eq_acc_0101_icon.png',
@@ -20,6 +22,7 @@ export const gearAll = {
 		evolution: '',
 	},
 	eq_wpn_0001: {
+		type: 'weapon',
 		name: 'Basic Sword',
 		grade: 1,
 		image: '/assets/gear/eq_wpn_0001_icon.png',
@@ -30,3 +33,10 @@ export const gearAll = {
 		evolution: '',
 	},
 };
+
+export const gearIndex = [
+	'eq_amr_0061',
+	'eq_acc_0101',
+	'eq_wpn_0001',
+	//
+];

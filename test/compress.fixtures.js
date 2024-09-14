@@ -228,3 +228,26 @@ _,M,0,0,¿,¿,¿
 0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz×÷!#$%&*+-:;<=>?@[^_|~¢£¤¥¦§©ª«¬®¯±°¹²³µ¶»¼½¾ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþ
 -----
 `.trim();
+
+export const gear1 = [
+	{
+		id: '0-localid',
+		code: 'eq_wpn_0001',
+		locked: false,
+		name: 'Basic Sword',
+		grade: 1,
+		image: '/assets/gear/eq_wpn_0001_icon.png',
+		effects: {
+			physicalAttack: 600,
+		},
+		extract: '20 - 0 - 0',
+		evolution: '',
+	},
+];
+
+export const gearCompressed1 = `
+0,2,0,23,¿,¿,¿,,,,,,,
+-----
+0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ
+-----
+`.trim();

@@ -1,4 +1,5 @@
 import { SVGIcons } from '../../assets/icons.svg.js';
+import { getGear } from '../../user/gear.js';
 import { getCurrentCharCache } from '../../utils/cache.js';
 
 const pageTitle = 'GEAR';
@@ -74,15 +75,10 @@ const ListItemComponent = (item) => `
 	</div>
 `;
 
-const attachList = async () => {
+const attachList = async ({ gear }) => {
 	const el = document.querySelector('.list');
 	const update = async (type) => {
-		const items = new Array(100).fill().map((x) => {
-			return {
-				name: type,
-				grade: 3,
-			};
-		});
+		const items = gear.filter((x) => x.type === type);
 		el.innerHTML = items.map(ListItemComponent).join('\n');
 	};
 	return {
@@ -113,7 +109,8 @@ const setup = async () => {
 	);
 	console.log({ params });
 
-	const list = await attachList();
+	const gear = await getGear();
+	const list = await attachList({ gear });
 	const selector = await attachListSelector({ params, list });
 
 	const unit = getCurrentCharCache();

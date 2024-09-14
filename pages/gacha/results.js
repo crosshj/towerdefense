@@ -4,6 +4,7 @@ import { addNewCharacter } from '../../user/characters.js';
 import { addNewGear } from '../../user/gear.js';
 import { getCollection } from '../../user/getCollection.js';
 import { forceUpdate } from '../../user/user.js';
+import { clone } from '../../utils/utils.js';
 import { attachTap } from '/utils/pointerEvents.js';
 
 const pageTitle = 'GACHA';
@@ -59,6 +60,35 @@ const getGachaDetails = async ({ params }) => {
 	};
 };
 
+const getRandomInRange = (min, max) => {
+	if (Number.isInteger(min) && Number.isInteger(max))
+		return Math.floor(Math.random() * (max - min + 1)) + min;
+	const precision = Math.max(
+		(min.toString().split('.')[1] || '').length,
+		(max.toString().split('.')[1] || '').length
+	);
+	return (Math.random() * (max - min) + min).toFixed(precision);
+};
+
+const processEffects = (effects) => {
+	const result = {};
+	for (const key in effects) {
+		const value = effects[key];
+		const isPercentage = value.includes('%');
+		const range = value.replace('%', '').split(' - ').map(Number);
+		result[key] = isPercentage
+			? getRandomInRange(range[0], range[1]) + '%'
+			: getRandomInRange(range[0], range[1]);
+	}
+	return result;
+};
+
+const GearInstance = (gearDefintion) => {
+	const gearInstance = clone(gearDefintion);
+	gearInstance.effects = processEffects(gearInstance.effects);
+	return gearInstance;
+};
+
 const getRewards = async ({ gachaDetails, gear, characters }) => {
 	let { pulls } = gachaDetails.option;
 	pulls = pulls.includes('+')
@@ -73,7 +103,10 @@ const getRewards = async ({ gachaDetails, gear, characters }) => {
 		const randomItem = getRandomItem(gachaDetails.drops);
 		const hydrated =
 			rewardType === 'gear'
-				? gear[randomItem.code]
+				? GearInstance({
+						...gear[randomItem.code],
+						code: randomItem.code,
+					})
 				: characters[randomItem.code];
 		hydrated.rewardType = rewardType;
 		rewards.push(hydrated);
@@ -82,14 +115,10 @@ const getRewards = async ({ gachaDetails, gear, characters }) => {
 	//update data store
 	for (const reward of rewards) {
 		if (reward.rewardType === 'unit') {
-			await addNewCharacter({
-				code: reward.code,
-			});
+			await addNewCharacter(reward);
 		}
 		if (reward.rewardType === 'gear') {
-			await addNewGear({
-				code: reward.code,
-			});
+			await addNewGear(reward);
 		}
 	}
 	//TODO: charge the cost to the user

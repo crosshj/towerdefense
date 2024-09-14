@@ -1,4 +1,5 @@
-import { generateUUID } from './utils.js';
+import { gearAll, gearIndex } from '../$data/gearAll.js';
+import { clone, generateUUID } from './utils.js';
 import { unitsAll } from '/$data/unitsAll.js';
 
 const allTeamNames = [
@@ -152,7 +153,7 @@ export const compressTeams = (lsTeam, lsCharacters, baseLength = 36) => {
 	return compressedOut + `\n-----\n${characterSet.join('')}\n-----\n`;
 };
 
-export const decompressTeams = (compedString, characters) => {
+export const decompressTeams = (compedString, characters, baseLength = 36) => {
 	try {
 		const [compressedData, charSet] = compedString.split('-----');
 		const characterSet = charSet.trim().split('');
@@ -181,4 +182,110 @@ export const decompressTeams = (compedString, characters) => {
 		console.log(e);
 		return {};
 	}
+};
+
+const getPercentageInRange = (rangeStr, value) => {
+	if (!isNaN(rangeStr)) return 100;
+	const [min, max] = rangeStr.replace('%', '').split(' - ').map(Number);
+	if (isNaN(min) || isNaN(max)) return 100;
+	if (min === max) return 100;
+	return Math.round((100 * (value - min)) / (max - min));
+};
+
+const getValueFromPercentage = (rangeStr, percentage) => {
+	if (!isNaN(rangeStr)) return rangeStr;
+	const [min, max] = rangeStr.replace('%', '').split(' - ').map(Number);
+	if (isNaN(min) || isNaN(max)) return min || max;
+	if (min === max) return min;
+	const value = min + (percentage / 100) * (max - min);
+	return rangeStr.includes('%') ? value.toFixed(2) + '%' : Math.round(value);
+};
+
+export const compressGear = (gear, baseLength = 36) => {
+	const characterSet = getCharacterSet(true).slice(0, baseLength);
+	const encode = (num) => encodeNumber(num, characterSet);
+
+	const gearCompressMap = (gearItem, i) => {
+		const gearDef = gearAll[gearItem.code];
+		const index = encode(gearIndex.indexOf(gearItem.code));
+
+		const pFromK = (prop, index) => {
+			try {
+				const [key, range] = Object.entries(gearDef[prop])[index];
+				const value = gearItem[prop][key];
+				return getPercentageInRange(range, value);
+			} catch (e) {
+				return '';
+			}
+		};
+		const properties = {
+			id: gear.uuid || encode(i),
+			index,
+			locked: gearItem.locked ? 1 : 0,
+			ef1: encode(pFromK('effects', 0)),
+			ef2: encode(pFromK('effects', 1)),
+			ef3: encode(pFromK('effects', 2)),
+			ef4: encode(pFromK('effects', 3)),
+			sw: '',
+			swWhich: '',
+			swUnlimit: '',
+			sk1: '',
+			sk2: '',
+			sk3: '',
+			sk4: '',
+		};
+		return Object.values(properties).join(',');
+	};
+	const compressed = gear.map(gearCompressMap).join('\n');
+	return compressed + `\n-----\n${characterSet.join('')}\n-----`;
+};
+
+export const deCompressGear = (compedString) => {
+	if (!compedString || typeof compedString !== 'string') {
+		return [];
+	}
+	const [compressedData, charSet] = compedString.split('-----');
+	const characterSet = charSet.trim().split('');
+	const decode = (str) => decodeNumber(str, characterSet);
+
+	const lines = compressedData.trim().split('\n');
+	return lines.map((line, i) => {
+		const [
+			id,
+			index,
+			locked,
+			ef1,
+			ef2,
+			ef3,
+			ef4,
+			sw,
+			swWhich,
+			swUnlimit,
+			sk1,
+			sk2,
+			sk3,
+			sk4,
+		] = line.split(',');
+		const code = gearIndex[decode(index)];
+		const gearDef = gearAll[code];
+		const gearInstance = clone(gearDef);
+
+		for (const [i, effectComped] of Object.entries([ef1, ef2, ef3, ef4])) {
+			const defEntry = Object.entries(gearDef.effects)[i];
+			if (!defEntry) continue;
+			const [key, range] = defEntry;
+			const effectValue = decode(effectComped);
+			gearInstance.effects[key] = getValueFromPercentage(
+				range,
+				effectValue
+			);
+		}
+		return {
+			//index,
+			id: i + '-localid',
+			code: gearIndex[decode(index)],
+			locked: locked + '' === '1' ? true : false,
+			...gearInstance,
+		};
+	});
 };
