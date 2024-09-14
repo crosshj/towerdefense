@@ -3,6 +3,24 @@ import { attachTap } from '../../utils/pointerEvents.js';
 
 const pageTitle = 'GACHA';
 
+const pageDone = () => {
+	document.title = 'TD: ' + pageTitle;
+	window.parent.postMessage({
+		_: 'stats',
+		feathers: false,
+		gems: true,
+		coins: false,
+		friendPoints: true,
+		gachaTickets: true,
+	});
+	window.parent.postMessage({
+		_: 'title',
+		title: pageTitle,
+		visibility: 'visible',
+	});
+	window.parent.postMessage({ _: 'loaded' });
+};
+
 const ListItemComponent = (item, i) => `
 	<div class="listItem" data-index="${i}" data-type="${item.type}">
 		<img src="${item.thumb}" >
@@ -49,12 +67,12 @@ const attachSelectedDetails = async () => {
 		expiresTime.textContent = '23:00';
 	};
 	attachTap(actions, (e) => {
-		console.log(
-			'TODO: go to gacha!',
-			e.target.dataset.item,
-			e.target.dataset.option,
-			e.target.dataset.cost
-		);
+		const { item, option, cost } = e.target.dataset;
+		const src = `/modals/gachaConfirm/index.html?item=${item}&option=${option}&cost=${cost}`;
+		window.parent.postMessage({
+			_: 'navigate',
+			src,
+		});
 	});
 	return { update };
 };
@@ -114,7 +132,6 @@ const setup = async () => {
 	const params = Object.fromEntries(
 		new URLSearchParams(window.location.search)
 	);
-	document.title = 'TD: ' + pageTitle;
 
 	const gachaItems = await getCurrentGacha();
 	const selectedDetails = await attachSelectedDetails();
@@ -125,20 +142,7 @@ const setup = async () => {
 		: 'units';
 	selector.selectTab(tabSelected);
 
-	window.parent.postMessage({
-		_: 'stats',
-		feathers: false,
-		gems: true,
-		coins: false,
-		friendPoints: false,
-	});
-	window.parent.postMessage({
-		_: 'title',
-		title: pageTitle,
-		visibility: 'visible',
-	});
-
-	window.parent.postMessage({ _: 'loaded' });
+	pageDone();
 };
 
 document.addEventListener('DOMContentLoaded', setup);

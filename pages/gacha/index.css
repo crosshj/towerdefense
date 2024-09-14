@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Passion+One:wght@400;700;900&display=swap');
+
 body {
 	margin: 0;
 	background-color: black;
@@ -9,9 +11,14 @@ body {
 	left: 0;
 	font-family: sans-serif;
 
+	.hidden {
+		display: none !important;
+	}
+
 	& > .background,
 	& > .container,
-	& > .message {
+	& > .message,
+	& > .overlay {
 		position: absolute;
 	}
 
@@ -49,7 +56,7 @@ body {
 		transform: translateX(-50%);
 		color: #2b2b2b;
 	}
-	.container {
+	& > .container {
 		left: 50%;
 		top: 10vh;
 		width: 660px;
@@ -240,6 +247,41 @@ body {
 						width: 100%;
 					}
 				}
+			}
+		}
+	}
+	& > .overlay {
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		background: #000b;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		.dialogBox {
+			background: #905527;
+			padding: 2em;
+			display: flex;
+			flex-direction: column;
+			gap: 10px;
+			color: white;
+			border-radius: 10px;
+			box-sizing: border-box;
+			border: 2px solid black;
+			button {
+				background: #00c031;
+				padding: 0.2em;
+				border-radius: 0.5em;
+				color: white;
+				text-transform: uppercase;
+				font-family: 'Passion One', sans-serif;
+				font-weight: 400;
+				font-size: 19px;
+				letter-spacing: 1px;
+				min-width: 130px;
+				border: 0;
 			}
 		}
 	}

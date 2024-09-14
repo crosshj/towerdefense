@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Passion+One:wght@400;700;900&display=swap');
+
+html,
+body {
+	background-color: transparent;
+}
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	overscroll-behavior: none;
+	width: 100vw;
+	height: 100vh;
+}
+
+.hidden {
+	display: none !important;
+}
+
+.overlay {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	background: #000b;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	.dialogBox {
+		background: #905527;
+		padding: 2em;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 6px;
+		color: white;
+		border-radius: 10px;
+		box-sizing: border-box;
+		border: 2px solid black;
+	}
+
+	.confirmContainer {
+		.confirmCost {
+			display: flex;
+			align-items: center;
+			flex-direction: column;
+			gap: 10px;
+			div:first-child {
+				color: yellow;
+			}
+			.cost {
+				border-radius: 7px;
+				background: #0003;
+				padding: 5px 7px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 10px;
+				font-size: 1.3em;
+				width: 100%;
+
+				.icon {
+					width: 20px;
+					height: 20px;
+					&.ruby {
+						background: red;
+					}
+					&.ticket {
+						background: #558be6;
+					}
+				}
+				.amount {
+				}
+			}
+		}
+
+		.actions {
+			margin-top: 20px;
+			display: flex;
+			gap: 10px;
+			button.cancel {
+				background: #05bbd0;
+			}
+			button {
+				background: #00c031;
+				padding: 0.2em;
+				border-radius: 0.5em;
+				color: white;
+				text-transform: uppercase;
+				font-family: 'Passion One', sans-serif;
+				font-weight: 400;
+				font-size: 19px;
+				letter-spacing: 1px;
+				min-width: 95px;
+				border: 0;
+			}
+		}
+	}
+}

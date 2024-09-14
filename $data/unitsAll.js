@@ -57,7 +57,7 @@ export const unitsAll = {
 		cooldown: 15, //seconds
 		physicalAttack: '411 - 2,959 - 7,198',
 		physicalDefense: '43 - 337 - 823',
-		extractMaterial: '180-15-0',
+		extractMaterial: '180 - 15 - 0',
 		hitRate: 0.0,
 		splashRadius: 0,
 		skillUseRate: '',
@@ -852,6 +852,7 @@ export const unitsAll = {
 	//https://rangers.lerico.net/en/ranger/u227e-cook
 	'u0001-4-cupcake': {
 		displayName: 'Cupcake',
+		displayName2: 'Cuppy',
 		element: 'Dessert',
 		type: 'Agility',
 		rank: 4,
@@ -864,8 +865,9 @@ export const unitsAll = {
 	},
 
 	//https://rangers.lerico.net/en/ranger/u024e-yang https://rangers.lerico.net/en/ranger/u1001e-brown
-	'u0001-5-dukecane': {
-		displayName: 'Duke Cane',
+	'u0001-5-cane': {
+		displayName: 'Cane',
+		displayName2: 'Duke',
 		element: 'Candy',
 		type: 'Strength',
 		rank: 5,

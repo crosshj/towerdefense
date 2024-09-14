@@ -1,0 +1,55 @@
+<svg width="1012" height="1016" viewBox="0 0 1012 1016" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient gradientUnits="userSpaceOnUse" x1="505.823" y1="615.935" x2="505.823" y2="676.974" id="gradient-0" gradientTransform="matrix(0, 3.555191, -2.506865, 0, 2128.290771, -1151.560871)">
+      <stop offset="0" style="stop-color: rgb(114, 114, 114);"></stop>
+      <stop offset="0.483" style="stop-color: rgb(186, 186, 186);"></stop>
+      <stop offset="1" style="stop-color: rgb(43.958% 43.958% 43.958%)"></stop>
+    </linearGradient>
+    <radialGradient gradientUnits="userSpaceOnUse" cx="452.072" cy="262.362" r="153.923" id="gradient-1" gradientTransform="matrix(1.35246, 2.078691, -2.066388, 1.344454, 382.804085, -1030.089714)">
+      <stop offset="0" style="stop-color: rgb(255, 255, 255);"></stop>
+      <stop offset="0.427" style="stop-color: rgb(206, 228, 236);"></stop>
+      <stop offset="1" style="stop-color: rgb(163, 205, 219);"></stop>
+    </radialGradient>
+  </defs>
+  <ellipse style="fill: rgba(0, 0, 0, 0.267);" cx="506" cy="912.252" rx="238.495" ry="65.622"></ellipse>
+  <rect x="426.969" y="603.768" width="157.708" height="86.564" style="fill: url(#gradient-0); stroke: rgb(0, 0, 0); stroke-width: 5px;"></rect>
+  <rect x="390.101" y="92.75" width="224.135" height="88.292" style="fill: rgb(153, 0, 0); stroke: rgb(0, 0, 0); stroke-width: 5px;" rx="13.711" ry="13.711"></rect>
+  <rect x="392.36" y="127.805" width="219.253" height="40.49" style="stroke-width: 5px; fill: rgb(113, 2, 2);"></rect>
+  <rect x="429.632" y="597.922" width="152.294" height="40.49" style="stroke-width: 5px; fill: rgb(114, 114, 114);"></rect>
+  <rect x="328.46" y="145.978" width="355.079" height="469.957" style="stroke: rgb(0, 0, 0); stroke-width: 6px; fill: rgb(182, 0, 0);" rx="22.311" ry="22.311"></rect>
+  <rect x="354.831" y="181.042" width="307.847" height="408.38" stroke-width="5" style="fill: url(#gradient-1); stroke: rgb(114, 33, 33);" rx="16.133" ry="16.133"></rect>
+  <g>
+    <title>balls</title>
+    <circle cx="602.118" cy="548.516" r="28.118" fill="red" style=""></circle>
+    <circle cx="533.882" cy="556.304" r="28.118" style="fill: rgb(194, 0, 0);"></circle>
+    <circle cx="467.646" cy="555.304" r="28.118" fill="red" style=""></circle>
+    <circle cx="403.091" cy="543.516" r="28.118" style="fill: rgb(249, 114, 114);"></circle>
+    <circle cx="499.867" cy="498.068" r="28.118" style="fill: rgb(249, 97, 97);"></circle>
+    <circle cx="561.103" cy="502.068" r="28.118" style="fill: rgb(249, 114, 114);"></circle>
+    <circle cx="628.118" cy="487.28" r="28.118" fill="red" style=""></circle>
+    <circle cx="433.631" cy="487.28" r="28.118" fill="red" style=""></circle>
+    <circle cx="514.552" cy="441.832" r="28.118" fill="red" style=""></circle>
+    <circle cx="571.882" cy="441.832" r="28.118" style="fill: rgb(194, 0, 0);"></circle>
+    <circle cx="628.118" cy="416.34" r="28.118" fill="red" style=""></circle>
+    <circle cx="443.631" cy="431.044" r="28.118" style="fill: rgb(194, 0, 0);"></circle>
+    <circle cx="387.493" cy="431.044" r="28.118" fill="red" style=""></circle>
+    <circle cx="415.41" cy="374.808" r="28.118" style="fill: rgb(249, 114, 114);"></circle>
+    <circle cx="471.646" cy="374.808" r="28.118" fill="red" style=""></circle>
+    <circle cx="529.882" cy="387.596" r="28.118" style="fill: rgb(245, 91, 91);"></circle>
+    <circle cx="586.118" cy="377.596" r="28.118" style="fill: rgb(249, 114, 114);"></circle>
+    <circle cx="550.882" cy="332.36" r="28.118" style="fill: rgb(249, 114, 114);"></circle>
+    <circle cx="628.118" cy="331.36" r="28.118" style="fill: rgb(194, 0, 0);"></circle>
+    <circle cx="590.118" cy="290.48" r="28.118" fill="red" style=""></circle>
+  </g>
+  <path d="M 396.24 661.245 L 618.349 661.644 C 640.372 661.644 658.225 680.524 658.225 703.814 L 679.045 901.209 C 679.045 924.499 661.192 943.38 639.169 943.38 L 378.333 943.38 C 356.31 943.38 338.457 924.499 338.457 901.209 L 356.364 703.414 C 356.364 680.124 374.217 661.245 396.24 661.245 Z" style="stroke: rgb(0, 0, 0); stroke-width: 7px; fill: rgb(182, 0, 0);"></path>
+  <path d="M 341.065 897.963 C 341.065 897.963 342.675 913.179 388.578 896.588 C 467.557 868.042 557.544 844.866 607.397 818.76 C 664.607 788.801 659.565 737.41 659.565 737.41 L 675.4 897.963 C 675.4 922.124 657.875 941.709 636.256 941.709 L 380.208 941.709 C 358.59 941.709 341.065 922.124 341.065 897.963 Z" style="stroke-width: 7px; fill: rgb(134, 2, 2);"></path>
+  <path d="M 463.008 703.48 L 547.88 703.883 C 556.295 703.883 563.117 710.533 563.117 718.734 L 571.073 787.981 C 571.073 796.183 564.251 802.831 555.836 802.831 L 456.164 802.831 C 447.749 802.831 440.927 796.183 440.927 787.981 L 447.77 718.331 C 447.77 710.129 454.592 703.48 463.008 703.48 Z" style="fill: rgb(199, 199, 199); stroke: rgb(38, 38, 38); stroke-width: 5px;"></path>
+  <path d="M 467.6 829.058 L 543.54 829.081 C 548.878 829.081 553.206 834.387 553.206 840.93 L 559.928 896.227 C 559.928 902.771 555.601 908.074 550.262 908.074 L 461.738 908.326 C 456.4 908.326 452.072 903.022 452.072 896.478 L 457.933 840.907 C 457.933 834.363 462.261 829.058 467.6 829.058 Z" style="fill: rgb(182, 182, 182); stroke: rgb(47, 47, 47); stroke-width: 5px;"></path>
+  <rect x="632.202" y="190.06" width="17.606" height="392.362" style="fill: rgba(253, 255, 255, 0.855);" rx="15.142" ry="15.142"></rect>
+  <g style="transform-origin: 506px 751.174px;">
+    <title>turner</title>
+    <ellipse style="stroke: rgb(0, 0, 0); stroke-width: 5px; fill: rgb(185, 185, 185);" cx="506" cy="751.341" rx="34.876" ry="32.677"></ellipse>
+    <rect x="497.566" y="716.876" width="16.869" height="68.596" style="stroke: rgb(0, 0, 0); stroke-width: 4px; fill: rgb(216, 216, 216);"></rect>
+    <animateTransform type="rotate" additive="sum" attributeName="transform" values="0;180" begin="0s" dur="1s" keyTimes="0; 1" repeatCount="indefinite"></animateTransform>
+  </g>
+</svg>

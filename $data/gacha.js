@@ -1,5 +1,53 @@
+const drops = {
+	// units
+	'units-ultra-rare': [
+		{ code: 'u0001-4-commando1', probability: 1 },
+		{ code: 'u0001-4-commando2', probability: 1 },
+		{ code: 'u0001-4-commando3', probability: 1 },
+		{ code: 'u0001-4-commando4', probability: 1 },
+		{ code: 'u0001-4-commando5', probability: 1 },
+		{ code: 'u0001-4-cupcake', probability: 0.1 },
+		{ code: 'u0001-5-cane', probability: 0.1 },
+	],
+	'units-rare': [
+		{ code: 'u0001-4-commando1', probability: 1 },
+		{ code: 'u0001-4-commando2', probability: 1 },
+		{ code: 'u0001-4-commando3', probability: 1 },
+		{ code: 'u0001-4-commando4', probability: 1 },
+		{ code: 'u0001-4-commando5', probability: 1 },
+		{ code: 'u0001-4-cupcake', probability: 0.1 },
+		{ code: 'u0001-5-cane', probability: 0.1 },
+	],
+	'units-common': [
+		{ code: 'u0001-4-commando1', probability: 1 },
+		{ code: 'u0001-4-commando2', probability: 1 },
+		{ code: 'u0001-4-commando3', probability: 1 },
+		{ code: 'u0001-4-commando4', probability: 1 },
+		{ code: 'u0001-4-commando5', probability: 1 },
+		{ code: 'u0001-4-cupcake', probability: 0.1 },
+		{ code: 'u0001-5-cane', probability: 0.1 },
+	],
+	// gear
+	'gear-special': [
+		{ code: 'eq_wpn_0001', probability: 1 },
+		{ code: 'eq_acc_0101', probability: 1 },
+		{ code: 'eq_amr_0061', probability: 1 },
+	],
+	'gear-rare': [
+		{ code: 'eq_wpn_0001', probability: 1 },
+		{ code: 'eq_acc_0101', probability: 1 },
+		{ code: 'eq_amr_0061', probability: 1 },
+	],
+	'gear-normal': [
+		{ code: 'eq_wpn_0001', probability: 1 },
+		{ code: 'eq_acc_0101', probability: 0.2 },
+		{ code: 'eq_amr_0061', probability: 0.3 },
+	],
+};
+
 export const getCurrentGacha = async () => {
 	return {
+		drops,
 		units: [
 			{
 				id: 'units-ultra-rare',
@@ -46,14 +94,14 @@ export const getCurrentGacha = async () => {
 		],
 		gear: [
 			{
-				id: 'gear-ultra-rare',
-				name: 'ULTRA RARE',
+				id: 'gear-special',
+				name: 'SPECIAL',
 				thumb: '/assets/gacha/gear1.thumb.svg',
 				image: '/assets/gacha/gear1.svg',
 				imageBg: 'linear-gradient(180deg, blue, red)',
 				options: [
-					{ type: 'ticket', pulls: '1', cost: '5' },
-					{ type: 'ruby', pulls: '6+1', cost: '300' },
+					{ type: 'ruby', pulls: '1', cost: '40' },
+					{ type: 'ruby', pulls: '5+1', cost: '200' },
 				],
 			},
 			{
@@ -68,8 +116,8 @@ export const getCurrentGacha = async () => {
 				],
 			},
 			{
-				id: 'gear-common',
-				name: 'COMMON',
+				id: 'gear-normal',
+				name: 'NORMAL',
 				thumb: '/assets/gacha/gear3.thumb.svg',
 				image: '/assets/gacha/gear3.svg',
 				imageBg: 'linear-gradient(180deg, green, #4F4)',

@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Passion+One:wght@400;700;900&display=swap');
+
+body {
+	margin: 0;
+	background-color: black;
+	overflow: hidden;
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+	top: 0;
+	left: 0;
+	font-family: sans-serif;
+
+	.hidden {
+		display: none !important;
+	}
+
+	.animatedBackground {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		background: rgb(151, 211, 227);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		img {
+			width: 300px;
+		}
+	}
+	.results {
+		z-index: 2;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		background: #506b96;
+		color: white;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		gap: 20px;
+		.title {
+			font-family: 'Passion One', sans-serif;
+			font-size: 30px;
+			color: orange;
+		}
+		.container {
+			display: grid;
+			gap: 10px 20px;
+			justify-items: center;
+			align-items: center;
+
+			&.items-1 {
+				grid-template-columns: 1fr;
+			}
+			&.items-6 {
+				grid-template-columns: repeat(3, 1fr);
+			}
+			&.items-7 {
+				grid-template-columns: repeat(4, 1fr);
+			}
+			&.items-7 > :nth-child(5),
+			&.items-7 > :nth-child(6),
+			&.items-7 > :nth-child(7) {
+				grid-column: span 1;
+				margin-right: -100%;
+			}
+			.reward {
+				width: 100px;
+				aspect-ratio: 1/1;
+				border-radius: 50%;
+				background: #fff3;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				img {
+					width: 60px;
+				}
+				&.unit img {
+					width: 80px;
+				}
+			}
+		}
+		.actions {
+			margin-top: 20px;
+			display: flex;
+			gap: 10px;
+			button.onceMore {
+				background: #05bbd0;
+			}
+			button {
+				background: #00c031;
+				padding: 0.2em;
+				border-radius: 0.5em;
+				color: white;
+				text-transform: uppercase;
+				font-family: 'Passion One', sans-serif;
+				font-weight: 400;
+				font-size: 19px;
+				letter-spacing: 1px;
+				min-width: 110px;
+				border: 0;
+			}
+		}
+	}
+}
