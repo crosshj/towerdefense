@@ -66,9 +66,15 @@ function showModal(args = {}) {
 	modalIframe.src = args.src;
 	document.body.insertAdjacentElement('beforeEnd', modalIframe);
 }
+function isModalShown() {
+	const modalIframe = document.querySelector('iframe.modal');
+	if (!modalIframe) return false;
+	return true;
+}
 function closeModal() {
 	const modalIframe = document.querySelector('iframe.modal');
 	if (!modalIframe) return false;
+	modalIframe.style.opacity = 0;
 	modalIframe.remove();
 	document.body.dispatchEvent(new CustomEvent('modalClose'));
 
@@ -94,12 +100,17 @@ document.addEventListener('focusin', (ev) => {
 	document.previousActiveElement = ev.target;
 });
 
-function navigate(args = {}) {
+function navigate(args = {}, { onFade } = {}) {
 	const fadeTime =
 		typeof args?.FADE_MS === 'undefined' ? FADE_MS : args.FADE_MS;
 	if (fadeTime > 0) {
 		document.body.classList.remove('fade-in');
 		document.body.classList.add('fade-out');
+	}
+	if (typeof onFade === 'function') {
+		// onFade();
+		// setTimeout(onFade, (fadeTime || 2) / 2);
+		setTimeout(onFade, fadeTime);
 	}
 	setTimeout(async () => {
 		document.querySelector('iframe').remove();
@@ -205,12 +216,15 @@ window.addEventListener('message', async function (event) {
 	}
 	if (_ === 'navigate') {
 		navigating = args;
-		const modalClosed = closeModal();
-		if (modalClosed && !args?.src) {
+		const modalShowing = isModalShown();
+		if (modalShowing && !args?.src) {
+			closeModal();
 			navigating = false;
 			return;
 		}
-		navigate(args);
+		navigate(args, {
+			onFade: closeModal,
+		});
 		return;
 	}
 	if (_ === 'loaded') {

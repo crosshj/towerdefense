@@ -4,6 +4,7 @@ import { addNewCharacter } from '../../user/characters.js';
 import { addNewGear } from '../../user/gear.js';
 import { getCollection } from '../../user/getCollection.js';
 import { forceUpdate } from '../../user/user.js';
+import { attachTap } from '/utils/pointerEvents.js';
 
 const pageTitle = 'GACHA';
 const pageDone = () => {
@@ -118,11 +119,32 @@ const showAnimation = async ({ duration }) => {
 	await new Promise((r) => setTimeout(r, duration));
 };
 
+const attachButtons = async ({ params }) => {
+	const okayButton = document.querySelector('.actions .okay');
+	attachTap(okayButton, () => {
+		window.parent.postMessage({
+			_: 'navigate',
+			src: '/pages/gacha/',
+		});
+	});
+	const onceMoreButton = document.querySelector('.actions .onceMore');
+	attachTap(onceMoreButton, () => {
+		const { item, option, cost } = params;
+		const src = `/modals/gachaConfirm/index.html?item=${item}&option=${option}&cost=${cost}`;
+		window.parent.postMessage({
+			_: 'navigate',
+			src,
+		});
+	});
+};
+
 const setup = async () => {
 	const params = Object.fromEntries(
 		new URLSearchParams(window.location.search)
 	);
 	console.log({ params });
+
+	attachButtons({ params });
 
 	const gachaDetails = await getGachaDetails({ params });
 	const characters = (await getCollection()).reduce((a, o) => {

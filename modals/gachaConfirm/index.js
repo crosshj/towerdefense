@@ -29,11 +29,13 @@ const getGachaDetails = async ({ params }) => {
 
 const attachActions = ({ params, elements }) => {
 	elements.actionsCancel.addEventListener('pointerup', () => {
+		elements.confirmContainer.classList.add('hidden');
 		window.parent.postMessage({
 			_: 'navigate',
 		});
 	});
 	elements.actionsOkay.addEventListener('pointerup', () => {
+		elements.confirmContainer.classList.add('hidden');
 		window.parent.postMessage({
 			_: 'navigate',
 			src: `/pages/gacha/results.html?item=${params.item}&option=${params.option}&cost=${params.cost}`,

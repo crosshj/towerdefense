@@ -80,7 +80,7 @@ const attachSlotEvents = ({ slot, update, characters, getCharImage }) => {
 				getCharImage,
 			});
 		}
-		update();
+		update && update();
 	};
 	slotDragAndDrop({ slot, onTap, onDragStart, onDragEnd });
 };
