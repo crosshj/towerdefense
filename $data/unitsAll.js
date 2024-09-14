@@ -238,8 +238,8 @@ export const unitsAll = {
 	},
 	// https://rangers.lerico.net/en/ranger/u22-glenn
 	'u0001-1-benny': {
-		displayName: 'Lava',
-		displayName2: 'Benny',
+		displayName: 'Benny',
+		displayName2: 'Lava',
 		element: 'Fire',
 		type: 'Agility',
 		rank: 1,
