@@ -1,6 +1,9 @@
 import { getCurrentGacha } from '../../$data/gacha.js';
 import { gearAll } from '../../$data/gearAll.js';
+import { addNewCharacter } from '../../user/characters.js';
+import { addNewGear } from '../../user/gear.js';
 import { getCollection } from '../../user/getCollection.js';
+import { forceUpdate } from '../../user/user.js';
 
 const pageTitle = 'GACHA';
 const pageDone = () => {
@@ -18,13 +21,22 @@ const pageDone = () => {
 };
 
 function getRandomItem(items) {
-	const totalProbability = items.reduce(
+	// Shuffle the items array
+	const shuffledItems = items
+		.map((value) => ({ value, sort: Math.random() })) // Add a random sort key
+		.sort((a, b) => a.sort - b.sort) // Sort using the random key
+		.map(({ value }) => value); // Return the original item objects
+
+	// Calculate total probability
+	const totalProbability = shuffledItems.reduce(
 		(sum, item) => sum + item.probability,
 		0
 	);
+
 	let random = Math.random() * totalProbability;
 
-	for (let item of items) {
+	// Select an item based on probability
+	for (let item of shuffledItems) {
 		if (random < item.probability) {
 			return item;
 		}
@@ -46,8 +58,7 @@ const getGachaDetails = async ({ params }) => {
 	};
 };
 
-const getRewards = async ({ params, gear, characters }) => {
-	const gachaDetails = await getGachaDetails({ params });
+const getRewards = async ({ gachaDetails, gear, characters }) => {
 	let { pulls } = gachaDetails.option;
 	pulls = pulls.includes('+')
 		? pulls.split('+').reduce((a, o) => Number(o) + a, 0)
@@ -66,6 +77,23 @@ const getRewards = async ({ params, gear, characters }) => {
 		hydrated.rewardType = rewardType;
 		rewards.push(hydrated);
 	}
+
+	//update data store
+	for (const reward of rewards) {
+		if (reward.rewardType === 'unit') {
+			await addNewCharacter({
+				code: reward.code,
+			});
+		}
+		if (reward.rewardType === 'gear') {
+			await addNewGear({
+				code: reward.code,
+			});
+		}
+	}
+	//TODO: charge the cost to the user
+	await forceUpdate();
+
 	return rewards;
 };
 
@@ -84,10 +112,10 @@ const showResults = async ({ rewards }) => {
 	containerEl.innerHTML = rewards.map(ItemElement).join('\n');
 };
 
-const showAnimation = async () => {
+const showAnimation = async ({ duration }) => {
 	const animatedBackground = document.querySelector('.animatedBackground');
 	animatedBackground.classList.remove('hidden');
-	await new Promise((r) => setTimeout(r, 4000));
+	await new Promise((r) => setTimeout(r, duration));
 };
 
 const setup = async () => {
@@ -95,15 +123,20 @@ const setup = async () => {
 		new URLSearchParams(window.location.search)
 	);
 	console.log({ params });
-	const gear = gearAll;
+
+	const gachaDetails = await getGachaDetails({ params });
 	const characters = (await getCollection()).reduce((a, o) => {
 		return { ...a, [o.code]: o };
 	}, {});
-	const rewards = await getRewards({ params, gear, characters });
+	const rewards = await getRewards({
+		gachaDetails,
+		gear: gearAll,
+		characters,
+	});
 
 	if (params?.skip + '' !== 'true') {
 		pageDone();
-		await showAnimation();
+		await showAnimation({ duration: 3000 });
 		await showResults({ rewards });
 	} else {
 		await showResults({ rewards });

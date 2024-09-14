@@ -37,7 +37,7 @@ body {
 		left: 0;
 		width: 100vw;
 		height: 100vh;
-		background: #506b96;
+		background: linear-gradient(0deg, #98d3e3 65%, #866da7);
 		color: white;
 		display: flex;
 		flex-direction: column;
