@@ -119,6 +119,7 @@ body {
 	overflow-x: hidden;
 	overflow-y: scroll;
 	scrollbar-width: none;
+	pointer-events: none;
 
 	.listItem {
 		height: 50px;
@@ -127,6 +128,10 @@ body {
 		background: #9993;
 		box-sizing: border-box;
 		font-size: 13px;
+		pointer-events: all;
+		& > * {
+			pointer-events: none;
+		}
 		.grade {
 			color: yellow;
 		}
@@ -153,11 +158,23 @@ body {
 	color: white;
 }
 .unitGear {
-	background: #780c8a;
 	right: 59.75vw;
 	top: 39.5vh;
 	width: 27.5vw;
 	height: 19.5vh;
+	flex-direction: row;
+	gap: 10px;
+	padding: 0;
+	pointer-events: none;
+	& > div {
+		pointer-events: all;
+		background: #780c8a;
+		flex: 1;
+		aspect-ratio: 1/1;
+		& > {
+			pointer-events: all;
+		}
+	}
 }
 .unitThumbnail {
 	opacity: 1;

@@ -1,6 +1,7 @@
 import { SVGIcons } from '../../assets/icons.svg.js';
 import { getGear } from '../../user/gear.js';
 import { getCurrentCharCache } from '../../utils/cache.js';
+import { attachTap } from '../../utils/pointerEvents.js';
 
 const pageTitle = 'GEAR';
 
@@ -8,6 +9,22 @@ const icons = {
 	weapon: SVGIcons.sword(),
 	armor: SVGIcons.shield(),
 	accessory: SVGIcons.ring(),
+};
+
+const pageDone = () => {
+	window.parent.postMessage({
+		_: 'stats',
+		feathers: false,
+		gems: true,
+		coins: false,
+		friendPoints: false,
+	});
+	window.parent.postMessage({
+		_: 'title',
+		title: pageTitle,
+		visibility: 'visible',
+	});
+	window.parent.postMessage({ _: 'loaded' });
 };
 
 const attachListSelector = async ({ params, list }) => {
@@ -66,7 +83,7 @@ const attachListSelector = async ({ params, list }) => {
 };
 
 const ListItemComponent = (item) => `
-	<div class="listItem">
+	<div class="listItem" data-code="${item.code}">
 		<div class="icon">
 			<img src="${item.image}" />
 		</div>
@@ -83,6 +100,10 @@ const attachList = async ({ gear }) => {
 		const items = gear.filter((x) => x.type === type);
 		el.innerHTML = items.map(ListItemComponent).join('\n');
 	};
+	attachTap(el, (e) => {
+		console.log(e.target);
+		showModal();
+	});
 	return {
 		update,
 	};
@@ -104,6 +125,27 @@ const attachUnitDetails = async ({ unit }) => {
 	return {};
 };
 
+const showModal = ({ right, left } = {}) => {
+	let src = `/modals/gear/detail/index.html?right=${right}&left=${left}`;
+	window.parent.postMessage({
+		_: 'navigate',
+		src,
+	});
+};
+
+const attachSlots = ({ unitDetails, selector }) => {
+	const unitGearEl = document.querySelector('.unitGear');
+	console.log({ unitDetails, selector });
+	attachTap(unitGearEl, (e) => {
+		const { type } = e.target.dataset;
+		selector.selectTab(type);
+		const slotFilled = true;
+		if (slotFilled) {
+			showModal({ left: 'some-gear-code' });
+		}
+	});
+};
+
 const setup = async () => {
 	document.title = 'TD: ' + pageTitle;
 	const params = Object.fromEntries(
@@ -118,19 +160,9 @@ const setup = async () => {
 	const unit = getCurrentCharCache();
 	const unitDetails = await attachUnitDetails({ unit });
 
-	window.parent.postMessage({
-		_: 'stats',
-		feathers: false,
-		gems: true,
-		coins: false,
-		friendPoints: false,
-	});
-	window.parent.postMessage({
-		_: 'title',
-		title: pageTitle,
-		visibility: 'visible',
-	});
-	window.parent.postMessage({ _: 'loaded' });
+	attachSlots({ unitDetails, selector });
+
+	pageDone();
 };
 
 document.addEventListener('DOMContentLoaded', setup);
