@@ -5,7 +5,7 @@
   preserveAspectRatio="none"
 >
   <defs></defs>
-  <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle">COMMON UNITS</text>
+  <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle">NORMAL UNITS</text>
   <path d="M 52.28 122.262 L 68.018 153.739 L 36.541 153.739 L 52.28 122.262 Z" style="transform-box: fill-box; transform-origin: 50% 50%;" transform="matrix(0, -1, 1, 0, -36.541008, 1.99931)" bx:shape="triangle 36.541 122.262 31.477 31.477 0.5 0 1@8322c695"></path>
   <path d="M 167.624 36.261 L 183.363 67.738 L 151.886 67.738 L 167.624 36.261 Z" style="transform-box: fill-box; transform-origin: 50% 50%;" transform="matrix(0, 1, -1, 0, 286.637005, 88.000687)" bx:shape="triangle 151.886 36.261 31.477 31.477 0.5 0 1@9719eb9f"></path>
 </svg>

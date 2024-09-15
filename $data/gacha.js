@@ -103,20 +103,30 @@ export const getCurrentGacha = async () => {
 				image: '/assets/gacha/units2.svg',
 				imageBg: 'linear-gradient(180deg, yellow, brown)',
 				options: [
-					{ type: 'ticket', pulls: '1', cost: '5' },
-					{ type: 'ruby', pulls: '6+1', cost: '300' },
+					{ type: 'ticket', pulls: '1', cost: '2' },
+					{ type: 'ruby', pulls: '5+1', cost: '100' },
 				],
 			},
-			{
-				id: 'units-common',
-				thumb: '/assets/gacha/units3.thumb.svg',
-				image: '/assets/gacha/units3.svg',
-				imageBg: 'linear-gradient(180deg, green, #4F4)',
-				options: [
-					{ type: 'ticket', pulls: '1', cost: '5' },
-					{ type: 'ruby', pulls: '6+1', cost: '300' },
-				],
-			},
+			// {
+			// 	id: 'units-common',
+			// 	thumb: '/assets/gacha/units3.thumb.svg',
+			// 	image: '/assets/gacha/units3.svg',
+			// 	imageBg: 'linear-gradient(180deg, green, #4F4)',
+			// 	options: [
+			// 		{
+			// 			type: 'friendPoints',
+			// 			pulls: '1',
+			// 			cost: '100',
+			// 			limit: 10,
+			// 		},
+			// 		{
+			// 			type: 'friendPoints',
+			// 			pulls: '5+1',
+			// 			cost: '500',
+			// 			limit: 2,
+			// 		},
+			// 	],
+			// },
 			// {
 			// 	type: 'purple',
 			// 	thumb: '/assets/gacha/units4.thumb.svg',
@@ -148,22 +158,20 @@ export const getCurrentGacha = async () => {
 				thumb: '/assets/gacha/gear2.thumb.svg',
 				image: '/assets/gacha/gear2.svg',
 				imageBg: 'linear-gradient(180deg, yellow, brown)',
-				options: [
-					{ type: 'ticket', pulls: '1', cost: '5' },
-					{ type: 'ruby', pulls: '6+1', cost: '300' },
-				],
+				options: [{ type: 'ruby', pulls: '5+1', cost: '100' }],
 			},
-			{
-				id: 'gear-normal',
-				name: 'NORMAL',
-				thumb: '/assets/gacha/gear3.thumb.svg',
-				image: '/assets/gacha/gear3.svg',
-				imageBg: 'linear-gradient(180deg, green, #4F4)',
-				options: [
-					{ type: 'ticket', pulls: '1', cost: '5' },
-					{ type: 'ruby', pulls: '6+1', cost: '300' },
-				],
-			},
+			// {
+			// 	id: 'gear-normal',
+			// 	name: 'NORMAL',
+			// 	thumb: '/assets/gacha/gear3.thumb.svg',
+			// 	image: '/assets/gacha/gear3.svg',
+			// 	imageBg: 'linear-gradient(180deg, green, #4F4)',
+			// 	options: [
+			// 		{ type: 'friendPoints', pulls: '1', cost: '40' },
+			// 		{ type: 'friendPoints', pulls: '5+1', cost: '200' },
+			// 	],
+			// },
+
 			// {
 			// 	type: 'purple',
 			// 	thumb: '/assets/gacha/gear4.thumb.svg',

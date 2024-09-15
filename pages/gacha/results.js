@@ -3,6 +3,7 @@ import { gearAll } from '../../$data/gearAll.js';
 import { addNewCharacter } from '../../user/characters.js';
 import { addNewGear } from '../../user/gear.js';
 import { getCollection } from '../../user/getCollection.js';
+import { addStats } from '../../user/stats.js';
 import { forceUpdate } from '../../user/user.js';
 import { clone } from '../../utils/utils.js';
 import { attachTap } from '/utils/pointerEvents.js';
@@ -121,7 +122,15 @@ const getRewards = async ({ gachaDetails, gear, characters }) => {
 			await addNewGear(reward);
 		}
 	}
-	//TODO: charge the cost to the user
+
+	const { option } = gachaDetails;
+	if (option.type === 'ruby') {
+		await addStats({ gems: -1 * Number(option.cost) });
+	}
+	if (option.type === 'ticket') {
+		await addStats({ gachaTickets: -1 * Number(option.cost) });
+	}
+
 	await forceUpdate();
 
 	return rewards;

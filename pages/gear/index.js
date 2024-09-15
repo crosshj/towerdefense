@@ -67,7 +67,9 @@ const attachListSelector = async ({ params, list }) => {
 
 const ListItemComponent = (item) => `
 	<div class="listItem">
-		<div class="icon"></div>
+		<div class="icon">
+			<img src="${item.image}" />
+		</div>
 		<div class="details">
 			<div class="grade">${'★'.repeat(item.grade)}</div>
 			<div class="name">${item.name}</div>
