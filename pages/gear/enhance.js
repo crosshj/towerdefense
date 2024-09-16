@@ -72,7 +72,7 @@ const attachGearEnhance = ({ gearToEnhance }) => {
 	const gearSelectedEl = document.querySelector('.gearSelected');
 	const { image, effects, ...rest } = gearToEnhance;
 	gearSelectedEl.innerHTML = `
-		<div>GO BACK - THIS IS WIP!!!</div>
+		<div>GO BACK - THIS IS NOT WORKING YET!!!</div>
 		<img src="${image}" />
 		<div>${JSON.stringify(rest, null, 2)}</div>
 	`;
