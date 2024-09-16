@@ -8,11 +8,11 @@ const drops = {
 		{ code: 'u0001-4-commando5', probability: 1 },
 		{ code: 'u0001-4-commando6', probability: 1 },
 		{ code: 'u0001-4-commando7', probability: 1 },
-		{ code: 'u0001-3-soda', probability: 1 },
 		{ code: 'u0001-4-cupcake', probability: 0.1 },
 		{ code: 'u0001-5-cane', probability: 0.1 },
 	],
 	'units-rare': [
+		{ code: 'u0001-3-soda', probability: 1 },
 		{ code: 'u0001-1-benny', probability: 1 },
 		{ code: 'u0001-4-slabb', probability: 1 },
 		{ code: 'u0001-4-crimson', probability: 1 },
@@ -44,6 +44,7 @@ const drops = {
 		{ code: 'u0001-5-rook', probability: 1 },
 		{ code: 'u0001-5-rookia', probability: 1 },
 		{ code: 'u0001-4-ebony', probability: 1 },
+		{ code: 'u0001-5-pumpee', probability: 1 },
 	],
 	'units-common': [
 		{ code: 'u0001-1-macho', probability: 1 },

@@ -876,7 +876,7 @@ export const unitsAll = {
 		attack: '1,115 - 12,175 - 26,955',
 		hp: '6,691 - 72,735 - 161,019',
 		defense: '60 - 692 - 1,534',
-		range: 60,
+		range: 55 * 10,
 	},
 
 	//
@@ -890,7 +890,7 @@ export const unitsAll = {
 		attack: '1,115 - 12,175 - 26,955',
 		hp: '6,691 - 72,735 - 161,019',
 		defense: '60 - 692 - 1,534',
-		range: 60,
+		range: 50 * 10,
 	},
 
 	//
@@ -904,20 +904,20 @@ export const unitsAll = {
 		attack: '1,115 - 12,175 - 26,955',
 		hp: '6,691 - 72,735 - 161,019',
 		defense: '60 - 692 - 1,534',
-		range: 60,
+		range: 40 * 10,
 	},
 
 	//
-	'u0001-5-pumpkin': {
+	'u0001-5-pumpee': {
 		displayName: 'Pumpee',
 		element: 'Normal',
-		type: 'Agility',
+		type: 'Strength',
 		rank: 5,
 		mineralCost: 150,
 		//orig cost 475
-		attack: '1,115 - 12,175 - 26,955',
-		hp: '6,691 - 72,735 - 161,019',
-		defense: '60 - 692 - 1,534',
-		range: 60,
+		attack: '1,115 - 12,175 - 50,000',
+		hp: '6,691 - 72,735 - 200,000',
+		defense: '60 - 692 - 5,000',
+		range: 50 * 10,
 	},
 };
