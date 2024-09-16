@@ -110,10 +110,15 @@ const attachList = async ({ gear }) => {
 };
 
 const attachUnitDetails = async ({ unit }) => {
+	const unitSelected = document.querySelector('.unitSelected');
+	const unitEmpty = document.querySelector('.unitEmpty');
 	if (!unit) {
-		console.log('TODO: allow unit selection');
+		unitSelected.classList.add('hidden');
+		unitEmpty.classList.remove('hidden');
 		return;
 	}
+	unitEmpty.classList.add('hidden');
+	unitSelected.classList.remove('hidden');
 	const el = document.querySelector('.unitInfo');
 	const thumbEl = document.querySelector('.unitThumbnail');
 	el.innerHTML = `
@@ -146,6 +151,16 @@ const attachSlots = ({ unitDetails, selector }) => {
 	});
 };
 
+const attachUnitSelect = ({} = {}) => {
+	const emptyEl = document.querySelector('.unitEmpty');
+	attachTap(emptyEl, (e) => {
+		window.parent.postMessage({
+			_: 'navigate',
+			src: `/modals/unit/select/index.html`,
+		});
+	});
+};
+
 const setup = async () => {
 	document.title = 'TD: ' + pageTitle;
 	const params = Object.fromEntries(
@@ -161,6 +176,7 @@ const setup = async () => {
 	const unitDetails = await attachUnitDetails({ unit });
 
 	attachSlots({ unitDetails, selector });
+	attachUnitSelect();
 
 	pageDone();
 };

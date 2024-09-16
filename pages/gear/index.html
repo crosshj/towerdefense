@@ -17,13 +17,32 @@
 		</div>
 		<div class="listSelector"></div>
 		<div class="list"></div>
-		<div class="unitInfo"></div>
-		<div class="unitGear">
-			<div class="weapon" data-type="weapon"></div>
-			<div class="armor" data-type="armor"></div>
-			<div class="accessory" data-type="accessory"></div>
+		<div class="unitSelected hidden">
+			<div class="unitInfo"></div>
+			<div class="unitGear">
+				<div class="weapon" data-type="weapon"></div>
+				<div class="armor" data-type="armor"></div>
+				<div class="accessory" data-type="accessory"></div>
+			</div>
+			<div class="unitThumbnail"></div>
 		</div>
-		<div class="unitThumbnail"></div>
+		<div class="unitEmpty hidden">
+			<div class="selectContainer">
+				<div class="message">
+					<div class="line"></div>
+					<div>Select a Unit to equip gear</div>
+					<div class="line"></div>
+				</div>
+				<button>UNIT SELECT</button>
+			</div>
+			<div class="unitOutline">
+				<svg viewBox="0 0 300 300">
+					<path
+						d="M 55.842 102.955 C 55.023 34.845 102.558 10.594 150.528 11.023 C 198.438 11.452 243.661 33.909 244.163 99.379 C 244.621 159.095 219.315 171.417 189.85 181.651 C 190.186 182.05 215.837 205.72 215.837 205.72 C 223.461 215.721 223.121 227.281 215.078 231.541 C 207.503 235.553 195.797 231.658 188.092 222.835 C 188.092 222.835 186.718 237.419 184.359 240.974 L 191.628 263.448 C 195.462 275.302 191.111 286.587 181.911 288.654 C 172.711 290.721 162.146 282.788 158.312 270.935 L 151.875 251.032 L 148.377 251.032 L 141.94 270.936 C 138.107 282.789 127.541 290.722 118.341 288.655 C 109.141 286.588 104.79 275.303 108.624 263.449 L 115.877 241.023 C 113.498 237.459 112.111 225.443 112.111 225.443 C 104.543 232.387 94.45 235.133 87.668 231.541 C 79.626 227.281 79.286 215.721 86.909 205.721 C 86.909 205.721 109.444 184.465 109.783 184.062 C 80.335 173.819 56.525 159.727 55.842 102.955 Z"
+					></path>
+				</svg>
+			</div>
+		</div>
 	</body>
 
 	<script type="module" src="./index.js"></script>
