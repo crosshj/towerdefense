@@ -884,7 +884,7 @@ export const unitsAll = {
 		displayName: 'Commando6',
 		element: 'Normal',
 		type: 'Agility',
-		rank: 5,
+		rank: 4,
 		mineralCost: 150,
 		//orig cost 475
 		attack: '1,115 - 12,175 - 26,955',
@@ -896,6 +896,20 @@ export const unitsAll = {
 	//
 	'u0001-4-commando7': {
 		displayName: 'Commando7',
+		element: 'Normal',
+		type: 'Agility',
+		rank: 4,
+		mineralCost: 150,
+		//orig cost 475
+		attack: '1,115 - 12,175 - 26,955',
+		hp: '6,691 - 72,735 - 161,019',
+		defense: '60 - 692 - 1,534',
+		range: 60,
+	},
+
+	//
+	'u0001-5-pumpkin': {
+		displayName: 'Pumpee',
 		element: 'Normal',
 		type: 'Agility',
 		rank: 5,
