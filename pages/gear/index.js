@@ -1,6 +1,6 @@
 import { SVGIcons } from '../../assets/icons.svg.js';
 import { getGear } from '../../user/gear.js';
-import { getCurrentCharCache } from '../../utils/cache.js';
+import { getCurrentCharCache, setCurrentGearCache } from '../../utils/cache.js';
 import { attachTap } from '../../utils/pointerEvents.js';
 
 const pageTitle = 'GEAR';
@@ -83,7 +83,7 @@ const attachListSelector = async ({ params, list }) => {
 };
 
 const ListItemComponent = (item) => `
-	<div class="listItem" data-code="${item.code}">
+	<div class="listItem" data-code="${item.code}" data-id="${item.id}">
 		<div class="icon">
 			<img src="${item.image}" />
 		</div>
@@ -94,15 +94,28 @@ const ListItemComponent = (item) => `
 	</div>
 `;
 
+const showGearDetailModal = ({ unit, type, gear } = {}) => {
+	gear && setCurrentGearCache(gear);
+	if (unit && !unit?.gear?.[type]) return;
+	window.parent.postMessage({
+		_: 'navigate',
+		src: `/modals/gear/detail/index.html?type=${type}`,
+	});
+};
+
 const attachList = async ({ gear }) => {
 	const el = document.querySelector('.list');
+	let currentType;
 	const update = async (type) => {
+		currentType = type;
 		const items = gear.filter((x) => x.type === type);
 		el.innerHTML = items.map(ListItemComponent).join('\n');
 	};
 	attachTap(el, (e) => {
-		console.log(e.target);
-		showModal();
+		showGearDetailModal({
+			type: currentType,
+			gear: gear.find((x) => x.id === e.target.dataset.id),
+		});
 	});
 	return {
 		update,
@@ -130,24 +143,12 @@ const attachUnitDetails = async ({ unit }) => {
 	return {};
 };
 
-const showModal = ({ right, left } = {}) => {
-	let src = `/modals/gear/detail/index.html?right=${right}&left=${left}`;
-	window.parent.postMessage({
-		_: 'navigate',
-		src,
-	});
-};
-
-const attachSlots = ({ unitDetails, selector }) => {
+const attachSlots = ({ unit, selector }) => {
 	const unitGearEl = document.querySelector('.unitGear');
-	console.log({ unitDetails, selector });
 	attachTap(unitGearEl, (e) => {
 		const { type } = e.target.dataset;
 		selector.selectTab(type);
-		const slotFilled = true;
-		if (slotFilled) {
-			showModal({ left: 'some-gear-code' });
-		}
+		showGearDetailModal({ unit, type });
 	});
 };
 
@@ -168,14 +169,15 @@ const setup = async () => {
 	);
 	console.log({ params });
 
+	const unit = getCurrentCharCache();
+
 	const gear = await getGear();
 	const list = await attachList({ gear });
 	const selector = await attachListSelector({ params, list });
 
-	const unit = getCurrentCharCache();
 	const unitDetails = await attachUnitDetails({ unit });
 
-	attachSlots({ unitDetails, selector });
+	attachSlots({ unit, unitDetails, selector });
 	attachUnitSelect();
 
 	pageDone();

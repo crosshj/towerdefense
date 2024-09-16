@@ -12,13 +12,24 @@
 		<link rel="stylesheet" href="/visuals/stats/stats.css" />
 	</head>
 	<body>
-		<div class="overlay">
+		<div class="overlay detailOverlay">
 			<div class="container">
-				<div class="left">
-					<div class="closeButton">x</div>
+				<div class="left gearDetail hidden"></div>
+				<div class="right gearDetail hidden"></div>
+			</div>
+		</div>
+		<div class="overlay equipOverlay hidden">
+			<div class="confirmContainer dialogBox">
+				<div>Equip the selected gear?</div>
+				<div class="warning">
+					<div>Units keep their</div>
+					<div>gears when</div>
+					<div>evolving. Removing</div>
+					<div>gear costs 1 Ruby.</div>
 				</div>
-				<div class="right">
-					<div class="closeButton">x</div>
+				<div class="actions">
+					<button class="cancel">CANCEL</button>
+					<button class="okay">OKAY</button>
 				</div>
 			</div>
 		</div>

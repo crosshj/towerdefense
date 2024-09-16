@@ -1,5 +1,54 @@
 @import url('https://fonts.googleapis.com/css2?family=Passion+One:wght@400;700;900&display=swap');
 
+:root {
+	--modal-background: #011420;
+	--border-light: #4d4d4d;
+	--border-dark: #2a2a28;
+
+	--enhance-button-light: #fdd610;
+	--enhance-button-dark: #e3b32c;
+	--enhance-button-text: #622600;
+	--level-indicator-light: #bd47f5;
+	--level-indicator-dark: #9110c9;
+	--level-indicator-text: #fff545;
+	--enhance-progress-dark: #081a28;
+	--enhance-progress-light: #0e2734;
+	--enhance-progress-text: #fcea7d;
+	--effects-background: #00353e;
+	--effects-label: #71f1ff;
+	--effects-value: #f8feff;
+	--sell-button-light: #00c031;
+	--sell-button-dark: #009b22;
+	--sell-button-text: #f3f2fd;
+	--equip-button-light: #23aac6;
+	--equip-button-dark: #057186;
+	--equip-button-text: #fffffc;
+	--lock-button-light: #2b4054;
+	--lock-button-dark: #0f1c28;
+	--lock-button-unlocked-light: #2b4054;
+	--lock-button-unlocked-dark: #0f1c28;
+}
+
+button {
+	cursor: pointer;
+	border: 1px solid var(--border-light);
+	border-radius: 7px;
+	text-transform: uppercase;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 8px 12px;
+	padding-bottom: 11px;
+	background: var(--button-light);
+	color: var(--button-text);
+	box-shadow:
+		inset 0 -5px var(--button-dark),
+		inset 0 2px #fff9;
+	font-size: 15px;
+	font-weight: 900;
+	-webkit-tap-highlight-color: transparent;
+}
+
 html,
 body {
 	background-color: transparent;
@@ -32,13 +81,21 @@ body {
 		height: 100%;
 		gap: 20px;
 		& > div {
-			background: grey;
-			border: 2px solid black;
+			color: white;
+			background: var(--modal-background);
+			border: 4px solid var(--border-light);
 			width: 100%;
 			height: 90%;
 			margin-block: auto;
 			border-radius: 10px;
 			position: relative;
+			display: flex;
+			flex-direction: column;
+			gap: 8px;
+			align-items: center;
+			padding: 15px;
+			box-sizing: border-box;
+
 			&.hidden {
 				visibility: hidden;
 			}
@@ -53,11 +110,183 @@ body {
 				height: 30px;
 				border: 2px solid black;
 				border-radius: 50%;
-				background: grey;
+				background: var(--border-light);
 				display: flex;
 				justify-content: center;
 				/* align-items: center; */
 			}
+		}
+
+		.gearDetail {
+			.item-name {
+				width: 100%;
+				font-size: 16px;
+				font-weight: bold;
+				color: white;
+				display: flex;
+				align-items: center;
+				gap: 5px;
+				img {
+					width: 50px;
+					margin-left: 0;
+				}
+				.stars {
+					color: #ffd400;
+					font-size: 0.8em;
+				}
+				.lock {
+					margin-left: auto;
+					width: 40px;
+					aspect-ratio: 1/1;
+					border-radius: 50%;
+					background: var(--lock-button-light);
+				}
+			}
+			.item-stats {
+				display: flex;
+				width: 100%;
+				justify-content: space-between;
+				align-items: center;
+				gap: 10px;
+				.level {
+					color: var(--level-indicator-text);
+					background: linear-gradient(
+						var(--level-indicator-light),
+						var(--level-indicator-dark)
+					);
+					padding: 3px 6px;
+					border-radius: 15px;
+					text-align: center;
+					line-height: 12px;
+					font-weight: 900;
+					text-shadow:
+						0 2px 0px black,
+						0 -2px 0px black,
+						2px 0px 0px black,
+						-2px 0px 0px black;
+					box-sizing: border-box;
+				}
+				.progress-bar {
+					flex: 1;
+					/* background: linear-gradient(
+						var(--enhance-progress-dark),
+						var(--enhance-progress-light)
+					); */
+					background: var(--enhance-progress-light);
+					border-radius: 10px;
+					padding: 3px;
+					height: 11px;
+					line-height: 10px;
+					.progress-text {
+						color: var(--enhance-progress-text);
+						text-align: center;
+						display: block;
+						font-weight: 900;
+						text-shadow:
+							0 2px 0px black,
+							0 -2px 0px black,
+							2px 0px 0px black,
+							-2px 0px 0px black;
+					}
+				}
+				.enhance-button {
+					--button-light: var(--enhance-button-light);
+					--button-dark: var(--enhance-button-dark);
+					--button-text: var(--enhance-button-text);
+					padding-inline: 5px;
+					letter-spacing: -1px;
+					font-size: 0.85em;
+				}
+			}
+			.effects {
+				width: 100%;
+				.item-effect {
+					background-color: var(--effects-background);
+					padding: 10px;
+					border-radius: 5px;
+					margin-bottom: 10px;
+					display: flex;
+					justify-content: space-between;
+
+					.effect-label {
+						color: var(--effects-label);
+					}
+					.effect-value {
+						color: var(--effects-value);
+					}
+				}
+			}
+			.action-buttons {
+				display: flex;
+				gap: 10px;
+				margin-top: auto;
+				.hidden {
+					display: none;
+				}
+				& > button {
+					width: 120px;
+				}
+				.sell-button {
+					--button-light: var(--sell-button-light);
+					--button-dark: var(--sell-button-dark);
+					--button-text: var(--sell-button-text);
+				}
+				.equip-button {
+					--button-light: var(--equip-button-light);
+					--button-dark: var(--equip-button-dark);
+					--button-text: var(--equip-button-text);
+				}
+			}
+		}
+	}
+}
+
+.dialogBox {
+	background: #905527;
+	padding: 2em;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 6px;
+	color: white;
+	border-radius: 10px;
+	box-sizing: border-box;
+	border: 2px solid black;
+}
+
+.confirmContainer {
+	.actions {
+		margin-top: 20px;
+		display: flex;
+		gap: 10px;
+	}
+}
+
+.equipOverlay {
+	&.hidden {
+		display: none;
+	}
+	.dialogBox {
+		width: 325px;
+		font-size: 22px;
+		padding: 30px 40px;
+		padding-bottom: 20px;
+		text-align: center;
+		gap: 15px;
+
+		.warning {
+			color: yellow;
+			font-size: 20px;
+		}
+		.actions .okay {
+			--button-light: var(--sell-button-light);
+			--button-dark: var(--sell-button-dark);
+			--button-text: var(--sell-button-text);
+		}
+		.actions .cancel {
+			--button-light: var(--equip-button-light);
+			--button-dark: var(--equip-button-dark);
+			--button-text: var(--equip-button-text);
 		}
 	}
 }

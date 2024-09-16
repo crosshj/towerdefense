@@ -2,6 +2,7 @@
 const CHARACTER_CACHE_KEY = 'CURRENT_CHAR_DETAIL';
 const OPPONENT_TEAM_CACHE_KEY = 'CURRENT_OPPONENT_TEAM';
 const UNITS_FILTER_CACHE_KEY = 'UNITS_FILTER';
+const GEAR_CACHE_KEY = 'CURRENT_GEAR';
 
 export function setCurrentCharCache(character) {
 	if (typeof character !== 'object') {
@@ -69,4 +70,18 @@ export function getUnitsFilterCache() {
 	);
 	if (!Array.isArray(filter)) return;
 	return filter;
+}
+
+export function setCurrentGearCache(gear) {
+	if (typeof gear !== 'object') {
+		localStorage.removeItem(GEAR_CACHE_KEY);
+		return;
+	}
+	localStorage.setItem(GEAR_CACHE_KEY, JSON.stringify(gear));
+}
+
+export function getCurrentGearCache() {
+	const gear = JSON.parse(localStorage.getItem(GEAR_CACHE_KEY) || 'null');
+	if (typeof gear !== 'object' || gear === null) return;
+	return gear;
 }
