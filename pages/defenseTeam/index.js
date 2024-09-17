@@ -61,6 +61,7 @@ const updateTeam = ({ teamSlots, team, characters }) => {
 const attachTeam = ({ params, characters, defense, opponent }) => {
 	const teamSlots = Array.from(document.querySelectorAll('.slot.team'));
 	let selectedTeam = 'a';
+	if (!defense?.a) return;
 
 	const switchTeam = () => {
 		selectedTeam = selectedTeam === 'a' ? 'b' : 'a';
