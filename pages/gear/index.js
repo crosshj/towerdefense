@@ -1,6 +1,11 @@
 import { SVGIcons } from '../../assets/icons.svg.js';
+import { getCharacters } from '../../user/characters.js';
 import { getGear } from '../../user/gear.js';
-import { getCurrentCharCache, setCurrentGearCache } from '../../utils/cache.js';
+import {
+	getCurrentCharCache,
+	setCurrentCharCache,
+	setCurrentGearCache,
+} from '../../utils/cache.js';
 import { attachTap } from '../../utils/pointerEvents.js';
 
 const pageTitle = 'GEAR';
@@ -65,7 +70,8 @@ const attachListSelector = async ({ params, list }) => {
 
 		newTab.classList.add('selected');
 		selectedText.textContent = type;
-		list.update(type);
+		list.setType(type);
+		list.render();
 	};
 	selectTab(selectedTab);
 
@@ -82,20 +88,35 @@ const attachListSelector = async ({ params, list }) => {
 	};
 };
 
-const ListItemComponent = (item) => `
-	<div class="listItem" data-code="${item.code}" data-id="${item.id}">
-		<div class="icon">
-			<img src="${item.image}" />
-		</div>
-		<div class="details">
-			<div class="grade">${'★'.repeat(item.grade)}</div>
-			<div class="name">${item.name}</div>
-		</div>
-	</div>
-`;
+const ListItemComponent = (allUnits) => {
+	const allUnitsGear = [];
+	for (const unit of allUnits) {
+		if (unit.gearWeapon) allUnitsGear.push(unit.gearWeapon);
+		if (unit.gearArmor) allUnitsGear.push(unit.gearArmor);
+		if (unit.gearAccessory) allUnitsGear.push(unit.gearAccessory);
+	}
+	return (item) => {
+		const itemClasses = ['listItem'];
+		if (allUnitsGear.includes(item.id)) {
+			itemClasses.push('used');
+		}
+		return `
+			<div class="${itemClasses.join(' ')}" data-code="${item.code}" data-id="${item.id}">
+				<div class="icon">
+					<img src="${item.image}" />
+				</div>
+				<div class="details">
+					<div class="grade">${'★'.repeat(item.grade)}</div>
+					<div class="name">${item.name}</div>
+				</div>
+			</div>
+		`;
+	};
+};
 
 const showGearDetailModal = ({ unit, type, gear } = {}) => {
-	gear && setCurrentGearCache(gear);
+	console.log({ unit, type, gear });
+	setCurrentGearCache(gear);
 	if (unit && !unit?.gear?.[type]) return;
 	window.parent.postMessage({
 		_: 'navigate',
@@ -106,10 +127,10 @@ const showGearDetailModal = ({ unit, type, gear } = {}) => {
 const attachList = async ({ gear }) => {
 	const el = document.querySelector('.list');
 	let currentType;
-	const update = async (type) => {
-		currentType = type;
-		const items = gear.filter((x) => x.type === type);
-		el.innerHTML = items.map(ListItemComponent).join('\n');
+	let currentAllUnits;
+	const render = () => {
+		const items = gear.filter((x) => x.type === currentType);
+		el.innerHTML = items.map(ListItemComponent(currentAllUnits)).join('\n');
 	};
 	attachTap(el, (e) => {
 		showGearDetailModal({
@@ -118,7 +139,9 @@ const attachList = async ({ gear }) => {
 		});
 	});
 	return {
-		update,
+		render,
+		setType: (type) => (currentType = type),
+		setAllUnits: (allUnits) => (currentAllUnits = allUnits),
 	};
 };
 
@@ -143,13 +166,34 @@ const attachUnitDetails = async ({ unit }) => {
 	return {};
 };
 
-const attachSlots = ({ unit, selector }) => {
+const attachSlots = ({ gear, selector }) => {
+	let thisUnit;
 	const unitGearEl = document.querySelector('.unitGear');
+	const slots = {
+		weapon: unitGearEl.querySelector('.weapon'),
+		armor: unitGearEl.querySelector('.armor'),
+		accessory: unitGearEl.querySelector('.accessory'),
+	};
 	attachTap(unitGearEl, (e) => {
 		const { type } = e.target.dataset;
 		selector.selectTab(type);
-		showGearDetailModal({ unit, type });
+		showGearDetailModal({
+			unit: thisUnit,
+			type,
+		});
 	});
+	const updateSlots = ({ unit }) => {
+		thisUnit = unit;
+		for (const [slotType, slot] of Object.entries(slots)) {
+			const image = unit?.gear?.[slotType]?.image;
+			if (!image) {
+				slot.innerHTML = '';
+				return;
+			}
+			slot.innerHTML = `<img src='${image}' />`;
+		}
+	};
+	return { updateSlots };
 };
 
 const attachUnitSelect = ({} = {}) => {
@@ -162,6 +206,20 @@ const attachUnitSelect = ({} = {}) => {
 	});
 };
 
+const refreshUnit = async ({ allUnits, gear }) => {
+	const cache = getCurrentCharCache();
+
+	const unit = allUnits.find((x) => x.id === cache.id);
+	unit.gear = {
+		weapon: gear.find((x) => x.id === unit.gearWeapon),
+		armor: gear.find((x) => x.id === unit.gearArmor),
+		accessory: gear.find((x) => x.id === unit.gearAccessory),
+	};
+	unit.imageUri = unit.imageUri || cache.imageUri;
+	setCurrentCharCache(unit);
+	return unit;
+};
+
 const setup = async () => {
 	document.title = 'TD: ' + pageTitle;
 	const params = Object.fromEntries(
@@ -169,16 +227,34 @@ const setup = async () => {
 	);
 	console.log({ params });
 
-	const unit = getCurrentCharCache();
+	let allUnits = await getCharacters(true);
 
 	const gear = await getGear();
+	let unit = await refreshUnit({ allUnits, gear });
+
 	const list = await attachList({ gear });
+	list.setAllUnits(allUnits);
+
 	const selector = await attachListSelector({ params, list });
 
-	const unitDetails = await attachUnitDetails({ unit });
+	await attachUnitDetails({ unit });
 
-	attachSlots({ unit, unitDetails, selector });
+	const slots = attachSlots({ gear, selector });
 	attachUnitSelect();
+
+	slots.updateSlots({ unit, gear });
+
+	window.addEventListener('message', async (event) => {
+		const { _, ...args } = event.data;
+		if (_ === 'broadcastGearChanged') {
+			allUnits = await getCharacters(true);
+			unit = await refreshUnit({ allUnits, gear });
+			list.setAllUnits({ allUnits });
+			list.render();
+			slots.updateSlots({ unit });
+			return;
+		}
+	});
 
 	pageDone();
 };

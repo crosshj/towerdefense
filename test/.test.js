@@ -1,25 +1,54 @@
 export function expect(actual) {
 	return {
 		toBe(expected) {
-			return actual === expected;
+			if (actual === expected) {
+				return true;
+			} else {
+				console.error(`Expected ${actual} to be ${expected}`);
+				return false;
+			}
 		},
 		not: {
 			toBe(expected) {
-				return actual !== expected;
+				if (actual !== expected) {
+					return true;
+				} else {
+					console.error(`Expected ${actual} not to be ${expected}`);
+					return false;
+				}
 			},
 		},
 	};
 }
 
 export function it(description, testFunction) {
-	const result = testFunction ? testFunction({ expect }) : undefined;
-	return {
-		description,
-		result,
-		skip: false,
-		todo: false,
-		only: false,
+	const isAsync = testFunction.constructor.name === 'AsyncFunction';
+
+	const runTest = async () => {
+		try {
+			const result = isAsync
+				? await testFunction({ expect })
+				: testFunction({ expect });
+			return {
+				description,
+				result,
+				skip: false,
+				todo: false,
+				only: false,
+			};
+		} catch (error) {
+			console.error(`Test failed: ${description}`, error);
+			return {
+				description,
+				result: false,
+				skip: false,
+				todo: false,
+				only: false,
+			};
+		}
 	};
+
+	return isAsync ? runTest() : runTest();
 }
 
 it.todo = function (description) {
@@ -43,13 +72,33 @@ it.skip = function (description, testFunction) {
 };
 
 it.only = function (description, testFunction) {
-	return {
-		description,
-		testFunction,
-		only: true,
-		skip: false,
-		todo: false,
+	const isAsync = testFunction.constructor.name === 'AsyncFunction';
+
+	const runTest = async () => {
+		try {
+			const result = isAsync
+				? await testFunction({ expect })
+				: testFunction({ expect });
+			return {
+				description,
+				result,
+				skip: false,
+				todo: false,
+				only: true,
+			};
+		} catch (error) {
+			console.error(`Test failed: ${description}`, error);
+			return {
+				description,
+				result: false,
+				skip: false,
+				todo: false,
+				only: true,
+			};
+		}
 	};
+
+	return isAsync ? runTest() : runTest();
 };
 
 export const xit = it.skip;
@@ -68,14 +117,17 @@ export function describe(suiteName, suiteFunction) {
 
 	const boundIt = (description, testFunction) => {
 		const test = it(description, testFunction);
-		if (test.only) {
-			onlyTests.push(test);
-		} else {
+		if (test instanceof Promise) {
 			testResults.push(test);
+		} else {
+			if (test.only) {
+				onlyTests.push(test);
+			} else {
+				testResults.push(test);
+			}
 		}
 	};
 
-	// Bind properties to boundIt
 	boundIt.todo = function (description) {
 		testResults.push(it.todo(description));
 	};
@@ -83,7 +135,12 @@ export function describe(suiteName, suiteFunction) {
 		testResults.push(it.skip(description, testFunction));
 	};
 	boundIt.only = function (description, testFunction) {
-		onlyTests.push(it.only(description, testFunction));
+		const test = it.only(description, testFunction);
+		if (test instanceof Promise) {
+			onlyTests.push(test);
+		} else {
+			onlyTests.push(it.only(description, testFunction));
+		}
 	};
 	boundIt.xit = function (description, testFunction) {
 		testResults.push(it.skip(description, testFunction));
@@ -91,24 +148,28 @@ export function describe(suiteName, suiteFunction) {
 
 	suiteFunction(boundIt);
 
-	// Handle only tests
 	const finalTestResults = onlyTests.length > 0 ? onlyTests : testResults;
 
-	const resultsDiv = document.getElementById(`results-${suiteName}`);
+	Promise.all(finalTestResults).then((resolvedTestResults) => {
+		const resultsDiv = document.getElementById(`results-${suiteName}`);
 
-	finalTestResults.forEach((test) => {
-		const testCase = document.createElement('div');
-		if (test.todo) {
-			testCase.classList.add('test-case', 'todo');
-			testCase.innerHTML = `<strong>TODO: ${test.description}</strong>`;
-		} else if (test.skip) {
-			testCase.classList.add('test-case', 'skip');
-			testCase.innerHTML = `<strong>SKIP: ${test.description}</strong>`;
-		} else {
-			testCase.classList.add('test-case', test.result ? 'pass' : 'fail');
-			testCase.innerHTML = `<strong>${test.description}</strong>`;
-		}
-		resultsDiv.appendChild(testCase);
+		resolvedTestResults.forEach((test) => {
+			const testCase = document.createElement('div');
+			if (test.todo) {
+				testCase.classList.add('test-case', 'todo');
+				testCase.innerHTML = `<strong>TODO: ${test.description}</strong>`;
+			} else if (test.skip) {
+				testCase.classList.add('test-case', 'skip');
+				testCase.innerHTML = `<strong>SKIP: ${test.description}</strong>`;
+			} else {
+				testCase.classList.add(
+					'test-case',
+					test.result ? 'pass' : 'fail'
+				);
+				testCase.innerHTML = `<strong>${test.description}</strong>`;
+			}
+			resultsDiv.appendChild(testCase);
+		});
 	});
 }
 

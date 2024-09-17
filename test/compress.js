@@ -63,13 +63,13 @@ describe('Compress Gear', (it) => {
 
 	it('should compress gear', ({ expect }) => {
 		const compressed = compressGear(gear1);
-		console.log(compressed, gearCompressed1);
+		//console.log(compressed, gearCompressed1);
 		return expect(compressed).toBe(gearCompressed1);
 	});
 
 	it('should decompress gear', ({ expect }) => {
 		const gear = deCompressGear(gearCompressed1);
-		console.log(gear);
+		//console.log(gear);
 		return expect(gear?.[0]?.effects?.physicalAttack).toBe(600);
 	});
 });

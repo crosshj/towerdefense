@@ -1,3 +1,4 @@
+import { assignGearToUnit } from '../../../user/gear.js';
 import {
 	getCurrentCharCache,
 	getCurrentGearCache,
@@ -11,7 +12,6 @@ const friendlyEffectName = (name) => {
 		physicalAttack: 'Physical ATK',
 		hp: 'HP',
 	};
-	console.log(name);
 	return friendlyMap[name] || name;
 };
 
@@ -58,7 +58,7 @@ const GearDetail = (gear, { sell, equip } = {}) => {
 	</div>
 `;
 };
-const attachButtons = () => {
+const attachButtons = ({ equipGear }) => {
 	const closeButtons = document.querySelectorAll('.closeButton');
 	for (const button of closeButtons) {
 		attachTap(button, () => {
@@ -69,12 +69,7 @@ const attachButtons = () => {
 	}
 	const equipOverlay = document.querySelector('.equipOverlay');
 	const equipOkay = document.querySelector('.equipOverlay .okay');
-	attachTap(equipOkay, () => {
-		console.log('TODO: equip');
-		window.parent.postMessage({
-			_: 'navigate',
-		});
-	});
+	attachTap(equipOkay, equipGear);
 	const equipCancel = document.querySelector('.equipOverlay .cancel');
 	attachTap(equipCancel, () => {
 		equipOverlay.classList.add('hidden');
@@ -127,8 +122,22 @@ const domLoaded = async () => {
 	const unit = getCurrentCharCache();
 	const gear = getCurrentGearCache();
 
+	const equipGear = async () => {
+		const { error } = await assignGearToUnit(gear.id, unit.id);
+		if (error) {
+			console.log({ error });
+			return;
+		}
+		window.parent.postMessage({
+			_: 'broadcastGearChanged',
+		});
+		window.parent.postMessage({
+			_: 'navigate',
+		});
+	};
+
 	attachLeft({ params, unit, gear });
 	attachRight({ params, unit, gear });
-	attachButtons();
+	attachButtons({ equipGear });
 };
 document.addEventListener('DOMContentLoaded', domLoaded);

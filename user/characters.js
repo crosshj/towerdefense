@@ -61,6 +61,15 @@ export const getCharacters = async (hydrate = true) => {
 	return hydratedCharacters;
 };
 
+export const updateAllChars = async (allChars, _apiUser) => {
+	const apiUser = _apiUser || (await getUserFromAPI());
+	await updateUserFromAPI({
+		...(apiUser?.data || {}),
+		characters: compressChars(allChars),
+	});
+	localStorage.setItem(LS_NAME, JSON.stringify(allChars));
+};
+
 // level is complete, give characters exp
 export const addCharactersEXP = async (chars, expAmount) => {
 	const prevTeams = await getTeams();
@@ -77,13 +86,7 @@ export const addCharactersEXP = async (chars, expAmount) => {
 		//TODO: cap experience based on stars
 	}
 
-	const apiUser = await getUserFromAPI();
-	await updateUserFromAPI({
-		...(apiUser?.data || {}),
-		characters: compressChars(allChars),
-	});
-
-	localStorage.setItem(LS_NAME, JSON.stringify(allChars));
+	await updateAllChars(allChars);
 };
 
 // player gets a character as a reward

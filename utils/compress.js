@@ -67,19 +67,26 @@ export const compressChars = (lsCharacters, baseLength = 36) => {
 			);
 			const exp = encode(Math.floor((char.experience || 0) / 100));
 			const uncapped = char.uncapped || char.uncappedLevel || 0;
-			const gear1 = encode(char.gear1);
-			const gear2 = encode(char.gear2);
-			const gear3 = encode(char.gear3);
+			const gearWeapon = char.gearWeapon
+				? encode(char.gearWeapon.replace('-localid', ''))
+				: '';
+			const gearArmor = char.gearArmor
+				? encode(char.gearArmor.replace('-localid', ''))
+				: '';
+			const gearAccessory = char.gearAccessory
+				? encode(char.gearAccessory.replace('-localid', ''))
+				: '';
 			const profPoints = encode(char.professorPoints || 1);
 			const locked = char.locked === true ? 1 : 0;
+
 			return [
 				char.uuid || encode(i),
 				unitsIndex,
 				exp,
 				uncapped,
-				gear1,
-				gear2,
-				gear3,
+				gearWeapon,
+				gearArmor,
+				gearAccessory,
 				profPoints,
 				locked,
 			].join(',');
@@ -92,6 +99,7 @@ export const decompressChars = (compedString) => {
 	if (!compedString || typeof compedString !== 'string') {
 		return [];
 	}
+
 	const [compressedData, charSet] = compedString.split('-----');
 	const characterSet = charSet.trim().split('');
 	const decode = (str) => decodeNumber(str, characterSet);
@@ -103,21 +111,32 @@ export const decompressChars = (compedString) => {
 			unitsIndex,
 			exp,
 			uncapped,
-			gear1,
-			gear2,
-			gear3,
+			_gearWeapon,
+			_gearArmor,
+			_gearAccessory,
 			profPoints,
 			locked = 0,
 		] = line.split(',');
+
+		const gearWeapon = _gearWeapon
+			? decode(_gearWeapon) + '-localid'
+			: undefined;
+		const gearArmor = _gearArmor
+			? decode(_gearArmor) + '-localid'
+			: undefined;
+		const gearAccessory = _gearAccessory
+			? decode(_gearAccessory) + '-localid'
+			: undefined;
+
 		return {
 			index,
 			id: i + '-localid',
 			code: Object.keys(unitsAll)[decode(unitsIndex)],
 			experience: decode(exp) * 100,
 			uncappedLevel: Number(uncapped),
-			gear1: decode(gear1),
-			gear2: decode(gear2),
-			gear3: decode(gear3),
+			gearWeapon,
+			gearArmor,
+			gearAccessory,
 			professorPoints: profPoints ? decode(profPoints) : 1,
 			locked: locked + '' === '1' ? true : false,
 		};

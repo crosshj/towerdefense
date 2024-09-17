@@ -1,4 +1,9 @@
-import { compressGear, deCompressGear } from '../utils/compress.js';
+import {
+	compressGear,
+	decompressChars,
+	deCompressGear,
+} from '../utils/compress.js';
+import { updateAllChars } from './characters.js';
 import { getUserFromAPI, updateUserFromAPI } from './user.js';
 
 export const getGear = async (_apiUser) => {
@@ -23,6 +28,29 @@ export const addNewGear = async (gear) => {
 };
 
 export const assignGearToUnit = async (gearId, unitId) => {
-	const apiUser = await getUserFromAPI();
-	console.log(gearId, unitId, apiUser);
+	try {
+		const apiUser = await getUserFromAPI();
+		const allUnits = decompressChars(apiUser.data.characters);
+		const allGear = deCompressGear(apiUser.data.gear);
+
+		const gear = allGear.find((x) => x.id === gearId);
+		const unit = allUnits.find((x) => x.id === unitId);
+
+		if (!gear) throw new Error('cannot find gear');
+		if (!unit) throw new Error('cannot find unit');
+
+		if (gear.type === 'accessory') {
+			unit.gearAccessory = gear.id;
+		}
+		if (gear.type === 'armor') {
+			unit.gearArmor = gear.id;
+		}
+		if (gear.type === 'weapon') {
+			unit.gearWeapon = gear.id;
+		}
+		await updateAllChars(allUnits, apiUser);
+		return { error: false };
+	} catch (e) {
+		return { error: e.message };
+	}
 };
