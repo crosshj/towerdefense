@@ -1,13 +1,13 @@
 ### Current
 
--   [ ] implement unit thumbnails cache
--   [ ] effects show up (or not) if selected (or not) in game setup
--   [ ] settings/game/resource check - manual resource cache update
--   [ ] fix issues with unit leveling on some units
--   [ ] make unit stats mean something in-game
--   [ ] remove character from team
--   [ ] re-order team
--   [ ] implement gear + basic gacha
+-   [x] implement unit thumbnails cache
+-   [x] effects show up (or not) if selected (or not) in game setup
+-   [x] settings/game/resource check - manual resource cache update
+-   [x] fix issues with unit leveling on some units
+-   [x] make unit stats mean something in-game
+-   [x] remove character from team
+-   [x] re-order team
+-   [x] implement gear + basic gacha
 -   [ ] evolve some character (Liz)
 
 ### Backlog
