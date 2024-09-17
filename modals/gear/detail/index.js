@@ -109,7 +109,7 @@ const attachRight = ({ params, unit, gear }) => {
 	const rightPane = document.querySelector('.container .right');
 	rightPane.classList.remove('hidden');
 	const sell = false;
-	const equip = true;
+	const equip = params?.isUsed + '' !== 'true';
 	rightPane.innerHTML = GearDetail(gear, { sell, equip });
 };
 

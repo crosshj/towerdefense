@@ -90,10 +90,10 @@ const attachListSelector = async ({ params, list }) => {
 
 const ListItemComponent = (allUnits) => {
 	const allUnitsGear = [];
-	for (const unit of allUnits) {
-		if (unit.gearWeapon) allUnitsGear.push(unit.gearWeapon);
-		if (unit.gearArmor) allUnitsGear.push(unit.gearArmor);
-		if (unit.gearAccessory) allUnitsGear.push(unit.gearAccessory);
+	for (const { gear } of allUnits) {
+		if (gear.weapon) allUnitsGear.push(gear.weapon.id);
+		if (gear.armor) allUnitsGear.push(gear.armor.id);
+		if (gear.accessory) allUnitsGear.push(gear.accessory.id);
 	}
 	return (item) => {
 		const itemClasses = ['listItem'];
@@ -114,13 +114,12 @@ const ListItemComponent = (allUnits) => {
 	};
 };
 
-const showGearDetailModal = ({ unit, type, gear } = {}) => {
-	console.log({ unit, type, gear });
+const showGearDetailModal = ({ unit, type, gear, isUsed } = {}) => {
 	setCurrentGearCache(gear);
 	if (unit && !unit?.gear?.[type]) return;
 	window.parent.postMessage({
 		_: 'navigate',
-		src: `/modals/gear/detail/index.html?type=${type}`,
+		src: `/modals/gear/detail/index.html?type=${type}&isUsed=${isUsed}`,
 	});
 };
 
@@ -130,12 +129,15 @@ const attachList = async ({ gear }) => {
 	let currentAllUnits;
 	const render = () => {
 		const items = gear.filter((x) => x.type === currentType);
-		el.innerHTML = items.map(ListItemComponent(currentAllUnits)).join('\n');
+		const listRender = ListItemComponent(currentAllUnits);
+		el.innerHTML = items.map(listRender).join('\n');
 	};
 	attachTap(el, (e) => {
+		console.log(e.target);
 		showGearDetailModal({
 			type: currentType,
 			gear: gear.find((x) => x.id === e.target.dataset.id),
+			isUsed: e.target.classList.contains('used'),
 		});
 	});
 	return {
@@ -206,15 +208,10 @@ const attachUnitSelect = ({} = {}) => {
 	});
 };
 
-const refreshUnit = async ({ allUnits, gear }) => {
+const refreshUnit = async ({ allUnits }) => {
 	const cache = getCurrentCharCache();
-
-	const unit = allUnits.find((x) => x.id === cache.id);
-	unit.gear = {
-		weapon: gear.find((x) => x.id === unit.gearWeapon),
-		armor: gear.find((x) => x.id === unit.gearArmor),
-		accessory: gear.find((x) => x.id === unit.gearAccessory),
-	};
+	const unit = cache?.id && allUnits.find((x) => x.id === cache?.id);
+	if (!unit) return cache;
 	unit.imageUri = unit.imageUri || cache.imageUri;
 	setCurrentCharCache(unit);
 	return unit;
@@ -248,8 +245,8 @@ const setup = async () => {
 		const { _, ...args } = event.data;
 		if (_ === 'broadcastGearChanged') {
 			allUnits = await getCharacters(true);
-			unit = await refreshUnit({ allUnits, gear });
-			list.setAllUnits({ allUnits });
+			unit = await refreshUnit({ allUnits });
+			list.setAllUnits(allUnits);
 			list.render();
 			slots.updateSlots({ unit });
 			return;

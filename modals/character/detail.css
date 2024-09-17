@@ -362,6 +362,10 @@ body {
 						color: yellow;
 						font-size: 28px;
 					}
+					img {
+						width: 80%;
+						pointer-events: none;
+					}
 				}
 				.more {
 					max-width: 29px;

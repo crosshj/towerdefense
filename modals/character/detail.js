@@ -235,6 +235,19 @@ const attachLock = ({ element, character }) => {
 	});
 };
 
+const attachGear = ({ character, nodeTree }) => {
+	const { gear: gearEl } = nodeTree.container.content.left;
+	const { gear: unitGear } = character;
+
+	for (const [eqType, eq] of Object.entries(unitGear)) {
+		if (!eq) continue;
+		gearEl[eqType].classList.add('filled');
+		gearEl[eqType].innerHTML = `
+			<img src="${eq.image}" />
+		`;
+	}
+};
+
 document.addEventListener('DOMContentLoaded', async () => {
 	const params = Object.fromEntries(
 		new URLSearchParams(window.location.search)
@@ -251,6 +264,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 		character: cachedChar,
 		element: nodeTree.container.content.right.actions.lock,
 	});
+	attachGear({ character: cachedChar, nodeTree });
 	await updateValues({
 		character: cachedChar,
 		nodeTree,

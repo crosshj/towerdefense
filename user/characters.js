@@ -17,6 +17,7 @@ import {
 	hydrateCharacters,
 } from '../utils/units.js';
 import { getStats } from './stats.js';
+import { getGear } from './gear.js';
 
 const LS_NAME = 'USER_CHARACTERS';
 const LS_NAME_TEAMS = 'USER_TEAMS';
@@ -49,6 +50,17 @@ export const getCharacters = async (hydrate = true) => {
 	const apiUser = await getUserFromAPI();
 	if (apiUser && apiUser.data.characters) {
 		const decomp = decompressChars(apiUser.data.characters);
+		const allGear = await getGear();
+		for (const unit of decomp) {
+			unit.gear = {
+				weapon: allGear.find((x) => x.id === unit.gearWeapon),
+				armor: allGear.find((x) => x.id === unit.gearArmor),
+				accessory: allGear.find((x) => x.id === unit.gearAccessory),
+			};
+			delete unit.gearArmor;
+			delete unit.gearAccessory;
+			delete unit.gearWeapon;
+		}
 		localStorage.setItem(LS_NAME, JSON.stringify(decomp));
 		characters = decomp;
 		// console.log({ apiUser, charactersFromApi: decomp });
