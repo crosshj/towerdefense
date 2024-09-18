@@ -934,7 +934,6 @@ export const unitsAll = {
 		range: 50 * 10,
 	},
 
-	/*
 	'u0001-5-boowee': {
 		displayName: 'Boowee',
 		element: 'Normal',
@@ -947,5 +946,4 @@ export const unitsAll = {
 		defense: '60 - 692 - 5,000',
 		range: 50 * 10,
 	},
-	*/
 };
