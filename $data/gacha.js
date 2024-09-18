@@ -45,6 +45,9 @@ const drops = {
 		{ code: 'u0001-5-rookia', probability: 1 },
 		{ code: 'u0001-4-ebony', probability: 1 },
 		{ code: 'u0001-5-pumpee', probability: 1 },
+		{ code: 'u0001-5-kor', probability: 1 },
+		{ code: 'u0001-5-bowee', probability: 1 },
+		{ code: 'u0001-5-mumay', probability: 1 },
 	],
 	'units-common': [
 		{ code: 'u0001-1-macho', probability: 1 },
