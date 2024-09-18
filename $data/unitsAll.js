@@ -920,4 +920,32 @@ export const unitsAll = {
 		defense: '60 - 692 - 5,000',
 		range: 50 * 10,
 	},
+
+	'u0001-5-kor': {
+		displayName: 'Kor',
+		element: 'Normal',
+		type: 'Intelligence',
+		rank: 5,
+		mineralCost: 150,
+		//orig cost 475
+		attack: '1,115 - 12,175 - 50,000',
+		hp: '6,691 - 72,735 - 200,000',
+		defense: '60 - 692 - 5,000',
+		range: 50 * 10,
+	},
+
+	/*
+	'u0001-5-boowee': {
+		displayName: 'Boowee',
+		element: 'Normal',
+		type: 'Intelligence',
+		rank: 5,
+		mineralCost: 150,
+		//orig cost 475
+		attack: '1,115 - 12,175 - 50,000',
+		hp: '6,691 - 72,735 - 200,000',
+		defense: '60 - 692 - 5,000',
+		range: 50 * 10,
+	},
+	*/
 };
