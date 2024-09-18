@@ -100,17 +100,32 @@ const getRewards = async ({ gachaDetails, gear, characters }) => {
 		? 'gear'
 		: 'unit';
 	const rewards = [];
+	const getPull = () => {
+		try {
+			const randomItem = getRandomItem(gachaDetails.drops);
+			const hydrated =
+				rewardType === 'gear'
+					? GearInstance({
+							...gear[randomItem.code],
+							code: randomItem.code,
+						})
+					: characters[randomItem.code];
+			if (!hydrated) {
+				throw new Error(
+					`${randomItem?.code} has a problem!`,
+					randomItem
+				);
+			}
+			hydrated.rewardType = rewardType;
+			return hydrated;
+		} catch (e) {
+			console.log(e);
+			return getPull();
+		}
+	};
 	for (const _pull of new Array(pulls)) {
-		const randomItem = getRandomItem(gachaDetails.drops);
-		const hydrated =
-			rewardType === 'gear'
-				? GearInstance({
-						...gear[randomItem.code],
-						code: randomItem.code,
-					})
-				: characters[randomItem.code];
-		hydrated.rewardType = rewardType;
-		rewards.push(hydrated);
+		const result = getPull();
+		rewards.push(result);
 	}
 
 	//update data store
