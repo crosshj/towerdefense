@@ -52,6 +52,7 @@ const drops = {
 		{ code: 'u0001-5-stain', probability: 1 },
 		{ code: 'u0001-5-gretchen', probability: 1 },
 		{ code: 'u0001-5-glinda', probability: 1 },
+		{ code: 'u0001-5-jack', probability: 1 },
 	],
 	'units-common': [
 		{ code: 'u0001-1-macho', probability: 1 },
