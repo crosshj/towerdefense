@@ -996,4 +996,16 @@ export const unitsAll = {
 		range: 50 * 10,
 	},
 
+	'u0001-5-glinda': {
+		displayName: 'Glinda',
+		element: 'Dark',
+		type: 'Strength',
+		rank: 5,
+		mineralCost: 150,
+		attack: '1,115 - 12,175 - 50,000',
+		hp: '6,691 - 72,735 - 200,000',
+		defense: '60 - 692 - 5,000',
+		range: 50 * 10,
+	},
+
 };
