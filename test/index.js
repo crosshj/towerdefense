@@ -1,4 +1,6 @@
 const links = [
+	{ href: '/assets/stage/main/background.html', label: 'Main Map' },
+	{ href: '/assets/stage/candy/background.html', label: 'Candy Map' },
 	{ href: 'characters/index.html', label: 'Characters Animation Test' },
 	{ href: 'characters/sprites/index.html', label: 'Sprites Tool' },
 	{ href: 'characters/dragonbones/index.html', label: 'DragonBones Tool' },
