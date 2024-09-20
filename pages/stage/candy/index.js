@@ -150,10 +150,10 @@ const setup = async () => {
 
 	const bg = await canvasVertical({
 		parent: document.body,
-		image: '/pages/stage/candy/background.png',
+		image: '/assets/stage/candy/background.png',
 		width: 950,
 		scrollBottom: 0,
-		clickMap: '/pages/stage/candy/background_clicks.png',
+		clickMap: '/assets/stage/candy/background_clicks.png',
 		clickHandle: (color) => {
 			const [which, number] = (clickColorMap[color] || '').split('-');
 			if (!which) return;

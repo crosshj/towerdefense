@@ -148,12 +148,13 @@ const setup = async () => {
 
 	const offsetY = localStorage.getItem('MAIN_SCROLL') || undefined;
 
+	//../../../assets/main/logo.svg
 	const bg = await canvasVertical({
 		parent: document.body,
-		image: '/pages/stage/main/background.png',
+		image: '/assets/stage/main/background.png',
 		width: 950,
 		scrollBottom: 0,
-		clickMap: '/pages/stage/main/background_clicks.png',
+		clickMap: '/assets/stage/main/background_clicks.png',
 		clickHandle: (color) => {
 			const [which, number] = (clickColorMap[color] || '').split('-');
 			if (!which) return;
