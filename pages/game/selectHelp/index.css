@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Passion+One:wght@400;700;900&display=swap');
+@import url('/vendor/google.fonts.css');
 
 :root {
 	--rows: 13% 13% 58% 1fr;
