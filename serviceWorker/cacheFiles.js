@@ -158,6 +158,35 @@ export const clearCache = async () => {
 	}
 };
 
+const cleanupCachedFiles = async (cache, filesToCache) => {
+	const cachedRequests = await cache.keys();
+	const cachedUrls = cachedRequests.map(
+		(request) => new URL(request.url).pathname
+	);
+	const filesToDelete = cachedUrls.filter(
+		(url) => !filesToCache.includes(url)
+	);
+	const ignoreFiles = ['/version', '/hash'];
+	const deletedFiles = [];
+	for (let i = 0; i < filesToDelete.length; i++) {
+		try {
+			if (ignoreFiles.includes(filesToDelete[i])) {
+				continue;
+			}
+			await cache.delete(filesToDelete[i]);
+			deletedFiles.push(filesToDelete[i]);
+		} catch (error) {
+			console.error(
+				`Failed to delete ${filesToDelete[i]}: ${error.message}`
+			);
+		}
+	}
+	if (deletedFiles.length) {
+		console.log(`Deleted ${deletedFiles.length} files from cache`);
+		console.log({ deletedFiles });
+	}
+};
+
 export const cacheFiles = async (event) => {
 	// maybe get this from the event?`
 	const CACHE_KEY = 'dynamic-cache-v1';
@@ -180,9 +209,8 @@ export const cacheFiles = async (event) => {
 		files,
 		meta,
 	});
-	console.log({ filesToRefresh });
+	filesToRefresh?.length && console.log({ filesToRefresh });
 
-	// maybe caches from other installs should be invalidated?
 	const cache = await caches.open(CACHE_KEY);
 	let cachedCount = 0;
 
@@ -225,6 +253,8 @@ export const cacheFiles = async (event) => {
 			);
 		}
 	}
+	await cleanupCachedFiles(cache, filesToCache);
+
 	// unstuck yourself, but WARNING some files were not cached!
 	if (failedToCache.length) {
 		console.log(failedToCache);

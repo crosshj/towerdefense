@@ -40,7 +40,7 @@ const exceptions = [
 	'*.bak.png',
 	'*.md',
 	'__depends.js',
-	'_depends.js',
+	'gem50.png',
 	//
 ];
 const dirSubstitutions = {

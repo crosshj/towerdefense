@@ -1,7 +1,7 @@
 /* 
 This file is auto-generated; do not edit manually.
 To regenerate, run 'node generateDepends.js'.
-Generated at: 2024-09-25T23:02:59.957Z
+Generated at: 2024-09-25T23:25:53.476Z
 */
 
 const getDepends = () => {
@@ -23,9 +23,9 @@ const getDepends = () => {
 export default getDepends;
 
 export const getDependsMeta = () => ({
-  generatedAt: '2024-09-25T23:02:59.957Z',
-  filesLength: 539,
-  hash: 'fa42f90d552d93e32181d8e824dca22d71864d8ff31f4dd34bbf862a5ea8398a'
+  generatedAt: '2024-09-25T23:25:53.476Z',
+  filesLength: 537,
+  hash: '36503b6134bb39331ac93025d9a96af2d44e3b316d1feac4dec444c22721600e'
 });
 
 const dirSubstitutions = {
@@ -39,7 +39,6 @@ const fileHashes = {
   "/$data/enemies.js": "973c8e2f9273ad20",
   "/$data/gacha.js": "e2312c31dacb43fa",
   "/$data/gearAll.js": "84d232a24aa9e030",
-  "/$data/testdata.js": "450f0af4f4c1ecc4",
   "/$data/unitsAll.js": "3dbc5c16eca02636",
   "/account/login/index.css": "b0d79f11e2b5cf88",
   "/account/login/index.html": "546d3cba9e4248cb",
@@ -53,8 +52,8 @@ const fileHashes = {
   "/assets/Screenshot1-Pixel7.png": "63e7005c02879306",
   "/assets/audio/AsianScene.wav": "9130eef59b3c4cf9",
   "/assets/audio/EtherealTraverse.wav": "005f875a60dc2b45",
-  "/assets/audio/Sunny Stroll remix v1.mp3": "07c6aa41637f6ab1",
   "/assets/audio/SunnyField.wav": "6ecb1f91e587b6a9",
+  "/assets/audio/SunnyStrollRemix.v1.mp3": "07c6aa41637f6ab1",
   "/assets/audio/SunsetWaves.mp3": "d2bacecca36dde43",
   "/assets/audio/TropicalShadows.wav": "7674be6bcf65b2ea",
   "/assets/audio/coreSounds.wav": "3260d39dd0700020",
@@ -209,7 +208,6 @@ const fileHashes = {
   "/assets/gear/eq_acc_0101_icon.png": "a1e510612a20f207",
   "/assets/gear/eq_amr_0061_icon.png": "4135319303fb5810",
   "/assets/gear/eq_wpn_0001_icon.png": "959a0886f5676233",
-  "/assets/gem50.png": "dacd4a0e2e5d9d71",
   "/assets/home/NEWTRY_background.png": "cda0d51717ede41c",
   "/assets/home/background.png": "4dc5cdc3f7f92730",
   "/assets/home/background_clicks.png": "c01fd7fe54fe1951",
