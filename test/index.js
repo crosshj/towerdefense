@@ -18,7 +18,7 @@ const links = [
 	{ label: 'svgIcons' },
 	{ label: 'Unit Leveling' },
 	{ label: 'userHandler' },
-	{ label: 'Vendor' },
+	{ label: 'Vendor (and other dependencies)', href: 'vendor.html' },
 	{ label: 'Webcam' },
 ];
 

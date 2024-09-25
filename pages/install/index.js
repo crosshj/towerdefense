@@ -2,6 +2,8 @@ import { depends, nonLocal } from '../../$data/_depends.js';
 import { IDBStorage } from '../../utils/IDBStorage.js';
 import { isSessionActive } from '../../utils/session.js';
 
+import getDepends, { getDependsMeta } from '/$data/__depends.js';
+
 const ONE_DAY = 24 * 60 * 60 * 1000;
 const TEN_MINUTES = 10 * 60 * 1000;
 
@@ -37,6 +39,11 @@ const registerServiceWorker = async () => {
 };
 
 const updateCache = async ({ onProgress }) => {
+	console.log({
+		_: 'new depends process',
+		meta: getDependsMeta(),
+		depends: getDepends(),
+	});
 	const { promise, resolve, reject } = getPromise();
 
 	const triggerUpdate = (worker) => {

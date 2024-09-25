@@ -9,7 +9,8 @@
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"watch": "ws -c .server/lws.config.mjs",
-		"pretty": "prettier --write \"./**/*.{js,mjs,json,html,css,svg}\""
+		"pretty": "prettier --write \"./**/*.{js,mjs,json,html,css,svg}\"",
+		"depends": "node .github/generateDepends.js"
 	},
 	"author": "",
 	"license": "ISC",

@@ -41,3 +41,15 @@ describe('Vendor', (it) => {
 		);
 	});
 });
+
+describe('Other Dependencies', (it) => {
+	it('should have a depends file', async ({ expect }) => {
+		const { default: getDepends, getDependsMeta } = await import(
+			'/$data/__depends.js'
+		);
+		const depends = getDepends();
+		const meta = getDependsMeta();
+		console.log(meta, depends);
+		return expect(true).toBe(true);
+	});
+});
