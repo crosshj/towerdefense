@@ -1,4 +1,4 @@
-import { Howl } from 'https://cdn.jsdelivr.net/npm/howler@2.2.4/+esm';
+import { Howl } from '/vendor/howler.2.2.4.js';
 import { getSettings } from '../../user/settings.js';
 
 const proxy = 'https://api.allorigins.win/raw?url=';

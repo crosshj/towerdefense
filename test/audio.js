@@ -1,4 +1,4 @@
-import { Howler, Howl } from 'https://cdn.jsdelivr.net/npm/howler@2.2.4/+esm';
+import { Howler, Howl } from '/vendor/howler.2.2.4.js';
 
 var sound = new Howl({
 	src: ['assets/audio/EtherealTraverse.wav'],
