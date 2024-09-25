@@ -39,8 +39,8 @@ const exceptions = [
 	//
 ];
 const dirSubstitutions = {
-	'assets/character/FighterBase': '$F_BASE$',
-	'assets/character/base_fighter': '$BASE_F$',
+	'/assets/character/FighterBase': '$F_BASE$',
+	'/assets/character/base_fighter': '$BASE_F$',
 };
 
 const isException = (file) => {
@@ -93,7 +93,7 @@ const substituteDirectory = (file) => {
 };
 
 const fileHashes = allFiles.reduce((acc, file) => {
-	const fileKey = file.replace('../', '');
+	const fileKey = file.replace('../', '/');
 	const substitutedFile = substituteDirectory(fileKey);
 	acc[substitutedFile] = calculateFileHash(path.join(__dirname, file));
 	acc[substitutedFile] = calculateFileHash(path.join(__dirname, file));

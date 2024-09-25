@@ -20,7 +20,7 @@
         "**/Thumbs.db": true,
         "node_modules": true,
         ".well-known": true,
-        ".github": false,
+        ".github": true,
         ".server": true,
         "web": true,
         "vendor": true,

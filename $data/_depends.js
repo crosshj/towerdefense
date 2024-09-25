@@ -96,8 +96,8 @@ const assets = [
 
 	'/pages/stage/main/index.html',
 	'/pages/stage/main/index.js',
-	'/pages/stage/main/background.png',
-	'/pages/stage/main/background_clicks.png',
+	'/assets/stage/main/background.png',
+	'/assets/stage/main/background_clicks.png',
 
 	'/pages/my-team/index.html',
 	'/pages/my-team/index.css',

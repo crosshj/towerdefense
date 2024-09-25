@@ -91,6 +91,9 @@ export const cacheFiles = async (event) => {
 	const CACHE_KEY = 'dynamic-cache-v1';
 
 	const filesToCache = event.data.files;
+
+	// TODO: if filesToCache is an object versus an array, then we need to handle that
+
 	const isNeeded = await isCacheUpdateNeeded({ CACHE_KEY, filesToCache });
 	console.log(`Dynamic Cache update needed: ${isNeeded}`);
 	if (!isNeeded) {
