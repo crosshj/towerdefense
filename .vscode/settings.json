@@ -24,7 +24,7 @@
         ".server": true,
         "web": true,
         "vendor": true,
-        "serviceWorker": false
+        "serviceWorker": true
     },
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {

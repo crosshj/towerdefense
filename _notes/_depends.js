@@ -1,4 +1,8 @@
 /*
+
+this is the old version of "depends" management
+kept here because notes
+
 these should be cached by service worker
 
 https://stackoverflow.com/questions/55729870/how-do-i-filter-out-gear-icon-xhr-requests-in-devtools
