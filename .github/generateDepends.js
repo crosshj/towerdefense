@@ -93,7 +93,8 @@ const substituteDirectory = (file) => {
 };
 
 const fileHashes = allFiles.reduce((acc, file) => {
-	const substitutedFile = substituteDirectory(file);
+	const fileKey = file.replace('../', '');
+	const substitutedFile = substituteDirectory(fileKey);
 	acc[substitutedFile] = calculateFileHash(path.join(__dirname, file));
 	acc[substitutedFile] = calculateFileHash(path.join(__dirname, file));
 	return acc;
@@ -132,7 +133,7 @@ export default getDepends;
 
 export const getDependsMeta = () => ({
   generatedAt: '${generatedAt}',
-  filesLength: Object.keys(fileHashes).length,
+  filesLength: ${Object.keys(fileHashes).length},
   hash: '${DEPENDS_HASH}'
 });
 
