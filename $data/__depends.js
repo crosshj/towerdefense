@@ -1,7 +1,7 @@
 /* 
 This file is auto-generated; do not edit manually.
 To regenerate, run 'node generateDepends.js'.
-Generated at: 2024-09-25T23:25:53.476Z
+Generated at: 2024-09-25T23:50:14.164Z
 */
 
 const getDepends = () => {
@@ -23,9 +23,9 @@ const getDepends = () => {
 export default getDepends;
 
 export const getDependsMeta = () => ({
-  generatedAt: '2024-09-25T23:25:53.476Z',
-  filesLength: 537,
-  hash: '36503b6134bb39331ac93025d9a96af2d44e3b316d1feac4dec444c22721600e'
+  generatedAt: '2024-09-25T23:50:14.164Z',
+  filesLength: 540,
+  hash: '2c79a1cf6c18c306f53b8140884e3d8612f6b42d53880285a9ad404cbfec2ebb'
 });
 
 const dirSubstitutions = {
@@ -570,5 +570,8 @@ const fileHashes = {
   "/vendor/howler.2.2.4.map": "1e59764677d2f4ef",
   "/vendor/nes.min.css": "174582de2b1b38f6",
   "/vendor/rxjs.bundle.7.8.1.js": "3f37d6e2ff571808",
-  "/vendor/timemachine.js": "f1834acc366f61fb"
+  "/vendor/timemachine.js": "f1834acc366f61fb",
+  "/index.html": "4d56dbf4584771ae",
+  "/index.js": "b82e7bf9b593ad33",
+  "/index.css": "5c0ac92495922796"
 };

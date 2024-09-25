@@ -18,6 +18,12 @@ const DEPENDS_FILE_PATH = '$data/__depends.js';
 
 //remember to NOT cache __depends.js
 
+const files = [
+	'index.html',
+	'index.js',
+	'index.css',
+	//
+];
 const directories = [
 	'$data',
 	'account',
@@ -26,6 +32,7 @@ const directories = [
 	'pages',
 	// 'serviceWorker',
 	'stages',
+	// 'test',
 	'user',
 	'utils',
 	'visuals',
@@ -104,6 +111,9 @@ const fileHashes = allFiles.reduce((acc, file) => {
 	acc[substitutedFile] = calculateFileHash(path.join(__dirname, file));
 	return acc;
 }, {});
+for (const f of files) {
+	fileHashes['/' + f] = calculateFileHash(path.join(__dirname, '../', f));
+}
 
 const outputFilePath = path.join(__dirname, '../', DEPENDS_FILE_PATH);
 const generatedAt = new Date().toISOString();
