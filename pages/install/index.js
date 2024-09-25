@@ -1,4 +1,3 @@
-import { depends, nonLocal } from '../../$data/_depends.js';
 import { IDBStorage } from '../../utils/IDBStorage.js';
 import { isSessionActive } from '../../utils/session.js';
 
@@ -39,11 +38,6 @@ const registerServiceWorker = async () => {
 };
 
 const updateCache = async ({ onProgress }) => {
-	console.log({
-		_: 'new depends process',
-		meta: getDependsMeta(),
-		depends: getDepends(),
-	});
 	const { promise, resolve, reject } = getPromise();
 
 	const triggerUpdate = (worker) => {
@@ -55,11 +49,10 @@ const updateCache = async ({ onProgress }) => {
 			}, 5000);
 			return;
 		}
-		const filesToCache =
-			document.location.hostname === '127.0.0.1' ? nonLocal : depends;
 		worker.controller.postMessage({
 			type: 'updateCache',
-			files: filesToCache,
+			meta: getDependsMeta(),
+			files: getDepends(),
 		});
 		worker.addEventListener('message', (event) => {
 			onProgress(event);

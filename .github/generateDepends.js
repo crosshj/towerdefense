@@ -16,12 +16,15 @@ const __dirname = dirname(__filename);
 const DEFAULT_FILE_HASH_LENGTH = 16;
 const DEPENDS_FILE_PATH = '$data/__depends.js';
 
+//remember to NOT cache __depends.js
+
 const directories = [
 	'$data',
+	'account',
 	'assets',
 	'modals',
 	'pages',
-	'serviceWorker',
+	// 'serviceWorker',
 	'stages',
 	'user',
 	'utils',
@@ -36,6 +39,8 @@ const exceptions = [
 	'*.clip',
 	'*.bak.png',
 	'*.md',
+	'__depends.js',
+	'_depends.js',
 	//
 ];
 const dirSubstitutions = {

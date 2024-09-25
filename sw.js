@@ -99,7 +99,12 @@ self.addEventListener('fetch', (event) => {
 		const cacheRequest = new Request(requestURL.pathname);
 		event.respondWith(
 			caches.match(cacheRequest).then((response) => {
-				return response || fetch(event.request);
+				return (
+					response ||
+					fetch(event.request, {
+						cache: 'no-store',
+					})
+				);
 			})
 		);
 		return;
@@ -107,7 +112,12 @@ self.addEventListener('fetch', (event) => {
 
 	event.respondWith(
 		caches.match(event.request).then((response) => {
-			return response || fetch(event.request);
+			return (
+				response ||
+				fetch(event.request, {
+					cache: 'no-store',
+				})
+			);
 		})
 	);
 

@@ -43,36 +43,108 @@ const sendClientsProgressDetail = async (file) => {
 	});
 };
 
-const isCacheUpdateNeeded = async ({ filesToCache, CACHE_KEY }) => {
-	const cache = await caches.open(CACHE_KEY);
+const getCacheVersion = async (cache) => {
+	const versionResponse = await cache.match('version');
+	const version = versionResponse && (await versionResponse.text());
+	return version;
+};
 
-	const cachedVersionResponse = await cache.match('version');
-	const cachedVersion =
-		cachedVersionResponse && (await cachedVersionResponse.text());
-	console.log(`
-		Cache version: ${cachedVersion || '[ none ]'}
-		SW version: ${self._version || '[ none ]'}
-	`);
-	if (!cachedVersion || cachedVersion !== self._version) return true;
+const getCacheHash = async (cache) => {
+	const hashResponse = await cache.match('hash');
+	const hash = hashResponse && (await hashResponse.text());
+	return hash;
+};
+
+const getCachedFileHash = async (cache, url) => {
+	const response = await cache.match(url);
+	if (!response) return undefined;
+	const hash = response.headers.get('X-File-Hash');
+	return hash;
+};
+
+const isCacheUpdateNeeded = async ({ files, meta, CACHE_KEY }) => {
+	const cache = await caches.open(CACHE_KEY);
+	// const cachedVersion = await getCacheVersion(cache);
+	const cachedHash = await getCacheHash(cache);
+	const filesToCache = Object.keys(files);
+	const newCacheHash = meta.hash;
+	// 	console.log(`
+	// Cache version: ${cachedVersion || '[ none ]'}
+	// Cache hash: ${cachedHash || '[ none ]'}
+	// Cache hash (new): ${newCacheHash || '[ none ]'}
+	// SW version: ${self._version || '[ none ]'}
+	// 	`);
+
+	if (!cachedHash || cachedHash !== newCacheHash) {
+		console.log('Cache update needed: hash mismatch');
+		return true;
+	}
+	// if (!cachedVersion || cachedVersion !== self._version) {
+	// 	console.log('Cache update needed: hash mismatch');
+	// 	return true;
+	// }
 
 	const cachedRequests = await cache.keys();
 	const cachedUrls = cachedRequests.map(
 		(request) => new URL(request.url).pathname
 	);
-	const filesMissingFromCache = [];
+	const cachedHashes = {};
+	for (const file of filesToCache) {
+		const filePath = new URL(file, location.origin);
+		cachedHashes[filePath.pathname] = await getCachedFileHash(
+			cache,
+			filePath.href
+		);
+	}
 	const allFilesCached = filesToCache.every((file) => {
-		const filePathname = new URL(file, location.origin).pathname;
-		const cacheMatch = cachedUrls.includes(filePathname);
-		if (!cacheMatch) filesMissingFromCache.push(file);
-		return cacheMatch;
+		const filePath = new URL(file, location.origin);
+		const cacheMatch = cachedUrls.includes(filePath.pathname);
+		if (!cacheMatch) {
+			console.log(
+				'Cache update needed: file missing - ' + filePath.pathname
+			);
+			return false;
+		}
+		const newHash = files[file];
+		const cachedHash = cachedHashes[filePath.pathname];
+		const fileHashMatches = cacheMatch && newHash === cachedHash;
+		if (!fileHashMatches) {
+			console.log(
+				'Cache update needed: file hash mismatch - ' +
+					filePath.pathname,
+				newHash,
+				cachedHash
+			);
+		}
+		return fileHashMatches;
 	});
+	return !allFilesCached;
+};
 
-	console.log(`
-		Missing files from cache: ${filesMissingFromCache.length}
-	`);
-	if (!allFilesCached) return true;
-
-	return false;
+const getFilesToRefresh = async ({ files, meta, CACHE_KEY }) => {
+	const cache = await caches.open(CACHE_KEY);
+	const cachedRequests = await cache.keys();
+	const cachedUrls = cachedRequests.map(
+		(request) => new URL(request.url).pathname
+	);
+	const filesToCache = Object.keys(files);
+	const cachedHashes = {};
+	for (const file of filesToCache) {
+		const filePath = new URL(file, location.origin);
+		cachedHashes[filePath.pathname] = await getCachedFileHash(
+			cache,
+			filePath.href
+		);
+	}
+	const filesToRefresh = filesToCache.filter((file) => {
+		const filePath = new URL(file, location.origin);
+		const cacheMatch = cachedUrls.includes(filePath.pathname);
+		if (!cacheMatch) return true;
+		const newHash = files[file];
+		const cachedHash = cachedHashes[filePath.pathname];
+		return newHash !== cachedHash;
+	});
+	return filesToRefresh;
 };
 
 export const clearCache = async () => {
@@ -90,27 +162,41 @@ export const cacheFiles = async (event) => {
 	// maybe get this from the event?`
 	const CACHE_KEY = 'dynamic-cache-v1';
 
-	const filesToCache = event.data.files;
+	const { files, meta } = event.data;
 
-	// TODO: if filesToCache is an object versus an array, then we need to handle that
-
-	const isNeeded = await isCacheUpdateNeeded({ CACHE_KEY, filesToCache });
+	const isNeeded = await isCacheUpdateNeeded({
+		CACHE_KEY,
+		files,
+		meta,
+	});
 	console.log(`Dynamic Cache update needed: ${isNeeded}`);
 	if (!isNeeded) {
 		await sendClientsProgress(100);
 		return;
 	}
 
+	const filesToRefresh = await getFilesToRefresh({
+		CACHE_KEY,
+		files,
+		meta,
+	});
+	console.log({ filesToRefresh });
+
 	// maybe caches from other installs should be invalidated?
 	const cache = await caches.open(CACHE_KEY);
 	let cachedCount = 0;
 
 	const failedToCache = [];
+	const filesToCache = Object.keys(files);
 
 	const timestamp = new Date().getTime();
 	for (let i = 0; i < filesToCache.length; i++) {
 		try {
 			await sendClientsProgressDetail(filesToCache[i]);
+			const fileUpdateNeeded = filesToRefresh.includes(filesToCache[i]);
+			if (!fileUpdateNeeded) {
+				continue;
+			}
 			const separator = filesToCache[i].includes('?') ? '&' : '?';
 			const urlWithCacheBusting = `${filesToCache[i]}${separator}v=${timestamp}`;
 			const response = await fetchWithRetry(urlWithCacheBusting, {
@@ -121,7 +207,14 @@ export const cacheFiles = async (event) => {
 					`Request for ${filesToCache[i]} failed with status ${response.status}`
 				);
 			}
-			await cache.put(filesToCache[i], response.clone());
+			const responseWithHash = new Response(response.body, {
+				headers: {
+					'Content-Type': response.headers.get('Content-Type'),
+					'Content-Length': response.headers.get('Content-Length'),
+					'X-File-Hash': files[filesToCache[i]],
+				},
+			});
+			await cache.put(filesToCache[i], responseWithHash);
 			cachedCount++;
 			const progress = (cachedCount / filesToCache.length) * 100;
 			sendClientsProgress(progress);
@@ -138,4 +231,5 @@ export const cacheFiles = async (event) => {
 	}
 	await sendClientsProgress(100);
 	await cache.put('version', new Response(self._version));
+	await cache.put('hash', new Response(meta.hash));
 };
