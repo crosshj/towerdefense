@@ -64,7 +64,7 @@ const getCachedFileHash = async (cache, url) => {
 
 const isCacheUpdateNeeded = async ({ files, meta, CACHE_KEY }) => {
 	const cache = await caches.open(CACHE_KEY);
-	// const cachedVersion = await getCacheVersion(cache);
+	const cachedVersion = await getCacheVersion(cache);
 	const cachedHash = await getCacheHash(cache);
 	const filesToCache = Object.keys(files);
 	const newCacheHash = meta.hash;
