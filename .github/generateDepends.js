@@ -138,6 +138,7 @@ export const getDependsMeta = () => ({
 });
 
 const dirSubstitutions = ${JSON.stringify(dirSubstitutions, null, 2)};
+
 const fileHashes = ${JSON.stringify(fileHashes, null, 2)};
 `.trim();
 
