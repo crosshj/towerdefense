@@ -79,10 +79,10 @@ const isCacheUpdateNeeded = async ({ files, meta, CACHE_KEY }) => {
 		console.log('Cache update needed: hash mismatch');
 		return true;
 	}
-	// if (!cachedVersion || cachedVersion !== self._version) {
-	// 	console.log('Cache update needed: hash mismatch');
-	// 	return true;
-	// }
+	if (!cachedVersion || cachedVersion !== self._version) {
+		console.log('Cache update needed: sw version mismatch');
+		return true;
+	}
 
 	const cachedRequests = await cache.keys();
 	const cachedUrls = cachedRequests.map(
