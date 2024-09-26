@@ -1,7 +1,7 @@
 /* 
 This file is auto-generated; do not edit manually.
 To regenerate, run 'node generateDepends.js'.
-Generated at: 2024-09-25T23:50:14.164Z
+Generated at: 2024-09-26T00:02:50.826Z
 */
 
 const getDepends = () => {
@@ -23,9 +23,9 @@ const getDepends = () => {
 export default getDepends;
 
 export const getDependsMeta = () => ({
-  generatedAt: '2024-09-25T23:50:14.164Z',
+  generatedAt: '2024-09-26T00:02:50.826Z',
   filesLength: 540,
-  hash: '2c79a1cf6c18c306f53b8140884e3d8612f6b42d53880285a9ad404cbfec2ebb'
+  hash: 'f0c56055d610592c1930ae91030349a0c5fbbd0b27db3aaaaeef4a89fc62f204'
 });
 
 const dirSubstitutions = {
@@ -451,7 +451,7 @@ const fileHashes = {
   "/pages/stage/main/index.html": "231c616537c48f92",
   "/pages/stage/main/index.js": "7faf198eee78776f",
   "/pages/startup/bg.png": "2e4a2adbd3f6ce2f",
-  "/pages/startup/index.css": "e0bc2fecfc55a779",
+  "/pages/startup/index.css": "e981ec3c79e45d8b",
   "/pages/startup/index.html": "dc06e02f75a373d6",
   "/pages/startup/index.js": "c08b79fc53c2e1b5",
   "/pages/swapShop/index.css": "4c42864dd96e0383",
