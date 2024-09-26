@@ -25,18 +25,18 @@ const files = [
 	//
 ];
 const directories = [
+	'pages',
 	'$data',
 	'account',
 	'assets',
 	'modals',
-	'pages',
-	// 'serviceWorker',
 	'stages',
-	// 'test',
 	'user',
 	'utils',
 	'visuals',
 	'vendor',
+	// 'serviceWorker',
+	// 'test',
 ];
 const exceptions = [
 	'.DS_Store',
@@ -85,7 +85,10 @@ const getAllFilesFromDirectories = (dirs) =>
 			: (console.log(`Directory ${dir} does not exist.`), []);
 	});
 
-const allFiles = getAllFilesFromDirectories(directories);
+const allFiles = [
+	...files.map((file) => '../' + file),
+	...getAllFilesFromDirectories(directories),
+];
 
 const calculateFileHash = (filePath, hashLength = DEFAULT_FILE_HASH_LENGTH) => {
 	const fileBuffer = fs.readFileSync(filePath);
@@ -111,9 +114,6 @@ const fileHashes = allFiles.reduce((acc, file) => {
 	acc[substitutedFile] = calculateFileHash(path.join(__dirname, file));
 	return acc;
 }, {});
-for (const f of files) {
-	fileHashes['/' + f] = calculateFileHash(path.join(__dirname, '../', f));
-}
 
 const outputFilePath = path.join(__dirname, '../', DEPENDS_FILE_PATH);
 const generatedAt = new Date().toISOString();
