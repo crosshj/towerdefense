@@ -23,15 +23,17 @@ body {
 	}
 
 	details {
+		display: none;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+
 		-webkit-tap-highlight-color: transparent;
 		position: absolute;
 		bottom: 80px;
 		cursor: pointer;
 		font-size: 1.5em;
 		font-family: sans-serif;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
 		color: white;
 
 		summary {

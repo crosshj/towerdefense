@@ -1,5 +1,7 @@
 import { IDBStorage } from '../../utils/IDBStorage.js';
 import { isSessionActive } from '../../utils/session.js';
+import { range } from '../../utils/utils.js';
+import { getAllThumbnails } from '../../visuals/assets/character.js';
 
 import getDepends, { getDependsMeta } from '/$data/__depends.js';
 
@@ -37,7 +39,7 @@ const registerServiceWorker = async () => {
 	return registration;
 };
 
-const updateCache = async ({ onProgress }) => {
+const updateCache = async ({ onProgress } = {}) => {
 	const { promise, resolve, reject } = getPromise();
 
 	const triggerUpdate = (worker) => {
@@ -166,6 +168,18 @@ TODO:
 	});
 };
 
+const fakeProgress = async (time = 5000) => {
+	for (const percent of range(1, 100, 1)) {
+		await new Promise((res) => setTimeout(res, time / 100));
+		progressListener({
+			data: {
+				type: 'progress',
+				progress: percent,
+			},
+		});
+	}
+};
+
 const onLoaded = async () => {
 	const sessionActive = isSessionActive();
 	if (sessionActive) {
@@ -179,12 +193,15 @@ const onLoaded = async () => {
 	try {
 		await cleanPrevious();
 		//await registerServiceWorker(); //(might not be needed since done in main frame)
-		await updateCache({
-			onProgress: progressListener,
+		updateCache({
+			onProgress: () => {},
 		});
 		// what if SW changes during one of these?
 		//await backgroundSync();
 		//await periodicSync();
+
+		getAllThumbnails();
+		await fakeProgress(4000);
 
 		window.parent.postMessage({
 			_: 'navigate',

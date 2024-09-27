@@ -1,4 +1,25 @@
+/**
+ * Creates a deep clone of the provided object.
+ * @param {T} x - The object to clone.
+ * @returns {T} A deep clone of the provided object.
+ * @template T
+ */
 export const clone = (x) => JSON.parse(JSON.stringify(x));
+
+/**
+ * Generates an array of numbers in a range.
+ * @param {number} start - Start of the range.
+ * @param {number} end - End of the range.
+ * @param {number} step - Step increment.
+ * @returns {number[]} Array of numbers.
+ * @example
+ * range(1, 9, 2); // [1, 3, 5, 7, 9]
+ */
+export const range = (start, end, step) =>
+	Array.from(
+		{ length: (end - start) / step + 1 },
+		(_, i) => start + i * step
+	);
 
 export const generateUUID = () => {
 	const time = Date.now().toString(16).padStart(12, '0'); // 48 bits of timestamp

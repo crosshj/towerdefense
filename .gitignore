@@ -134,3 +134,4 @@ dist
 
 # image backups
 *autosave.kra
+CACHE_DEPENDS
