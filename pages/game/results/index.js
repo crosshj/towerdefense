@@ -4,8 +4,28 @@ import { updateEffectsCount } from '../../../user/effects.js';
 import { addStats } from '../../../user/stats.js';
 import { addUserExperience, forceUpdate, getUser } from '../../../user/user.js';
 import { waitForElementById } from '../../../utils/htmlToElement.js';
+import { clearBonusSVG } from './clearBonus.svg.js';
 import { getTeamFromNumber } from '/utils/getTeam.js';
 import { getTeam } from '/utils/getTeam.js';
+
+const RewardsPopoverContent = ({ rewards }) => {
+	let rewardKeyDiv = `<div>${rewards.bonus.key}</div>`;
+	if (rewards.bonus.type === 'coin') {
+		rewardKeyDiv = ``;
+	}
+	return `
+		<div class="title">
+			${clearBonusSVG()}
+		</div>
+		<div class="indicator">
+			<div>~%:: imagine spin animation ::%~</div>
+			<div style="height: 10px"></div>
+			<div>${rewards.bonus.type}</div>
+			${rewardKeyDiv}
+			<div>amount: ${rewards.bonus.amount || '1'}</div>
+		</div>
+	`;
+};
 
 const updateRewards = async ({ svgDoc, rewards }) => {
 	const params = Object.fromEntries(
@@ -154,12 +174,7 @@ const showClearBonus = async (rewards) => {
 	const contentEl = document.querySelector(
 		'.rewardsPopover .rewardsPopoverMessage .rewardsPopoverContent'
 	);
-	contentEl.innerHTML = `
-		<div style="color:yellow;font-size:20px;">CLEAR BONUS</div>
-		<div>type: ${rewards.bonus.type}</div>
-		<div>key: ${rewards.bonus.key}</div>
-		<div>amount: ${rewards.bonus.amount || '--'}</div>
-	`;
+	contentEl.innerHTML = RewardsPopoverContent({ rewards });
 	const el = document.querySelector('.rewardsPopover ');
 	el.classList.remove('hidden');
 	return new Promise((resolve) => {

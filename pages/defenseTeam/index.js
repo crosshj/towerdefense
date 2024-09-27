@@ -56,7 +56,6 @@ const updateTeam = ({ teamSlots, team, characters }) => {
 				: '',
 		};
 
-		console.log({ unit, unitCharacter });
 		slot.innerHTML = `
 			<div class="unitImage">
 				${unitCharacter?.image ? `<img src="${unitCharacter?.image}">` : ''}
