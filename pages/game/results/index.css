@@ -11,6 +11,13 @@ body {
 	--dark-bar-top: 37%;
 	--modal-bg-color: #ae6333;
 	--modal-border-color: #351d07;
+
+	--retryButtonColor: #9a33e5;
+	--okayButtonColor: #00ca3e;
+	--nextButtonColor: #00c3d2;
+
+	--roulette-border-light: #00d7e0;
+	--roulette-border-dark: #005c8f;
 }
 
 .tapToContinue {
@@ -163,10 +170,6 @@ body {
 }
 
 .rewardsPopover {
-	--retryButtonColor: #7323b5;
-	--okayButtonColor: #00a330;
-	--nextButtonColor: #009ba9;
-
 	position: absolute;
 	left: 0;
 	top: 0;
@@ -210,7 +213,7 @@ body {
 			.indicator {
 				--indicator-padding: 45px;
 				border-radius: 10px;
-				outline: 15px solid #46b2e6;
+				outline: 15px solid var(--roulette-border-light);
 				box-shadow: inset 0 0 15px 2px black;
 				display: flex;
 				flex-direction: column;
@@ -232,10 +235,11 @@ body {
 			margin: auto;
 			button {
 				flex: 1;
-				height: 36px;
+				height: 38px;
+				font-weight: 900;
 				font-size: 19px;
 				border: 1px solid black;
-				border-radius: 7px;
+				border-radius: 10px;
 				color: white;
 				padding-bottom: 3px;
 				box-shadow:
