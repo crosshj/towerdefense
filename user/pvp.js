@@ -1,6 +1,7 @@
 import {
 	compressChars,
 	decompressChars,
+	deCompressGear,
 	decompressTeams,
 } from '../utils/compress.js';
 import { defaultCharacters } from '../$data/defaultCharacters.js';
@@ -42,14 +43,21 @@ export async function getDefenseTeam({ player }) {
 
 	const characters = decompressChars(result.characters);
 	const teams = decompressTeams(result.teams, characters);
+	const allGear = deCompressGear(result.gear);
 	const { Defense } = teams;
 
 	for (const subTeam of ['a', 'b']) {
 		for (const i of Object.keys(Defense[subTeam])) {
-			Defense[subTeam][i] = {
+			const unit = {
 				...characters.find((x) => x.id === Defense[subTeam][i]?.id),
 				id: `defense-${subTeam}-${i}`,
 			};
+			unit.gear = {
+				weapon: allGear.find((x) => x.id === unit.gearWeapon),
+				armor: allGear.find((x) => x.id === unit.gearArmor),
+				accessory: allGear.find((x) => x.id === unit.gearAccessory),
+			};
+			Defense[subTeam][i] = unit;
 		}
 	}
 

@@ -142,6 +142,9 @@ body {
 						width: 30%;
 						aspect-ratio: 1/1;
 						background: #0007;
+						img {
+							width: 100%;
+						}
 					}
 				}
 			}

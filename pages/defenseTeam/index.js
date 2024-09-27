@@ -43,16 +43,35 @@ const updateTeam = ({ teamSlots, team, characters }) => {
 	for (const [index, slot] of Object.entries(teamSlots)) {
 		const unit = team[index];
 		const unitCharacter = characters.find((x) => x.code == unit.code);
-		// console.log({ unit });
+		const { gear = {} } = unit || {};
+		let gearHTML = {
+			weapon: gear?.weapon?.image
+				? `<img src="${gear.weapon.image}">` //
+				: '',
+			armor: gear?.armor?.image
+				? `<img src="${gear.armor.image}">` //
+				: '',
+			accessory: gear.accessory
+				? `<img src="${gear.accessory.image}">` //
+				: '',
+		};
+
+		console.log({ unit, unitCharacter });
 		slot.innerHTML = `
 			<div class="unitImage">
 				${unitCharacter?.image ? `<img src="${unitCharacter?.image}">` : ''}
 			</div>
 			<div class="platform"></div>
 			<div class="gear">
-				<div class="gearSlot weapon"></div>
-				<div class="gearSlot armor"></div>
-				<div class="gearSlot accessory"></div>
+				<div class="gearSlot weapon">
+					${gearHTML.weapon}
+				</div>
+				<div class="gearSlot armor">
+					${gearHTML.armor}
+				</div>
+				<div class="gearSlot accessory">
+					${gearHTML.accessory}
+				</div>
 			</div>
 		`;
 	}
