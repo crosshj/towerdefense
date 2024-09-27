@@ -67,6 +67,7 @@ export const compressChars = (lsCharacters, baseLength = 36) => {
 			);
 			const exp = encode(Math.floor((char.experience || 0) / 100));
 			const uncapped = char.uncapped || char.uncappedLevel || 0;
+
 			const gearWeapon = char.gearWeapon
 				? encode(char.gearWeapon.replace('-localid', ''))
 				: '';

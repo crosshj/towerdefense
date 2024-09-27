@@ -134,4 +134,6 @@ dist
 
 # image backups
 *autosave.kra
-CACHE_DEPENDS
+
+# use this to modify local caching behavior
+*CACHE_DEPENDS*

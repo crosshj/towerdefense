@@ -57,9 +57,6 @@ export const getCharacters = async (hydrate = true) => {
 				armor: allGear.find((x) => x.id === unit.gearArmor),
 				accessory: allGear.find((x) => x.id === unit.gearAccessory),
 			};
-			delete unit.gearArmor;
-			delete unit.gearAccessory;
-			delete unit.gearWeapon;
 		}
 		localStorage.setItem(LS_NAME, JSON.stringify(decomp));
 		characters = decomp;
@@ -87,7 +84,8 @@ export const addCharactersEXP = async (chars, expAmount) => {
 	const prevTeams = await getTeams();
 	const hydrated = false;
 	const allChars = await getCharacters(hydrated);
-	for (const { id } of chars) {
+	for (const updating of chars) {
+		const { id } = updating;
 		const thisChar = allChars.find((x) => x.id === id);
 		if (!thisChar) {
 			continue;
@@ -96,6 +94,7 @@ export const addCharactersEXP = async (chars, expAmount) => {
 		thisChar.experience += expAmount;
 		//TODO: note when this causes a char to level up?
 		//TODO: cap experience based on stars
+		console.log({ thisChar, updating });
 	}
 
 	await updateAllChars(allChars);

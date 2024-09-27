@@ -186,11 +186,12 @@ const attachSlots = ({ gear, selector }) => {
 	});
 	const updateSlots = ({ unit }) => {
 		thisUnit = unit;
-		for (const [slotType, slot] of Object.entries(slots)) {
+		const allSlots = Object.entries(slots);
+		for (const [slotType, slot] of allSlots) {
 			const image = unit?.gear?.[slotType]?.image;
 			if (!image) {
 				slot.innerHTML = '';
-				return;
+				continue;
 			}
 			slot.innerHTML = `<img src='${image}' />`;
 		}

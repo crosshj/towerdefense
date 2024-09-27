@@ -1,4 +1,5 @@
 import { assignGearToUnit } from '../../../user/gear.js';
+import { forceUpdate } from '../../../user/user.js';
 import {
 	getCurrentCharCache,
 	getCurrentGearCache,
@@ -128,6 +129,7 @@ const domLoaded = async () => {
 			console.log({ error });
 			return;
 		}
+		await forceUpdate();
 		window.parent.postMessage({
 			_: 'broadcastGearChanged',
 		});

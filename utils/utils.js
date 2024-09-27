@@ -21,6 +21,14 @@ export const range = (start, end, step) =>
 		(_, i) => start + i * step
 	);
 
+/**
+ * Returns a promise that resolves after a specified delay.
+ * @param {number} [ms=1000] - The number of milliseconds to delay.
+ * @returns {Promise<void>} A promise that resolves after the specified delay.
+ */
+export const delay = (ms = 1000) =>
+	new Promise((resolve) => setTimeout(resolve, ms));
+
 export const generateUUID = () => {
 	const time = Date.now().toString(16).padStart(12, '0'); // 48 bits of timestamp
 	const random = 'xxxxxxxxxxxx'.replace(/[x]/g, () =>
