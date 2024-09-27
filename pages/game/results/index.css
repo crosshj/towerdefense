@@ -234,10 +234,12 @@ body {
 			width: 90%;
 			margin: auto;
 			button {
+				font-family: 'Passion One', sans-serif;
 				flex: 1;
 				height: 38px;
-				font-weight: 900;
-				font-size: 19px;
+				font-weight: 400;
+				letter-spacing: 1px;
+				font-size: 22px;
 				border: 1px solid black;
 				border-radius: 10px;
 				color: white;
