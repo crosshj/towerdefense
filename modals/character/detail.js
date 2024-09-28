@@ -3,6 +3,7 @@ import { nodeTree, populateNodeTree } from './detailDom.js';
 import { SVGIcons } from '../../assets/icons.svg.js';
 import { toggleCharacterLock } from '../../user/characters.js';
 import { withCommas } from '../../utils/htmlToElement.js';
+import { applyGearModifiers, getGearModifiers } from '../../user/gear.js';
 
 const icons = {
 	lockCircle: SVGIcons.lockCircle(),
@@ -51,6 +52,51 @@ const getElementColor = (element) => {
 	if (element === 'Water') return '#717fff';
 	const color = '#f0f';
 	return color;
+};
+
+const updateAdvancedValues = ({ unit }) => {
+	const statParams = [
+		'regenTime',
+		'mineralCost',
+		'moveSpeed',
+		'attackPerSecond',
+		'attack',
+		'physicalAttack',
+		'magicAttack',
+		'attackSpeed',
+		'range',
+		'splashRadius',
+		'critChance',
+		'critMult',
+		'hitRate',
+		'hp',
+		'defense',
+		'physicalDefense',
+		'magicDefense',
+		'evadeChance',
+		'skillUseRate',
+		'skillCooldown',
+		'skillEvadeRate',
+		'skillHitRate',
+		'skillResistance',
+	];
+	console.log({ unit });
+	for (const prop of statParams) {
+		let value = unit[prop];
+		if (typeof value === 'undefined') continue;
+		value = withCommas(value);
+		const el = document.querySelector(
+			`.advanced .${prop} .value:not(.stat-mod)`
+		);
+		el.innerHTML = value || '---';
+	}
+	const modTotals = getGearModifiers(unit);
+	for (const [key, value] of Object.entries(modTotals)) {
+		const el = document.querySelector(`.advanced .${key} .value.stat-mod`);
+		if (!el) continue;
+		el.classList.add('applied');
+		el.innerHTML = '+' + withCommas(value);
+	}
 };
 
 const updateValues = async ({ params, character, nodeTree }) => {
@@ -116,18 +162,28 @@ const updateValues = async ({ params, character, nodeTree }) => {
 	right.rowTwo.mineral.icon.innerHTML = icons.mineral;
 	right.rowTwo.mineral.amount.innerText = character.mineralCost + '';
 
+	const moddedUnit = applyGearModifiers(character);
 	right.details.basic.metrics.attack.icon.innerHTML = icons.sword;
 	right.details.basic.metrics.attack.value.innerHTML = withCommas(
-		character.attack
+		moddedUnit.attack
 	);
+	if (moddedUnit.attack !== character.attack) {
+		right.details.basic.metrics.attack.value.classList.add('stat-mod');
+	}
 	right.details.basic.metrics.health.icon.innerHTML = icons.heart;
 	right.details.basic.metrics.health.value.innerHTML = withCommas(
-		character.hp
+		moddedUnit.hp
 	);
+	if (moddedUnit.hp !== character.hp) {
+		right.details.basic.metrics.health.value.classList.add('stat-mod');
+	}
 	right.details.basic.metrics.defense.icon.innerHTML = icons.shield;
 	right.details.basic.metrics.defense.value.innerHTML = withCommas(
-		character.defense
+		moddedUnit.defense
 	);
+	if (moddedUnit.defense !== character.defense) {
+		right.details.basic.metrics.defense.value.classList.add('stat-mod');
+	}
 
 	right.details.basic.speed.attackSpeed.value.innerText =
 		character.attackSpeedText;
@@ -145,6 +201,8 @@ const updateValues = async ({ params, character, nodeTree }) => {
 	if (character?.evolution?.canSwitch) {
 		right.actions.switchEvolve.classList.remove('hidden');
 	}
+
+	updateAdvancedValues({ unit: character });
 
 	// finished loading
 	left.loading.style.display = 'none';
@@ -206,6 +264,24 @@ const attachHandlers = (nodeTree, params) => {
 			_: 'navigate',
 			src: `/pages/gear/?back=${params.back || ''}`,
 		});
+	});
+	right.rowTwo.details.addEventListener('pointerup', () => {
+		const basic = document.querySelector('.details .basic');
+		const advanced = document.querySelector('.details .advanced');
+		if (right.rowTwo.details.classList.contains('open')) {
+			right.rowTwo.details.classList.remove('open');
+			right.rowTwo.details.classList.add('closed');
+			basic.classList.remove('hidden');
+			advanced.classList.add('hidden');
+			return;
+		}
+		if (right.rowTwo.details.classList.contains('closed')) {
+			right.rowTwo.details.classList.remove('closed');
+			right.rowTwo.details.classList.add('open');
+			basic.classList.add('hidden');
+			advanced.classList.remove('hidden');
+			return;
+		}
 	});
 	closeButton.addEventListener('pointerup', () => {
 		window.parent.postMessage({

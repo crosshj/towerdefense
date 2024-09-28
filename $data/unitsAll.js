@@ -10,6 +10,8 @@ export const unitsAll = {
 		hp: '413 - 1,401 - 4,394',
 		defense: '14 - 52 - 166',
 		range: 1000,
+		evadeChance: 0.05,
+		hitRate: 0.0,
 	},
 	// like https://rangers.lerico.net/en/ranger/u030e-ron
 	'u0001-2-toto': {
@@ -22,6 +24,7 @@ export const unitsAll = {
 		hp: '998 - 4,623 - 12,821',
 		defense: '22 - 109 - 304',
 		range: 350,
+		evadeChance: 0.05,
 	},
 	// like https://rangers.lerico.net/en/ranger/u031e-ron
 	'u0001-3-twinkle': {
@@ -34,6 +37,7 @@ export const unitsAll = {
 		hp: '2,128 - 12,502 - 32,080',
 		defense: '32 - 188 - 482',
 		range: 800,
+		evadeChance: 0.05,
 	},
 	// like https://rangers.lerico.net/en/ranger/u032e-ron
 	'u0001-4-vispi': {
@@ -76,6 +80,7 @@ export const unitsAll = {
 		hp: '3,978 - 33,360 - 77,976',
 		defense: '317 - 2,736 - 6,401',
 		range: 1000,
+		evadeChance: 0.05,
 	},
 	// like https://rangers.lerico.net/en/ranger/u032e-ron
 	'u0001-4-antonio': {
@@ -88,6 +93,7 @@ export const unitsAll = {
 		hp: '4,270 - 30,436 - 74,009',
 		defense: '43 - 337 - 823',
 		range: 600,
+		evadeChance: 0.05,
 	},
 	// like https://rangers.lerico.net/en/ranger/u032e-ron
 	'u0001-4-bumpier': {
@@ -100,6 +106,7 @@ export const unitsAll = {
 		hp: '4,270 - 30,436 - 74,009',
 		defense: '43 - 337 - 823',
 		range: 600,
+		evadeChance: 0.05,
 	},
 	// like https://rangers.lerico.net/en/ranger/u032e-ron
 	'u0001-4-tabi': {
@@ -112,6 +119,7 @@ export const unitsAll = {
 		hp: '4,270 - 30,436 - 74,009',
 		defense: '43 - 337 - 823',
 		range: 600,
+		evadeChance: 0.05,
 	},
 	// like https://rangers.lerico.net/en/ranger/u13-lia
 	'u0001-5-electopus': {
@@ -125,6 +133,7 @@ export const unitsAll = {
 		hp: '3,978 - 33,360 - 77,976',
 		defense: '317 - 2,736 - 6,401',
 		range: 1000,
+		evadeChance: 0.05,
 	},
 	// like https://rangers.lerico.net/en/ranger/u13-lia
 	'u0001-5-santelmo': {
@@ -137,6 +146,7 @@ export const unitsAll = {
 		hp: '3,978 - 33,360 - 77,976',
 		defense: '317 - 2,736 - 6,401',
 		range: 1000,
+		evadeChance: 0.05,
 	},
 	// like https://rangers.lerico.net/en/ranger/u13-lia
 	'u0001-5-multo': {
@@ -1019,7 +1029,6 @@ export const unitsAll = {
 		defense: '60 - 692 - 5,000',
 		range: 50 * 10,
 	},
-
 	'u0001-3-kopi': {
 		displayName: 'Kopi',
 		element: 'Water',
@@ -1031,7 +1040,6 @@ export const unitsAll = {
 		defense: '60 - 692 - 5,000',
 		range: 50 * 10,
 	},
-
 	'u0001-3-chai': {
 		displayName: 'Chai',
 		element: 'Water',
@@ -1043,7 +1051,6 @@ export const unitsAll = {
 		defense: '60 - 692 - 5,000',
 		range: 50 * 10,
 	},
-
 	'u0001-3-choco': {
 		displayName: 'Choco',
 		element: 'Water',
@@ -1055,7 +1062,6 @@ export const unitsAll = {
 		defense: '60 - 692 - 5,000',
 		range: 50 * 10,
 	},
-
 	'u0001-3-milky': {
 		displayName: 'Milky',
 		element: 'Water',
@@ -1067,6 +1073,4 @@ export const unitsAll = {
 		defense: '60 - 692 - 5,000',
 		range: 50 * 10,
 	},
-
-
 };

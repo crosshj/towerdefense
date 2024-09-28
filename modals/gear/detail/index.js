@@ -11,6 +11,7 @@ const icons = {};
 const friendlyEffectName = (name) => {
 	const friendlyMap = {
 		physicalAttack: 'Physical ATK',
+		physicalDefense: 'Physical DEF',
 		hp: 'HP',
 	};
 	return friendlyMap[name] || name;

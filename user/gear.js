@@ -3,6 +3,7 @@ import {
 	decompressChars,
 	deCompressGear,
 } from '../utils/compress.js';
+import { clone } from '../utils/utils.js';
 import { updateAllChars } from './characters.js';
 import { getUserFromAPI, updateUserFromAPI } from './user.js';
 
@@ -53,4 +54,36 @@ export const assignGearToUnit = async (gearId, unitId) => {
 	} catch (e) {
 		return { error: e.message };
 	}
+};
+
+export const getGearModifiers = (unit) => {
+	const modTotals = {};
+	for (const { effects } of Object.values(unit?.gear || {})) {
+		for (const [key, value] of Object.entries(effects || {})) {
+			modTotals[key] = (modTotals[key] || 0) + value;
+			if (['physicalDefense', 'magicalDefense'].includes(key)) {
+				modTotals.defense = (modTotals.defense || 0) + value;
+			}
+			if (['physicalAttack', 'magicalAttack'].includes(key)) {
+				modTotals.attack = (modTotals.attack || 0) + value;
+			}
+		}
+	}
+	return modTotals;
+};
+
+export const applyGearModifiers = (unit) => {
+	const unitModded = clone(unit);
+	for (const { effects } of Object.values(unit?.gear || {})) {
+		for (const [key, value] of Object.entries(effects || {})) {
+			unitModded[key] = (unitModded[key] || 0) + value;
+			if (['physicalDefense', 'magicalDefense'].includes(key)) {
+				unitModded.defense = (unitModded.defense || 0) + value;
+			}
+			if (['physicalAttack', 'magicalAttack'].includes(key)) {
+				unitModded.attack = (unitModded.attack || 0) + value;
+			}
+		}
+	}
+	return unitModded;
 };
