@@ -10,6 +10,8 @@ const drops = {
 		{ code: 'u0001-4-commando7', probability: 1 },
 		{ code: 'u0001-4-cupcake', probability: 0.1 },
 		{ code: 'u0001-5-cane', probability: 0.1 },
+		{ code: 'u0001-3-kopi', probability: 0.1 },
+		{ code: 'u0001-3-choco', probability: 0.1 },
 	],
 	'units-rare': [
 		{ code: 'u0001-3-soda', probability: 1 },
