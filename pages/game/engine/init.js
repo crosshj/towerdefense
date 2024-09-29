@@ -25,6 +25,10 @@ const adjustGame = async (game, params) => {
 
 	game.state.towers[0] = attackerTower;
 
+	if (params.zone === 'friendBattle') {
+		game.state.towers[1].ai = 'enemyOne';
+	}
+
 	game.state.effects = {
 		friend: params?.friend,
 		ice: params?.fxIce,

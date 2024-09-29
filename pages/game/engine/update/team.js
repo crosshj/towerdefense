@@ -28,7 +28,7 @@ export const spawnTeam = (state) => {
 		char.spawnTicker = char.respawn;
 	};
 	for (const tower of towers) {
-		if (tower?.type === 'defender' && tower.team.length > 1) {
+		if (tower?.type === 'defender' && tower.ai === 'enemyOne') {
 			enemyOneSpawnTicker(state, tower);
 			continue;
 		}

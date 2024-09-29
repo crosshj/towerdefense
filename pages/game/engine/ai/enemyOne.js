@@ -8,12 +8,11 @@ const chargeMineral = (state) => {
 };
 
 const updateMineral = (state) => {
-	const mineralRate = 4; //4;
+	const mineralRate = 3.65; //4;
 	// const thisLevel = mineralMap[state.mineral.level - 1];
 	// const nextLevel = mineralMap[state.mineral.level];
 	// state.mineral.capacity = thisLevel.amount;
 	// state.mineral.levelCost = nextLevel?.cost || 0;
-	if (state.mineral.amount === state.mineral.capacity) return;
 	state.mineral.amount += mineralRate;
 	if (state.mineral.amount >= state.mineral.capacity) {
 		state.mineral.amount = state.mineral.capacity;
@@ -43,6 +42,7 @@ const enemyState = {
 	awaitLevelChance: 0.1,
 	awaitCharge: false,
 	awaitChargeChance: 0.5,
+	shouldLevel: true,
 	mineral: {
 		charge: 0, //cooldown
 		chargeRate: 20, //cooldown rate
@@ -53,9 +53,22 @@ const enemyState = {
 };
 
 export const enemyOneSpawnTicker = (state, tower) => {
+	if (!enemyState.maxMineralNeeded) {
+		enemyState.maxMineralNeeded = Math.max(
+			...tower.team.map((x) => x.mineralCost)
+		);
+	}
+	if (
+		enemyState.shouldLevel &&
+		enemyState.maxMineralNeeded <= enemyState.mineral.capacity
+	) {
+		enemyState.shouldLevel = false;
+	}
+
 	enemyState.tick = state.tick;
 	chargeMineral(enemyState); // cooldown
 	updateMineral(enemyState);
+
 	const mineralLevelable = enemyState.mineral.charge === 100;
 	const mineralCharged =
 		enemyState.mineral.amount === enemyState.mineral.capacity;
@@ -109,6 +122,7 @@ export const enemyOneSpawnTicker = (state, tower) => {
 	}
 
 	if (
+		enemyState.shouldLevel &&
 		enemyState.mineral.level <= 8 &&
 		Math.random() < enemyState.awaitLevelChance
 	) {

@@ -46,6 +46,7 @@ export default async () => {
 					hp: towerData.hp,
 					deployed: [],
 					team: enemyTeam,
+					ai: 'enemyOne',
 				},
 			],
 			tick: 0,

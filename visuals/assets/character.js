@@ -17,7 +17,7 @@ export const characterAnimationGetter = async (
 	const skeleton = '/assets/character/FighterBase/FighterBase_ske.json';
 	const atlas = '/assets/character/FighterBase/FighterBase_tex.json';
 	let texture = '/assets/character/FighterBase/Elements/Normal_tex.png';
-	if (character?.type === 'defender') {
+	if (character?.type === 'defender' && !character?.code) {
 		texture = '/assets/character/FighterBase/skins/0-enemy_tex.png';
 	}
 	if (character?.element && !character?.code) {
