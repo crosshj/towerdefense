@@ -151,7 +151,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 	selector.addEventListener('change', updateTeamIcons);
 	await updateTeamIcons();
 
-	const locationMap = await getLocationMap();
+	const locationMap = await getLocationMap(params);
 	const location = locationMap[params.zone];
 
 	if (params?.number) {
@@ -173,7 +173,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 		_: 'title',
 		title: location?.title || 'Select Team',
 		visibility: 'visible',
-		back: `/pages/stage/${stage}/index.html`,
+		back: params?.back || `/pages/stage/${stage}/index.html`,
 	};
 	if (params?.zone === 'friendBattle') {
 		titleConfig.title = 'FRIEND BATTLE';

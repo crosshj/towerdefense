@@ -214,7 +214,7 @@ export const unitsAll = {
 		element: 'Psychic',
 		type: 'Intelligence',
 		rank: 5,
-		mineralCost: 300, // Aileen's broken cost = 150
+		mineralCost: 300,
 		// orig mineralCost: 450,
 		attack: '1,328 - 11,122 - 25,996',
 		hp: '3,978 - 33,360 - 77,976',

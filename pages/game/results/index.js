@@ -208,6 +208,9 @@ const goBack = ({ params }) => {
 	if (params.zone === 'friendBattle') {
 		src = '/pages/pvp/';
 	}
+	if (stage === 'special') {
+		src = '/pages/specialStage/index.html';
+	}
 	window.parent.postMessage({
 		_: 'navigate',
 		src,

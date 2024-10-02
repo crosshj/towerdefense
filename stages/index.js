@@ -10,6 +10,15 @@ const stageMap = {
 	industrial1: './main/industrial1.js',
 	pantheon1: './main/pantheon1.js',
 	friendBattle1: './pvp/friendBattle1.js',
+
+	//special stage
+	event1: './special/event1.js',
+	crimson1: './special/crimson1.js',
+	evolution1: './special/evolution1.js',
+	verdant1: './special/verdant1.js',
+	moving1: './special/moving1.js',
+	wizard1: './special/wizard1.js',
+	immortal1: './special/immortal1.js',
 };
 
 export const featherCost = {
@@ -24,6 +33,15 @@ export const featherCost = {
 	industrial1: 3,
 	pantheon1: 4,
 	friendBattle: 1, //TODO: specialFeathers!
+
+	//special stage
+	event1: 1,
+	crimson1: 1,
+	evolution1: 1,
+	verdant1: 1,
+	moving1: 1,
+	wizard1: 1,
+	immortal1: 1,
 };
 
 export const getStage = async (params) => {
@@ -77,7 +95,10 @@ export const getPotentialStageRewards = async (params) => {
 	const { zone, name: paramsName } = params;
 	const name = zone || paramsName;
 	const stagePath = stageMap[name] || stageMap[name + '1'];
-	if (!stagePath) return;
+	if (!stagePath) {
+		console.log('no stagePath', { params });
+		return;
+	}
 
 	const stage = await import(stagePath);
 	const rewards = await stage.getRewards();

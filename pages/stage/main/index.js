@@ -158,7 +158,7 @@ const setup = async () => {
 		clickHandle: (color) => {
 			const [which, number] = (clickColorMap[color] || '').split('-');
 			if (!which) return;
-			const src = `/pages/game/selectTeam/index.html?zone=${which}&number=${number}`;
+			const src = `/pages/game/selectTeam/index.html?stage=main&zone=${which}&number=${number}`;
 			bgMusic.stop();
 			window.parent.postMessage({ _: 'navigate', src });
 		},

@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 	);
 	console.log({ params });
 
-	const locationMap = await getLocationMap();
+	const locationMap = await getLocationMap(params);
 	const location = locationMap[params.zone];
 	if (params?.number) {
 		location.title = 'STAGE ' + params.number;

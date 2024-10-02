@@ -1,40 +1,68 @@
-export const getLocationMap = async () => {
-	const locationMap = {
-		openField: {
-			name: 'Open Field',
-		},
-		forest: {
-			name: 'Forest Path',
-		},
-		water: {
-			name: 'Coastal Region',
-		},
-		sakura: {
-			name: 'Sakura',
-		},
-		highlands: {
-			name: 'Rocky Highlands',
-		},
-		tropical: {
-			name: 'Tropical Graveyard',
-		},
-		oasis: {
-			name: 'Thunder Oasis',
-		},
-		tundra: {
-			name: 'Frozen Tundra',
-		},
-		industrial: {
-			name: 'Industrial Complex',
-		},
-		pantheon: {
-			name: 'Mystical Pantheon',
-		},
+const mainStageMap = {
+	openField: {
+		name: 'Open Field',
+	},
+	forest: {
+		name: 'Forest Path',
+	},
+	water: {
+		name: 'Coastal Region',
+	},
+	sakura: {
+		name: 'Sakura',
+	},
+	highlands: {
+		name: 'Rocky Highlands',
+	},
+	tropical: {
+		name: 'Tropical Graveyard',
+	},
+	oasis: {
+		name: 'Thunder Oasis',
+	},
+	tundra: {
+		name: 'Frozen Tundra',
+	},
+	industrial: {
+		name: 'Industrial Complex',
+	},
+	pantheon: {
+		name: 'Mystical Pantheon',
+	},
 
-		//pvp
-		friendBattle: {},
-	};
-	return locationMap;
+	//pvp
+	friendBattle: {},
+};
+
+const specialStageMap = {
+	event: {
+		name: 'Event',
+	},
+	crimson: {
+		name: 'Crimson Volcano',
+	},
+	evolution: {
+		name: 'Evolution Mine',
+	},
+	verdant: {
+		name: 'Verdant Tree',
+	},
+	moving: {
+		name: 'Moving Glacier',
+	},
+	wizard: {
+		name: "Wizard's Maze Cube",
+	},
+	immortal: {
+		name: 'Immortal Skull Stone',
+	},
+};
+
+export const getLocationMap = async ({ stage } = {}) => {
+	if (stage === 'special') {
+		return specialStageMap;
+	}
+	return mainStageMap;
 };
 
 const stageColorMap = {
