@@ -1038,7 +1038,7 @@ export const unitsAll = {
 		attack: '1,115 - 12,175 - 50,000',
 		hp: '6,691 - 72,735 - 200,000',
 		defense: '60 - 692 - 5,000',
-		range: 50 * 10,
+		range: 20 * 10,
 	},
 	'u0001-3-chai': {
 		displayName: 'Chai',
@@ -1049,7 +1049,7 @@ export const unitsAll = {
 		attack: '1,115 - 12,175 - 50,000',
 		hp: '6,691 - 72,735 - 200,000',
 		defense: '60 - 692 - 5,000',
-		range: 50 * 10,
+		range: 40 * 10,
 	},
 	'u0001-3-choco': {
 		displayName: 'Choco',
@@ -1071,6 +1071,18 @@ export const unitsAll = {
 		attack: '1,115 - 12,175 - 50,000',
 		hp: '6,691 - 72,735 - 200,000',
 		defense: '60 - 692 - 5,000',
-		range: 50 * 10,
+		range: 60 * 10,
+	},
+
+	'u0001-3-sencha': {
+		displayName: 'Sencha',
+		element: 'Water',
+		type: 'Agility',
+		rank: 3,
+		mineralCost: 150,
+		attack: '2,115 - 12,175 - 70,000',
+		hp: '6,691 - 72,735 - 300,000',
+		defense: '60 - 692 - 5,000',
+		range: 80 * 10,
 	},
 };
