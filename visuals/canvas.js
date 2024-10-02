@@ -7,8 +7,8 @@ export const canvasHorizontal = async (args) => {
 	const { parent, image, height, offsetX, clickMap, clickHandle, onDraw } =
 		args;
 	const canvas = document.createElement('canvas');
-	canvas.width = parent.clientWidth;
-	canvas.height = height;
+	canvas.width = window.innerWidth;
+	canvas.height = window.innerHeight;
 	const ctx = canvas.getContext('2d', {
 		antialias: true,
 		depth: false,
@@ -19,6 +19,7 @@ export const canvasHorizontal = async (args) => {
 	parent.insertAdjacentElement('afterbegin', canvas);
 	if (image) {
 		await scrollable({
+			...args,
 			image,
 			horizontal: true,
 			canvas,
@@ -47,8 +48,8 @@ export const canvasVertical = async (args) => {
 		onDraw,
 	} = args;
 	const canvas = document.createElement('canvas');
-	canvas.width = width;
-	canvas.height = parent.clientHeight;
+	canvas.width = window.innerWidth;
+	canvas.height = window.innerHeight;
 	const ctx = canvas.getContext('2d', {
 		antialias: true,
 		depth: false,

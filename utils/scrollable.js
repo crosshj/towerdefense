@@ -289,9 +289,11 @@ const horizontal = async (args) => {
 	const { image, canvas, ctx, clickMap, clickHandle, onDraw, onScroll } =
 		args;
 	const background = await loadImage(image);
-	const originalHeight = background.height;
-	const newHeight = canvas.height;
+	const scaleFactor = args?.scaleFactor || background.height / canvas.height;
 	let offsetX = args.offsetX || 0;
+	if (args.offsetX === 'center') {
+		offsetX = (background.width - canvas.width / scaleFactor) / 2;
+	}
 
 	let drawClickCanvas;
 	let handleTap;
@@ -339,16 +341,32 @@ const horizontal = async (args) => {
 				height: background.height,
 			});
 		}
+		if (scaleFactor === 1) {
+			const originalHeight = background.height;
+			const newHeight = canvas.height;
+			ctx.drawImage(
+				bgCanvas,
+				offsetX,
+				0,
+				canvas.width,
+				originalHeight,
+				0,
+				0,
+				canvas.width,
+				newHeight
+			);
+			return;
+		}
 		ctx.drawImage(
 			bgCanvas,
-			offsetX,
+			offsetX / scaleFactor,
+			0,
+			canvas.width * scaleFactor,
+			canvas.height * scaleFactor,
+			0,
 			0,
 			canvas.width,
-			originalHeight,
-			0,
-			0,
-			canvas.width,
-			newHeight
+			canvas.height
 		);
 	};
 	draw();
@@ -358,7 +376,7 @@ const horizontal = async (args) => {
 			const deltaX = event.deltaX;
 			offsetX = Math.min(
 				Math.max(offsetX + deltaX, 0),
-				background.width - canvas.width
+				background.width - canvas.width / scaleFactor
 			);
 			onScroll && onScroll({ offsetX });
 			draw();

@@ -328,6 +328,7 @@ const setup = async () => {
 		offsetX: 1200 - document.body.clientWidth / 2,
 		height: 500,
 		clickMap: '/assets/home/background_clicks.png',
+		scaleFactor: 1,
 		clickHandle: (color) => {
 			const which = clickColorMap[color];
 			if (!which) {
