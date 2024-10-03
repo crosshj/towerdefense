@@ -2,6 +2,7 @@ import { SVGIcons } from '../../../assets/icons.svg.js';
 import { getDefenseTeam } from '../../../user/pvp.js';
 import { setOpponentTeamCache } from '/utils/cache.js';
 import { getFriends } from '/user/getFriends.js';
+import { attachHorizontalScroll } from '../../my-team/handlePointerEvents.js';
 
 const versusGraphic = SVGIcons.versusGraphic();
 
@@ -37,6 +38,8 @@ const friendCardComponent = (friend) => `
 
 const attachFriendsList = async ({ friends, nextButton }) => {
 	const friendsList = document.querySelector('.items-list');
+	attachHorizontalScroll(friendsList);
+
 	const friendsListSort = document.querySelector(
 		'.filter-dropdown custom-select'
 	);

@@ -1,6 +1,7 @@
 import { SVGIcons } from '../../../assets/icons.svg.js';
 import { getStageInfo } from '../../../stages/index.js';
 import { getLocationMap } from '../../../utils/locations.js';
+import { attachHorizontalScroll } from '../../my-team/handlePointerEvents.js';
 import { getFriends } from '/user/getFriends.js';
 import { animateOrb } from '/visuals/objects/orb.js';
 
@@ -56,6 +57,7 @@ const friendCardComponent = (friend) => `
 
 const attachFriendsList = async ({ friends, params }) => {
 	const friendsList = document.querySelector('.items-list');
+	attachHorizontalScroll(friendsList);
 	const friendsListSort = document.querySelector(
 		'.filter-dropdown custom-select'
 	);

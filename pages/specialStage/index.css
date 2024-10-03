@@ -3,6 +3,7 @@
 body {
 	background: black;
 	font-family: sans-serif;
+	user-select: none;
 
 	.stageEntryTime {
 		position: absolute;
@@ -125,6 +126,7 @@ body {
 				}
 
 				.timer {
+					display: none;
 					position: absolute;
 					bottom: 10%;
 					left: 50%;
@@ -142,7 +144,7 @@ body {
 					left: 30px;
 					right: 30px;
 
-					font-size: 24px;
+					font-size: 22px;
 					text-align: center;
 					color: #ff505061;
 					font-weight: 900;

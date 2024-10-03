@@ -1,3 +1,5 @@
+import { attachHorizontalScroll } from '../my-team/handlePointerEvents.js';
+
 const pageTitle = 'SPECIAL STAGE';
 const getWorlds = async () => {
 	return [
@@ -100,6 +102,9 @@ const attachHandlers = () => {
 
 const setup = async () => {
 	document.title += `: ${pageTitle}`;
+
+	const container = document.querySelector('.container');
+	attachHorizontalScroll(container);
 
 	await attachWorlds();
 	attachHandlers();

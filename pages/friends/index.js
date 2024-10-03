@@ -1,5 +1,6 @@
 import { getFriends } from '../../user/getFriends.js';
 import { SVGIcons } from '../../assets/icons.svg.js';
+import { attachHorizontalScroll } from '../my-team/handlePointerEvents.js';
 
 const gearIcon = SVGIcons.gear();
 
@@ -39,6 +40,7 @@ const friendCardComponent = (friend) => `
 `;
 const attachFriendsList = async () => {
 	const friendsList = document.querySelector('.items-list');
+	attachHorizontalScroll(friendsList);
 	const friends = await getFriends();
 	const friendsListSort = document.querySelector(
 		'.filter-dropdown custom-select'

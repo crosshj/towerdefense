@@ -6,6 +6,7 @@ import {
 } from '../../utils/cache.js';
 import { characterDiv } from './index.components.js';
 import {
+	attachHorizontalScroll,
 	attachTap,
 	handlePointerEvents,
 	removeTap,
@@ -31,35 +32,6 @@ const attachFilterUpdateListener = ({ state }) => {
 			await state.onFilterHandler(state);
 			return;
 		}
-	});
-};
-
-const attachHorizontalScroll = (scrollable) => {
-	// mouse wheel
-	scrollable.addEventListener('wheel', (e) => {
-		e.preventDefault();
-		scrollable.scrollLeft += e.deltaY;
-	});
-
-	//dragging
-	let pointerFrom;
-	let elementFrom;
-	const onDrag = (event) => {
-		scrollable.scrollLeft = elementFrom - event.clientX + pointerFrom;
-	};
-	scrollable.addEventListener('pointerdown', (event) => {
-		if (
-			event.target.classList.contains('icon') &&
-			!event.target.classList.contains('used')
-		)
-			return;
-		if (event.pointerType !== 'mouse') return;
-		pointerFrom = event.clientX;
-		elementFrom = scrollable.scrollLeft;
-		document.addEventListener('pointermove', onDrag);
-	});
-	document.addEventListener('pointerup', (event) => {
-		document.removeEventListener('pointermove', onDrag);
 	});
 };
 

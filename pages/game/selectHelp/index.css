@@ -1,5 +1,9 @@
 @import url('/vendor/google.fonts.css');
 
+body {
+	user-select: none;
+}
+
 :root {
 	--rows: 13% 13% 58% 1fr;
 	--columns: 1fr 16% 46% 10% 1fr;

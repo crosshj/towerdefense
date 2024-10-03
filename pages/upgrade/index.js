@@ -1,3 +1,5 @@
+import { attachHorizontalScroll } from '../my-team/handlePointerEvents.js';
+
 document.addEventListener('DOMContentLoaded', async () => {
 	window.parent.postMessage({
 		_: 'title',
@@ -11,6 +13,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 		friendPoints: false,
 	};
 	window.parent.postMessage({ _: 'stats', ...args });
+
+	const upgradesList = document.querySelector('.upgrades-list');
+	attachHorizontalScroll(upgradesList);
 
 	const upgradeEls = Array.from(
 		document.querySelectorAll('.upgrades-list .upgrade')

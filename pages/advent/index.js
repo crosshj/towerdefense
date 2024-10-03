@@ -1,3 +1,5 @@
+import { attachHorizontalScroll } from '../my-team/handlePointerEvents.js';
+
 const pageTitle = 'ADVENT';
 
 const pageDone = () => {
@@ -48,6 +50,7 @@ const SelectorItem = (item, i) => `
 
 const attachSelector = async () => {
 	const el = document.querySelector('.selector');
+	attachHorizontalScroll(el);
 	const items = new Array(5).fill();
 	el.innerHTML = items.map(SelectorItem).join('\n');
 };
