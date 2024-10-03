@@ -214,8 +214,14 @@ export const slotDragAndDrop = (args) => {
 };
 
 export const attachHorizontalScroll = (scrollable) => {
+	// this function is only necessary on windows machines
+	const isWindows = /Win/.test(navigator.platform);
+	if (!isWindows) return;
+
 	// mouse wheel
 	scrollable.addEventListener('wheel', (e) => {
+		if (e.deltaY === 0) return;
+		// Only prevent default if trying to scroll vertically
 		e.preventDefault();
 		scrollable.scrollLeft += e.deltaY;
 	});
@@ -235,10 +241,10 @@ export const attachHorizontalScroll = (scrollable) => {
 		if (event.pointerType !== 'mouse') return;
 		pointerFrom = event.clientX;
 		elementFrom = scrollable.scrollLeft;
-		document.addEventListener('pointermove', onDrag);
+		scrollable.addEventListener('pointermove', onDrag);
 	});
 	document.addEventListener('pointerup', (event) => {
-		document.removeEventListener('pointermove', onDrag);
+		scrollable.removeEventListener('pointermove', onDrag);
 	});
 };
 
