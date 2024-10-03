@@ -1086,14 +1086,14 @@ export const unitsAll = {
 		range: 80 * 10,
 	},
 
-	'u0001-3-lime': {
-		displayName: 'Lime',
+	'u0001-3-spritz': {
+		displayName: 'Spritz',
 		element: 'Water',
 		type: 'Strength',
 		rank: 3,
 		mineralCost: 150,
-		attack: '2,115 - 12,175 - 70,000',
-		hp: '6,691 - 72,735 - 300,000',
+		attack: '1,115 - 12,175 - 50,000',
+		hp: '6,691 - 72,735 - 200,000',
 		defense: '60 - 692 - 5,000',
 		range: 20 * 10,
 	},
