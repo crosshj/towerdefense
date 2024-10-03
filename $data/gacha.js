@@ -17,6 +17,8 @@ const drops = {
 		{ code: 'u0001-3-sencha', probability: 1 },
 	],
 	'units-rare': [
+		{ code: 'u0001-3-bloo', probability: 1 },
+		{ code: 'u0001-3-vinia', probability: 1 },
 		{ code: 'u0001-3-oran', probability: 1 },
 		{ code: 'u0001-3-spritz', probability: 1 },
 		{ code: 'u0001-3-soda', probability: 1 },
