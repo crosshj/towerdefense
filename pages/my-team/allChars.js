@@ -34,6 +34,35 @@ const attachFilterUpdateListener = ({ state }) => {
 	});
 };
 
+const attachHorizontalScroll = (scrollable) => {
+	// mouse wheel
+	scrollable.addEventListener('wheel', (e) => {
+		e.preventDefault();
+		scrollable.scrollLeft += e.deltaY;
+	});
+
+	//dragging
+	let pointerFrom;
+	let elementFrom;
+	const onDrag = (event) => {
+		scrollable.scrollLeft = elementFrom - event.clientX + pointerFrom;
+	};
+	scrollable.addEventListener('pointerdown', (event) => {
+		if (
+			event.target.classList.contains('icon') &&
+			!event.target.classList.contains('used')
+		)
+			return;
+		if (event.pointerType !== 'mouse') return;
+		pointerFrom = event.clientX;
+		elementFrom = scrollable.scrollLeft;
+		document.addEventListener('pointermove', onDrag);
+	});
+	document.addEventListener('pointerup', (event) => {
+		document.removeEventListener('pointermove', onDrag);
+	});
+};
+
 export const attachAllCharacters = (args) => {
 	const {
 		characters,
@@ -49,6 +78,7 @@ export const attachAllCharacters = (args) => {
 
 	const allCharactersDiv = document.getElementById('all-characters');
 	allCharactersDiv.innerHTML = '';
+	attachHorizontalScroll(allCharactersDiv);
 
 	let sorted = [];
 
@@ -148,12 +178,14 @@ export const attachAllCharacters = (args) => {
 		characterCard.dataset.stars = character.stars;
 		characterCard.dataset.id = character.id;
 
-		if (typeof isUsed === 'function' && isUsed(character)) {
+		const charUsed = typeof isUsed === 'function' && isUsed(character);
+		if (charUsed) {
 			characterCard.classList.add('used');
 		}
+		const charIcon = characterCard.querySelector('.icon');
+		charUsed && charIcon.classList.add('used');
 
 		if (dragStart && dragEnd) {
-			const charIcon = characterCard.querySelector('.icon');
 			handlePointerEvents({
 				element: charIcon,
 				onTap: () => {
