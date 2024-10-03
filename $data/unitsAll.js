@@ -746,20 +746,6 @@ export const unitsAll = {
 		defense: '69 - 510 - 1,242',
 		range: 40 * 10,
 	},
-	// https://rangers.lerico.net/en/ranger/u004e-clark
-	'u0001-3-soda': {
-		displayName: 'Poppy',
-		displayName2: 'da Soda',
-		element: 'Normal',
-		type: 'Strength',
-		rank: 3,
-		mineralCost: 150,
-		//orig cost 450
-		attack: '325 - 1,924 - 4,939',
-		hp: '1,890 - 11,133 - 28,571',
-		defense: '340 - 2,017 - 5,179',
-		range: 30 * 10,
-	},
 
 	// https://rangers.lerico.net/en/ranger/u005e-clark
 	'u0001-4-chrono': {
@@ -1132,6 +1118,21 @@ export const unitsAll = {
 		hp: '6,691 - 72,735 - 200,000',
 		defense: '60 - 692 - 5,000',
 		range: 20 * 10,
+	},
+
+	// https://rangers.lerico.net/en/ranger/u004e-clark
+	'u0001-3-soda': {
+		displayName: 'Poppy',
+		displayName2: 'da Soda',
+		element: 'Normal',
+		type: 'Strength',
+		rank: 3,
+		mineralCost: 150,
+		//orig cost 450
+		attack: '325 - 1,924 - 4,939',
+		hp: '1,890 - 11,133 - 28,571',
+		defense: '340 - 2,017 - 5,179',
+		range: 30 * 10,
 	},
 
 	
