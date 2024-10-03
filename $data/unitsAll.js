@@ -1097,4 +1097,16 @@ export const unitsAll = {
 		defense: '60 - 692 - 5,000',
 		range: 20 * 10,
 	},
+
+	'u0001-3-oran': {
+		displayName: 'Oran',
+		element: 'Water',
+		type: 'Intelligence',
+		rank: 3,
+		mineralCost: 150,
+		attack: '1,115 - 12,175 - 50,000',
+		hp: '6,691 - 72,735 - 200,000',
+		defense: '60 - 692 - 5,000',
+		range: 20 * 10,
+	},
 };
