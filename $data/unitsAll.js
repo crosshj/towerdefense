@@ -1135,4 +1135,18 @@ export const unitsAll = {
 		range: 20 * 10,
 	},
 
+	//https://rangers.lerico.net/en/ranger/u2004e-clara
+	'u0001-5-queenlollie': {
+		displayName: 'Lollie',
+		displayName2: 'Queen',
+		element: 'Candy',
+		type: 'Intelligence',
+		rank: 5,
+		mineralCost: 900,
+		attack: '3,900 - 63,400 - 132,120',
+		hp: '20,000 - 317,500 - 661,500',
+		defense: '0 - 0 - 0',
+		range: 340,
+	},
+
 };
