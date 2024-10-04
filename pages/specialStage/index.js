@@ -79,7 +79,7 @@ const attachHandlers = () => {
 			console.log('unhandled stage click', e.target);
 			return;
 		}
-		const src = `/pages/game/selectTeam/index.html?stage=special&zone=${world}&number=${stage}&back=/pages/specialStage/index.html`;
+		const src = `/pages/specialStage/pregame.html?world=${world}&stage=${stage}`;
 		window.parent.postMessage({ _: 'navigate', src });
 	});
 

@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1"
+		/>
+		<title></title>
+		<link rel="stylesheet" href="pregame.css" />
+	</head>
+	<body>
+		<div class="background">
+			<div class="clouds">
+				<svg width="0" height="0">
+					<filter id="filter">
+						<feTurbulence
+							type="fractalNoise"
+							baseFrequency="0.009"
+							numOctaves="4"
+							seed="8510"
+						/>
+						<feDisplacementMap in="SourceGraphic" scale="240" />
+					</filter>
+				</svg>
+			</div>
+			<div class="planet"></div>
+			<div class="planet2"></div>
+			<div class="planet3"></div>
+
+			<svg width="0" height="0">
+				<filter id="twinkle">
+					<feTurbulence
+						type="fractalNoise"
+						baseFrequency="0.02"
+						numOctaves="3"
+						seed="2"
+						result="noise"
+					/>
+					<feDisplacementMap
+						in="SourceGraphic"
+						in2="noise"
+						scale="20"
+						xChannelSelector="R"
+						yChannelSelector="G"
+					/>
+					<feGaussianBlur stdDeviation="2" />
+					<feComponentTransfer>
+						<feFuncA type="linear" slope="3" />
+					</feComponentTransfer>
+				</filter>
+			</svg>
+			<div class="star star0"></div>
+			<div class="star star1"></div>
+			<div class="star star2"></div>
+			<div class="star star3"></div>
+			<div class="star star4"></div>
+			<div class="star star5"></div>
+			<div class="star star6"></div>
+			<div class="star star7"></div>
+			<div class="star star8"></div>
+			<div class="star star9"></div>
+			<div class="star star10"></div>
+			<div class="star star11"></div>
+			<div class="star star12"></div>
+			<div class="star star13"></div>
+			<div class="star star14"></div>
+			<svg viewBox="0 0 500 75" preserveAspectRatio="none">
+				<defs>
+					<linearGradient
+						id="a"
+						x1="239.6"
+						x2="239.6"
+						y1="81.7"
+						y2="140.1"
+						gradientTransform="translate(0 -55)"
+						gradientUnits="userSpaceOnUse"
+					>
+						<stop offset="0" stop-color="#fff" />
+						<stop offset=".1" stop-color="#eff0f1" />
+						<stop offset=".2" stop-color="#ced2d5" />
+						<stop offset=".4" stop-color="#bec4c7" />
+						<stop offset=".8" stop-color="#466476" />
+						<stop offset="1" stop-color="#1c435a" />
+					</linearGradient>
+					<linearGradient
+						id="c"
+						x1="250.1"
+						x2="250.1"
+						y1="63.6"
+						y2="97.9"
+						gradientTransform="translate(0 -26)"
+						gradientUnits="userSpaceOnUse"
+					>
+						<stop offset="0" stop-color="#2766a1" />
+						<stop offset=".5" stop-color="#0986cc" />
+						<stop offset=".8" stop-color="#025495" />
+						<stop offset="1" stop-color="#0a5a9f" />
+					</linearGradient>
+					<linearGradient
+						id="b"
+						x1="250.3"
+						x2="250.3"
+						y1="46.2"
+						y2="71.8"
+						gradientTransform="translate(0 1)"
+						gradientUnits="userSpaceOnUse"
+					>
+						<stop
+							offset="0"
+							stop-color="rgb(.39216% 9.4118% 27.451%)"
+						/>
+						<stop offset="1" stop-color="#152e74" />
+					</linearGradient>
+					<linearGradient
+						id="d"
+						x1="242"
+						x2="242"
+						y1="-16.9"
+						y2="2.2"
+						gradientTransform="translate(8 21)"
+						gradientUnits="userSpaceOnUse"
+					>
+						<stop offset="0" stop-color="#e5edf6" />
+						<stop offset=".1" stop-color="#d8e3ee" />
+						<stop offset=".2" stop-color="#c1d3e1" />
+						<stop offset="1" stop-color="#6b9cc1" />
+					</linearGradient>
+				</defs>
+				<path
+					fill="url(#a)"
+					d="m0 24 71 12s3-7 7-6l32 4c3 0 6 7 6 7l129 8 177-12s6-8 11-9l67-11v59H0V24Z"
+				/>
+				<path
+					fill="url(#b)"
+					d="m149 55 35-7h132l36 7-7 20-187 1-9-21Z"
+				/>
+				<path
+					fill="url(#c)"
+					d="M319 50H182s-15 3-22 6c-10 4-14 0-9-7l15-18c4-4 8-7 15-8h139c7 1 11 4 14 8l15 18c6 7 2 11-8 7-7-3-22-6-22-6Z"
+				/>
+				<path fill="url(#d)" d="M196 4h108l14 19H182l14-19Z" />
+			</svg>
+		</div>
+		<div class="container">
+			<div class="left">
+				<div class="difficulty"></div>
+				<div class="title"></div>
+				<div class="retries"></div>
+			</div>
+			<div class="right">
+				<div class="potentialRewards">
+					<div class="reward"></div>
+					<div class="reward"></div>
+					<div class="reward"></div>
+					<div class="reward"></div>
+					<div class="reward"></div>
+					<div class="reward"></div>
+					<div class="reward"></div>
+					<div class="reward"></div>
+				</div>
+				<div class="rewardsBlurb">
+					Rewards you can earn in this stage.
+				</div>
+			</div>
+		</div>
+		<div class="selector">
+			<div class="leftArrow"></div>
+			<div class="indicator"></div>
+			<div class="rightArrow"></div>
+		</div>
+		<div class="actions">
+			<button class="enter">ENTER</button>
+		</div>
+		<script src="pregame.js" type="module"></script>
+	</body>
+</html>

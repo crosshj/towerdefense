@@ -1,0 +1,263 @@
+@import url('/vendor/google.fonts.css');
+@import url('/visuals/components.css');
+
+:root {
+	--background-light: #1d0b5f;
+	--background-medium: #000f28;
+	--background-dark: black;
+	--rewards-blurb-text: #a96cf0;
+	--difficulty-label-text: #9854e7;
+	--retries-text1: #8978ac;
+	--retries-text2: #f7e947;
+}
+
+body {
+	font-family: sans-serif;
+	background: var(--background-dark);
+	color: white;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin: 0;
+	height: 100vh;
+	overflow: hidden;
+
+	button {
+		--button-light: #d3170c;
+		--button-text: #fefefe;
+		--button-border-light: #d3170c;
+	}
+}
+
+.container {
+	display: flex;
+	position: absolute;
+	width: 625px;
+	top: 90px;
+	bottom: 34vh;
+	.left,
+	.right {
+		flex: 1;
+	}
+	.left {
+		display: grid;
+		grid-template-rows: auto 1fr 1fr;
+		gap: 10px;
+		font-size: 18px;
+		.difficulty {
+			width: fit-content;
+			display: flex;
+			border: 1px solid #fff4;
+			gap: 5px;
+			padding: 5px;
+			.label {
+				color: var(--difficulty-label-text);
+			}
+		}
+		.title {
+			font-size: 28px;
+		}
+		.retries {
+			display: flex;
+			align-items: center;
+			color: var(--retries-text1);
+			.remaining {
+				padding-left: 5px;
+				color: var(--retries-text2);
+			}
+			.addRetries {
+				background-color: yellow;
+				width: 29px;
+				aspect-ratio: 1 / 1;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				color: black;
+				border-radius: 50%;
+				border: 2.5px solid black;
+				box-sizing: border-box;
+				font-weight: 900;
+				box-shadow:
+					1px 3px 0px #0003,
+					inset 2px 4px #fff3,
+					inset -2px -4px #ffa800a8;
+				font-size: 21px;
+				padding-bottom: 2px;
+				margin-left: 10px;
+			}
+		}
+	}
+	.right {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		.rewardsBlurb {
+			margin-top: 10px;
+			color: var(--rewards-blurb-text);
+		}
+		.potentialRewards {
+			display: grid;
+			grid-template-columns: 1fr 1fr 1fr 1fr;
+			flex: 1;
+			width: 90%;
+			gap: 5px;
+			.reward.used {
+				border-top-left-radius: 20px;
+				border-bottom-right-radius: 20px;
+				border: 1px solid #fff4;
+				background: #0003;
+			}
+			.reward {
+				.stars {
+					color: yellow;
+					letter-spacing: -5px;
+					text-align: center;
+				}
+			}
+		}
+	}
+}
+
+.actions {
+	position: absolute;
+	bottom: 5vh;
+	left: 0;
+	width: 100vw;
+	display: flex;
+	justify-content: center;
+	.enter {
+		width: 22vw;
+		height: 11vh;
+		font-size: 28px;
+		padding: unset;
+	}
+}
+
+.background {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100vw;
+	height: 100vh;
+
+	svg {
+		width: 100%;
+		position: absolute;
+		bottom: 0;
+		height: 27vh;
+	}
+
+	.planet,
+	.planet2,
+	.planet3 {
+		border-radius: 50%;
+		width: 165px;
+		aspect-ratio: 1 / 1;
+		background: #312263;
+		position: absolute;
+		top: -110px;
+		left: 250px;
+		box-shadow:
+			inset 20px -16px 33px 20px #090311,
+			0 0 0px 2px black;
+	}
+	.planet2 {
+		top: 38vh;
+		left: 35px;
+		width: 100px;
+		background: #214178;
+	}
+	.planet3 {
+		top: 205px;
+		left: 85%;
+		width: 60px;
+		background: #214178;
+		box-shadow:
+			inset 1px -14px 33px 6px #090311,
+			0 0 0px 1px black;
+	}
+	.clouds {
+		width: 100%;
+		height: 100%;
+		transform: scale(1.6); /* This zooms the element by 1.5 times */
+		transform-origin: center center;
+		background: radial-gradient(
+			ellipse at center,
+			var(--background-light),
+			var(--background-medium) 47%,
+			var(--background-dark)
+		);
+		filter: url(#filter);
+	}
+
+	.star {
+		width: 1px;
+		height: 1px;
+		background-color: white;
+		border-radius: 50%;
+		/* filter: url(#twinkle); */
+		/* animation: twinkle 1.5s infinite ease-in-out; */
+		/* box-shadow: 0 0 10px rgba(255, 255, 255, 0.8); */
+		position: absolute;
+		left: 50%;
+		top: 27px;
+		&.star1 {
+			left: 20px;
+			top: 50%;
+		}
+		&.star2 {
+			left: 400px;
+			top: 60%;
+		}
+		&.star3 {
+			left: 90%;
+			top: 300px;
+		}
+		&.star4 {
+			left: 70%;
+			top: 400px;
+		}
+		&.star5 {
+			left: 80%;
+			top: 20%;
+		}
+		&.star6 {
+			left: 10%;
+			top: 80%;
+		}
+		&.star7 {
+			left: 30%;
+			top: 30%;
+		}
+		&.star8 {
+			left: 60%;
+			top: 30%;
+		}
+		&.star9 {
+			left: 50%;
+			top: 80%;
+		}
+		&.star10 {
+			left: 90%;
+			top: 10%;
+		}
+		&.star11 {
+			left: 40%;
+			top: 90%;
+		}
+		&.star12 {
+			left: 70%;
+			top: 50%;
+		}
+		&.star13 {
+			left: 20%;
+			top: 40%;
+		}
+		&.star14 {
+			left: 85%;
+			top: 75%;
+		}
+	}
+}
