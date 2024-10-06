@@ -301,10 +301,10 @@
 		}
 
 		.character-card {
-			pointer-events: all;
+			/* pointer-events: all;
 			& > * {
 				pointer-events: none;
-			}
+			} */
 			position: relative;
 			display: inline-flex;
 			flex-direction: column;
@@ -356,10 +356,10 @@
 				flex: 1;
 				max-width: 100%;
 				.icon {
-					pointer-events: all;
+					/* pointer-events: all;
 					& > * {
 						pointer-events: none;
-					}
+					} */
 					width: 100px;
 					aspect-ratio: 1 / 1;
 					margin-left: 10px;
