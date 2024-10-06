@@ -6,13 +6,25 @@
 	--background-medium: #000f28;
 	--background-dark: black;
 	--rewards-blurb-text: #a96cf0;
+
+	--difficulty-border: #604c90;
 	--difficulty-label-text: #9854e7;
+	--difficulty-easy-color: #23ca02;
+	--difficulty-normal-color: orange;
+	--difficulty-hard-color: #ff2f00;
+
 	--retries-text1: #8978ac;
 	--retries-text2: #f7e947;
+
+	--indicator-bg-light: #175494;
+	--indicator-bg-dark: #041123;
+	--selector-arrow-light: #b4d0e4;
+	--selector-arrow-dark: #3d84e1;
 }
 
 body {
 	font-family: sans-serif;
+	font-weight: 500;
 	background: var(--background-dark);
 	color: white;
 	display: flex;
@@ -35,7 +47,7 @@ body {
 	position: absolute;
 	width: 625px;
 	top: 90px;
-	bottom: 34vh;
+	bottom: 37vh;
 	.left,
 	.right {
 		flex: 1;
@@ -47,12 +59,36 @@ body {
 		font-size: 18px;
 		.difficulty {
 			width: fit-content;
+			box-sizing: border-box;
 			display: flex;
-			border: 1px solid #fff4;
-			gap: 5px;
-			padding: 5px;
+			border: 2px solid var(--difficulty-border);
+			border-radius: 2px;
+			gap: 7px;
+			padding: 5px 10px;
 			.label {
 				color: var(--difficulty-label-text);
+			}
+			&.easy {
+				color: var(--difficulty-easy-color);
+			}
+			&.normal {
+				color: var(--difficulty-normal-color);
+			}
+			&.hard {
+				color: var(--difficulty-hard-color);
+			}
+			.bar {
+				display: flex;
+				align-items: center;
+				gap: 3px;
+				& > div {
+					height: 80%;
+					width: 9px;
+					background: grey;
+				}
+				div.filled {
+					background: currentColor;
+				}
 			}
 		}
 		.title {
@@ -110,13 +146,52 @@ body {
 				background: #0003;
 			}
 			.reward {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				padding-block: 8px;
+				padding-inline: 10px;
+				img {
+					width: 40px;
+				}
 				.stars {
 					color: yellow;
-					letter-spacing: -5px;
-					text-align: center;
+					letter-spacing: -3px;
+					margin-left: -3px;
+					font-size: 13px;
+					line-height: 20px;
 				}
 			}
 		}
+	}
+}
+
+.selector {
+	position: absolute;
+	width: 650px;
+	top: 72.5vh;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	.arrowBig {
+		fill: var(--selector-arrow-light);
+	}
+	.arrowSmall {
+		fill: var(--selector-arrow-dark);
+	}
+	svg {
+		width: 10vh;
+		filter: blur(1px);
+	}
+	.indicator {
+		background: linear-gradient(
+			0deg,
+			var(--indicator-bg-light),
+			var(--indicator-bg-dark)
+		);
+		height: 20px;
+		width: 190px;
+		border-radius: 5px;
 	}
 }
 
