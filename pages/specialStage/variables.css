@@ -1,0 +1,20 @@
+:root {
+	--background-light: #1d0b5f;
+	--background-medium: #000f28;
+	--background-dark: black;
+	--rewards-blurb-text: #a96cf0;
+
+	--difficulty-border: #604c90;
+	--difficulty-label-text: #9854e7;
+	--difficulty-easy-color: #36c815;
+	--difficulty-normal-color: #e1db00;
+	--difficulty-hard-color: #e38700;
+
+	--retries-text1: #8978ac;
+	--retries-text2: #f7e947;
+
+	--indicator-bg-light: #175494;
+	--indicator-bg-dark: #041123;
+	--selector-arrow-light: #b4d0e4;
+	--selector-arrow-dark: #3d84e1;
+}

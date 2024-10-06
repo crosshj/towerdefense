@@ -1,26 +1,6 @@
 @import url('/vendor/google.fonts.css');
 @import url('/visuals/components.css');
-
-:root {
-	--background-light: #1d0b5f;
-	--background-medium: #000f28;
-	--background-dark: black;
-	--rewards-blurb-text: #a96cf0;
-
-	--difficulty-border: #604c90;
-	--difficulty-label-text: #9854e7;
-	--difficulty-easy-color: #3b9427;
-	--difficulty-normal-color: #b3af2d;
-	--difficulty-hard-color: #b26a00;
-
-	--retries-text1: #8978ac;
-	--retries-text2: #f7e947;
-
-	--indicator-bg-light: #175494;
-	--indicator-bg-dark: #041123;
-	--selector-arrow-light: #b4d0e4;
-	--selector-arrow-dark: #3d84e1;
-}
+@import url('./variables.css');
 
 body {
 	font-family: sans-serif;
@@ -127,7 +107,7 @@ body {
 	.right {
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
+		justify-content: start;
 		align-items: center;
 		.rewardsBlurb {
 			margin-top: 10px;
@@ -136,7 +116,8 @@ body {
 		.potentialRewards {
 			display: grid;
 			grid-template-columns: 1fr 1fr 1fr 1fr;
-			flex: 1;
+			grid-template-rows: min-content min-content;
+			/* flex: 1; */
 			width: 90%;
 			gap: 5px;
 			.reward.used {
@@ -144,13 +125,17 @@ body {
 				border-bottom-right-radius: 20px;
 				border: 1px solid #fff4;
 				background: #0003;
+				padding-block: 8px;
+				padding-inline: 10px;
+				display: flex;
 			}
 			.reward {
+				height: fit-content;
 				display: flex;
 				flex-direction: column;
 				align-items: center;
-				padding-block: 8px;
-				padding-inline: 10px;
+				display: none;
+
 				img {
 					width: 40px;
 				}
