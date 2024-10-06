@@ -1,46 +1,4 @@
-import { getLocationMap } from '../../utils/locations.js';
-import { specialStage } from '../../$data/stages.js';
-
-const getStageData = async ({ locationMap, world, stage }) => {
-	const locationLabel = locationMap[world]?.name || world;
-	console.log('getStageData', { world, stage });
-
-	const worldInfo = specialStage[world];
-	console.log({ worldInfo });
-	return {
-		difficulty: 'Hard',
-		difficultyLevel: stage,
-		title: `${locationLabel} ${stage}`,
-		retries: '-',
-		retriesLeft: '-',
-		rewards: [
-			{
-				grade: 1,
-				image: '/assets/materials/ev-101.png',
-			},
-			{
-				grade: 2,
-				image: '/assets/materials/ev-102.png',
-			},
-			{
-				grade: 1,
-				image: '/assets/materials/ev-201.png',
-			},
-			{
-				grade: 2,
-				image: '/assets/materials/ev-202.png',
-			},
-			{
-				grade: 1,
-				image: '/assets/materials/ev-301.png',
-			},
-			{
-				grade: 2,
-				image: '/assets/materials/ev-302.png',
-			},
-		],
-	};
-};
+import { getStageInfo } from '../../utils/stageInfo.js';
 
 const pageDone = ({ params }) => {
 	window.parent.postMessage({
@@ -60,7 +18,7 @@ const pageDone = ({ params }) => {
 };
 
 const StageDetails = (stageData) => `
-	<div class="difficulty ${stageData.difficulty.toLowerCase()}">
+	<div class="difficulty ${(stageData?.difficulty || '').toLowerCase() || ''}">
 		<div class="label">Difficulty Level</div>
 		<div class="value">${stageData.difficulty}</div>
 		<div class="bar">
@@ -142,8 +100,12 @@ const domLoaded = async () => {
 	console.log({ params });
 
 	const { world, stage } = params;
-	const locationMap = await getLocationMap({ stage: 'special' });
-	const stageData = await getStageData({ locationMap, world, stage });
+	const stageData = await getStageInfo({
+		stage: 'special',
+		zone: world,
+		number: stage,
+	});
+	console.log({ stageData });
 
 	attachDetails({ stageData });
 	attachRewards({ stageData });

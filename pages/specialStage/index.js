@@ -1,51 +1,13 @@
+import { getActiveStages } from '../../utils/stageInfo.js';
 import { attachHorizontalScroll } from '../my-team/handlePointerEvents.js';
 
 const pageTitle = 'SPECIAL STAGE';
-const getWorlds = async () => {
-	return [
-		{ id: 'event', event: true, image: '/assets/stage/special/world1.svg' },
 
-		// SCHEDULED
-		{
-			id: 'crimson',
-			title: 'CRIMSON VOLCANO',
-			image: '/assets/stage/special/worlds/crimsonVolcano.svg',
-		},
-		// {
-		// 	id: 'verdant',
-		// 	title: 'VERDANT TREE',
-		// 	image: '/assets/stage/special/world1.svg',
-		// },
-		// {
-		// 	id: 'moving',
-		// 	title: 'MOVING GLACIER',
-		// 	image: '/assets/stage/special/world1.svg',
-		// },
-		// END SCHEDULED
-		{
-			id: 'evolution',
-			title: 'EVOLUTION MINE',
-			image: '/assets/stage/special/worlds/evolutionMine.svg',
-			difficulty: 'easy',
-		},
-		{
-			id: 'wizard',
-			title: "WIZARD'S MAZE CUBE",
-			image: '/assets/stage/special/world1.svg',
-			difficulty: 'normal',
-		},
-		{
-			id: 'immortal',
-			title: 'IMMORTAL SKULL STONE',
-			image: '/assets/stage/special/world1.svg',
-			difficulty: 'hard',
-		},
-	];
-};
-
-const StageContainer = ({ image = '', title = '', id = '' } = {}) => {
+const StageContainer = (args) => {
+	const { image = '', name = '', id = '', difficulty } = args || {};
 	return `
 		<div class="world">
+			${args.status === 'COMING SOON' ? '<div class="comingSoon">COMING SOON</div>' : ''}
 			<div class="central-image" style="background-image: url('${image}');"></div>
 
 			<div class="stage" data-stage="${id}|1" style="top: 65%; left: 10%;">1</div>
@@ -56,17 +18,18 @@ const StageContainer = ({ image = '', title = '', id = '' } = {}) => {
 			<div class="stage special" data-stage="${id}|6" style="top: 65%; right: 10%; background-color: rgba(255, 50, 50, 0.5);">😈</div>
 
 			<div class="timer"></div>
-			<div class="title">${title}</div>
+			<div class="title" style="color:${args.color || 'white'}">${name}</div>
+			${difficulty ? `<div class="difficulty ${difficulty.toLowerCase()}">${difficulty}</div>` : ''}
 		</div>
 	`;
 };
 
 const attachWorlds = async () => {
 	const scrollDiv = document.querySelector('.scroll');
-	const worlds = await getWorlds();
+	const activeWorlds = await getActiveStages({ stage: 'special' });
 	scrollDiv.innerHTML = `
 		<div class="worldSpacer"></div>
-		${worlds.map(StageContainer).join('')}
+		${activeWorlds.map(StageContainer).join('')}
 		<div class="worldSpacer"></div>
 	`;
 };

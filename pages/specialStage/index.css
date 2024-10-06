@@ -1,5 +1,11 @@
 @import url('/vendor/google.fonts.css');
 
+:root {
+	--difficulty-easy-color: #3b9427;
+	--difficulty-normal-color: #b3af2d;
+	--difficulty-hard-color: #b26a00;
+}
+
 body {
 	background: black;
 	font-family: sans-serif;
@@ -63,6 +69,7 @@ body {
 		-webkit-overflow-scrolling: touch;
 
 		.scroll {
+			min-width: 100vw;
 			background: url(/assets/stage/special/background.png);
 			padding-top: 40px;
 			padding-bottom: 100px;
@@ -86,6 +93,28 @@ body {
 				width: 246px;
 				height: 300px;
 				position: relative;
+
+				.comingSoon {
+					position: absolute;
+					background: #5c5c5c33;
+					color: #c5b9cba8;
+					top: 38px;
+					left: -7px;
+					width: calc(100% + 14px);
+					height: 100%;
+					border-radius: 10px;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					font-size: 36px;
+					font-weight: 900;
+					z-index: 3;
+					padding-bottom: 68px;
+					box-sizing: border-box;
+					text-align: center;
+					text-shadow: 0 0 10px #000000;
+					pointer-events: all;
+				}
 
 				.stage {
 					pointer-events: all;
@@ -140,14 +169,64 @@ body {
 
 				.title {
 					position: absolute;
-					bottom: 0px;
+					top: calc(100% - 53px);
 					left: 30px;
 					right: 30px;
-
 					font-size: 22px;
 					text-align: center;
-					color: #ff505061;
 					font-weight: 900;
+					opacity: 0.4;
+					text-transform: uppercase;
+				}
+
+				.difficulty {
+					background: black;
+					position: absolute;
+					bottom: -29px;
+					left: 0;
+					right: 0;
+					font-size: 11px;
+					line-height: 20px;
+					text-align: center;
+					font-weight: 900;
+					border: 2px solid
+						color-mix(in srgb, currentColor 40%, transparent);
+					border-radius: 5px;
+					width: min-content;
+					margin: auto;
+					padding-left: 24px;
+					padding-right: 10px;
+
+					&::before {
+						content: '';
+						position: absolute;
+						top: -2px;
+						left: -7px;
+						width: 24px;
+						aspect-ratio: 1/1;
+						background: color-mix(in srgb, currentColor 70%, black);
+						transform: rotate(45deg);
+						clip-path: polygon(
+							25% 0%,
+							75% 0%,
+							100% 25%,
+							100% 75%,
+							75% 100%,
+							25% 100%,
+							0% 75%,
+							0% 25%
+						);
+					}
+
+					&.easy {
+						color: var(--difficulty-easy-color);
+					}
+					&.normal {
+						color: var(--difficulty-normal-color);
+					}
+					&.hard {
+						color: var(--difficulty-hard-color);
+					}
 				}
 			}
 		}
