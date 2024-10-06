@@ -95,6 +95,7 @@ body {
 				position: relative;
 
 				.comingSoon {
+					padding-inline: 80px;
 					position: absolute;
 					background: #5c5c5c33;
 					color: #c5b9cba8;
