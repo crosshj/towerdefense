@@ -2,6 +2,7 @@ import { specialStage } from '../$data/stages.js';
 import { specialRewards } from '../$data/drops.js';
 import { materials as materialsInfo } from '../$data/materials.js';
 import { unitsAll as unitsInfo } from '../$data/unitsAll.js';
+import { getStageTracking } from '../user/stageTrack.js';
 
 const stageInfoMap = {
 	special: specialStage,
@@ -44,14 +45,20 @@ const getDrops = ({ stage, zone, number }) => {
 export const getStageInfo = async ({ stage, zone, number }) => {
 	const stageInfo = stageInfoMap[stage][zone];
 	const { rewards, experience } = getDrops({ stage, zone, number });
+
+	const retries = stageInfo.maxTries || 5;
+	const stageTracking = getStageTracking();
+	const trackingKey = `${stage}_${zone}_${number}`;
+	const retriesUsed = stageTracking.count[trackingKey] || 0;
+
 	return {
 		experience,
 		difficulty: stageInfo.difficulty || 'Normal',
 		difficultyLevel: number,
 		title: `${stageInfo.name} ${number}`,
 		rewards,
-		retries: stageInfo.maxTries || 5,
-		retriesLeft: '-',
+		retries,
+		retriesLeft: retries - retriesUsed,
 	};
 };
 

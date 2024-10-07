@@ -1,6 +1,8 @@
 import { userIconsMap } from '../assets/userIcons/$map.js';
 import { getUserLevelInfo } from '../utils/experience.js';
+import { pipe } from '../utils/functional.js';
 import { clone } from '../utils/utils.js';
+import { StageTrackAPIModifier } from './stageTrack.js';
 
 const LS_NAME = 'USER_INFO';
 
@@ -18,6 +20,16 @@ const defaultValue = {
 	exp: 0,
 };
 
+const preProcessPost = pipe(
+	StageTrackAPIModifier.post
+	//
+);
+const postProcessGet = pipe(
+	(x) => x.json(),
+	StageTrackAPIModifier.get
+	//
+);
+
 export const getUserFromAPI = async () => {
 	try {
 		const userToken = localStorage.getItem('USER_TOKEN');
@@ -33,7 +45,7 @@ export const getUserFromAPI = async () => {
 		const user = await fetch(
 			'https://datamosh.vercel.app/api/teedee/players/getByToken',
 			opts
-		).then((x) => x.json());
+		).then(postProcessGet);
 		if (user.error) throw new Error(user.error);
 		return user;
 	} catch (e) {
@@ -54,7 +66,7 @@ export const updateUserFromAPI = async (data) => {
 			},
 			body: JSON.stringify({
 				token: userToken,
-				...data,
+				...(await preProcessPost(data)),
 			}),
 		};
 		const user = await fetch(

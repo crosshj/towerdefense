@@ -79,7 +79,8 @@ body {
 			align-items: center;
 			color: var(--retries-text1);
 			.remaining {
-				padding-left: 5px;
+				padding-left: 7px;
+				padding-right: 5px;
 				color: var(--retries-text2);
 			}
 			.addRetries {

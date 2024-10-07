@@ -1,12 +1,23 @@
+function arraysEqual(arr1, arr2) {
+	if (arr1.length !== arr2.length) return false;
+	for (let i = 0; i < arr1.length; i++) {
+		if (arr1[i] !== arr2[i]) return false;
+	}
+	return true;
+}
+
 export function expect(actual) {
 	return {
 		toBe(expected) {
 			if (actual === expected) {
 				return true;
-			} else {
-				console.error(`Expected ${actual} to be ${expected}`);
-				return false;
 			}
+			if (Array.isArray(actual) && Array.isArray(expected)) {
+				return arraysEqual(actual, expected);
+			}
+
+			console.error(`Expected ${actual} to be ${expected}`);
+			return false;
 		},
 		not: {
 			toBe(expected) {

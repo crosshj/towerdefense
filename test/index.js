@@ -15,6 +15,7 @@ const links = [
 	{ label: 'push' },
 	{ label: 'pvp' },
 	{ label: 'render' },
+	{ label: 'Stage Tracking', href: 'stageTrack.html' },
 	{ label: 'svgIcons' },
 	{ label: 'Unit Leveling' },
 	{ label: 'userHandler' },
