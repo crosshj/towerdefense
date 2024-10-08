@@ -3,6 +3,7 @@ import { UserDataStorage as Store } from '../utils/storage.js';
 const fromAPI = (currentAPI, currentLS) => {
 	//TODO: decompress materials
 	//TODO: handle collision
+	//TODO: reconsitute materials
 	const apiParsed = (currentAPI || '').split(',').reduce((acc, x) => {
 		const [k, v] = x.split(':');
 		if (!k || k === 'undefined') return acc;
