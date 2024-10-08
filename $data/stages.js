@@ -48,6 +48,7 @@ export const specialStage = {
 		difficulty: 'Easy',
 		maxTries: 5,
 		image: '/assets/stage/special/worlds/ascensionSphere.webp',
+		featherCost: [1, 2, 3, 4, 5, 6],
 	},
 	wizard: {
 		id: 'wizard',

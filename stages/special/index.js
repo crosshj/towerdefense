@@ -1,26 +1,32 @@
-import { stageCharacterDrops, stageExperience } from '../../$data/drops.js';
 import { stageEnemies, stageTowers } from '../../$data/enemies.js';
+import { getStageInfo } from '../../utils/stageInfo.js';
 
-export const getRewards = async () => {
+// TODO: get rid of this helper function if possible
+const getInfo = async (args) => {
+	const { stage, world, number } = args;
+	const stageInfo = getStageInfo({
+		stage,
+		number,
+		zone: world,
+	});
+	return stageInfo;
+};
+
+export const getRewards = async (args) => {
+	const info = await getInfo(args);
 	return {
-		coins: 4000,
-		exp: stageExperience.field1(),
-		bonus: {
-			coin: { type: 'coin', probability: 1, amount: 5000 },
-			meteor: { type: 'effect', probability: 0.5 },
-			ice: { type: 'effect', probability: 0.5 },
-			tornado: { type: 'effect', probability: 0.5 },
-			invincible: { type: 'effect', probability: 0.5 },
-			...stageCharacterDrops.field1,
-		},
+		coins: info.coins,
+		exp: info.experience,
+		bonus: info.rewards,
 	};
 };
 
-export default async () => {
-	const towerX = 200;
-	const towerData = stageTowers.field1();
-	const enemyTeam = stageEnemies.field1({ towerX });
+export default async (args) => {
+	const info = await getInfo(args);
+	const towerData = stageTowers.special({ args, info });
+	const enemyTeam = stageEnemies.special({ args, info }, towerData);
 
+	//TODO: much of this is useless detail which should be abstracted
 	return {
 		state: {
 			auto: undefined,
@@ -41,11 +47,12 @@ export default async () => {
 				{
 					type: 'defender',
 					dims: [200, 343],
-					x: towerX,
+					x: towerData.x,
 					color: towerData.color,
 					hp: towerData.hp,
 					deployed: [],
 					team: enemyTeam,
+					ai: 'enemyOne',
 				},
 			],
 			tick: 0,

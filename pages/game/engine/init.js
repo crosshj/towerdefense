@@ -12,6 +12,7 @@ import { updateGameStatus } from './update/game.js';
 import TeamUpdates from './update/team.js';
 import PlayerUpdates from './update/player.js';
 import MissileUpdates from './update/missile.js';
+import { loadImage } from '../../../visuals/assets/assets.js';
 
 const adjustGame = async (game, params) => {
 	const attackerTower = await getTower();
@@ -48,7 +49,7 @@ export const startGame = async ({ menu, params, gameOver }) => {
 		return;
 	}
 	menu.hide();
-	const gameInstance = await thisGame();
+	const gameInstance = await thisGame(params);
 	await adjustGame(gameInstance, params);
 	const state = new State(gameInstance.state);
 
@@ -110,6 +111,16 @@ export const startGame = async ({ menu, params, gameOver }) => {
 			return false;
 		}
 	};
+
+	const backgroundImageIsUrl = (state?.stage?.background || '').includes('/');
+	const assetsIncludesBackground =
+		state.assets.images[state.stage.background];
+	if (backgroundImageIsUrl && !assetsIncludesBackground) {
+		state.assets.images[state.stage.background] = await loadImage(
+			state.stage.background,
+			''
+		);
+	}
 
 	const render = new Render({ state });
 

@@ -1,3 +1,5 @@
+import { getStageInfo } from './stageInfo.js';
+
 const mainStageMap = {
 	openField: {
 		name: 'Open Field',
@@ -34,33 +36,17 @@ const mainStageMap = {
 	friendBattle: {},
 };
 
-const specialStageMap = {
-	event: {
-		name: 'Event',
-	},
-	crimson: {
-		name: 'Crimson Volcano',
-	},
-	evolution: {
-		name: 'Evolution Mine',
-	},
-	verdant: {
-		name: 'Verdant Tree',
-	},
-	moving: {
-		name: 'Moving Glacier',
-	},
-	wizard: {
-		name: "Wizard's Maze Cube",
-	},
-	immortal: {
-		name: 'Immortal Skull Stone',
-	},
-};
-
-export const getLocationMap = async ({ stage } = {}) => {
+export const getLocationMap = async (params = {}) => {
+	const { stage, world, number } = params;
 	if (stage === 'special') {
-		return specialStageMap;
+		const stageInfo = await getStageInfo({
+			stage: 'special',
+			zone: world,
+			number,
+		});
+		return {
+			[world]: stageInfo,
+		};
 	}
 	return mainStageMap;
 };

@@ -48,7 +48,7 @@ const attachHandlers = ({ params }) => {
 	const { world, stage } = params;
 	const enterButton = document.querySelector('button.enter');
 	enterButton.addEventListener('pointerup', () => {
-		const src = `/pages/game/selectTeam/index.html?stage=special&zone=${world}&number=${stage}&back=/pages/specialStage/index.html`;
+		const src = `/pages/game/selectTeam/index.html?zone=special&stage=special&world=${world}&number=${stage}&back=/pages/specialStage/index.html`;
 		window.parent.postMessage({ _: 'navigate', src });
 	});
 };

@@ -89,6 +89,19 @@ export const stageTowers = {
 			background: 'backgroundGhost1',
 		};
 	},
+	special: (args) => {
+		console.log({
+			_: 'TODO: should return different tower depending on args',
+			args,
+		});
+		return {
+			x: 200,
+			hp: 35000,
+			color: '#ffd701',
+			music: 'sunnyFieldBackground',
+			background: '/assets/background/special.webp',
+		};
+	},
 };
 
 export const stageEnemies = {
@@ -333,4 +346,26 @@ export const stageEnemies = {
 			evadeChance: 0.6,
 		},
 	],
+
+	special: (args, tower) => {
+		console.log({
+			_: 'TODO: should return different enemies depending on args',
+			args,
+		});
+		return [
+			{
+				type: 'defender',
+				mineralCost: 100,
+				hp: 300000,
+				range: 560,
+				attack: 95,
+				move: 70,
+				defense: 350,
+				x: tower.x + 140,
+				critChance: 0.1,
+				critMult: 5,
+				evadeChance: 0.3,
+			},
+		];
+	},
 };

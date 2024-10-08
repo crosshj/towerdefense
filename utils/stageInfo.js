@@ -34,6 +34,7 @@ const getDrops = ({ stage, zone, number }) => {
 		.map(MapReward(unitsInfo, 'unit'))
 		.filter((x) => x);
 	return {
+		coins: rewardsDef.coins?.[Number(number) - 1] || 2000,
 		experience: rewardsDef.experience?.[Number(number) - 1] || {},
 		rewards: [
 			...materials,
@@ -44,7 +45,7 @@ const getDrops = ({ stage, zone, number }) => {
 
 export const getStageInfo = async ({ stage, zone, number }) => {
 	const stageInfo = stageInfoMap[stage][zone];
-	const { rewards, experience } = getDrops({ stage, zone, number });
+	const { rewards, experience, coins } = getDrops({ stage, zone, number });
 
 	const retries = stageInfo.maxTries || 5;
 	const stageTracking = getStageTracking();
@@ -53,9 +54,14 @@ export const getStageInfo = async ({ stage, zone, number }) => {
 
 	return {
 		experience,
+		coins,
 		difficulty: stageInfo.difficulty || 'Normal',
 		difficultyLevel: number,
 		title: `${stageInfo.name} ${number}`,
+		name: `${stageInfo.name} ${number}`,
+		featherCost: Array.isArray(stageInfo.featherCost)
+			? stageInfo.featherCost[number - 1]
+			: undefined,
 		rewards,
 		retries,
 		retriesLeft: retries - retriesUsed,

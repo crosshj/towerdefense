@@ -113,7 +113,7 @@ const attachFriendsList = async ({ friends, params }) => {
 };
 
 const attachNextButton = async ({ location, params }) => {
-	const stage = await getStageInfo(params);
+	const stage = location.featherCost ? location : await getStageInfo(params);
 	const nextButton = document.querySelector('button.next-button');
 
 	const featherCost = stage.featherCost || 1;
@@ -171,10 +171,14 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 	updateOptions(params);
 
+	//TODO: migrate to getStageInfo instead of locationMap approach
 	const locationMap = await getLocationMap(params);
-	const location = locationMap[params.zone];
-	if (params?.number) {
+	const location = locationMap[params.world || params.zone];
+	if (params?.number && params?.stage !== 'special') {
 		location.title = 'STAGE ' + params.number;
+	}
+	if (params?.stage === 'special') {
+		location.title = 'SPECIAL STAGE';
 	}
 
 	await attachNextButton({ location, params });

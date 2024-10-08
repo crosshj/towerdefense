@@ -1,3 +1,5 @@
+//NOTE: this stageInfo should be migrated toward: utils/stageInfo.js
+
 const stageMap = {
 	openField1: './main/field1.js',
 	forest1: './main/forest1.js',
@@ -12,6 +14,7 @@ const stageMap = {
 	friendBattle1: './pvp/friendBattle1.js',
 
 	//special stage
+	special: './special/index.js',
 	event1: './special/event1.js',
 	crimson1: './special/crimson1.js',
 	evolution1: './special/evolution1.js',
@@ -33,15 +36,6 @@ export const featherCost = {
 	industrial1: 3,
 	pantheon1: 4,
 	friendBattle: 1, //TODO: specialFeathers!
-
-	//special stage
-	event1: 1,
-	crimson1: 1,
-	evolution1: 1,
-	verdant1: 1,
-	moving1: 1,
-	wizard1: 1,
-	immortal1: 1,
 };
 
 export const getStage = async (params) => {
@@ -61,7 +55,7 @@ export const getStageInfo = async (params) => {
 	if (!stagePath) return;
 
 	const stage = await import(stagePath);
-	const { state } = await stage.default();
+	const { state } = await stage.default(params);
 	return {
 		featherCost: featherCost[name] || featherCost[name + '1'],
 		...state,
@@ -69,7 +63,10 @@ export const getStageInfo = async (params) => {
 };
 
 function pickRandom(items = {}) {
-	const randomValue = Math.random();
+	const maxProbability = Math.max(
+		...Object.values(items).map((item) => item.probability)
+	);
+	const randomValue = Math.random() * maxProbability;
 	const sortedEntries = Object.entries(items).sort(
 		(a, b) => a[1].probability - b[1].probability
 	);
@@ -101,7 +98,7 @@ export const getPotentialStageRewards = async (params) => {
 	}
 
 	const stage = await import(stagePath);
-	const rewards = await stage.getRewards();
+	const rewards = await stage.getRewards(params);
 
 	return rewards;
 };

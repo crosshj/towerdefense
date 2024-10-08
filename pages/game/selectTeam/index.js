@@ -83,7 +83,22 @@ const getEffectsValues = () => {
 	};
 };
 
-const levelAndRewards = async ({ params, location, collection }) => {
+const PageHeader = async ({ params, location, collection }) => {
+	if (params?.zone === 'friendBattle') {
+		return `
+			<div class="level-message">
+				Select the team and items you wish to use for the battle.
+			</div>
+		`;
+	}
+	if (params?.stage === 'special') {
+		return `
+			<div class="level-name">${location?.name || ''}</div>
+			<div class="flex-spacer"></div>
+			<div class="rewards">
+		`;
+	}
+
 	const rewards = await getPotentialStageRewards({ ...params, location });
 	const rewardUnits = [];
 	for (const [code, value] of Object.entries(rewards.bonus)) {
@@ -139,7 +154,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 	console.log({ params });
 
 	if (!params.zone && typeof params.number !== 'undefined') {
-		params.zone = getZoneFromNumber(params.number);
+		params.zone = params.zone || getZoneFromNumber(params.number);
 	}
 
 	const collection = await getCollection();
@@ -151,11 +166,14 @@ document.addEventListener('DOMContentLoaded', async () => {
 	selector.addEventListener('change', updateTeamIcons);
 	await updateTeamIcons();
 
+	//TODO: migrate to getStageInfo instead of locationMap approach
 	const locationMap = await getLocationMap(params);
-	const location = locationMap[params.zone];
-
-	if (params?.number) {
+	const location = locationMap[params.world || params.zone];
+	if (params?.number && params?.stage !== 'special') {
 		location.title = 'STAGE ' + params.number;
+	}
+	if (params?.stage === 'special') {
+		location.title = 'SPECIAL STAGE';
 	}
 
 	await attachEffects();
@@ -182,19 +200,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 	window.parent.postMessage(titleConfig);
 
 	const subHeader = document.querySelector('.sub-header');
-	if (params?.zone === 'friendBattle') {
-		subHeader.innerHTML = `
-			<div class="level-message">
-				Select the team and items you wish to use for the battle.
-			</div>
-		`;
-	} else {
-		subHeader.innerHTML = await levelAndRewards({
-			params,
-			location,
-			collection,
-		});
-	}
+
+	subHeader.innerHTML = await PageHeader({
+		params,
+		location,
+		collection,
+	});
 
 	const nextButton = document.querySelector('button.next-button');
 	nextButton.addEventListener('mousedown', () => {

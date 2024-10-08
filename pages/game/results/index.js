@@ -13,6 +13,20 @@ const RewardsPopoverContent = ({ rewards }) => {
 	if (rewards.bonus.type === 'coin') {
 		rewardKeyDiv = ``;
 	}
+	if (rewards.bonus.type === 'material') {
+		// reward.bonus.image
+		return `
+			<div class="title">
+				${clearBonusSVG()}
+			</div>
+			<div class="indicator">
+				<div>~%:: imagine spin animation ::%~</div>
+				<div style="height: 10px"></div>
+				<img src="${rewards.bonus.image}" />
+				<div>${rewards.bonus.name}</div>
+			</div>
+		`;
+	}
 	return `
 		<div class="title">
 			${clearBonusSVG()}
@@ -58,6 +72,11 @@ const updateRewards = async ({ svgDoc, rewards }) => {
 		await updateEffectsCount({
 			[bonus.key]: 1,
 		});
+	}
+
+	// update effects
+	if (bonus.type === 'material') {
+		console.log('TODO: add material to user inventory', bonus);
 	}
 
 	// update team EXP

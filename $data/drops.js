@@ -178,6 +178,7 @@ export const specialRewards = {
 		],
 	},
 	evolution: {
+		coins: [2000, 3000, 4000, 5000, 6000, 7000],
 		experience: [
 			{ player: 10000, unit: 10000 },
 			{ player: 20000, unit: 20000 },

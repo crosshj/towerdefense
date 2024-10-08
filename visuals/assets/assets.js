@@ -152,7 +152,7 @@ const images = {
 		),
 };
 
-const loadImage = (src, root) =>
+export const loadImage = (src, root) =>
 	new Promise((resolve, reject) => {
 		if (typeof src === 'function') {
 			try {
