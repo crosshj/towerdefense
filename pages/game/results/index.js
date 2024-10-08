@@ -1,6 +1,7 @@
 import { getStageRewards } from '../../../stages/index.js';
 import { addCharactersEXP, addNewCharacter } from '../../../user/characters.js';
 import { updateEffectsCount } from '../../../user/effects.js';
+import { MaterialsStore } from '../../../user/material.js';
 import { addStats } from '../../../user/stats.js';
 import { addUserExperience, forceUpdate, getUser } from '../../../user/user.js';
 import { waitForElementById } from '../../../utils/htmlToElement.js';
@@ -76,7 +77,7 @@ const updateRewards = async ({ svgDoc, rewards }) => {
 
 	// update effects
 	if (bonus.type === 'material') {
-		console.log('TODO: add material to user inventory', bonus);
+		MaterialsStore.lsAdd(bonus.key);
 	}
 
 	// update team EXP

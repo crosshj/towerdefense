@@ -14,11 +14,12 @@ const getInfo = async (args) => {
 
 export const getRewards = async (args) => {
 	const info = await getInfo(args);
-	return {
+	const rewards = {
 		coins: info.coins,
 		exp: info.experience,
-		bonus: info.rewards,
+		bonus: info.rewards.reduce((a, o) => ({ ...a, [o.id]: o }), {}),
 	};
+	return rewards;
 };
 
 export default async (args) => {

@@ -1,9 +1,9 @@
-import { xit, describe, setAutoRefresh } from '/test/.test.js';
+import { describe, setAutoRefresh } from '/test/.test.js';
 import { assignGearToUnit } from '../user/gear.js';
 import { getCharacters } from '../user/characters.js';
 import { forceUpdate } from '../user/user.js';
 
-describe('Gear', (it) => {
+describe('Gear', (it, { xit }) => {
 	it.todo('Mocked cases');
 
 	it.todo('Live cases');

@@ -157,7 +157,9 @@ export function describe(suiteName, suiteFunction) {
 		testResults.push(it.skip(description, testFunction));
 	};
 
-	suiteFunction(boundIt);
+	suiteFunction(boundIt, {
+		xit: boundIt.skip,
+	});
 
 	const finalTestResults = onlyTests.length > 0 ? onlyTests : testResults;
 

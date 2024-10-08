@@ -12,6 +12,7 @@ const links = [
 	{ label: 'effects' },
 	{ label: 'experience' },
 	{ label: 'gear' },
+	{ label: 'materials' },
 	{ label: 'push' },
 	{ label: 'pvp' },
 	{ label: 'render' },

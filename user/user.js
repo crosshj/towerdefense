@@ -2,6 +2,7 @@ import { userIconsMap } from '../assets/userIcons/$map.js';
 import { getUserLevelInfo } from '../utils/experience.js';
 import { pipe } from '../utils/functional.js';
 import { clone } from '../utils/utils.js';
+import { MaterialsStore } from './material.js';
 import { StageTrackAPIModifier } from './stageTrack.js';
 
 const LS_NAME = 'USER_INFO';
@@ -21,12 +22,14 @@ const defaultValue = {
 };
 
 const preProcessPost = pipe(
-	StageTrackAPIModifier.post
+	StageTrackAPIModifier.post,
+	MaterialsStore.apiPost
 	//
 );
 const postProcessGet = pipe(
 	(x) => x.json(),
-	StageTrackAPIModifier.get
+	StageTrackAPIModifier.get,
+	MaterialsStore.apiGet
 	//
 );
 
