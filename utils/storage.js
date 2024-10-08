@@ -45,7 +45,8 @@ export class UserDataStorage {
 	apiGet(apiUser) {
 		apiUser.data[this.apiName] = this.fromAPI(
 			apiUser?.data?.[this.apiName], //currentAPI
-			this.lsGet() //currentLS
+			this.lsGet(), //currentLS
+			{ lsUpdate: this.lsUpdate }
 		);
 		return apiUser;
 	}
