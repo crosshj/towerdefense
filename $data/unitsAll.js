@@ -1149,4 +1149,33 @@ export const unitsAll = {
 		range: 340,
 	},
 
+	//https://rangers.lerico.net/en/ranger/u81-james
+	//https://rangers.lerico.net/en/ranger/u86-cony
+	'u0001-4-ladycindy': {
+		displayName: 'Cindy',
+		displayName2: 'Lady',
+		element: 'Candy',
+		type: 'Intelligence',
+		rank: 4,
+		mineralCost: 250,
+		attack: '1,017 - 7,289 - 17,728',
+		hp: '3,575 - 25,478 - 61,952',
+		defense: '0 - 0 - 0',
+		range: 382,
+	},
+
+	//https://rangers.lerico.net/en/ranger/u123u-brown
+	'u0001-5-kingpopillol': {
+		displayName: 'Popillol',
+		displayName2: 'King',
+		element: 'Candy',
+		type: 'Agility',
+		rank: 5,
+		mineralCost: 1000,
+		attack: '2,709 - 59,004 - 99,504',
+		hp: '44,872 - 902,502 - 1,519,502',
+		defense: '303 - 5,585 - 9,385',
+		range: 155,
+	},
+
 };
