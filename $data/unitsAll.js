@@ -1178,4 +1178,41 @@ export const unitsAll = {
 		range: 155,
 	},
 
+	//changeDET
+	'u0001-5-friesCHANGENAME': {
+		displayName: 'friesCHANGENAME',
+		element: 'Food',
+		type: 'Agility',
+		rank: 5,
+		mineralCost: 1000,
+		attack: '2,709 - 59,004 - 99,504',
+		hp: '44,872 - 902,502 - 1,519,502',
+		defense: '303 - 5,585 - 9,385',
+		range: 155,
+	},
+
+	'u0001-5-burgerCHANGENAME': {
+		displayName: 'burgerCHANGENAME',
+		element: 'Food',
+		type: 'Agility',
+		rank: 5,
+		mineralCost: 1000,
+		attack: '2,709 - 59,004 - 99,504',
+		hp: '44,872 - 902,502 - 1,519,502',
+		defense: '303 - 5,585 - 9,385',
+		range: 155,
+	},
+
+	'u0001-5-gothCHANGENAME': {
+		displayName: 'gothCHANGENAME',
+		element: 'Normal',
+		type: 'Agility',
+		rank: 5,
+		mineralCost: 1000,
+		attack: '2,709 - 59,004 - 99,504',
+		hp: '44,872 - 902,502 - 1,519,502',
+		defense: '303 - 5,585 - 9,385',
+		range: 155,
+	},
+
 };
