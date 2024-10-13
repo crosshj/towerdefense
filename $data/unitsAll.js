@@ -1214,5 +1214,18 @@ export const unitsAll = {
 		defense: '303 - 5,585 - 9,385',
 		range: 155,
 	},
+	//edit stats
+	'u0001-5-rayella': {
+		displayName: 'Rayella ',
+		element: 'Mermaid',
+		type: 'Agility',
+		rank: 5,
+		mineralCost: 1000,
+		attack: '2,709 - 59,004 - 99,504',
+		hp: '44,872 - 902,502 - 1,519,502',
+		defense: '303 - 5,585 - 9,385',
+		range: 155,
+	},
+
 
 };
