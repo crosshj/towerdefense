@@ -107,6 +107,10 @@ body {
 			justify-content: center;
 			align-items: center;
 			font-size: 15px;
+			&.spacer {
+				border: 0;
+				box-shadow: none;
+			}
 			.graphic {
 				position: relative;
 				display: flex;
