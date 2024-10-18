@@ -10,7 +10,7 @@ const pageDone = ({ params }) => {
 	const args = {
 		feathers: false,
 		gems: true,
-		coins: false,
+		coins: true,
 		friendPoints: false,
 	};
 	window.parent.postMessage({ _: 'stats', ...args });

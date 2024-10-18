@@ -1,16 +1,18 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1843 921">
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 1843 921"
+  preserveAspectRatio="none"
+>
   <defs>
     <radialGradient id="bgGrad" cx="935.8" cy="1587" r="921.5" gradientTransform="matrix(1, 0, 0, 1, -14.306999, -1182.422974)" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#e3e8eb"/>
       <stop offset="1" stop-color="#80a0b1"/>
     </radialGradient>
-
-    <radialGradient id="floorGrad" cx="1018.881" cy="972.753" r="921" gradientTransform="matrix(0.992381, 0, 0, 0.08, -101.678324, 780.999884)" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#94a8b4"></stop>
-      <stop offset="1" stop-color="#4c5c66"></stop>
+    <radialGradient id="floorGrad" cx="922" cy="981" r="921" gradientTransform="matrix(0.5, 0, 0, 0.08, 400, 781)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#94a8b4"/>
+      <stop offset="1" stop-color="#4c5c66"/>
     </radialGradient>
   </defs>
-
   <path fill="url(#bgGrad)" d="M0 0h1843v809H0z"/>
   <path fill="url(#floorGrad)" d="M0 802h1843v120H0z"/>
   <path fill="#2a363e" d="M478 801h5L297 921h-15l196-120Z"/>

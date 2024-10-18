@@ -28,13 +28,13 @@ body {
 .message {
 	z-index: 1;
 	position: absolute;
-	bottom: 2.5vh;
+	bottom: 4vh;
 }
 
 .controls {
 	z-index: 1;
 	position: absolute;
-	bottom: 14vh;
+	bottom: 18vh;
 	display: flex;
 	width: 600px;
 	justify-content: center;
@@ -64,7 +64,7 @@ body {
 	gap: 25px;
 	z-index: 1;
 	position: absolute;
-	top: 18vh;
+	top: 16vh;
 
 	.pageButton {
 		display: flex;
