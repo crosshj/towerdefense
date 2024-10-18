@@ -155,9 +155,12 @@ export class UserDataStorage {
 	 */
 	apiGet(apiUser) {
 		if (typeof this.fromAPI !== 'function') return apiUser;
+		let lsValue = this.lsGet();
+		lsValue =
+			typeof this.toLS === 'function' ? this.toLS(lsValue) : lsValue;
 		apiUser.data[this.apiName] = this.fromAPI(
 			apiUser?.data?.[this.apiName], //currentAPI
-			this.lsGet(), //currentLS
+			lsValue, //currentLS
 			{ lsUpdate: this.lsUpdate }
 		);
 		return apiUser;
@@ -169,8 +172,11 @@ export class UserDataStorage {
 	 */
 	apiPost(apiUserData) {
 		if (typeof this.toAPI !== 'function') return apiUserData;
+		let lsValue = this.lsGet();
+		lsValue =
+			typeof this.toLS === 'function' ? this.toLS(lsValue) : lsValue;
 		apiUserData[this.apiName] = this.toAPI(
-			this.lsGet() // currentLS
+			lsValue // currentLS
 		);
 		return apiUserData;
 	}
