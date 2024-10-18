@@ -29,7 +29,6 @@ const updateOptions = async (params) => {
 const trackStage = async (args) => {
 	if (args.params.zone !== 'special') return;
 	const code = `${args.params.zone}_${args.params.world}_${args.params.number}`;
-	console.log({ _: 'TODO: stage tracking', code, args });
 	updateStageTracking(code);
 };
 
