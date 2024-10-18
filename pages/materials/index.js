@@ -59,6 +59,10 @@ const attachMaterials = ({ materials, pageSize = 9 }) => {
 		for (let i = 0; i < spacerCount; i++) {
 			const spacerEl = document.createElement('div');
 			spacerEl.classList.add('material', 'spacer');
+			spacerEl.innerHTML = `
+				<div class="graphic"></div>
+				<div class="details"></div>
+			`;
 			materialsEl.appendChild(spacerEl);
 		}
 
