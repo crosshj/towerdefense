@@ -1,5 +1,6 @@
 import { SVGIcons } from '../../../assets/icons.svg.js';
 import { getStageInfo } from '../../../stages/index.js';
+import { updateStageTracking } from '../../../user/stageTrack.js';
 import { getLocationMap } from '../../../utils/locations.js';
 import { attachHorizontalScroll } from '../../my-team/handlePointerEvents.js';
 import { getFriends } from '/user/getFriends.js';
@@ -23,6 +24,13 @@ const updateOptions = async (params) => {
 			container.classList.remove('disabled');
 		}
 	}
+};
+
+const trackStage = async (args) => {
+	if (args.params.zone !== 'special') return;
+	const code = `${args.params.zone}_${args.params.world}_${args.params.number}`;
+	console.log({ _: 'TODO: stage tracking', code, args });
+	updateStageTracking(code);
 };
 
 const messageCardComponent = () => `
@@ -112,7 +120,8 @@ const attachFriendsList = async ({ friends, params }) => {
 	friendsList.addEventListener('pointerup', handleFriendSelect);
 };
 
-const attachNextButton = async ({ location, params }) => {
+const attachNextButton = async (args) => {
+	const { location, params } = args;
 	const stage = location.featherCost ? location : await getStageInfo(params);
 	const nextButton = document.querySelector('button.next-button');
 
@@ -140,6 +149,7 @@ const attachNextButton = async ({ location, params }) => {
 			_: 'action',
 			minusFeathers: featherCost,
 		});
+		await trackStage(args);
 		await animateOrb(
 			window.innerWidth / 2 + 60,
 			10,

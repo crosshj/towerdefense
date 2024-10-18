@@ -1,6 +1,6 @@
 import { UserDataStorage as Store } from '../utils/storage.js';
 
-const fromAPI = (currentAPI, currentLS, { lsUpdate } = {}) => {
+const fromAPI = (currentAPI, currentLS, { lsUpdate }) => {
 	//TODO: decompress materials
 	//TODO: handle collision
 	//TODO: reconsitute materials
@@ -10,12 +10,12 @@ const fromAPI = (currentAPI, currentLS, { lsUpdate } = {}) => {
 		acc[k] = Number(v);
 		return acc;
 	}, {});
-	console.log({ _: 'fromAPI', apiParsed, currentLS });
+	//console.log({ _: 'fromAPI', apiParsed, currentLS });
 
 	//TODO: unshitify this poor cache invalidation
 	const apiIsNewer =
 		Object.keys(apiParsed).length > Object.keys(currentLS).length;
-	if (typeof lsUpdate === 'function' && apiIsNewer) {
+	if (apiIsNewer) {
 		lsUpdate(apiParsed);
 	}
 	return apiParsed;
@@ -24,7 +24,7 @@ const fromAPI = (currentAPI, currentLS, { lsUpdate } = {}) => {
 const toAPI = (currentLS = {}) => {
 	//TODO: compress materials
 	//TODO: handle collision
-	console.log({ _: 'toAPI', currentLS });
+	//console.log({ _: 'toAPI', currentLS });
 	return Object.entries(currentLS)
 		.map(([k, v]) => `${k}:${v}`)
 		.join(',');
