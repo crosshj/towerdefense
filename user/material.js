@@ -45,6 +45,9 @@ const fromLS = (lsMaterials) => {
 const toLS = (materials) => {
 	return Object.entries(materials).reduce((acc, [k, v]) => {
 		acc[k] = v?.count || v || 0;
+		if (v?.count === null) {
+			acc[k] = 0;
+		}
 		if (typeof v === 'string' && v.includes('[object Object]')) {
 			acc[k] = 0;
 		}
