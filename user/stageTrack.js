@@ -1,5 +1,7 @@
 //import { debounce } from '../utils/debounce.js';
 
+import { clone } from '../utils/utils.js';
+
 const LS_NAME = 'STAGE_TRACKING';
 
 const LocalStorageModifier = {
@@ -35,6 +37,7 @@ const LocalStorageModifier = {
 };
 
 export const getStageTracking = () => LocalStorageModifier.read();
+
 export const updateStageTracking = (stageCode) =>
 	LocalStorageModifier.iterate(stageCode);
 
@@ -57,10 +60,23 @@ export const StageTrackAPIModifier = {
 		}
 		if (apiData.date === currentData.date) {
 			newData.date = apiData.date;
-			newData.count = { ...currentData.count, ...apiData.count };
+			const allKeys = Array.from(
+				new Set([
+					...Object.keys(currentData.count),
+					...Object.keys(apiData.count),
+				])
+			);
+			newData.count = {};
+			for (const key of allKeys) {
+				newData.count[key] = Math.max(
+					currentData.count[key] || 0,
+					apiData.count[key] || 0
+				);
+				newData.count[key] = newData.count[key] || 0;
+			}
 		}
 		apiUser.data.stageTrack = newData;
-
+		LocalStorageModifier.write(newData);
 		return apiUser;
 	},
 };
