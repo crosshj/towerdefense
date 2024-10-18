@@ -87,6 +87,7 @@ export class UserDataStorage {
 		this.fromAPI = options.fromAPI;
 		this.toAPI = options.toAPI;
 		this.fromLS = options.fromLS;
+		this.toLS = options.toLS;
 
 		this.lsGet = this.lsGet.bind(this);
 		this.lsUpdate = this.lsUpdate.bind(this);
@@ -120,7 +121,9 @@ export class UserDataStorage {
 	 * @param {number} [qty=1] - The quantity to remove.
 	 */
 	lsRemove(key, qty = 1) {
-		const lsValue = this.lsGet();
+		let lsValue = this.lsGet();
+		lsValue =
+			typeof this.toLS === 'function' ? this.toLS(lsValue) : lsValue;
 		lsValue[key] = lsValue[key] || 0;
 		lsValue[key] -= qty;
 		if (lsValue[key] === 0) {
@@ -134,7 +137,9 @@ export class UserDataStorage {
 	 * @param {number} [qty=1] - The quantity to add.
 	 */
 	lsAdd(key, qty = 1) {
-		const lsValue = this.lsGet();
+		let lsValue = this.lsGet();
+		lsValue =
+			typeof this.toLS === 'function' ? this.toLS(lsValue) : lsValue;
 		lsValue[key] = lsValue[key] || 0;
 		lsValue[key] += qty;
 		if (lsValue[key] === 0) {
