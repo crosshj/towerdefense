@@ -141,6 +141,9 @@ export class UserDataStorage {
 		lsValue =
 			typeof this.toLS === 'function' ? this.toLS(lsValue) : lsValue;
 		lsValue[key] = lsValue[key] || 0;
+		if (isNaN(lsValue[key])) {
+			lsValue[key] = 0;
+		}
 		lsValue[key] += qty;
 		if (lsValue[key] === 0) {
 			delete lsValue[key];
