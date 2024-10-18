@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1843 921">
+  <defs>
+    <radialGradient id="bgGrad" cx="935.8" cy="1587" r="921.5" gradientTransform="matrix(1, 0, 0, 1, -14.306999, -1182.422974)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e3e8eb"/>
+      <stop offset="1" stop-color="#80a0b1"/>
+    </radialGradient>
+
+    <radialGradient id="floorGrad" cx="1018.881" cy="972.753" r="921" gradientTransform="matrix(0.992381, 0, 0, 0.08, -101.678324, 780.999884)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#94a8b4"></stop>
+      <stop offset="1" stop-color="#4c5c66"></stop>
+    </radialGradient>
+  </defs>
+
+  <path fill="url(#bgGrad)" d="M0 0h1843v809H0z"/>
+  <path fill="url(#floorGrad)" d="M0 802h1843v120H0z"/>
+  <path fill="#2a363e" d="M478 801h5L297 921h-15l196-120Z"/>
+  <path fill="#2a363e" d="M1553 922h5l-186-120h-15l196 120Z" />
+  <path fill="#87989f" d="m246 770 51-1 1 32-63 22 11-53Z"/>
+  <path fill="#a5b1b9" d="M93 769h200c5 0 6-1 3 3l-59 51s-3 2-7 2l-211-2c-5 0-6-4-3-7l67-43c3-2 5-4 10-4Z"/>
+  <path fill="#87989f" d="m1600 772-51-1-1 32 63 22-11-53Z"/>
+  <path fill="#a5b1b9" d="M1753 771h-200c-5 0-6-1-3 2l59 52 7 1 211-1c5 0 6-5 3-8l-67-42c-3-2-5-4-10-4Z"/>
+</svg>

@@ -1,4 +1,5 @@
 import { UserDataStorage as Store } from '../utils/storage.js';
+import { materials as materialsInfo } from '../$data/materials.js';
 
 const fromAPI = (currentAPI, currentLS, { lsUpdate }) => {
 	//TODO: decompress materials
@@ -30,8 +31,20 @@ const toAPI = (currentLS = {}) => {
 		.join(',');
 };
 
+const fromLS = (lsMaterials) => {
+	const materials = {};
+	for (const key of Object.keys(lsMaterials)) {
+		materials[key] = {
+			...materialsInfo[key],
+			count: lsMaterials[key],
+		};
+	}
+	return materials;
+};
+
 export const MaterialsStore = new Store({
 	name: 'materials',
+	fromLS,
 	fromAPI,
 	toAPI,
 });

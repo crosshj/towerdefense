@@ -10,8 +10,36 @@
 		<link rel="stylesheet" href="index.css" />
 	</head>
 	<body>
-		<span>WIP:materials</span>
-		<div class="currentMaterials"></div>
+		<div class="background"></div>
+		<div class="materials">
+			<div class="prevPage pageButton">
+				<svg viewBox="0 0 500 500">
+					<path
+						d="M 399.458 88.533 C 408.296 81.234 411.163 54.009 401.306 42.03 C 391.331 29.908 364.313 26.98 354.769 34.805 L 92.498 250 L 354.769 465.195 C 364.313 473.02 391.331 470.092 401.306 457.97 C 411.163 445.991 408.296 418.766 399.458 411.467 L 205.467 250 L 399.458 88.533 Z"
+						style="fill: currentColor"
+					></path>
+				</svg>
+			</div>
+			<div class="currentPage"></div>
+			<div class="nextPage pageButton">
+				<svg viewBox="0 0 500 500">
+					<path
+						d="M 100.542 88.533 C 91.704 81.234 88.837 54.009 98.694 42.03 C 108.669 29.908 135.687 26.98 145.231 34.805 L 407.502 250 L 145.231 465.195 C 135.687 473.02 108.669 470.092 98.694 457.97 C 88.837 445.991 91.704 418.766 100.542 411.467 L 294.533 250 L 100.542 88.533 Z"
+						style="fill: currentColor"
+					></path>
+				</svg>
+			</div>
+		</div>
+		<div class="controls">
+			<div class="pageNumber bordered"></div>
+			<div class="selectors">
+				<div class="grade bordered">Grade</div>
+				<div class="filter bordered">Filter</div>
+			</div>
+		</div>
+		<div class="message">
+			You can acquire evolution materials in special stages.
+		</div>
 		<script src="index.js" type="module"></script>
 	</body>
 </html>
