@@ -1,3 +1,5 @@
+const K = 1000;
+
 export const stageExperience = {
 	field1: () => ({ player: 12000, unit: 12000 }),
 	forest1: () => ({ player: 20000, unit: 20000 }),
@@ -77,6 +79,39 @@ export const stageCharacterDrops = {
 };
 
 export const specialRewards = {
+	evolution: {
+		coins: [
+			2 * K,
+			6.08 * K,
+			15.96 * K,
+			28.14 * K,
+			53.51 * K,
+			61.53 * K, //
+		],
+		experience: [
+			{ player: 12.0 * K, unit: 2.5 * K },
+			{ player: 154.0 * K, unit: 41.47 * K },
+			{ player: 128.99 * K, unit: 26.87 * K },
+			{ player: 247.67 * K, unit: 51.6 * K },
+			{ player: 534.97 * K, unit: 111.45 * K },
+			{ player: 641.96 * K, unit: 133.74 * K },
+		],
+		unit: [
+			'',
+			'',
+			'',
+			'',
+			'', //
+		],
+		material: [
+			'ev-101:0.3, ev-102:0.3, ev-201:0.3, ev-202:0.3, ev-301:0.3, ev-302:0.3',
+			'ev-101:0.3, ev-102:0.3, ev-201:0.3, ev-202:0.3, ev-301:0.3, ev-302:0.3',
+			'ev-102:0.3, ev-103:0.3, ev-202:0.3, ev-203:0.3, ev-302:0.3, ev-303:0.3',
+			'ev-102:0.3, ev-103:0.3, ev-202:0.3, ev-203:0.3, ev-302:0.3, ev-303:0.3',
+			'ev-102:0.3, ev-103:0.3, ev-202:0.3, ev-203:0.3, ev-302:0.3, ev-303:0.3',
+			'ev-103:0.3, ev-203:0.3, ev-303:0.3',
+		],
+	},
 	event: {
 		experience: [
 			{ player: 10000, unit: 10000 },
@@ -177,32 +212,6 @@ export const specialRewards = {
 			'ev-101:0.3, ev-102:0.3, ev-201:0.3, ev-202:0.3, ev-301:0.3, ev-302:0.3',
 		],
 	},
-	evolution: {
-		coins: [2000, 3000, 4000, 5000, 6000, 7000],
-		experience: [
-			{ player: 10000, unit: 10000 },
-			{ player: 20000, unit: 20000 },
-			{ player: 30000, unit: 30000 },
-			{ player: 40000, unit: 40000 },
-			{ player: 50000, unit: 50000 },
-			{ player: 60000, unit: 60000 },
-		],
-		unit: [
-			'',
-			'',
-			'',
-			'',
-			'', //
-		],
-		material: [
-			'ev-101:0.3, ev-102:0.3, ev-201:0.3, ev-202:0.3, ev-301:0.3, ev-302:0.3',
-			'ev-101:0.3, ev-102:0.3, ev-201:0.3, ev-202:0.3, ev-301:0.3, ev-302:0.3',
-			'ev-102:0.3, ev-103:0.3, ev-202:0.3, ev-203:0.3, ev-302:0.3, ev-303:0.3',
-			'ev-102:0.3, ev-103:0.3, ev-202:0.3, ev-203:0.3, ev-302:0.3, ev-303:0.3',
-			'ev-102:0.3, ev-103:0.3, ev-202:0.3, ev-203:0.3, ev-302:0.3, ev-303:0.3',
-			'ev-103:0.3, ev-203:0.3, ev-303:0.3',
-		],
-	},
 	wizard: {
 		experience: [
 			{ player: 10000, unit: 10000 },
@@ -238,6 +247,7 @@ export const specialRewards = {
 			{ player: 60000, unit: 60000 },
 		],
 		unit: [
+			'',
 			'',
 			'',
 			'',
