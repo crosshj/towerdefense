@@ -14,6 +14,16 @@ body {
 	height: 100vh;
 }
 
+.textOutlined {
+	-webkit-text-stroke: 1px black;
+	text-stroke: 1px black;
+	/* text-shadow:
+	0 2px 0px black,
+	0 -2px 0px black,
+	2px 0px 0px black,
+	-2px 0px 0px black; */
+}
+
 .background {
 	position: absolute;
 	top: 0;
@@ -71,7 +81,7 @@ body {
 		flex-direction: column;
 		justify-content: center;
 		&.disabled {
-			opacity: 0.5;
+			opacity: 0.25;
 		}
 		svg {
 			width: 30px;
@@ -95,9 +105,26 @@ body {
 			justify-content: center;
 			align-items: center;
 			font-size: 15px;
-			.thumbnail {
-				width: 46px;
-				height: 46px;
+			.graphic {
+				position: relative;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				height: 50px;
+				.thumbnail {
+					width: 40px;
+					height: 40px;
+					margin-top: -3px;
+				}
+				.stars {
+					position: absolute;
+					bottom: -4px;
+					color: yellow;
+					letter-spacing: -3px;
+					margin-left: -3px;
+					font-size: 13px;
+					line-height: 20px;
+				}
 			}
 			.details {
 				display: flex;

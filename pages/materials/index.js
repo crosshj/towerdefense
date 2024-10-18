@@ -42,7 +42,10 @@ const attachMaterials = ({ materials, pageSize = 9 }) => {
 			const materialEl = document.createElement('div');
 			materialEl.classList.add('material');
 			materialEl.innerHTML = `
-				<img class="thumbnail" src="${v.image}" alt="${k}" />
+				<div class="graphic">
+					<img class="thumbnail" src="${v.image}" alt="${k}" />
+					<div class="stars textOutlined">${'★'.repeat(v.grade)}</div>
+				</div>
 				<div class="details">
 					<div class="">${v.name}</div>
 					<div class="count">x${v.count}</div>
@@ -101,7 +104,7 @@ const domLoaded = async () => {
 	);
 	console.log({ params });
 
-	const materials = MaterialsStore.lsGet();
+	const materials = MaterialsStore.getHydrated();
 	attachMaterials({ materials });
 
 	pageDone({ params });
