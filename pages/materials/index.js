@@ -24,12 +24,24 @@ const attachMaterials = ({ materials, pageSize = 9 }) => {
 	const nextButton = document.querySelector('.materials .nextPage');
 	const pageNumber = document.querySelector('.controls .pageNumber');
 
-	const materialEntries = Object.entries(materials).sort(
-		([k1, v1], [k2, v2]) => {
-			return k1.localeCompare(k2);
+	let materialEntries;
+
+	const sortEntries = (reverse = false) => {
+		materialEntries = Object.entries(materials).sort(
+			([k1, v1], [k2, v2]) => {
+				// Sort by grade and name
+				if (v1.grade !== v2.grade) {
+					return v1.grade - v2.grade;
+				}
+				if (v1.name < v2.name) return -1;
+				if (v1.name > v2.name) return 1;
+				return 0;
+			}
+		);
+		if (reverse) {
+			materialEntries = materialEntries.reverse();
 		}
-	);
-	console.log({ materialEntries });
+	};
 
 	const renderPage = () => {
 		const totalPages = Math.ceil(materialEntries.length / pageSize);
@@ -99,7 +111,29 @@ const attachMaterials = ({ materials, pageSize = 9 }) => {
 		}
 	});
 
-	renderPage();
+	const updatePage = ({ reverse } = {}) => {
+		sortEntries(reverse);
+		renderPage();
+		console.log({ materialEntries });
+	};
+	updatePage();
+
+	return {
+		updatePage,
+	};
+};
+
+const attachSelectors = ({ updatePage }) => {
+	const gradeSort = document.querySelector('.selectors .grade');
+	gradeSort.addEventListener('click', () => {
+		const gradeReverse = gradeSort.classList.contains('reverse');
+		if (gradeReverse) {
+			gradeSort.classList.remove('reverse');
+		} else {
+			gradeSort.classList.add('reverse');
+		}
+		updatePage({ reverse: !gradeReverse });
+	});
 };
 
 const domLoaded = async () => {
@@ -109,7 +143,9 @@ const domLoaded = async () => {
 	console.log({ params });
 
 	const materials = MaterialsStore.getHydrated();
-	attachMaterials({ materials });
+	const { updatePage } = attachMaterials({ materials });
+
+	attachSelectors({ updatePage });
 
 	pageDone({ params });
 };

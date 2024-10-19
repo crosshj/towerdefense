@@ -68,6 +68,17 @@ body {
 		position: absolute;
 		right: 0px;
 		gap: 15px;
+
+		& > div {
+			display: flex;
+			gap: 5px;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.grade.reverse svg {
+			transform: rotate(180deg);
+		}
 	}
 }
 
