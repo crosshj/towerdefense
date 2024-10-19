@@ -116,7 +116,7 @@ const attachMaterials = ({ materials, pageSize = 9 }) => {
 		renderPage();
 		console.log({ materialEntries });
 	};
-	updatePage();
+	updatePage({ reverse: true });
 
 	return {
 		updatePage,
