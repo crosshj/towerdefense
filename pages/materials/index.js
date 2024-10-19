@@ -123,8 +123,8 @@ const attachMaterials = ({ materials, pageSize = 9 }) => {
 	};
 };
 
-const attachSelectors = ({ updatePage }) => {
-	const gradeSort = document.querySelector('.selectors .grade');
+const attachControls = ({ updatePage }) => {
+	const gradeSort = document.querySelector('.controls .grade');
 	gradeSort.addEventListener('click', () => {
 		const gradeReverse = gradeSort.classList.contains('reverse');
 		if (gradeReverse) {
@@ -145,7 +145,7 @@ const domLoaded = async () => {
 	const materials = MaterialsStore.getHydrated();
 	const { updatePage } = attachMaterials({ materials });
 
-	attachSelectors({ updatePage });
+	attachControls({ updatePage });
 
 	pageDone({ params });
 };

@@ -41,6 +41,8 @@ body {
 	z-index: 1;
 	position: absolute;
 	bottom: 4vh;
+	font-weight: 600;
+	color: #28282a;
 }
 
 .controls {
@@ -63,6 +65,10 @@ body {
 			0 2px 3px 0px var(--highlight-color);
 	}
 
+	.pageNumber {
+		font-weight: 600;
+	}
+
 	.selectors {
 		display: flex;
 		position: absolute;
@@ -78,6 +84,10 @@ body {
 
 		.grade.reverse svg {
 			transform: rotate(180deg);
+		}
+
+		.filter {
+			font-weight: 500;
 		}
 	}
 }
@@ -146,6 +156,7 @@ body {
 			.details {
 				display: flex;
 				flex-direction: column;
+				text-wrap: balance;
 				.count {
 					font-weight: 700;
 				}
