@@ -38,9 +38,11 @@ body {
 	transform: translateY(-50%);
 	background: none;
 	border: none;
-	color: white;
+	color: #4d3126;
 	font-size: 1.5em;
 	cursor: pointer;
+	border: 2px solid #4d3126;
+	background-color: var(--color-brown);
 }
 
 .notice-content {
