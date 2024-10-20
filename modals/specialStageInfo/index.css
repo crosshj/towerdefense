@@ -1,5 +1,5 @@
 :root {
-	--header-height: 10vh;
+	--header-height: 12vh;
 	--color-brown: #774e24;
 }
 
@@ -28,6 +28,7 @@ body {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	font-size: 25px;
 }
 
 .close-btn {
