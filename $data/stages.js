@@ -58,6 +58,7 @@ export const specialStage = {
 		difficulty: 'Normal',
 		maxTries: 3,
 		image: '/assets/stage/special/worlds/mysticTesseract.webp',
+		featherCost: [7, 7, 7, 8, 8, 8],
 	},
 	immortal: {
 		id: 'immortal',
@@ -67,5 +68,6 @@ export const specialStage = {
 		difficulty: 'Hard',
 		maxTries: 3,
 		image: '/assets/stage/special/worlds/phantomObelisk.webp',
+		featherCost: [9, 9, 9, 10, 10, 10],
 	},
 };

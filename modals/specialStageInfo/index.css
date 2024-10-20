@@ -1,10 +1,85 @@
+:root {
+	--header-height: 10vh;
+	--color-brown: #774e24;
+}
+
 body {
-	background: white;
-	height: 100vh;
-	width: 100vw;
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	background-color: #f4f4f4;
 	overflow: hidden;
+}
+
+.notice-container {
+	margin: 0;
+	box-sizing: border-box;
+	overflow: hidden;
+}
+
+.notice-header {
+	background-color: var(--color-brown);
+	color: white;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: var(--header-height);
 	display: flex;
-	flex-direction: column;
-	justify-content: center;
 	align-items: center;
+	justify-content: center;
+}
+
+.close-btn {
+	position: absolute;
+	top: 50%;
+	right: 2%;
+	transform: translateY(-50%);
+	background: none;
+	border: none;
+	color: white;
+	font-size: 1.5em;
+	cursor: pointer;
+}
+
+.notice-content {
+	box-sizing: border-box;
+	position: absolute;
+	top: var(--header-height);
+	left: 0;
+	width: 100vw;
+	height: calc(100vh - var(--header-height));
+	padding: 10px;
+	overflow-y: auto;
+}
+
+.notice-content h2 {
+	font-size: 1.2em; /* Scales according to screen size */
+	color: var(--color-brown);
+}
+
+.notice-content ul {
+	list-style-type: none;
+	padding-left: 0;
+}
+
+.notice-content li {
+	margin: 5px 0;
+}
+
+.notice-content li b {
+	color: var(--color-brown);
+}
+
+.stageHeader {
+	color: rgb(158, 46, 42);
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-weight: bold;
+	font-size: 16px;
+	margin-top: 16px;
+}
+
+.stageDetails {
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-size: 14px;
 }
