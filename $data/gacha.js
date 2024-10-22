@@ -1,13 +1,6 @@
 const drops = {
 	// units
 	'units-ultra-rare': [
-		{ code: 'u0001-4-commando1', probability: 0.8 },
-		{ code: 'u0001-4-commando2', probability: 0.8 },
-		{ code: 'u0001-4-commando3', probability: 0.8 },
-		{ code: 'u0001-4-commando4', probability: 0.8 },
-		{ code: 'u0001-4-commando5', probability: 0.8 },
-		{ code: 'u0001-4-commando6', probability: 0.8 },
-		{ code: 'u0001-4-commando7', probability: 0.8 },
 		{ code: 'u0001-4-cupcake', probability: 1 },
 		{ code: 'u0001-5-cane', probability: 1 },
 		{ code: 'u0001-3-kopi', probability: 1 },
@@ -83,6 +76,13 @@ const drops = {
 		{ code: 'u0001-5-robia', probability: 1 },
 		{ code: 'u0001-5-barbell', probability: 1 },
 		{ code: 'u0001-5-wap', probability: 1 },
+		{ code: 'u0001-4-commando1', probability: 0.8 },
+		{ code: 'u0001-4-commando2', probability: 0.8 },
+		{ code: 'u0001-4-commando3', probability: 0.8 },
+		{ code: 'u0001-4-commando4', probability: 0.8 },
+		{ code: 'u0001-4-commando5', probability: 0.8 },
+		{ code: 'u0001-4-commando6', probability: 0.8 },
+		{ code: 'u0001-4-commando7', probability: 0.8 },
 	],
 	// gear
 	'gear-special': [
