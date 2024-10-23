@@ -1142,11 +1142,11 @@ export const unitsAll = {
 		element: 'Candy',
 		type: 'Intelligence',
 		rank: 5,
-		mineralCost: 900,
+		mineralCost: 150,
 		attack: '3,900 - 63,400 - 132,120',
 		hp: '20,000 - 317,500 - 661,500',
 		defense: '0 - 0 - 0',
-		range: 340,
+		range: 500,
 	},
 
 	//https://rangers.lerico.net/en/ranger/u81-james
@@ -1157,11 +1157,11 @@ export const unitsAll = {
 		element: 'Candy',
 		type: 'Intelligence',
 		rank: 4,
-		mineralCost: 250,
+		mineralCost: 150,
 		attack: '1,017 - 7,289 - 17,728',
 		hp: '3,575 - 25,478 - 61,952',
 		defense: '0 - 0 - 0',
-		range: 382,
+		range: 350,
 	},
 
 	//https://rangers.lerico.net/en/ranger/u123u-brown
@@ -1171,17 +1171,19 @@ export const unitsAll = {
 		element: 'Candy',
 		type: 'Agility',
 		rank: 5,
-		mineralCost: 1000,
+		mineralCost: 150,
 		attack: '2,709 - 59,004 - 99,504',
 		hp: '44,872 - 902,502 - 1,519,502',
 		defense: '303 - 5,585 - 9,385',
-		range: 155,
+		range: 600,
 	},
 
+	/*
 	//changeDET
-	'u0001-5-friesCHANGENAME': {
-		displayName: 'friesCHANGENAME',
-		element: 'Food',
+	'u0001-5-price': {
+		displayName: 'Price',
+		displayName2: 'Prince',
+		element: 'Fire',
 		type: 'Agility',
 		rank: 5,
 		mineralCost: 1000,
@@ -1190,29 +1192,43 @@ export const unitsAll = {
 		defense: '303 - 5,585 - 9,385',
 		range: 155,
 	},
+	*/
 
-	'u0001-5-burgerCHANGENAME': {
-		displayName: 'burgerCHANGENAME',
-		element: 'Food',
+	'u0001-5-freida': {
+		displayName: 'Freida',
+		displayName2: 'Princess',
+		element: 'Fire',
 		type: 'Agility',
 		rank: 5,
-		mineralCost: 1000,
+		mineralCost: 150,
 		attack: '2,709 - 59,004 - 99,504',
 		hp: '44,872 - 902,502 - 1,519,502',
 		defense: '303 - 5,585 - 9,385',
-		range: 155,
+		range: 400,
 	},
 
-	'u0001-5-gothCHANGENAME': {
-		displayName: 'gothCHANGENAME',
-		element: 'Normal',
-		type: 'Agility',
+	'u0001-5-burkley': {
+		displayName: 'Burkley',
+		element: 'Plant',
+		type: 'Strength',
 		rank: 5,
-		mineralCost: 1000,
+		mineralCost: 150,
 		attack: '2,709 - 59,004 - 99,504',
 		hp: '44,872 - 902,502 - 1,519,502',
 		defense: '303 - 5,585 - 9,385',
-		range: 155,
+		range: 200,
+	},
+
+	'u0001-5-callista': {
+		displayName: 'Callista',
+		element: 'Dark',
+		type: 'Agility',
+		rank: 5,
+		mineralCost: 150,
+		attack: '2,709 - 59,004 - 99,504',
+		hp: '44,872 - 902,502 - 1,519,502',
+		defense: '303 - 5,585 - 9,385',
+		range: 300,
 	},
 	//edit stats
 	'u0001-5-rayella': {
@@ -1220,11 +1236,11 @@ export const unitsAll = {
 		element: 'Mermaid',
 		type: 'Agility',
 		rank: 5,
-		mineralCost: 1000,
+		mineralCost: 150,
 		attack: '2,709 - 59,004 - 99,504',
 		hp: '44,872 - 902,502 - 1,519,502',
 		defense: '303 - 5,585 - 9,385',
-		range: 155,
+		range: 500,
 	},
 
 	'u0001-5-glacielle': {
@@ -1232,12 +1248,10 @@ export const unitsAll = {
 		element: 'Mermaid',
 		type: 'Agility',
 		rank: 5,
-		mineralCost: 1000,
-		attack: '2,709 - 59,004 - 99,504',
-		hp: '44,872 - 902,502 - 1,519,502',
+		mineralCost: 150,
+		attack: '5,709 - 70,004 - 150,000',
+		hp: '44,872 - 902,502 - 1,700,000',
 		defense: '303 - 5,585 - 9,385',
-		range: 155,
+		range: 700,
 	},
-
-
 };

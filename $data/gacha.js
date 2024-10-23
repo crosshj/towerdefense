@@ -9,6 +9,13 @@ const drops = {
 		{ code: 'u0001-3-milky', probability: 1 },
 		{ code: 'u0001-3-sencha', probability: 1 },
 		{ code: 'u0001-5-queenlollie', probability: 1 },
+		{ code: 'u0001-5-kingpopillol', probability: 1 },
+		{ code: 'u0001-5-ladycindy', probability: 1 },
+		{ code: 'u0001-5-freida', probability: 1 },
+		{ code: 'u0001-5-burkley', probability: 1 },
+		{ code: 'u0001-5-callista', probability: 1 },
+		{ code: 'u0001-5-rayella', probability: 1 },
+		{ code: 'u0001-5-glacielle', probability: 1 },
 	],
 	'units-rare': [
 		{ code: 'u0001-3-bloo', probability: 1 },
