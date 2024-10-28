@@ -39,8 +39,11 @@ const registerServiceWorker = async () => {
 	return registration;
 };
 
-const updateCache = async ({ onProgress } = {}) => {
+const updateCache = async ({ onProgress, isCapacitor } = {}) => {
 	const { promise, resolve, reject } = getPromise();
+	if (isCapacitor) {
+		return;
+	}
 
 	const triggerUpdate = (worker) => {
 		if (!worker?.controller) {
@@ -181,6 +184,7 @@ const fakeProgress = async (time = 5000) => {
 };
 
 const onLoaded = async () => {
+	const isCapacitor = !!window.Capacitor;
 	const sessionActive = isSessionActive();
 	if (sessionActive) {
 		window.parent.postMessage({
@@ -195,6 +199,7 @@ const onLoaded = async () => {
 		//await registerServiceWorker(); //(might not be needed since done in main frame)
 		updateCache({
 			onProgress: () => {},
+			isCapacitor,
 		});
 		// what if SW changes during one of these?
 		//await backgroundSync();

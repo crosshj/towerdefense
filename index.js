@@ -243,7 +243,9 @@ window.addEventListener('message', async function (event) {
 	}
 });
 
-const registerServiceWorker = async () => {
+const registerServiceWorker = async ({ isCapacitor }) => {
+	if (isCapacitor) return;
+
 	if (!('serviceWorker' in navigator)) {
 		console.log('unable to register service worker');
 		return;
@@ -265,6 +267,8 @@ const registerServiceWorker = async () => {
 };
 
 const onLoaded = async () => {
+	const isCapacitor = !!window.Capacitor;
+
 	const params = Object.fromEntries(
 		new URLSearchParams(window.location.search)
 	);
@@ -274,7 +278,7 @@ const onLoaded = async () => {
 		onInstall: () => document.location.reload(),
 	});
 	if (['fullscreen', 'standalone'].includes(install) || isLocal || isWeb) {
-		await registerServiceWorker();
+		await registerServiceWorker({ isCapacitor });
 		if (!bgMusic) {
 			bgMusic = await loadSounds('march');
 			bgMusic.start(4000);
