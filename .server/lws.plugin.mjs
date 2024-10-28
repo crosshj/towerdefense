@@ -17,7 +17,7 @@ const sendModdedServiceWorker = (ctx) => {
 
 const sendModdedDepends = (ctx) => {
 	ctx.set('Content-Type', 'application/javascript; charset=utf-8');
-	if (fs.existsSync('CACHE_DEPENDS')) {
+	if (fs.existsSync('.CACHE_DEPENDS')) {
 		const original = fs.readFileSync('$data/__depends.js');
 		ctx.body = original;
 		return;
