@@ -1254,4 +1254,16 @@ export const unitsAll = {
 		defense: '303 - 5,585 - 9,385',
 		range: 700,
 	},
+
+	'u0001-5-merlot': {
+		displayName: 'Merlot',
+		element: 'Mermaid',
+		type: 'Agility',
+		rank: 5,
+		mineralCost: 150,
+		attack: '5,709 - 70,004 - 150,000',
+		hp: '44,872 - 902,502 - 1,700,000',
+		defense: '303 - 5,585 - 9,385',
+		range: 700,
+	},
 };

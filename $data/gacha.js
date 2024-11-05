@@ -16,6 +16,7 @@ const drops = {
 		{ code: 'u0001-5-callista', probability: 1 },
 		{ code: 'u0001-5-rayella', probability: 1 },
 		{ code: 'u0001-5-glacielle', probability: 1 },
+		{ code: 'u0001-5-merlot', probability: 1 },
 	],
 	'units-rare': [
 		{ code: 'u0001-3-bloo', probability: 1 },
