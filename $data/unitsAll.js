@@ -1266,4 +1266,16 @@ export const unitsAll = {
 		defense: '303 - 5,585 - 9,385',
 		range: 700,
 	},
+
+	'u0001-1-sapphire': {
+		displayName: 'Sapphire',
+		element: 'Flying',
+		type: 'Intelligence',
+		rank: 1,
+		mineralCost: 150,
+		attack: '1,709 - 20,004 - 50,000',
+		hp: '4,872 - 92,502 - 150,000',
+		defense: '303 - 5,585 - 9,385',
+		range: 400,
+	},
 };
