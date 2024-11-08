@@ -1314,4 +1314,29 @@ export const unitsAll = {
 		defense: '303 - 5,585 - 9,385',
 		range: 300,
 	},
+
+	// this is for new base I made - Aileen
+	'u0001-4-newbase': {
+		displayName: 'Newbase',
+		element: 'Flying',
+		type: 'Intelligence',
+		rank: 1,
+		mineralCost: 150,
+		attack: '1,709 - 20,004 - 50,000',
+		hp: '4,872 - 92,502 - 150,000',
+		defense: '303 - 5,585 - 9,385',
+		range: 300,
+	},
+
+	'u0001-4-molly': {
+		displayName: 'Molly',
+		element: 'Flying',
+		type: 'Intelligence',
+		rank: 1,
+		mineralCost: 150,
+		attack: '1,709 - 20,004 - 50,000',
+		hp: '4,872 - 92,502 - 150,000',
+		defense: '303 - 5,585 - 9,385',
+		range: 300,
+	},
 };
