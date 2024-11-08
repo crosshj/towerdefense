@@ -65,6 +65,8 @@ const drops = {
 		{ code: 'u0001-5-glinda', probability: 1 },
 		{ code: 'u0001-5-jack', probability: 1 },
 		{ code: 'u0001-1-sapphire', probability: 1 },
+		{ code: 'u0001-1-daisy', probability: 1 },
+		{ code: 'u0001-1-jam', probability: 1 },
 	],
 
 	'units-common': [
