@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="color-scheme" content="dark light" />
+		<title>Delete Account</title>
+		<script>
+			function validateForm() {
+				const username = document.getElementById('username').value;
+				const password = document.getElementById('password').value;
+				const deleteButton = document.getElementById('deleteButton');
+				deleteButton.disabled = !(username && password);
+			}
+
+			function showConfirmationMessage(event) {
+				event.preventDefault();
+				const form = document.querySelector('form');
+				form.innerHTML =
+					'<h1>Request Received</h1><p>We have received your request and will begin deleting your account shortly.</p>';
+			}
+		</script>
+		<style>
+			body {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				flex-direction: column;
+				height: 100vh;
+				margin: 0;
+				font-family: Arial, sans-serif;
+			}
+			form {
+				background: #fff3;
+				padding: 20px;
+				border-radius: 10px;
+				box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+				width: 300px;
+				text-align: center;
+			}
+			label {
+				display: block;
+				margin: 10px 0 5px;
+			}
+			input {
+				width: calc(100% - 20px);
+				padding: 8px;
+				margin-bottom: 10px;
+				border: 1px solid #ccc;
+				border-radius: 5px;
+			}
+			button {
+				width: 100%;
+				padding: 10px;
+				color: white;
+				border: none;
+				border-radius: 5px;
+				cursor: pointer;
+			}
+			button:disabled {
+				background-color: #ccc3;
+			}
+		</style>
+	</head>
+	<body>
+		<form
+			action="/delete_account"
+			method="POST"
+			onsubmit="showConfirmationMessage(event)"
+		>
+			<h1>Delete Account</h1>
+			<p>
+				If you wish to delete your account, please confirm by entering
+				your username and password, and clicking the button below. This
+				action cannot be undone.
+			</p>
+			<label for="username">Username:</label>
+			<input
+				type="text"
+				id="username"
+				name="username"
+				oninput="validateForm()"
+			/>
+			<br />
+			<label for="password">Password:</label>
+			<input
+				type="password"
+				id="password"
+				name="password"
+				oninput="validateForm()"
+			/>
+			<br />
+			<button type="submit" id="deleteButton" disabled>
+				Delete My Account
+			</button>
+		</form>
+	</body>
+</html>
