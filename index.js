@@ -276,6 +276,7 @@ const onLoaded = async () => {
 	const isLocal = document.location.host.startsWith('127.0.0.1');
 	const install = await installable({
 		onInstall: () => document.location.reload(),
+		isCapacitor,
 	});
 	if (['fullscreen', 'standalone'].includes(install) || isLocal || isWeb) {
 		await registerServiceWorker({ isCapacitor });
