@@ -1,4 +1,5 @@
 import { getDefenseTeam } from '../user/pvp.js';
+import API from '../utils/API.js';
 
 function getSelectedValue() {
 	const selectedRadio = document.querySelector('input[name="user"]:checked');
@@ -15,7 +16,7 @@ const userRow = (user, i) => `
 
 const attachUsersList = async () => {
 	const users = (
-		await fetch('https://datamosh.vercel.app/api/teedee/players').then(
+		await API.fetch('https://datamosh.vercel.app/api/teedee/players').then(
 			(x) => x.json()
 		)
 	)

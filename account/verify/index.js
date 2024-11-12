@@ -1,3 +1,5 @@
+import API from '../../utils/API.js';
+
 document.addEventListener('DOMContentLoaded', function () {
 	const spinner = document.getElementById('spinner');
 	const content = document.getElementById('content');
@@ -8,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	const code = urlParams.get('code');
 
 	// Make the POST request to verify the account
-	fetch('https://datamosh.vercel.app/api/teedee/verify', {
+	API.fetch('https://datamosh.vercel.app/api/teedee/verify', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',

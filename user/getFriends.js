@@ -1,5 +1,6 @@
 import { getUserLevelInfo } from '../utils/experience.js';
 import { getUserImage } from './user.js';
+import API from '../utils/API.js';
 
 const gradeOrder = ['N', 'M', 'S', 'U', 'L'];
 function sort(players) {
@@ -31,7 +32,7 @@ const PlayerToFriend = (player) => {
 
 export const getFriends = async () => {
 	// TODO: should be a call to friends endpoin not players(?)
-	let players = await fetch(
+	let players = await API.fetch(
 		'https://datamosh.vercel.app/api/teedee/players'
 	).then((x) => x.json());
 	players = players.filter((x) => typeof x.last_login === 'string');

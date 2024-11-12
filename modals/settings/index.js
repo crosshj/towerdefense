@@ -3,6 +3,7 @@ import { getSettings, setSettings } from '../../user/settings.js';
 import { getUser, getUserFromAPI, updateUserFromAPI } from '../../user/user.js';
 import { IDBStorage } from '../../utils/IDBStorage.js';
 import { getVersionString } from './version.js';
+import API from '../../utils/API.js';
 
 const notificationPermitted = async () => {
 	if ('Notification' in window && navigator.serviceWorker) {
@@ -70,16 +71,19 @@ const setupPushNotifications = async (_subscription) => {
 
 	console.log({ subscription });
 
-	await fetch('https://datamosh.vercel.app/api/teedee/notification/send', {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		body: JSON.stringify({
-			subscription,
-			payload: 'this is a test notification!',
-		}),
-	});
+	await API.fetch(
+		'https://datamosh.vercel.app/api/teedee/notification/send',
+		{
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				subscription,
+				payload: 'this is a test notification!',
+			}),
+		}
+	);
 };
 
 const resourcesCheck = async ({ reload = true } = {}) => {

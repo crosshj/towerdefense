@@ -1,5 +1,6 @@
 import { getUser } from '../../user/user.js';
 import { isSessionActive, setSessionActive } from '../../utils/session.js';
+import API from '../../utils/API.js';
 
 const resetGame = () => {
 	localStorage.removeItem('USER_TEAMS');
@@ -19,7 +20,7 @@ const updateLogin = async () => {
 			},
 			body: JSON.stringify({ token: userToken }),
 		};
-		const update = await fetch(
+		const update = await API.fetch(
 			'https://datamosh.vercel.app/api/teedee/loginUpdate',
 			opts
 		).then((x) => x.json());

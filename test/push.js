@@ -1,3 +1,5 @@
+import API from '../utils/API.js';
+
 const setupPushNotifications = async (subscription) => {
 	console.log({ subscription });
 	// await updateUserFromAPI({
@@ -9,7 +11,7 @@ const setupPushNotifications = async (subscription) => {
 
 async function sendNotification({ subscription, player, title, content }) {
 	let error;
-	const result = await fetch(
+	const result = await API.fetch(
 		'https://datamosh.vercel.app/api/teedee/notification/send',
 		{
 			method: 'POST',
@@ -48,7 +50,7 @@ const userRow = (user, i) => `
 
 const attachUsersList = async () => {
 	const users = (
-		await fetch('https://datamosh.vercel.app/api/teedee/players').then(
+		await API.fetch('https://datamosh.vercel.app/api/teedee/players').then(
 			(x) => x.json()
 		)
 	)
