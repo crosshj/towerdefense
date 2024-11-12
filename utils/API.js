@@ -19,7 +19,7 @@ const API = {
 API.on(
 	(url) => /\/version$/.test(url),
 	async (url, options) => {
-		const currentVersion = '0.0.1';
+		const currentVersion = '1.0.0';
 		//will be replaced with GH Action
 		const currentHash = '{GIT_COMMIT_HASH}';
 		const version = currentHash.includes('_HASH')
