@@ -4,6 +4,7 @@ import { pipe } from '../utils/functional.js';
 import { clone } from '../utils/utils.js';
 import { MaterialsStore } from './material.js';
 import { StageTrackAPIModifier } from './stageTrack.js';
+import API from '../utils/API.js';
 
 const LS_NAME = 'USER_INFO';
 
@@ -45,7 +46,7 @@ export const getUserFromAPI = async () => {
 			},
 			body: JSON.stringify({ token: userToken }),
 		};
-		const user = await fetch(
+		const user = await API.fetch(
 			'https://datamosh.vercel.app/api/teedee/players/getByToken',
 			opts
 		).then(postProcessGet);
@@ -72,7 +73,7 @@ export const updateUserFromAPI = async (data) => {
 				...(await preProcessPost(data)),
 			}),
 		};
-		const user = await fetch(
+		const user = await API.fetch(
 			'https://datamosh.vercel.app/api/teedee/players/setByToken',
 			opts
 		).then((x) => x.json());

@@ -4,6 +4,7 @@ import { SVGIcons } from '../../assets/icons.svg.js';
 import { getDefenseTeam } from '../../user/pvp.js';
 import { setOpponentTeamCache } from '/utils/cache.js';
 import { userIconsMap } from '../../assets/userIcons/$map.js';
+import API from '../../utils/API.js';
 
 const pageTitle = 'PVP';
 
@@ -40,7 +41,7 @@ const updatePlayersList = async () => {
 	//NOTE: click handler is in "attachActions: tierPlayers"
 	const tierPlayers = document.querySelector('.tierPlayers');
 	// const players = new Array(30).fill();
-	let players = await fetch(
+	let players = await API.fetch(
 		'https://datamosh.vercel.app/api/teedee/players'
 	).then((x) => x.json());
 	players = players

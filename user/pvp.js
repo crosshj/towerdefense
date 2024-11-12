@@ -5,10 +5,11 @@ import {
 	decompressTeams,
 } from '../utils/compress.js';
 import { defaultCharacters } from '../$data/defaultCharacters.js';
+import API from '../utils/API.js';
 
 export async function getDefenseTeam({ player }) {
 	let error;
-	const result = await fetch(
+	const result = await API.fetch(
 		'https://datamosh.vercel.app/api/teedee/players/getPVP',
 		{
 			method: 'POST',

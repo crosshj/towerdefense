@@ -1,3 +1,5 @@
+import API from '../../utils/API.js';
+
 // export const getVersionString = async () => {
 // 	const currentVersion = '0.0.1';
 // 	const currentHash = '{GIT_COMMIT_HASH}'; //will be replace with GH Action
@@ -10,7 +12,7 @@
 const currentHash = '{GIT_COMMIT_HASH}';
 
 export const getVersionString = async () => {
-	const { version } = await fetch('/version').then((response) =>
+	const { version } = await API.fetch('/version').then((response) =>
 		response.json()
 	);
 	let localString = '';

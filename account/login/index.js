@@ -1,3 +1,5 @@
+import API from '../../utils/API.js';
+
 const submitLogin = async ({ name, password }) => {
 	const url = 'https://datamosh.vercel.app/api/teedee/login';
 	const opts = {
@@ -7,7 +9,7 @@ const submitLogin = async ({ name, password }) => {
 		},
 		body: JSON.stringify({ name, password }),
 	};
-	const response = await fetch(url, opts)
+	const response = await API.fetch(url, opts)
 		.then((x) => x.json())
 		.catch((fetchError) => ({ error: { fetchError } }));
 	return response;

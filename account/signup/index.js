@@ -1,3 +1,5 @@
+import API from '../../utils/API.js';
+
 document.addEventListener('DOMContentLoaded', async () => {
 	document
 		.getElementById('signupForm')
@@ -8,7 +10,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 			const email = document.getElementById('email').value;
 			const password = document.getElementById('password').value;
 
-			const response = await fetch(
+			const response = await API.fetch(
 				'https://datamosh.vercel.app/api/teedee/signUp',
 				{
 					method: 'POST',
