@@ -1316,6 +1316,7 @@ export const unitsAll = {
 	},
 
 	// this is for new base I made - Aileen
+	/*
 	'u0001-4-newbase': {
 		displayName: 'Newbase',
 		element: 'Flying',
@@ -1328,6 +1329,7 @@ export const unitsAll = {
 		range: 300,
 	},
 
+	// go back to this one and make outfit
 	'u0001-4-molly': {
 		displayName: 'Molly',
 		element: 'Normal',
@@ -1339,6 +1341,8 @@ export const unitsAll = {
 		defense: '303 - 5,585 - 9,385',
 		range: 300,
 	},
+
+	*/
 
 	'u0001-4-sheen': {
 		displayName: 'Sheen',
