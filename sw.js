@@ -61,6 +61,7 @@ self.addEventListener('fetch', (event) => {
 	const requestURL = new URL(event.request.url);
 
 	if (requestURL.pathname === '/version') {
+		console.log(`DEPRECATE: sw handles /version`);
 		const versionInfo = {
 			version: self._version,
 		};
@@ -72,16 +73,19 @@ self.addEventListener('fetch', (event) => {
 	}
 
 	if (requestURL.pathname === '/api/teedee/players/getByToken') {
+		console.log(`DEPRECATE: sw handles /getByToken`);
 		event.respondWith(handleGetByToken(event.request));
 		return;
 	}
 
 	if (requestURL.pathname === '/api/teedee/players/setByToken') {
+		console.log(`DEPRECATE: sw handles /setByToken`);
 		event.respondWith(handleSetByToken(event.request));
 		return;
 	}
 
 	if (requestURL.pathname.includes('/api/')) {
+		console.log(`DEPRECATE: sw handles /api/ caching`);
 		// If the request contains '/api/', just fetch it from the network
 		if (event.request.method === 'GET') {
 			event.respondWith(fetchAndCache(event.request));
@@ -96,6 +100,7 @@ self.addEventListener('fetch', (event) => {
 	}
 
 	if (requestURL.pathname.endsWith('.html')) {
+		//console.log(`DEPRECATE: sw handles .html file caching`);
 		const cacheRequest = new Request(requestURL.pathname);
 		event.respondWith(
 			caches.match(cacheRequest).then((response) => {

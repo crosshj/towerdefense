@@ -1,32 +1,36 @@
+import { cacheHandler } from '../api-handlers/cache.js';
+import { playersGetByToken } from '../api-handlers/playersGetByToken.js';
+import { playersSetByToken } from '../api-handlers/playersSetByToken.js';
+import { versionHandler } from '../api-handlers/version.js';
+
+const currentHash = '{GIT_COMMIT_HASH}';
+
 const API = {
-	matchers: [],
-	on(match, $) {
-		this.matchers.push({ match, $ });
-	},
+	matchers: [
+		versionHandler({ currentHash }),
+		playersGetByToken({ currentHash }),
+		playersSetByToken({ currentHash }),
+		cacheHandler({ currentHash }),
+	],
 	async fetch(url, opts) {
-		const match = this.matchers.find((m) => m.match(url, opts)) || {};
-		const intResponse = match.$ && (await match.$(url, opts));
+		const match = this.matchers.find((m) => m.match(url, opts));
+		if (!match) {
+			console.log('API: unmatched ', url);
+			return await fetch(url, opts);
+		}
+		const { handler: $ } = match;
+		const intResponse = $ && (await $(url, opts));
+
+		if (intResponse instanceof Response) {
+			return intResponse;
+		}
 		if (intResponse?.json) {
 			return {
 				json: async () => intResponse.json,
 			};
 		}
-		console.log('FETCH:', url);
 		return await fetch(url, opts);
 	},
 };
-
-API.on(
-	(url) => /\/version$/.test(url),
-	async (url, options) => {
-		const currentVersion = '1.0.0';
-		//will be replaced with GH Action
-		const currentHash = '{GIT_COMMIT_HASH}';
-		const version = currentHash.includes('_HASH')
-			? currentVersion
-			: currentVersion + '-' + currentHash.slice(0, 7);
-		return { json: { version } };
-	}
-);
 
 export default API;
