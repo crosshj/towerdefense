@@ -68,10 +68,12 @@ const drops = {
 		{ code: 'u0001-1-daisy', probability: 1 },
 		{ code: 'u0001-1-jam', probability: 1 },
 		{ code: 'u0001-1-layla', probability: 1 },
-		{ code: 'u0001-1-sheen', probability: 1 },
-		{ code: 'u0001-1-peanut', probability: 1 },
-		{ code: 'u0001-1-macadamia', probability: 1 },
-		{ code: 'u0001-1-walnut', probability: 1 },
+		{ code: 'u0001-4-sheen', probability: 1 },
+		{ code: 'u0001-4-peanut', probability: 1 },
+		{ code: 'u0001-4-macadamia', probability: 1 },
+		{ code: 'u0001-4-walnut', probability: 1 },
+		{ code: 'u0001-4-pesto', probability: 1 },
+		{ code: 'u0001-4-pasta', probability: 1 },
 	],
 
 	'units-common': [
