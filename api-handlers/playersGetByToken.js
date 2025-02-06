@@ -3,7 +3,7 @@ import { getCurrentVersion } from './version.js';
 import { feathersModifier } from './_userHandler.js';
 import IDBResponse from '../../utils/IDBResponse.js';
 
-const playerStore = new IDBStorage('CacheDB', 'PlayerStore');
+const playerStore = new IDBStorage('PlayerDB', 'PlayerStore');
 const CACHE_TTL = 1 * 60 * 60 * 1000; // TTL set to 1 hour (in milliseconds)
 const DEBUG = false;
 

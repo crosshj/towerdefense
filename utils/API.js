@@ -1,7 +1,7 @@
-import { cacheHandler } from '../api-handlers/cache.js';
+import { versionHandler } from '../api-handlers/version.js';
 import { playersGetByToken } from '../api-handlers/playersGetByToken.js';
 import { playersSetByToken } from '../api-handlers/playersSetByToken.js';
-import { versionHandler } from '../api-handlers/version.js';
+import { apiCacheHandler } from '../api-handlers/cache.js';
 
 const currentHash = '{GIT_COMMIT_HASH}';
 
@@ -10,11 +10,12 @@ const API = {
 		versionHandler({ currentHash }),
 		playersGetByToken({ currentHash }),
 		playersSetByToken({ currentHash }),
-		cacheHandler({ currentHash }),
+		apiCacheHandler({ currentHash }), // api cache handler, must be last
 	],
 	async fetch(url, opts) {
 		const match = this.matchers.find((m) => m.match(url, opts));
 		if (!match) {
+			debugger;
 			console.log('API: unmatched ', url);
 			return await fetch(url, opts);
 		}
