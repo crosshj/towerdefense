@@ -1,5 +1,12 @@
 ### Current
 
+-   [ ] migrate from service worker (required for mobile)  
+         - [x] version  
+         - [x] getByToken  
+         - [x] api cache  
+         - [ ] setByToken
+-   [ ] all-in on mobile (app store version of game)
+
 -   [x] implement unit thumbnails cache
 -   [x] effects show up (or not) if selected (or not) in game setup
 -   [x] settings/game/resource check - manual resource cache update
