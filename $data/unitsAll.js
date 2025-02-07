@@ -1427,4 +1427,16 @@ export const unitsAll = {
 		defense: '303 - 5,585 - 9,385',
 		range: 200,
 	},
+
+	'u0001-4-pecan': {
+		displayName: 'Pecan',
+		element: 'Normal',
+		type: 'Agility',
+		rank: 4,
+		mineralCost: 150,
+		attack: '1,709 - 20,004 - 50,000',
+		hp: '4,872 - 92,502 - 150,000',
+		defense: '303 - 5,585 - 9,385',
+		range: 400,
+	},
 };

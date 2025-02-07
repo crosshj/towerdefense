@@ -75,6 +75,7 @@ const drops = {
 		{ code: 'u0001-4-pesto', probability: 1 },
 		{ code: 'u0001-4-pasta', probability: 1 },
 		{ code: 'u0001-4-cassis', probability: 1 },
+		{ code: 'u0001-4-pecan', probability: 1 },
 	],
 
 	'units-common': [
