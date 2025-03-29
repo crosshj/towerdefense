@@ -47,7 +47,7 @@ const template = () => `
             PLAY
         </button>
     </div>
-    <a href="/pages/home/index.html" style="margin-top:2em;">home</a>
+    <a href="/pages/home_new/iframe.html" style="margin-top:2em;">home</a>
 </div>
 `;
 

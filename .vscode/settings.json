@@ -21,7 +21,7 @@
         "node_modules": true,
         ".well-known": true,
         ".github": false,
-        ".server": true,
+        ".server": false,
         "web": true,
         "vendor": true,
         "serviceWorker": true

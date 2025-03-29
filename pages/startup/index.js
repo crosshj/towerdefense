@@ -53,7 +53,7 @@ const setupActionsNew = ({ gameStarted }) => {
 		}
 		window.parent.postMessage({
 			_: 'navigate',
-			src: '/pages/home/index.html',
+			src: '/pages/home_new/iframe.html',
 		});
 	});
 };
@@ -70,7 +70,7 @@ const setupActionsContinue = ({ gameStarted }) => {
 		setSessionActive();
 		window.parent.postMessage({
 			_: 'navigate',
-			src: '/pages/home/index.html',
+			src: '/pages/home_new/iframe.html',
 		});
 	});
 };
@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 	if (sessionActive) {
 		window.parent.postMessage({
 			_: 'navigate',
-			src: '/pages/home/index.html',
+			src: '/pages/home_new/iframe.html',
 		});
 		return;
 	}

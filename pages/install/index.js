@@ -189,7 +189,7 @@ const onLoaded = async () => {
 	if (sessionActive) {
 		window.parent.postMessage({
 			_: 'navigate',
-			src: '/pages/home/index.html',
+			src: '/pages/home_new/iframe.html',
 		});
 		return;
 	}

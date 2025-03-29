@@ -37,7 +37,7 @@ const { key, cert } = getCerts();
 export default {
 	hostname: localIp || '127.0.0.1',
 	port: 8000,
-	https: { key, cert },
+	//https: { key, cert },
 	rewrite: [{ from: '^/(.*)/$', to: '/$1/index.html' }],
 	stack,
 };

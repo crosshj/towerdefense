@@ -117,14 +117,14 @@ function navigate(args = {}, { onFade } = {}) {
 		const mainIframe = document.createElement('iframe');
 		mainIframe.width = '100%';
 		mainIframe.height = '100%';
-		mainIframe.src = args.src || '/pages/home/index.html';
+		mainIframe.src = args.src || '/pages/home_new/iframe.html';
 		document.body.insertAdjacentElement('afterBegin', mainIframe);
 		if (args?.src === '/pages/stage/main/index.html' && bgMusic) {
 			bgMusic.stop();
 			bgMusic = undefined;
 		}
 		if (
-			['/pages/home/index.html', undefined].includes(args?.src) &&
+			['/pages/home_new/iframe.html', undefined].includes(args?.src) &&
 			!bgMusic
 		) {
 			bgMusic = await loadSounds('march');

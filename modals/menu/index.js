@@ -66,7 +66,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
 	container.classList.remove('hidden');
 	document.body.addEventListener('pointerdown', (e) => {
 		const navigateTo = getNavigateTo(e.target);
-		const src = navigateTo ? `/pages/${navigateTo}/index.html` : undefined;
+		let src = navigateTo ? `/pages/${navigateTo}/index.html` : undefined;
+		if (navigateTo === 'home') {
+			src = '/pages/home_new/iframe.html';
+		}
 		if (src) {
 			event.stopPropagation();
 			setCurrentCharCache(false);
