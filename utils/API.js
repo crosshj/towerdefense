@@ -1,6 +1,5 @@
 import { versionHandler } from '../api-handlers/version.js';
-import { playersGetByToken } from '../api-handlers/playersGetByToken.js';
-import { playersSetByToken } from '../api-handlers/playersSetByToken.js';
+import { playersGetByToken, playersSetByToken } from '../api-handlers/players.js';
 import { apiCacheHandler } from '../api-handlers/cache.js';
 
 const currentHash = '{GIT_COMMIT_HASH}';
