@@ -18,6 +18,12 @@ const getFactory = async () => {
 	return import('./POJFactory.js');
 };
 
+const range = (start, end, step) =>
+	Array.from(
+		{ length: (end - start) / step + 1 },
+		(_, i) => start + i * step
+	);
+
 export const getAnimateable = async (args) => {
 	const { POJFactory, POJArmatureDisplay } = await getFactory();
 	const {
@@ -27,7 +33,7 @@ export const getAnimateable = async (args) => {
 		framerate = 24,
 		skeleton,
 		atlas,
-		texture
+		texture,
 		//
 	} = args;
 
@@ -46,16 +52,34 @@ export const getAnimateable = async (args) => {
 	await factory.loadData({ skeleton, atlas, texture });
 	const armature = factory.buildArmatureDisplay('Armature');
 
-	const setAnimation = (newAnim) => {
-		armature.animation.play(newAnim);
+	const setAnimation = async (newAnim) => {
+		return armature.animation.play(newAnim);
 	};
-	const advanceTime = (time) => {
+	const advanceTime = async (time) => {
 		if (!time) {
-			factory.advanceTime(1 / framerate);
-			return;
+			return factory.advanceTime(1 / framerate);
 		}
-		factory.advanceTime(time);
+		return factory.advanceTime(time);
 	};
+
+	const idleFrames = await (async () => {
+		await setAnimation('idle');
+
+		let frames = [];
+		for (const time of range(1, 30, 1)) {
+			await advanceTime();
+			const img = await new Promise((resolve) => {
+				const img = new Image();
+				img.src = canvas.toDataURL();
+				img.onload = resolve(img);
+			});
+			if (time > 10 && time % 4 === 0) {
+				frames.push(img);
+			}
+		}
+		return frames;
+	})();
+
 	const thumbnail = cropCanvas(canvas);
 
 	return {
@@ -65,6 +89,8 @@ export const getAnimateable = async (args) => {
 		//
 		setAnimation,
 		advanceTime,
-		thumbnail
+		//
+		thumbnail,
+		idleFrames,
 	};
 };

@@ -1,0 +1,126 @@
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 10px;
+}
+custom-select {
+	min-width: 200px;
+}
+.options {
+	width: 50%;
+	display: flex;
+	gap: 10px;
+	justify-content: center;
+}
+
+#animationsList {
+	display: none; /* THIS PAGE IS ONLY FOR IDLE ANIMATIONS */
+}
+
+canvas {
+	background: #555;
+	/* image-rendering: pixelated; */
+	zoom: 1.5;
+}
+
+.thumbnail {
+	--background-color: #ffe168;
+	--background-stripe-color: #ffcc00;
+	background: repeating-linear-gradient(
+		var(--background-color),
+		var(--background-color) 6px,
+		var(--background-stripe-color) 7px
+	);
+	width: 64px;
+	height: 64px;
+	margin-bottom: 1em;
+	border: 3px solid #e3b637;
+	border-radius: 10px;
+	display: grid;
+	grid-template: 1fr / 1fr;
+	place-items: center;
+	overflow: hidden;
+	box-shadow:
+		inset 0px 0px 7px black,
+		0 0 0px 1.5px black;
+
+	& > * {
+		grid-column: 1 / 1;
+		grid-row: 1 / 1;
+	}
+
+	.rank {
+		color: #ffd700;
+		display: flex;
+		justify-content: center;
+		margin-bottom: auto;
+		letter-spacing: 2px;
+		text-shadow:
+			1px 0px black,
+			-1px 0px black,
+			0px 1px black,
+			0px -1px black;
+		font-size: 9px;
+		line-height: 18px;
+	}
+	.unit {
+		background-image: var(--thumbnailUrl);
+		background-size: contain;
+		width: 58px;
+		height: 58px;
+	}
+	.cost {
+		color: white;
+		background-color: #4449;
+		display: flex;
+		justify-content: center;
+		font-size: 10px;
+		line-height: 12px;
+		margin-top: auto;
+		width: 100%;
+		span:first-child {
+			margin-right: 3px;
+			text-shadow: 1px 1px black;
+		}
+	}
+}
+
+.controls {
+	display: flex;
+	gap: 10px;
+	font-size: 24px;
+	cursor: pointer;
+	& > div {
+		background: CanvasText;
+		color: Canvas;
+		width: 50px;
+		height: 35px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 5px;
+		user-select: none;
+		&.disabled {
+			opacity: 0.5;
+			cursor: not-allowed;
+		}
+		&:not(.disabled):hover {
+			filter: sepia(1) saturate(4) hue-rotate(45deg);
+		}
+	}
+}
+
+.stats {
+	display: grid;
+	grid-template-columns: auto 1fr 1fr 1fr;
+	gap: 0 10px;
+	font-family: monospace;
+	& > .property {
+		opacity: 0.7;
+	}
+	& > .value {
+		text-align: right;
+	}
+}

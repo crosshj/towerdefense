@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>TD: Characters Test</title>
+		<meta
+			name="viewport"
+			content="width=device-width,initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"
+		/>
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="full-screen" content="true" />
+		<meta name="screen-orientation" content="portrait" />
+		<meta name="color-scheme" content="dark light" />
+		<link href="idle.css" rel="stylesheet" />
+		<script src="/visuals/components/custom-select.js" defer></script>
+	</head>
+	<body>
+		<h4>IDLE ANIMATION</h4>
+		<canvas id="test-canvas" width="128" height="128"></canvas>
+		<div class="controls">
+			<div id="play">&#9654;</div>
+			<div id="pause" style="display: none">&#10074;&#10074;</div>
+			<div id="step-forward">&#10140;</div>
+		</div>
+		<div class="options">
+			<custom-select id="charactersList"></custom-select>
+			<custom-select id="animationsList"></custom-select>
+		</div>
+		<div id="frames"></div>
+	</body>
+	<script type="module" src="idle.js"></script>
+</html>
