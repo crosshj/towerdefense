@@ -68,13 +68,17 @@ export const getAnimateable = async (args) => {
 		let frames = [];
 		for (const time of range(1, 30, 1)) {
 			advanceTime();
-			const img = await new Promise((resolve) => {
-				const img = new Image();
-				img.src = canvas.toDataURL();
-				img.onload = resolve(img);
-			});
+
+			// offscreen canvas optimization:
+			if (time > 10 && time % 4 === 0 && canvas.transferToImageBitmap) {
+				frames.push(canvas.transferToImageBitmap());
+				continue;
+			}
+
+			// Fallback transferToImageBitmap is not available
 			if (time > 10 && time % 4 === 0) {
-				frames.push(img);
+				const imgBitmap = await createImageBitmap(canvas);
+				frames.push(imgBitmap);
 			}
 		}
 		return frames;

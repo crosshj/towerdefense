@@ -193,23 +193,23 @@ export const characterImageFromDef = async (character) => {
 };
 
 export const getCharacterIdleFrames = async (character) => {
+	//console.time('getCharacterIdleFrames');
+	let idleFrames = [];
 	try {
 		const skeleton = '/assets/character/FighterBase/FighterBase_ske.json';
 		const atlas = '/assets/character/FighterBase/FighterBase_tex.json';
 		const texture = getCharacterTexture(character);
-		const width = 120;
-		const height = 128;
+		const canvas = new OffscreenCanvas(128, 128);
 		const animation = await getAnimateable({
-			width,
-			height,
+			canvas,
 			skeleton,
 			atlas,
 			texture,
 		});
-		const idleFrames = (await animation.idleFrames()) || [];
-		return idleFrames;
+		idleFrames = (await animation.idleFrames()) || [];
 	} catch (e) {
 		console.log(e);
-		return [];
 	}
+	//console.timeEnd('getCharacterIdleFrames');
+	return idleFrames;
 };

@@ -43,8 +43,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 async function getGame() {
 	const { canvas, ctx } = initCanvas();
-	const assets = await loadAssets();
 	const state = await initState();
+	const assets = await loadAssets({ state });
 
 	attachScrollHandler({ state, canvas });
 	attachClickHandler({ state, canvas, assets });
@@ -355,7 +355,7 @@ function attachScrollHandler({ state, canvas }) {
 	);
 }
 
-async function loadAssets() {
+async function loadAssets({ state }) {
 	const assets = {
 		images: {},
 	};
@@ -388,6 +388,27 @@ async function loadAssets() {
 		color: 'rgba(0, 0, 0, 0.5)',
 		radius: 0.5,
 	});
+
+	//console.time('make homeTeam frames');
+
+	assets.homeTeam = [];
+	const canvas = new OffscreenCanvas(
+		assets.images.bgNear.width,
+		assets.images.bgNear.height
+	);
+	const ctx = canvas.getContext('2d');
+	for (const tick of range(0, 4, 1)) {
+		drawTeam({
+			canvas,
+			ctx,
+			state,
+			assets,
+			tick,
+		});
+		assets.homeTeam.push(canvas.transferToImageBitmap());
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+	}
+	//console.timeEnd('make homeTeam frames');
 
 	return assets;
 }
@@ -457,22 +478,6 @@ function drawParallaxBackground({ canvas, ctx, time, state, assets }) {
 	bgNearCanvas.height = assets.images.bgNear.height;
 	const bgNearCtx = bgNearCanvas.getContext('2d');
 	bgNearCtx.drawImage(assets.images.bgNear, 0, 0);
-
-	//move this to loadAssets
-	if (!Array.isArray(assets.homeTeam)) {
-		assets.homeTeam = [];
-		for (const tick of range(0, 4, 1)) {
-			const frame = drawTeam({
-				width: bgNearCanvas.width,
-				height: bgNearCanvas.height,
-				state,
-				assets,
-				tick,
-			});
-			assets.homeTeam.push(frame);
-		}
-	}
-
 	bgNearCtx.drawImage(assets.homeTeam[state.charAnimFrame], 0, 0);
 
 	drawParallaxLayerImage(speedNear, bgNearCanvas);
@@ -480,20 +485,14 @@ function drawParallaxBackground({ canvas, ctx, time, state, assets }) {
 	drawParallaxLayerImage(speedFore, assets.images.bgFore);
 }
 
-function drawTeam({ width, height, state, assets, tick }) {
+function drawTeam({ canvas, ctx, state, assets, tick }) {
+	const { width, height } = canvas;
 	const { teamIdle } = state;
 
-	const offscreenCanvas = document.createElement('canvas');
-	offscreenCanvas.width = width;
-	offscreenCanvas.height = height;
-	const ctx = offscreenCanvas.getContext('2d');
-
 	const CHARACTER_SCALE = 0.68;
-	const charWidth = 120 * CHARACTER_SCALE;
+	const charWidth = 128 * CHARACTER_SCALE;
 	const charHeight = 128 * CHARACTER_SCALE;
 	const charBase = assets.images.charBase;
-
-	// ctx.globalCompositeOperation = 'source-over';
 
 	const images = [
 		[teamIdle.a[0].idle[tick], -187, 28],
@@ -527,9 +526,8 @@ function drawTeam({ width, height, state, assets, tick }) {
 			charWidth,
 			charHeight
 		);
-		ctx.filter = 'none';
+		// ctx.filter = 'none';
 	}
-	return offscreenCanvas;
 }
 
 function navigationDOM() {

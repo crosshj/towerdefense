@@ -83,10 +83,13 @@ export const getTeamWithIdle = async (
 	teamName = 'Team 1',
 	flipBTeam = true
 ) => {
+	//console.time('getTeamWithIdle');
+
 	const characters = await getCharacters();
 	const teams = await getTeams();
 	const raidTeam = teams[teamName];
 
+	//console.time('getTeamWithIdle:TeamA');
 	for (const [k, v] of Object.entries(raidTeam.a)) {
 		raidTeam.a[k] = characters.find((c) => c.id === v.id);
 		if (!raidTeam.a[k]) {
@@ -95,7 +98,9 @@ export const getTeamWithIdle = async (
 		const idle = await getCharacterIdleFrames(raidTeam.a[k]);
 		raidTeam.a[k].idle = idle;
 	}
+	//console.timeEnd('getTeamWithIdle:TeamA');
 
+	//console.time('getTeamWithIdle:TeamB');
 	for (const [k, v] of Object.entries(raidTeam.b)) {
 		raidTeam.b[k] = characters.find((c) => c.id === v.id);
 		if (!raidTeam.b[k]) {
@@ -103,16 +108,22 @@ export const getTeamWithIdle = async (
 		}
 		const idle = await getCharacterIdleFrames(raidTeam.b[k]);
 		if (flipBTeam) {
-			const flipped = [];
-			for (const frame of idle) {
-				const flippedImage = await flipImage(frame);
-				flipped.push(flippedImage);
-			}
-			raidTeam.b[k].idle = flipped;
+			const flipped = idle.map((frame) => {
+				const canvas = new OffscreenCanvas(frame.width, frame.height);
+				const ctx = canvas.getContext('2d');
+				ctx.translate(frame.width, 0);
+				ctx.scale(-1, 1);
+				ctx.drawImage(frame, 0, 0);
+				return canvas.transferToImageBitmap();
+			});
+			raidTeam.b[k].idle = await Promise.all(flipped);
 			continue;
 		}
 		raidTeam.b[k].idle = idle;
 	}
+	//console.timeEnd('getTeamWithIdle:TeamB');
+
+	//console.timeEnd('getTeamWithIdle');
 
 	return raidTeam;
 };
