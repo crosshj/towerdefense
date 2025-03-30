@@ -1,6 +1,9 @@
 import { SVGIcons } from '../../assets/icons.svg.js';
 import { getUser } from '../../user/user.js';
+import { setCurrentCharCache } from '../../utils/cache.js';
+import { getUnitDetails } from '../../utils/units.js';
 import { statsRequest } from '../../visuals/stats/stats.js';
+import { getTeam } from '/utils/getTeam.js';
 
 const pageTitle = 'HOME';
 
@@ -30,7 +33,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 		visibility: 'hidden',
 	});
 
-	const onFrame = await getGame();
+	const state = {
+		scroll: 0,
+	};
+	state.raidTeam = await getTeam('Team 1');
+
+	const onFrame = await getGame(state);
 	const gameLoop = createGameLoop({ onFrame });
 	gameLoop.resume();
 
@@ -43,7 +51,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 		const { _, ...args } = event.data;
 		if (_ === 'broadcastCharactersUpdate') {
 			// console.log('home knows characters are updated');
-			raidTeam = await getTeam('Team 1');
+			state.raidTeam = await getTeam('Team 1');
 			return;
 		}
 		if (_ === 'broadcastUserIconUpdate') {
@@ -53,14 +61,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 	});
 });
 
-async function getGame() {
+async function getGame(state) {
 	const { canvas, ctx } = setupCanvas();
 	const assets = await loadAssets();
-	const state = {
-		scroll: 0,
-	};
 	attachScrollHandler({ state, canvas });
-	attachClickHandler({ canvas, state, assets });
+	attachClickHandler({ state, canvas, assets });
 
 	return ({ delta, now: time }) => {
 		//state.scroll = Math.sin(time * 0.0005);
@@ -212,7 +217,25 @@ function getClickReader(image) {
 	return getColorAt;
 }
 
-function onCanvasClick(color, { test = false } = {}) {
+function handleCharacterClick(which, state) {
+	if (!which.includes('modals/character/detail')) {
+		return;
+	}
+	const urlParams = new URLSearchParams(which.split('?')[1]);
+	const sub = urlParams.get('sub');
+	const slot = parseInt(urlParams.get('slot'), 10);
+	const raidArray = state?.raidTeam?.[sub];
+	if (!raidArray || slot < 1 || slot > 5) {
+		return;
+	}
+	const characterDetails = raidArray[slot - 1];
+	const currentCharacter = getUnitDetails(characterDetails, true);
+	if (currentCharacter) {
+		setCurrentCharCache(currentCharacter);
+	}
+}
+
+function onCanvasClick(color, { state, test = false } = {}) {
 	// console.log({ color });
 	const clickColorMap = {
 		'#00ffdd': '/pages/stage/main/index.html',
@@ -249,6 +272,7 @@ function onCanvasClick(color, { test = false } = {}) {
 		// 	type: 'dialog',
 		// 	message: matchedUrl,
 		// });
+		handleCharacterClick(matchedUrl, state);
 		window.parent.postMessage({
 			_: 'navigate',
 			src: matchedUrl,
@@ -266,7 +290,7 @@ function attachClickHandler({ canvas, state, assets }) {
 	const getColorAt = getClickReader(image);
 
 	const testColor = getColorAt(1200, 90);
-	const url = onCanvasClick(testColor, { test: true });
+	const url = onCanvasClick(testColor, { state, test: true });
 	if (
 		testColor?.hex !== '#00ffdd' ||
 		url !== '/pages/stage/main/index.html'
@@ -307,7 +331,7 @@ function attachClickHandler({ canvas, state, assets }) {
 		const y = Math.floor((e.clientY / canvas.height) * image.height);
 
 		const color = getColorAt(x, y);
-		if (color) onCanvasClick(color);
+		if (color) onCanvasClick(color, { state });
 	});
 }
 
