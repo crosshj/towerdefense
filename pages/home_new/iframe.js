@@ -2,8 +2,9 @@ import { SVGIcons } from '../../assets/icons.svg.js';
 import { getUser } from '../../user/user.js';
 import { setCurrentCharCache } from '../../utils/cache.js';
 import { getUnitDetails } from '../../utils/units.js';
+import { range } from '../../utils/utils.js';
 import { statsRequest } from '../../visuals/stats/stats.js';
-import { getTeam } from '/utils/getTeam.js';
+import { getTeam, getTeamWithIdle } from '/utils/getTeam.js';
 
 const pageTitle = 'HOME';
 
@@ -33,8 +34,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 		visibility: 'hidden',
 	});
 
-	const onFrame = await getGame();
-	const gameLoop = createGameLoop({ onFrame });
+	const { onFrame, onFrameCount } = await getGame();
+	const gameLoop = createGameLoop({ onFrame, onFrameCount });
 	gameLoop.resume();
 
 	window.parent.postMessage({ _: 'loaded' });
@@ -51,20 +52,30 @@ async function getGame() {
 	await drawControls({ state });
 
 	// the main game loop
-	return ({ delta, now: time }) => {
+	const onFrame = ({ delta, now: time }) => {
 		//state.scroll = Math.sin(time * 0.0005);
 		clearCanvas(canvas, ctx);
 		//drawCenteredTriangle(canvas, ctx, time);
 		//drawCenteredRotatingSquare(canvas, ctx, time);
-		drawParallaxBackground({ state, canvas, ctx, assets });
+		drawParallaxBackground({ state, canvas, ctx, assets, time });
 	};
+
+	const onFrameCount = ({ frameCount }) => {
+		if (frameCount % 10 === 0) {
+			state.charAnimFrame = (state.charAnimFrame + 1) % 5;
+		}
+	};
+
+	return { onFrame, onFrameCount };
 }
 
 async function initState() {
 	const state = {
 		scroll: 0,
 		raidTeam: await getTeam('Team 1'),
+		teamIdle: await getTeamWithIdle('Team 1'),
 		user: await getUser(),
+		charAnimFrame: 0,
 	};
 
 	// listens for changes to characters and updates raidTeam
@@ -73,6 +84,7 @@ async function initState() {
 		if (_ === 'broadcastCharactersUpdate') {
 			// console.log('home knows characters are updated');
 			state.raidTeam = await getTeam('Team 1');
+			state.teamIdle = await getTeamWithIdle('Team 1');
 			return;
 		}
 		if (_ === 'broadcastUserIconUpdate') {
@@ -446,22 +458,31 @@ function drawParallaxBackground({ canvas, ctx, time, state, assets }) {
 	const bgNearCtx = bgNearCanvas.getContext('2d');
 	bgNearCtx.drawImage(assets.images.bgNear, 0, 0);
 
-	assets.homeTeam =
-		assets.homeTeam ||
-		drawTeam({
-			width: bgNearCanvas.width,
-			height: bgNearCanvas.height,
-			raidTeam: state.raidTeam,
-			assets,
-		});
-	bgNearCtx.drawImage(assets.homeTeam, 0, 0);
+	//move this to loadAssets
+	if (!Array.isArray(assets.homeTeam)) {
+		assets.homeTeam = [];
+		for (const tick of range(0, 4, 1)) {
+			const frame = drawTeam({
+				width: bgNearCanvas.width,
+				height: bgNearCanvas.height,
+				state,
+				assets,
+				tick,
+			});
+			assets.homeTeam.push(frame);
+		}
+	}
+
+	bgNearCtx.drawImage(assets.homeTeam[state.charAnimFrame], 0, 0);
 
 	drawParallaxLayerImage(speedNear, bgNearCanvas);
 
 	drawParallaxLayerImage(speedFore, assets.images.bgFore);
 }
 
-function drawTeam({ width, height, raidTeam, assets }) {
+function drawTeam({ width, height, state, assets, tick }) {
+	const { teamIdle } = state;
+
 	const offscreenCanvas = document.createElement('canvas');
 	offscreenCanvas.width = width;
 	offscreenCanvas.height = height;
@@ -475,17 +496,17 @@ function drawTeam({ width, height, raidTeam, assets }) {
 	// ctx.globalCompositeOperation = 'source-over';
 
 	const images = [
-		[raidTeam.a[0].image, -187, 28],
-		[raidTeam.a[1].image, -305, 23],
-		[raidTeam.a[2].image, -385, -26],
-		[raidTeam.a[3].image, -250, -65],
-		[raidTeam.a[4].image, -135, -67],
+		[teamIdle.a[0].idle[tick], -187, 28],
+		[teamIdle.a[1].idle[tick], -305, 23],
+		[teamIdle.a[2].idle[tick], -385, -26],
+		[teamIdle.a[3].idle[tick], -250, -65],
+		[teamIdle.a[4].idle[tick], -135, -67],
 
-		[raidTeam.b[0].image, 187 - charWidth, 28],
-		[raidTeam.b[1].image, 305 - charWidth, 23],
-		[raidTeam.b[2].image, 385 - charWidth, -26],
-		[raidTeam.b[3].image, 250 - charWidth, -65],
-		[raidTeam.b[4].image, 135 - charWidth, -67],
+		[teamIdle.b[0].idle[tick], 187 - charWidth, 28],
+		[teamIdle.b[1].idle[tick], 305 - charWidth, 23],
+		[teamIdle.b[2].idle[tick], 385 - charWidth, -26],
+		[teamIdle.b[3].idle[tick], 250 - charWidth, -65],
+		[teamIdle.b[4].idle[tick], 135 - charWidth, -67],
 	].reverse();
 
 	for (const [image, offsetX, offsetY] of images) {

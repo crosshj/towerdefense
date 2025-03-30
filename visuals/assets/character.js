@@ -4,18 +4,7 @@ import { getAnimateable } from '/vendor/DragonBones/Animateable.js';
 
 const unitImageStore = new IDBStorage('ImageDB', 'UnitStore');
 
-export const characterAnimationGetter = async (
-	character,
-	{ width = 128, height = 140, still } = {}
-) => {
-	if (still === true) {
-		try {
-			const image = await unitImageStore.get(character.code);
-			if (image) return { image };
-		} catch (e) {}
-	}
-	const skeleton = '/assets/character/FighterBase/FighterBase_ske.json';
-	const atlas = '/assets/character/FighterBase/FighterBase_tex.json';
+const getCharacterTexture = (character) => {
 	let texture = '/assets/character/FighterBase/Elements/Normal_tex.png';
 	if (character?.type === 'defender' && !character?.code) {
 		texture = '/assets/character/FighterBase/skins/0-enemy_tex.png';
@@ -35,6 +24,23 @@ export const characterAnimationGetter = async (
 	if (texture === '/assets/character/FighterBase/Elements/Normal_tex.png') {
 		debugger;
 	}
+	return texture;
+};
+
+export const characterAnimationGetter = async (
+	character,
+	{ width = 128, height = 140, still } = {}
+) => {
+	if (still === true) {
+		try {
+			const image = await unitImageStore.get(character.code);
+			if (image) return { image };
+		} catch (e) {}
+	}
+	const skeleton = '/assets/character/FighterBase/FighterBase_ske.json';
+	const atlas = '/assets/character/FighterBase/FighterBase_tex.json';
+	const texture = getCharacterTexture(character);
+
 	const framerate = 8;
 	const animation = await getAnimateable({
 		width,
@@ -178,4 +184,25 @@ export const characterImageFromDef = async (character) => {
 		still: true,
 	});
 	return animation?.image || animation.canvas.toDataURL();
+};
+
+export const getCharacterIdleFrames = async (character) => {
+	try {
+		const skeleton = '/assets/character/FighterBase/FighterBase_ske.json';
+		const atlas = '/assets/character/FighterBase/FighterBase_tex.json';
+		const texture = getCharacterTexture(character);
+		const width = 120;
+		const height = 128;
+		const animation = await getAnimateable({
+			width,
+			height,
+			skeleton,
+			atlas,
+			texture,
+		});
+		return animation?.idleFrames || [];
+	} catch (e) {
+		console.log(e);
+		return [];
+	}
 };
