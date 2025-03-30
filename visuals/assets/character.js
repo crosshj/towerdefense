@@ -60,8 +60,14 @@ export const characterAnimationGetter = async (
 	*/
 
 	try {
+		//TODO: not sure why this doesn't work
+		// const idleFrames = await animation.idleFrames();
+		// await unitImageStore.set(character.code, idleFrames[0].toDataURL());
+
 		await unitImageStore.set(character.code, animation.canvas.toDataURL());
-	} catch (e) {}
+	} catch (e) {
+		console.log(e);
+	}
 
 	return animation;
 };
@@ -200,7 +206,8 @@ export const getCharacterIdleFrames = async (character) => {
 			atlas,
 			texture,
 		});
-		return animation?.idleFrames || [];
+		const idleFrames = (await animation.idleFrames()) || [];
+		return idleFrames;
 	} catch (e) {
 		console.log(e);
 		return [];

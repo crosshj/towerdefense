@@ -62,12 +62,12 @@ export const getAnimateable = async (args) => {
 		return factory.advanceTime(time);
 	};
 
-	const idleFrames = await (async () => {
-		await setAnimation('idle');
+	const idleFrames = async () => {
+		await armature.animation.play('idle');
 
 		let frames = [];
 		for (const time of range(1, 30, 1)) {
-			await advanceTime();
+			advanceTime();
 			const img = await new Promise((resolve) => {
 				const img = new Image();
 				img.src = canvas.toDataURL();
@@ -78,7 +78,7 @@ export const getAnimateable = async (args) => {
 			}
 		}
 		return frames;
-	})();
+	};
 
 	const thumbnail = cropCanvas(canvas);
 

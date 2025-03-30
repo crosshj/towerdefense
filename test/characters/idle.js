@@ -19,7 +19,7 @@ const getFrames = async ({ skeleton, atlas, texture, animName }) => {
 		// framerate: 12,
 	});
 
-	return animation.idleFrames;
+	return await animation.idleFrames();
 };
 
 const switchCharacter = async ({ character, animation: _animName }) => {
