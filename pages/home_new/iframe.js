@@ -33,18 +33,39 @@ document.addEventListener('DOMContentLoaded', async () => {
 		visibility: 'hidden',
 	});
 
-	const state = {
-		scroll: 0,
-	};
-	state.raidTeam = await getTeam('Team 1');
-
-	const onFrame = await getGame(state);
+	const onFrame = await getGame();
 	const gameLoop = createGameLoop({ onFrame });
 	gameLoop.resume();
 
-	await drawControls();
-
 	window.parent.postMessage({ _: 'loaded' });
+});
+
+async function getGame() {
+	const { canvas, ctx } = initCanvas();
+	const assets = await loadAssets();
+	const state = await initState();
+
+	attachScrollHandler({ state, canvas });
+	attachClickHandler({ state, canvas, assets });
+
+	await drawControls({ state });
+
+	// the main game loop
+	return ({ delta, now: time }) => {
+		//state.scroll = Math.sin(time * 0.0005);
+		clearCanvas(canvas, ctx);
+		//drawCenteredTriangle(canvas, ctx, time);
+		//drawCenteredRotatingSquare(canvas, ctx, time);
+		drawParallaxBackground({ state, canvas, ctx, assets });
+	};
+}
+
+async function initState() {
+	const state = {
+		scroll: 0,
+		raidTeam: await getTeam('Team 1'),
+		user: await getUser(),
+	};
 
 	// listens for changes to characters and updates raidTeam
 	window.addEventListener('message', async function (event) {
@@ -59,21 +80,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 			return;
 		}
 	});
-});
 
-async function getGame(state) {
-	const { canvas, ctx } = setupCanvas();
-	const assets = await loadAssets();
-	attachScrollHandler({ state, canvas });
-	attachClickHandler({ state, canvas, assets });
-
-	return ({ delta, now: time }) => {
-		//state.scroll = Math.sin(time * 0.0005);
-		clearCanvas(canvas, ctx);
-		//drawCenteredTriangle(canvas, ctx, time);
-		//drawCenteredRotatingSquare(canvas, ctx, time);
-		drawParallaxBackground({ canvas, ctx, assets, state });
-	};
+	return state;
 }
 
 function clearCanvas(canvas, ctx) {
@@ -83,7 +91,7 @@ function clearCanvas(canvas, ctx) {
 	ctx.fillRect(0, 0, width, height);
 }
 
-function setupCanvas() {
+function initCanvas() {
 	const canvas = document.createElement('canvas');
 	canvas.id = 'canvas';
 	canvas.style.position = 'absolute';
@@ -102,88 +110,6 @@ function setupCanvas() {
 
 	clearCanvas(canvas, ctx);
 	return { canvas, ctx };
-}
-
-function attachScrollHandler({ state, canvas }) {
-	canvas.style.touchAction = 'none';
-
-	// Config
-	const TOUCH_INVERT = true;
-	const SCROLL_INVERT = false;
-	const DRAG_TO_SCROLL_RATIO = 1 / canvas.width;
-	const FRICTION = 0.96;
-	const WHEEL_SENSITIVITY = 1 / 1000;
-	const MIN_VELOCITY = 0.002;
-
-	let isDragging = false;
-	let startX = 0;
-	let scrollStart = 0;
-	let lastX = 0;
-	let lastTime = 0;
-	let velocity = 0;
-	let rafId;
-
-	const clamp = (x) => Math.max(-1, Math.min(1, x));
-
-	const animate = () => {
-		if (Math.abs(velocity) < MIN_VELOCITY) return;
-		state.scroll = clamp(state.scroll + velocity);
-		velocity *= FRICTION;
-		rafId = requestAnimationFrame(animate);
-	};
-
-	canvas.addEventListener('pointerdown', (e) => {
-		isDragging = true;
-		startX = lastX = e.clientX;
-		scrollStart = state.scroll;
-		lastTime = performance.now();
-		velocity = 0;
-		cancelAnimationFrame(rafId);
-		canvas.setPointerCapture(e.pointerId);
-		e.preventDefault();
-	});
-
-	canvas.addEventListener('pointermove', (e) => {
-		if (!isDragging) return;
-		const now = performance.now();
-		const dx = (e.clientX - startX) * (TOUCH_INVERT ? -1 : 1);
-		state.scroll = clamp(scrollStart + dx * DRAG_TO_SCROLL_RATIO);
-
-		// Compute velocity from last frame
-		const deltaX = e.clientX - lastX;
-		const dt = now - lastTime;
-		if (dt > 0) {
-			const frameVelocity =
-				((deltaX * (TOUCH_INVERT ? -1 : 1)) / dt) *
-				DRAG_TO_SCROLL_RATIO *
-				16; // scaled for ~60fps
-			velocity = frameVelocity;
-		}
-		lastX = e.clientX;
-		lastTime = now;
-		e.preventDefault();
-	});
-
-	canvas.addEventListener('pointerup', (e) => {
-		isDragging = false;
-		canvas.releasePointerCapture(e.pointerId);
-		rafId = requestAnimationFrame(animate);
-		e.preventDefault();
-	});
-
-	canvas.addEventListener(
-		'wheel',
-		(e) => {
-			if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
-				const direction = SCROLL_INVERT ? 1 : -1;
-				state.scroll = clamp(
-					state.scroll + direction * e.deltaX * WHEEL_SENSITIVITY
-				);
-				e.preventDefault();
-			}
-		},
-		{ passive: false }
-	);
 }
 
 function getClickReader(image) {
@@ -335,6 +261,88 @@ function attachClickHandler({ canvas, state, assets }) {
 	});
 }
 
+function attachScrollHandler({ state, canvas }) {
+	canvas.style.touchAction = 'none';
+
+	// Config
+	const TOUCH_INVERT = true;
+	const SCROLL_INVERT = false;
+	const DRAG_TO_SCROLL_RATIO = 1 / canvas.width;
+	const FRICTION = 0.96;
+	const WHEEL_SENSITIVITY = 1 / 1000;
+	const MIN_VELOCITY = 0.002;
+
+	let isDragging = false;
+	let startX = 0;
+	let scrollStart = 0;
+	let lastX = 0;
+	let lastTime = 0;
+	let velocity = 0;
+	let rafId;
+
+	const clamp = (x) => Math.max(-1, Math.min(1, x));
+
+	const animate = () => {
+		if (Math.abs(velocity) < MIN_VELOCITY) return;
+		state.scroll = clamp(state.scroll + velocity);
+		velocity *= FRICTION;
+		rafId = requestAnimationFrame(animate);
+	};
+
+	canvas.addEventListener('pointerdown', (e) => {
+		isDragging = true;
+		startX = lastX = e.clientX;
+		scrollStart = state.scroll;
+		lastTime = performance.now();
+		velocity = 0;
+		cancelAnimationFrame(rafId);
+		canvas.setPointerCapture(e.pointerId);
+		e.preventDefault();
+	});
+
+	canvas.addEventListener('pointermove', (e) => {
+		if (!isDragging) return;
+		const now = performance.now();
+		const dx = (e.clientX - startX) * (TOUCH_INVERT ? -1 : 1);
+		state.scroll = clamp(scrollStart + dx * DRAG_TO_SCROLL_RATIO);
+
+		// Compute velocity from last frame
+		const deltaX = e.clientX - lastX;
+		const dt = now - lastTime;
+		if (dt > 0) {
+			const frameVelocity =
+				((deltaX * (TOUCH_INVERT ? -1 : 1)) / dt) *
+				DRAG_TO_SCROLL_RATIO *
+				16; // scaled for ~60fps
+			velocity = frameVelocity;
+		}
+		lastX = e.clientX;
+		lastTime = now;
+		e.preventDefault();
+	});
+
+	canvas.addEventListener('pointerup', (e) => {
+		isDragging = false;
+		canvas.releasePointerCapture(e.pointerId);
+		rafId = requestAnimationFrame(animate);
+		e.preventDefault();
+	});
+
+	canvas.addEventListener(
+		'wheel',
+		(e) => {
+			if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+				const direction = SCROLL_INVERT ? 1 : -1;
+				state.scroll = clamp(
+					state.scroll + direction * e.deltaX * WHEEL_SENSITIVITY
+				);
+				e.preventDefault();
+			}
+		},
+		{ passive: false }
+	);
+}
+
 async function loadAssets() {
 	const assets = {
 		images: {},
@@ -347,6 +355,7 @@ async function loadAssets() {
 		bgMountain: './assets/mountains.png',
 		bgMid: './assets/mid.png',
 		bgFar: './assets/far.png',
+		charBase: './assets/charBase.png',
 	};
 
 	await Promise.all(
@@ -361,6 +370,12 @@ async function loadAssets() {
 			});
 		})
 	);
+
+	createOutlineFilter({
+		id: 'outline-thin-black',
+		color: 'rgba(0, 0, 0, 0.5)',
+		radius: 0.5,
+	});
 
 	return assets;
 }
@@ -424,11 +439,79 @@ function drawParallaxBackground({ canvas, ctx, time, state, assets }) {
 	drawParallaxLayerImage(speedFar, assets.images.bgFar);
 	drawParallaxLayerImage(speedMiddle, assets.images.bgMid);
 	drawParallaxLayerImage(speedMountain, assets.images.bgMountain);
-	drawParallaxLayerImage(speedNear, assets.images.bgNear);
+
+	const bgNearCanvas = document.createElement('canvas');
+	bgNearCanvas.width = assets.images.bgNear.width;
+	bgNearCanvas.height = assets.images.bgNear.height;
+	const bgNearCtx = bgNearCanvas.getContext('2d');
+	bgNearCtx.drawImage(assets.images.bgNear, 0, 0);
+
+	assets.homeTeam =
+		assets.homeTeam ||
+		drawTeam({
+			width: bgNearCanvas.width,
+			height: bgNearCanvas.height,
+			raidTeam: state.raidTeam,
+			assets,
+		});
+	bgNearCtx.drawImage(assets.homeTeam, 0, 0);
+
+	drawParallaxLayerImage(speedNear, bgNearCanvas);
+
 	drawParallaxLayerImage(speedFore, assets.images.bgFore);
 }
 
-function navigation() {
+function drawTeam({ width, height, raidTeam, assets }) {
+	const offscreenCanvas = document.createElement('canvas');
+	offscreenCanvas.width = width;
+	offscreenCanvas.height = height;
+	const ctx = offscreenCanvas.getContext('2d');
+
+	const CHARACTER_SCALE = 0.68;
+	const charWidth = 120 * CHARACTER_SCALE;
+	const charHeight = 128 * CHARACTER_SCALE;
+	const charBase = assets.images.charBase;
+
+	// ctx.globalCompositeOperation = 'source-over';
+
+	const images = [
+		[raidTeam.a[0].image, -187, 28],
+		[raidTeam.a[1].image, -305, 23],
+		[raidTeam.a[2].image, -385, -26],
+		[raidTeam.a[3].image, -250, -65],
+		[raidTeam.a[4].image, -135, -67],
+
+		[raidTeam.b[0].image, 187 - charWidth, 28],
+		[raidTeam.b[1].image, 305 - charWidth, 23],
+		[raidTeam.b[2].image, 385 - charWidth, -26],
+		[raidTeam.b[3].image, 250 - charWidth, -65],
+		[raidTeam.b[4].image, 135 - charWidth, -67],
+	].reverse();
+
+	for (const [image, offsetX, offsetY] of images) {
+		if (!image) continue;
+		ctx.drawImage(
+			charBase,
+			width / 2 + offsetX - 15,
+			height / 2 + offsetY + 63,
+			charWidth + 30,
+			55
+		);
+		// ctx.filter = 'contrast(1.007) saturate(1.007) url(#outline-thin-black)';
+		// ctx.filter = 'url(#outline-thin-black)';
+		ctx.drawImage(
+			image,
+			width / 2 + offsetX,
+			height / 2 + offsetY,
+			charWidth,
+			charHeight
+		);
+		ctx.filter = 'none';
+	}
+	return offscreenCanvas;
+}
+
+function navigationDOM() {
 	return `
 	<div class="navigation">
 	<div class="my-team clickable wip">
@@ -479,8 +562,8 @@ function navigation() {
 `;
 }
 
-const drawControls = async () => {
-	const user = await getUser();
+async function drawControls({ state }) {
+	const { user } = state;
 	const container = document.createElement('div');
 	container.classList.add('controls');
 	const progressAmountClass = 'progress-' + user.levelInfo.levelExpPercent10;
@@ -547,7 +630,7 @@ const drawControls = async () => {
 
 		</div>
 
-		${navigation()}
+		${navigationDOM()}
 	</div>
 	`;
 	statsRequest({
@@ -592,7 +675,53 @@ const drawControls = async () => {
 	});
 
 	document.body.insertAdjacentElement('afterbegin', container);
-};
+}
+
+// function createOutlineFilter({
+// 	id = 'outline',
+// 	color = 'black',
+// 	radius = 2,
+// } = {}) {
+// 	const wrapper = document.createElement('div');
+// 	wrapper.innerHTML = `
+// 		<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute; width:0; height:0;">
+// 			<filter id="${id}">
+// 				<feMorphology in="SourceAlpha" operator="dilate" radius="${radius}" result="dilated" />
+// 				<feComposite in="dilated" in2="SourceAlpha" operator="xor" result="border" />
+// 				<feFlood flood-color="${color}" result="color" />
+// 				<feComposite in="color" in2="border" operator="in" result="coloredBorder" />
+// 				<feMerge>
+// 					<feMergeNode in="coloredBorder" />
+// 					<feMergeNode in="SourceGraphic" />
+// 				</feMerge>
+// 			</filter>
+// 		</svg>
+// 	`;
+// 	document.body.appendChild(wrapper);
+// }
+
+function createOutlineFilter({
+	id = 'outline',
+	color = 'black',
+	radius = 1,
+} = {}) {
+	const wrapper = document.createElement('div');
+	wrapper.innerHTML = `
+		<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute; width:0; height:0;">
+			<filter id="${id}">
+				<feMorphology in="SourceAlpha" operator="dilate" radius="${radius}" result="dilated" />
+				<feComposite in="dilated" in2="SourceAlpha" operator="out" result="border" />
+				<feFlood flood-color="${color}" result="color" />
+				<feComposite in="color" in2="border" operator="in" result="coloredBorder" />
+				<feMerge>
+					<feMergeNode in="coloredBorder" />
+					<feMergeNode in="SourceGraphic" />
+				</feMerge>
+			</filter>
+		</svg>
+	`;
+	document.body.appendChild(wrapper);
+}
 
 // ------------------------------------------------------------
 
