@@ -52,10 +52,10 @@ export const getAnimateable = async (args) => {
 	await factory.loadData({ skeleton, atlas, texture });
 	const armature = factory.buildArmatureDisplay('Armature');
 
-	const setAnimation = async (newAnim) => {
+	const setAnimation = (newAnim) => {
 		return armature.animation.play(newAnim);
 	};
-	const advanceTime = async (time) => {
+	const advanceTime = (time) => {
 		if (!time) {
 			return factory.advanceTime(1 / framerate);
 		}
