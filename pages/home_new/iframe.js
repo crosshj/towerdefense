@@ -60,10 +60,18 @@ async function getGame() {
 		drawParallaxBackground({ state, canvas, ctx, assets, time });
 	};
 
-	const onFrameCount = ({ frameCount }) => {
-		if (frameCount % 10 === 0) {
-			state.charAnimFrame = (state.charAnimFrame + 1) % 5;
-		}
+	let accumulatedDelta = 0;
+	const frameAdvanceThreshold = 225;
+	const onFrameCount = ({ delta, frameCount }) => {
+		accumulatedDelta += delta;
+
+		if (accumulatedDelta < frameAdvanceThreshold) return;
+		state.charAnimFrame = (state.charAnimFrame + 1) % 5;
+		accumulatedDelta %= frameAdvanceThreshold; // Keep the excess delta
+
+		// if (frameCount % 10 === 0) {
+		// 	state.charAnimFrame = (state.charAnimFrame + 1) % 5;
+		// }
 	};
 
 	return { onFrame, onFrameCount };
@@ -73,7 +81,10 @@ async function initState() {
 	const state = {
 		scroll: 0,
 		raidTeam: await getTeam('Team 1'),
-		teamIdle: await getTeamWithIdle('Team 1'),
+		teamIdle: await getTeamWithIdle('Team 1', {
+			flipBTeam: true,
+			randomStart: true,
+		}),
 		user: await getUser(),
 		charAnimFrame: 0,
 	};
@@ -109,18 +120,32 @@ function initCanvas() {
 	canvas.style.position = 'absolute';
 	canvas.style.top = '0';
 	canvas.style.left = '0';
-	canvas.style.width = '100%';
-	canvas.style.height = '100%';
+	canvas.style.width = window.innerWidth + 'px';
+	canvas.style.height = window.innerHeight + 'px';
+
 	document.body.appendChild(canvas);
 
+	const HIGH_DPI = true;
 	const ctx = canvas.getContext('2d');
-	const width = window.innerWidth;
-	const height = window.innerHeight;
-
+	const width = HIGH_DPI
+		? window.innerWidth * devicePixelRatio
+		: window.innerWidth;
+	const height = HIGH_DPI
+		? window.innerHeight * devicePixelRatio
+		: window.innerHeight;
+	// HIGH_DPI && ctx.scale(devicePixelRatio, devicePixelRatio);
+	HIGH_DPI &&
+		ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
 	canvas.width = width;
 	canvas.height = height;
 
-	clearCanvas(canvas, ctx);
+	// console.log({
+	// 	css: [window.innerWidth, window.innerHeight],
+	// 	dpr: window.devicePixelRatio,
+	// 	canvas: [canvas.width, canvas.height],
+	// });
+
+	// clearCanvas(canvas, ctx);
 	return { canvas, ctx };
 }
 
@@ -390,7 +415,6 @@ async function loadAssets({ state }) {
 	});
 
 	//console.time('make homeTeam frames');
-
 	assets.homeTeam = [];
 	const canvas = new OffscreenCanvas(
 		assets.images.bgNear.width,

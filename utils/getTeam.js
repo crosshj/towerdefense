@@ -81,13 +81,25 @@ export const getTeamFromNumber = async (teamNumber, flipBTeam = false) => {
 
 export const getTeamWithIdle = async (
 	teamName = 'Team 1',
-	flipBTeam = true
+	{ flipBTeam = true, randomStart = false } = {}
 ) => {
 	//console.time('getTeamWithIdle');
 
 	const characters = await getCharacters();
 	const teams = await getTeams();
 	const raidTeam = teams[teamName];
+
+	const modifyIdleFrames = (frames) => {
+		if (randomStart) {
+			const randomIndex = Math.floor(Math.random() * frames.length);
+			const modifiedFrames = [
+				...frames.slice(randomIndex),
+				...frames.slice(0, randomIndex),
+			];
+			return modifiedFrames;
+		}
+		return frames;
+	};
 
 	//console.time('getTeamWithIdle:TeamA');
 	for (const [k, v] of Object.entries(raidTeam.a)) {
@@ -96,7 +108,7 @@ export const getTeamWithIdle = async (
 			raidTeam.a[k] = { ...v };
 		}
 		const idle = await getCharacterIdleFrames(raidTeam.a[k]);
-		raidTeam.a[k].idle = idle;
+		raidTeam.a[k].idle = modifyIdleFrames(idle);
 	}
 	//console.timeEnd('getTeamWithIdle:TeamA');
 
@@ -106,7 +118,8 @@ export const getTeamWithIdle = async (
 		if (!raidTeam.b[k]) {
 			raidTeam.b[k] = { ...v };
 		}
-		const idle = await getCharacterIdleFrames(raidTeam.b[k]);
+		let idle = await getCharacterIdleFrames(raidTeam.b[k]);
+		idle = modifyIdleFrames(idle);
 		if (flipBTeam) {
 			const flipped = idle.map((frame) => {
 				const canvas = new OffscreenCanvas(frame.width, frame.height);
