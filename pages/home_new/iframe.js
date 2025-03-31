@@ -125,7 +125,7 @@ function initCanvas() {
 
 	document.body.appendChild(canvas);
 
-	const HIGH_DPI = true;
+	const HIGH_DPI = false;
 	const ctx = canvas.getContext('2d');
 	const width = HIGH_DPI
 		? window.innerWidth * devicePixelRatio
