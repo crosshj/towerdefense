@@ -1442,7 +1442,7 @@ export const unitsAll = {
 
 	'u0001-4-shirataki': {
 		displayName: 'Shirataki',
-		element: 'Normal',
+		element: 'Grass',
 		type: 'Strength',
 		rank: 4,
 		mineralCost: 150,
@@ -1461,12 +1461,12 @@ export const unitsAll = {
 		attack: '1,709 - 20,004 - 50,000',
 		hp: '4,872 - 92,502 - 150,000',
 		defense: '303 - 5,585 - 9,385',
-		range: 500,
+		range: 200,
 	},
 
 	'u0001-4-hazelnut': {
 		displayName: 'Hazelnut',
-		element: 'Plant',
+		element: 'Earth',
 		type: 'Strength',
 		rank: 4,
 		mineralCost: 150,
@@ -1474,5 +1474,17 @@ export const unitsAll = {
 		hp: '4,872 - 92,502 - 150,000',
 		defense: '303 - 5,585 - 9,385',
 		range: 500,
+	},
+
+	'u0001-4-hickory': {
+		displayName: 'Hickory',
+		element: 'Poison',
+		type: 'Strength',
+		rank: 4,
+		mineralCost: 150,
+		attack: '1,709 - 20,004 - 50,000',
+		hp: '4,872 - 92,502 - 150,000',
+		defense: '303 - 5,585 - 9,385',
+		range: 300,
 	},
 };
