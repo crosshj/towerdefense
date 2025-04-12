@@ -4,6 +4,7 @@ import { getUser, getUserFromAPI, updateUserFromAPI } from '../../user/user.js';
 import { IDBStorage } from '../../utils/IDBStorage.js';
 import { getVersionString } from './version.js';
 import API from '../../utils/API.js';
+import './index.components.js';
 
 const notificationPermitted = async () => {
 	if ('Notification' in window && navigator.serviceWorker) {
@@ -192,6 +193,11 @@ const attachSettings = async () => {
 
 	const resourcesCheckButton = document.querySelector('.resourceCheckButton');
 	resourcesCheckButton.addEventListener('pointerup', resourcesCheck);
+
+	const debugUrlField = document.querySelector('#debugUrl');
+	debugUrlField.addEventListener('input', (e) => {
+		localStorage.setItem('DEBUG_URL', e.target.value);
+	});
 };
 
 const updateVersionString = async () => {

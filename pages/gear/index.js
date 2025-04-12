@@ -7,6 +7,7 @@ import {
 	setCurrentGearCache,
 } from '../../utils/cache.js';
 import { attachTap } from '../../utils/pointerEvents.js';
+import { debug } from '../../utils/debug.js';
 
 const pageTitle = 'GEAR';
 
@@ -219,42 +220,46 @@ const refreshUnit = async ({ allUnits }) => {
 };
 
 const setup = async () => {
-	document.title = 'TD: ' + pageTitle;
-	const params = Object.fromEntries(
-		new URLSearchParams(window.location.search)
-	);
-	console.log({ params });
+	try {
+		document.title = 'TD: ' + pageTitle;
+		const params = Object.fromEntries(
+			new URLSearchParams(window.location.search)
+		);
+		debug.log({ params });
 
-	let allUnits = await getCharacters(true);
+		let allUnits = await getCharacters(true);
 
-	const gear = await getGear();
-	let unit = await refreshUnit({ allUnits, gear });
+		const gear = await getGear();
+		let unit = await refreshUnit({ allUnits, gear });
 
-	const list = await attachList({ gear });
-	list.setAllUnits(allUnits);
+		const list = await attachList({ gear });
+		list.setAllUnits(allUnits);
 
-	const selector = await attachListSelector({ params, list });
+		const selector = await attachListSelector({ params, list });
 
-	await attachUnitDetails({ unit });
+		await attachUnitDetails({ unit });
 
-	const slots = attachSlots({ gear, selector });
-	attachUnitSelect();
+		const slots = attachSlots({ gear, selector });
+		attachUnitSelect();
 
-	slots.updateSlots({ unit, gear });
+		slots.updateSlots({ unit, gear });
 
-	window.addEventListener('message', async (event) => {
-		const { _, ...args } = event.data;
-		if (_ === 'broadcastGearChanged') {
-			allUnits = await getCharacters(true);
-			unit = await refreshUnit({ allUnits });
-			list.setAllUnits(allUnits);
-			list.render();
-			slots.updateSlots({ unit });
-			return;
-		}
-	});
+		window.addEventListener('message', async (event) => {
+			const { _, ...args } = event.data;
+			if (_ === 'broadcastGearChanged') {
+				allUnits = await getCharacters(true);
+				unit = await refreshUnit({ allUnits });
+				list.setAllUnits(allUnits);
+				list.render();
+				slots.updateSlots({ unit });
+				return;
+			}
+		});
 
-	pageDone();
+		pageDone();
+	} catch (e) {
+		debug.log({ error: e.message });
+	}
 };
 
 document.addEventListener('DOMContentLoaded', setup);

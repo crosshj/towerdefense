@@ -9,6 +9,7 @@
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"watch": "ws -c .server/lws.config.mjs",
+		"debug": "node .server/debug.js",
 		"pretty": "prettier --write \"./**/*.{js,mjs,json,html,css,svg}\"",
 		"depends": "node .github/generateDepends.js"
 	},
@@ -16,6 +17,7 @@
 	"license": "ISC",
 	"devDependencies": {
 		"local-web-server": "5.3.3",
-		"prettier": "^3.3.3"
+		"prettier": "^3.3.3",
+		"ws": "^8.18.1"
 	}
 }

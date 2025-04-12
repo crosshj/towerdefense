@@ -8,6 +8,34 @@ body {
 	overscroll-behavior: none;
 }
 
+.hidden {
+	display: none;
+}
+
+.field {
+	height: 58px;
+	border-radius: 0.5em;
+	background: #b39466;
+	border: 1.5px solid black;
+	font-family: 'Passion One', sans-serif;
+	font-weight: 400;
+	font-size: 19px;
+	letter-spacing: 1px;
+	padding-inline: 1em;
+	color: #47370f;
+}
+
+.field::placeholder {
+	color: #7a5f32;
+	opacity: 1;
+}
+
+.field:focus {
+	outline: none;
+	border-color: #ffd279;
+	box-shadow: 0 0 0 2px #ffe4b8;
+}
+
 .font-smaller {
 	font-size: 0.8em;
 }
@@ -307,4 +335,8 @@ button {
 .team-slots,
 .all-characters {
 	box-sizing: border-box;
+}
+
+#debugUrl {
+	grid-column: 1 / -1;
 }
