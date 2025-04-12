@@ -8,6 +8,7 @@ const wss = new WebSocketServer({ server });
 wss.on('connection', (ws, req) => {
 	const ip = req.socket.remoteAddress;
 	logInfo('Client connected', ip);
+	console.log('');
 
 	ws.on('message', (msg) => {
 		try {
@@ -18,14 +19,18 @@ wss.on('connection', (ws, req) => {
 		}
 	});
 
-	ws.on('close', () => logInfo('Client disconnected', ip));
+	ws.on('close', () => {
+		console.log('');
+		logInfo('Client disconnected', ip);
+		console.log('');
+	});
 });
 
 server.listen(8080, () => {
 	const ip = getLocalIP();
 	logInfo('WebSocket server running:');
 	console.log('  ', bold('ws://localhost:8080'));
-	console.log('  ', bold(`ws://${ip}:8080`));
+	console.log('  ', bold(`ws://${ip}:8080\n`));
 });
 
 function getLocalIP() {
