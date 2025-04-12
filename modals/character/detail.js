@@ -226,43 +226,43 @@ const attachHandlers = (nodeTree, params) => {
 	left.actions.potentialUp.addEventListener('pointerup', () => {
 		window.parent.postMessage({
 			_: 'navigate',
-			src: `/pages/unit/potentialUp/?back=${params.back || ''}`,
+			src: `/pages/unit/potentialUp/index.html?back=${params.back || ''}`,
 		});
 	});
 	right.actions.hyperEvolve.addEventListener('pointerup', () => {
 		window.parent.postMessage({
 			_: 'navigate',
-			src: `/pages/unit/hyperEvolve/?back=${params.back || ''}`,
+			src: `/pages/unit/hyperEvolve/index.html?back=${params.back || ''}`,
 		});
 	});
 	right.actions.ultraEvolve.addEventListener('pointerup', () => {
 		window.parent.postMessage({
 			_: 'navigate',
-			src: `/pages/unit/ultraEvolve/?back=${params.back || ''}`,
+			src: `/pages/unit/ultraEvolve/index.html?back=${params.back || ''}`,
 		});
 	});
 	left.gear.weapon.addEventListener('pointerup', () => {
 		window.parent.postMessage({
 			_: 'navigate',
-			src: `/pages/gear/?weapon=true&back=${params.back || ''}`,
+			src: `/pages/gear/index.html?weapon=true&back=${params.back || ''}`,
 		});
 	});
 	left.gear.accessory.addEventListener('pointerup', () => {
 		window.parent.postMessage({
 			_: 'navigate',
-			src: `/pages/gear/?accessory=true&back=${params.back || ''}`,
+			src: `/pages/gear/index.html?accessory=true&back=${params.back || ''}`,
 		});
 	});
 	left.gear.armor.addEventListener('pointerup', () => {
 		window.parent.postMessage({
 			_: 'navigate',
-			src: `/pages/gear/?armor=true&back=${params.back || ''}`,
+			src: `/pages/gear/index.html?armor=true&back=${params.back || ''}`,
 		});
 	});
 	left.gear.more.addEventListener('pointerup', () => {
 		window.parent.postMessage({
 			_: 'navigate',
-			src: `/pages/gear/?back=${params.back || ''}`,
+			src: `/pages/gear/index.html?back=${params.back || ''}`,
 		});
 	});
 	right.rowTwo.details.addEventListener('pointerup', () => {
