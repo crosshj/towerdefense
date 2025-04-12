@@ -1,6 +1,7 @@
 import http from 'http';
 import { WebSocketServer } from 'ws';
 import { networkInterfaces } from 'os';
+import ngrok from 'ngrok';
 
 const server = http.createServer();
 const wss = new WebSocketServer({ server });
@@ -26,11 +27,24 @@ wss.on('connection', (ws, req) => {
 	});
 });
 
-server.listen(8080, '0.0.0.0', () => {
+server.listen(8080, '0.0.0.0', async () => {
 	const ip = getLocalIP();
 	logInfo('WebSocket server running:');
 	console.log('  ', bold('ws://localhost:8080'));
 	console.log('  ', bold(`ws://${ip}:8080\n`));
+
+	try {
+		const url = await ngrok.connect({
+			addr: 8080,
+			proto: 'http',
+			bind_tls: true,
+		});
+		const wssUrl = url.replace('https://', 'wss://');
+		logInfo('Public WSS URL via ngrok:');
+		console.log('  ', bold(wssUrl + '\n'));
+	} catch (err) {
+		logWarn('Failed to start ngrok:', err.message || err);
+	}
 });
 
 function getLocalIP() {

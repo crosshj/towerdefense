@@ -68,7 +68,7 @@ export const debug = {
 		const data = args.map((a) =>
 			typeof a === 'string' ? a : JSON.stringify(a)
 		);
-		alert(data);
+		// alert(data);
 		console.log(...args);
 		if (!enabled) return;
 		init();
