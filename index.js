@@ -114,17 +114,12 @@ function navigate(args = {}, { onFade } = {}) {
 		// setTimeout(onFade, (fadeTime || 2) / 2);
 		setTimeout(onFade, fadeTime);
 	}
-	const navigateTo =
-		args?.src === '/'
-			? '/pages/home_new/iframe.html'
-			: args?.src || '/pages/home_new/iframe.html';
-
 	setTimeout(async () => {
 		document.querySelector('iframe').remove();
 		const mainIframe = document.createElement('iframe');
 		mainIframe.width = '100%';
 		mainIframe.height = '100%';
-		mainIframe.src = navigateTo;
+		mainIframe.src = args.src || '/pages/home_new/iframe.html';
 		document.body.insertAdjacentElement('afterBegin', mainIframe);
 		if (args?.src === '/pages/stage/main/index.html' && bgMusic) {
 			bgMusic.stop();
