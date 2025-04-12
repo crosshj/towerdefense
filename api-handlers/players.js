@@ -112,3 +112,10 @@ export const playersSetByToken = ({ currentHash }) => ({
 		}
 	},
 });
+
+export const playersGetPvP = ({}) => ({
+	match: (url) => url.endsWith('/api/teedee/players/getPVP'),
+	handler(url, options) {
+		return fetch(url, options);
+	},
+});

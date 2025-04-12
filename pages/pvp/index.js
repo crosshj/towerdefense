@@ -117,7 +117,7 @@ const attachActions = ({ players }) => {
 	const tierPlayers = document.querySelector('.tierPlayers');
 	tierPlayers.addEventListener('pointerup', async (e) => {
 		const { index } = e.target.dataset;
-		const player = players[index - 1];
+		const player = players[Number(index) - 1];
 		const selectedOpponent = await getDefenseTeam({ player: player.name });
 		setOpponentTeamCache(selectedOpponent);
 		const src = `/pages/defenseTeam/index.html?back=${back}`;

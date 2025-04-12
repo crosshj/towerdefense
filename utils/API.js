@@ -1,5 +1,9 @@
 import { versionHandler } from '../api-handlers/version.js';
-import { playersGetByToken, playersSetByToken } from '../api-handlers/players.js';
+import {
+	playersGetByToken,
+	playersSetByToken,
+	playersGetPvP,
+} from '../api-handlers/players.js';
 import { apiCacheHandler } from '../api-handlers/cache.js';
 
 const currentHash = '{GIT_COMMIT_HASH}';
@@ -9,6 +13,7 @@ const API = {
 		versionHandler({ currentHash }),
 		playersGetByToken({ currentHash }),
 		playersSetByToken({ currentHash }),
+		playersGetPvP({ currentHash }),
 		apiCacheHandler({ currentHash }), // api cache handler, must be last
 	],
 	async fetch(url, opts) {
