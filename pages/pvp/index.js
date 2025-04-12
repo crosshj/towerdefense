@@ -87,10 +87,10 @@ const updateUserInfo = async ({ players }) => {
 };
 
 const attachActions = ({ players }) => {
-	const back = '/pages/pvp/';
+	const back = '/pages/pvp/index.html';
 	const friendBattle = document.querySelector('button.friendBattle');
 	friendBattle.addEventListener('pointerup', () => {
-		const src = `/pages/game/friendBattle/`;
+		const src = `/pages/game/friendBattle/index.html`;
 		window.parent.postMessage({ _: 'navigate', src });
 	});
 	const record = document.querySelector('button.record');

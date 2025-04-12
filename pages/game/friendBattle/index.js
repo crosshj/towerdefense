@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 		_: 'title',
 		title: 'FRIEND BATTLE',
 		visibility: 'visible',
-		back: '/pages/pvp/',
+		back: '/pages/pvp/index.html',
 	});
 	const args = {
 		feathersSpecial: true,

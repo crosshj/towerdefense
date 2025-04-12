@@ -26,6 +26,12 @@ const isWIP = [
 	'settings',
 ];
 
+const updateUserImage = async () => {
+	const user = await getUser();
+	const userImageEl = document.querySelector('.controls .user .image');
+	userImageEl.style.backgroundImage = `url("${user.image}")`;
+};
+
 document.addEventListener('DOMContentLoaded', async () => {
 	document.title += `: ${pageTitle}`;
 	window.parent.postMessage({

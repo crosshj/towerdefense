@@ -40,6 +40,9 @@ const attachActions = async ({ user }) => {
 		window.parent.postMessage({
 			_: 'broadcastUserIconUpdate',
 		});
+		window.parent.postMessage({
+			_: 'navigate',
+		});
 	});
 };
 

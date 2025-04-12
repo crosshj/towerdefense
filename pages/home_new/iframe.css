@@ -1,6 +1,6 @@
 body {
 	margin: 0;
-	background: blue;
+	background: black;
 }
 .controls {
 	--rounded-square-bg: #0004;
@@ -20,7 +20,7 @@ body {
 		'spacer'
 		'navigation';
 	grid-template-rows: auto auto 1fr auto;
-	padding: 13px;
+	padding: 13px 25px;
 	box-sizing: border-box;
 	pointer-events: none;
 	font-family: monospace;

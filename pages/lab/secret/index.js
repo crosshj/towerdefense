@@ -14,7 +14,6 @@ const pageDone = () => {
 		title: pageTitle,
 		visibility: 'visible',
 		back: '/pages/lab/index.html',
-		back: '/pages/lab/index.html',
 	});
 	window.parent.postMessage({ _: 'loaded' });
 };
