@@ -120,7 +120,7 @@ const attachActions = ({ players }) => {
 		const player = players[index - 1];
 		const selectedOpponent = await getDefenseTeam({ player: player.name });
 		setOpponentTeamCache(selectedOpponent);
-		const src = `/pages/defenseTeam/?back=${back}`;
+		const src = `/pages/defenseTeam/index.html?back=${back}`;
 		window.parent.postMessage({ _: 'navigate', src });
 	});
 };

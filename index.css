@@ -63,6 +63,8 @@ iframe {
 	padding-right: 1em;
 	box-sizing: border-box;
 	pointer-events: none;
+	padding-left: max(env(safe-area-inset-left), 1em);
+	padding-right: max(env(safe-area-inset-right), 1em);
 }
 
 .main-header {
