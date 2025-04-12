@@ -195,6 +195,7 @@ const attachSettings = async () => {
 	resourcesCheckButton.addEventListener('pointerup', resourcesCheck);
 
 	const debugUrlField = document.querySelector('#debugUrl');
+	debugUrlField.value = localStorage.getItem('DEBUG_URL') || '';
 	debugUrlField.addEventListener('input', (e) => {
 		localStorage.setItem('DEBUG_URL', e.target.value);
 	});
