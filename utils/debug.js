@@ -58,12 +58,13 @@ function flushQueue() {
 
 export const debug = {
 	log: (...args) => {
-		console.log(...args);
-		if (!enabled) return;
-		init();
 		const data = args.map((a) =>
 			typeof a === 'string' ? a : JSON.stringify(a)
 		);
+		alert(data);
+		console.log(...args);
+		if (!enabled) return;
+		init();
 		send(data);
 	},
 };

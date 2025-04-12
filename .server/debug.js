@@ -26,7 +26,7 @@ wss.on('connection', (ws, req) => {
 	});
 });
 
-server.listen(8080, () => {
+server.listen(8080, '0.0.0.0', () => {
 	const ip = getLocalIP();
 	logInfo('WebSocket server running:');
 	console.log('  ', bold('ws://localhost:8080'));

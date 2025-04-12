@@ -23,6 +23,7 @@ const links = [
 	{ label: 'userHandler' },
 	{ label: 'Vendor (and other dependencies)', href: 'vendor.html' },
 	{ label: 'Webcam' },
+	{ label: 'Websocket' },
 ];
 
 const domLoaded = async () => {
