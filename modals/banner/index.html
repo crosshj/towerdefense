@@ -8,19 +8,18 @@
 		/>
 		<title>TD: User Level</title>
 		<link rel="stylesheet" href="index.css" />
-
 		<link rel="stylesheet" href="/visuals/stats/stats.css" />
 	</head>
 	<body>
 		<div class="background"></div>
-		<div class="container">
+		<div class="container hidden">
 			<div class="current-rank">
 				<div class="levelInfo">
 					<div class="gradeIcon"></div>
 					<div>
 						<div class="gradeLevelInfo">
 							<span class="gradeName"></span>
-							<span>Lv.</span>
+							<span>Level</span>
 							<span class="levelNumber"></span>
 						</div>
 						<div>
@@ -39,14 +38,259 @@
 				<span>Each user level is from 1 to 99</span>
 			</div>
 			<div class="progress">
-				<div>Normal</div>
-				<div>Master</div>
-				<div>Super Master</div>
-				<div>Ultra Master</div>
-				<div>Legend</div>
+				<!-- Normal -->
+				<div class="flag-block scale-1">
+					<svg viewBox="0 0 60 72" width="50" height="60">
+						<path
+							d="M0 0h60v55L30 72 0 55z"
+							fill="#e1cc07"
+							stroke="#947f3d"
+							stroke-width="2"
+						/>
+						<text
+							x="30"
+							y="30"
+							text-anchor="middle"
+							font-size="10"
+							font-weight="bold"
+							fill="#5c4b1d"
+						>
+							LEVEL
+						</text>
+						<text
+							x="30"
+							y="33"
+							text-anchor="middle"
+							font-size="10"
+							font-weight="bold"
+							fill="#5c4b1d"
+						></text>
+						<text
+							x="30"
+							y="52"
+							text-anchor="middle"
+							font-size="20"
+							font-weight="bold"
+							fill="#5c4b1d"
+						>
+							1
+						</text>
+					</svg>
+				</div>
+				<div class="arrow-block">
+					<svg viewBox="0 0 24 24">
+						<path
+							d="M8 4l8 8-8 8"
+							fill="none"
+							stroke="#5a4400"
+							stroke-width="2"
+							stroke-linecap="round"
+						/>
+					</svg>
+				</div>
+
+				<!-- Master -->
+				<div class="flag-block scale-2">
+					<svg viewBox="0 0 60 72" width="52" height="62">
+						<path
+							d="M0 0h60v55L30 72 0 55z"
+							fill="#d53535"
+							stroke="#820000"
+							stroke-width="2"
+						/>
+						<text
+							x="30"
+							y="18"
+							text-anchor="middle"
+							font-size="10"
+							font-weight="bold"
+							fill="#fff"
+						>
+							MASTER
+						</text>
+						<text
+							x="30"
+							y="33"
+							text-anchor="middle"
+							font-size="10"
+							font-weight="bold"
+							fill="#0008"
+						>
+							LEVEL
+						</text>
+						<text
+							x="30"
+							y="52"
+							text-anchor="middle"
+							font-size="20"
+							font-weight="bold"
+							fill="#0008"
+						>
+							1
+						</text>
+					</svg>
+				</div>
+				<div class="arrow-block">
+					<svg viewBox="0 0 24 24">
+						<path
+							d="M8 4l8 8-8 8"
+							fill="none"
+							stroke="#5a4400"
+							stroke-width="2"
+							stroke-linecap="round"
+						/>
+					</svg>
+				</div>
+
+				<!-- Super Master -->
+				<div class="flag-block scale-3">
+					<svg viewBox="0 0 60 72" width="54" height="64">
+						<path
+							d="M0 0h60v55L30 72 0 55z"
+							fill="#a34bd3"
+							stroke="#2e004f"
+							stroke-width="2"
+						/>
+						<text
+							x="30"
+							y="18"
+							text-anchor="middle"
+							font-size="10"
+							font-weight="bold"
+							fill="#fff"
+						>
+							S MASTER
+						</text>
+						<text
+							x="30"
+							y="33"
+							text-anchor="middle"
+							font-size="10"
+							font-weight="bold"
+							fill="#000a"
+						>
+							LEVEL
+						</text>
+						<text
+							x="30"
+							y="52"
+							text-anchor="middle"
+							font-size="20"
+							font-weight="bold"
+							fill="#000a"
+						>
+							1
+						</text>
+					</svg>
+				</div>
+				<div class="arrow-block">
+					<svg viewBox="0 0 24 24">
+						<path
+							d="M8 4l8 8-8 8"
+							fill="none"
+							stroke="#5a4400"
+							stroke-width="2"
+							stroke-linecap="round"
+						/>
+					</svg>
+				</div>
+
+				<!-- Ultra Master -->
+				<div class="flag-block scale-4">
+					<svg viewBox="0 0 60 72" width="56" height="66">
+						<path
+							d="M0 0h60v55L30 72 0 55z"
+							fill="#25388c"
+							stroke="#000"
+							stroke-width="2"
+						/>
+						<text
+							x="30"
+							y="17"
+							text-anchor="middle"
+							font-size="10"
+							font-weight="bold"
+							fill="#fff"
+						>
+							U MASTER
+						</text>
+						<text
+							x="30"
+							y="33"
+							text-anchor="middle"
+							font-size="10"
+							font-weight="bold"
+							fill="#31eedb"
+						>
+							LEVEL
+						</text>
+						<text
+							x="30"
+							y="52"
+							text-anchor="middle"
+							font-size="20"
+							font-weight="bold"
+							fill="#31eedb"
+						>
+							1
+						</text>
+					</svg>
+				</div>
+				<div class="arrow-block">
+					<svg viewBox="0 0 24 24">
+						<path
+							d="M8 4l8 8-8 8"
+							fill="none"
+							stroke="#5a4400"
+							stroke-width="2"
+							stroke-linecap="round"
+						/>
+					</svg>
+				</div>
+
+				<!-- Legend -->
+				<div class="flag-block scale-5">
+					<svg viewBox="0 0 60 72" width="60" height="70">
+						<path
+							d="M0 0h60v55L30 72 0 55z"
+							fill="#1a1a1a"
+							stroke="#ffd700"
+							stroke-width="2"
+						/>
+						<text
+							x="30"
+							y="16"
+							text-anchor="middle"
+							font-size="10"
+							font-weight="bold"
+							fill="#fff"
+						>
+							LEGEND
+						</text>
+						<text
+							x="30"
+							y="33"
+							text-anchor="middle"
+							font-size="10"
+							font-weight="bold"
+							fill="#ffd84d"
+						>
+							LEVEL
+						</text>
+						<text
+							x="30"
+							y="52"
+							text-anchor="middle"
+							font-size="20"
+							font-weight="bold"
+							fill="#ffd84d"
+						>
+							1
+						</text>
+					</svg>
+				</div>
 			</div>
 		</div>
-
 		<script src="index.js" type="module"></script>
 	</body>
 </html>

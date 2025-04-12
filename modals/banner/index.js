@@ -25,6 +25,10 @@ const updateUserInfo = async () => {
 	levelNumb.innerHTML = level;
 	exp.innerHTML = withCommas(totalExp);
 	expTotal.innerHTML = withCommas(expForNextLevel);
+
+	// container hidden
+	const container = document.querySelector('.container');
+	container.classList.remove('hidden');
 };
 
 document.addEventListener('DOMContentLoaded', async () => {
