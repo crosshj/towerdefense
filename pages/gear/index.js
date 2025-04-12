@@ -18,7 +18,7 @@ const icons = {
 };
 
 const pageDone = () => {
-	debug.log('pageDone');
+	// debug.log('pageDone');
 	window.parent.postMessage({
 		_: 'stats',
 		feathers: false,
@@ -35,7 +35,7 @@ const pageDone = () => {
 };
 
 const attachListSelector = async ({ params, list }) => {
-	debug.log('attachListSelector');
+	// debug.log('attachListSelector');
 	const el = document.querySelector('.listSelector');
 	let selectedTab = 'weapon';
 	if (params?.armor) {
@@ -127,7 +127,7 @@ const showGearDetailModal = ({ unit, type, gear, isUsed } = {}) => {
 };
 
 const attachList = async ({ gear }) => {
-	debug.log('attachList');
+	// debug.log('attachList');
 	const el = document.querySelector('.list');
 	let currentType;
 	let currentAllUnits;
@@ -152,7 +152,7 @@ const attachList = async ({ gear }) => {
 };
 
 const attachUnitDetails = async ({ unit }) => {
-	debug.log('attachUnitDetails');
+	// debug.log('attachUnitDetails');
 	const unitSelected = document.querySelector('.unitSelected');
 	const unitEmpty = document.querySelector('.unitEmpty');
 	if (!unit) {
@@ -174,7 +174,7 @@ const attachUnitDetails = async ({ unit }) => {
 };
 
 const attachSlots = ({ gear, selector }) => {
-	debug.log('attachSlots');
+	// debug.log('attachSlots');
 	let thisUnit;
 	const unitGearEl = document.querySelector('.unitGear');
 	const slots = {
@@ -206,7 +206,7 @@ const attachSlots = ({ gear, selector }) => {
 };
 
 const attachUnitSelect = ({} = {}) => {
-	debug.log('attachUnitSelect');
+	// debug.log('attachUnitSelect');
 	const emptyEl = document.querySelector('.unitEmpty');
 	attachTap(emptyEl, (e) => {
 		window.parent.postMessage({
@@ -217,7 +217,7 @@ const attachUnitSelect = ({} = {}) => {
 };
 
 const refreshUnit = async ({ allUnits }) => {
-	debug.log('refreshUnit');
+	// debug.log('refreshUnit');
 	const cache = getCurrentCharCache();
 	const unit = cache?.id && allUnits.find((x) => x.id === cache?.id);
 	if (!unit) return cache;
@@ -234,10 +234,10 @@ const setup = async () => {
 		);
 		debug.log({ params });
 
-		debug.log('getCharacters');
+		// debug.log('getCharacters');
 		let allUnits = await getCharacters(true);
 
-		debug.log('getGear');
+		// debug.log('getGear');
 		const gear = await getGear();
 
 		let unit = await refreshUnit({ allUnits, gear });
