@@ -328,6 +328,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 	const params = Object.fromEntries(
 		new URLSearchParams(window.location.search)
 	);
+	params.back = params.back || '/';
 	console.log({ params });
 	const cachedChar = getCurrentCharCache();
 

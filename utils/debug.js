@@ -8,6 +8,7 @@ const queue = [];
 function init() {
 	if (tried || ready || socket) return;
 	tried = true;
+
 	try {
 		socket = new WebSocket(url);
 
@@ -23,12 +24,18 @@ function init() {
 			flushQueue();
 		};
 
-		socket.onerror = socket.onclose = () => {
+		socket.onerror = (e) => {
+			alert('WebSocket error: ' + (e.message || 'connection failed'));
+			socket = null;
+			ready = false;
+		};
+
+		socket.onclose = () => {
 			socket = null;
 			ready = false;
 		};
 	} catch (e) {
-		console.log(e);
+		alert('Init error: ' + e.message);
 	}
 }
 

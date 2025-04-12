@@ -2,6 +2,7 @@ import { addStats } from './user/stats.js';
 import { installable } from './utils/installable.js';
 import { statsElement, refreshStats } from './visuals/stats/stats.js';
 import { loadSounds } from '/visuals/assets/assets.js';
+import { debug } from './utils/debug.js';
 
 const FADE_MS = 200;
 let whereIsBack;
@@ -101,6 +102,7 @@ document.addEventListener('focusin', (ev) => {
 });
 
 function navigate(args = {}, { onFade } = {}) {
+	debug.log('navigate', args);
 	const fadeTime =
 		typeof args?.FADE_MS === 'undefined' ? FADE_MS : args.FADE_MS;
 	if (fadeTime > 0) {
