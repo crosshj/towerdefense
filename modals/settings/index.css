@@ -279,9 +279,11 @@ body {
 				align-items: start;
 				color: #e9bf8f;
 				white-space: pre;
-				button.logout {
+				.actions {
 					margin-top: auto;
 					margin-left: auto;
+					display: flex;
+					gap: 10px;
 				}
 			}
 		}

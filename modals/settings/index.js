@@ -5,6 +5,7 @@ import { IDBStorage } from '../../utils/IDBStorage.js';
 import { getVersionString } from './version.js';
 import API from '../../utils/API.js';
 import './index.components.js';
+import { htmlHelper as html } from '../../utils/html.js';
 
 const notificationPermitted = async () => {
 	if ('Notification' in window && navigator.serviceWorker) {
@@ -120,6 +121,13 @@ const logout = async () => {
 	});
 };
 
+const googleAuth = async () => {
+	window.parent.postMessage({
+		_: 'navigate',
+		src: `/account/googleAuth.html`,
+	});
+};
+
 const attachSettings = async () => {
 	const settings = await getSettings();
 
@@ -210,15 +218,27 @@ const updateVersionString = async () => {
 const updateUserPane = async () => {
 	const user = await getUser();
 	const accountPane = document.querySelector('.tab-pane.account');
-	accountPane.innerHTML = `
+	accountPane.innerHTML = html`
 		<div class="username">NAME: ${user?.apiUser?.name}</div>
-		<div class="userCreatedDate">CREATED: ${user?.apiUser?.date_created}</div>
-		<div class="userLastLogin">LAST LOGIN: ${user?.apiUser?.last_login}</div>
-		<div class="userPushSubs">Push Subscriptions: ${(user?.apiUser?.data?.subscriptions || []).length}</div>
-		<button class="logout">LOG OUT</button>
+		<div class="userCreatedDate">
+			CREATED: ${user?.apiUser?.date_created}
+		</div>
+		<div class="userLastLogin">
+			LAST LOGIN: ${user?.apiUser?.last_login}
+		</div>
+		<div class="userPushSubs">
+			Push Subscriptions:
+			${(user?.apiUser?.data?.subscriptions || []).length}
+		</div>
+		<div class="actions">
+			<button class="googleAuth">Google Auth</button>
+			<button class="logout">LOG OUT</button>
+		</div>
 	`;
 	const logoutButton = accountPane.querySelector('.logout');
 	logoutButton.addEventListener('pointerup', logout);
+	const googleAuthButton = accountPane.querySelector('.googleAuth');
+	googleAuthButton.addEventListener('pointerup', googleAuth);
 };
 
 const attachIcons = () => {
