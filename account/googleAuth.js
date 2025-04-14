@@ -23,7 +23,7 @@ async function initFirebaseAuthentication() {
 
 	try {
 		FirebaseAuthentication = (
-			await import('capacitor-firebase-authentication')
+			await import('@capacitor-firebase/authentication')
 		).FirebaseAuthentication;
 	} catch (e) {
 		debug.log(`FirebaseAuthentication import error: ${e.message}`);
