@@ -23,8 +23,8 @@ let provider;
 let platform;
 
 const useWebAuth = () => {
-	// return true;
-	return platform === 'web';
+	return true;
+	//return platform === 'web';
 };
 
 async function initFirebaseAuthentication() {
@@ -48,6 +48,9 @@ async function initFirebaseAuthentication() {
 	} else {
 		debug.log('initFirebaseAuthentication: native');
 		debug.log(`Plugins: ${Object.keys(Capacitor.Plugins).join(', ')}`);
+		debug.log(
+			`Firebase: ${Object.keys(FirebaseAuthentication).join(', ')}`
+		);
 		FirebaseAuthentication = Capacitor.Plugins.FirebaseAuthentication;
 	}
 }
@@ -72,9 +75,6 @@ async function handleAuthState() {
 	} else {
 		try {
 			debug.log('handleAuthState: native');
-			debug.log(
-				`Firebase: ${Object.keys(FirebaseAuthentication).join(', ')}`
-			);
 			const { user } = await FirebaseAuthentication.getCurrentUser();
 			if (user) {
 				debug.log('Native user already signed in:', user);
