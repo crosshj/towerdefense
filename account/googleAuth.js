@@ -10,25 +10,66 @@ import {
 	GoogleAuthProvider,
 } from 'https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js';
 
+import { debug } from '../utils/debug.js';
+
 let FirebaseAuthentication;
-try {
-	FirebaseAuthentication = (await import('capacitor-firebase-authentication'))
-		.FirebaseAuthentication;
-} catch (_) {}
+let auth;
+let provider;
+let platform;
 
-const firebaseConfig = {
-	apiKey: 'AIzaSyBirVAOsWziG6l3GKvZhj_dygN2JP_pSVw',
-	authDomain: 'teedee-441303.firebaseapp.com',
-	projectId: 'teedee-441303',
-	storageBucket: 'teedee-441303.firebasestorage.app',
-	messagingSenderId: '421449850638',
-	appId: '1:421449850638:web:b04425f809ac6284a1815f',
-	measurementId: 'G-CN6VYEK723',
-};
+async function initFirebaseAuthentication() {
+	platform = Capacitor.getPlatform();
+	debug.log(`Platform: ${platform}`);
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const provider = new GoogleAuthProvider();
+	try {
+		FirebaseAuthentication = (
+			await import('capacitor-firebase-authentication')
+		).FirebaseAuthentication;
+	} catch (e) {
+		debug.log(`FirebaseAuthentication import error: ${e.message}`);
+	}
+
+	const firebaseConfig = {
+		apiKey: 'AIzaSyBirVAOsWziG6l3GKvZhj_dygN2JP_pSVw',
+		authDomain: 'teedee-441303.firebaseapp.com',
+		projectId: 'teedee-441303',
+		storageBucket: 'teedee-441303.firebasestorage.app',
+		messagingSenderId: '421449850638',
+		appId: '1:421449850638:web:b04425f809ac6284a1815f',
+		measurementId: 'G-CN6VYEK723',
+	};
+
+	const app = initializeApp(firebaseConfig);
+	auth = getAuth(app);
+	provider = new GoogleAuthProvider();
+}
+
+async function handleAuthState() {
+	if (platform === 'web') {
+		const result = await getRedirectResult(auth);
+		if (result?.user) {
+			debug.log('Redirect sign-in user:', result.user);
+			renderUser(result.user);
+		} else {
+			onAuthStateChanged(auth, (user) => {
+				if (user) {
+					debug.log('User already signed in:', user);
+					renderUser(user);
+				} else {
+					showLoginButton();
+				}
+			});
+		}
+	}
+
+	const { user } = await FirebaseAuthentication.getCurrentUser();
+	if (user) {
+		debug.log('Native user already signed in:', user);
+		renderUser(user);
+	} else {
+		showLoginButton();
+	}
+}
 
 async function setUserPhoto(user) {
 	const img = document.getElementById('user-photo');
@@ -119,33 +160,12 @@ function attachButtons() {
 document.addEventListener('DOMContentLoaded', async () => {
 	attachButtons();
 
-	const platform = Capacitor.getPlatform();
-
-	if (platform === 'web') {
-		const result = await getRedirectResult(auth);
-		if (result?.user) {
-			console.log('Redirect sign-in user:', result.user);
-			renderUser(result.user);
-		} else {
-			onAuthStateChanged(auth, (user) => {
-				if (user) {
-					console.log('User already signed in:', user);
-					renderUser(user);
-				} else {
-					showLoginButton();
-				}
-			});
-		}
-	} else {
-		const { user } = await FirebaseAuthentication.getCurrentUser();
-		if (user) {
-			console.log('Native user already signed in:', user);
-			renderUser(user);
-		} else {
-			showLoginButton();
-		}
+	try {
+		await initFirebaseAuthentication();
+		await handleAuthState();
+	} catch (e) {
+		debug.log(`FirebaseAuthentication error: ${e.message}`);
 	}
-
 	if (window.parent) {
 		window.parent.postMessage({ _: 'stats', visibility: 'hidden' });
 		window.parent.postMessage({
