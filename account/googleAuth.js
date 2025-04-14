@@ -27,6 +27,16 @@ const useWebAuth = () => {
 	return platform === 'web';
 };
 
+const testFirebase = async () => {
+	try {
+		const { FirebaseStatus } = Capacitor.Plugins;
+		const res = await FirebaseStatus.checkStatus();
+		debug.log(res);
+	} catch (e) {
+		debug.error('testFirebase error:', e.message);
+	}
+};
+
 async function initFirebaseAuthentication() {
 	platform = Capacitor.getPlatform();
 	debug.log(`Platform: ${platform}`);
@@ -48,6 +58,8 @@ async function initFirebaseAuthentication() {
 	} else {
 		debug.log('initFirebaseAuthentication: native');
 		debug.log(`Plugins: ${Object.keys(Capacitor.Plugins).join(', ')}`);
+
+		await testFirebase();
 
 		FirebaseAuthentication = Capacitor.Plugins.FirebaseAuthentication;
 		debug.log(
