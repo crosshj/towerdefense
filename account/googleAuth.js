@@ -1,3 +1,5 @@
+import { debug } from '../utils/debug.js';
+
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js';
 import {
 	getAuth,
@@ -12,8 +14,6 @@ import {
 import { Capacitor as CapacitorCDN } from '/vendor/capacitor.js';
 const Capacitor = window.Capacitor ?? CapacitorCDN;
 
-import { debug } from '../utils/debug.js';
-
 let FirebaseAuthentication;
 let auth;
 let provider;
@@ -27,22 +27,19 @@ async function initFirebaseAuthentication() {
 	if (Capacitor.isNativePlatform()) {
 		FirebaseAuthentication = Capacitor.Plugins.FirebaseAuthentication;
 	} else {
-		debug.log('FirebaseAuthentication not available on web platform');
+		const firebaseConfig = {
+			apiKey: 'AIzaSyBirVAOsWziG6l3GKvZhj_dygN2JP_pSVw',
+			authDomain: 'teedee-441303.firebaseapp.com',
+			projectId: 'teedee-441303',
+			storageBucket: 'teedee-441303.firebasestorage.app',
+			messagingSenderId: '421449850638',
+			appId: '1:421449850638:web:b04425f809ac6284a1815f',
+			measurementId: 'G-CN6VYEK723',
+		};
+		const app = initializeApp(firebaseConfig);
+		auth = getAuth(app);
+		provider = new GoogleAuthProvider();
 	}
-
-	const firebaseConfig = {
-		apiKey: 'AIzaSyBirVAOsWziG6l3GKvZhj_dygN2JP_pSVw',
-		authDomain: 'teedee-441303.firebaseapp.com',
-		projectId: 'teedee-441303',
-		storageBucket: 'teedee-441303.firebasestorage.app',
-		messagingSenderId: '421449850638',
-		appId: '1:421449850638:web:b04425f809ac6284a1815f',
-		measurementId: 'G-CN6VYEK723',
-	};
-
-	const app = initializeApp(firebaseConfig);
-	auth = getAuth(app);
-	provider = new GoogleAuthProvider();
 }
 
 async function handleAuthState() {
@@ -61,15 +58,14 @@ async function handleAuthState() {
 				}
 			});
 		}
-		return;
-	}
-
-	const { user } = await FirebaseAuthentication.getCurrentUser();
-	if (user) {
-		debug.log('Native user already signed in:', user);
-		renderUser(user);
 	} else {
-		showLoginButton();
+		const { user } = await FirebaseAuthentication.getCurrentUser();
+		if (user) {
+			debug.log('Native user already signed in:', user);
+			renderUser(user);
+		} else {
+			showLoginButton();
+		}
 	}
 }
 
@@ -123,21 +119,19 @@ function showLoginButton() {
 }
 
 async function signIn() {
-	const platform = Capacitor.getPlatform();
 	document.getElementById('login-button').style.display = 'none';
-
 	if (platform === 'web') {
 		try {
 			const result = await signInWithPopup(auth, provider);
-			console.log('Web user:', result.user);
+			debug.log('Web user:', result.user);
 			renderUser(result.user);
 		} catch (e) {
-			console.warn('Popup failed, falling back to redirect...');
+			debug.warn('Popup failed, falling back to redirect...');
 			await signInWithRedirect(auth, provider);
 		}
 	} else {
 		const result = await FirebaseAuthentication.signInWithGoogle();
-		console.log('Native user:', result.user);
+		debug.log('Native user:', result.user);
 		renderUser(result.user);
 	}
 }
@@ -160,21 +154,20 @@ function attachButtons() {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
-	attachButtons();
-
 	try {
+		attachButtons();
 		await initFirebaseAuthentication();
 		await handleAuthState();
+		if (window.parent) {
+			window.parent.postMessage({ _: 'stats', visibility: 'hidden' });
+			window.parent.postMessage({
+				_: 'title',
+				title: 'Google Auth',
+				visibility: 'visible',
+			});
+			window.parent.postMessage({ _: 'loaded' });
+		}
 	} catch (e) {
 		debug.log(`FirebaseAuthentication error: ${e.message}`);
-	}
-	if (window.parent) {
-		window.parent.postMessage({ _: 'stats', visibility: 'hidden' });
-		window.parent.postMessage({
-			_: 'title',
-			title: 'Google Auth',
-			visibility: 'visible',
-		});
-		window.parent.postMessage({ _: 'loaded' });
 	}
 });
