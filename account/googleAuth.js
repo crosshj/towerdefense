@@ -22,14 +22,17 @@ let auth;
 let provider;
 let platform;
 
+const useWebAuth = () => {
+	// return true;
+	return platform === 'web';
+};
+
 async function initFirebaseAuthentication() {
 	platform = Capacitor.getPlatform();
 	debug.log(`Platform: ${platform}`);
-	debug.log(`Plugins: ${Object.keys(Capacitor.Plugins).join(', ')}`);
 
-	if (Capacitor.isNativePlatform()) {
-		FirebaseAuthentication = Capacitor.Plugins.FirebaseAuthentication;
-	} else {
+	if (useWebAuth()) {
+		debug.log('initFirebaseAuthentication: web');
 		const firebaseConfig = {
 			apiKey: 'AIzaSyBirVAOsWziG6l3GKvZhj_dygN2JP_pSVw',
 			authDomain: 'teedee-441303.firebaseapp.com',
@@ -42,11 +45,16 @@ async function initFirebaseAuthentication() {
 		const app = initializeApp(firebaseConfig);
 		auth = getAuth(app);
 		provider = new GoogleAuthProvider();
+	} else {
+		debug.log('initFirebaseAuthentication: native');
+		debug.log(`Plugins: ${Object.keys(Capacitor.Plugins).join(', ')}`);
+		FirebaseAuthentication = Capacitor.Plugins.FirebaseAuthentication;
 	}
 }
 
 async function handleAuthState() {
-	if (platform === 'web') {
+	if (useWebAuth()) {
+		debug.log('handleAuthState: web');
 		const result = await getRedirectResult(auth);
 		if (result?.user) {
 			debug.log('Redirect sign-in user:', result.user);
@@ -62,12 +70,42 @@ async function handleAuthState() {
 			});
 		}
 	} else {
-		const { user } = await FirebaseAuthentication.getCurrentUser();
-		if (user) {
-			debug.log('Native user already signed in:', user);
-			renderUser(user);
-		} else {
+		try {
+			debug.log('handleAuthState: native');
+			const { user } = await FirebaseAuthentication.getCurrentUser();
+			if (user) {
+				debug.log('Native user already signed in:', user);
+				renderUser(user);
+			} else {
+				showLoginButton();
+			}
+		} catch (e) {
+			debug.log('Native user not signed in');
 			showLoginButton();
+		}
+	}
+}
+
+async function signIn() {
+	document.getElementById('login-button').style.display = 'none';
+	if (useWebAuth()) {
+		try {
+			debug.log('signIn: web');
+			const result = await signInWithPopup(auth, provider);
+			debug.log('Web user:', result.user);
+			renderUser(result.user);
+		} catch (e) {
+			debug.warn('Popup failed, falling back to redirect...');
+			await signInWithRedirect(auth, provider);
+		}
+	} else {
+		try {
+			debug.log('signIn: native');
+			const result = await FirebaseAuthentication.signInWithGoogle();
+			debug.log('Native user:', result.user);
+			renderUser(result.user);
+		} catch (e) {
+			debug.error('Native sign-in failed:', e);
 		}
 	}
 }
@@ -119,24 +157,6 @@ function showLoginButton() {
 	document.getElementById('user-name').textContent = '';
 	document.getElementById('user-email').textContent = '';
 	document.getElementById('user-info').hidden = true;
-}
-
-async function signIn() {
-	document.getElementById('login-button').style.display = 'none';
-	if (platform === 'web') {
-		try {
-			const result = await signInWithPopup(auth, provider);
-			debug.log('Web user:', result.user);
-			renderUser(result.user);
-		} catch (e) {
-			debug.warn('Popup failed, falling back to redirect...');
-			await signInWithRedirect(auth, provider);
-		}
-	} else {
-		const result = await FirebaseAuthentication.signInWithGoogle();
-		debug.log('Native user:', result.user);
-		renderUser(result.user);
-	}
 }
 
 function attachButtons() {
