@@ -20,6 +20,7 @@ let platform;
 async function initFirebaseAuthentication() {
 	platform = Capacitor.getPlatform();
 	debug.log(`Platform: ${platform}`);
+	debug.log(`Plugins: ${Object.keys(Capacitor.Plugins).join(', ')}`);
 
 	if (Capacitor.isNativePlatform()) {
 		FirebaseAuthentication = Capacitor.Plugins.FirebaseAuthentication;
