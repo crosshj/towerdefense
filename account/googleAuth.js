@@ -21,12 +21,10 @@ async function initFirebaseAuthentication() {
 	platform = Capacitor.getPlatform();
 	debug.log(`Platform: ${platform}`);
 
-	try {
-		FirebaseAuthentication = (
-			await import('@capacitor-firebase/authentication')
-		).FirebaseAuthentication;
-	} catch (e) {
-		debug.log(`FirebaseAuthentication import error: ${e.message}`);
+	if (Capacitor.isNativePlatform()) {
+		FirebaseAuthentication = Capacitor.Plugins.FirebaseAuthentication;
+	} else {
+		debug.log('FirebaseAuthentication not available on web platform');
 	}
 
 	const firebaseConfig = {
