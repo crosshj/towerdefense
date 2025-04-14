@@ -90,7 +90,18 @@ async function handleAuthState() {
 	} else {
 		try {
 			debug.log('handleAuthState: native');
-			const { user } = await FirebaseAuthentication.getCurrentUser();
+			const timeout = new Promise((_, reject) =>
+				setTimeout(
+					() => reject(new Error('getCurrentUser Timeout')),
+					10000
+				)
+			);
+			const result = await Promise.race([
+				FirebaseAuthentication.getCurrentUser(),
+				timeout,
+			]);
+			user = result?.user;
+
 			if (user) {
 				debug.log('Native user already signed in:', user);
 				renderUser(user);
@@ -99,7 +110,7 @@ async function handleAuthState() {
 				showLoginButton();
 			}
 		} catch (e) {
-			debug.log('Native user not signed in');
+			debug.log('Native user not signed in. Error: ', e.message);
 			showLoginButton();
 		}
 	}
