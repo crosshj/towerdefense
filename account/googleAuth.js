@@ -48,10 +48,12 @@ async function initFirebaseAuthentication() {
 	} else {
 		debug.log('initFirebaseAuthentication: native');
 		debug.log(`Plugins: ${Object.keys(Capacitor.Plugins).join(', ')}`);
+
+		FirebaseAuthentication = Capacitor.Plugins.FirebaseAuthentication;
 		debug.log(
 			`Firebase: ${Object.keys(FirebaseAuthentication).join(', ')}`
 		);
-		FirebaseAuthentication = Capacitor.Plugins.FirebaseAuthentication;
+
 		FirebaseAuthentication.addListener('authStateChange', debug.log);
 	}
 }
