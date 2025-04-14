@@ -33,7 +33,7 @@ const testFirebase = async () => {
 		const res = await FirebaseStatus.checkStatus();
 		debug.log(res);
 	} catch (e) {
-		debug.error('testFirebase error:', e.message);
+		debug.log('testFirebase error:', e.message);
 	}
 };
 
