@@ -23,8 +23,8 @@ let provider;
 let platform;
 
 const useWebAuth = () => {
-	return true;
-	//return platform === 'web';
+	// return true;
+	return platform === 'web';
 };
 
 async function initFirebaseAuthentication() {
@@ -52,6 +52,7 @@ async function initFirebaseAuthentication() {
 			`Firebase: ${Object.keys(FirebaseAuthentication).join(', ')}`
 		);
 		FirebaseAuthentication = Capacitor.Plugins.FirebaseAuthentication;
+		FirebaseAuthentication.addListener('authStateChange', debug.log);
 	}
 }
 
