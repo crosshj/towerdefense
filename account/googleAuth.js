@@ -161,6 +161,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 		attachButtons();
 		await initFirebaseAuthentication();
 		await handleAuthState();
+		debug.log(
+			`Auth loaded. Parent window ${window.parent ? 'exists' : 'does not exist'}`
+		);
 		if (window.parent) {
 			window.parent.postMessage({ _: 'stats', visibility: 'hidden' });
 			window.parent.postMessage({
