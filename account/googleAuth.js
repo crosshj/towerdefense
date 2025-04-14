@@ -72,11 +72,15 @@ async function handleAuthState() {
 	} else {
 		try {
 			debug.log('handleAuthState: native');
+			debug.log(
+				`Firebase: ${Object.keys(FirebaseAuthentication).join(', ')}`
+			);
 			const { user } = await FirebaseAuthentication.getCurrentUser();
 			if (user) {
 				debug.log('Native user already signed in:', user);
 				renderUser(user);
 			} else {
+				debug.log('Native user not signed in');
 				showLoginButton();
 			}
 		} catch (e) {
