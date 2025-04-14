@@ -12,6 +12,9 @@ import {
 } from 'https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js';
 
 import { Capacitor as CapacitorCDN } from '/vendor/capacitor.js';
+debug.log(
+	`Using Capacitor from ${window.Capacitor ? 'window.Capacitor' : 'CDN'}`
+);
 const Capacitor = window.Capacitor ?? CapacitorCDN;
 
 let FirebaseAuthentication;
