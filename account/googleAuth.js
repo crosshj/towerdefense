@@ -135,7 +135,7 @@ async function signIn() {
 			debug.log('Native user:', result.user);
 			renderUser(result.user);
 		} catch (e) {
-			debug.error('Native sign-in failed:', e);
+			debug.log('Native sign-in failed:', e);
 		}
 	}
 }
