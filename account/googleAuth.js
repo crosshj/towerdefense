@@ -1,4 +1,3 @@
-import { Capacitor } from 'https://cdn.jsdelivr.net/npm/@capacitor/core@5.0.5/dist/index.js';
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js';
 import {
 	getAuth,
@@ -9,6 +8,9 @@ import {
 	signOut,
 	GoogleAuthProvider,
 } from 'https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js';
+
+import { Capacitor as CapacitorCDN } from '/vendor/capacitor.js';
+const Capacitor = window.Capacitor ?? CapacitorCDN;
 
 import { debug } from '../utils/debug.js';
 
@@ -59,6 +61,7 @@ async function handleAuthState() {
 				}
 			});
 		}
+		return;
 	}
 
 	const { user } = await FirebaseAuthentication.getCurrentUser();
