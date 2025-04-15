@@ -82,17 +82,21 @@ async function handleAuthState() {
 		user = result?.user;
 	}
 	if (user) {
-		debug.log('Redirect sign-in user:', result.user);
-		renderUser(result.user);
+		debug.log('Redirect sign-in user:', user);
+		renderUser(user);
 	} else {
-		onAuthStateChanged(auth, (user) => {
-			if (user) {
-				debug.log('User already signed in:', user);
-				renderUser(user);
-			} else {
-				showLoginButton();
-			}
-		});
+		if (useWebAuth()) {
+			onAuthStateChanged(auth, (user) => {
+				if (user) {
+					debug.log('User already signed in:', user);
+					renderUser(user);
+				} else {
+					showLoginButton();
+				}
+			});
+		} else {
+			showLoginButton();
+		}
 	}
 }
 
