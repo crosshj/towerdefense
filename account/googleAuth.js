@@ -27,6 +27,27 @@ const useWebAuth = () => {
 	return platform === 'web';
 };
 
+const remoteExec = async (method, ...args) => {
+	const procedure = 'auth.' + method;
+	window.parent.postMessage({
+		_: procedure,
+	});
+	const execResult = await new Promise((resolve) => {
+		const listener = (event) => {
+			if (typeof event?.data !== 'object') {
+				return;
+			}
+			const { _, srcEvent, result } = event.data;
+			if (_ === 'authResult' && srcEvent === procedure) {
+				window.removeEventListener('message', listener);
+				resolve(result);
+			}
+		};
+		window.addEventListener('message', listener);
+	});
+	return execResult;
+};
+
 async function initFirebaseAuthentication() {
 	platform = Capacitor.getPlatform();
 	debug.log(`Platform: ${platform}`);
@@ -46,32 +67,31 @@ async function initFirebaseAuthentication() {
 		auth = getAuth(app);
 		provider = new GoogleAuthProvider();
 	} else {
-		window.parent.postMessage({
-			_: 'auth.initAuth',
-		});
+		await remoteExec('initAuth');
 	}
 }
 
 async function handleAuthState() {
+	let user;
 	if (useWebAuth()) {
 		debug.log('handleAuthState: web');
 		const result = await getRedirectResult(auth);
-		if (result?.user) {
-			debug.log('Redirect sign-in user:', result.user);
-			renderUser(result.user);
-		} else {
-			onAuthStateChanged(auth, (user) => {
-				if (user) {
-					debug.log('User already signed in:', user);
-					renderUser(user);
-				} else {
-					showLoginButton();
-				}
-			});
-		}
+		user = result?.user;
 	} else {
-		window.parent.postMessage({
-			_: 'auth.getCurrentUser',
+		const result = await remoteExec('getCurrentUser');
+		user = result?.user;
+	}
+	if (user) {
+		debug.log('Redirect sign-in user:', result.user);
+		renderUser(result.user);
+	} else {
+		onAuthStateChanged(auth, (user) => {
+			if (user) {
+				debug.log('User already signed in:', user);
+				renderUser(user);
+			} else {
+				showLoginButton();
+			}
 		});
 	}
 }
@@ -89,9 +109,9 @@ async function signIn() {
 			await signInWithRedirect(auth, provider);
 		}
 	} else {
-		window.parent.postMessage({
-			_: 'auth.signInWithGoogle',
-		});
+		const result = await remoteExec('signInWithGoogle');
+		debug.log('Native user:', result.user);
+		renderUser(result.user);
 	}
 }
 
@@ -169,20 +189,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 		debug.log(
 			`Auth loaded. Parent window ${window.parent ? 'exists' : 'does not exist'}`
 		);
-
-		window.addEventListener('message', async (event) => {
-			if (typeof event?.data !== 'object') {
-				return;
-			}
-			if (event.data._ === 'authResult') {
-				const { srcEvent, result } = event.data;
-				debug.log({
-					_: 'iframe hears auth result',
-					srcEvent,
-					result,
-				});
-			}
-		});
 
 		if (window.parent) {
 			window.parent.postMessage({ _: 'stats', visibility: 'hidden' });
