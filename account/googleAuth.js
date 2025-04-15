@@ -59,10 +59,6 @@ async function initFirebaseAuthentication() {
 		debug.log('initFirebaseAuthentication: native');
 		debug.log(`Plugins: ${Object.keys(Capacitor.Plugins).join(', ')}`);
 
-		const Device = window.Capacitor?.Plugins?.Device;
-		const deviceInfo = await Device?.getInfo();
-		debug.log({ deviceInfo });
-
 		// await testFirebase();
 
 		FirebaseAuthentication = Capacitor.Plugins.FirebaseAuthentication;

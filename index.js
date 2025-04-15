@@ -269,8 +269,17 @@ const registerServiceWorker = async ({ isCapacitor }) => {
 	console.log('Service Worker registered');
 };
 
+const testCapacitor = async () => {
+	const Device = window.Capacitor?.Plugins?.Device;
+	const deviceInfo = await Device?.getInfo();
+	debug.log({ deviceInfo });
+};
+
 const onLoaded = async () => {
 	const isCapacitor = !!window.Capacitor;
+	if (isCapacitor) {
+		await testCapacitor();
+	}
 
 	const params = Object.fromEntries(
 		new URLSearchParams(window.location.search)
