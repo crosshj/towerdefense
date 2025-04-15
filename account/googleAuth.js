@@ -56,6 +56,10 @@ async function initFirebaseAuthentication() {
 		auth = getAuth(app);
 		provider = new GoogleAuthProvider();
 	} else {
+		const Device = window.Capacitor?.Plugins?.Device;
+		const deviceInfo = await Device?.getInfo();
+		debug.log({ deviceInfo });
+
 		debug.log('initFirebaseAuthentication: native');
 		debug.log(`Plugins: ${Object.keys(Capacitor.Plugins).join(', ')}`);
 
