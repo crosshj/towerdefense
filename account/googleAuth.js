@@ -121,19 +121,19 @@ async function signIn() {
 
 async function setUserPhoto(user) {
 	const img = document.getElementById('user-photo');
-	const fallback = '/assets/auth/fallback.png';
-	const cached = sessionStorage.getItem('userPhotoDataURL');
-
-	if (cached) {
-		img.src = cached;
-		return;
-	}
-
-	// Show original while we try to cache it
-	img.src = user.photoURL;
-
 	try {
-		const res = await fetch(user.photoURL, { mode: 'cors' });
+		const fallback = '/assets/auth/fallback.png';
+		const cached = sessionStorage.getItem('userPhotoDataURL');
+
+		if (cached) {
+			img.src = cached;
+			return;
+		}
+
+		// Show original while we try to cache it
+		const photoURL = user.photoURL || user.photoUrl;
+		img.src = photoURL;
+		const res = await fetch(photoURL, { mode: 'cors' });
 		if (!res.ok) throw new Error('Image fetch failed');
 
 		const blob = await res.blob();
@@ -145,6 +145,7 @@ async function setUserPhoto(user) {
 		};
 		reader.readAsDataURL(blob);
 	} catch (err) {
+		debug.log('Error loading user photo:', err.message);
 		img.src = fallback;
 	}
 }
