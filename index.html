@@ -1,61 +1,221 @@
 <!doctype html>
-<html>
+<html lang="en">
 	<head>
-		<title>Tower Defense</title>
 		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Tee Dee – Tower Defense Game</title>
 
-		<meta name="author" content="" />
-
-		<meta
-			name="viewport"
-			content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover"
-		/>
-		<meta name="mobile-web-app-capable" content="yes" />
-		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<!-- possible content values: default, black or black-translucent -->
-		<meta
-			name="apple-mobile-web-app-status-bar-style"
-			content="black-translucent"
+		<link rel="icon" href="/assets/favicon.png" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Cinzel:wght@700&display=swap"
+			rel="stylesheet"
 		/>
 
-		<meta name="mobile-web-app-capable" content="yes" />
-		<meta name="color-scheme" content="light" />
-		<link rel="manifest" href="/manifest.json" />
-		<link rel="icon" type="image/png" href="/assets/favicon.png" />
-		<link rel="stylesheet" href="/index.css" />
-		<link rel="stylesheet" href="/visuals/stats/stats.css" />
-		<link rel="stylesheet" href="/visuals/fading.css" />
+		<style>
+			html,
+			body {
+				margin: 0;
+				padding: 0;
+				background: #000;
+				color: #fff;
+				font-family: 'Inter', sans-serif;
+				height: 100%;
+				overscroll-behavior: none;
+			}
 
-		<!-- Open Graph Meta Tags -->
-		<meta property="og:url" content="https://teedee.us/web" />
-		<meta property="og:type" content="game" />
-		<meta property="og:title" content="TeeDee" />
-		<meta
-			property="og:description"
-			content="Immerse yourself in a fast-paced mobile tower defense adventure! Collect unique heroes, power them up, and craft unstoppable teams to conquer rivals and rise to the top!"
-		/>
-		<meta
-			property="og:image"
-			content="https://teedee.us/assets/preview1.png"
-		/>
-		<meta property="og:image:width" content="1920" />
-		<meta property="og:image:height" content="885" />
-		<meta
-			property="og:image:alt"
-			content="Preview image of TeeDee game showing characters and gameplay."
-		/>
+			body {
+				display: flex;
+				flex-direction: column;
+				min-height: 100vh;
+			}
 
-		<!-- Twitter Meta Tags -->
-		<meta name="twitter:card" content="summary_large_image" />
-		<meta property="twitter:domain" content="teedee.us" />
-		<meta property="twitter:url" content="https://teedee.us/web" />
-		<meta
-			name="twitter:image"
-			content="https://teedee.us/assets/preview1.png"
-		/>
+			header {
+				position: sticky;
+				top: 0;
+				z-index: 20;
+				background: rgba(0, 0, 0, 0.5);
+				backdrop-filter: blur(6px);
+				padding: 1em 2em;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				max-width: 1200px;
+				margin: 0 auto;
+				width: 100%;
+				display: none;
+			}
+
+			header h1 {
+				font-family: 'Cinzel', serif;
+				font-size: 1.8em;
+				margin: 0;
+			}
+
+			header nav a {
+				color: #fff;
+				margin-left: 1.5em;
+				text-decoration: none;
+				font-weight: 600;
+			}
+
+			.hero {
+				position: relative;
+				width: 100%;
+				height: 100vh;
+				background: url('/assets/preview1.png') center/cover no-repeat;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				overflow: hidden;
+				background-size: cover;
+				background-position: center;
+				animation: bg-drift 90s infinite alternate;
+			}
+			@keyframes bg-drift {
+				0% {
+					background-position: 50% center;
+				}
+				33% {
+					background-position: 80% center;
+				}
+				67% {
+					background-position: 50% center;
+				}
+				100% {
+					background-position: 20% center;
+				}
+			}
+
+			.hero::after {
+				content: '';
+				position: absolute;
+				inset: 0;
+				background: linear-gradient(
+					to bottom,
+					rgba(0, 0, 0, 0) 60%,
+					#111 100%
+				);
+				z-index: 1;
+			}
+
+			.hero-content {
+				position: absolute;
+				bottom: 5vh;
+				z-index: 2;
+				text-align: center;
+				max-width: 800px;
+
+				padding: 0 1em;
+			}
+
+			.hero-content h2 {
+				font-size: 3em;
+				font-family: 'Cinzel', serif;
+				letter-spacing: 0.1em;
+				margin: 0 0 0.5em;
+			}
+
+			.hero-content p {
+				font-size: 1.2em;
+				color: #ccc;
+				margin-bottom: 1.5em;
+			}
+
+			.hero-content a.button {
+				display: inline-block;
+				padding: 0.75em 1.5em;
+				border: 2px solid #fff;
+				color: #fff;
+				text-decoration: none;
+				font-weight: bold;
+				transition: background 0.2s;
+			}
+
+			.hero-content a.button:hover {
+				background: #fff;
+				color: #000;
+			}
+
+			footer {
+				background: #111;
+				color: #ccc;
+				text-align: center;
+				padding: 2em 1em 1em;
+				margin-top: auto;
+			}
+
+			footer nav a {
+				color: #ccc;
+				margin: 0 0.75em;
+				text-decoration: none;
+				font-size: 0.9em;
+			}
+
+			@media (max-width: 600px) {
+				header {
+					flex-direction: column;
+					align-items: flex-start;
+				}
+				header nav {
+					margin-top: 0.5em;
+				}
+				.hero-content h2 {
+					font-size: 2em;
+				}
+			}
+		</style>
 	</head>
+	<body>
+		<header>
+			<h1>Tee Dee</h1>
+			<nav>
+				<a href="#about">About</a>
+				<a
+					href="https://play.google.com/store/apps/details?id=us.teedee.game"
+					target="_blank"
+					>Play Now</a
+				>
+			</nav>
+		</header>
 
-	<body class="fade-in">
-		<script type="module" src="/index.js"></script>
+		<section class="hero">
+			<img
+				class="hero-logo"
+				src="/assets/towerDefenseIconTransparent.png"
+				alt="Tee Dee logo"
+				style="
+					width: 10em;
+					position: absolute;
+					top: 65px;
+					display: none;
+				"
+			/>
+
+			<div class="hero-content">
+				<img
+					src="/assets/brandText1.png"
+					alt="Tee Dee"
+					style="width: 25vw; min-width: 350px"
+				/>
+				<p>
+					A mobile tower defense game with heroes, chaos, and strategy
+					that hits hard.
+				</p>
+				<a
+					class="button"
+					href="https://play.google.com/store/apps/details?id=us.teedee.game"
+					target="_blank"
+					>Play Now</a
+				>
+			</div>
+		</section>
+
+		<footer>
+			<p>&copy; 2025 Tee Dee. All rights reserved.</p>
+			<nav>
+				<a href="/account/terms/">Terms of Service</a> |
+				<a href="/account/privacy/">Privacy Policy</a>
+			</nav>
+		</footer>
 	</body>
 </html>
