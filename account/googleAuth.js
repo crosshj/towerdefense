@@ -171,10 +171,16 @@ document.addEventListener('DOMContentLoaded', async () => {
 		);
 
 		window.addEventListener('message', async (event) => {
-			if (typeof event?.data !== 'object') return;
-			if (event._.startsWith('auth.')) {
+			if (typeof event?.data !== 'object') {
+				return;
+			}
+			if (event.data._ === 'authResult') {
 				const { srcEvent, result } = event.data;
-				debug.log({ _: 'iframe hears auth result', srcEvent, result });
+				debug.log({
+					_: 'iframe hears auth result',
+					srcEvent,
+					result,
+				});
 			}
 		});
 
