@@ -59,7 +59,7 @@ async function initFirebaseAuthentication() {
 		debug.log('initFirebaseAuthentication: native');
 		debug.log(`Plugins: ${Object.keys(Capacitor.Plugins).join(', ')}`);
 
-		await testFirebase();
+		// await testFirebase();
 
 		FirebaseAuthentication = Capacitor.Plugins.FirebaseAuthentication;
 		debug.log(
