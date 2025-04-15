@@ -3,6 +3,11 @@ import { installable } from './utils/installable.js';
 import { statsElement, refreshStats } from './visuals/stats/stats.js';
 import { loadSounds } from '/visuals/assets/assets.js';
 import { debug } from './utils/debug.js';
+import {
+	initAuth,
+	signInWithGoogle,
+	getCurrentUser,
+} from './utils/firebase.js';
 
 const FADE_MS = 200;
 let whereIsBack;
@@ -242,6 +247,22 @@ window.addEventListener('message', async function (event) {
 		titleContainer.style.visibility = args.visibility;
 		titleEl.innerHTML = args.title;
 		whereIsBack = args?.back ? args.back : undefined;
+		return;
+	}
+	if (_.startsWith('auth.')) {
+		const authOp = { initAuth, getCurrentUser, signInWithGoogle }[
+			_.replace('auth.', '')
+		];
+		if (!authOp) {
+			debug.log('authOp not found', _);
+			return;
+		}
+		const result = await authOp();
+		broadcastUpdate({
+			_: 'authResult',
+			srcEvent: _,
+			result,
+		});
 		return;
 	}
 });

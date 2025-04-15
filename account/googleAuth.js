@@ -27,16 +27,6 @@ const useWebAuth = () => {
 	return platform === 'web';
 };
 
-const testFirebase = async () => {
-	try {
-		const { FirebaseStatus } = Capacitor.Plugins;
-		const res = await FirebaseStatus.checkStatus();
-		debug.log(res);
-	} catch (e) {
-		debug.log('testFirebase error:', e.message);
-	}
-};
-
 async function initFirebaseAuthentication() {
 	platform = Capacitor.getPlatform();
 	debug.log(`Platform: ${platform}`);
@@ -56,18 +46,9 @@ async function initFirebaseAuthentication() {
 		auth = getAuth(app);
 		provider = new GoogleAuthProvider();
 	} else {
-		debug.log('initFirebaseAuthentication: native');
-		debug.log(`Plugins: ${Object.keys(Capacitor.Plugins).join(', ')}`);
-
-		// await testFirebase();
-
-		FirebaseAuthentication = Capacitor.Plugins.FirebaseAuthentication;
-		debug.log(
-			`Firebase: ${Object.keys(FirebaseAuthentication).join(', ')}`
-		);
-
-		FirebaseAuthentication.addListener('authStateChange', debug.log);
-		FirebaseAuthentication.addListener('authDebug', debug.log);
+		window.parent.postMessage({
+			_: 'auth.initAuth',
+		});
 	}
 }
 
@@ -89,31 +70,9 @@ async function handleAuthState() {
 			});
 		}
 	} else {
-		try {
-			debug.log('handleAuthState: native');
-			const timeout = new Promise((_, reject) =>
-				setTimeout(
-					() => reject(new Error('getCurrentUser Timeout')),
-					10000
-				)
-			);
-			const result = await Promise.race([
-				FirebaseAuthentication.getCurrentUser(),
-				timeout,
-			]);
-			user = result?.user;
-
-			if (user) {
-				debug.log('Native user already signed in:', user);
-				renderUser(user);
-			} else {
-				debug.log('Native user not signed in');
-				showLoginButton();
-			}
-		} catch (e) {
-			debug.log('Native user not signed in. Error: ', e.message);
-			showLoginButton();
-		}
+		window.parent.postMessage({
+			_: 'auth.getCurrentUser',
+		});
 	}
 }
 
@@ -130,14 +89,9 @@ async function signIn() {
 			await signInWithRedirect(auth, provider);
 		}
 	} else {
-		try {
-			debug.log('signIn: native');
-			const result = await FirebaseAuthentication.signInWithGoogle();
-			debug.log('Native user:', result.user);
-			renderUser(result.user);
-		} catch (e) {
-			debug.log('Native sign-in failed:', e);
-		}
+		window.parent.postMessage({
+			_: 'auth.signInWithGoogle',
+		});
 	}
 }
 
@@ -215,6 +169,15 @@ document.addEventListener('DOMContentLoaded', async () => {
 		debug.log(
 			`Auth loaded. Parent window ${window.parent ? 'exists' : 'does not exist'}`
 		);
+
+		window.addEventListener('message', async (event) => {
+			if (typeof event?.data !== 'object') return;
+			if (event._.startsWith('auth.')) {
+				const { srcEvent, result } = event.data;
+				debug.log({ _: 'iframe hears auth result', srcEvent, result });
+			}
+		});
+
 		if (window.parent) {
 			window.parent.postMessage({ _: 'stats', visibility: 'hidden' });
 			window.parent.postMessage({
