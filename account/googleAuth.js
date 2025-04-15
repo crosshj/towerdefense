@@ -67,6 +67,7 @@ async function initFirebaseAuthentication() {
 		);
 
 		FirebaseAuthentication.addListener('authStateChange', debug.log);
+		FirebaseAuthentication.addListener('authDebug', debug.log);
 	}
 }
 
