@@ -31,7 +31,7 @@ export async function initPlugin() {
 export async function getCurrentUser() {
 	try {
 		debug.log('getCurrentUser: native');
-		const user = await PlayGamesServices.login();
+		const user = await PlayGames.login();
 		/* response return: 
         id: string;
         display_name: string;
