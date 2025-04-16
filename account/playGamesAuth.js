@@ -57,7 +57,8 @@ const onReady = async ({ debug, call, Capacitor }) => {
 		return;
 	}
 
-	const user = await call('playGames.getCurrentUser');
-	renderUser(user);
+	const result = await call('playGames.getCurrentUser');
+	debug.log('Play Games User:', result);
+	renderUser(result?.user);
 };
 Page(pageConfig, onReady);
