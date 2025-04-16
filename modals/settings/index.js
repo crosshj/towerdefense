@@ -121,13 +121,6 @@ const logout = async () => {
 	});
 };
 
-const googleAuth = async () => {
-	window.parent.postMessage({
-		_: 'navigate',
-		src: `/account/googleAuth.html`,
-	});
-};
-
 const attachSettings = async () => {
 	const settings = await getSettings();
 
@@ -231,14 +224,29 @@ const updateUserPane = async () => {
 			${(user?.apiUser?.data?.subscriptions || []).length}
 		</div>
 		<div class="actions">
+			<button class="playGamesAuth">Play Games Auth</button>
 			<button class="googleAuth">Google Auth</button>
 			<button class="logout">LOG OUT</button>
 		</div>
 	`;
 	const logoutButton = accountPane.querySelector('.logout');
 	logoutButton.addEventListener('pointerup', logout);
+
+	const playGamesAuthButton = accountPane.querySelector('.playGamesAuth');
+	playGamesAuthButton.addEventListener('pointerup', () => {
+		window.parent.postMessage({
+			_: 'navigate',
+			src: `/account/playGamesAuth.html`,
+		});
+	});
+
 	const googleAuthButton = accountPane.querySelector('.googleAuth');
-	googleAuthButton.addEventListener('pointerup', googleAuth);
+	googleAuthButton.addEventListener('pointerup', () => {
+		window.parent.postMessage({
+			_: 'navigate',
+			src: `/account/googleAuth.html`,
+		});
+	});
 };
 
 const attachIcons = () => {

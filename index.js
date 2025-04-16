@@ -3,11 +3,8 @@ import { installable } from './utils/installable.js';
 import { statsElement, refreshStats } from './visuals/stats/stats.js';
 import { loadSounds } from '/visuals/assets/assets.js';
 import { debug } from './utils/debug.js';
-import {
-	initAuth,
-	signInWithGoogle,
-	getCurrentUser,
-} from './utils/firebase.js';
+import * as Firebase from './utils/firebase.js';
+import * as PlayGames from './utils/playGames.js';
 
 const FADE_MS = 200;
 let whereIsBack;
@@ -250,16 +247,24 @@ window.addEventListener('message', async function (event) {
 		return;
 	}
 	if (_.startsWith('auth.')) {
-		const authOp = { initAuth, getCurrentUser, signInWithGoogle }[
-			_.replace('auth.', '')
-		];
-		if (!authOp) {
-			debug.log('authOp not found', _);
-			return;
-		}
-		const result = await authOp();
+		const authOp = Firebase[_.replace('auth.', '')];
+		const result = !playGamesOp
+			? { error: `authOp not found: ${_}` }
+			: await authOp();
 		broadcastUpdate({
 			_: 'authResult',
+			srcEvent: _,
+			result,
+		});
+		return;
+	}
+	if (_.startsWith('playGames.')) {
+		const playGamesOp = PlayGames[_.replace('playGames.', '')];
+		const result = !playGamesOp
+			? { error: `Play Games Op not found: ${_}` }
+			: await playGamesOp();
+		broadcastUpdate({
+			_: 'callResult',
 			srcEvent: _,
 			result,
 		});

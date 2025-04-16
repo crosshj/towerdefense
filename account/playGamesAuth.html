@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Google Auth</title>
+		<link rel="stylesheet" href="playGamesAuth.css" />
+	</head>
+	<body>
+		<div id="auth-container">
+			<button
+				id="login-button"
+				class="google-signin-btn"
+				style="display: none"
+			>
+				<img src="/assets/auth/google.svg" alt="Google logo" />
+				<span>Sign in with Google</span>
+			</button>
+
+			<div id="user-info" hidden>
+				<img id="user-photo" />
+				<p id="user-name"></p>
+				<button id="logout-button">Sign Out</button>
+			</div>
+		</div>
+	</body>
+	<script src="playGamesAuth.js" type="module"></script>
+</html>
