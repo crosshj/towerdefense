@@ -41,11 +41,12 @@ export async function getCurrentUser() {
         isLogin: boolean; TRUE if is online FALSE if is offline
     */
 		debug.log('Current user:', user);
+		const fallbackUserIcon = '/assets/auth/playGames.png';
 		return {
 			user: {
-				id: user.id,
+				...user,
 				displayName: user.display_name,
-				photoURL: user.icon,
+				photoURL: fallbackUserIcon,
 				title: user.title,
 			},
 		};

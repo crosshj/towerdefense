@@ -224,8 +224,8 @@ const updateUserPane = async () => {
 			${(user?.apiUser?.data?.subscriptions || []).length}
 		</div>
 		<div class="actions">
-			<button class="playGamesAuth">Play Games Auth</button>
-			<button class="googleAuth">Google Auth</button>
+			<button class="playGamesAuth">Play Games</button>
+			<button class="googleAuth">Google</button>
 			<button class="logout">LOG OUT</button>
 		</div>
 	`;

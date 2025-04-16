@@ -9,7 +9,7 @@ async function setUserPhoto(user) {
 	const img = document.getElementById('user-photo');
 	try {
 		const fallback = '/assets/auth/fallback.png';
-		const cached = sessionStorage.getItem('userPhotoDataURL');
+		const cached = sessionStorage.getItem('playGamesPhotoDataURL');
 
 		if (cached) {
 			img.src = cached;
@@ -26,7 +26,7 @@ async function setUserPhoto(user) {
 		const reader = new FileReader();
 		reader.onloadend = () => {
 			const dataURL = reader.result;
-			sessionStorage.setItem('userPhotoDataURL', dataURL);
+			sessionStorage.setItem('playGamesPhotoDataURL', dataURL);
 			img.src = dataURL; // just in case image failed before
 		};
 		reader.readAsDataURL(blob);
@@ -41,6 +41,7 @@ function renderUser(user) {
 	document.getElementById('login-button').style.display = 'none';
 	setUserPhoto(user);
 	document.getElementById('user-name').textContent = user.displayName;
+	document.getElementById('user-title').textContent = user.title;
 	document.getElementById('user-info').hidden = false;
 }
 
@@ -48,6 +49,11 @@ const onReady = async ({ debug, call, Capacitor }) => {
 	const pluginInited = await call('playGames.initPlugin');
 
 	if (pluginInited?.error) {
+		renderUser({
+			displayName: 'Play Games Error',
+			title: 'user not found',
+			photoURL: '/assets/auth/playGames.png',
+		});
 		return;
 	}
 
