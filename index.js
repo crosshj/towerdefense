@@ -248,7 +248,7 @@ window.addEventListener('message', async function (event) {
 	}
 	if (_.startsWith('auth.')) {
 		const authOp = Firebase[_.replace('auth.', '')];
-		const result = !playGamesOp
+		const result = !authOp
 			? { error: `authOp not found: ${_}` }
 			: await authOp();
 		broadcastUpdate({
