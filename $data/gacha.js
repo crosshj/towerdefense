@@ -81,6 +81,7 @@ const drops = {
 		{ code: 'u0001-4-hazelnut', probability: 1 },
 		{ code: 'u0001-4-hickory', probability: 1 },
 		{ code: 'u0001-4-angela', probability: 1 },
+		{ code: 'u0001-4-charlie', probability: 1 },
 	],
 
 	'units-common': [
