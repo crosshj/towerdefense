@@ -1,19 +1,41 @@
-html,
+:root {
+	color-scheme: light dark;
+}
+
 body {
-	margin: 0;
-	padding: 0;
-	height: 100%;
-	width: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	background-color: #000;
 	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	max-width: 900px;
+	margin: auto;
+	gap: 1em;
+	padding: 1em;
+	box-sizing: border-box;
+	font-family: sans-serif;
+}
+
+.selectWrapper {
+	display: inline-block;
+	position: relative;
+}
+
+.selectWrapper select {
+	appearance: none;
+	font: inherit;
+	padding: 0.5em;
+	border-radius: 6px;
+	width: 100%;
+}
+
+.selectWrapper .selectArrow {
+	pointer-events: none;
+	position: absolute;
+	right: 0.7em;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 1em;
+	height: auto;
 }
 
 video {
-	width: 100vw;
-	/* height: 100vh; */
-	object-fit: cover;
-	background-color: #000;
 }

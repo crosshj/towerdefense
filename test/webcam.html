@@ -3,11 +3,29 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="color-scheme" content="light dark" />
 		<title>Webcam Test</title>
 		<link rel="stylesheet" href="webcam.css" />
 	</head>
 	<body>
-		<video id="webcam" autoplay></video>
+		<div class="selectWrapper">
+			<select id="cameraSelect"></select>
+			<svg
+				class="selectArrow"
+				viewBox="0 0 10 6"
+				xmlns="http://www.w3.org/2000/svg"
+			>
+				<path
+					d="M1 1L5 5L9 1"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="1.5"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+				/>
+			</svg>
+		</div>
+		<video id="webcam" autoplay playsinline></video>
 
 		<script type="module" src="webcam.js"></script>
 	</body>
