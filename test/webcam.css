@@ -39,3 +39,7 @@ body {
 
 video {
 }
+
+#webcam {
+	transform: scaleX(-1);
+}
